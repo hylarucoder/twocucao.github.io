@@ -1,0 +1,789 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="效率,工作自动化,Cheatsheet," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Shell 单行命令。 不定期更新。 桌面版和 Server 版的操作系统版本均为 Ubuntu 16.04 , 数据库为 MySQL / PostgreSQL , Python 3.5.2 开发和运行环境。 由于部分 Mac 上面的配置与 Ubuntu 上配置几乎相同，所以也将部分 Mac 的终端相关软件放在本文中。">
+<meta name="keywords" content="效率,工作自动化,Cheatsheet">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ubuntu16.04 Cheatsheet">
+<meta property="og:url" content="http://twocucao.github.com/2016/10/05/UbuntuCheatsheet/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Shell 单行命令。 不定期更新。 桌面版和 Server 版的操作系统版本均为 Ubuntu 16.04 , 数据库为 MySQL / PostgreSQL , Python 3.5.2 开发和运行环境。 由于部分 Mac 上面的配置与 Ubuntu 上配置几乎相同，所以也将部分 Mac 的终端相关软件放在本文中。">
+<meta property="og:updated_time" content="2017-04-03T08:05:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Ubuntu16.04 Cheatsheet">
+<meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Shell 单行命令。 不定期更新。 桌面版和 Server 版的操作系统版本均为 Ubuntu 16.04 , 数据库为 MySQL / PostgreSQL , Python 3.5.2 开发和运行环境。 由于部分 Mac 上面的配置与 Ubuntu 上配置几乎相同，所以也将部分 Mac 的终端相关软件放在本文中。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '无与童比'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://twocucao.github.com/2016/10/05/UbuntuCheatsheet/"/>
+
+
+
+
+
+  <title> Ubuntu16.04 Cheatsheet | MG的编程小屋 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?299254d95898cdfa110fc6d914eba9c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">MG的编程小屋</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">博客内容正在调整中</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/10/05/UbuntuCheatsheet/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Micheal Gardner">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="MG的编程小屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Ubuntu16.04 Cheatsheet
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-10-05T18:41:47+08:00">
+                2016-10-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/10/05/UbuntuCheatsheet/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/05/UbuntuCheatsheet/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Shell 单行命令。</p>
+<p>不定期更新。</p>
+<p>桌面版和 Server 版的操作系统版本均为 Ubuntu 16.04 , 数据库为 MySQL / PostgreSQL , Python 3.5.2 开发和运行环境。</p>
+<p>由于部分 Mac 上面的配置与 Ubuntu 上配置几乎相同，所以也将部分 Mac 的终端相关软件放在本文中。</p>
+<p>每次来一个新同事就需要给他们的环境进行配置，配置其实挺麻烦的，虽然可以花一天的时间配置一遍，但总觉得如果多来几个同事的话我基本上就废掉了。<br>于是抛弃 bash 脚本，修改为 Ansible 脚本，将当前的配置任务彻底脚本化。</p>
+<a id="more"></a>
+<h2 id="Ubuntu-桌面版开发基本配置"><a href="#Ubuntu-桌面版开发基本配置" class="headerlink" title="Ubuntu 桌面版开发基本配置"></a>Ubuntu 桌面版开发基本配置</h2><h3 id="设置无登录密钥"><a href="#设置无登录密钥" class="headerlink" title="设置无登录密钥"></a>设置无登录密钥</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 刚开始用了一个很蠢的方法</div><div class="line">scp ~/.ssh/id_rsa.pub twocucao@192.168.2.156:.ssh/id_rsa.pub</div><div class="line">ssh twocucao@192.168.2.156 &quot;mkdir .ssh;chmod 0700 .ssh&quot;</div><div class="line"># 现在想想，可以直接 ssh-copy-id</div></pre></td></tr></table></figure>
+<p><a href="http://askubuntu.com/questions/46930/how-can-i-set-up-password-less-ssh-login" target="_blank" rel="external">http://askubuntu.com/questions/46930/how-can-i-set-up-password-less-ssh-login</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 更换源</span></div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev</div><div class="line">sudo apt-get install zsh tree htop</div><div class="line">sudo apt-get install build-essential acl ntp htop git libpq-dev libmysqlclient-dev libffi-dev libfreetype6-dev libjpeg8-dev liblcms2-dev libtiff5-dev libwebp-dev libxml2-dev libxslt1-dev tcl8.6-dev tk8.6-dev zlib1g-dev python-dev python-pip python-pycurl python-tk ipython supervisor python3.5 python3.5-dev python3-pip python3-lxml python3-tk ipython3</div><div class="line">sudo apt-get install mysql-server mysql-client libmysqlclient-dev slurm</div><div class="line"></div><div class="line"><span class="comment"># GIT 配置</span></div><div class="line">git config --global color.ui <span class="literal">true</span></div><div class="line">git config --global user.name <span class="string">"twocucao"</span></div><div class="line">git config --global user.email <span class="string">"twocucao@gmail.com"</span></div><div class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">"twocucao@gmail.com"</span></div><div class="line"></div><div class="line"><span class="comment"># 安装 nvm</span></div><div class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash</div><div class="line">nvm install 5.12.0</div><div class="line"><span class="built_in">echo</span> <span class="string">'\n#alias for cnpm\nalias cnpm="npm --registry=https://registry.npm.taobao.org \</span></div><div class="line">  --cache=$HOME/.npm/.cache/cnpm \</div><div class="line">  --disturl=https://npm.taobao.org/dist \</div><div class="line">  --userconfig=$HOME/.cnpmrc"' &gt;&gt; ~/.zshrc &amp;&amp; <span class="built_in">source</span> ~/.zshrc</div><div class="line"></div><div class="line">git <span class="built_in">clone</span> https://github.com/yyuu/pyenv.git ~/.pyenv</div><div class="line"><span class="built_in">echo</span> <span class="string">'export PYENV_ROOT="$HOME/.pyenv"'</span> &gt;&gt; ~/.zshrc</div><div class="line"><span class="built_in">echo</span> <span class="string">'export PATH="$PYENV_ROOT/bin:$PATH"'</span> &gt;&gt; ~/.zshrc</div><div class="line"><span class="built_in">echo</span> <span class="string">'eval "$(pyenv init -)"'</span> &gt;&gt; ~/.zshrc</div><div class="line"><span class="built_in">echo</span> <span class="string">'eval "$(pyenv virtualenv-init -)"'</span> &gt;&gt; ~/.zshrc</div><div class="line"></div><div class="line"><span class="comment"># 由于本人的不喜欢写兼容代码，所有代码均向 3.5+ 靠拢</span></div><div class="line">v=3.5.2|wget http://mirrors.sohu.com/python/<span class="variable">$v</span>/Python-<span class="variable">$v</span>.tar.xz -P ~/.pyenv/cache/;pyenv install <span class="variable">$v</span></div><div class="line">v=3.6.0|wget http://mirrors.sohu.com/python/<span class="variable">$v</span>/Python-<span class="variable">$v</span>.tar.xz -P ~/.pyenv/cache/;pyenv install <span class="variable">$v</span></div><div class="line">v=2.7.9|wget http://mirrors.sohu.com/python/<span class="variable">$v</span>/Python-<span class="variable">$v</span>.tar.xz -P ~/.pyenv/cache/;pyenv install <span class="variable">$v</span></div><div class="line"></div><div class="line">pyenv virtualenv 3.5.2 py3-daily</div><div class="line">pyenv activate py3-daily</div><div class="line">pip install -i https://pypi.doubanio.com/simple requests</div><div class="line">pip install -i https://pypi.doubanio.com/simple beatutifulsoup4</div><div class="line">pyenv deactivate</div><div class="line"><span class="comment"># pyenv uninstall py3-daily</span></div></pre></td></tr></table></figure>
+<p>##<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Homebrew 的小问题</div><div class="line">/usr/local/lib/python2.7/site-packages/sitecustomize.py</div></pre></td></tr></table></figure></p>
+<h2 id="Ubuntu-服务器版本基本配置"><a href="#Ubuntu-服务器版本基本配置" class="headerlink" title="Ubuntu 服务器版本基本配置"></a>Ubuntu 服务器版本基本配置</h2><p>第一步，更新源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># deb cdrom:[Ubuntu 16.04 LTS _Xenial Xerus_ - Release amd64 (20160420.1)]/ xenial main restricted</span></div><div class="line">deb-src http://archive.ubuntu.com/ubuntu xenial main restricted <span class="comment">#Added by software-properties</span></div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted multiverse universe <span class="comment">#Added by software-properties</span></div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted multiverse universe <span class="comment">#Added by software-properties</span></div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial universe</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse <span class="comment">#Added by software-properties</span></div><div class="line">deb http://archive.canonical.com/ubuntu xenial partner</div><div class="line">deb-src http://archive.canonical.com/ubuntu xenial partner</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted multiverse universe <span class="comment">#Added by software-properties</span></div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security multiverse</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># 服务器</span></div><div class="line"></div><div class="line">sudo apt-get install openssh-server</div><div class="line">sudo vi /etc/ssh/sshd_config <span class="comment"># 找到 PermitRootLogin no 一行，改为 PermitRootLogin yes</span></div><div class="line">sudo service ssh restart</div><div class="line"></div><div class="line">sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev</div><div class="line"></div><div class="line">sudo adduser deploy</div><div class="line">sudo adduser deploy sudo</div><div class="line">su deploy</div><div class="line"></div><div class="line"><span class="comment"># 开发机复制 ssh 公钥。</span></div><div class="line"><span class="comment"># 可以用下面的命令，汗，之前都是在服务器上面创建.ssh 文件夹，然后在本地 scp 拷贝过去，现在想想这个方法还是挺笨的。</span></div><div class="line"><span class="comment"># 就像这样</span></div><div class="line">scp ~/.ssh/id_rsa.pub deploy@192.168.1.143:/webapps/xxxapp/.ssh/authorized_keys</div><div class="line"><span class="comment"># 其实这个命令就 OK 了。</span></div><div class="line">ssh-copy-id deploy@IPADDRESS</div><div class="line"></div><div class="line"><span class="comment"># 服务器</span></div><div class="line">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7</div><div class="line">sudo apt-get install -y apt-transport-https ca-certificates</div><div class="line"></div><div class="line">sudo apt-get install -y nginx-extras</div><div class="line">sudo service nginx start</div></pre></td></tr></table></figure>
+<h2 id="Tips-amp-amp-Hacks"><a href="#Tips-amp-amp-Hacks" class="headerlink" title="Tips &amp;&amp; Hacks"></a>Tips &amp;&amp; Hacks</h2><h3 id="网络篇"><a href="#网络篇" class="headerlink" title="网络篇"></a>网络篇</h3><h4 id="001-修改-hostname"><a href="#001-修改-hostname" class="headerlink" title="001. 修改 hostname"></a>001. 修改 hostname</h4><p>/etc/hostname /etc/hosts</p>
+<h3 id="磁盘篇"><a href="#磁盘篇" class="headerlink" title="磁盘篇"></a>磁盘篇</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看当前目录大小</span></div><div class="line">du -sh</div><div class="line"><span class="comment"># 查看当前目录的下一级文件和子目录的磁盘容量</span></div><div class="line">du -lh --max-depth=1</div></pre></td></tr></table></figure>
+<h3 id="文本篇"><a href="#文本篇" class="headerlink" title="文本篇"></a>文本篇</h3><p>sed -i ‘s/twocucao/micheal/g’ xx.dump.sql</p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-03-19</strong> 重修文字，准备整理安装配置将结果转化为 Ansible PlayBook</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>若是技术文章有帮助，何不赞助杯咖啡喝呢？</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weichat_donating.png" alt="Micheal Gardner WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/效率/" rel="tag"># 效率</a>
+          
+            <a href="/tags/工作自动化/" rel="tag"># 工作自动化</a>
+          
+            <a href="/tags/Cheatsheet/" rel="tag"># Cheatsheet</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/05/VimCheatsheet/" rel="next" title="Vim Cheatsheet">
+                <i class="fa fa-chevron-left"></i> Vim Cheatsheet
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/20/IPynb和ECharts/" rel="prev" title="IPython Notebook 引入 ECharts 做可视化">
+                IPython Notebook 引入 ECharts 做可视化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/10/05/UbuntuCheatsheet/"
+     data-title="Ubuntu16.04 Cheatsheet"
+     data-content=""
+     data-url="http://twocucao.github.com/2016/10/05/UbuntuCheatsheet/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/05/UbuntuCheatsheet/"
+           data-title="Ubuntu16.04 Cheatsheet" data-url="http://twocucao.github.com/2016/10/05/UbuntuCheatsheet/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oh1n2bfoj.bkt.clouddn.com/avatar.png"
+               alt="Micheal Gardner" />
+          <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+          <p class="site-description motion-element" itemprop="description">博客内容正在调整中,估计17年初调整完毕.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/twocucao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/twocucao" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/twocucao" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu-桌面版开发基本配置"><span class="nav-number">2.</span> <span class="nav-text">Ubuntu 桌面版开发基本配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#设置无登录密钥"><span class="nav-number">2.1.</span> <span class="nav-text">设置无登录密钥</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu-服务器版本基本配置"><span class="nav-number">3.</span> <span class="nav-text">Ubuntu 服务器版本基本配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tips-amp-amp-Hacks"><span class="nav-number">4.</span> <span class="nav-text">Tips && Hacks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#网络篇"><span class="nav-number">4.1.</span> <span class="nav-text">网络篇</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#001-修改-hostname"><span class="nav-number">4.1.1.</span> <span class="nav-text">001. 修改 hostname</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#磁盘篇"><span class="nav-number">4.2.</span> <span class="nav-text">磁盘篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本篇"><span class="nav-number">4.3.</span> <span class="nav-text">文本篇</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"twocucao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="//cdn.jsdelivr.net/ua-parser.js/0.7.10/ua-parser.min.js"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

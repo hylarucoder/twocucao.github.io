@@ -1,0 +1,871 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="效率,工作自动化,Cheatsheet,MySQL," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 MySQL 相关命令。主要包含：  MySQL Shell, 其实就是 SQL 命令。 MySQL 配套工具 Python API  不定期更新。">
+<meta name="keywords" content="效率,工作自动化,Cheatsheet,MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MySQL Cheatsheet">
+<meta property="og:url" content="http://twocucao.github.com/2016/09/12/MySQLCheatSheet/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 MySQL 相关命令。主要包含：  MySQL Shell, 其实就是 SQL 命令。 MySQL 配套工具 Python API  不定期更新。">
+<meta property="og:updated_time" content="2017-03-14T02:26:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MySQL Cheatsheet">
+<meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 MySQL 相关命令。主要包含：  MySQL Shell, 其实就是 SQL 命令。 MySQL 配套工具 Python API  不定期更新。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '无与童比'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://twocucao.github.com/2016/09/12/MySQLCheatSheet/"/>
+
+
+
+
+
+  <title> MySQL Cheatsheet | MG的编程小屋 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?299254d95898cdfa110fc6d914eba9c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">MG的编程小屋</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">博客内容正在调整中</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/09/12/MySQLCheatSheet/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Micheal Gardner">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="MG的编程小屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                MySQL Cheatsheet
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-09-12T18:41:47+08:00">
+                2016-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">PC/MAC 使用心得技巧</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/09/12/MySQLCheatSheet/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/12/MySQLCheatSheet/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 MySQL 相关命令。主要包含：</p>
+<ul>
+<li>MySQL Shell, 其实就是 SQL 命令。</li>
+<li>MySQL 配套工具</li>
+<li>Python API</li>
+</ul>
+<p>不定期更新。</p>
+<a id="more"></a>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="UTF-8-Please"><a href="#UTF-8-Please" class="headerlink" title="UTF-8 , Please"></a>UTF-8 , Please</h3><p>真的很讨厌那些用 GBK 的程序员啊！</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[mysql]</div><div class="line">default-character-set=utf8</div><div class="line"></div><div class="line">[mysqld]</div><div class="line">collation-server = utf8_general_ci</div><div class="line">init-connect=<span class="string">'SET NAMES utf8'</span></div><div class="line">character-set-server = utf8</div></pre></td></tr></table></figure>
+<p>然后在 mysql console 执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">"%character%"</span>;show variables like <span class="string">"%collation%"</span>;</div></pre></td></tr></table></figure>
+<p>如下即可</p>
+<h2 id="MySQL-配套工具"><a href="#MySQL-配套工具" class="headerlink" title="MySQL 配套工具"></a>MySQL 配套工具</h2><ul>
+<li>JetBrain 的 Datagrip 作为 编写大段 SQL 语句的 IDE</li>
+<li>通过网络或者 Dash 查看文档</li>
+<li>强烈推荐 mycli 作为正常情况下的 MySQL 命令的替代品。</li>
+<li>MySQL 官方自带工具</li>
+</ul>
+<p>只挑选几个重要的，常用的说一说。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 启动 MYSQL</span></div><div class="line"></div><div class="line"><span class="comment"># 常规 mysql</span></div><div class="line">mysql -u username -p password</div><div class="line"><span class="comment">## 命令的用户名和密码最好与命令合在一起</span></div><div class="line">mysqlshow -uroot -psomepass some_db;</div><div class="line"><span class="comment"># 导入数据</span></div><div class="line">mysql -u username -p password &lt; filename</div><div class="line"><span class="comment"># 优雅的导入数据，可以查看进度条的 Hacks</span></div><div class="line">pv -i 1 -p -t <span class="_">-e</span> /Users/twocucao/Codes/update_new_date.sql | mysql -uadmin -p123456 -h 192.168.2.254 --port=3306 some_db</div><div class="line"><span class="comment"># 导出数据</span></div><div class="line">mysqldump -u username -p password database [tables] &gt; filename</div><div class="line">mysqldump database table_bame --where=<span class="string">"date_column BETWEEN '2012-07-01 00:00:00' and '2012-12-01 00:00:00'"</span></div><div class="line"></div><div class="line"><span class="comment"># ref : http://dev.mysql.com/doc/refman/5.7/en/mysqldump.html#option_mysqldump_where</span></div></pre></td></tr></table></figure>
+<h2 id="MySQL-Shell-MySQL-Console"><a href="#MySQL-Shell-MySQL-Console" class="headerlink" title="MySQL Shell ( MySQL Console )"></a>MySQL Shell ( MySQL Console )</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">SHOW DATABASES;</div><div class="line">CREATE DATABASE database;</div><div class="line">USE database;</div><div class="line">SHOW TABLES;</div><div class="line">DESCRIBE table;</div><div class="line">SHOW COLUMN FROM table;</div><div class="line">DROP DATEBASE;</div></pre></td></tr></table></figure>
+<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><h3 id="密码忘了怎么办？"><a href="#密码忘了怎么办？" class="headerlink" title="密码忘了怎么办？"></a>密码忘了怎么办？</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/etc/init.d/mysql stop</div><div class="line">mysqld_safe --skip-grant-tables &amp;</div><div class="line"><span class="comment"># 在另一个终端 输入 mysql 进入终端</span></div><div class="line">在另一端执行 SQL 命令</div><div class="line">UPDATE mysql.user SET password=PASSWORD(<span class="string">'nouveau'</span>) WHERE user=<span class="string">'root'</span>;</div><div class="line"><span class="comment">## Kill mysqld_safe from the terminal, using Control + \</span></div><div class="line">/etc/init.d/mysql start</div></pre></td></tr></table></figure>
+<h2 id="常用-Snippet"><a href="#常用-Snippet" class="headerlink" title="常用 Snippet"></a>常用 Snippet</h2><h3 id="1-数据清洗常用脚本"><a href="#1-数据清洗常用脚本" class="headerlink" title="1. 数据清洗常用脚本"></a>1. 数据清洗常用脚本</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 少量去重</span></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> everyday_info_temp <span class="keyword">AS</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span>  everyday_info <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">id</span>,<span class="built_in">date</span>,numbers;</div><div class="line"><span class="comment">-- 大量去重</span></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> everyday_info_temp <span class="keyword">AS</span> <span class="keyword">SELECT</span> * <span class="keyword">FROM</span>  everyday_info <span class="keyword">GROUP</span> <span class="keyword">BY</span> <span class="keyword">id</span>,<span class="built_in">date</span>,numbers <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="literal">null</span>;</div></pre></td></tr></table></figure>
+<p><a href="http://stackoverflow.com/questions/16568228/how-to-transpose-mysql-table-rows-into-columns" target="_blank" rel="external">http://stackoverflow.com/questions/16568228/how-to-transpose-mysql-table-rows-into-columns</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">SELECT @max := MAX(ID)+ 1 FROM ABC;</div><div class="line"></div><div class="line">PREPARE stmt FROM &apos;ALTER TABLE ABC AUTO_INCREMENT = ?&apos;;</div><div class="line">EXECUTE stmt USING @max;</div><div class="line"></div><div class="line">DEALLOCATE PREPARE stmt;</div></pre></td></tr></table></figure>
+<p>mysql&gt; delete from shophtml;<br>Query OK, 117141 rows affected (4 min 2.92 sec)<br>TRUNCATE shophtml;</p>
+<h3 id="2-用户管理常用脚本"><a href="#2-用户管理常用脚本" class="headerlink" title="2. 用户管理常用脚本"></a>2. 用户管理常用脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SELECT User FROM mysql.user;</div></pre></td></tr></table></figure>
+<h3 id="3-备份迁移常用脚本"><a href="#3-备份迁移常用脚本" class="headerlink" title="3. 备份迁移常用脚本"></a>3. 备份迁移常用脚本</h3><p>–single-transaction</p>
+<h3 id="4-性能优化常用脚本"><a href="#4-性能优化常用脚本" class="headerlink" title="4. 性能优化常用脚本"></a>4. 性能优化常用脚本</h3><p>SHOW FULL PROCESSLIST;</p>
+<h3 id="5-其他脚本"><a href="#5-其他脚本" class="headerlink" title="5. 其他脚本"></a>5. 其他脚本</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 6. 随机选择 10 组记录</div><div class="line">-- 慢速</div><div class="line">SELECT * FROM Table_Name ORDER BY RAND() LIMIT 0,10;</div><div class="line"></div><div class="line">-- 快速</div><div class="line">SELECT name</div><div class="line">  FROM random AS r1 JOIN</div><div class="line">       (SELECT CEIL(RAND() *</div><div class="line">                     (SELECT MAX(id)</div><div class="line">                        FROM random)) AS id)</div><div class="line">        AS r2</div><div class="line"> WHERE r1.id &gt;= r2.id</div><div class="line"> ORDER BY r1.id ASC</div><div class="line"> LIMIT 1</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 1. 查询时间</div><div class="line">select date_format(create_time, '%Y-%m-%d') as day from table_name</div><div class="line">select from_unixtime(create_time, '%Y-%m-%d') as day from table_name</div><div class="line"></div><div class="line"># 2. CASE WHEN 案例</div><div class="line">## 2.1 返回同一列多个结果</div><div class="line"></div><div class="line">## 2.2 行列值颠倒</div><div class="line"></div><div class="line"># 3. 替换某字段内容</div><div class="line">update table_name set content = REPLACE(content, 'aaa', 'bbb')  where (content like '%aaa%')</div><div class="line"></div><div class="line"># 4. 获取表中某字段包含某字符串的数据</div><div class="line">SELECT * FROM `表名` WHERE LOCATE('关键字', 字段名）</div><div class="line"></div><div class="line"># 5. 字符串处理</div><div class="line">SELECT SUBSTRING（字段名，1,4) FROM 表名</div><div class="line"></div><div class="line"># 6. 求解数字的连续范围</div><div class="line"></div><div class="line">select min(number) start_range,max(number) end_range</div><div class="line">from</div><div class="line">(</div><div class="line">    select number,rn,number-rn diff from</div><div class="line">    (</div><div class="line">        select number,@number:=@number+1 rn from test_number,(select @number:=0) as number</div><div class="line">    ) b</div><div class="line">) c group by diff;</div></pre></td></tr></table></figure>
+<h2 id="性能优化切入点"><a href="#性能优化切入点" class="headerlink" title="性能优化切入点"></a>性能优化切入点</h2><p>应用的切入点也比较简单和暴力：</p>
+<ol>
+<li>优化应用层面的查询。</li>
+<li>优化数据库的 SQL 查询。</li>
+<li>优化数据库的存储结构。</li>
+<li>优化单个数据库服务器的性能。</li>
+<li>遵循『机多运算大』的原则，上几台机器。</li>
+<li>更好的机器，即加内存条，上好的 CPU。</li>
+</ol>
+<p>优化前三点，则需要理解取数据的客户端从发送 SQL 语句到接受数据之间都发生了什么？流程如下：</p>
+<ol>
+<li>开启连接</li>
+<li>发送查询给服务器</li>
+<li>分析查询</li>
+<li>执行查询</li>
+<li>传输数据</li>
+<li>关闭连接</li>
+</ol>
+<h3 id="优化应用层面的查询"><a href="#优化应用层面的查询" class="headerlink" title="优化应用层面的查询"></a>优化应用层面的查询</h3><p>在同样工作量的情况下不断的减少数据库的连接，将多个动作放在一起使用 TRANSACTION 可以显著提高速度。</p>
+<ol>
+<li>对于 OLTP 类型的数据库设计的数据库，一些耗时查询往往是可以在应用层面查询进行优化的，比如在手写代码应用级缓存，借助外部组件 (redis) 应用内缓存。</li>
+<li>对于一些有性能要求的场景，不要使用 select * from xxx 这种查询，服务器到客户端传输也是需要时间的，而是要选择需要的字段。</li>
+<li>如果有必要，不要在循环内部进行数据库查询，而是直接取出来放在内存中进行运算。学过的算法与数据结构用起来！!</li>
+</ol>
+<h3 id="优化数据库的-SQL-查询"><a href="#优化数据库的-SQL-查询" class="headerlink" title="优化数据库的 SQL 查询"></a>优化数据库的 SQL 查询</h3><p>如同前文所见，到了 SQL 命令这层切入点能够优化的地方只有步骤 4.</p>
+<p>对于查找，效率取决于：</p>
+<ol>
+<li>取记录数量</li>
+<li>搜索到这些记录的时间。</li>
+</ol>
+<p>对于插入，执行查询则插入记录和更新索引两个部分，也是插入的瓶颈所在：</p>
+<ol>
+<li>插入记录 速度取决于记录数量，记录大小</li>
+<li>更新索引 速度取决于索引数量。</li>
+</ol>
+<p>对于更新，执行查询则有查找，更新记录和更新索引两个部分，也是更新的瓶颈所在：</p>
+<ol>
+<li>查找 需要参考查找</li>
+<li>更新记录 速度取决于记录数量，记录大小</li>
+<li>更新索引 速度取决于更新索引字段的数量。</li>
+</ol>
+<p>对于删除，执行查询则有查找，删除记录和删除索引两个部分，也是删除的瓶颈所在：</p>
+<ol>
+<li>查找 需要参考查找</li>
+<li>删除记录 速度取决于记录数量，记录大小</li>
+<li>更新索引 速度取决于更新索引字段的数量。</li>
+</ol>
+<h4 id="查询的优化"><a href="#查询的优化" class="headerlink" title="查询的优化"></a>查询的优化</h4><h4 id="索引的代价"><a href="#索引的代价" class="headerlink" title="索引的代价"></a>索引的代价</h4><blockquote>
+<p>在计算机这个神奇的世界里面，没有一个算法与数据结构的挑选是没有代价的。便于查询，则不便于插入更新。</p>
+</blockquote>
+<p>有的人把索引比作字典。说字典的索引页面就好像是数据表中的索引。</p>
+<p>这个比方很贴切，可以用在索引的比方上，也可以用在索引的代价上。</p>
+<ul>
+<li>一个没有索引的页面，即是一个只有页码，编号的字典。当我们查询一个新字的时候，只能从第一页翻到结尾，效率很低。</li>
+<li>一个有一个索引的页面，即是一个有页码，编号，拼音索引的字典。当我们查询一个新字的时候，先查询索引，然后从索引查页码，于是很快找到字。当我们<strong>增加 / 删除 / 更新</strong>一个字之后，还需要更新拼音索引。</li>
+<li>一个有多个索引的页面，即是一个有页码，编号，拼音索引和部首索引以及其他索引的字典。当我们<strong>增加 / 删除 / 更新</strong>一个字之后，还需要更新拼音索引，部首索引等等索引。</li>
+</ul>
+<blockquote>
+<p><strong>计算机世界就是这样，没有完美的算法，也没有完美的模型。</strong></p>
+</blockquote>
+<h3 id="数据存储结构"><a href="#数据存储结构" class="headerlink" title="数据存储结构"></a>数据存储结构</h3><h3 id="硬件优化"><a href="#硬件优化" class="headerlink" title="硬件优化"></a>硬件优化</h3><p>留空，这个可能比较接近运维或者 DBA 的工作</p>
+<h3 id="配置优化"><a href="#配置优化" class="headerlink" title="配置优化"></a>配置优化</h3><p>留空，这个可能比较接近运维或者 DBA 的工作</p>
+<h2 id="关于-SQL-与数据库的有趣解释"><a href="#关于-SQL-与数据库的有趣解释" class="headerlink" title="关于 SQL 与数据库的有趣解释"></a>关于 SQL 与数据库的有趣解释</h2><ol>
+<li><a href="http://stackoverflow.com/questions/38549/what-is-the-difference-between-inner-join-and-outer-join" target="_blank" rel="external">Inner Join 和 Outer Join</a></li>
+<li><a href="http://stackoverflow.com/questions/60174/how-can-i-prevent-sql-injection-in-php" target="_blank" rel="external">如何防止 SQL 注入</a></li>
+<li><a href="http://stackoverflow.com/questions/1108/how-does-database-indexing-work" target="_blank" rel="external">索引是怎么工作的</a></li>
+<li><a href="https://gold.xitu.io/post/584e7b298d6d81005456eb53" target="_blank" rel="external">Mysql 常用 SQL 语句集锦（本文部分 SQL 语句取自此博文）</a></li>
+</ol>
+<p><a href="http://stackoverflow.com/questions/194852/concatenate-many-rows-into-a-single-text-string" target="_blank" rel="external">http://stackoverflow.com/questions/194852/concatenate-many-rows-into-a-single-text-string</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>若是技术文章有帮助，何不赞助杯咖啡喝呢？</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weichat_donating.png" alt="Micheal Gardner WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/效率/" rel="tag"># 效率</a>
+          
+            <a href="/tags/工作自动化/" rel="tag"># 工作自动化</a>
+          
+            <a href="/tags/Cheatsheet/" rel="tag"># Cheatsheet</a>
+          
+            <a href="/tags/MySQL/" rel="tag"># MySQL</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/20/IPynb和ECharts/" rel="next" title="IPython Notebook 引入 ECharts 做可视化">
+                <i class="fa fa-chevron-left"></i> IPython Notebook 引入 ECharts 做可视化
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/15/MacPythonMonitorPart2/" rel="prev" title="使用 Python 监控 Mac 一天的运行（下）">
+                使用 Python 监控 Mac 一天的运行（下） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/09/12/MySQLCheatSheet/"
+     data-title="MySQL Cheatsheet"
+     data-content=""
+     data-url="http://twocucao.github.com/2016/09/12/MySQLCheatSheet/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/12/MySQLCheatSheet/"
+           data-title="MySQL Cheatsheet" data-url="http://twocucao.github.com/2016/09/12/MySQLCheatSheet/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oh1n2bfoj.bkt.clouddn.com/avatar.png"
+               alt="Micheal Gardner" />
+          <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+          <p class="site-description motion-element" itemprop="description">博客内容正在调整中,估计17年初调整完毕.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/twocucao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/twocucao" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/twocucao" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">2.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#UTF-8-Please"><span class="nav-number">2.1.</span> <span class="nav-text">UTF-8 , Please</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-配套工具"><span class="nav-number">3.</span> <span class="nav-text">MySQL 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySQL-Shell-MySQL-Console"><span class="nav-number">4.</span> <span class="nav-text">MySQL Shell ( MySQL Console )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见问题"><span class="nav-number">5.</span> <span class="nav-text">常见问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#密码忘了怎么办？"><span class="nav-number">5.1.</span> <span class="nav-text">密码忘了怎么办？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常用-Snippet"><span class="nav-number">6.</span> <span class="nav-text">常用 Snippet</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据清洗常用脚本"><span class="nav-number">6.1.</span> <span class="nav-text">1. 数据清洗常用脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-用户管理常用脚本"><span class="nav-number">6.2.</span> <span class="nav-text">2. 用户管理常用脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-备份迁移常用脚本"><span class="nav-number">6.3.</span> <span class="nav-text">3. 备份迁移常用脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-性能优化常用脚本"><span class="nav-number">6.4.</span> <span class="nav-text">4. 性能优化常用脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-其他脚本"><span class="nav-number">6.5.</span> <span class="nav-text">5. 其他脚本</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#性能优化切入点"><span class="nav-number">7.</span> <span class="nav-text">性能优化切入点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#优化应用层面的查询"><span class="nav-number">7.1.</span> <span class="nav-text">优化应用层面的查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化数据库的-SQL-查询"><span class="nav-number">7.2.</span> <span class="nav-text">优化数据库的 SQL 查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#查询的优化"><span class="nav-number">7.2.1.</span> <span class="nav-text">查询的优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引的代价"><span class="nav-number">7.2.2.</span> <span class="nav-text">索引的代价</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据存储结构"><span class="nav-number">7.3.</span> <span class="nav-text">数据存储结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬件优化"><span class="nav-number">7.4.</span> <span class="nav-text">硬件优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置优化"><span class="nav-number">7.5.</span> <span class="nav-text">配置优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于-SQL-与数据库的有趣解释"><span class="nav-number">8.</span> <span class="nav-text">关于 SQL 与数据库的有趣解释</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"twocucao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="//cdn.jsdelivr.net/ua-parser.js/0.7.10/ua-parser.min.js"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

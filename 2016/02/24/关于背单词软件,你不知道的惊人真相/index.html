@@ -1,0 +1,921 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="碎碎念,ToyTools," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="0x00 前言 你想知道背单词软件有大概多少人注册第一天都没有背完嘛？ 你想知道背单词软件这么火，这么多人在使用，真的有多少人真的在背诵嘛？  别急，Python 程序员用数据给你说话。 文章目录如下：  0x00 前言 0x01 问题的提出和任务的分解 0x02 任务一，信息爬取 ox03 任务二，清理和存储 0x04 任务三，分析 0x05 任务四，结论 0x06 整个流程的不足和反思。 0x">
+<meta name="keywords" content="碎碎念,ToyTools">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于背单词软件，你不知道的惊人真相">
+<meta property="og:url" content="http://twocucao.github.com/2016/02/24/关于背单词软件,你不知道的惊人真相/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言 你想知道背单词软件有大概多少人注册第一天都没有背完嘛？ 你想知道背单词软件这么火，这么多人在使用，真的有多少人真的在背诵嘛？  别急，Python 程序员用数据给你说话。 文章目录如下：  0x00 前言 0x01 问题的提出和任务的分解 0x02 任务一，信息爬取 ox03 任务二，清理和存储 0x04 任务三，分析 0x05 任务四，结论 0x06 整个流程的不足和反思。 0x">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-700e3adc4e88dd4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-d43f053706de8b37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-532a24af7f6a4c0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-a1adbb9a925128a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-6e0b3c72b5c02c13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-2cf944cc1c837507.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-03-14T02:20:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于背单词软件，你不知道的惊人真相">
+<meta name="twitter:description" content="0x00 前言 你想知道背单词软件有大概多少人注册第一天都没有背完嘛？ 你想知道背单词软件这么火，这么多人在使用，真的有多少人真的在背诵嘛？  别急，Python 程序员用数据给你说话。 文章目录如下：  0x00 前言 0x01 问题的提出和任务的分解 0x02 任务一，信息爬取 ox03 任务二，清理和存储 0x04 任务三，分析 0x05 任务四，结论 0x06 整个流程的不足和反思。 0x">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/52890-700e3adc4e88dd4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '无与童比'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://twocucao.github.com/2016/02/24/关于背单词软件,你不知道的惊人真相/"/>
+
+
+
+
+
+  <title> 关于背单词软件，你不知道的惊人真相 | MG的编程小屋 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?299254d95898cdfa110fc6d914eba9c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">MG的编程小屋</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">博客内容正在调整中</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/02/24/关于背单词软件,你不知道的惊人真相/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Micheal Gardner">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="MG的编程小屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于背单词软件，你不知道的惊人真相
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-24T18:50:23+08:00">
+                2016-02-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开源项目/" itemprop="url" rel="index">
+                    <span itemprop="name">开源项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/02/24/关于背单词软件,你不知道的惊人真相/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/24/关于背单词软件,你不知道的惊人真相/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><ul>
+<li>你想知道背单词软件有大概多少人注册第一天都没有背完嘛？</li>
+<li>你想知道背单词软件这么火，这么多人在使用，真的有多少人真的在背诵嘛？</li>
+</ul>
+<p>别急，Python 程序员用数据给你说话。</p>
+<p>文章目录如下：</p>
+<ul>
+<li>0x00 前言</li>
+<li>0x01 问题的提出和任务的分解</li>
+<li>0x02 任务一，信息爬取</li>
+<li>ox03 任务二，清理和存储</li>
+<li>0x04 任务三，分析</li>
+<li>0x05 任务四，结论</li>
+<li>0x06 整个流程的不足和反思。</li>
+<li>0x07 代码。</li>
+</ul>
+<h2 id="0x01-问题的提出和任务的分解"><a href="#0x01-问题的提出和任务的分解" class="headerlink" title="0x01 问题的提出和任务的分解"></a>0x01 问题的提出和任务的分解</h2><p>前两天，就在一个雷电交加的夜晚，我躺在床上，草草的看了一篇英文文章，突然想到一个非常有意思的问题：</p>
+<blockquote>
+<p>是不是大部分的人做事真的不能坚持呢？比如，背单词。</p>
+</blockquote>
+<p>好，那我就看看到底有多少人是坚持不下来的？</p>
+<p>那么，我们的问题就变成了这样子：</p>
+<ul>
+<li>有多少人是在坚持或者曾经坚持过背单词呢？（假设 100 天以上算的上是背单词的话）</li>
+<li>有多少梦想，毁于不能坚持？</li>
+<li>背单词的人们学习的量，是不是符合正太分布呢？</li>
+</ul>
+<p>于是我选中了业内的标杆扇贝软件作为分析的对象。抽取其中的大约 1/30 的用户的公开数据，也就是游客用户都可以看得到的数据，进行抽样调查。</p>
+<p> 调查的具体内容如下：</p>
+<ul>
+<li>打卡最高 / 成长值最高 / 学习单词数量最高</li>
+<li>平均每个人打卡次数 / 成长值 / 学习单词数量</li>
+<li>打卡 / 成长值 / 学习单词数量的分布（也就是已经坚持了多少天了）</li>
+</ul>
+<p>那么，我的任务也就可以分解如下：</p>
+<ul>
+<li>爬取数据<ul>
+<li>使用 Python2 的 Scrapy 进行爬站</li>
+</ul>
+</li>
+<li>清理数据<ul>
+<li>sql 语句和 pandas 运算</li>
+</ul>
+</li>
+<li>分析数据<ul>
+<li>pandas + seaborn + ipython book</li>
+</ul>
+</li>
+<li>得出结论</li>
+</ul>
+<h2 id="0x02-任务一，信息爬取，清理和存储"><a href="#0x02-任务一，信息爬取，清理和存储" class="headerlink" title="0x02 任务一，信息爬取，清理和存储"></a>0x02 任务一，信息爬取，清理和存储</h2><p>每个用户的信息都在这里：</p>
+<p><a href="http://www.shanbay.com/bdc/review/progress/2" target="_blank" rel="external">http://www.shanbay.com/bdc/review/progress/2</a></p>
+<p>使用 beautifulsoup4 进行解析即可。其他部分参考代码。</p>
+<p>扇贝的工程师反爬虫做的还不错，主要有两点：</p>
+<ul>
+<li>访问数量超标，封禁 IP 半个小时。对应的方法就是代理服务器.（代码中已经删除代理服务器，所以，如果你运行不了代码，那你应该知道怎么做了.)</li>
+<li>cookie 如果不禁用很快就无法爬取。对应的方法就是禁用 Cookie.</li>
+</ul>
+<h2 id="0x03-任务二，清理和存储"><a href="#0x03-任务二，清理和存储" class="headerlink" title="0x03 任务二，清理和存储"></a>0x03 任务二，清理和存储</h2><p>对于数据库，使用 Postgresql 存储就好了。也没有什么大问题。参考代码。有问题在评论下面问。</p>
+<p>通常情况下在存入数据库的时候需要进行数据的净化，不处理也没有什么大问题。</p>
+<h2 id="0x04-任务三，分析"><a href="#0x04-任务三，分析" class="headerlink" title="0x04 任务三，分析"></a>0x04 任务三，分析</h2><p>分析阶段，使用 IPython notebook. 通常情况下，我们使用的是 Anaconda 里面的 Python3 版本 . 可以到这里下载，注意，mac 和 ubuntu 下载的是命令行版本。</p>
+<p><a href="https://www.continuum.io/downloads" target="_blank" rel="external">https://www.continuum.io/downloads</a></p>
+<p>安装完毕以后，重启终端。环境变量生效。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#直接安装 seaborn</span></div><div class="line">pip install seaborn</div></pre></td></tr></table></figure>
+<p>切换到指定目录然后敲入命令 ipython notebook 打开浏览器进行编辑。</p>
+<p>至于怎么使用，请看代码。</p>
+<h2 id="0x05-任务三，结论"><a href="#0x05-任务三，结论" class="headerlink" title="0x05 任务三，结论"></a>0x05 任务三，结论</h2><p>在这里省去部分的分析过程直接贴出结论。</p>
+<p>总共抓取 1111111 张网页，成功获取 610888 个用户的信息。</p>
+<p>于是得出结论如下：</p>
+<p><strong>扇贝之最：</strong></p>
+<ul>
+<li>最高打卡天数：chainyu 1830 天</li>
+<li>最高成长值：Lerystal 成长值 28767</li>
+<li>最高单词数量：chenmaoboss 单词量 38313</li>
+</ul>
+<p><strong>平均到每一个人身上</strong></p>
+<ul>
+<li>平均每人打卡天数：14.18, 而超过成长平均值的人数为 71342, 占总抽样人数的，额，11.69%</li>
+<li>平均成长值：121.79, 而超过平均成长的人数为 13351, 占总抽样人数的，额，11.42%</li>
+<li>平均学习单词数量：78.92, 而背超过平均单词的人数为 13351, 占总抽样人数的，额，2.19%（注意，真的是 2% 左右）</li>
+</ul>
+<p><strong>那么，我们来看看打卡，成长值，单词数量的，分布吧.</strong></p>
+<p>第一个，所有人的打卡数量直方图。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-700e3adc4e88dd4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这是所有人的打卡数量直方图"></p>
+<p>简直惨不忍睹。</p>
+<p>第二个，非零用户的打卡数量直方图。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-d43f053706de8b37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="非零用户的打卡数量的直方图"></p>
+<p>这真是一段悲伤的故事。由于坚持不了几天的用户实在是太多，简直就是反比例函数嘛，导致图像严重畸形。那么，我们只能分段了看用户打卡天数在 0~20,20~100,100~500,500~2000 范围的分布图了。</p>
+<p>分别如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-532a24af7f6a4c0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0~20"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-a1adbb9a925128a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20~100"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-6e0b3c72b5c02c13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="100~500"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-2cf944cc1c837507.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="500~2000"></p>
+<p>其他成长值的各种分布也是如此，在此就不贴出来了。</p>
+<p>正如你所看到的，我再来总结一下，</p>
+<p>在抽样中，</p>
+<ol>
+<li>英语梦死在前 0 天的有 416351 人，占总比 68.15%;</li>
+<li>英语梦死在前 1 天的有 466761 人，占总比 76.40%;</li>
+<li>英语梦死在前 2 天的有 484535 人，占总比 79.31%;</li>
+<li>英语梦死在前 5 天的有 510230 人，占总比 83.52%;</li>
+<li>英语梦死在前 10 天的有 531219 人，占总比 86.95%;</li>
+<li>英语梦死在前 20 天的有 551557 人，占总比 90.28%;</li>
+<li>英语梦死在前 50 天的有 575975 人，占总比的 94.28%;</li>
+<li>英语梦死在前 100 天的有 590700 人，占总比 96.69%;</li>
+<li>英语梦死在前 200 天的有 575975 人，占总比 98.36%;</li>
+<li>英语梦死在前 263 天的有 600875 人，占总比 98.81%;</li>
+</ol>
+<p>你可以大致感受到残酷的现实，几乎没有多少人可以坚持到 200 天以后。</p>
+<p>但是，你还需要注意到的事情是：</p>
+<blockquote>
+<p>抽样的来源是 ID 为 1~1111111 之间的 60W 成员</p>
+</blockquote>
+<p>众所周知的事情是：</p>
+<ul>
+<li>早期的用户往往质量相对会高一些。而且，注册的 ID 越大，证明注册时间距离现在越近。获得 200 天的几率也就低了不少。</li>
+</ul>
+<blockquote>
+<p>那么，这样的话，英语梦死在 200 天之前的人数比例还会大上不少。</p>
+</blockquote>
+<p>回到文章开始：</p>
+<p>问：背单词软件有大概多少人注册第一天都没有背完嘛？<br>答：68.15%</p>
+<p>问：有多少人是在坚持或者曾经坚持过背单词呢？（假设 100 天以上算的上是背单词的话）<br>答：保守估计，不足 3.4%</p>
+<p>问：有多少梦想，毁于不能坚持？<br>答：不妨干了这碗鸡汤，歌唱青春一去不复返。</p>
+<p>问：背单词的人们学习的量，是不是符合正太分布呢？<br>答：不是，简直就是反比例函数。</p>
+<p>抛出一个结论：</p>
+<blockquote>
+<p>以绝大部分人努力之低，根本就用不着拼天赋。</p>
+</blockquote>
+<p>赠给你我，共勉。</p>
+<h2 id="0x06-整个流程的不足和反思。"><a href="#0x06-整个流程的不足和反思。" class="headerlink" title="0x06 整个流程的不足和反思。"></a>0x06 整个流程的不足和反思。</h2><p>扇贝的工程师反爬虫做的还不错，主要有两点：</p>
+<ul>
+<li>访问数量超标，封禁 IP 半个小时。对应的方法就是代理服务器。</li>
+<li>cookie 如果不禁用很快就无法爬取。对应的方法就是禁用 Cookie.</li>
+</ul>
+<p>爬虫框架使用 Scrapy, 这样就免去了大量的繁琐的线程调度问题，直接写获取信息的逻辑代码，以及存储信息的逻辑代码就好了。</p>
+<p>在编写爬虫的过程中，有一些经验：</p>
+<ul>
+<li>在爬虫开启以后，由于我暴力的关闭，导致还是有不少的 item 没有完成请求处理和存储。</li>
+<li>我在处理异常的时候忘了应当把失败的 item 存放放在文件中，方便我第二次补充，这样的话就不会丢失一部分的用户信息了。</li>
+<li>代理服务器需要自己写脚本进行测试，否则你可能有很多很多的请求都会超时（毕竟很多代理服务器还是很不靠谱的）.</li>
+</ul>
+<p>我的分析数据能力并不是很强，仅仅是从 CS109 里面偷学了一点点，然后使用 Seaborn 画图，但是这整个过程中还是觉得自己分析不过来，不是写不出代码，而是不清楚使用什么样的数据模型进行分析更好。</p>
+<h2 id="0x07-代码"><a href="#0x07-代码" class="headerlink" title="0x07 代码"></a>0x07 代码</h2><p>代码放在了 Github 上面，咳咳，注意，没有把代理服务器放进去。如果你跑一下会发现只能半小时抓取 300+ 页面，这不是我的问题，是你没有把代理服务器填好。代码比较粗糙，还请轻拍。</p>
+<p>代码的地址为：</p>
+<p><a href="https://github.com/twocucao/DataScience/" target="_blank" rel="external">https://github.com/twocucao/DataScience/</a></p>
+<p>仓库里包含了抓取网站的代码和分析数据的 IPython Notebook, 自己阅读吧。</p>
+<p>如果喜欢本文，就点个喜欢吧。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>若是技术文章有帮助，何不赞助杯咖啡喝呢？</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weichat_donating.png" alt="Micheal Gardner WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/碎碎念/" rel="tag"># 碎碎念</a>
+          
+            <a href="/tags/ToyTools/" rel="tag"># ToyTools</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/03/15/如何发布一个Py命令行工具/" rel="next" title="如何发布一个 Python 命令行工具">
+                <i class="fa fa-chevron-left"></i> 如何发布一个 Python 命令行工具
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/02/15/Python斗鱼弹幕助手/" rel="prev" title="Python 程序员如何优雅的看斗鱼 TV">
+                Python 程序员如何优雅的看斗鱼 TV <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2016/02/24/关于背单词软件,你不知道的惊人真相/"
+     data-title="关于背单词软件，你不知道的惊人真相"
+     data-content=""
+     data-url="http://twocucao.github.com/2016/02/24/关于背单词软件,你不知道的惊人真相/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/02/24/关于背单词软件,你不知道的惊人真相/"
+           data-title="关于背单词软件，你不知道的惊人真相" data-url="http://twocucao.github.com/2016/02/24/关于背单词软件,你不知道的惊人真相/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oh1n2bfoj.bkt.clouddn.com/avatar.png"
+               alt="Micheal Gardner" />
+          <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+          <p class="site-description motion-element" itemprop="description">博客内容正在调整中,估计17年初调整完毕.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/twocucao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/twocucao" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/twocucao" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-问题的提出和任务的分解"><span class="nav-number">2.</span> <span class="nav-text">0x01 问题的提出和任务的分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-任务一，信息爬取，清理和存储"><span class="nav-number">3.</span> <span class="nav-text">0x02 任务一，信息爬取，清理和存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-任务二，清理和存储"><span class="nav-number">4.</span> <span class="nav-text">0x03 任务二，清理和存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-任务三，分析"><span class="nav-number">5.</span> <span class="nav-text">0x04 任务三，分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-任务三，结论"><span class="nav-number">6.</span> <span class="nav-text">0x05 任务三，结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-整个流程的不足和反思。"><span class="nav-number">7.</span> <span class="nav-text">0x06 整个流程的不足和反思。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-代码"><span class="nav-number">8.</span> <span class="nav-text">0x07 代码</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"twocucao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="//cdn.jsdelivr.net/ua-parser.js/0.7.10/ua-parser.min.js"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>

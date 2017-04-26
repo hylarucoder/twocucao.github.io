@@ -1,0 +1,782 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="效率,ToyTools," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本文内容思路 英文单词的处理 shanbay 单词本的提交  英文单词的处理正则表达式进行提取，然后通过 Python 的自然语言处理工具 ntlk 进行单词原型的转换 shanbay 单词的处理由于使用了传说中的 requests，使得代码简洁程度大大提升。">
+<meta name="keywords" content="效率,ToyTools">
+<meta property="og:type" content="article">
+<meta property="og:title" content="扇贝背单词小助手">
+<meta property="og:url" content="http://twocucao.github.com/2015/03/17/扇贝背单词小助手/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="本文内容思路 英文单词的处理 shanbay 单词本的提交  英文单词的处理正则表达式进行提取，然后通过 Python 的自然语言处理工具 ntlk 进行单词原型的转换 shanbay 单词的处理由于使用了传说中的 requests，使得代码简洁程度大大提升。">
+<meta property="og:updated_time" content="2017-03-14T02:18:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="扇贝背单词小助手">
+<meta name="twitter:description" content="本文内容思路 英文单词的处理 shanbay 单词本的提交  英文单词的处理正则表达式进行提取，然后通过 Python 的自然语言处理工具 ntlk 进行单词原型的转换 shanbay 单词的处理由于使用了传说中的 requests，使得代码简洁程度大大提升。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '无与童比'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://twocucao.github.com/2015/03/17/扇贝背单词小助手/"/>
+
+
+
+
+
+  <title> 扇贝背单词小助手 | MG的编程小屋 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?299254d95898cdfa110fc6d914eba9c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">MG的编程小屋</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">博客内容正在调整中</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2015/03/17/扇贝背单词小助手/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Micheal Gardner">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="MG的编程小屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                扇贝背单词小助手
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-03-17T11:20:51+08:00">
+                2015-03-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/开源项目/" itemprop="url" rel="index">
+                    <span itemprop="name">开源项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2015/03/17/扇贝背单词小助手/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/03/17/扇贝背单词小助手/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="本文内容"><a href="#本文内容" class="headerlink" title="本文内容"></a>本文内容</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>英文单词的处理</li>
+<li>shanbay 单词本的提交</li>
+</ul>
+<h3 id="英文单词的处理"><a href="#英文单词的处理" class="headerlink" title="英文单词的处理"></a>英文单词的处理</h3><p>正则表达式进行提取，然后通过 Python 的自然语言处理工具 ntlk 进行单词原型的转换</p>
+<h3 id="shanbay-单词的处理"><a href="#shanbay-单词的处理" class="headerlink" title="shanbay 单词的处理"></a>shanbay 单词的处理</h3><p>由于使用了传说中的 requests，使得代码简洁程度大大提升。</p>
+<a id="more"></a>
+<h3 id="代码如下"><a href="#代码如下" class="headerlink" title="代码如下"></a>代码如下</h3><p>英文单词处理模块</p>
+<p>shanbay 登录以及单词的提交</p>
+<p>这是 v0.1 版本，有不少细节需要调整。有时间我会继续更新<br>代码 9 逻辑比较简单，自己阅读代码吧</p>
+<p><a href="https://github.com/twocucao/PyTools" target="_blank" rel="external">请来 github 这里</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> re</div><div class="line"></div><div class="line">__author__ = <span class="string">'micheal'</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> WordNetLemmatizer</div><div class="line"></div><div class="line">lemmatizer = WordNetLemmatizer()</div><div class="line"></div><div class="line"><span class="comment">## 常量设置</span></div><div class="line"></div><div class="line">BOOKS_FOLDER = <span class="string">"Books/"</span></div><div class="line"></div><div class="line">OUTPUTS_FOLDER = <span class="string">"OutPuts/"</span></div><div class="line"></div><div class="line">COVER_FILE = <span class="string">"cover.jpg"</span></div><div class="line"></div><div class="line">EXCLUDED_LIB_FILE = <span class="string">"excluded_libs.txt"</span></div><div class="line"></div><div class="line">SUMMARY_FILE = <span class="string">"SUMMARY.json"</span></div><div class="line"></div><div class="line">ALL_LIB_FILE = <span class="string">"all.txt"</span></div><div class="line"></div><div class="line"><span class="comment">### 初始化数据，</span></div><div class="line"><span class="comment"># 创建 ALLFile</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createMergeFile</span><span class="params">()</span>:</span></div><div class="line">    fo = open(ALL_LIB_FILE, <span class="string">'w'</span>)</div><div class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> os.listdir(BOOKS_FOLDER):</div><div class="line">        fi = open(BOOKS_FOLDER + name, <span class="string">"r"</span>)</div><div class="line">        <span class="keyword">while</span> <span class="keyword">True</span>:</div><div class="line">            s = fi.read(<span class="number">16</span> * <span class="number">1024</span>)</div><div class="line">            <span class="keyword">if</span> <span class="keyword">not</span> s:</div><div class="line">                <span class="keyword">break</span></div><div class="line">            fo.write(s)</div><div class="line">        fi.close()</div><div class="line">    fo.close()</div><div class="line"></div><div class="line">    <span class="keyword">pass</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_sorted_words_list_from</span><span class="params">(txt_path)</span>:</span></div><div class="line">    <span class="keyword">with</span> open(txt_path, <span class="string">"r"</span>) <span class="keyword">as</span> f:</div><div class="line">        strs = f.read()</div><div class="line">        s = re.findall(<span class="string">"\w+"</span>, str.lower(strs), flags=re.ASCII)</div><div class="line"></div><div class="line">    ss = []</div><div class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> s:</div><div class="line">        ss.append(lemmatizer.lemmatize(item))</div><div class="line"></div><div class="line">    l = sorted(list(set(ss)))</div><div class="line">    ll = []</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> l:</div><div class="line">        m = re.search(<span class="string">"\d+"</span>, i)</div><div class="line">        n = re.search(<span class="string">"\W+"</span>, i, flags=re.ASCII)</div><div class="line">        <span class="keyword">if</span> <span class="keyword">not</span> m <span class="keyword">and</span> <span class="keyword">not</span> n <span class="keyword">and</span> len(i) &gt; <span class="number">4</span>:</div><div class="line">            ll.append(i)</div><div class="line">            <span class="comment"># 不属于数字也不属于非（英文 + 数字）并且字母长度大于 4 的集合</span></div><div class="line"></div><div class="line">    <span class="keyword">return</span> ll</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">WordCountInit</span><span class="params">()</span>:</span></div><div class="line">    createMergeFile()</div><div class="line"></div><div class="line">    excluded_words = get_sorted_words_list_from(<span class="string">"excluded_libs.txt"</span>)</div><div class="line"></div><div class="line">    file = &#123;&#125;</div><div class="line"></div><div class="line">    folder_list = os.listdir(BOOKS_FOLDER)</div><div class="line"></div><div class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> folder_list:</div><div class="line">        file[item] = get_sorted_words_list_from(BOOKS_FOLDER + item)</div><div class="line"></div><div class="line">        words = file[item]</div><div class="line"></div><div class="line">        real_words = []</div><div class="line"></div><div class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> words:</div><div class="line">            <span class="keyword">if</span> word <span class="keyword">not</span> <span class="keyword">in</span> excluded_words:</div><div class="line">                real_words.append(word)</div><div class="line"></div><div class="line">        <span class="comment"># print("excluded_words\n"+str(excluded_words))</span></div><div class="line"></div><div class="line">        print(<span class="string">"real_words\n"</span> + str(real_words))</div><div class="line"></div><div class="line">        excluded_words.extend(file[item])</div><div class="line">        <span class="keyword">with</span> open(OUTPUTS_FOLDER + item, <span class="string">"w"</span>) <span class="keyword">as</span> f:</div><div class="line">            f.write(str(sorted(list(real_words))))</div><div class="line"></div><div class="line">    <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line">    <span class="comment"># print(file)</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</div><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> requests</div><div class="line"><span class="keyword">from</span> WordsCount <span class="keyword">import</span> get_sorted_words_list_from, WordCountInit</div><div class="line"></div><div class="line">__author__ = <span class="string">'micheal'</span></div><div class="line"></div><div class="line">word_book_url = <span class="string">"http://www.shanbay.com/wordbook/99004/"</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> nltk.stem <span class="keyword">import</span> WordNetLemmatizer</div><div class="line"></div><div class="line">lemmatizer = WordNetLemmatizer()</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ShanBay</span>:</span></div><div class="line">    <span class="comment"># 初始化 shanbay 的基本信息</span></div><div class="line">    <span class="comment"># 1. 登录，</span></div><div class="line"></div><div class="line">    <span class="comment"># 2，创建 wordbook</span></div><div class="line">    <span class="comment"># 3，创建 wordlist，</span></div><div class="line">    <span class="comment"># 4，用集合填充 wordlist</span></div><div class="line">    <span class="comment"># 5，填充策略</span></div><div class="line">    <span class="comment">#</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        print(<span class="string">"基本数据正在初始化"</span>)</div><div class="line">        WordCountInit()</div><div class="line">        print(<span class="string">"初始化完毕"</span>)</div><div class="line"></div><div class="line">        self.headers = &#123;</div><div class="line">            <span class="string">"User-Agent"</span>: <span class="string">"Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.93 Safari/537.36"</span>,</div><div class="line">            <span class="string">"Accept"</span>: <span class="string">"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"</span>,</div><div class="line">            <span class="string">"Content-Type"</span>: <span class="string">"application/x-www-form-urlencoded; charset=UTF-8"</span>,</div><div class="line">            <span class="string">"Accept-Language"</span>: <span class="string">"en-US,en;q=0.5"</span>,</div><div class="line">            <span class="string">"Accept-Encoding"</span>: <span class="string">"gzip, deflate"</span>,</div><div class="line">            <span class="string">"Connection"</span>: <span class="string">"keep-alive"</span>,</div><div class="line">            <span class="string">"Cache-Control"</span>: <span class="string">"max-age=0"</span>,</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        self.index_url = <span class="string">"http://www.shanbay.com/"</span></div><div class="line"></div><div class="line">        self.login_url = <span class="string">"http://www.shanbay.com/accounts/login/"</span></div><div class="line"></div><div class="line">        self.sb_session = requests.Session()</div><div class="line">        self.sb_session.headers.update(self.headers)</div><div class="line">        self.sb_session.get(self.login_url)</div><div class="line">        <span class="comment"># 开始登录</span></div><div class="line">        <span class="comment"># 初始化登录</span></div><div class="line"></div><div class="line">        print(<span class="string">"正在登录中"</span>)</div><div class="line">        self.doLogin(<span class="string">"test"</span>, <span class="string">"test"</span>)</div><div class="line"></div><div class="line">        print(<span class="string">"单词书  情况如下 \n"</span>)</div><div class="line">        <span class="keyword">with</span> open(<span class="string">"SUMMARY.json"</span>, <span class="string">"r"</span>) <span class="keyword">as</span> f:</div><div class="line">            decodejson = json.loads(f.read())</div><div class="line">            self.book_info_title = decodejson[<span class="string">"title"</span>]</div><div class="line">            self.book_info_category = decodejson[<span class="string">"category"</span>]</div><div class="line">            self.book_info_description = decodejson[<span class="string">"description"</span>]</div><div class="line">            self.book_info_price = decodejson[<span class="string">"price"</span>]</div><div class="line">            print(</div><div class="line">                <span class="string">"标题："</span> + self.book_info_title + <span class="string">"\n 类型："</span> + self.book_info_category + <span class="string">"\n 描述："</span> + self.book_info_description + <span class="string">"\n 价格："</span> + self.book_info_price)</div><div class="line"></div><div class="line">        self.createWordBook()</div><div class="line"></div><div class="line">        <span class="comment">## 判断有多少个路进然后接着进行一系列的操作</span></div><div class="line">        word_list_list = os.listdir(<span class="string">"Books/"</span>)</div><div class="line">        <span class="keyword">for</span> word_list <span class="keyword">in</span> word_list_list:</div><div class="line">            print(<span class="string">"正在创建"</span> + word_list)</div><div class="line"></div><div class="line">            dt = datetime.now()</div><div class="line"></div><div class="line">            list_id = self.createWordList(self.word_book_id, <span class="string">"List"</span> + dt.strftime(<span class="string">'%Y%m%d%H%M%S'</span>),</div><div class="line">                                          <span class="string">"这仅仅是一个比较简单的描述"</span> + dt.strftime(<span class="string">'%Y%m%d%H%M%S'</span>))</div><div class="line"></div><div class="line">            self.fillWordListById(list_id, get_sorted_words_list_from(<span class="string">"OutPuts/"</span> + word_list))</div><div class="line"></div><div class="line">            <span class="comment"># print(self.sb_session.get(self.index_url).text)</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">doLogin</span><span class="params">(self, username, password)</span>:</span></div><div class="line">        self.login_form = &#123;</div><div class="line">            <span class="string">"csrfmiddlewaretoken"</span>: self.sb_session.cookies[<span class="string">"csrftoken"</span>],</div><div class="line">            <span class="string">"username"</span>: username,</div><div class="line">            <span class="string">"password"</span>: password,</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        self.sb_session.post(self.login_url, self.login_form)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">fillWordListById</span><span class="params">(self, _id, words)</span>:</span></div><div class="line">        <span class="comment"># "172981"</span></div><div class="line">        <span class="keyword">for</span> word <span class="keyword">in</span> words:</div><div class="line">            post_data = &#123;</div><div class="line">                <span class="string">"id"</span>: _id,</div><div class="line">                <span class="string">"word"</span>: word,</div><div class="line">            &#125;</div><div class="line">            self.sb_session.post(<span class="string">"http://www.shanbay.com/api/v1/wordlist/vocabulary/"</span>, post_data)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">createWordBook</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># http://www.shanbay.com/wordbook/create/basicinfo/</span></div><div class="line"></div><div class="line">        createWordBookForm = &#123;</div><div class="line">            <span class="string">"csrfmiddlewaretoken"</span>: self.sb_session.cookies[<span class="string">"csrftoken"</span>],</div><div class="line">            <span class="string">"title"</span>: self.book_info_title,</div><div class="line">            <span class="string">"category"</span>: self.book_info_category,</div><div class="line">            <span class="string">"description"</span>: self.book_info_description,</div><div class="line">            <span class="string">"price"</span>: self.book_info_price,</div><div class="line">        &#125;</div><div class="line"></div><div class="line">        t = self.sb_session.post(<span class="string">"http://www.shanbay.com/wordbook/create/basicinfo/"</span>, createWordBookForm)</div><div class="line">        self.word_book_id = str(t.url).split(<span class="string">"/"</span>)[<span class="number">-3</span>]</div><div class="line"></div><div class="line">        <span class="comment"># 封面没有办法提交...... 以后再说</span></div><div class="line">        coverFiles = &#123;</div><div class="line">            <span class="string">"csrfmiddlewaretoken"</span>: self.sb_session.cookies[<span class="string">"csrftoken"</span>],</div><div class="line">            <span class="string">"cover"</span>: (<span class="string">'cover.jpg'</span>, open(<span class="string">'cover.jpg'</span>, <span class="string">'rb'</span>), <span class="string">'image/jpeg'</span>, &#123;<span class="string">'Expires'</span>: <span class="string">'0'</span>&#125;),</div><div class="line">            <span class="string">"wordbook_id"</span>: self.word_book_id,</div><div class="line">            <span class="string">"description"</span>: self.book_info_description,</div><div class="line">        &#125;</div><div class="line">        <span class="comment"># files = &#123;'file': ('report.xls', open('report.xls', 'rb'), 'application/vnd.ms-excel', &#123;'Expires': '0'&#125;)&#125;</span></div><div class="line"></div><div class="line">        self.sb_session.post(<span class="string">"http://www.shanbay.com/wordbook/create/"</span> + self.word_book_id + <span class="string">"/uploadcover/"</span>,</div><div class="line">                             files=coverFiles)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">True</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">doMenu</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="comment"># while True:</span></div><div class="line">        <span class="comment">#</span></div><div class="line">        <span class="comment"># print("""\</span></div><div class="line">        <span class="comment">#</span></div><div class="line">        <span class="comment"># 请输入相关操作：</span></div><div class="line">        <span class="comment"># 1.createWordBook</span></div><div class="line">        <span class="comment"># 2.createWordList</span></div><div class="line">        <span class="comment">#</span></div><div class="line">        <span class="comment">#</span></div><div class="line">        <span class="comment">#     """)</span></div><div class="line">        <span class="comment">#     self.word_book_id = input("word_book_id")</span></div><div class="line">        <span class="comment">#</span></div><div class="line">        <span class="comment">#</span></div><div class="line">        <span class="comment">#</span></div><div class="line"></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">createWordList</span><span class="params">(self, _id, name, desc)</span>:</span></div><div class="line">        createWordListFrom = &#123;</div><div class="line">            <span class="string">"name"</span>: name,</div><div class="line">            <span class="string">"description"</span>: desc,</div><div class="line">            <span class="string">"wordbook_id"</span>: _id,</div><div class="line"></div><div class="line">        &#125;</div><div class="line">        r = self.sb_session.post(<span class="string">"http://www.shanbay.com/api/v1/wordbook/wordlist/"</span>, createWordListFrom)</div><div class="line">        <span class="keyword">return</span> (json.loads(r.text)[<span class="string">"data"</span>][<span class="string">"wordlist"</span>][<span class="string">"id"</span>])</div><div class="line"></div><div class="line">        <span class="keyword">pass</span></div><div class="line"></div><div class="line">sss = ShanBay()</div></pre></td></tr></table></figure>
+<p>这个程序还是比较简单的。</p>
+<p>博客文章原创声明：<br>本博文章如果没有声明为整理或者转载，均为本人原创。非商业可以任意转载分享。<br>关于本人』(<a href="http://twocucao.xyz/about/" target="_blank" rel="external">http://twocucao.xyz/about/</a>),<br>点击链接就可以 web 幻灯片的方式看到我对自己的介绍。</p>
+<p>我的 Github 地址：<a href="https://github.com/twocucao" target="_blank" rel="external">https://github.com/twocucao</a>  （尽管东西不多，但是欢迎来 Star 和 Fork，就算你们来这里提前 Star Folk 了）<br>简书地址：<a href="http://www.jianshu.com/users/9a7e0b9da317/latest_articles" target="_blank" rel="external">http://www.jianshu.com/users/9a7e0b9da317/latest_articles</a> （不常更新，而且几乎没有技术文章的讲解）<br>联系方式：twocucao@gmail.com<br>本人才疏学浅，是一个水平比较菜的程序员，如果行文之间发现任何错误，欢迎指正，特别欢迎技术上的指正。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>若是技术文章有帮助，何不赞助杯咖啡喝呢？</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/images/weichat_donating.png" alt="Micheal Gardner WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/效率/" rel="tag"># 效率</a>
+          
+            <a href="/tags/ToyTools/" rel="tag"># ToyTools</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/03/22/交流与沟通/" rel="next" title="交流与沟通">
+                <i class="fa fa-chevron-left"></i> 交流与沟通
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/03/09/一个小爬虫/" rel="prev" title="Python 小爬虫案例 -- 抓取女神邓紫棋相关照片">
+                Python 小爬虫案例 -- 抓取女神邓紫棋相关照片 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="2015/03/17/扇贝背单词小助手/"
+     data-title="扇贝背单词小助手"
+     data-content=""
+     data-url="http://twocucao.github.com/2015/03/17/扇贝背单词小助手/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2015/03/17/扇贝背单词小助手/"
+           data-title="扇贝背单词小助手" data-url="http://twocucao.github.com/2015/03/17/扇贝背单词小助手/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oh1n2bfoj.bkt.clouddn.com/avatar.png"
+               alt="Micheal Gardner" />
+          <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+          <p class="site-description motion-element" itemprop="description">博客内容正在调整中,估计17年初调整完毕.</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/twocucao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/twocucao" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/twocucao" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#本文内容"><span class="nav-number">1.</span> <span class="nav-text">本文内容</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#思路"><span class="nav-number">1.1.</span> <span class="nav-text">思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#英文单词的处理"><span class="nav-number">1.2.</span> <span class="nav-text">英文单词的处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shanbay-单词的处理"><span class="nav-number">1.3.</span> <span class="nav-text">shanbay 单词的处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#代码如下"><span class="nav-number">1.4.</span> <span class="nav-text">代码如下</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"twocucao"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="//cdn.jsdelivr.net/ua-parser.js/0.7.10/ua-parser.min.js"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
