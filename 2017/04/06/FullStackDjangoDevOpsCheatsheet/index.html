@@ -88,17 +88,17 @@
 
 
 
-<meta name="description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Django 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB 技术：爬虫技术，数据库设计，GIS 记录，单页">
+<meta name="description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB 技术：爬虫技术，数据库设计，GIS">
 <meta name="keywords" content="Pandas,效率,工作自动化,Cheatsheet">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Full Stack Django DevOps Cheatsheet">
 <meta property="og:url" content="http://twocucao.github.com/2017/04/06/FullStackDjangoDevOpsCheatsheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Django 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB 技术：爬虫技术，数据库设计，GIS 记录，单页">
-<meta property="og:updated_time" content="2017-04-26T07:27:34.000Z">
+<meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB 技术：爬虫技术，数据库设计，GIS">
+<meta property="og:updated_time" content="2017-04-27T06:43:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Full Stack Django DevOps Cheatsheet">
-<meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Django 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB 技术：爬虫技术，数据库设计，GIS 记录，单页">
+<meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB 技术：爬虫技术，数据库设计，GIS">
 
 
 
@@ -371,7 +371,7 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Django 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。</p>
 <p>不仅仅是 Django, 还有 Django 涉及到的：</p>
 <ul>
 <li>组件：PostgreSQL,RabbitMQ,Redis,MongoDB</li>
@@ -387,16 +387,24 @@
 <li>维护相关</li>
 </ul>
 <!-- more -->
-<h2 id="0x01-前后端分离"><a href="#0x01-前后端分离" class="headerlink" title="0x01. 前后端分离"></a>0x01. 前后端分离</h2><p>前后端分离是提高团队开发的一个重要的开发策略，前后端分离之后，后端和前端约束 JSON 格式，并行开发，局域网中放置一台服务器，后端写好一个功能，立马部署到服务器上。这样的话，前后端可以并行开发，从而摆脱每一次后端开发，前端编写模板，然后由后端套用模板，出了问题，前端修改模板，后端接着修改模板… 循环往复，不曾更改。</p>
-<p>对的，而如果 Ajax 比较多或者前端写的代码质量稍微低一些，那么倒霉的事情就发生了，后端和前端的沟通成本那是相当的高。</p>
+<h2 id="0x01-前后端分离"><a href="#0x01-前后端分离" class="headerlink" title="0x01. 前后端分离"></a>0x01. 前后端分离</h2><p>前后端分离是提高团队开发的一个重要的开发策略，前后端分离之后，后端和前端交流好 JSON 格式，并行开发，局域网中放置一台服务器，后端写好一个功能，推送代码, 由gitlab 触发 Runner 自动交付到局域网的服务器上。这样的话，前后端可以并行开发，从而摆脱每一次开发过程不可避免，前端编写模板，然后由后端套用模板，出了问题，前端修改模板，后端接着修改模板… 循环往复，不曾更改的问题,在这种职责分明的情况下也不会出现背锅侠的问题.</p>
+<p>在往常的开发过程中，而如果 Ajax 比较多或者前端写的代码质量稍微低一些，那么倒霉的事情就发生了，后端和前端的沟通成本那是相当的高。推锅的事情也会发生.</p>
+<p>而新的开发过程中,如果上级有界面上的需求,基本上只需要前端更新一下代码,推送,就可以立即看到效果.<br>同样的,后端也是如此.</p>
 <blockquote>
 <p>这就是我选择前后端分离的初衷 – 将主要的精力放在开发上面。而不是套用模板和编辑 Ajax 过程中带来的沟通问题。</p>
 </blockquote>
 <p>在前后端配合上：</p>
 <ul>
 <li>后端选择 Django,Restful 框架选择了 DjangoRestFramework, DRF 的优点在于可以自动生成 API 界面，让前端对照着表单进行请求接口的测试。于是局域网的那一台可以配置为 Debug 模式，生产机器就可以关闭 DEBUG 模式。</li>
-<li>前端选择 VueJS, 选择这个小而精美的框架一方面是基于团队的水平考虑，如果使用太激进的框架 React, 可能遇到问题无法在短时间内解决。</li>
+<li>前端选择 VueJS, 选择这个小而精美的框架一方面是基于团队的开发水平考虑，如果使用太激进的框架 React, 可能遇到问题无法在短时间内解决。由于选用了VueJS,也就选用了Vue全家桶,通过Webpack2 进行配置完成基本的打包任务,通过config读取环境变量进行生产环境和发布环境的apiurl的分离</li>
+<li>代码提交选择 Coding.NET 用于提交代码, 在局域网中选择 Gitlab 用于提交代码, 配上Gitlab CI进行持续集成,妈妈再也不用担心我的任务提交了.</li>
 </ul>
+<p>前后端分离有什么缺点呢?</p>
+<ol>
+<li>必须强行升级 Https </li>
+<li>开发时候需要关掉 Django 的同源策略</li>
+<li>IE8– 不兼容</li>
+</ol>
 <h3 id="1-1-Django-和-他的小伙伴们"><a href="#1-1-Django-和-他的小伙伴们" class="headerlink" title="1.1. Django 和 他的小伙伴们"></a>1.1. Django 和 他的小伙伴们</h3><p>Django 适用于快速开发，对于创业公司来说，是不错的快速开发语言。</p>
 <h2 id="0x02-自动化部署"><a href="#0x02-自动化部署" class="headerlink" title="0x02. 自动化部署"></a>0x02. 自动化部署</h2><p>写程序 一般就是开发测试部署。</p>
 <p>话虽然这么时候，但是在具体的实践过程中，还是有很多很多坑需要注意的。</p>
