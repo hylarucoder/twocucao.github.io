@@ -95,7 +95,7 @@
 <meta property="og:url" content="http://twocucao.github.com/2017/04/18/读书笔记_FluentPython/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="前言Fluent Python 适用于中级 Pythoner。  以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。">
-<meta property="og:updated_time" content="2017-04-26T08:20:23.000Z">
+<meta property="og:updated_time" content="2017-04-26T12:13:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="『Fluent Python』读书笔记">
 <meta name="twitter:description" content="前言Fluent Python 适用于中级 Pythoner。  以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。">
@@ -653,13 +653,161 @@
 </ul>
 </li>
 </ul>
-<h2 id="P1-Prologue"><a href="#P1-Prologue" class="headerlink" title="P1. Prologue"></a>P1. Prologue</h2><h3 id="C01-The-Python-Data-Model"><a href="#C01-The-Python-Data-Model" class="headerlink" title="C01. The Python Data Model"></a>C01. The Python Data Model</h3><pre><code>- A Pythonic Card Deck
-- How Special Methods Are Used
-- Overview of Special Methods
-- Why len Is Not a Method
-- Summary
-- Further Reading
-</code></pre><h2 id="P2-Data-Structure"><a href="#P2-Data-Structure" class="headerlink" title="P2. Data Structure"></a>P2. Data Structure</h2><h3 id="C02-An-Array-of-Sequences"><a href="#C02-An-Array-of-Sequences" class="headerlink" title="C02. An Array of Sequences"></a>C02. An Array of Sequences</h3><pre><code>- Overview of Built-in Sequences
+<h2 id="P1-Prologue"><a href="#P1-Prologue" class="headerlink" title="P1. Prologue"></a>P1. Prologue</h2><p>序言部分讲了很重要的一点, Python 最优秀的地方就是其统一性.</p>
+<p>Pythonic 体现在使用的 Python Data Model 来表述, 其途径主要编写<strong>特殊方法(Special/Magic Method)</strong></p>
+<ul>
+<li>Iteration</li>
+<li>Collections</li>
+<li>Attribute access</li>
+<li>Operator overloading</li>
+<li>Function and method invocation</li>
+<li>Object creation and destruction</li>
+<li>String representation and formatting</li>
+<li>Managed contexts (i.e., with blocks)</li>
+</ul>
+<h3 id="C01-The-Python-Data-Model"><a href="#C01-The-Python-Data-Model" class="headerlink" title="C01. The Python Data Model"></a>C01. The Python Data Model</h3><h4 id="本章综述"><a href="#本章综述" class="headerlink" title="本章综述"></a>本章综述</h4><p>通过特殊方法, 对象可以像 built-in types 那样用使用非常直观的代码来表示思路</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">__str__ 对 end user</div><div class="line">__repr__ 针对 presentation</div></pre></td></tr></table></figure>
+<h4 id="A-Pythonic-Card-Deck"><a href="#A-Pythonic-Card-Deck" class="headerlink" title="A Pythonic Card Deck"></a>A Pythonic Card Deck</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#### 1. 案例一：纸牌 nametuple</span></div><div class="line">Card = collections.namedtuple(<span class="string">'Card'</span>, [<span class="string">'rank'</span>, <span class="string">'suit'</span>])</div><div class="line"><span class="comment"># Card 是一个类</span></div><div class="line"><span class="comment"># 重载到 Cards(object) 的 __init__ , __len__ , __getitem__</span></div><div class="line"><span class="comment"># 重载可以之后可以使用 [] 语法 ( [0] [-1] random.choice(cards) [:3] [12::13] for in sorted reversed,sorted(cards, key=calc_score) card in cards ),</span></div><div class="line"><span class="comment"># 还可以重载 __setitem__, 之后就可以 shuffle</span></div><div class="line"><span class="comment"># 重载 __repr__ , __abs__ , __bool__ , __add__ , __mul__ 可以 repr() abs() bool() + *</span></div></pre></td></tr></table></figure>
+<h4 id="How-Special-Methods-Are-Used"><a href="#How-Special-Methods-Are-Used" class="headerlink" title="How Special Methods Are Used"></a>How Special Methods Are Used</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">obj.__len__() </div><div class="line">len()</div><div class="line"></div><div class="line">obj.__</div></pre></td></tr></table></figure>
+<h4 id="Overview-of-Special-Methods"><a href="#Overview-of-Special-Methods" class="headerlink" title="Overview of Special Methods"></a>Overview of Special Methods</h4><h4 id="Why-len-Is-Not-a-Method"><a href="#Why-len-Is-Not-a-Method" class="headerlink" title="Why len Is Not a Method"></a>Why len Is Not a Method</h4><h4 id="Further-Reading"><a href="#Further-Reading" class="headerlink" title="Further Reading"></a>Further Reading</h4><h3 id="特殊方法集合"><a href="#特殊方法集合" class="headerlink" title="特殊方法集合"></a>特殊方法集合</h3><p>特殊方法名 （有操作符）</p>
+<table>
+<thead>
+<tr>
+<th>种类</th>
+<th>方法名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String/Bytes</td>
+<td>repr , str , format , bytes</td>
+</tr>
+<tr>
+<td>Conversion to number</td>
+<td>abs , bool , complex , init , float , hash , index</td>
+</tr>
+<tr>
+<td>Emulating collections</td>
+<td>len , getitem , setitem , delitem , contains</td>
+</tr>
+<tr>
+<td>Iteration</td>
+<td>iter, reversed , next</td>
+</tr>
+<tr>
+<td>Emulating callables</td>
+<td>call</td>
+</tr>
+<tr>
+<td>Context management</td>
+<td>enter, exit</td>
+</tr>
+<tr>
+<td>Instance creation &amp; destruction</td>
+<td>new , init , del</td>
+</tr>
+<tr>
+<td>Attribute management</td>
+<td>getattr , getattribute , setattr , delattr, dir</td>
+</tr>
+<tr>
+<td>Attribute descriptors</td>
+<td>get , set ,delete</td>
+</tr>
+<tr>
+<td>Class service</td>
+<td>prepare , instancecheck , subclasscheck</td>
+</tr>
+</tbody>
+</table>
+<p>特殊方法名 （无操作符）</p>
+<table>
+<thead>
+<tr>
+<th>种类</th>
+<th>方法名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unary numeric operators</td>
+<td>neg  , pos  , abs</td>
+</tr>
+<tr>
+<td>Rich comparison operators</td>
+<td>lt  , le  , eq  , ne  , gt  , ge</td>
+</tr>
+<tr>
+<td>Arithmetic operators</td>
+<td>add  ,sub  , mul  ,truediv  ,floordiv  ,mod , divmod , pow , round round</td>
+</tr>
+<tr>
+<td>Reversed arithmetic operators</td>
+<td>radd , rsub , rmul , rtruediv, rfloordiv , rmod , rdivmod, rpow</td>
+</tr>
+<tr>
+<td>Augmented assignment mathmatic</td>
+<td>iadd , isub , imul , itruediv, ifloordiv</td>
+</tr>
+<tr>
+<td>Bitwise operators</td>
+<td>invert  , lshift  , rshift  , and  , or</td>
+</tr>
+<tr>
+<td>Reversed bitwise operators</td>
+<td>rlshift , rrshift , rand , rxor , ror</td>
+</tr>
+<tr>
+<td>Augmented assignment bitwise</td>
+<td>ilshift , irshift , iand , ixor , ior</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Bonus"><a href="#Bonus" class="headerlink" title="Bonus"></a>Bonus</h3><ol>
+<li><em>sorted(arr)</em> 可以直接返回，arr.sort() 是排序内部。</li>
+<li>python 判断 一个 obj 的真假为：先判断 bool, 再判断 len</li>
+<li><a href="http://zopeinterface.readthedocs.io/en/latest/" target="_blank" rel="external">http://zopeinterface.readthedocs.io/en/latest/</a></li>
+</ol>
+<h2 id="P2-Data-Structure"><a href="#P2-Data-Structure" class="headerlink" title="P2. Data Structure"></a>P2. Data Structure</h2><p>特殊方法是统一 Python 中数据模型的关键</p>
+<p>集合类型 ( sequences , mappings , sets , str , bytes ) 的用法和隐藏技</p>
+<p>function is the first-class object</p>
+<p>Higher-Order Functions</p>
+<ul>
+<li>设计模式</li>
+<li>装饰器</li>
+<li>callables</li>
+<li>function attributes</li>
+<li>introspection</li>
+<li>parameter annotations</li>
+<li><p>nonlocal declaration</p>
+</li>
+<li><p>references, mutability, 实例生命周期，定制自己集合类 collections and ABCs, 多继承，重载操作符。</p>
+</li>
+<li><p>生成器</p>
+</li>
+<li>上下文管理器</li>
+<li>协程 （包括 Yield)</li>
+<li>concurrency</li>
+<li><p>event-oriented IO asyncio</p>
+</li>
+<li><p>动态创建类</p>
+</li>
+<li>descriptors</li>
+<li>class decorators</li>
+<li>metaclasses</li>
+</ul>
+<p>C 实现的按照 item 是否为同一类型分为：</p>
+<ul>
+<li><strong>Container sequences</strong>:  list, tuple, and collections.deque can hold items of different types.</li>
+<li><strong>Flat sequences</strong>: str, bytes, bytearray, memoryview, and array.array hold items of one type.</li>
+</ul>
+<p>C 实现按照 item 是否可修改分为：</p>
+<ul>
+<li><strong>Mutable sequences</strong>: list, bytearray, array.array, collections.deque, and memoryview</li>
+<li><strong>Immutable sequences</strong>: tuple, str, and bytes</li>
+</ul>
+<p>list 往往和 map filter 以及 listcomp 用于创建简单的序列</p>
+<h3 id="C02-An-Array-of-Sequences"><a href="#C02-An-Array-of-Sequences" class="headerlink" title="C02. An Array of Sequences"></a>C02. An Array of Sequences</h3><pre><code>- Overview of Built-in Sequences
 - List Comprehensions and Generator Expressions
 - Tuples Are Not Just Immutable Lists
 - Slicing
@@ -847,157 +995,7 @@
 - Classes as Objects
 - Chapter Summary
 - Further Reading
-</code></pre><p>特殊方法是统一 Python 中数据模型的关键</p>
-<p>集合类型 ( sequences , mappings , sets , str , bytes ) 的用法和隐藏技</p>
-<p>function is the first-class object</p>
-<p>Higher-Order Functions</p>
-<ul>
-<li>设计模式</li>
-<li>装饰器</li>
-<li>callables</li>
-<li>function attributes</li>
-<li>introspection</li>
-<li>parameter annotations</li>
-<li><p>nonlocal declaration</p>
-</li>
-<li><p>references, mutability, 实例生命周期，定制自己集合类 collections and ABCs, 多继承，重载操作符。</p>
-</li>
-<li><p>生成器</p>
-</li>
-<li>上下文管理器</li>
-<li>协程 （包括 Yield)</li>
-<li>concurrency</li>
-<li><p>event-oriented IO asyncio</p>
-</li>
-<li><p>动态创建类</p>
-</li>
-<li>descriptors</li>
-<li>class decorators</li>
-<li>metaclasses</li>
-</ul>
-<h2 id="P1-Prologue-1"><a href="#P1-Prologue-1" class="headerlink" title="P1. Prologue"></a>P1. Prologue</h2><p>可以用来保持一致性的数据模型</p>
-<ul>
-<li>Iteration</li>
-<li>Collections</li>
-<li>Attribute access</li>
-<li>Operator overloading</li>
-<li>Function and method invocation</li>
-<li>Object creation and destruction</li>
-<li>String representation and formatting</li>
-<li>Managed contexts (i.e., with blocks)</li>
-</ul>
-<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#### 1. 案例一：纸牌 nametuple</span></div><div class="line">Card = collections.namedtuple(<span class="string">'Card'</span>, [<span class="string">'rank'</span>, <span class="string">'suit'</span>])</div><div class="line"><span class="comment"># Card 是一个类</span></div><div class="line"><span class="comment"># 重载到 Cards(object) 的 __init__ , __len__ , __getitem__</span></div><div class="line"><span class="comment"># 重载可以之后可以使用 [] 语法 ( [0] [-1] random.choice(cards) [:3] [12::13] for in sorted reversed,sorted(cards, key=calc_score) card in cards ),</span></div><div class="line"><span class="comment"># 还可以重载 __setitem__, 之后就可以 shuffle</span></div><div class="line"><span class="comment"># 重载 __repr__ , __abs__ , __bool__ , __add__ , __mul__ 可以 repr() abs() bool() + *</span></div></pre></td></tr></table></figure>
-<h3 id="特殊方法集合"><a href="#特殊方法集合" class="headerlink" title="特殊方法集合"></a>特殊方法集合</h3><p>特殊方法名 （有操作符）</p>
-<table>
-<thead>
-<tr>
-<th>种类</th>
-<th>方法名</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>String/Bytes</td>
-<td>repr , str , format , bytes</td>
-</tr>
-<tr>
-<td>Conversion to number</td>
-<td>abs , bool , complex , init , float , hash , index</td>
-</tr>
-<tr>
-<td>Emulating collections</td>
-<td>len , getitem , setitem , delitem , contains</td>
-</tr>
-<tr>
-<td>Iteration</td>
-<td>iter, reversed , next</td>
-</tr>
-<tr>
-<td>Emulating callables</td>
-<td>call</td>
-</tr>
-<tr>
-<td>Context management</td>
-<td>enter, exit</td>
-</tr>
-<tr>
-<td>Instance creation &amp; destruction</td>
-<td>new , init , del</td>
-</tr>
-<tr>
-<td>Attribute management</td>
-<td>getattr , getattribute , setattr , delattr, dir</td>
-</tr>
-<tr>
-<td>Attribute descriptors</td>
-<td>get , set ,delete</td>
-</tr>
-<tr>
-<td>Class service</td>
-<td>prepare , instancecheck , subclasscheck</td>
-</tr>
-</tbody>
-</table>
-<p>特殊方法名 （无操作符）</p>
-<table>
-<thead>
-<tr>
-<th>种类</th>
-<th>方法名</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Unary numeric operators</td>
-<td>neg  , pos  , abs</td>
-</tr>
-<tr>
-<td>Rich comparison operators</td>
-<td>lt  , le  , eq  , ne  , gt  , ge</td>
-</tr>
-<tr>
-<td>Arithmetic operators</td>
-<td>add  ,sub  , mul  ,truediv  ,floordiv  ,mod , divmod , pow , round round</td>
-</tr>
-<tr>
-<td>Reversed arithmetic operators</td>
-<td>radd , rsub , rmul , rtruediv, rfloordiv , rmod , rdivmod, rpow</td>
-</tr>
-<tr>
-<td>Augmented assignment mathmatic</td>
-<td>iadd , isub , imul , itruediv, ifloordiv</td>
-</tr>
-<tr>
-<td>Bitwise operators</td>
-<td>invert  , lshift  , rshift  , and  , or</td>
-</tr>
-<tr>
-<td>Reversed bitwise operators</td>
-<td>rlshift , rrshift , rand , rxor , ror</td>
-</tr>
-<tr>
-<td>Augmented assignment bitwise</td>
-<td>ilshift , irshift , iand , ixor , ior</td>
-</tr>
-</tbody>
-</table>
-<h3 id="Bonus"><a href="#Bonus" class="headerlink" title="Bonus"></a>Bonus</h3><ol>
-<li><em>sorted(arr)</em> 可以直接返回，arr.sort() 是排序内部。</li>
-<li>python 判断 一个 obj 的真假为：先判断 bool, 再判断 len</li>
-<li><a href="http://zopeinterface.readthedocs.io/en/latest/" target="_blank" rel="external">http://zopeinterface.readthedocs.io/en/latest/</a></li>
-</ol>
-<h2 id="P2-Data-Structure-1"><a href="#P2-Data-Structure-1" class="headerlink" title="P2. Data Structure"></a>P2. Data Structure</h2><h3 id="2-1-Sequences"><a href="#2-1-Sequences" class="headerlink" title="2.1 Sequences"></a>2.1 Sequences</h3><p>C 实现的按照 item 是否为同一类型分为：</p>
-<ul>
-<li><strong>Container sequences</strong>:  list, tuple, and collections.deque can hold items of different types.</li>
-<li><strong>Flat sequences</strong>: str, bytes, bytearray, memoryview, and array.array hold items of one type.</li>
-</ul>
-<p>C 实现按照 item 是否可修改分为：</p>
-<ul>
-<li><strong>Mutable sequences</strong>: list, bytearray, array.array, collections.deque, and memoryview</li>
-<li><strong>Immutable sequences</strong>: tuple, str, and bytes</li>
-</ul>
-<p>list 往往和 map filter 以及 listcomp 用于创建简单的序列</p>
-<h3 id="2-2-Sequences"><a href="#2-2-Sequences" class="headerlink" title="2.2 Sequences"></a>2.2 Sequences</h3><h3 id="2-3-Sequences"><a href="#2-3-Sequences" class="headerlink" title="2.3 Sequences"></a>2.3 Sequences</h3><h2 id="P3-Function-as-Objects-1"><a href="#P3-Function-as-Objects-1" class="headerlink" title="P3. Function as Objects"></a>P3. Function as Objects</h2><h2 id="P4-Object-Oriented-Idioms-1"><a href="#P4-Object-Oriented-Idioms-1" class="headerlink" title="P4. Object-Oriented Idioms"></a>P4. Object-Oriented Idioms</h2><h2 id="P5-Control-Flow-1"><a href="#P5-Control-Flow-1" class="headerlink" title="P5. Control Flow"></a>P5. Control Flow</h2><h2 id="P6-Metaprogramming-1"><a href="#P6-Metaprogramming-1" class="headerlink" title="P6. Metaprogramming"></a>P6. Metaprogramming</h2><h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>UPDATE:</p>
+</code></pre><h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p>UPDATE:</p>
 <table>
 <thead>
 <tr>
@@ -1249,7 +1247,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本文目录"><span class="nav-number">2.</span> <span class="nav-text">本文目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本书结构"><span class="nav-number">3.</span> <span class="nav-text">本书结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P1-Prologue"><span class="nav-number">4.</span> <span class="nav-text">P1. Prologue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C01-The-Python-Data-Model"><span class="nav-number">4.1.</span> <span class="nav-text">C01. The Python Data Model</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2-Data-Structure"><span class="nav-number">5.</span> <span class="nav-text">P2. Data Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C02-An-Array-of-Sequences"><span class="nav-number">5.1.</span> <span class="nav-text">C02. An Array of Sequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C03-Dictionaries-and-Sets"><span class="nav-number">5.2.</span> <span class="nav-text">C03. Dictionaries and Sets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C04-Text-VS-Bytes"><span class="nav-number">5.3.</span> <span class="nav-text">C04. Text VS Bytes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P3-Function-as-Objects"><span class="nav-number">6.</span> <span class="nav-text">P3. Function as Objects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C05-First-Class-Function"><span class="nav-number">6.1.</span> <span class="nav-text">C05. First-Class Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C06-Design-Patterns-with-First-Class-Functions"><span class="nav-number">6.2.</span> <span class="nav-text">C06. Design Patterns with First-Class Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C07-Function-Decorators-and-Closures"><span class="nav-number">6.3.</span> <span class="nav-text">C07. Function Decorators and Closures</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P4-Object-Oriented-Idioms"><span class="nav-number">7.</span> <span class="nav-text">P4. Object-Oriented Idioms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C08-Object-References-Mutability-and-Recycling"><span class="nav-number">7.1.</span> <span class="nav-text">C08. Object References, Mutability, and Recycling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C09-A-Pythonic-Object"><span class="nav-number">7.2.</span> <span class="nav-text">C09. A Pythonic Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C10-Sequence-Hacking-Hashing-and-Slicing"><span class="nav-number">7.3.</span> <span class="nav-text">C10. Sequence Hacking , Hashing , and Slicing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C11-Interfaces-From-Protocols-to-ABCs"><span class="nav-number">7.4.</span> <span class="nav-text">C11. Interfaces: From Protocols to ABCs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C12-Inheritance-For-Good-or-For-Worse"><span class="nav-number">7.5.</span> <span class="nav-text">C12. Inheritance: For Good or For Worse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C13-Operator-Overloading-Doing-It-Right"><span class="nav-number">7.6.</span> <span class="nav-text">C13. Operator Overloading: Doing It Right</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P5-Control-Flow"><span class="nav-number">8.</span> <span class="nav-text">P5. Control Flow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C14-Iterables-Iterators-and-Generators"><span class="nav-number">8.1.</span> <span class="nav-text">C14. Iterables, Iterators , and Generators</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C15-Context-Managers-and-else-Blocks"><span class="nav-number">8.2.</span> <span class="nav-text">C15. Context Managers and else Blocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C16-Coroutines"><span class="nav-number">8.3.</span> <span class="nav-text">C16. Coroutines</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C17-Concurrency-with-Futures"><span class="nav-number">8.4.</span> <span class="nav-text">C17. Concurrency with Futures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C18-Concurrency-with-asyncio"><span class="nav-number">8.5.</span> <span class="nav-text">C18. Concurrency with asyncio</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P6-Metaprogramming"><span class="nav-number">9.</span> <span class="nav-text">P6. Metaprogramming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C19-Dynamic-Attributes-and-Properties"><span class="nav-number">9.1.</span> <span class="nav-text">C19. Dynamic Attributes and Properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C20-Attribute-Descriptors"><span class="nav-number">9.2.</span> <span class="nav-text">C20. Attribute Descriptors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C21-Class-Metaprogramming"><span class="nav-number">9.3.</span> <span class="nav-text">C21. Class Metaprogramming</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P1-Prologue-1"><span class="nav-number">10.</span> <span class="nav-text">P1. Prologue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#案例"><span class="nav-number">10.1.</span> <span class="nav-text">案例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊方法集合"><span class="nav-number">10.2.</span> <span class="nav-text">特殊方法集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bonus"><span class="nav-number">10.3.</span> <span class="nav-text">Bonus</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2-Data-Structure-1"><span class="nav-number">11.</span> <span class="nav-text">P2. Data Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Sequences"><span class="nav-number">11.1.</span> <span class="nav-text">2.1 Sequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Sequences"><span class="nav-number">11.2.</span> <span class="nav-text">2.2 Sequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Sequences"><span class="nav-number">11.3.</span> <span class="nav-text">2.3 Sequences</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P3-Function-as-Objects-1"><span class="nav-number">12.</span> <span class="nav-text">P3. Function as Objects</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P4-Object-Oriented-Idioms-1"><span class="nav-number">13.</span> <span class="nav-text">P4. Object-Oriented Idioms</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P5-Control-Flow-1"><span class="nav-number">14.</span> <span class="nav-text">P5. Control Flow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P6-Metaprogramming-1"><span class="nav-number">15.</span> <span class="nav-text">P6. Metaprogramming</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关链接"><span class="nav-number">16.</span> <span class="nav-text">相关链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本文目录"><span class="nav-number">2.</span> <span class="nav-text">本文目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#本书结构"><span class="nav-number">3.</span> <span class="nav-text">本书结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P1-Prologue"><span class="nav-number">4.</span> <span class="nav-text">P1. Prologue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C01-The-Python-Data-Model"><span class="nav-number">4.1.</span> <span class="nav-text">C01. The Python Data Model</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#本章综述"><span class="nav-number">4.1.1.</span> <span class="nav-text">本章综述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#A-Pythonic-Card-Deck"><span class="nav-number">4.1.2.</span> <span class="nav-text">A Pythonic Card Deck</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-Special-Methods-Are-Used"><span class="nav-number">4.1.3.</span> <span class="nav-text">How Special Methods Are Used</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Overview-of-Special-Methods"><span class="nav-number">4.1.4.</span> <span class="nav-text">Overview of Special Methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Why-len-Is-Not-a-Method"><span class="nav-number">4.1.5.</span> <span class="nav-text">Why len Is Not a Method</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Further-Reading"><span class="nav-number">4.1.6.</span> <span class="nav-text">Further Reading</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特殊方法集合"><span class="nav-number">4.2.</span> <span class="nav-text">特殊方法集合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Bonus"><span class="nav-number">4.3.</span> <span class="nav-text">Bonus</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2-Data-Structure"><span class="nav-number">5.</span> <span class="nav-text">P2. Data Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C02-An-Array-of-Sequences"><span class="nav-number">5.1.</span> <span class="nav-text">C02. An Array of Sequences</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C03-Dictionaries-and-Sets"><span class="nav-number">5.2.</span> <span class="nav-text">C03. Dictionaries and Sets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C04-Text-VS-Bytes"><span class="nav-number">5.3.</span> <span class="nav-text">C04. Text VS Bytes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P3-Function-as-Objects"><span class="nav-number">6.</span> <span class="nav-text">P3. Function as Objects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C05-First-Class-Function"><span class="nav-number">6.1.</span> <span class="nav-text">C05. First-Class Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C06-Design-Patterns-with-First-Class-Functions"><span class="nav-number">6.2.</span> <span class="nav-text">C06. Design Patterns with First-Class Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C07-Function-Decorators-and-Closures"><span class="nav-number">6.3.</span> <span class="nav-text">C07. Function Decorators and Closures</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P4-Object-Oriented-Idioms"><span class="nav-number">7.</span> <span class="nav-text">P4. Object-Oriented Idioms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C08-Object-References-Mutability-and-Recycling"><span class="nav-number">7.1.</span> <span class="nav-text">C08. Object References, Mutability, and Recycling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C09-A-Pythonic-Object"><span class="nav-number">7.2.</span> <span class="nav-text">C09. A Pythonic Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C10-Sequence-Hacking-Hashing-and-Slicing"><span class="nav-number">7.3.</span> <span class="nav-text">C10. Sequence Hacking , Hashing , and Slicing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C11-Interfaces-From-Protocols-to-ABCs"><span class="nav-number">7.4.</span> <span class="nav-text">C11. Interfaces: From Protocols to ABCs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C12-Inheritance-For-Good-or-For-Worse"><span class="nav-number">7.5.</span> <span class="nav-text">C12. Inheritance: For Good or For Worse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C13-Operator-Overloading-Doing-It-Right"><span class="nav-number">7.6.</span> <span class="nav-text">C13. Operator Overloading: Doing It Right</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P5-Control-Flow"><span class="nav-number">8.</span> <span class="nav-text">P5. Control Flow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C14-Iterables-Iterators-and-Generators"><span class="nav-number">8.1.</span> <span class="nav-text">C14. Iterables, Iterators , and Generators</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C15-Context-Managers-and-else-Blocks"><span class="nav-number">8.2.</span> <span class="nav-text">C15. Context Managers and else Blocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C16-Coroutines"><span class="nav-number">8.3.</span> <span class="nav-text">C16. Coroutines</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C17-Concurrency-with-Futures"><span class="nav-number">8.4.</span> <span class="nav-text">C17. Concurrency with Futures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C18-Concurrency-with-asyncio"><span class="nav-number">8.5.</span> <span class="nav-text">C18. Concurrency with asyncio</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P6-Metaprogramming"><span class="nav-number">9.</span> <span class="nav-text">P6. Metaprogramming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C19-Dynamic-Attributes-and-Properties"><span class="nav-number">9.1.</span> <span class="nav-text">C19. Dynamic Attributes and Properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C20-Attribute-Descriptors"><span class="nav-number">9.2.</span> <span class="nav-text">C20. Attribute Descriptors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C21-Class-Metaprogramming"><span class="nav-number">9.3.</span> <span class="nav-text">C21. Class Metaprogramming</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关链接"><span class="nav-number">10.</span> <span class="nav-text">相关链接</span></a></li></ol></div>
             
 
           </div>

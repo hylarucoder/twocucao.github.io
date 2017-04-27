@@ -96,7 +96,7 @@
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00 前言16 年 12 月的时候研究 GIS 系统，查找了相当一部分资料，最后完成了基本的 GIS 功能，特此记录。">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-e01da69c8cfaf777.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-03-16T01:32:56.000Z">
+<meta property="og:updated_time" content="2017-04-26T14:29:37.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 与 PostGIS">
 <meta name="twitter:description" content="0x00 前言16 年 12 月的时候研究 GIS 系统，查找了相当一部分资料，最后完成了基本的 GIS 功能，特此记录。">
@@ -413,7 +413,20 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">PGSQL_SERVER=&apos;127.0.0.1&apos;</div><div class="line">PGSQL_PORT=5432</div><div class="line">PGSQL_USER=twocucao</div><div class="line">DB_NAME=basicgis;</div><div class="line">SHP_FILES_FOLDER=/Users/twocucao/Codes/GIS_DATA/china_basic_shps_data</div><div class="line">SRID=4326</div><div class="line"></div><div class="line">cd $SHP_FILES_FOLDER</div><div class="line">echo $SHP_FILES_FOLDER</div><div class="line"># 创建</div><div class="line"></div><div class="line">for f in *.shp</div><div class="line">do</div><div class="line">    shp_basename=`basename $f .shp`</div><div class="line">    echo $shp_basename</div><div class="line">    shp2pgsql -W GBK -I -s $SRID $f public.$shp_basename  | psql -U $PGSQL_USER -d $DB_NAME</div><div class="line">done</div></pre></td></tr></table></figure>
 <p>导入完毕之后，编写脚本迁移数据到 django, 就可以从后台看数据了，使用 QGIS 查看中国地图，对比省层 / 市层 / 县区层，缺少数据或者数据缺失则进行补充。</p>
 <p><img src="http://upload-images.jianshu.io/upload_images/52890-e01da69c8cfaf777.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="导入完毕的北京地图数据"></p>
-<h2 id="PostGIS-的一些概念"><a href="#PostGIS-的一些概念" class="headerlink" title="PostGIS 的一些概念"></a>PostGIS 的一些概念</h2><h3 id="PostGIS-MetaTable"><a href="#PostGIS-MetaTable" class="headerlink" title="PostGIS MetaTable"></a>PostGIS MetaTable</h3><ul>
+<h2 id="PostGIS-的一些概念"><a href="#PostGIS-的一些概念" class="headerlink" title="PostGIS 的一些概念"></a>PostGIS 的一些概念</h2><h3 id="基础版本"><a href="#基础版本" class="headerlink" title="基础版本"></a>基础版本</h3><ul>
+<li>Point </li>
+<li>LineString</li>
+<li><p>Polygon</p>
+</li>
+<li><p>MultiPoint </p>
+</li>
+<li>MultiLineString</li>
+<li>MultiPolygon</li>
+</ul>
+<h3 id="中级概念"><a href="#中级概念" class="headerlink" title="中级概念"></a>中级概念</h3><ul>
+<li>Raster / Tile (Bands 是什么鬼)</li>
+</ul>
+<h3 id="PostGIS-MetaTable"><a href="#PostGIS-MetaTable" class="headerlink" title="PostGIS MetaTable"></a>PostGIS MetaTable</h3><ul>
 <li>spatial_ref_sys</li>
 <li>geography_columns</li>
 <li>geometry_columns</li>
@@ -663,7 +676,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-几种独有的坐标系"><span class="nav-number">2.</span> <span class="nav-text">0x01 几种独有的坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-一些数据"><span class="nav-number">3.</span> <span class="nav-text">0x02 一些数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PostGIS-的一些概念"><span class="nav-number">4.</span> <span class="nav-text">PostGIS 的一些概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-MetaTable"><span class="nav-number">4.1.</span> <span class="nav-text">PostGIS MetaTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-常用函数"><span class="nav-number">4.2.</span> <span class="nav-text">PostGIS 常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snippets"><span class="nav-number">4.3.</span> <span class="nav-text">Snippets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他参考链接"><span class="nav-number">4.4.</span> <span class="nav-text">其他参考链接</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-几种独有的坐标系"><span class="nav-number">2.</span> <span class="nav-text">0x01 几种独有的坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-一些数据"><span class="nav-number">3.</span> <span class="nav-text">0x02 一些数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PostGIS-的一些概念"><span class="nav-number">4.</span> <span class="nav-text">PostGIS 的一些概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础版本"><span class="nav-number">4.1.</span> <span class="nav-text">基础版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中级概念"><span class="nav-number">4.2.</span> <span class="nav-text">中级概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-MetaTable"><span class="nav-number">4.3.</span> <span class="nav-text">PostGIS MetaTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-常用函数"><span class="nav-number">4.4.</span> <span class="nav-text">PostGIS 常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snippets"><span class="nav-number">4.5.</span> <span class="nav-text">Snippets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他参考链接"><span class="nav-number">4.6.</span> <span class="nav-text">其他参考链接</span></a></li></ol></li></ol></div>
             
 
           </div>
