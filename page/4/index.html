@@ -273,6 +273,154 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/04/02/MacPythonMonitorPart1/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Micheal Gardner">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="MG的编程小屋">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/04/02/MacPythonMonitorPart1/" itemprop="url">
+                  使用 Python 监控 Mac 一天的运行（上）
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-02T18:50:23+08:00">
+                2016-04-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">PC/MAC 使用心得技巧</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/04/02/MacPythonMonitorPart1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/02/MacPythonMonitorPart1/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一不小心写成上下两篇了。真是有些过意不去。毕竟，写的太多就少了一部分读者（少了一部分赞额）.</p>
+<p>之所以拆成上下两篇，主要是因为在研究的过程中越发感到在一篇中强行植入那么多的东西，自己的文章结构组织起来有些困难，对读者来说，也是不容易理解。那倒不如拆分成两部分。</p>
+<h2 id="任务分解"><a href="#任务分解" class="headerlink" title="任务分解"></a>任务分解</h2><p>我的需求如此简单，统计 Mac 上面一天的运行情况，然后在每天的下午六点把统计的情况汇总通过 Email 发送给我。</p>
+          <!--noindex-->
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/04/02/MacPythonMonitorPart1/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/04/02/MacRemoteControl/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1281,7 +1429,7 @@
         
           <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我会想念 Windows 上面的一切，但我选择了 Mac。</p>
 <p>从某种程度上讲，我并不是讨厌 Windows。尽管我是一个伪装成、*nix 程序员的技术菜鸟。</p>
-<p>我还记得高一时候家里给我买的第一台二手电脑，那是一台烂到令人发指的破电脑，你可能见过那种俗称大屁股的电脑，1G 内存，64M 显存。我就在那一台机器上打了仙剑三通关和仙剑四的青鸾峰到寿阳城阶段，千佛寺时候家里电脑实在是烂到令人发指，于是电脑就报废了。后来，家里面换了一台电脑，128 显存，内存 2g 的联想杨天电脑。我就在这一台机器上打了仙剑四的寿阳城之后的剧情。</p>
+<p>我还记得高一时候家里给我买的第一台二手电脑，那是一台烂到令人发指的破电脑，你可能见过那种俗称大屁股的电脑，512M 内存，64M 显存。我就在那一台机器上打了仙剑三通关和仙剑四的青鸾峰到寿阳城阶段，千佛寺时候家里电脑实在是烂到令人发指，于是电脑就报废了。后来，家里面换了一台电脑，128 显存，内存 2g 的联想杨天电脑。我就在这一台机器上打了仙剑四的寿阳城之后的剧情。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
             <a class="btn" href="/2016/02/01/PC2MAC/#more" rel="contents">
@@ -1784,244 +1932,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2015/06/14/如何优雅的使用Windows10/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Micheal Gardner">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="MG的编程小屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/06/14/如何优雅的使用Windows10/" itemprop="url">
-                  如何优雅的使用 Windows 10
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-06-14T08:50:23+08:00">
-                2015-06-14
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
-                    <span itemprop="name">PC/MAC 使用心得技巧</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2015/06/14/如何优雅的使用Windows10/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/06/14/如何优雅的使用Windows10/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>刚开始 Win10 发布没有多久的时候我就写了这篇回答，放在知乎上。发现好久没有在 Jianshu 上更新文章了，发现简书优化了不少东西嘛！现在用起来好舒服啊！</p>
-<p>**已经过了折腾的年龄，答案仅仅从提升效率方面来说，是否优雅就看诸位的审美了。</p>
-<p>**==============================================</p>
-<p><strong>1. 文件夹与文件一定要分类命名好。</strong></p>
-<p><strong>2. Win10 自带功能怎样提升效率。</strong></p>
-<p><strong>- 2.1 快捷键**</strong>- 2.2 <strong>**触摸板手势</strong></p>
-<p><strong>- 2.3 Win+R</strong></p>
-<p><strong>3. 非 Windows 自带的必备的提升效率，节省时间的软件。</strong></p>
-<p><strong>- 3.1 文档，图片，文本，以及通用文件管理器</strong></p>
-<p><strong>- 3.2 Everything is OK</strong></p>
-<p><strong>- 3.3 Chrome （Google 出品，必属精品）</strong></p>
-<p><strong>- 3.4 阅读方面 calibre ， 欧路词典，</strong></p>
-<p><strong>- 3.5 笔记软件 xmind，wiznote</strong></p>
-<p><strong>- 3.6 播放器</strong></p>
-<p><strong>- 3.7 其他想到再补充</strong></p>
-<p><strong>4. **</strong>不写点代码优化一下工作流程，你都不好意思说自己逼格高。**- autohotkey</p>
-<p>==============================================</p>
-<p><strong>1. 文件夹与文件一定要分类命名好。</strong></p>
-<p><strong>仅仅贴身上我的几张图来表示一下：</strong></p>
-<p><em>文件夹命名：</em></p>
-<p><em>一级文件夹 </em></p>
-<p>*<img src="http://upload-images.jianshu.io/upload_images/52890-b6a5322beca48d2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>二级文件夹！<a href="http://upload-images.jianshu.io/upload_images/52890-656d90e16abaff66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" target="_blank" rel="external"></a></p>
-<p>三级或者三级以上文件夹<em><img src="http://upload-images.jianshu.io/upload_images/52890-bdf7349fccedda52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></em></p>
-<p><strong>文件命名规范（因为涉及到后面使用 Everything，所以我们的命名尽量追求便于搜索）</strong></p>
-<p><strong><em>举个例子，*</em></strong>对于读书笔记 ：<strong>**读书笔记_设计模式_20150303_v2.1.xmind</strong></p>
-<p><strong>对于照片这种文件比较多的，优先命名文件夹：**</strong>大明湖胖_夏雨荷_20150101**</p>
-<p><strong>无需刻意追求命名，方便搜索，方便管理就好。</strong></p>
-<p>可以参考：<a href="http://www.zhihu.com/question/21537488" target="_blank" rel="external">电脑上的文件夹该如何命名（整理）才能做到很久都不用重新整理的那种？ - 文件整理</a></p>
-<p>嗯这样你在搜索笔记的时候在 Everything 里面只需要键入 2015 笔记就可以查看<strong>2015 笔记文件</strong>。</p>
-<p>是不是很方便？</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/52890-f4a815755900d627.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/52890-1fb3ac3766e59044.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>当然桌面上尽量少放或者不放文件夹，我的桌面上仅仅有一个链接到 OneDrive 里面的 TEMP 文件夹的快捷方式，用于存放临时没有整理的文件。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/52890-be22e9252b149d1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><strong>2. Win10 自带功能怎样提升效率。</strong></p>
-<p><strong>- 2.1 快捷键</strong>其他答主说的都可以，你就直接参考他们的答案中的关于快捷键。我仅仅说一些重点快捷键。Win+ 数字键 把常用的软件附在任务栏上。建议四个以内，方便单手操作。Win+X Alt+tab 切换窗口 WIn+R 运行</p>
-<p><strong>- 2.2 触摸板手势**</strong>参考最高票的答案。虽然我觉得增加的那么多的触摸手势比较鸡肋。**</p>
-<p><strong>- 2.3 Win+R**</strong>Win+R 主要用于启动一些程序或者一些 DOS 小命令。**</p>
-<p>**<img src="http://upload-images.jianshu.io/upload_images/52890-d39ea3f078f1d800.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p>我将所有的便携与非便携软件的快捷方式放在这里并且配置环境变量。比如，我需要启动为知笔记，我就仅仅需要闭上眼睛输入 Win+R + wz +<enter>**</enter></p>
-<p><strong>其他软件同理。</strong></p>
-<p><strong>sublime text 打开需要输入 </strong></p>
-<p><strong>Win+R + st +<enter></enter></strong></p>
-<p><strong>欧路词典 打开需要输入 </strong></p>
-<p><strong>Win+R + ol +<enter></enter></strong></p>
-<p><strong>这里省去若干软件打开方式。</strong></p>
-<p><strong>关于 WIn+R 你可以参考善用佳软 [最绿色最高效，用 win+r 启动常用程序和文档</strong>](<a href="http://xbeta.info/win-run.htm" target="_blank" rel="external">http://xbeta.info/win-run.htm</a>) 的介绍。**</p>
-<p><strong>3. 非 Windows 自带的必备的提升效率，节省时间的软件。</strong></p>
-<p><strong>- 3.1 文档，图片，文本，以及通用文件管理器</strong>如果文件多，就一定需要一个用于管理这种类型文件的管理器 - 托马斯。电脑达人</p>
-<p><strong>图片管理用 Picasa</strong></p>
-<p><strong>文本管理直接使用笔记软件比如为知笔记，或者印象笔记。</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/52890-efe86c9e4bd48b95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><strong>文件管理进阶的话可以使用 totalcmd，不过学习路线比较陡峭，没有足够的需求，不要搞 TC.</strong></p>
-<p>用 Everything。或者 listary</p>
-<p><strong>- 3.2 Everything is OK</strong></p>
-<p><strong>无坚不摧，为快不破。 everything 是搜索效率最快的软件。没有之一。合理的命名可以为你的生活节省一半找资料的时间。</strong></p>
-<p><strong>- 3.3 Chrome （Google 出品，必属精品）</strong></p>
-<p><strong>浏览器本身速度快，配合强大的插件库。让你在实力派装逼的道路上越走越远</strong></p>
-<p>这玩意的强大在哪到处都有，直接在知乎上搜一下就好了。</p>
-<p><strong>- 3.4 阅读方面 calibre ， 欧路词典，</strong></p>
-<p><strong>calibre 主要是用来看经济学人，老乡恶魔的奶爸推荐。</strong></p>
-<p><strong>欧路词典可以外挂其他的开源词库，查词速度超级快。</strong></p>
-<p><strong>- 3.5 笔记软件 xmind，wiznote</strong>用于记录笔记。前者用于梳理思路，把一本书读薄，后者用于将自己的知识体系梳理一遍，把书读厚。消化资料。</p>
-<p><strong>- 3.6 播放器</strong></p>
-<p><strong>QQ 影音 – 满足普通播放需求</strong></p>
-<p><strong>kmplayer – 用于视频截图</strong></p>
-<p><strong>foobar2000 – 逼格提升必备</strong></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/52890-1d8bc57d69948d60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
-<p><strong>网易云音乐 – 这货真的不错。</strong></p>
-<p><strong>- 3.7 其他想到再补充</strong></p>
-<p><strong>4. **</strong>不写点代码优化一下工作流程，你都不好意思说自己逼格高。**- autohotkey</p>
-<p>可以针对快捷键进行编程。有了它，妈妈再也不担心我操作速度慢的要死了。有如下场景：一大段文字中有一个网址，你需要访问它，我的解决方法就是选中那些文字，然后一个 Win+b，直接打开 chrome 进行搜索，如果文字中没有网址，那么对选中文字进行百度。同理可以推淘宝，京东 github 等等。或者这样一个场景，你需要大量的文本编辑，但是上下左右离自己的工作区比较远，你可以小拇指按住大写锁定按键，然后使用 HJKL 进行移动。</p>
-<p>教程参考 <a href="http://zhuanlan.zhihu.com/autohotkey" target="_blank" rel="external">AutoHotkey 之美 - 知乎专栏</a></p>
-<p>新手可以先拿我搜刮整理的 AHK 代码看看。<a href="https://github.com/twocucao/ChortHotKey" target="_blank" rel="external">twocucao/ChortHotKey · GitHub**</a></p>
-<p>===================== 我是华丽的分割线 ===================================</p>
-<p>PS：我上面提到的软件几乎都是神级软件，都是入门容易精通难得深坑，想调教好也不是想象中呢么简单的，但，书到用时方恨少，你可以先挑一些使用。如果你以后有不少的文件需要管理，在未来，你一定会用到。</p>
-<p>===================== 我是低调的补充线 ===================================</p>
-<p>至于哪些图标怎么搞定？步骤如下：制作出那样的图片文件 （PS）<br>转换成 ico 文件（Iconmaster），把 ico 文件拷贝到指定文件夹内部（这步是为了方便修改文件夹切换电脑带来的文件夹图标恢复原样）<br>ico 设置到文件夹上 （修改文件夹内部的 desktop.ini 文件）</p>
-<p>附上制作的 PSD 文件，ICONMASTER 以及一个样板文件夹（注意要开启显示系统文件以及隐藏文件两个选项，然后查看样板文件夹中的 desktop.ini 以及*ico 文件。修改的话，也就是修改 desktop.ini 文件里面的对应文件名称就好了）</p>
-<p>链接：</p>
-<p><a href="http://pan.baidu.com/s/1qWyx6oc" target="_blank" rel="external">百度云 请输入提取密码**</a> 密码：g9up</p>
-<p>foobar 地址：链接：<a href="http://pan.baidu.com/s/1e7xZC" target="_blank" rel="external">百度云 请输入提取密码**</a> 密码：e0as</p>
-<p><strong>文件图标受此答案启发：<a href="http://www.zhihu.com/question/19901022" target="_blank" rel="external">如何整理电脑文件夹？ - 计算机</a></strong></p>
-<p>===================== 我是低调的补充线 ===================================</p>
-<blockquote>
-<p>已经更换 Macbook Pro, 再无挂念 Windows.</p>
-</blockquote>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2017-03-08 09:32:15</strong> 补充现在使用的电脑信息</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2062,7 +1977,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>

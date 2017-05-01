@@ -95,7 +95,7 @@
 <meta property="og:url" content="http://twocucao.github.com/2017/04/06/FullStackDjangoDevOpsCheatsheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB 技术：爬虫技术，数据库设计，GIS">
-<meta property="og:updated_time" content="2017-04-27T06:43:23.000Z">
+<meta property="og:updated_time" content="2017-05-01T13:19:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Full Stack Django DevOps Cheatsheet">
 <meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB 技术：爬虫技术，数据库设计，GIS">
@@ -387,28 +387,34 @@
 <li>维护相关</li>
 </ul>
 <!-- more -->
-<h2 id="0x01-前后端分离"><a href="#0x01-前后端分离" class="headerlink" title="0x01. 前后端分离"></a>0x01. 前后端分离</h2><p>前后端分离是提高团队开发的一个重要的开发策略，前后端分离之后，后端和前端交流好 JSON 格式，并行开发，局域网中放置一台服务器，后端写好一个功能，推送代码, 由gitlab 触发 Runner 自动交付到局域网的服务器上。这样的话，前后端可以并行开发，从而摆脱每一次开发过程不可避免，前端编写模板，然后由后端套用模板，出了问题，前端修改模板，后端接着修改模板… 循环往复，不曾更改的问题,在这种职责分明的情况下也不会出现背锅侠的问题.</p>
-<p>在往常的开发过程中，而如果 Ajax 比较多或者前端写的代码质量稍微低一些，那么倒霉的事情就发生了，后端和前端的沟通成本那是相当的高。推锅的事情也会发生.</p>
-<p>而新的开发过程中,如果上级有界面上的需求,基本上只需要前端更新一下代码,推送,就可以立即看到效果.<br>同样的,后端也是如此.</p>
+<h2 id="0x01-前后端分离"><a href="#0x01-前后端分离" class="headerlink" title="0x01. 前后端分离"></a>0x01. 前后端分离</h2><p>前后端分离是提高团队开发的一个重要的开发策略，前后端分离之后，后端和前端交流好 JSON 格式，并行开发，局域网中放置一台服务器，后端写好一个功能，推送代码，由 gitlab 触发 Runner 自动交付到局域网的服务器上。这样的话，前后端可以并行开发，从而摆脱每一次开发过程不可避免，前端编写模板，然后由后端套用模板，出了问题，前端修改模板，后端接着修改模板… 循环往复，不曾更改的问题，在这种职责分明的情况下也不会出现背锅侠的问题。</p>
+<p>在往常的开发过程中，而如果 Ajax 比较多或者前端写的代码质量稍微低一些，那么倒霉的事情就发生了，后端和前端的沟通成本那是相当的高。推锅的事情也会发生。</p>
+<p>而新的开发过程中，如果上级有界面上的需求，基本上只需要前端更新一下代码，推送，就可以立即看到效果。<br>同样的，后端也是如此。</p>
 <blockquote>
 <p>这就是我选择前后端分离的初衷 – 将主要的精力放在开发上面。而不是套用模板和编辑 Ajax 过程中带来的沟通问题。</p>
 </blockquote>
 <p>在前后端配合上：</p>
 <ul>
 <li>后端选择 Django,Restful 框架选择了 DjangoRestFramework, DRF 的优点在于可以自动生成 API 界面，让前端对照着表单进行请求接口的测试。于是局域网的那一台可以配置为 Debug 模式，生产机器就可以关闭 DEBUG 模式。</li>
-<li>前端选择 VueJS, 选择这个小而精美的框架一方面是基于团队的开发水平考虑，如果使用太激进的框架 React, 可能遇到问题无法在短时间内解决。由于选用了VueJS,也就选用了Vue全家桶,通过Webpack2 进行配置完成基本的打包任务,通过config读取环境变量进行生产环境和发布环境的apiurl的分离</li>
-<li>代码提交选择 Coding.NET 用于提交代码, 在局域网中选择 Gitlab 用于提交代码, 配上Gitlab CI进行持续集成,妈妈再也不用担心我的任务提交了.</li>
+<li>前端选择 VueJS, 选择这个小而精美的框架一方面是基于团队的开发水平考虑，如果使用太激进的框架 React, 可能遇到问题无法在短时间内解决。由于选用了 VueJS, 也就选用了 Vue 全家桶，通过 Webpack2 进行配置完成基本的打包任务，通过 config 读取环境变量进行生产环境和发布环境的 apiurl 的分离</li>
+<li>代码提交选择 Coding.NET 用于提交代码，在局域网中选择 Gitlab 用于提交代码，配上 Gitlab CI 进行持续集成，每次提交代码直接直接构建本地发布。前后端合作亲密无间。</li>
 </ul>
-<p>前后端分离有什么缺点呢?</p>
+<p>前后端分离有什么缺点呢？</p>
 <ol>
-<li>必须强行升级 Https </li>
+<li>必须强行升级 Https</li>
 <li>开发时候需要关掉 Django 的同源策略</li>
 <li>IE8– 不兼容</li>
 </ol>
 <h3 id="1-1-Django-和-他的小伙伴们"><a href="#1-1-Django-和-他的小伙伴们" class="headerlink" title="1.1. Django 和 他的小伙伴们"></a>1.1. Django 和 他的小伙伴们</h3><p>Django 适用于快速开发，对于创业公司来说，是不错的快速开发语言。</p>
+<p>不仅仅是因为 Python 表达力比较强，更重要的是 Django 有很多高质量的包可以使用。</p>
+<ul>
+<li>Django Debug Toolbar</li>
+<li>DjangoRestFramework</li>
+<li>Django Extensions</li>
+</ul>
 <h2 id="0x02-自动化部署"><a href="#0x02-自动化部署" class="headerlink" title="0x02. 自动化部署"></a>0x02. 自动化部署</h2><p>写程序 一般就是开发测试部署。</p>
 <p>话虽然这么时候，但是在具体的实践过程中，还是有很多很多坑需要注意的。</p>
-<p>比如，仅仅就开发环节来说，团队协作怎么搞？你说可以用 GIT 作为版本管理工具，代码托管。那我问你，这个 Web 开发过程中前端开发模板，后端套用模板怎么搞？你说，前后端分离，那前后端分离后 Http 请求被劫持怎么办，跨站攻击怎么搞……<br>甚至如果是一个人开发的话，直接拉一台服务器做做部署，定期更新到网站上就行了。但如果是团队协作呢？前端提交了代码，产品经理过来说，你更新一下服务器，后端提交了代码，前端过来说，你更新一下服务器，过程琐碎而耗时。大量的时间就浪费在了这种枯燥的事情上了。两个后端，一个前端的情况下，每天发布的次数就已经是相当惊人，如果以后是 3 个后端，三个前端，那我作为主程，得每天就写不了代码了，这种情况是断不能忍的。</p>
+<p>比如，仅仅就开发环节来说，团队协作怎么搞？你说可以用 GIT 作为版本管理工具，代码托管。那我问你，这个 Web 开发过程中前端开发模板，后端套用模板怎么搞？你说，前后端分离，那前后端分离后 Http 请求被劫持怎么办，跨站攻击怎么搞……<br>甚至如果是一个人开发的话，直接拉一台服务器做做部署，定期更新到网站上就行了。但如果是团队协作呢？前端提交了代码，产品经理过来说，你更新一下服务器，后端提交了代码，前端过来说，你更新一下服务器，过程琐碎而耗时。大量的时间就浪费在了这种枯燥的事情上了。两个后端，一个前端的情况下，每天本地发布（交付）的次数就已经是相当惊人（大概是前后端每天提交 5 次左右），如果以后是 3 个后端，三个前端，那我作为主程，每天就写不了代码了，这种情况是断不能忍的。</p>
 <p>这个时候，就需要想着把团队协作开发流程优化好：</p>
 <p>在我刚开始进行开发的时候，使用 bash 配合 Ansible 在本地和上线的 Ubuntu 16.04 上面自动化能够自动化的一切</p>
 <h3 id="2-1-使用场景"><a href="#2-1-使用场景" class="headerlink" title="2.1. 使用场景"></a>2.1. 使用场景</h3><p>经过研究，我确定了理想中的使用场景：</p>
@@ -436,7 +442,7 @@
 <p>硬件设备 3 台：</p>
 <ol>
 <li>第一台为 Gitlab 部署的软件</li>
-<li>第二台为 Stage  （本地局域网持续交付）的机器</li>
+<li>第二台为 Stage 环境 （本地局域网持续交付）的机器</li>
 <li>第三台为 Server （阿里云） 机器</li>
 </ol>
 <h3 id="2-3-持续交付"><a href="#2-3-持续交付" class="headerlink" title="2.3. 持续交付"></a>2.3. 持续交付</h3><p>当前端工程师 Push Master 分支到 Repo 上的时候，执行 Job 更新网站<br>当后端工程师 Push Master 分支到 Repo 上的时候，执行 Job 更新网站</p>
@@ -471,7 +477,9 @@
 <p>我在 Google 了一下，发现下面一个脚本，于是设置数据库为新数据库 default 和 depressed</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">batch_migrate</span><span class="params">(model)</span>:</span></div><div class="line">    <span class="comment"># remove data from destination db before copying</span></div><div class="line">    <span class="comment"># to avoid primary key conflicts or mismatches</span></div><div class="line">    <span class="keyword">if</span> model.objects.using(<span class="string">'default'</span>).exists():</div><div class="line">        model.objects.using(<span class="string">'default'</span>).all().delete()</div><div class="line"></div><div class="line">    <span class="comment"># get data form the source database</span></div><div class="line">    items = model.objects.using(<span class="string">'depressed'</span>).order_by(<span class="string">"pk"</span>).all()</div><div class="line">    count = len(items)</div><div class="line">    <span class="comment"># process in chunks, to handle models with lots of data</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, count, <span class="number">10000</span>):</div><div class="line">        chunk_items = items[i:i + <span class="number">10000</span>]</div><div class="line">        print(<span class="string">"已经迁移数据"</span>, i)</div><div class="line">        model.objects.using(<span class="string">'default'</span>).bulk_create(chunk_items)</div><div class="line"></div><div class="line">    <span class="comment"># many-to-many fields are NOT handled by bulk create; check for</span></div><div class="line">    <span class="comment"># them and use the existing implicit through models to copy them</span></div><div class="line">    <span class="keyword">for</span> m2mfield <span class="keyword">in</span> model._meta.many_to_many:</div><div class="line">        m2m_model = getattr(model, m2mfield.name).through</div><div class="line">        batch_migrate(m2m_model)</div></pre></td></tr></table></figure>
 <p>按照表与表之间的依赖关系，逐个迁移到数据库中搞定。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">```</div><div class="line"></div><div class="line">### 1.3 sequence 问题</div><div class="line"></div><div class="line">在写 Django 的时候发现的时候无论如何都无法保存新的 item.</div><div class="line"></div><div class="line">原来的代码为：</div><div class="line"></div><div class="line">```python</div><div class="line">item = Item.objects.get_or_create()</div><div class="line">item.foo = 1</div><div class="line">item.save()</div></pre></td></tr></table></figure>
+<h3 id="1-3-sequence-问题"><a href="#1-3-sequence-问题" class="headerlink" title="1.3 sequence 问题"></a>1.3 sequence 问题</h3><p>在写 Django 的时候发现的时候无论如何都无法保存新的 item.</p>
+<p>原来的代码为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">item = Item.objects.get_or_create()</div><div class="line">item.foo = <span class="number">1</span></div><div class="line">item.save()</div></pre></td></tr></table></figure>
 <p>报错信息是 Integrety, 报 duplicated 错误（下面的代码当然是打了马赛克了）</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">django.db.utils.IntegrityError: duplicate key value violates unique constraint <span class="string">"foo_item_pkey"</span></div><div class="line">DETAIL:  Key (id)=(<span class="number">111111</span>) already exists.</div></pre></td></tr></table></figure>
 <p>那么，问题来了：</p>
@@ -580,8 +588,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/21/LearnPythonLanguage/" rel="prev" title="Thinking In Python Language">
-                Thinking In Python Language <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/21/LearnProgrammingLanguage/" rel="prev" title="Thinking In Programming Language">
+                Thinking In Programming Language <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -673,7 +681,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-count">51</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -754,7 +762,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-前后端分离"><span class="nav-number">2.</span> <span class="nav-text">0x01. 前后端分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Django-和-他的小伙伴们"><span class="nav-number">2.1.</span> <span class="nav-text">1.1. Django 和 他的小伙伴们</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-自动化部署"><span class="nav-number">3.</span> <span class="nav-text">0x02. 自动化部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-使用场景"><span class="nav-number">3.1.</span> <span class="nav-text">2.1. 使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-实施方案"><span class="nav-number">3.2.</span> <span class="nav-text">2.2. 实施方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-持续交付"><span class="nav-number">3.3.</span> <span class="nav-text">2.3. 持续交付</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库相关"><span class="nav-number">4.</span> <span class="nav-text">数据库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据库设计"><span class="nav-number">4.1.</span> <span class="nav-text">1. 数据库设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数据迁移"><span class="nav-number">4.2.</span> <span class="nav-text">2. 数据迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-第一次数据迁移之-MySQL-转-PostgreSQL"><span class="nav-number">4.2.1.</span> <span class="nav-text">1.1. 第一次数据迁移之 MySQL 转 PostgreSQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-第二次数据迁移之重新-makemigrations"><span class="nav-number">4.2.2.</span> <span class="nav-text">1.2. 第二次数据迁移之重新 makemigrations</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebServer"><span class="nav-number">5.</span> <span class="nav-text">WebServer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#unix-socket-和-gunicorn-的-REMOTE-ADDR-问题"><span class="nav-number">5.1.</span> <span class="nav-text">unix socket 和 gunicorn 的 REMOTE_ADDR 问题</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-前后端分离"><span class="nav-number">2.</span> <span class="nav-text">0x01. 前后端分离</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Django-和-他的小伙伴们"><span class="nav-number">2.1.</span> <span class="nav-text">1.1. Django 和 他的小伙伴们</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-自动化部署"><span class="nav-number">3.</span> <span class="nav-text">0x02. 自动化部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-使用场景"><span class="nav-number">3.1.</span> <span class="nav-text">2.1. 使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-实施方案"><span class="nav-number">3.2.</span> <span class="nav-text">2.2. 实施方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-持续交付"><span class="nav-number">3.3.</span> <span class="nav-text">2.3. 持续交付</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库相关"><span class="nav-number">4.</span> <span class="nav-text">数据库相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-数据库设计"><span class="nav-number">4.1.</span> <span class="nav-text">1. 数据库设计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-数据迁移"><span class="nav-number">4.2.</span> <span class="nav-text">2. 数据迁移</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-第一次数据迁移之-MySQL-转-PostgreSQL"><span class="nav-number">4.2.1.</span> <span class="nav-text">1.1. 第一次数据迁移之 MySQL 转 PostgreSQL</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-第二次数据迁移之重新-makemigrations"><span class="nav-number">4.2.2.</span> <span class="nav-text">1.2. 第二次数据迁移之重新 makemigrations</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-sequence-问题"><span class="nav-number">4.3.</span> <span class="nav-text">1.3 sequence 问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#WebServer"><span class="nav-number">5.</span> <span class="nav-text">WebServer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#unix-socket-和-gunicorn-的-REMOTE-ADDR-问题"><span class="nav-number">5.1.</span> <span class="nav-text">unix socket 和 gunicorn 的 REMOTE_ADDR 问题</span></a></li></ol></li></ol></div>
             
 
           </div>
