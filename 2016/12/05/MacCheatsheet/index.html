@@ -95,7 +95,7 @@
 <meta property="og:url" content="http://twocucao.github.com/2016/12/05/MacCheatsheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Mac 快捷键和工具。 不定期更新。">
-<meta property="og:updated_time" content="2017-03-14T02:15:38.000Z">
+<meta property="og:updated_time" content="2017-05-04T07:12:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mac Cheatsheet">
 <meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Mac 快捷键和工具。 不定期更新。">
@@ -431,6 +431,9 @@
 <li>iTerm</li>
 </ul>
 <h3 id="工程师必备"><a href="#工程师必备" class="headerlink" title="工程师必备"></a>工程师必备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># https://github.com/sindresorhus/quick-look-plugins</span></div><div class="line">brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package quicklookase qlvideo</div></pre></td></tr></table></figure>
+<h3 id="shell-工具"><a href="#shell-工具" class="headerlink" title="shell 工具"></a>shell 工具</h3><p>tig 字符模式下交互查看 git 项目<br>jq 可以用于 json 文件处理以及何世华显示<br>python -m json.tool<br>axel -n 20 <a href="http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso" target="_blank" rel="external">http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso</a><br>cloc 用于统计代码</p>
+<h3 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h3><h4 id="Homebrew-的-Python-问题"><a href="#Homebrew-的-Python-问题" class="headerlink" title="Homebrew 的 Python 问题"></a>Homebrew 的 Python 问题</h4><p>如果本机安装了 Homebrew 如果后面使用 PyEnv 或者 Anaconda 设置当前环境为默认 Python 为 Python3（不建议这么搞), 但是如果偏偏要把默认的 Python 版本换成 Python3, 会弹出一些 pythonpath 的问题，执行下面命令即可暂时屏蔽这个问题，但是后没有隐患则不清楚。<br>mv /usr/local/lib/python2.7/site-packages/sitecustomize.py /usr/local/lib/python2.7/site-packages/sitecustomize.py.back</p>
+<p>有时候 /usr/local 的可能会存在权限问题，建议如果可能出现问题，则需要执行下面的命令修复权限。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chown -R $(whoami):admin /usr/<span class="built_in">local</span>/</div></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -667,7 +670,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必装"><span class="nav-number">2.</span> <span class="nav-text">必装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见应用"><span class="nav-number">2.1.</span> <span class="nav-text">常见应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工程师必备"><span class="nav-number">2.2.</span> <span class="nav-text">工程师必备</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#必装"><span class="nav-number">2.</span> <span class="nav-text">必装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#常见应用"><span class="nav-number">2.1.</span> <span class="nav-text">常见应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工程师必备"><span class="nav-number">2.2.</span> <span class="nav-text">工程师必备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shell-工具"><span class="nav-number">2.3.</span> <span class="nav-text">shell 工具</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些问题"><span class="nav-number">2.4.</span> <span class="nav-text">一些问题</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Homebrew-的-Python-问题"><span class="nav-number">2.4.1.</span> <span class="nav-text">Homebrew 的 Python 问题</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

@@ -95,7 +95,7 @@
 <meta property="og:url" content="http://twocucao.github.com/2016/09/12/MySQLCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 MySQL 相关命令。主要包含：  MySQL Shell, 其实就是 SQL 命令。 MySQL 配套工具 Python API  不定期更新。">
-<meta property="og:updated_time" content="2017-03-14T02:26:02.000Z">
+<meta property="og:updated_time" content="2017-05-03T16:48:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MySQL Cheatsheet">
 <meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 MySQL 相关命令。主要包含：  MySQL Shell, 其实就是 SQL 命令。 MySQL 配套工具 Python API  不定期更新。">
@@ -380,7 +380,7 @@
 <p>不定期更新。</p>
 <a id="more"></a>
 <h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="UTF-8-Please"><a href="#UTF-8-Please" class="headerlink" title="UTF-8 , Please"></a>UTF-8 , Please</h3><p>真的很讨厌那些用 GBK 的程序员啊！</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[mysql]</div><div class="line">default-character-set=utf8</div><div class="line"></div><div class="line">[mysqld]</div><div class="line">collation-server = utf8_general_ci</div><div class="line">init-connect=<span class="string">'SET NAMES utf8'</span></div><div class="line">character-set-server = utf8</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 注意,下面的设置MySQL是无法保存emoji的/</span></div><div class="line">[mysql]</div><div class="line">default-character-set=utf8</div><div class="line"></div><div class="line">[mysqld]</div><div class="line">collation-server = utf8_general_ci</div><div class="line">init-connect=<span class="string">'SET NAMES utf8'</span></div><div class="line">character-set-server = utf8</div></pre></td></tr></table></figure>
 <p>然后在 mysql console 执行：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show variables like <span class="string">"%character%"</span>;show variables like <span class="string">"%collation%"</span>;</div></pre></td></tr></table></figure>
 <p>如下即可</p>
