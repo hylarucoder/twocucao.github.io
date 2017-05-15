@@ -13,8 +13,14 @@
 
 
 
+
+
+
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -69,19 +75,21 @@
 
 <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Micheal Gardner, twocucao, python" />
-
-
-
+  <meta name="keywords" content="Python , Micheal Gardner , 无与童比 , twocucao , Django" />
 
 
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+  <link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
 
 
 
@@ -105,12 +113,12 @@
   var CONFIG = {
     root: '/',
     scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
     fancybox: true,
     motion: true,
     duoshuo: {
       userId: '0',
-      author: '无与童比'
+      author: '博主'
     },
     algolia: {
       applicationID: '',
@@ -130,7 +138,7 @@
 
 
 
-  <title> MG的编程小屋 </title>
+  <title>MG的编程小屋</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -139,15 +147,20 @@
 
 
 
+
+
   <script type="text/javascript">
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?299254d95898cdfa110fc6d914eba9c4";
+      hm.src = "https://hm.baidu.com/hm.js?299254d95898cdfa110fc6d914eba9c4";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
+
+
+
 
 
 
@@ -161,31 +174,35 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
+  <div class="container sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">MG的编程小屋</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MG的编程小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">博客内容正在调整中</h1>
+      
   </div>
-  <p class="site-subtitle">博客内容正在调整中</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -235,6 +252,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-tags">
           <a href="/tags" rel="section">
             
@@ -273,37 +300,26 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/04/02/MacPythonMonitorPart1/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/04/02/MacPythonMonitorPart1/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Micheal Gardner">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="MG的编程小屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/02/MacPythonMonitorPart1/" itemprop="url">
-                  使用 Python 监控 Mac 一天的运行（上）
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/04/02/MacPythonMonitorPart1/" itemprop="url">使用 Python 监控 Mac 一天的运行（上）</a></h2>
         
 
         <div class="post-meta">
@@ -312,8 +328,10 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-02T18:50:23+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-02T18:50:23+08:00">
                 2016-04-02
               </time>
             
@@ -325,11 +343,15 @@
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
@@ -345,20 +367,44 @@
 
           
             
-              <span class="post-comments-count">
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/04/02/MacPythonMonitorPart1/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/02/MacPythonMonitorPart1/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
 
-          
+              
+                <span class="post-meta-divider">|</span>
+              
 
-          
-          
-
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -366,7 +412,6 @@
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -379,7 +424,7 @@
 <p>之所以拆成上下两篇，主要是因为在研究的过程中越发感到在一篇中强行植入那么多的东西，自己的文章结构组织起来有些困难，对读者来说，也是不容易理解。那倒不如拆分成两部分。</p>
 <h2 id="任务分解"><a href="#任务分解" class="headerlink" title="任务分解"></a>任务分解</h2><p>我的需求如此简单，统计 Mac 上面一天的运行情况，然后在每天的下午六点把统计的情况汇总通过 Email 发送给我。</p>
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2016/04/02/MacPythonMonitorPart1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
@@ -397,8 +442,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -421,37 +471,26 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/04/02/MacRemoteControl/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/04/02/MacRemoteControl/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Micheal Gardner">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="MG的编程小屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/04/02/MacRemoteControl/" itemprop="url">
-                  Mac 上面的远程控制 Teamviewer
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/04/02/MacRemoteControl/" itemprop="url">Mac 上面的远程控制 Teamviewer</a></h2>
         
 
         <div class="post-meta">
@@ -460,8 +499,10 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-04-02T18:50:23+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-02T18:50:23+08:00">
                 2016-04-02
               </time>
             
@@ -473,11 +514,15 @@
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
@@ -493,20 +538,44 @@
 
           
             
-              <span class="post-comments-count">
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/04/02/MacRemoteControl/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/02/MacRemoteControl/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
 
-          
+              
+                <span class="post-meta-divider">|</span>
+              
 
-          
-          
-
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -514,7 +583,6 @@
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -532,7 +600,7 @@
 <p>当然，这些都难不倒我，我最后挑选了 Phantomjs, 编写 Js 调用脚本，从命令行调用程序，将抓取结果输出到标准输出流中，接着获取使用 beautifulsoup 进行基本的解析。剩下的就是入库了。</p>
 <p>这里的技术点也是蛮多的，以后有机会就介绍一下.（汗，因为毕业设计这回事情实在是耽误了不少梳理博文的时间，攒了不少开了个头的文章，但自己又不忍心把不好的文章放出来污染大众视野.)</p>
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2016/04/02/MacRemoteControl/#more" rel="contents">
               阅读全文 &raquo;
             </a>
@@ -550,8 +618,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -574,37 +647,26 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/03/15/如何发布一个Py命令行工具/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/03/15/如何发布一个Py命令行工具/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Micheal Gardner">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="MG的编程小屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/03/15/如何发布一个Py命令行工具/" itemprop="url">
-                  如何发布一个 Python 命令行工具
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/03/15/如何发布一个Py命令行工具/" itemprop="url">如何发布一个 Python 命令行工具</a></h2>
         
 
         <div class="post-meta">
@@ -613,8 +675,10 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-03-15T18:50:23+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-03-15T18:50:23+08:00">
                 2016-03-15
               </time>
             
@@ -626,11 +690,15 @@
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/开源项目/" itemprop="url" rel="index">
@@ -646,20 +714,44 @@
 
           
             
-              <span class="post-comments-count">
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/03/15/如何发布一个Py命令行工具/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/03/15/如何发布一个Py命令行工具/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
 
-          
+              
+                <span class="post-meta-divider">|</span>
+              
 
-          
-          
-
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -667,7 +759,6 @@
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -684,7 +775,7 @@
 <p><strong>写一个 Python 命令行工具，并且发布到 PIP 上面.</strong>并且在这个过程中给出我自己的一些思考。</p>
 </blockquote>
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2016/03/15/如何发布一个Py命令行工具/#more" rel="contents">
               阅读全文 &raquo;
             </a>
@@ -702,8 +793,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -726,37 +822,26 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/02/24/关于背单词软件,你不知道的惊人真相/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/02/24/关于背单词软件,你不知道的惊人真相/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Micheal Gardner">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="MG的编程小屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/02/24/关于背单词软件,你不知道的惊人真相/" itemprop="url">
-                  关于背单词软件，你不知道的惊人真相
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/02/24/关于背单词软件,你不知道的惊人真相/" itemprop="url">关于背单词软件，你不知道的惊人真相</a></h2>
         
 
         <div class="post-meta">
@@ -765,8 +850,10 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-24T18:50:23+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-24T18:50:23+08:00">
                 2016-02-24
               </time>
             
@@ -778,11 +865,15 @@
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/开源项目/" itemprop="url" rel="index">
@@ -798,20 +889,44 @@
 
           
             
-              <span class="post-comments-count">
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/02/24/关于背单词软件,你不知道的惊人真相/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/24/关于背单词软件,你不知道的惊人真相/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
 
-          
+              
+                <span class="post-meta-divider">|</span>
+              
 
-          
-          
-
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -819,7 +934,6 @@
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -991,8 +1105,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1015,37 +1134,26 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/02/15/Python斗鱼弹幕助手/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/02/15/Python斗鱼弹幕助手/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Micheal Gardner">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="MG的编程小屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/02/15/Python斗鱼弹幕助手/" itemprop="url">
-                  Python 程序员如何优雅的看斗鱼 TV
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/02/15/Python斗鱼弹幕助手/" itemprop="url">Python 程序员如何优雅的看斗鱼 TV</a></h2>
         
 
         <div class="post-meta">
@@ -1054,8 +1162,10 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-15T18:50:23+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-15T18:50:23+08:00">
                 2016-02-15
               </time>
             
@@ -1067,11 +1177,15 @@
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/开源项目/" itemprop="url" rel="index">
@@ -1087,20 +1201,44 @@
 
           
             
-              <span class="post-comments-count">
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/02/15/Python斗鱼弹幕助手/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/15/Python斗鱼弹幕助手/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
 
-          
+              
+                <span class="post-meta-divider">|</span>
+              
 
-          
-          
-
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -1108,7 +1246,6 @@
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1154,8 +1291,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1178,37 +1320,26 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/02/04/斗鱼TV弹幕助手/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/02/04/斗鱼TV弹幕助手/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Micheal Gardner">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="MG的编程小屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/02/04/斗鱼TV弹幕助手/" itemprop="url">
-                  斗鱼 TV 弹幕助手
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/02/04/斗鱼TV弹幕助手/" itemprop="url">斗鱼 TV 弹幕助手</a></h2>
         
 
         <div class="post-meta">
@@ -1217,8 +1348,10 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-04T18:50:23+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-04T18:50:23+08:00">
                 2016-02-04
               </time>
             
@@ -1230,11 +1363,15 @@
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/开源项目/" itemprop="url" rel="index">
@@ -1250,20 +1387,44 @@
 
           
             
-              <span class="post-comments-count">
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/02/04/斗鱼TV弹幕助手/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/04/斗鱼TV弹幕助手/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
 
-          
+              
+                <span class="post-meta-divider">|</span>
+              
 
-          
-          
-
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -1271,7 +1432,6 @@
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1283,7 +1443,7 @@
           <h1 id="斗鱼弹幕助手"><a href="#斗鱼弹幕助手" class="headerlink" title="斗鱼弹幕助手"></a>斗鱼弹幕助手</h1><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p>前几天闲着无聊，看到舍友们都在看斗鱼 TV，虽然我对那些网络游戏东西都不是非常感兴趣。只是我突然间想到，如果我可以获取上面的弹幕内容。不就有点意思了么？</p>
 <h2 id="1-分析阶段"><a href="#1-分析阶段" class="headerlink" title="1. 分析阶段"></a>1. 分析阶段</h2><p>如果我想要抓取网页上面的东西，无非就是两种方法</p>
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2016/02/04/斗鱼TV弹幕助手/#more" rel="contents">
               阅读全文 &raquo;
             </a>
@@ -1301,8 +1461,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1325,37 +1490,26 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/02/01/PC2MAC/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2016/02/01/PC2MAC/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Micheal Gardner">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="MG的编程小屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/02/01/PC2MAC/" itemprop="url">
-                  Oh My Mac!
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2016/02/01/PC2MAC/" itemprop="url">Oh My Mac!</a></h2>
         
 
         <div class="post-meta">
@@ -1364,8 +1518,10 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-02-01T18:50:23+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-01T18:50:23+08:00">
                 2016-02-01
               </time>
             
@@ -1377,11 +1533,15 @@
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
@@ -1397,20 +1557,44 @@
 
           
             
-              <span class="post-comments-count">
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
                 <span class="post-meta-divider">|</span>
-                <a href="/2016/02/01/PC2MAC/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/02/01/PC2MAC/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
 
-          
+              
+                <span class="post-meta-divider">|</span>
+              
 
-          
-          
-
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -1418,7 +1602,6 @@
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1431,7 +1614,7 @@
 <p>从某种程度上讲，我并不是讨厌 Windows。尽管我是一个伪装成、*nix 程序员的技术菜鸟。</p>
 <p>我还记得高一时候家里给我买的第一台二手电脑，那是一台烂到令人发指的破电脑，你可能见过那种俗称大屁股的电脑，512M 内存，64M 显存。我就在那一台机器上打了仙剑三通关和仙剑四的青鸾峰到寿阳城阶段，千佛寺时候家里电脑实在是烂到令人发指，于是电脑就报废了。后来，家里面换了一台电脑，128 显存，内存 2g 的联想杨天电脑。我就在这一台机器上打了仙剑四的寿阳城之后的剧情。</p>
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2016/02/01/PC2MAC/#more" rel="contents">
               阅读全文 &raquo;
             </a>
@@ -1449,8 +1632,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1473,37 +1661,26 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2015/12/31/书单/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2015/12/31/书单/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Micheal Gardner">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="MG的编程小屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/12/31/书单/" itemprop="url">
-                  书单
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/12/31/书单/" itemprop="url">书单</a></h2>
         
 
         <div class="post-meta">
@@ -1512,8 +1689,10 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-12-31T18:41:47+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-31T18:41:47+08:00">
                 2015-12-31
               </time>
             
@@ -1525,11 +1704,15 @@
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/写在人生的边上/" itemprop="url" rel="index">
@@ -1545,20 +1728,44 @@
 
           
             
-              <span class="post-comments-count">
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/12/31/书单/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/12/31/书单/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
 
-          
+              
+                <span class="post-meta-divider">|</span>
+              
 
-          
-          
-
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -1566,7 +1773,6 @@
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1589,7 +1795,7 @@
 </blockquote>
 <p>但下面的一些书籍，或多或少让我觉得应该和官网结合起来看。</p>
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2015/12/31/书单/#more" rel="contents">
               阅读全文 &raquo;
             </a>
@@ -1607,8 +1813,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1631,37 +1842,26 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2015/09/19/博人传影评/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2015/09/19/博人传影评/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Micheal Gardner">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="MG的编程小屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/09/19/博人传影评/" itemprop="url">
-                  『博人传』影评
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/09/19/博人传影评/" itemprop="url">『博人传』影评</a></h2>
         
 
         <div class="post-meta">
@@ -1670,8 +1870,10 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-09-19T18:50:23+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-09-19T18:50:23+08:00">
                 2015-09-19
               </time>
             
@@ -1683,11 +1885,15 @@
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/写在人生的边上/" itemprop="url" rel="index">
@@ -1703,20 +1909,44 @@
 
           
             
-              <span class="post-comments-count">
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/09/19/博人传影评/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/09/19/博人传影评/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
 
-          
+              
+                <span class="post-meta-divider">|</span>
+              
 
-          
-          
-
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -1724,7 +1954,6 @@
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1739,7 +1968,7 @@
 <p>也是在这时，世界的科技日新月异，转眼间木叶的电脑技术已经杰出到世人无法理解的地步。</p>
 <p>宇智波童参考这查克拉的结构，结合中国功夫中的内功，外功，亦欲以究天人之际，通古今之变，终于在 SCI 上发表论文《查克拉的数学原理和中国周易的必然联系》，该论文深刻阐述了<strong>查克拉的本质</strong>，查克拉由两个东西构成，一个叫做阴，另一个叫做阳，而所有人的查克拉都可以都可以通过一定量的排序组合变成不同属性的查克拉。</p>
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2015/09/19/博人传影评/#more" rel="contents">
               阅读全文 &raquo;
             </a>
@@ -1757,8 +1986,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1781,37 +2015,26 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2015/08/09/TmuxAndTmuxinator/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.github.com/2015/08/09/TmuxAndTmuxinator/">
 
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="Micheal Gardner">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="MG的编程小屋">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="MG的编程小屋" src="">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
     </span>
-  </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
 
     
       <header class="post-header">
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+          <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2015/08/09/TmuxAndTmuxinator/" itemprop="url">
-                  Tmux 与 Tmuxnator
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/2015/08/09/TmuxAndTmuxinator/" itemprop="url">Tmux 与 Tmuxnator</a></h2>
         
 
         <div class="post-meta">
@@ -1820,8 +2043,10 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-09T18:50:23+08:00">
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-08-09T18:50:23+08:00">
                 2015-08-09
               </time>
             
@@ -1833,11 +2058,15 @@
 
           
             <span class="post-category" >
+            
               <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
@@ -1853,20 +2082,44 @@
 
           
             
-              <span class="post-comments-count">
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
                 <span class="post-meta-divider">|</span>
-                <a href="/2015/08/09/TmuxAndTmuxinator/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/08/09/TmuxAndTmuxinator/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
 
-          
+              
+                <span class="post-meta-divider">|</span>
+              
 
-          
-          
-
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
           
 
           
@@ -1874,7 +2127,6 @@
         </div>
       </header>
     
-
 
     <div class="post-body" itemprop="articleBody">
 
@@ -1899,7 +2151,7 @@
 </blockquote>
 <p>为何不用工具来解决呢？</p>
           <!--noindex-->
-          <div class="post-more-link text-center">
+          <div class="post-button text-center">
             <a class="btn" href="/2015/08/09/TmuxAndTmuxinator/#more" rel="contents">
               阅读全文 &raquo;
             </a>
@@ -1917,8 +2169,13 @@
       
     </div>
 
+    <div>
+      
+    </div>
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1972,19 +2229,26 @@
                src="http://oh1n2bfoj.bkt.clouddn.com/avatar.png"
                alt="Micheal Gardner" />
           <p class="site-author-name" itemprop="name">Micheal Gardner</p>
-          <p class="site-description motion-element" itemprop="description">博客内容正在调整中,估计17年初调整完毕.</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">51</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">10</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -1992,8 +2256,10 @@
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">39</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -2002,6 +2268,13 @@
 
         </nav>
 
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
         
 
         <div class="links-of-author motion-element">
@@ -2050,6 +2323,8 @@
 
       
 
+      
+
     </div>
   </aside>
 
@@ -2062,7 +2337,7 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy; 
+  &copy;  2014 - 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
@@ -2078,9 +2353,13 @@
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -2100,6 +2379,15 @@
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -2125,68 +2413,69 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
-
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-  
-    
-  
-
-  <script type="text/javascript">
-    var duoshuoQuery = {short_name:"twocucao"};
-    (function() {
-      var ds = document.createElement('script');
-      ds.type = 'text/javascript';ds.async = true;
-      ds.id = 'duoshuo-script';
-      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-      ds.charset = 'UTF-8';
-      (document.getElementsByTagName('head')[0]
-      || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-  </script>
-
-  
-    
-    
-    <script src="//cdn.jsdelivr.net/ua-parser.js/0.7.10/ua-parser.min.js"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
-  
-
-
-
-
-
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
 
 
 
   
   
 
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
   
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
 
   
 
@@ -2194,6 +2483,12 @@
 
   
 
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+
+
+  
 
 </body>
 </html>
