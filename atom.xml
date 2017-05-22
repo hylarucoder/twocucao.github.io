@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2017-05-07T05:55:06.000Z</updated>
+  <updated>2017-05-21T03:32:34.000Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -14,6 +14,68 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Docker CheatSheet</title>
+    <link href="http://twocucao.xyz/2017/05/21/DockerCheatSheet/"/>
+    <id>http://twocucao.xyz/2017/05/21/DockerCheatSheet/</id>
+    <published>2017-05-21T02:57:00.000Z</published>
+    <updated>2017-05-21T03:32:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Docker 相关和命令。</p>
+<ul>
+<li>Docker 相关概念</li>
+<li>Docker 配套工具</li>
+<li>Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化</li>
+<li>Docker 踩坑记录</li>
+</ul>
+<p>不定期更新。</p>
+<a id="more"></a>
+<h2 id="0x01-Docker-相关概念"><a href="#0x01-Docker-相关概念" class="headerlink" title="0x01 Docker 相关概念"></a>0x01 Docker 相关概念</h2><h3 id="1-1-Docker-是什么？"><a href="#1-1-Docker-是什么？" class="headerlink" title="1.1 Docker 是什么？"></a>1.1 Docker 是什么？</h3><p>在认知 Docker 这种相对而言比较新概念的时候，只要从以往的经验中拿出一个词语来概括新词汇即可。</p>
+<p>于是，我们便可以这么理解：</p>
+<blockquote>
+<p>Docker 是一种比虚拟机轻量的用来存放职责比较单一的应用的容器。</p>
+</blockquote>
+<p>也就是三点：</p>
+<ul>
+<li>比虚拟机轻量</li>
+<li>用来存放职责单一的应用</li>
+<li>容器</li>
+</ul>
+<p>显然这是一种理解，而不是一种定义。</p>
+<h3 id="1-2-Docker-是用来做什么的？"><a href="#1-2-Docker-是用来做什么的？" class="headerlink" title="1.2 Docker 是用来做什么的？"></a>1.2 Docker 是用来做什么的？</h3><p>新技术本质是什么？工具也。<br>每一个新的技术都是为了提升效率才被创造出来，那么，究竟 Docker 可以从哪些方面提升我们的效率呢？</p>
+<p>我们知道开发一个有些规模的网站的话，需要严格遵守如下的开发流程：</p>
+<ul>
+<li>编码</li>
+<li>测试</li>
+<li>集成到系统中</li>
+<li>部署</li>
+</ul>
+<p>但如果人员比较多，则会出现问题，有的人喜欢用 MacOS, 有的人喜欢用 Ubuntu, 开发测试环境怎么统一呢？如果开发人员明明使用的是某个版本的 PostgreSQL, 用了最新的功能，但是测试和运维用的就是老版本的功能怎么办？</p>
+<p>部署环境也会有问题，比如，开发部突然想使用更高版本的软件，比如突然需要更多的 Django 应用来负担海量请求的怎么办？Hadoop 不够用怎么办？</p>
+<p>当然，思路很简单，开发的时候使用虚拟机，拷贝给大家一起用，部署的时候多创建一些机器，然后上 Ansible 远程操控。即可。</p>
+<p>并不是不行，但是 Docker 由于更加轻量，操作粒度更加细腻，我可以销毁镜像，上传镜像，定制镜像，很轻松调整镜像包并且安装挂载文件。</p>
+<h2 id="0x02-Docker-配套工具"><a href="#0x02-Docker-配套工具" class="headerlink" title="0x02 Docker 配套工具"></a>0x02 Docker 配套工具</h2><h2 id="0x03-Django-技术栈-Docker-化"><a href="#0x03-Django-技术栈-Docker-化" class="headerlink" title="0x03 Django 技术栈 Docker 化"></a>0x03 Django 技术栈 Docker 化</h2><h2 id="0x04-Docker-踩坑记录"><a href="#0x04-Docker-踩坑记录" class="headerlink" title="0x04 Docker 踩坑记录"></a>0x04 Docker 踩坑记录</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Docker 相关和命令。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Docker 相关概念&lt;/li&gt;
+&lt;li&gt;Docker 配套工具&lt;/li&gt;
+&lt;li&gt;Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化&lt;/li&gt;
+&lt;li&gt;Docker 踩坑记录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不定期更新。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="数据库与消息队列" scheme="http://twocucao.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"/>
+    
+    
+      <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
   
   <entry>
     <title>MacBook Pro 15.4 Multi-Touch Bar</title>
@@ -776,7 +838,7 @@
     <link href="http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/"/>
     <id>http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/</id>
     <published>2017-04-06T12:29:00.000Z</published>
-    <updated>2017-05-09T11:32:02.000Z</updated>
+    <updated>2017-05-19T08:17:45.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。</p>
 <p>不仅仅是 Django, 还有 Django 涉及到的：</p>
@@ -819,6 +881,9 @@
 <li>DjangoRestFramework</li>
 <li>Django Extensions</li>
 </ul>
+<h3 id="1-4-Django-的奇技淫巧"><a href="#1-4-Django-的奇技淫巧" class="headerlink" title="1.4. Django 的奇技淫巧"></a>1.4. Django 的奇技淫巧</h3><h4 id="Django-Model"><a href="#Django-Model" class="headerlink" title="Django Model"></a>Django Model</h4><ul>
+<li><a href="http://stackoverflow.com/questions/1355150/django-when-saving-how-can-you-check-if-a-field-has-changed" target="_blank" rel="external">Save If Changed</a></li>
+</ul>
 <h2 id="0x02-自动化部署"><a href="#0x02-自动化部署" class="headerlink" title="0x02. 自动化部署"></a>0x02. 自动化部署</h2><p>写程序 一般就是开发测试部署。</p>
 <p>话虽然这么时候，但是在具体的实践过程中，还是有很多很多坑需要注意的。</p>
 <p>比如，仅仅就开发环节来说，团队协作怎么搞？你说可以用 GIT 作为版本管理工具，代码托管。那我问你，这个 Web 开发过程中前端开发模板，后端套用模板怎么搞？你说，前后端分离，那前后端分离后 Http 请求被劫持怎么办，跨站攻击怎么搞……<br>甚至如果是一个人开发的话，直接拉一台服务器做做部署，定期更新到网站上就行了。但如果是团队协作呢？前端提交了代码，产品经理过来说，你更新一下服务器，后端提交了代码，前端过来说，你更新一下服务器，过程琐碎而耗时。大量的时间就浪费在了这种枯燥的事情上了。两个后端，一个前端的情况下，每天本地发布（交付）的次数就已经是相当惊人（大概是前后端每天提交 5 次左右），如果以后是 3 个后端，三个前端，那我作为主程，每天就写不了代码了，这种情况是断不能忍的。</p>
@@ -852,12 +917,17 @@
 <li>第二台为 Stage 环境 （本地局域网持续交付）的机器</li>
 <li>第三台为 Server （阿里云） 机器</li>
 </ol>
+<blockquote>
+<p>注：最初使用 Ubuntu 机器，最终确定使用 Docker 镜像进行构建</p>
+</blockquote>
 <h3 id="2-3-持续交付"><a href="#2-3-持续交付" class="headerlink" title="2.3. 持续交付"></a>2.3. 持续交付</h3><p>当前端工程师 Push Master 分支到 Repo 上的时候，执行 Job 更新网站<br>当后端工程师 Push Master 分支到 Repo 上的时候，执行 Job 更新网站</p>
 <p>Push Master 分支，这个自然无需多说，问题是怎么执行 Job 呢？</p>
 <blockquote>
 <p><strong>Gitlab CI Multi Runner</strong></p>
 </blockquote>
 <p>在一台 stage 的机器上安装 gitlab ci multi runner , 并且在该机器上注册 runner 为 shell , 这意味着 runner 会以 gitlab-runner 用户的权限进行测试 , 你需要 uninstall<br>然后 install –user=root 一下，然后重启，即可在 gitlab-ci.yml 上。</p>
+<h3 id="2-4-Dockerize-Application"><a href="#2-4-Dockerize-Application" class="headerlink" title="2.4. Dockerize Application"></a>2.4. Dockerize Application</h3><p>Docker 以其轻量级和类似于版本管理的软件方式吸引了我。于是，准备将所有的 Service 都 Docker 化。</p>
+<p>拿 Django 程序来说，首先 Django 程序依赖三个组件 redis / postgresql / rabbitmq , 完成这些组件的安装之后才能进行下一步的操作。</p>
 <h2 id="0x03-数据库相关"><a href="#0x03-数据库相关" class="headerlink" title="0x03 数据库相关"></a>0x03 数据库相关</h2><h3 id="1-数据库设计"><a href="#1-数据库设计" class="headerlink" title="1. 数据库设计"></a>1. 数据库设计</h3><p>PostgreSQL Array 在爬虫方面可以用来标记一个 Record 的处理状态<br>PostgreSQL Range 用来判断范围也是一个比较高效的选择（用空间 gist 索引取代两个索引）</p>
 <p>GeoDjango 和 PostGIS 非常配</p>
 <h3 id="2-数据迁移"><a href="#2-数据迁移" class="headerlink" title="2. 数据迁移"></a>2. 数据迁移</h3><h4 id="1-1-第一次数据迁移之-MySQL-转-PostgreSQL"><a href="#1-1-第一次数据迁移之-MySQL-转-PostgreSQL" class="headerlink" title="1.1. 第一次数据迁移之 MySQL 转 PostgreSQL"></a>1.1. 第一次数据迁移之 MySQL 转 PostgreSQL</h4><p>第一次数据迁移的时候基于 PostgreSQL 社区里面有个大杀器，叫做 PostGIS, 通过 PostGIS, 可以很方便的拥有和国内一些地图公司匹敌的算法。抛开算法实现的效率问题，基本上可以满足日常的开发需求，当时数据量不算大，使用 mysqldump 下来也就 500M 左右，而且行数大约 700W 条，于是使用了一个很笨的方法，就是将数据库使用 Django 命令 dump 成 json, 接着修改配置重新导入新数据库。</p>
@@ -963,6 +1033,172 @@
       <category term="工作自动化" scheme="http://twocucao.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
     
       <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Thinking In Python Language</title>
+    <link href="http://twocucao.xyz/2017/03/21/ThinkingInPython/"/>
+    <id>http://twocucao.xyz/2017/03/21/ThinkingInPython/</id>
+    <published>2017-03-21T12:05:00.000Z</published>
+    <updated>2017-05-11T09:44:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote>
+<p>本文的内容都是一些简略的笔记。</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。</p>
+<a id="more"></a>
+<h2 id="0x00-简介"><a href="#0x00-简介" class="headerlink" title="0x00 简介"></a>0x00 简介</h2><h3 id="1-为什么是-Python"><a href="#1-为什么是-Python" class="headerlink" title="1. 为什么是 Python"></a>1. 为什么是 Python</h3><p>选 Python, 很大程度上是因为 Python 的快速开发。</p>
+<p>当然，快速开发（这里的开发包含部署）这个词也往往会被误解。什么叫做快速？我用一个 CMS 框架快速搭建出一个网站这是否叫做快速？</p>
+<ul>
+<li>每一次部署的时候，如果使用 Java 或者是 Go, 部署的时候直接 maven 编译打包，接着把 War 包直接上传到 Tomcat 就结束了。而用 Python 则需要各种虚拟环境，各种稀里哗啦的配置。这种情况下是哪一种快速呢？</li>
+</ul>
+<p>Python 有什么好处呢？</p>
+<ul>
+<li>写代码效率高</li>
+<li>生态圈好</li>
+</ul>
+<p>写代码效率高，这指的是写 Python 代码，而不是运行时。</p>
+<p>生态圈好，Web 开发用 Django/Flask , 数据抓取用 Requests , 数据分析清洗用 Pandas, 数据</p>
+<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><blockquote>
+<p> 程序 = 算法 + 数据结构</p>
+</blockquote>
+<p>这句话当然是不全面的，但并不影响这句话在计算机世界里面的地位。</p>
+<p>依我看来，对我的启发大致是：</p>
+<blockquote>
+<p>我会把 API 的调用和数据结构以及算法想清楚，然后才动手把代码分解成伪代码。</p>
+</blockquote>
+<h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><p>数据类型按照不同的划分标准可以进行不同的划分：</p>
+<p>按照复杂性可以这么划分：</p>
+<ul>
+<li>简单类型</li>
+<li>复杂类型</li>
+</ul>
+<p>按照复杂性可以这么划分：</p>
+<ul>
+<li>基本类型</li>
+<li>引用类型</li>
+</ul>
+<p>按照数据结构可以这么划分：</p>
+<ul>
+<li>集合结构 : 串</li>
+<li>线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，<strong>栈，队列</strong>)</li>
+<li>树形结构 : 树（二叉树，B+ 树，红黑树）</li>
+<li>图形结构 : 图</li>
+</ul>
+<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><p>对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</p>
+<p>对于复杂的一些数据类型，则需要对数据结构多一些了解。</p>
+<p>比如，对队列而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对 hash 而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字典而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字符串而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？</p>
+<p>那字符串来说，Java 推荐使用 StringBuilder 来合并多个字符串，Python 推荐 join 多个字符串等等。</p>
+<h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。</p>
+<p>这里的模块指的是一个包下的函数。</p>
+<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p>面向对象有三大概念：</p>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><p>异常处理实际上可以考验一个程序员编写代码的健壮性。</p>
+<p>事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。</p>
+<h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><ol>
+<li>Introduction</li>
+<li>Built-in Functions</li>
+<li>Built-in Constants</li>
+<li>Built-in Types</li>
+<li>Built-in Exceptions</li>
+<li>Text Processing Services</li>
+<li>Binary Data Services</li>
+<li>Data Types</li>
+<li>Numeric and Mathematical Modules</li>
+<li>Functional Programming Modules</li>
+<li>File and Directory Access</li>
+<li>Data Persistence</li>
+<li>Data Compression and Archiving</li>
+<li>File Formats</li>
+<li>Cryptographic Services</li>
+<li>Generic Operating System Services</li>
+<li>Concurrent Execution</li>
+<li>Interprocess Communication and Networking</li>
+<li>Internet Data Handling</li>
+<li>Structured Markup Processing Tools</li>
+<li>Internet Protocols and Support</li>
+<li>Multimedia Services</li>
+<li>Internationalization</li>
+<li>Program Frameworks</li>
+<li>Graphical User Interfaces with Tk</li>
+<li>Development Tools</li>
+<li>Debugging and Profiling</li>
+<li>Software Packaging and Distribution</li>
+<li>Python Runtime Services</li>
+<li>Custom Python Interpreters</li>
+<li>Importing Modules</li>
+<li>Python Language Services</li>
+<li>Miscellaneous Services</li>
+<li>MS Windows Specific Services</li>
+<li>Unix Specific Services</li>
+<li>Superseded Modules</li>
+<li>Undocumented Modules</li>
+</ol>
+<h2 id="0x05-第三方库"><a href="#0x05-第三方库" class="headerlink" title="0x05 第三方库"></a>0x05 第三方库</h2><ul>
+<li>Requests : API 人性化</li>
+</ul>
+<h2 id="0x06-代码质量"><a href="#0x06-代码质量" class="headerlink" title="0x06 代码质量"></a>0x06 代码质量</h2><h3 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h3><ul>
+<li>外部<strong>不该</strong>引用 protected member （单下划线）</li>
+<li>lambda 为一次使用，最好不要赋值。</li>
+<li>不要给 buildin 函数赋值</li>
+<li>py3 直接 super()</li>
+<li>for in else 如果不内置 break 则出会在最后 for in 为 empty 的时候再执行 else 中的语句</li>
+<li>context exit 如果不 catch 掉异常让其自然向上一级抛出错误的话，必须为 (self, exception_type, exception_value, traceback):</li>
+<li>不要在 init 里面 return 数据</li>
+<li>不要混用 tab 和 space</li>
+<li>4 个 space 缩进</li>
+<li>staticmethod 直接是 参数，classmethod 第一个参数为 cls</li>
+<li>可变的 default value 是不能作为 参数的。（可能是解释器在确定函数的定义的时候完成赋值？)</li>
+<li>遵循 exception hierachy <a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy" target="_blank" rel="external">https://docs.python.org/3/library/exceptions.html#exception-hierarchy</a></li>
+<li>defaultdict defaultdict(lambda : 6) , 必须 callable</li>
+<li>尽量 unpack 赋值</li>
+<li>字典用获取用 get(“myk”,None) , 赋值用 dictionary.setdefault(“list”, []).append(“list_item”)</li>
+</ul>
+<h3 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h3><ul>
+<li>避免使用 import * , 我觉得这点值得商榷 , 如果是某个模块下，完全可以先把模块拆分成多个，最后 import 进来，接着使用 all.</li>
+<li>getxxx 获取实际值，如果不为实际值，返回 None 显然不如 try catch 来的实在。</li>
+<li>避免使用 global</li>
+<li>命名要注意</li>
+<li>动态创建方法 , 我觉得这点值得商榷。</li>
+</ul>
+<h3 id="可读性"><a href="#可读性" class="headerlink" title="可读性"></a>可读性</h3><ul>
+<li>不要检查，如果可能有异常，尽量抛出异常来 trycatch 解决。</li>
+<li>a is None , if flag</li>
+<li>isinstance , not type(r) is types.ListType</li>
+<li>“{name}{city}”.format(**info_dict)</li>
+<li>for k , v in infodict.items()</li>
+<li>使用 poiinfo = namedtuple(“poiinfo”,[“name”,”lng”,”lat”]) 返回 poiinfo[‘上海’,121.00,23] 最后返回值打印 poi.name , poi.lng , poi lat</li>
+<li>for numbers_value, letters_value in zip(numbers, letters):</li>
+<li>enumerate</li>
+<li>如果能用 listcomp 则不使用 map 和 filter</li>
+</ul>
+<h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><ul>
+<li>用 set</li>
+<li>d.iteritems() 比 items() 省内存</li>
+</ul>
+<h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
+<li><strong>2017-05-11 19:43:00</strong> : 增加代码质量模块</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;本文的内容都是一些简略的笔记。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+    
+    
+      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -1162,172 +1398,6 @@
 &lt;p&gt;本文的内容都是一些个人的比较虚的经验。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍，我从 Autohotkey 开始学习编程开始，陆陆续续学习了 C , C++ , Java 6,Delphi 7 , Ruby , Python , JavaScript , 学的很多，很杂，我觉得我上手一门编程语言是完全没有什么心理上的障碍的，可是我觉得我应该是还有很大提升的空间的。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
-    
-    
-      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Thinking In Python Language</title>
-    <link href="http://twocucao.xyz/2017/03/21/ThinkingInPython/"/>
-    <id>http://twocucao.xyz/2017/03/21/ThinkingInPython/</id>
-    <published>2017-03-21T12:05:00.000Z</published>
-    <updated>2017-05-11T09:44:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<blockquote>
-<p>本文的内容都是一些简略的笔记。</p>
-</blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。</p>
-<a id="more"></a>
-<h2 id="0x00-简介"><a href="#0x00-简介" class="headerlink" title="0x00 简介"></a>0x00 简介</h2><h3 id="1-为什么是-Python"><a href="#1-为什么是-Python" class="headerlink" title="1. 为什么是 Python"></a>1. 为什么是 Python</h3><p>选 Python, 很大程度上是因为 Python 的快速开发。</p>
-<p>当然，快速开发（这里的开发包含部署）这个词也往往会被误解。什么叫做快速？我用一个 CMS 框架快速搭建出一个网站这是否叫做快速？</p>
-<ul>
-<li>每一次部署的时候，如果使用 Java 或者是 Go, 部署的时候直接 maven 编译打包，接着把 War 包直接上传到 Tomcat 就结束了。而用 Python 则需要各种虚拟环境，各种稀里哗啦的配置。这种情况下是哪一种快速呢？</li>
-</ul>
-<p>Python 有什么好处呢？</p>
-<ul>
-<li>写代码效率高</li>
-<li>生态圈好</li>
-</ul>
-<p>写代码效率高，这指的是写 Python 代码，而不是运行时。</p>
-<p>生态圈好，Web 开发用 Django/Flask , 数据抓取用 Requests , 数据分析清洗用 Pandas, 数据</p>
-<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><blockquote>
-<p> 程序 = 算法 + 数据结构</p>
-</blockquote>
-<p>这句话当然是不全面的，但并不影响这句话在计算机世界里面的地位。</p>
-<p>依我看来，对我的启发大致是：</p>
-<blockquote>
-<p>我会把 API 的调用和数据结构以及算法想清楚，然后才动手把代码分解成伪代码。</p>
-</blockquote>
-<h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><p>数据类型按照不同的划分标准可以进行不同的划分：</p>
-<p>按照复杂性可以这么划分：</p>
-<ul>
-<li>简单类型</li>
-<li>复杂类型</li>
-</ul>
-<p>按照复杂性可以这么划分：</p>
-<ul>
-<li>基本类型</li>
-<li>引用类型</li>
-</ul>
-<p>按照数据结构可以这么划分：</p>
-<ul>
-<li>集合结构 : 串</li>
-<li>线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，<strong>栈，队列</strong>)</li>
-<li>树形结构 : 树（二叉树，B+ 树，红黑树）</li>
-<li>图形结构 : 图</li>
-</ul>
-<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><p>对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</p>
-<p>对于复杂的一些数据类型，则需要对数据结构多一些了解。</p>
-<p>比如，对队列而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对 hash 而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字典而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字符串而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？</p>
-<p>那字符串来说，Java 推荐使用 StringBuilder 来合并多个字符串，Python 推荐 join 多个字符串等等。</p>
-<h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。</p>
-<p>这里的模块指的是一个包下的函数。</p>
-<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p>面向对象有三大概念：</p>
-<ul>
-<li>封装</li>
-<li>继承</li>
-<li>多态</li>
-</ul>
-<h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><p>异常处理实际上可以考验一个程序员编写代码的健壮性。</p>
-<p>事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。</p>
-<h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><ol>
-<li>Introduction</li>
-<li>Built-in Functions</li>
-<li>Built-in Constants</li>
-<li>Built-in Types</li>
-<li>Built-in Exceptions</li>
-<li>Text Processing Services</li>
-<li>Binary Data Services</li>
-<li>Data Types</li>
-<li>Numeric and Mathematical Modules</li>
-<li>Functional Programming Modules</li>
-<li>File and Directory Access</li>
-<li>Data Persistence</li>
-<li>Data Compression and Archiving</li>
-<li>File Formats</li>
-<li>Cryptographic Services</li>
-<li>Generic Operating System Services</li>
-<li>Concurrent Execution</li>
-<li>Interprocess Communication and Networking</li>
-<li>Internet Data Handling</li>
-<li>Structured Markup Processing Tools</li>
-<li>Internet Protocols and Support</li>
-<li>Multimedia Services</li>
-<li>Internationalization</li>
-<li>Program Frameworks</li>
-<li>Graphical User Interfaces with Tk</li>
-<li>Development Tools</li>
-<li>Debugging and Profiling</li>
-<li>Software Packaging and Distribution</li>
-<li>Python Runtime Services</li>
-<li>Custom Python Interpreters</li>
-<li>Importing Modules</li>
-<li>Python Language Services</li>
-<li>Miscellaneous Services</li>
-<li>MS Windows Specific Services</li>
-<li>Unix Specific Services</li>
-<li>Superseded Modules</li>
-<li>Undocumented Modules</li>
-</ol>
-<h2 id="0x05-第三方库"><a href="#0x05-第三方库" class="headerlink" title="0x05 第三方库"></a>0x05 第三方库</h2><ul>
-<li>Requests : API 人性化</li>
-</ul>
-<h2 id="0x06-代码质量"><a href="#0x06-代码质量" class="headerlink" title="0x06 代码质量"></a>0x06 代码质量</h2><h3 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h3><ul>
-<li>外部<strong>不该</strong>引用 protected member （单下划线）</li>
-<li>lambda 为一次使用，最好不要赋值。</li>
-<li>不要给 buildin 函数赋值</li>
-<li>py3 直接 super()</li>
-<li>for in else 如果不内置 break 则出会在最后 for in 为 empty 的时候再执行 else 中的语句</li>
-<li>context exit 如果不 catch 掉异常让其自然向上一级抛出错误的话，必须为 (self, exception_type, exception_value, traceback):</li>
-<li>不要在 init 里面 return 数据</li>
-<li>不要混用 tab 和 space</li>
-<li>4 个 space 缩进</li>
-<li>staticmethod 直接是 参数，classmethod 第一个参数为 cls</li>
-<li>可变的 default value 是不能作为 参数的。（可能是解释器在确定函数的定义的时候完成赋值？)</li>
-<li>遵循 exception hierachy <a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy" target="_blank" rel="external">https://docs.python.org/3/library/exceptions.html#exception-hierarchy</a></li>
-<li>defaultdict defaultdict(lambda : 6) , 必须 callable</li>
-<li>尽量 unpack 赋值</li>
-<li>字典用获取用 get(“myk”,None) , 赋值用 dictionary.setdefault(“list”, []).append(“list_item”)</li>
-</ul>
-<h3 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h3><ul>
-<li>避免使用 import * , 我觉得这点值得商榷 , 如果是某个模块下，完全可以先把模块拆分成多个，最后 import 进来，接着使用 all.</li>
-<li>getxxx 获取实际值，如果不为实际值，返回 None 显然不如 try catch 来的实在。</li>
-<li>避免使用 global</li>
-<li>命名要注意</li>
-<li>动态创建方法 , 我觉得这点值得商榷。</li>
-</ul>
-<h3 id="可读性"><a href="#可读性" class="headerlink" title="可读性"></a>可读性</h3><ul>
-<li>不要检查，如果可能有异常，尽量抛出异常来 trycatch 解决。</li>
-<li>a is None , if flag</li>
-<li>isinstance , not type(r) is types.ListType</li>
-<li>“{name}{city}”.format(**info_dict)</li>
-<li>for k , v in infodict.items()</li>
-<li>使用 poiinfo = namedtuple(“poiinfo”,[“name”,”lng”,”lat”]) 返回 poiinfo[‘上海’,121.00,23] 最后返回值打印 poi.name , poi.lng , poi lat</li>
-<li>for numbers_value, letters_value in zip(numbers, letters):</li>
-<li>enumerate</li>
-<li>如果能用 listcomp 则不使用 map 和 filter</li>
-</ul>
-<h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><ul>
-<li>用 set</li>
-<li>d.iteritems() 比 items() 省内存</li>
-</ul>
-<h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
-<li><strong>2017-05-11 19:43:00</strong> : 增加代码质量模块</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;blockquote&gt;
-&lt;p&gt;本文的内容都是一些简略的笔记。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。&lt;/p&gt;
     
     </summary>
     
@@ -1925,6 +1995,63 @@
   </entry>
   
   <entry>
+    <title>『好好说话』读书笔记</title>
+    <link href="http://twocucao.xyz/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/"/>
+    <id>http://twocucao.xyz/2017/01/27/读书笔记_好好说话/</id>
+    <published>2017-01-27T10:40:59.000Z</published>
+    <updated>2017-03-14T02:31:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。</p>
+<p>于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。</p>
+<p>好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。</p>
+<blockquote>
+<p>真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。</p>
+</blockquote>
+<p>世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：</p>
+<a id="more"></a>
+<p>就像在书籍第一章开头所说，说话之伤都是暗伤。</p>
+<blockquote>
+<p>能意识到你问题所在的，通常都不会告诉你。心大点的，察人之过笑而不言，但是私下里知道你这个人不靠谱，以后有重要的事不能指望你，就会疏远你；心稍微小点的，不跟你计较，但是客客气气找个别的由头举了你；等而下之的人的，甚至会一边给你穿小鞋一边装大度，让你死都没有四个明白。</p>
+</blockquote>
+<p>回想起我前 25 年的很多糟糕的言行，现在想想，当时总归是可以有更优解的。</p>
+<p>但仔细一想，似乎寻常人总会去踩这些坑，吃过很多教训，才能明白。</p>
+<h3 id="说话是权利的游戏"><a href="#说话是权利的游戏" class="headerlink" title="说话是权利的游戏"></a>说话是权利的游戏</h3><p>五维话术：演讲，沟通，说服，谈判，辩论。</p>
+<ul>
+<li>演讲 A – 权力的形成（吸引，聚焦，引导）</li>
+<li>沟通 B – 权力的流动（避免冲突与协调转向）</li>
+<li>说服 C – 权力在对方（无权的一方要改变有权的一方）</li>
+<li>谈判 D – 权力在双方（双方要合作，才能解决问题）</li>
+<li>辩论 E – 权力在他方（双方无权决定胜负，通常由中立第三方裁决）</li>
+</ul>
+<p>这里面的纬度，并不是每一个场景下就对应某一纬度的，比如说，当你在沟通的时候，有的时候就也需要说服，有的时候又需要辩论，甚至谈判。</p>
+<p>所以，每一场复杂的说话场景实际上是在不断的变化当中，甚至可以用矢量 (A,B,C,D,E,T) 其中 T 表示的是 Times 次数. 即以 A 为演讲值，MAX 为 10,MIN 为 0 的情况下，第 T 次演讲的说法应该为 (A,B,C,D,E), 比如 (2,3,4,9,0) 表示此次对话应该着重于谈判.P20 有一个非常有趣的说明叫做色有三原，光分七彩。</p>
+<p>温和的的沟通，可能蕴含着辩论的机锋和谈判的策略；<br>娓娓道来的说服可能需要演讲的华彩的沟通的诀窍。</p>
+<p>而好好说话的工作流就是</p>
+<p>S1. 倾听 For 收集信息<br>S2. 判断 For 权力棍术<br>S3. 思考 For 应对之策 说话策略需要依据权力（大小）, 态度（反对 / 赞同）, 成本（低 / 高）, 方向（单向 / 双向）, 受众（多 / 少）<br>S4. 表达 For 语言输出，然后转 S1</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。&lt;/p&gt;
+&lt;p&gt;于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。&lt;/p&gt;
+&lt;p&gt;好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
+    
+    
+      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+      <category term="书单与简评" scheme="http://twocucao.xyz/tags/%E4%B9%A6%E5%8D%95%E4%B8%8E%E7%AE%80%E8%AF%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>『把时间当做朋友』读书笔记</title>
     <link href="http://twocucao.xyz/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E4%B8%8E%E6%97%B6%E9%97%B4%E5%81%9A%E6%9C%8B%E5%8F%8B/"/>
     <id>http://twocucao.xyz/2017/01/27/读书笔记_与时间做朋友/</id>
@@ -2147,63 +2274,6 @@
 &lt;p&gt;这本书放在公网上，并不需要购买即可免费查看，但，值得一提的是，第三版在排版上下足了功夫。阅读体验很好。推荐购买纸质书。&lt;/p&gt;
 &lt;p&gt;我是一个认为『术』重于『道』的人。『道』意味着对『术』进行抽象总结，并且艺术化的语言进行诠释，这个过程难保没有信息的损失。&lt;/p&gt;
 &lt;p&gt;这本书在四年后看的今天，依然读出了很多不一样的味道，这种惊喜恰如第一次读到这本书的时候那般惊奇。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
-    
-    
-      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-      <category term="书单与简评" scheme="http://twocucao.xyz/tags/%E4%B9%A6%E5%8D%95%E4%B8%8E%E7%AE%80%E8%AF%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>『好好说话』读书笔记</title>
-    <link href="http://twocucao.xyz/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/"/>
-    <id>http://twocucao.xyz/2017/01/27/读书笔记_好好说话/</id>
-    <published>2017-01-27T10:40:59.000Z</published>
-    <updated>2017-03-14T02:31:12.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。</p>
-<p>于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。</p>
-<p>好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。</p>
-<blockquote>
-<p>真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。</p>
-</blockquote>
-<p>世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：</p>
-<a id="more"></a>
-<p>就像在书籍第一章开头所说，说话之伤都是暗伤。</p>
-<blockquote>
-<p>能意识到你问题所在的，通常都不会告诉你。心大点的，察人之过笑而不言，但是私下里知道你这个人不靠谱，以后有重要的事不能指望你，就会疏远你；心稍微小点的，不跟你计较，但是客客气气找个别的由头举了你；等而下之的人的，甚至会一边给你穿小鞋一边装大度，让你死都没有四个明白。</p>
-</blockquote>
-<p>回想起我前 25 年的很多糟糕的言行，现在想想，当时总归是可以有更优解的。</p>
-<p>但仔细一想，似乎寻常人总会去踩这些坑，吃过很多教训，才能明白。</p>
-<h3 id="说话是权利的游戏"><a href="#说话是权利的游戏" class="headerlink" title="说话是权利的游戏"></a>说话是权利的游戏</h3><p>五维话术：演讲，沟通，说服，谈判，辩论。</p>
-<ul>
-<li>演讲 A – 权力的形成（吸引，聚焦，引导）</li>
-<li>沟通 B – 权力的流动（避免冲突与协调转向）</li>
-<li>说服 C – 权力在对方（无权的一方要改变有权的一方）</li>
-<li>谈判 D – 权力在双方（双方要合作，才能解决问题）</li>
-<li>辩论 E – 权力在他方（双方无权决定胜负，通常由中立第三方裁决）</li>
-</ul>
-<p>这里面的纬度，并不是每一个场景下就对应某一纬度的，比如说，当你在沟通的时候，有的时候就也需要说服，有的时候又需要辩论，甚至谈判。</p>
-<p>所以，每一场复杂的说话场景实际上是在不断的变化当中，甚至可以用矢量 (A,B,C,D,E,T) 其中 T 表示的是 Times 次数. 即以 A 为演讲值，MAX 为 10,MIN 为 0 的情况下，第 T 次演讲的说法应该为 (A,B,C,D,E), 比如 (2,3,4,9,0) 表示此次对话应该着重于谈判.P20 有一个非常有趣的说明叫做色有三原，光分七彩。</p>
-<p>温和的的沟通，可能蕴含着辩论的机锋和谈判的策略；<br>娓娓道来的说服可能需要演讲的华彩的沟通的诀窍。</p>
-<p>而好好说话的工作流就是</p>
-<p>S1. 倾听 For 收集信息<br>S2. 判断 For 权力棍术<br>S3. 思考 For 应对之策 说话策略需要依据权力（大小）, 态度（反对 / 赞同）, 成本（低 / 高）, 方向（单向 / 双向）, 受众（多 / 少）<br>S4. 表达 For 语言输出，然后转 S1</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。&lt;/p&gt;
-&lt;p&gt;于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。&lt;/p&gt;
-&lt;p&gt;好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：&lt;/p&gt;
     
     </summary>
     
@@ -2927,7 +2997,7 @@
     <link href="http://twocucao.xyz/2016/12/05/MacCheatsheet/"/>
     <id>http://twocucao.xyz/2016/12/05/MacCheatsheet/</id>
     <published>2016-12-05T10:41:47.000Z</published>
-    <updated>2017-05-04T07:12:31.000Z</updated>
+    <updated>2017-05-16T08:42:42.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在工作生活中经常使用的 Mac 快捷键和工具。</p>
 <p>不定期更新。</p>
@@ -2992,7 +3062,7 @@
 <h3 id="shell-工具"><a href="#shell-工具" class="headerlink" title="shell 工具"></a>shell 工具</h3><p>tig 字符模式下交互查看 git 项目<br>jq 可以用于 json 文件处理以及何世华显示<br>python -m json.tool<br>axel -n 20 <a href="http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso" target="_blank" rel="external">http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso</a><br>cloc 用于统计代码</p>
 <h3 id="一些问题"><a href="#一些问题" class="headerlink" title="一些问题"></a>一些问题</h3><h4 id="Homebrew-的-Python-问题"><a href="#Homebrew-的-Python-问题" class="headerlink" title="Homebrew 的 Python 问题"></a>Homebrew 的 Python 问题</h4><p>如果本机安装了 Homebrew 如果后面使用 PyEnv 或者 Anaconda 设置当前环境为默认 Python 为 Python3（不建议这么搞), 但是如果偏偏要把默认的 Python 版本换成 Python3, 会弹出一些 pythonpath 的问题，执行下面命令即可暂时屏蔽这个问题，但是后没有隐患则不清楚。<br>mv /usr/local/lib/python2.7/site-packages/sitecustomize.py /usr/local/lib/python2.7/site-packages/sitecustomize.py.back</p>
 <p>有时候 /usr/local 的可能会存在权限问题，建议如果可能出现问题，则需要执行下面的命令修复权限。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo chown -R $(whoami):admin /usr/<span class="built_in">local</span>/</div></pre></td></tr></table></figure></p>
-]]></content>
+<h4 id="brew-update-amp-amp-brew-upgrade-–all-amp-amp-brew-cleanup-amp-amp-brew-prune"><a href="#brew-update-amp-amp-brew-upgrade-–all-amp-amp-brew-cleanup-amp-amp-brew-prune" class="headerlink" title="brew update &amp;&amp; brew upgrade –all &amp;&amp; brew cleanup &amp;&amp; brew prune"></a>brew update &amp;&amp; brew upgrade –all &amp;&amp; brew cleanup &amp;&amp; brew prune</h4>]]></content>
     
     <summary type="html">
     
@@ -3054,45 +3124,6 @@
       <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
     
       <category term="CheatSheet" scheme="http://twocucao.xyz/tags/CheatSheet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>重新审视自己的博客与笔记</title>
-    <link href="http://twocucao.xyz/2016/12/03/ReviewWriting/"/>
-    <id>http://twocucao.xyz/2016/12/03/ReviewWriting/</id>
-    <published>2016-12-03T10:41:47.000Z</published>
-    <updated>2016-12-09T15:37:57.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>把自己的博客和一部分的笔记看了一下，觉得文字间废话太多。</p>
-<ul>
-<li>总是过度交代背景信息，导致文字间充斥着相当大的无用信息。</li>
-<li>夹杂了不少写博客时候的情绪，这些情绪或者是沾沾自喜，或者是有些是刻意或者无意的炫耀。</li>
-</ul>
-<p>于是，我决定花上一个月的时间，把文章之间的文字精简并且重新格式化一下。</p>
-<p>仔细一看，我居然在我之前的笔记里面留下了几十篇文章的半成品，这实在是让我羞愧不已。</p>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2016-12-05</strong> 增加部分文章内容</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;把自己的博客和一部分的笔记看了一下，觉得文字间废话太多。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;总是过度交代背景信息，导致文字间充斥着相当大的无用信息。&lt;/li&gt;
-&lt;li&gt;夹杂了不少写博客时候的情绪，这些情绪或者是沾沾自喜，或者是有些是刻意或者无意的炫耀。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;
-    
-    </summary>
-    
-      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
-    
-    
-      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
   </entry>
   
