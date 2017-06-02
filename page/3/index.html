@@ -591,18 +591,15 @@
       
         
           
-            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中的文本处理相关思路。</p>
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中的文本处理相关思路。</p>
 <p>本文的目录为:</p>
 <ul>
 <li>正则处理相关</li>
 <li>HTML/XML 处理相关</li>
 <li>Python 中的文本处理</li>
 </ul>
-<p>不定期更新。</p>
-<p>桌面版和 Server 版的操作系统版本均为 Ubuntu 16.04 , 数据库为 MySQL / PostgreSQL , Python 3.5.2 开发和运行环境。</p>
-<p>由于部分 Mac 上面的配置与 Ubuntu 上配置几乎相同，所以也将部分 Mac 的终端相关软件放在本文中。</p>
-<p>每次来一个新同事就需要给他们的环境进行配置，配置其实挺麻烦的，虽然可以花一天的时间配置一遍，但总觉得如果多来几个同事的话我基本上就废掉了。<br>于是抛弃 bash 脚本，修改为 Ansible 脚本，将当前的配置任务彻底脚本化。</p>
-<h2 id="节点类型与节点关系"><a href="#节点类型与节点关系" class="headerlink" title="节点类型与节点关系"></a>节点类型与节点关系</h2><p>七种：</p>
+<h2 id="0x01-正则处理相关"><a href="#0x01-正则处理相关" class="headerlink" title="0x01 正则处理相关"></a>0x01 正则处理相关</h2><h2 id="0x02-HTML-XML-处理相关"><a href="#0x02-HTML-XML-处理相关" class="headerlink" title="0x02 HTML/XML 处理相关"></a>0x02 HTML/XML 处理相关</h2><h3 id="2-1-Beautifulsoup-处理-HTML"><a href="#2-1-Beautifulsoup-处理-HTML" class="headerlink" title="2.1. Beautifulsoup 处理 HTML"></a>2.1. Beautifulsoup 处理 HTML</h3><h3 id="2-2-XPath-处理-HTML"><a href="#2-2-XPath-处理-HTML" class="headerlink" title="2.2. XPath 处理 HTML"></a>2.2. XPath 处理 HTML</h3><h3 id="2-3-标准库处理-HTML"><a href="#2-3-标准库处理-HTML" class="headerlink" title="2.3. 标准库处理 HTML"></a>2.3. 标准库处理 HTML</h3><h4 id="2-2-1-概念"><a href="#2-2-1-概念" class="headerlink" title="2.2.1. 概念"></a>2.2.1. 概念</h4><p>XPath是一种通过路径表达式定位XML文档内容的语法.</p>
+<p>有七种<strong>节点类型</strong>: </p>
 <ul>
 <li>element</li>
 <li>attribute</li>
@@ -612,13 +609,40 @@
 <li>comment</li>
 <li>document nodes</li>
 </ul>
-<p>父节点<br>子节点<br>兄弟节点<br>先祖节点，即父与父父节点。<br>后代节点，即子与子子节点。</p>
+<p>有五种<strong>节点间关系</strong>:</p>
+<ul>
+<li>父节点 Parent</li>
+<li>子节点 Children</li>
+<li>兄弟节点 Siblings</li>
+<li>先祖节点，即父与父父节点。Ancestors</li>
+<li>后代节点，即子与子子节点。Descendants</li>
+</ul>
 <p>名称    描述    例子</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">nodename	节点名</div><div class="line">/</div><div class="line">根节点</div><div class="line">//	从当前未知开始匹配所有，可以用于解决树问题	bookstore//book</div><div class="line">.</div><div class="line"></div><div class="line">..</div><div class="line"></div><div class="line"><span class="meta">@</span></div><div class="line">//@lang</div></pre></td></tr></table></figure>
 <p>谓语是对主语动作或状态的陈述或说明</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">/bookstore/book[1]</div><div class="line">/bookstore/book[last()]</div><div class="line">/bookstore/book[last()-1]</div><div class="line">/bookstore/book[position()&lt;3]</div><div class="line">//title[@lang]</div><div class="line">//title[@lang=&apos;en&apos;]</div><div class="line">/bookstore/book[price&gt;35.00]</div></pre></td></tr></table></figure>
 <p>前三种在 HTML 的时候使用频繁。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">response.xpath(<span class="string">"//*[@id=\"landlb_B04_04\"]/span[2]/a[contains(@href,'market')]"</span>)</div><div class="line">response.xpath(<span class="string">"//*[@id=\"landlb_B04_04\"]/span[2]/a[not(@class)]"</span>)</div><div class="line">response.xpath(<span class="string">"//ul/li/b[contains(text(),'什么玩意')]/following-sibling::span/text()"</span>)</div><div class="line">response.xpath(<span class="string">"//div[@class='address']/text()[preceding::span[@class='item' and contains(text(),'地址：')]]"</span>)</div><div class="line">response.xpath(<span class="string">"//ul/li/b[contains(text(),'什么玩意：')]/following-sibling::a/text()"</span>)</div></pre></td></tr></table></figure>
+<h3 id="BeautifulSoup-的缺陷"><a href="#BeautifulSoup-的缺陷" class="headerlink" title="BeautifulSoup 的缺陷"></a>BeautifulSoup 的缺陷</h3><p>解析往往伴随着各种各样奇葩的不奇葩的，诡异的不诡异的网页数据抽取，这个过程中，我们常使用两个库来解决问题，一个库叫做 lxml, 另一个库叫做 BeautifulSoup.</p>
+<p>beautifulsoup 可是让我们通过直接手动编写遍历 dom 树的方法来快速遍历 dom 树从而获得数据。相比自己写解析器而言，可以算得上非常的节省时间了。</p>
+<p>只要能手动遍历 dom 树，基本上所有的数据都是可以获取的。痛点就是手动编写遍历 Dom 树并且完成测试的时间可能长一些。</p>
+<p>但是开发效率就比较低了。</p>
+<p>举个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"lal"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">itemprop</span>=<span class="string">"street-address"</span> <span class="attr">title</span>=<span class="string">"浦东南路八佰伴西面"</span>&gt;</span></div><div class="line">       地址：浦东南路八佰伴西面</div><div class="line">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">itemprop</span>=<span class="string">"street-address"</span> <span class="attr">title</span>=<span class="string">"浦东南路"</span>&gt;</span></div><div class="line">       名称：xxxx</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span> &gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>我想要地址属性，如果是 beautifulsoup, 则我们需要先定位到 id 为 lal 的 div 元素。然后获取每个元素的 text 部分，然后使用 if 判断地址属性，然后提取 text.</p>
+<p><strong>但是如果用 xpath, 则可以把对元素的简单定位简单判断直接写在 xpath 表达式.</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sel.xpath(<span class="string">'//div[@id="lal"]/*[contains(text(),"地址")]/text()'</span>).extract_first()</div><div class="line"><span class="comment"># 如果还需要添加筛选名称，则可是使用</span></div><div class="line">sel.xpath(<span class="string">'//div[@id="lal"]/*[contains(text(),"名称")]/text()'</span>).extract_first()</div></pre></td></tr></table></figure>
+<p>这样可以极大的提升开发效率。</p>
+<p>页面的结构越复杂，则 xpath 带来的开发效率越高。</p>
+<h3 id="XPATH"><a href="#XPATH" class="headerlink" title="XPATH"></a>XPATH</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//*[contains(text(),&apos;ABC&apos;)]</div><div class="line">http://stackoverflow.com/questions/3655549/xpath-containstext-some-string-doesnt-work-when-used-with-node-with-more/3655588#3655588</div><div class="line"></div><div class="line">&lt;div class=&quot;atag btag&quot; /&gt;</div><div class="line">//div[contains(@class, &apos;atag&apos;) and contains(@class ,&apos;btag&apos;)]</div></pre></td></tr></table></figure>
+<h3 id="番外篇"><a href="#番外篇" class="headerlink" title="番外篇"></a>番外篇</h3><p>众所周知，Mac 的 Homebrew 很方便，每一次遇到需要下载编译的组件的时候，只需要执行 brew install xxx, 很快就可以使用了。</p>
+<p>但 homebrew 安装的软件都是最新的，这很容易导致部分软件由于版本更新带来的兼容性问题。</p>
+<p>这不，最近在Mac上进行开发的时候每次调用初始化lxml的时候总是无法进行解析,最后经过排查发现问题是 lxml 在编译的时候使用的 libxml 2.9.4 但是 使用的版本为 2.9.2 , 于是每当我使用 lxml 的时候，就会报错。</p>
+<p>不得已，找到 lxml 的 F&amp;Q 部分发现提 issue 之前需要先查看依赖版本。</p>
+<p>于是进入 IPython 排查。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</div><div class="line"></div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'Python'</span>, sys.version_info))</div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'lxml.etree'</span>, etree.LXML_VERSION))</div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'libxml used'</span>, etree.LIBXML_VERSION))</div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'libxml compiled'</span>, etree.LIBXML_COMPILED_VERSION))</div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'libxslt used'</span>, etree.LIBXSLT_VERSION))</div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'libxslt compiled'</span>, etree.LIBXSLT_COMPILED_VERSION))</div><div class="line"></div><div class="line"><span class="comment"># Python : sys.version_info(major=3, minor=5, micro=1, releaselevel='final', serial=0)</span></div><div class="line"><span class="comment"># lxml.etree : (3, 6, 2, 0)</span></div><div class="line"><span class="comment"># libxml used : (2, 9, 2)</span></div><div class="line"><span class="comment"># libxml compiled : (2, 9, 4) # 注意问题出在这里.</span></div><div class="line"><span class="comment"># libxslt used : (1, 1, 28)</span></div><div class="line"><span class="comment"># libxslt compiled : (1, 1, 28)</span></div></pre></td></tr></table></figure></p>
+<p>于是使用 pip 强制进行安装升级。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">STATIC_DEPS=true pip install -i http://pypi.douban.com/simple/ –trusted-host pypi.douban.com lxml –ignore-installed –no-cache-dir –upgrade -vvv</div></pre></td></tr></table></figure>
+<p>安装完毕即可.</p>
 
           
         
@@ -1356,175 +1380,6 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/11/01/爬虫与LXML/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/11/01/爬虫与LXML/" itemprop="url">爬虫 lxml 与 XPATH</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-01T18:50:23+08:00">
-                2016-11-01
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/爬虫-Crawler/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫 Crawler</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我们知道，其实在爬虫过程中，有除去抓取和存储两个模块，就剩下一个叫做解析的模块。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/11/01/爬虫与LXML/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/10/10/一个有趣的Ubuntu问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2036,6 +1891,208 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/09/20/IPynb和ECharts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/20/IPynb和ECharts/" itemprop="url">IPython Notebook 引入 ECharts 做可视化</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-20T19:26:26+08:00">
+                2016-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/爬虫-Crawler/" itemprop="url" rel="index">
+                    <span itemprop="name">爬虫 Crawler</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Python 的开发生态圈有相当多的好用的数据分析挖掘工具。Pandas,Numpy,Scikit-Learn 等等。</p>
+<p>在进行数据分析挖掘的方面，我们选用 IPython Notebook 对数据进行前期的探索和挖掘。以及内部的可视化交流。</p>
+<p>也需要经常新的进行一些可视化来使得探索过程更加的顺利。面对海量的数据可视化，也依照目的使用不同的工具。</p>
+<ul>
+<li>对于后台开发 / 数据挖掘 / 爬虫工程师而言，内部沟通的过程中注重信息交流沟通的快捷和准确，而不需要考虑可视化的美观程度，所以使用 IPython Notebook 配上 Matplotlib 或者是 Seaborn 进行可视化。</li>
+<li>与其他非开发的技术人员交流沟通的时候，这个时候优美的图表就成为了重中之重。</li>
+</ul>
+<blockquote>
+<p>可是 Seaborn Matplotlib 这些库画出来的图，如同那些其貌不扬的高手，包含大量信息，美中不足的就是<strong>不美</strong>。那可不可以使用更加漂亮的图来可视化呢？</p>
+</blockquote>
+<p>有，ECharts<a href="http://echarts.baidu.com/examples.html" target="_blank" rel="external">案例地址戳这里</a></p>
+<blockquote>
+<p>想拥有 IPython Notebook 的优点上，还能够最大化 IPython Notebook 的美观程度，这就是我们想在 IPython Notebook 中引入 ECharts 作为可视化的初衷。</p>
+<p>如果你使用过 IPython Notebook，细心的你一定大致了解，核心困难点在于如何在 IPython Notebook 中引入 ECharts.</p>
+</blockquote>
+<p>今天我们使用 IPython NoteBook 来演示一个简单的 ECharts 饼图案例。本文的数据来自大众点评闵行区部分美食店铺。</p>
+<h2 id="代码思路"><a href="#代码思路" class="headerlink" title="代码思路"></a>代码思路</h2><p>IPython 中，我们知道，可以通过 IPython.display 导入 HTML.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> HTML</div><div class="line">HTML(<span class="string">"""</span></div><div class="line">&lt;div&gt;这是一小块 HTML&lt;/div&gt;</div><div class="line">""")</div></pre></td></tr></table></figure></p>
+<p>执行就 IPython Notebook 中看到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;这是一小块 HTML&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-e7646baa6145766b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="显示 HTML"></p>
+<p>但问题来了，我们知道，在通常的情况下，是不能动态引入 JS 脚本的。因此我们在开发 HTML 静态页面的时候，往往脚本都是在 Head 或者 Body 结束标签之前就写死了。如果要在 IPython 中增加 ECharts, 是不是需要修改一些配置文件，让 IPython Notebook 在 Header 部分引入 ECharts 脚本呢？</p>
+<p>答案是<strong>不需要</strong>.</p>
+<blockquote>
+<p>为何？因为 IPython Notebook 本身自带一个 Js 模块，叫做 RequireJS. 通过这个模块<strong>可以动态引入并执行 JS.</strong></p>
+</blockquote>
+<p>具体原理不详细介绍，但是这个模块为 IPython Notebook 动态引入其他 JS 框架和代码带来了无限的可能性。注意，再次强调，这个模块可以帮助我们<strong>可以动态引入并执行 JS.</strong></p>
+<p>于是通过下面的代码，我们就轻松的将 ECharts 引入到 IPython Notebook 中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">chart_header_html = <span class="string">"""</span></div><div class="line">&lt;div id="chart" style="width:800px; height:600px;"&gt;&lt;/div&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    require.config(&#123;</div><div class="line">         paths:&#123;</div><div class="line">            echarts: '//cdn.bootcss.com/echarts/3.2.3/echarts.min',</div><div class="line">         &#125;</div><div class="line">    &#125;);</div><div class="line">    require(['echarts'],function(ec)&#123;</div><div class="line">var myChart = ec.init(document.getElementById('chart'));</div><div class="line">                var option = &#123;</div><div class="line">                    title: &#123;</div><div class="line">                        text: '闵行区美食类人均消费餐馆分布',</div><div class="line">                        subtext: '数据来自大众点评',</div><div class="line">                        x: 'center'</div><div class="line">                    &#125;,</div><div class="line">                    tooltip: &#123;</div><div class="line">                        trigger: 'item',</div><div class="line">                        formatter: "&#123;a&#125; &lt;br/&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)"</div><div class="line">                    &#125;,</div><div class="line">                    legend: &#123;</div><div class="line">                        orient: 'vertical',</div><div class="line">                        left: 'left',</div><div class="line">                        data: ['人均消费不明','人均消费 0~50 元', '人均消费 50~100 元', '人均消费 100~150 元', '人均消费 150~200 元', '人均消费 200 元以上']</div><div class="line">                    &#125;,</div><div class="line">                    series: [</div><div class="line">                        &#123;</div><div class="line">                            name: '店铺比例',</div><div class="line">                            type: 'pie',</div><div class="line">                            radius: '55%',</div><div class="line">                            center: ['50%', '60%'],</div><div class="line">                            data: [</div><div class="line"></div><div class="line">"""</div><div class="line">chart_content_html = <span class="string">"""</span></div><div class="line">                                &#123;value: %s, name: '人均消费不明'&#125;,</div><div class="line">                                &#123;value: %s, name: '人均消费 0~50 元'&#125;,</div><div class="line">                                &#123;value: %s, name: '人均消费 50~100 元'&#125;,</div><div class="line">                                &#123;value: %s, name: '人均消费 100~150 元'&#125;,</div><div class="line">                                &#123;value: %s, name: '人均消费 150~200 元'&#125;,</div><div class="line">                                &#123;value: %s, name: '人均消费 200 元以上'&#125;</div><div class="line">""" % (consume_unknown_restaurant_count,consume_0_50_restaurant_count,consume_50_100_restaurant_count,consume_100_150_restaurant_count,consume_150_200_restaurant_count,consume_200_greater_restaurant_count)</div><div class="line">chart_footer_html = <span class="string">"""</span></div><div class="line">                            ],</div><div class="line">                            itemStyle: &#123;</div><div class="line">                                emphasis: &#123;</div><div class="line">                                    shadowBlur: 10,</div><div class="line">                                    shadowOffsetX: 0,</div><div class="line">                                    shadowColor: 'rgba(0, 0, 0, 0.5)'</div><div class="line">                                &#125;</div><div class="line">                            &#125;</div><div class="line">                        &#125;</div><div class="line">                    ]</div><div class="line">                &#125;;</div><div class="line">                myChart.setOption(option);</div><div class="line">    &#125;);</div><div class="line">&lt;/script&gt;</div><div class="line">"""</div><div class="line"></div><div class="line">HTML(</div><div class="line"> chart_header_html + chart_content_html + chart_footer_html</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>看一看代码，首先，配置对应的脚本。引入 requirejs 的配置模块。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>.config(&#123;</div><div class="line">     <span class="attr">paths</span>:&#123;</div><div class="line">        <span class="attr">echarts</span>: <span class="string">'//cdn.bootcss.com/echarts/3.2.3/echarts.min'</span>,</div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>接着使用如下代码进行引入和执行代码，具体的 Demo 可以参考文章末尾的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([<span class="string">'echarts'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">ec</span>)</span>&#123;</div><div class="line"> <span class="keyword">var</span> option = &#123;</div><div class="line"><span class="comment">//... 图表配置</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//... 获取图表 div</span></div><div class="line"><span class="comment">//... 为所获取的图表 DIV 设置</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>于是，美观漂亮的可视化图就出来了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-59bffc49212928be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ECharts 饼图"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>附上 IPythonNotebook 以及 Excel 表用于大家分析。</p>
+<ul>
+<li><a href="https://github.com/twocucao/DataScience/blob/master/project_03_dianpin/simple_stat.ipynb" target="_blank" rel="external">对应的 IPythonNotebook</a></li>
+<li><a href="https://github.com/twocucao/DataScience/blob/master/project_03_dianpin/%E5%A4%A7%E4%BC%97%E7%82%B9%E8%AF%84%E9%97%B5%E8%A1%8C%E5%8C%BA%E7%BE%8E%E9%A3%9F%E9%A4%90%E5%8E%85%E7%AE%80%E5%8D%95%E7%BB%9F%E8%AE%A1.xlsx" target="_blank" rel="external">对应的 Excel 表</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
   </section>
 
   
@@ -2085,7 +2142,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2107,7 +2164,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">39</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
