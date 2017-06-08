@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/03/21/ThinkingInPython/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="本文的内容都是一些简略的笔记。  前言本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。">
-<meta property="og:updated_time" content="2017-05-25T12:06:14.000Z">
+<meta property="og:updated_time" content="2017-06-04T00:59:47.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Thinking In Python Language">
 <meta name="twitter:description" content="本文的内容都是一些简略的笔记。  前言本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。">
@@ -488,7 +488,7 @@
 <p>当 N 个线程在网络 I/O 堵塞，或等待重新获取 GIL，而一个线程运行 Python。</p>
 </blockquote>
 <p>让出之后还要执行代码呀，所以要有个收回 GIL 的动作。</p>
-<h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><p>Python 2 GIL , 尝试收回为 执行 1000 字节码。<br>Python 3 GIL , 检测间隔为 15ms</p>
+<h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><p>Python 2 GIL , 尝试收回GIL为 执行 1000 字节码。<br>Python 3 GIL , 尝试收回GIL检测间隔为 15ms</p>
 <h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><p>原子操作：sort 之类不需要<br>非原子操作：n=n+2 的字节码分为 加载 n , 加载 2 , 相加，存储 n, 四个步骤，由于不是原子性，很可能被由于 15 ms 而被打断。</p>
 <p>当然，懒人一向是 : <strong>优先级不决加括号，线程不决加 lock</strong></p>
 <p>对于 Java, 程序员努力在尽可能短的时间内加锁存取共享数据，减轻线程的争夺，实现最大并行。但 Python 中，线程无法并行运行，细粒度的锁就没有了优势。</p>
@@ -618,8 +618,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/06/FullStackDjangoDevOpsCheatsheet/" rel="next" title="Full Stack Django DevOps Cheatsheet">
-                <i class="fa fa-chevron-left"></i> Full Stack Django DevOps Cheatsheet
+              <a href="/2017/03/21/LearnProgrammingLanguage/" rel="next" title="Thinking In Programming Language">
+                <i class="fa fa-chevron-left"></i> Thinking In Programming Language
               </a>
             
           </div>
@@ -628,8 +628,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/21/LearnProgrammingLanguage/" rel="prev" title="Thinking In Programming Language">
-                Thinking In Programming Language <i class="fa fa-chevron-right"></i>
+              <a href="/2017/02/10/读书笔记_如何阅读一本书/" rel="prev" title="『如何阅读一本书』读书笔记">
+                『如何阅读一本书』读书笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -702,7 +702,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

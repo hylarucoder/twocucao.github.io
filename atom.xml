@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2017-06-03T11:58:42.000Z</updated>
+  <updated>2017-06-07T01:03:55.000Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -16,61 +16,59 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>DataAnalysisCheatSheet</title>
-    <link href="http://twocucao.xyz/2017/06/03/IPythonCheatSheet/"/>
-    <id>http://twocucao.xyz/2017/06/03/IPythonCheatSheet/</id>
-    <published>2017-06-03T00:46:00.000Z</published>
-    <updated>2017-06-03T11:58:42.000Z</updated>
+    <title>Pandas Cheatsheet</title>
+    <link href="http://twocucao.xyz/2017/06/03/PandasCheatSheet/"/>
+    <id>http://twocucao.xyz/2017/06/03/PandasCheatSheet/</id>
+    <published>2017-06-03T10:41:47.000Z</published>
+    <updated>2017-06-07T01:03:55.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的数据分析相关。</p>
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。</p>
+<p>主要包含：</p>
 <ul>
-<li>IPython 奇技淫巧</li>
-<li>IPython Notebook</li>
+<li>Pandas 与 SQL 等价的一些操作</li>
+<li>Pandas 使用过程中的一些细节</li>
 </ul>
 <p>不定期更新。</p>
 <a id="more"></a>
-<h2 id="0x01-Docker-相关概念"><a href="#0x01-Docker-相关概念" class="headerlink" title="0x01 Docker 相关概念"></a>0x01 Docker 相关概念</h2><h3 id="1-1-Docker-是什么？"><a href="#1-1-Docker-是什么？" class="headerlink" title="1.1 Docker 是什么？"></a>1.1 Docker 是什么？</h3><p>在认知 Docker 这种相对而言比较新概念的时候，只要从以往的经验中拿出一个词语来概括新词汇即可。</p>
-<p>于是，我们便可以这么理解：</p>
 <blockquote>
-<p>Docker 是一种比虚拟机轻量的用来存放职责比较单一的应用的容器。</p>
+<p>SQL 是一种面向集合的处理工具 / 语言<br>Pandas 是一种面向数组的处理工具</p>
+<p><strong>而一般处理 pandas 的数据往往以二维表的形式存在。所以，可以类比为更加强大的 SQL 语言。</strong></p>
 </blockquote>
-<p>也就是三点：</p>
-<ul>
-<li>比虚拟机轻量</li>
-<li>用来存放职责单一的应用</li>
-<li>容器</li>
-</ul>
-<p>显然这是一种理解，而不是一种定义。</p>
-<h3 id="1-2-Docker-是用来做什么的？"><a href="#1-2-Docker-是用来做什么的？" class="headerlink" title="1.2 Docker 是用来做什么的？"></a>1.2 Docker 是用来做什么的？</h3><p>新技术本质是什么？工具也。<br>每一个新的技术都是为了提升效率才被创造出来，那么，究竟 Docker 可以从哪些方面提升我们的效率呢？</p>
-<p>我们知道开发一个有些规模的网站的话，需要严格遵守如下的开发流程：</p>
-<ul>
-<li>编码</li>
-<li>测试</li>
-<li>集成到系统中</li>
-<li>部署</li>
-</ul>
-<p>但如果人员比较多，则会出现问题，有的人喜欢用 MacOS, 有的人喜欢用 Ubuntu, 开发测试环境怎么统一呢？如果开发人员明明使用的是某个版本的 PostgreSQL, 用了最新的功能，但是测试和运维用的就是老版本的功能怎么办？</p>
-<p>部署环境也会有问题，比如，开发部突然想使用更高版本的软件，比如突然需要更多的 Django 应用来负担海量请求的怎么办？Hadoop 不够用怎么办？</p>
-<p>当然，思路很简单，开发的时候使用虚拟机，拷贝给大家一起用，部署的时候多创建一些机器，然后上 Ansible 远程操控。即可。</p>
-<p>并不是不行，但是 Docker 由于更加轻量，操作粒度更加细腻，我可以销毁镜像，上传镜像，定制镜像，很轻松调整镜像包并且安装挂载文件。</p>
-<h2 id="0x02-Docker-配套工具"><a href="#0x02-Docker-配套工具" class="headerlink" title="0x02 Docker 配套工具"></a>0x02 Docker 配套工具</h2><h2 id="0x03-Django-技术栈-Docker-化"><a href="#0x03-Django-技术栈-Docker-化" class="headerlink" title="0x03 Django 技术栈 Docker 化"></a>0x03 Django 技术栈 Docker 化</h2><h2 id="0x04-Docker-踩坑记录"><a href="#0x04-Docker-踩坑记录" class="headerlink" title="0x04 Docker 踩坑记录"></a>0x04 Docker 踩坑记录</h2><h3 id="4-1-PostgreSQL-的初始化"><a href="#4-1-PostgreSQL-的初始化" class="headerlink" title="4.1 PostgreSQL 的初始化"></a>4.1 PostgreSQL 的初始化</h3><p>当 Docker 化 PostgreSQL 的时候，必须要把一些初始化脚本放在 docker-entrypoint-initdb.d 中，才能初始化，笔者在进行测试的时候多次发现无法进行初始化，究其原因，经过查找，如果没有及时删除 Volume 的话，则无论怎么初始化，或者 Build, 每一次都会挂载原来的文件夹。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ADD init_django_db.sh /docker-entrypoint-initdb.d/init_django_db.sh</div></pre></td></tr></table></figure></p>
+<h2 id="0x01-DataFrame-相关"><a href="#0x01-DataFrame-相关" class="headerlink" title="0x01. DataFrame 相关"></a>0x01. DataFrame 相关</h2><h3 id="1-1-定义并初始化"><a href="#1-1-定义并初始化" class="headerlink" title="1.1. 定义并初始化"></a>1.1. 定义并初始化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># 1. 内存变量转 Dataframe</span></div><div class="line"><span class="comment">## 1.1. 通过二位矩阵 , index , columns</span></div><div class="line">dates = pd.date_range(<span class="string">'20130101'</span>, periods=<span class="number">6</span>)</div><div class="line">pd = pd.DataFrame(np.random.randn(<span class="number">6</span>,<span class="number">4</span>), index=dates, columns=list(<span class="string">'ABCD'</span>))</div><div class="line"><span class="comment">## 1.2. 通过字典 Key 为 Column , Value 为 list,timestamp,np.array,value</span></div><div class="line">df2 = pd.DataFrame(&#123; <span class="string">'A'</span> : <span class="number">1.</span>,</div><div class="line">                     <span class="string">'B'</span> : pd.Timestamp(<span class="string">'20130102'</span>),</div><div class="line">                     <span class="string">'C'</span> : pd.Series(<span class="number">1</span>,index=list(range(<span class="number">4</span>)),dtype=<span class="string">'float32'</span>),</div><div class="line">                     <span class="string">'D'</span> : np.array([<span class="number">3</span>] * <span class="number">4</span>,dtype=<span class="string">'int32'</span>),</div><div class="line">                     <span class="string">'E'</span> : pd.Categorical([<span class="string">"test"</span>,<span class="string">"train"</span>,<span class="string">"test"</span>,<span class="string">"train"</span>]),</div><div class="line">                     <span class="string">'F'</span> : <span class="string">'foo'</span> &#125;)</div><div class="line"><span class="comment"># 长度无需统一，会自动填充</span></div><div class="line"></div><div class="line"><span class="comment"># 2. 从文件中读取</span></div><div class="line">pd.read_excel(<span class="string">"./data_set.xlsx"</span>,index_col=<span class="keyword">False</span>) <span class="comment"># 关掉 Index</span></div><div class="line"></div><div class="line"><span class="comment"># 3. 合并多个同样的 DataFrame</span></div><div class="line">df_items = [df_item1,df_item2,...]</div><div class="line">final_df = pd.concat(df_items).drop_duplicates()</div><div class="line">final_df.merge(data_set_df, left_on=<span class="string">"lno"</span>, right_on=<span class="string">"rno"</span>, how=<span class="string">"outer"</span>)</div></pre></td></tr></table></figure>
+<h3 id="1-2-查看并修改表结构"><a href="#1-2-查看并修改表结构" class="headerlink" title="1.2. 查看并修改表结构"></a>1.2. 查看并修改表结构</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 1. 查看表结构</span></div><div class="line"></div><div class="line">df.head()</div><div class="line">df.tail(<span class="number">3</span>)</div><div class="line">df.index </div><div class="line"><span class="comment"># df.index = ['日期','小时']</span></div><div class="line">df.columns</div><div class="line">df.columns = map(str.lower, df.columns)</div><div class="line"></div><div class="line">df.values</div><div class="line"></div><div class="line">df[<span class="string">'col'</span>] = df[<span class="string">'col'</span>].astype(str).convert_objects(convert_numeric=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment"># 2. 删除col_name</span></div><div class="line"></div><div class="line">df.drop([<span class="string">'col_name_1'</span>,<span class="string">'col_name_2'</span>,...,<span class="string">'col_name_N'</span>],inplace=<span class="keyword">True</span>,axis=<span class="number">1</span>,errors=<span class="string">'ignore'</span>)</div><div class="line"></div><div class="line"><span class="keyword">del</span> df[<span class="string">'col'</span>]</div><div class="line"><span class="comment"># 3. 修改元数据</span></div><div class="line">df.rename(columns=<span class="keyword">lambda</span> x: x.split(<span class="string">'.'</span>)[<span class="number">-1</span>], inplace=<span class="keyword">True</span>)</div><div class="line">df.rename(columns=&#123;<span class="string">'oldName1'</span>: <span class="string">'newName1'</span>, <span class="string">'oldName2'</span>: <span class="string">'newName2'</span>&#125;, inplace=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"></div><div class="line">total_rows=len(df.axes[<span class="number">0</span>])</div><div class="line">total_cols=len(df.axes[<span class="number">1</span>])</div><div class="line"></div><div class="line"><span class="comment"># 2.</span></div><div class="line"><span class="comment">## 2. 遍历</span></div><div class="line"><span class="keyword">for</span> index, row <span class="keyword">in</span> df.iterrows():</div><div class="line">    <span class="keyword">print</span> row[<span class="string">"c1"</span>], row[<span class="string">"c2"</span>]</div><div class="line"><span class="keyword">for</span> row <span class="keyword">in</span> df.itertuples(index=<span class="keyword">True</span>, name=<span class="string">'Pandas'</span>):</div><div class="line">    <span class="keyword">print</span> getattr(row, <span class="string">"c1"</span>), getattr(row, <span class="string">"c2"</span>)</div><div class="line">= IF([@price] &lt; <span class="number">1</span>, <span class="string">"未知"</span>,IF([@price] &lt; <span class="number">30000</span>, <span class="string">"三万以下"</span>, IF([@price] &lt;= <span class="number">50000</span>, <span class="string">"三万到五万"</span>, IF([@price] &lt;= <span class="number">100000</span>, <span class="string">"五万到十万"</span>, IF([@price] &lt;= <span class="number">10000000</span>, <span class="string">"十万以上"</span>, <span class="string">"其他"</span>)))))</div></pre></td></tr></table></figure>
+<h3 id="1-3-修改表内容"><a href="#1-3-修改表内容" class="headerlink" title="1.3. 修改表内容"></a>1.3. 修改表内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
+<h3 id="1-4-查看表内容"><a href="#1-4-查看表内容" class="headerlink" title="1.4. 查看表内容"></a>1.4. 查看表内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 选择</span></div><div class="line">df[<span class="string">'A'</span>] <span class="comment"># 列选</span></div><div class="line">df[<span class="number">0</span>:<span class="number">30</span>] <span class="comment"># 行选</span></div><div class="line">df[<span class="string">'20130102'</span>:<span class="string">'20130104'</span>] <span class="comment"># 行选</span></div><div class="line">df.loc[<span class="string">'20130102'</span>:<span class="string">'20130104'</span>,[<span class="string">'A'</span>,<span class="string">'B'</span>]] <span class="comment"># by label</span></div><div class="line">df.iloc[<span class="number">1</span>:<span class="number">5</span>, <span class="number">2</span>:<span class="number">4</span>] <span class="comment"># by position</span></div><div class="line">df.sample(<span class="number">3000</span>) <span class="comment"># 随机抽取 3000 行，可以用于快速验证算法</span></div><div class="line"></div><div class="line">criterion = df2[<span class="string">'a'</span>].map(<span class="keyword">lambda</span> x: x.startswith(<span class="string">'t'</span>))</div><div class="line">df2[criterion]</div><div class="line"></div><div class="line">df2[[x.startswith(<span class="string">'t'</span>) <span class="keyword">for</span> x <span class="keyword">in</span> df2[<span class="string">'a'</span>]]]</div><div class="line"><span class="comment"># select * from final_df limit 5</span></div><div class="line">final_df.head()</div><div class="line"><span class="comment"># select a,b,c from final_df </span></div><div class="line">final_df[[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]].head()</div><div class="line"><span class="comment"># select a,b,c from final_df where a = 11 and b = 'xx'</span></div><div class="line">final_df[ ( final_df[<span class="string">'a'</span>] == <span class="number">11</span>) &amp; ( final_df[<span class="string">'b'</span>] == <span class="string">'xx'</span>) ][[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]]</div><div class="line">final_df[<span class="string">'a'</span>].value_counts()</div><div class="line"></div><div class="line"><span class="comment"># SELECT * FROM final_df ORDER BY a DESC LIMIT 10 OFFSET 5;</span></div><div class="line">final_df.nlargest(<span class="number">10</span>+<span class="number">5</span>, columns=<span class="string">'a'</span>).tail(<span class="number">10</span>)</div><div class="line"></div><div class="line">df.column.str[<span class="number">0</span>:<span class="number">2</span>]</div><div class="line">df.column_name.str.len()</div><div class="line">two_groups = <span class="string">'(?P&lt;letter&gt;[a-z])(?P&lt;digit&gt;[0-9])'</span></div><div class="line">s.str.extract(two_groups, expand=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment"># 排序</span></div><div class="line"></div><div class="line">df.sort_index(axis=<span class="number">1</span>, ascending=<span class="keyword">False</span>)</div><div class="line">df.sort_values(by=<span class="string">'B'</span>)</div><div class="line">df = df.sort([<span class="string">'col1'</span>,<span class="string">'col2'</span>,<span class="string">'col3'</span>],ascending=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>])</div><div class="line"><span class="comment"># </span></div><div class="line"></div><div class="line"><span class="comment"># window function</span></div><div class="line"><span class="comment"># SELECT a, b, c, rank() OVER (PARTITION BY a ORDER BY b DESC) as rn FROM final_df;</span></div><div class="line"><span class="comment"># 如果没有这个 window function 的话，可以 groupby 一下，然后生成表和原有表进行 JOIN</span></div><div class="line">tips.assign(rn=tips.sort_values([<span class="string">'b'</span>], ascending=<span class="keyword">False</span>).groupby([<span class="string">'a'</span>]).cumcount() + <span class="number">1</span>) </div><div class="line"></div><div class="line"><span class="comment"># Top N rows per group</span></div><div class="line"><span class="comment"># rank 代表等级 如果两人并列第一名，则不存在第二名，直接是第三名 , row_number 代表排名，即即便两个人分数一样，也无法并列第一名</span></div><div class="line"></div><div class="line"><span class="comment"># PostGRESQL's ROW_NUMBER() analytic function</span></div><div class="line">SELECT * FROM (</div><div class="line">  SELECT</div><div class="line">    t.*,</div><div class="line">    ROW_NUMBER() OVER(PARTITION BY day ORDER BY total_bill DESC) AS rn</div><div class="line">  FROM tips t</div><div class="line">) tt</div><div class="line">WHERE rn &lt; <span class="number">3</span></div><div class="line">ORDER BY day, rn;</div><div class="line"></div><div class="line">(tips.assign(rn=tips.sort_values([<span class="string">'total_bill'</span>], ascending=<span class="keyword">False</span>)</div><div class="line">                    .groupby([<span class="string">'day'</span>])</div><div class="line">                    .cumcount() + <span class="number">1</span>)</div><div class="line">     .query(<span class="string">'rn &lt; 3'</span>)</div><div class="line">     .sort_values([<span class="string">'day'</span>,<span class="string">'rn'</span>])</div><div class="line">)</div><div class="line"></div><div class="line">(tips.assign(rnk=tips.groupby([<span class="string">'day'</span>])[<span class="string">'total_bill'</span>]</div><div class="line">                     .rank(method=<span class="string">'first'</span>, ascending=<span class="keyword">False</span>))</div><div class="line">     .query(<span class="string">'rnk &lt; 3'</span>)</div><div class="line">     .sort_values([<span class="string">'day'</span>,<span class="string">'rnk'</span>])</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># PostGRESQL's RANK() analytic function</span></div><div class="line">SELECT * FROM (</div><div class="line">  SELECT</div><div class="line">    t.*,</div><div class="line">    RANK() OVER(PARTITION BY sex ORDER BY tip) AS rnk</div><div class="line">  FROM tips t</div><div class="line">  WHERE tip &lt; <span class="number">2</span></div><div class="line">)</div><div class="line">WHERE rnk &lt; <span class="number">3</span></div><div class="line">ORDER BY sex, rnk;</div><div class="line"></div><div class="line">(tips[tips[<span class="string">'tip'</span>] &lt; <span class="number">2</span>]</div><div class="line">     .assign(rnk_min=tips.groupby([<span class="string">'sex'</span>])[<span class="string">'tip'</span>]</div><div class="line">                         .rank(method=<span class="string">'min'</span>))</div><div class="line">     .query(<span class="string">'rnk_min &lt; 3'</span>)</div><div class="line">     .sort_values([<span class="string">'sex'</span>,<span class="string">'rnk_min'</span>])</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># where 语句</span></div><div class="line">final_df[<span class="string">'a'</span>].isnull()</div><div class="line">final_df[<span class="string">'a'</span>].isin(arr)</div><div class="line"></div><div class="line"><span class="comment"># groupby</span></div><div class="line">final_df.groupby(<span class="string">'a'</span>).size() <span class="comment"># 计算 a</span></div><div class="line">final_df.groupby(<span class="string">'a'</span>)[<span class="string">'b'</span>].count() <span class="comment"># 同上计算 a</span></div><div class="line">final_df.groupby(<span class="string">'a'</span>).count() <span class="comment"># 计算所有 cols </span></div><div class="line">agg_fun_dict = &#123;<span class="string">'tip'</span>: np.mean, <span class="string">'day'</span>: np.size&#125;</div><div class="line">agg_fun_dict_new = &#123;<span class="string">'tip'</span>: [np.mean, np.size]&#125;</div><div class="line">final_df.groupby(<span class="string">'a'</span>)[[<span class="string">'b'</span>,<span class="string">'c'</span>]].agg(agg_fun_dict)</div><div class="line"></div><div class="line">calc_groups = final_df.groupby([date])</div><div class="line">calc_groups[<span class="string">'id_aa'</span>].nunique().reset_index().to_excel(<span class="string">"123.xlsx"</span>)</div><div class="line"></div><div class="line"><span class="comment"># pivot</span></div><div class="line">pd.pivot_table(data=df,values=<span class="string">'value_col'</span>, index=<span class="string">'A_FROM'</span>, columns=<span class="string">'B_TO'</span>, aggfunc=<span class="keyword">lambda</span> x: len(x.unique()),margins=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment"># CONCAT</span></div><div class="line">append</div><div class="line"><span class="comment"># JOIN </span></div><div class="line">pd.merge(df1, df2, on=<span class="string">'key'</span>, how=<span class="string">'outer'</span>)</div><div class="line"></div><div class="line"><span class="comment"># UPDATE tips SET tip = tip*2 WHERE tip &lt; 2;</span></div><div class="line">tips.loc[tips[<span class="string">'tip'</span>] &lt; <span class="number">2</span>, <span class="string">'tip'</span>] *= <span class="number">2</span></div><div class="line"></div><div class="line"><span class="comment"># <span class="doctag">TODO:</span></span></div></pre></td></tr></table></figure>
+<h3 id="1-5-表变换"><a href="#1-5-表变换" class="headerlink" title="1.5. 表变换"></a>1.5. 表变换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># apply , apply map </span></div><div class="line">DataFrame.apply operates on entire rows <span class="keyword">or</span> columns at a time.</div><div class="line">DataFrame.applymap, Series.apply, <span class="keyword">and</span> Series.map operate on one element at time.</div></pre></td></tr></table></figure>
+<h2 id="0x02-asd"><a href="#0x02-asd" class="headerlink" title="0x02. asd"></a>0x02. asd</h2><h2 id="0x03-asd1"><a href="#0x03-asd1" class="headerlink" title="0x03. asd1"></a>0x03. asd1</h2><h2 id="0x04-Performance-Tips"><a href="#0x04-Performance-Tips" class="headerlink" title="0x04. Performance Tips"></a>0x04. Performance Tips</h2><p>最近遇到了数据量比较大的数据处理,数据条数差不多在3千万条.加载到内存中大约1GB.</p>
+<h3 id="4-1-精简行列"><a href="#4-1-精简行列" class="headerlink" title="4.1. 精简行列"></a>4.1. 精简行列</h3><ol>
+<li>读入dataframe的时候就排除多余的行列.</li>
+<li>Merge时候需要精简行列. </li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df1.merge(df2[list(<span class="string">'xab'</span>)])</div><div class="line">pandas.merge(dataframe1, dataframe2.iloc[:, [<span class="number">0</span>:<span class="number">5</span>]], how=<span class="string">'left'</span>, on=<span class="string">'key'</span>)</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的数据分析相关。&lt;/p&gt;
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。&lt;/p&gt;
+&lt;p&gt;主要包含：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;IPython 奇技淫巧&lt;/li&gt;
-&lt;li&gt;IPython Notebook&lt;/li&gt;
+&lt;li&gt;Pandas 与 SQL 等价的一些操作&lt;/li&gt;
+&lt;li&gt;Pandas 使用过程中的一些细节&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;不定期更新。&lt;/p&gt;
     
     </summary>
     
-      <category term="PC/MAC 使用心得技巧" scheme="http://twocucao.xyz/categories/PC-MAC-%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97%E6%8A%80%E5%B7%A7/"/>
+      <category term="爬虫 Crawler" scheme="http://twocucao.xyz/categories/%E7%88%AC%E8%99%AB-Crawler/"/>
     
     
-      <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="Pandas" scheme="http://twocucao.xyz/tags/Pandas/"/>
+    
+      <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
+    
+      <category term="工作自动化" scheme="http://twocucao.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+      <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
     
   </entry>
   
@@ -233,7 +231,7 @@
     <link href="http://twocucao.xyz/2017/05/21/DockerCheatSheet/"/>
     <id>http://twocucao.xyz/2017/05/21/DockerCheatSheet/</id>
     <published>2017-05-21T02:57:00.000Z</published>
-    <updated>2017-05-31T01:54:58.000Z</updated>
+    <updated>2017-06-04T01:00:06.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。</p>
 <ul>
@@ -1255,7 +1253,7 @@
     <link href="http://twocucao.xyz/2017/03/21/ThinkingInPython/"/>
     <id>http://twocucao.xyz/2017/03/21/ThinkingInPython/</id>
     <published>2017-03-21T12:05:00.000Z</published>
-    <updated>2017-05-25T12:06:14.000Z</updated>
+    <updated>2017-06-04T00:59:47.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>本文的内容都是一些简略的笔记。</p>
@@ -1328,7 +1326,7 @@
 <p>当 N 个线程在网络 I/O 堵塞，或等待重新获取 GIL，而一个线程运行 Python。</p>
 </blockquote>
 <p>让出之后还要执行代码呀，所以要有个收回 GIL 的动作。</p>
-<h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><p>Python 2 GIL , 尝试收回为 执行 1000 字节码。<br>Python 3 GIL , 检测间隔为 15ms</p>
+<h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><p>Python 2 GIL , 尝试收回GIL为 执行 1000 字节码。<br>Python 3 GIL , 尝试收回GIL检测间隔为 15ms</p>
 <h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><p>原子操作：sort 之类不需要<br>非原子操作：n=n+2 的字节码分为 加载 n , 加载 2 , 相加，存储 n, 四个步骤，由于不是原子性，很可能被由于 15 ms 而被打断。</p>
 <p>当然，懒人一向是 : <strong>优先级不决加括号，线程不决加 lock</strong></p>
 <p>对于 Java, 程序员努力在尽可能短的时间内加锁存取共享数据，减轻线程的争夺，实现最大并行。但 Python 中，线程无法并行运行，细粒度的锁就没有了优势。</p>
@@ -1439,7 +1437,7 @@
     <link href="http://twocucao.xyz/2017/03/21/LearnProgrammingLanguage/"/>
     <id>http://twocucao.xyz/2017/03/21/LearnProgrammingLanguage/</id>
     <published>2017-03-21T12:05:00.000Z</published>
-    <updated>2017-04-26T07:27:34.000Z</updated>
+    <updated>2017-06-04T00:54:12.000Z</updated>
     
     <content type="html"><![CDATA[<blockquote>
 <p>本文的内容都是一些个人的比较虚的经验。</p>
@@ -1484,13 +1482,16 @@
 <h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><p>工欲善其事必先利其器，而这个器就是工具链。</p>
 <p>工具链往往分为多种，有的是集成开发环境，有的是开发环境里面的 shell 脚本。</p>
 <h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><p>官网的文档是最应该反复查看的东西，这是我现在依然喜欢强调的。</p>
-<p>而官网的文档也分为三种</p>
+<p>而官网的文档也分为四种</p>
 <ul>
 <li>一种是 tutorial      – 用于<strong>上手</strong>对应的软件 / 编程语言</li>
 <li>一种是 guide         – 用于<strong> Topic Reading </strong></li>
 <li>一种是 api document  – 用于<strong>查看细节</strong></li>
 <li>一种是 RTFSC ( Read The Fucking Source Code ) 阅读源码</li>
 </ul>
+<blockquote>
+<p>注: 把StackOverFlow中某个标签的Most Votes的答案,是除了大略看看tutorial之外的另一种快速熟悉入门时候的痛点的手段.</p>
+</blockquote>
 <p>当然，其实代码写的足够好的话本身就是一种注释。</p>
 <h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><p>社区一般情况下都会有的，但有几个网站特别值得提出来</p>
 <ul>
@@ -2227,63 +2228,6 @@
   </entry>
   
   <entry>
-    <title>『好好说话』读书笔记</title>
-    <link href="http://twocucao.xyz/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/"/>
-    <id>http://twocucao.xyz/2017/01/27/读书笔记_好好说话/</id>
-    <published>2017-01-27T10:40:59.000Z</published>
-    <updated>2017-03-14T02:31:12.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。</p>
-<p>于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。</p>
-<p>好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。</p>
-<blockquote>
-<p>真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。</p>
-</blockquote>
-<p>世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：</p>
-<a id="more"></a>
-<p>就像在书籍第一章开头所说，说话之伤都是暗伤。</p>
-<blockquote>
-<p>能意识到你问题所在的，通常都不会告诉你。心大点的，察人之过笑而不言，但是私下里知道你这个人不靠谱，以后有重要的事不能指望你，就会疏远你；心稍微小点的，不跟你计较，但是客客气气找个别的由头举了你；等而下之的人的，甚至会一边给你穿小鞋一边装大度，让你死都没有四个明白。</p>
-</blockquote>
-<p>回想起我前 25 年的很多糟糕的言行，现在想想，当时总归是可以有更优解的。</p>
-<p>但仔细一想，似乎寻常人总会去踩这些坑，吃过很多教训，才能明白。</p>
-<h3 id="说话是权利的游戏"><a href="#说话是权利的游戏" class="headerlink" title="说话是权利的游戏"></a>说话是权利的游戏</h3><p>五维话术：演讲，沟通，说服，谈判，辩论。</p>
-<ul>
-<li>演讲 A – 权力的形成（吸引，聚焦，引导）</li>
-<li>沟通 B – 权力的流动（避免冲突与协调转向）</li>
-<li>说服 C – 权力在对方（无权的一方要改变有权的一方）</li>
-<li>谈判 D – 权力在双方（双方要合作，才能解决问题）</li>
-<li>辩论 E – 权力在他方（双方无权决定胜负，通常由中立第三方裁决）</li>
-</ul>
-<p>这里面的纬度，并不是每一个场景下就对应某一纬度的，比如说，当你在沟通的时候，有的时候就也需要说服，有的时候又需要辩论，甚至谈判。</p>
-<p>所以，每一场复杂的说话场景实际上是在不断的变化当中，甚至可以用矢量 (A,B,C,D,E,T) 其中 T 表示的是 Times 次数. 即以 A 为演讲值，MAX 为 10,MIN 为 0 的情况下，第 T 次演讲的说法应该为 (A,B,C,D,E), 比如 (2,3,4,9,0) 表示此次对话应该着重于谈判.P20 有一个非常有趣的说明叫做色有三原，光分七彩。</p>
-<p>温和的的沟通，可能蕴含着辩论的机锋和谈判的策略；<br>娓娓道来的说服可能需要演讲的华彩的沟通的诀窍。</p>
-<p>而好好说话的工作流就是</p>
-<p>S1. 倾听 For 收集信息<br>S2. 判断 For 权力棍术<br>S3. 思考 For 应对之策 说话策略需要依据权力（大小）, 态度（反对 / 赞同）, 成本（低 / 高）, 方向（单向 / 双向）, 受众（多 / 少）<br>S4. 表达 For 语言输出，然后转 S1</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。&lt;/p&gt;
-&lt;p&gt;于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。&lt;/p&gt;
-&lt;p&gt;好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
-    
-    
-      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-      <category term="书单与简评" scheme="http://twocucao.xyz/tags/%E4%B9%A6%E5%8D%95%E4%B8%8E%E7%AE%80%E8%AF%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>『把时间当做朋友』读书笔记</title>
     <link href="http://twocucao.xyz/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E4%B8%8E%E6%97%B6%E9%97%B4%E5%81%9A%E6%9C%8B%E5%8F%8B/"/>
     <id>http://twocucao.xyz/2017/01/27/读书笔记_与时间做朋友/</id>
@@ -2519,6 +2463,63 @@
   </entry>
   
   <entry>
+    <title>『好好说话』读书笔记</title>
+    <link href="http://twocucao.xyz/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/"/>
+    <id>http://twocucao.xyz/2017/01/27/读书笔记_好好说话/</id>
+    <published>2017-01-27T10:40:59.000Z</published>
+    <updated>2017-03-14T02:31:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。</p>
+<p>于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。</p>
+<p>好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。</p>
+<blockquote>
+<p>真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。</p>
+</blockquote>
+<p>世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：</p>
+<a id="more"></a>
+<p>就像在书籍第一章开头所说，说话之伤都是暗伤。</p>
+<blockquote>
+<p>能意识到你问题所在的，通常都不会告诉你。心大点的，察人之过笑而不言，但是私下里知道你这个人不靠谱，以后有重要的事不能指望你，就会疏远你；心稍微小点的，不跟你计较，但是客客气气找个别的由头举了你；等而下之的人的，甚至会一边给你穿小鞋一边装大度，让你死都没有四个明白。</p>
+</blockquote>
+<p>回想起我前 25 年的很多糟糕的言行，现在想想，当时总归是可以有更优解的。</p>
+<p>但仔细一想，似乎寻常人总会去踩这些坑，吃过很多教训，才能明白。</p>
+<h3 id="说话是权利的游戏"><a href="#说话是权利的游戏" class="headerlink" title="说话是权利的游戏"></a>说话是权利的游戏</h3><p>五维话术：演讲，沟通，说服，谈判，辩论。</p>
+<ul>
+<li>演讲 A – 权力的形成（吸引，聚焦，引导）</li>
+<li>沟通 B – 权力的流动（避免冲突与协调转向）</li>
+<li>说服 C – 权力在对方（无权的一方要改变有权的一方）</li>
+<li>谈判 D – 权力在双方（双方要合作，才能解决问题）</li>
+<li>辩论 E – 权力在他方（双方无权决定胜负，通常由中立第三方裁决）</li>
+</ul>
+<p>这里面的纬度，并不是每一个场景下就对应某一纬度的，比如说，当你在沟通的时候，有的时候就也需要说服，有的时候又需要辩论，甚至谈判。</p>
+<p>所以，每一场复杂的说话场景实际上是在不断的变化当中，甚至可以用矢量 (A,B,C,D,E,T) 其中 T 表示的是 Times 次数. 即以 A 为演讲值，MAX 为 10,MIN 为 0 的情况下，第 T 次演讲的说法应该为 (A,B,C,D,E), 比如 (2,3,4,9,0) 表示此次对话应该着重于谈判.P20 有一个非常有趣的说明叫做色有三原，光分七彩。</p>
+<p>温和的的沟通，可能蕴含着辩论的机锋和谈判的策略；<br>娓娓道来的说服可能需要演讲的华彩的沟通的诀窍。</p>
+<p>而好好说话的工作流就是</p>
+<p>S1. 倾听 For 收集信息<br>S2. 判断 For 权力棍术<br>S3. 思考 For 应对之策 说话策略需要依据权力（大小）, 态度（反对 / 赞同）, 成本（低 / 高）, 方向（单向 / 双向）, 受众（多 / 少）<br>S4. 表达 For 语言输出，然后转 S1</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。&lt;/p&gt;
+&lt;p&gt;于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。&lt;/p&gt;
+&lt;p&gt;好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
+    
+    
+      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+      <category term="书单与简评" scheme="http://twocucao.xyz/tags/%E4%B9%A6%E5%8D%95%E4%B8%8E%E7%AE%80%E8%AF%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>写给 Pythoner 的 Spacemacs 入门指北</title>
     <link href="http://twocucao.xyz/2017/01/15/Spacemacs/"/>
     <id>http://twocucao.xyz/2017/01/15/Spacemacs/</id>
@@ -2684,7 +2685,7 @@
     <link href="http://twocucao.xyz/2017/01/14/OneQuestionToSeePythonScope/"/>
     <id>http://twocucao.xyz/2017/01/14/OneQuestionToSeePythonScope/</id>
     <published>2017-01-14T12:48:31.000Z</published>
-    <updated>2017-04-26T07:27:34.000Z</updated>
+    <updated>2017-06-04T00:38:55.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>整理工具字符类的时候，想借助正则表达式来实现一部分的文字判断抽取等操作。</p>
 <p>比如实现：</p>
@@ -2738,9 +2739,6 @@
 <p>对程序植入一些 print 代码来 Debug 一下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">for regex, regex_pattern in REGEXES.items():</div><div class="line">    def has_regex_func(_str, regex_pattern=regex_pattern):</div><div class="line">        # 当函数被调用之后，打印 regex_pattern 查看对应的字符串</div><div class="line">        print(regex_pattern)</div><div class="line">        return has_pattern(_str, regex_pattern)</div><div class="line"></div><div class="line">    def is_regex_func(_str, regex_pattern=regex_pattern):</div><div class="line">        return match_pattern(_str, regex_pattern)</div><div class="line"></div><div class="line">    def extract_first_regex_func(_str, regex_pattern=regex_pattern):</div><div class="line">        return find_first_matched_pattern(_str, regex_pattern)</div><div class="line"></div><div class="line">    def extract_all_regex_func(_str, regex_pattern=regex_pattern):</div><div class="line">        return find_all_matched_pattern(_str, regex_pattern)</div><div class="line"></div><div class="line">    # 查看是否为同一个函数</div><div class="line">    print(id(has_regex_func))</div><div class="line"></div><div class="line">    setattr(sys.modules[__name__], &apos;has_&#123;regex_suffix&#125;&apos;.format(regex_suffix=regex), has_regex_func)</div><div class="line">    setattr(sys.modules[__name__], &apos;is_&#123;regex_suffix&#125;&apos;.format(regex_suffix=regex), is_regex_func)</div><div class="line">    setattr(sys.modules[__name__], &apos;extract_first_&#123;regex_suffix&#125;&apos;.format(regex_suffix=regex), extract_first_regex_func)</div><div class="line">    setattr(sys.modules[__name__], &apos;extract_all_&#123;regex_suffix&#125;&apos;.format(regex_suffix=regex), extract_all_regex_func)</div></pre></td></tr></table></figure>
 <p>于是发现问题，所有打印出来的 regex_pattern 都是一致的。也就是，不管是 has_uuid 还是 has_qq_num 还是其他，最后 regex_pattern 都是我在字典中实现的</p>
-<blockquote>
-<p>看来这个应该是和</p>
-</blockquote>
 ]]></content>
     
     <summary type="html">
@@ -3001,57 +2999,6 @@
   </entry>
   
   <entry>
-    <title>Pandas Cheatsheet</title>
-    <link href="http://twocucao.xyz/2016/12/20/PandasCheatSheet/"/>
-    <id>http://twocucao.xyz/2016/12/20/PandasCheatSheet/</id>
-    <published>2016-12-20T10:41:47.000Z</published>
-    <updated>2017-06-03T16:14:47.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。</p>
-<p>主要包含：</p>
-<ul>
-<li>Pandas 与 SQL 等价的一些操作</li>
-<li>Pandas 使用过程中的一些细节</li>
-</ul>
-<p>不定期更新。</p>
-<a id="more"></a>
-<blockquote>
-<p>SQL 是一种面向集合的处理工具 / 语言<br>Pandas 是一种面向数组的处理工具</p>
-<p><strong>而一般处理 pandas 的数据往往以二维表的形式存在。所以，可以类比为更加强大的 SQL 语言。</strong></p>
-</blockquote>
-<h2 id="0x01-DataFrame-相关"><a href="#0x01-DataFrame-相关" class="headerlink" title="0x01. DataFrame 相关"></a>0x01. DataFrame 相关</h2><h3 id="1-1-定义并初始化"><a href="#1-1-定义并初始化" class="headerlink" title="1.1. 定义并初始化"></a>1.1. 定义并初始化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># 1. 内存变量转 Dataframe</span></div><div class="line"><span class="comment">## 1.1. 通过二位矩阵 , index , columns</span></div><div class="line">dates = pd.date_range(<span class="string">'20130101'</span>, periods=<span class="number">6</span>)</div><div class="line">pd = pd.DataFrame(np.random.randn(<span class="number">6</span>,<span class="number">4</span>), index=dates, columns=list(<span class="string">'ABCD'</span>))</div><div class="line"><span class="comment">## 1.2. 通过字典 Key 为 Column , Value 为 list,timestamp,np.array,value</span></div><div class="line">df2 = pd.DataFrame(&#123; <span class="string">'A'</span> : <span class="number">1.</span>,</div><div class="line">                     <span class="string">'B'</span> : pd.Timestamp(<span class="string">'20130102'</span>),</div><div class="line">                     <span class="string">'C'</span> : pd.Series(<span class="number">1</span>,index=list(range(<span class="number">4</span>)),dtype=<span class="string">'float32'</span>),</div><div class="line">                     <span class="string">'D'</span> : np.array([<span class="number">3</span>] * <span class="number">4</span>,dtype=<span class="string">'int32'</span>),</div><div class="line">                     <span class="string">'E'</span> : pd.Categorical([<span class="string">"test"</span>,<span class="string">"train"</span>,<span class="string">"test"</span>,<span class="string">"train"</span>]),</div><div class="line">                     <span class="string">'F'</span> : <span class="string">'foo'</span> &#125;)</div><div class="line"><span class="comment"># 长度无需统一，会自动填充</span></div><div class="line"></div><div class="line"><span class="comment"># 2. 从文件中读取</span></div><div class="line">pd.read_excel(<span class="string">"./data_set.xlsx"</span>,index_col=<span class="keyword">False</span>) <span class="comment"># 关掉 Index</span></div><div class="line"></div><div class="line"><span class="comment"># 3. 合并多个同样的 DataFrame</span></div><div class="line">df_items = [df_item1,df_item2,...]</div><div class="line">final_df = pd.concat(df_items).drop_duplicates()</div><div class="line">final_df.merge(data_set_df, left_on=<span class="string">"lno"</span>, right_on=<span class="string">"rno"</span>, how=<span class="string">"outer"</span>)</div></pre></td></tr></table></figure>
-<h3 id="1-2-查看并修改表结构"><a href="#1-2-查看并修改表结构" class="headerlink" title="1.2. 查看并修改表结构"></a>1.2. 查看并修改表结构</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 1. 查看表结构</span></div><div class="line"></div><div class="line">df.head()</div><div class="line">df.tail(<span class="number">3</span>)</div><div class="line">df.index </div><div class="line"><span class="comment"># df.index = ['日期','小时']</span></div><div class="line">df.columns</div><div class="line">df.values</div><div class="line"></div><div class="line"><span class="comment"># 2. 查看表内容</span></div><div class="line"></div><div class="line">df.rename(columns=&#123;<span class="string">'oldName1'</span>: <span class="string">'newName1'</span>, <span class="string">'oldName2'</span>: <span class="string">'newName2'</span>&#125;, inplace=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"></div><div class="line">total_rows=len(df.axes[<span class="number">0</span>])</div><div class="line">total_cols=len(df.axes[<span class="number">1</span>])</div><div class="line"></div><div class="line"><span class="comment"># 2.</span></div><div class="line"><span class="comment">## 2. 遍历</span></div><div class="line"><span class="keyword">for</span> index, row <span class="keyword">in</span> df.iterrows():</div><div class="line">    <span class="keyword">print</span> row[<span class="string">"c1"</span>], row[<span class="string">"c2"</span>]</div><div class="line"><span class="keyword">for</span> row <span class="keyword">in</span> df.itertuples(index=<span class="keyword">True</span>, name=<span class="string">'Pandas'</span>):</div><div class="line">    <span class="keyword">print</span> getattr(row, <span class="string">"c1"</span>), getattr(row, <span class="string">"c2"</span>)</div><div class="line">= IF([@price] &lt; <span class="number">1</span>, <span class="string">"未知"</span>,IF([@price] &lt; <span class="number">30000</span>, <span class="string">"三万以下"</span>, IF([@price] &lt;= <span class="number">50000</span>, <span class="string">"三万到五万"</span>, IF([@price] &lt;= <span class="number">100000</span>, <span class="string">"五万到十万"</span>, IF([@price] &lt;= <span class="number">10000000</span>, <span class="string">"十万以上"</span>, <span class="string">"其他"</span>)))))</div><div class="line">reset_index</div></pre></td></tr></table></figure>
-<h3 id="1-3-修改表内容"><a href="#1-3-修改表内容" class="headerlink" title="1.3. 修改表内容"></a>1.3. 修改表内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-<h3 id="1-4-查看表内容"><a href="#1-4-查看表内容" class="headerlink" title="1.4. 查看表内容"></a>1.4. 查看表内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 选择</span></div><div class="line">df[<span class="string">'A'</span>] <span class="comment"># 列选</span></div><div class="line">df[<span class="number">0</span>:<span class="number">30</span>] <span class="comment"># 行选</span></div><div class="line">df[<span class="string">'20130102'</span>:<span class="string">'20130104'</span>] <span class="comment"># 行选</span></div><div class="line">df.loc[<span class="string">'20130102'</span>:<span class="string">'20130104'</span>,[<span class="string">'A'</span>,<span class="string">'B'</span>]] <span class="comment"># by label</span></div><div class="line">df.iloc[<span class="number">1</span>:<span class="number">5</span>, <span class="number">2</span>:<span class="number">4</span>] <span class="comment"># by position</span></div><div class="line">df.sample(<span class="number">3000</span>) <span class="comment"># 随机抽取 3000 行，可以用于快速验证算法</span></div><div class="line"></div><div class="line">criterion = df2[<span class="string">'a'</span>].map(<span class="keyword">lambda</span> x: x.startswith(<span class="string">'t'</span>))</div><div class="line">df2[criterion]</div><div class="line"></div><div class="line">df2[[x.startswith(<span class="string">'t'</span>) <span class="keyword">for</span> x <span class="keyword">in</span> df2[<span class="string">'a'</span>]]]</div><div class="line"><span class="comment"># select * from final_df limit 5</span></div><div class="line">final_df.head()</div><div class="line"><span class="comment"># select a,b,c from final_df </span></div><div class="line">final_df[[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]].head()</div><div class="line"><span class="comment"># select a,b,c from final_df where a = 11 and b = 'xx'</span></div><div class="line">final_df[ ( final_df[<span class="string">'a'</span>] == <span class="number">11</span>) &amp; ( final_df[<span class="string">'b'</span>] == <span class="string">'xx'</span>) ][[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]]</div><div class="line">final_df[<span class="string">'a'</span>].value_counts()</div><div class="line"></div><div class="line"><span class="comment"># SELECT * FROM final_df ORDER BY a DESC LIMIT 10 OFFSET 5;</span></div><div class="line">final_df.nlargest(<span class="number">10</span>+<span class="number">5</span>, columns=<span class="string">'a'</span>).tail(<span class="number">10</span>)</div><div class="line"></div><div class="line"><span class="comment"># 排序</span></div><div class="line"></div><div class="line">df.sort_index(axis=<span class="number">1</span>, ascending=<span class="keyword">False</span>)</div><div class="line">df.sort_values(by=<span class="string">'B'</span>)</div><div class="line"></div><div class="line"><span class="comment"># window function</span></div><div class="line"><span class="comment"># SELECT a, b, c, rank() OVER (PARTITION BY a ORDER BY b DESC) as rn FROM final_df;</span></div><div class="line"><span class="comment"># 如果没有这个 window function 的话，可以 groupby 一下，然后生成表和原有表进行 JOIN</span></div><div class="line">tips.assign(rn=tips.sort_values([<span class="string">'b'</span>], ascending=<span class="keyword">False</span>).groupby([<span class="string">'a'</span>]).cumcount() + <span class="number">1</span>) </div><div class="line"></div><div class="line"><span class="comment"># Top N rows per group</span></div><div class="line"><span class="comment"># rank 代表等级 如果两人并列第一名，则不存在第二名，直接是第三名 , row_number 代表排名，即即便两个人分数一样，也无法并列第一名</span></div><div class="line"></div><div class="line"><span class="comment"># PostGRESQL's ROW_NUMBER() analytic function</span></div><div class="line">SELECT * FROM (</div><div class="line">  SELECT</div><div class="line">    t.*,</div><div class="line">    ROW_NUMBER() OVER(PARTITION BY day ORDER BY total_bill DESC) AS rn</div><div class="line">  FROM tips t</div><div class="line">) tt</div><div class="line">WHERE rn &lt; <span class="number">3</span></div><div class="line">ORDER BY day, rn;</div><div class="line"></div><div class="line">(tips.assign(rn=tips.sort_values([<span class="string">'total_bill'</span>], ascending=<span class="keyword">False</span>)</div><div class="line">                    .groupby([<span class="string">'day'</span>])</div><div class="line">                    .cumcount() + <span class="number">1</span>)</div><div class="line">     .query(<span class="string">'rn &lt; 3'</span>)</div><div class="line">     .sort_values([<span class="string">'day'</span>,<span class="string">'rn'</span>])</div><div class="line">)</div><div class="line"></div><div class="line">(tips.assign(rnk=tips.groupby([<span class="string">'day'</span>])[<span class="string">'total_bill'</span>]</div><div class="line">                     .rank(method=<span class="string">'first'</span>, ascending=<span class="keyword">False</span>))</div><div class="line">     .query(<span class="string">'rnk &lt; 3'</span>)</div><div class="line">     .sort_values([<span class="string">'day'</span>,<span class="string">'rnk'</span>])</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># PostGRESQL's RANK() analytic function</span></div><div class="line">SELECT * FROM (</div><div class="line">  SELECT</div><div class="line">    t.*,</div><div class="line">    RANK() OVER(PARTITION BY sex ORDER BY tip) AS rnk</div><div class="line">  FROM tips t</div><div class="line">  WHERE tip &lt; <span class="number">2</span></div><div class="line">)</div><div class="line">WHERE rnk &lt; <span class="number">3</span></div><div class="line">ORDER BY sex, rnk;</div><div class="line"></div><div class="line">(tips[tips[<span class="string">'tip'</span>] &lt; <span class="number">2</span>]</div><div class="line">     .assign(rnk_min=tips.groupby([<span class="string">'sex'</span>])[<span class="string">'tip'</span>]</div><div class="line">                         .rank(method=<span class="string">'min'</span>))</div><div class="line">     .query(<span class="string">'rnk_min &lt; 3'</span>)</div><div class="line">     .sort_values([<span class="string">'sex'</span>,<span class="string">'rnk_min'</span>])</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># where 语句</span></div><div class="line">final_df[<span class="string">'a'</span>].isnull()</div><div class="line">final_df[<span class="string">'a'</span>].isin(arr)</div><div class="line"></div><div class="line"><span class="comment"># groupby</span></div><div class="line">final_df.groupby(<span class="string">'a'</span>).size() <span class="comment"># 计算 a</span></div><div class="line">final_df.groupby(<span class="string">'a'</span>)[<span class="string">'b'</span>].count() <span class="comment"># 同上计算 a</span></div><div class="line">final_df.groupby(<span class="string">'a'</span>).count() <span class="comment"># 计算所有 cols </span></div><div class="line">agg_fun_dict = &#123;<span class="string">'tip'</span>: np.mean, <span class="string">'day'</span>: np.size&#125;</div><div class="line">agg_fun_dict_new = &#123;<span class="string">'tip'</span>: [np.mean, np.size]&#125;</div><div class="line">final_df.groupby(<span class="string">'a'</span>)[[<span class="string">'b'</span>,<span class="string">'c'</span>]].agg(agg_fun_dict)</div><div class="line"></div><div class="line"><span class="comment"># CONCAT</span></div><div class="line">append</div><div class="line"><span class="comment"># JOIN </span></div><div class="line">pd.merge(df1, df2, on=<span class="string">'key'</span>, how=<span class="string">'outer'</span>)</div><div class="line"></div><div class="line"><span class="comment"># UPDATE tips SET tip = tip*2 WHERE tip &lt; 2;</span></div><div class="line">tips.loc[tips[<span class="string">'tip'</span>] &lt; <span class="number">2</span>, <span class="string">'tip'</span>] *= <span class="number">2</span></div><div class="line"></div><div class="line"><span class="comment"># <span class="doctag">TODO:</span></span></div></pre></td></tr></table></figure>
-<h3 id="1-5-表变换"><a href="#1-5-表变换" class="headerlink" title="1.5. 表变换"></a>1.5. 表变换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"></div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。&lt;/p&gt;
-&lt;p&gt;主要包含：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Pandas 与 SQL 等价的一些操作&lt;/li&gt;
-&lt;li&gt;Pandas 使用过程中的一些细节&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;不定期更新。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="爬虫 Crawler" scheme="http://twocucao.xyz/categories/%E7%88%AC%E8%99%AB-Crawler/"/>
-    
-    
-      <category term="Pandas" scheme="http://twocucao.xyz/tags/Pandas/"/>
-    
-      <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
-    
-      <category term="工作自动化" scheme="http://twocucao.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
-    
-      <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Redis Cheatsheet</title>
     <link href="http://twocucao.xyz/2016/12/11/RedisCheatSheet/"/>
     <id>http://twocucao.xyz/2016/12/11/RedisCheatSheet/</id>
@@ -3171,6 +3118,58 @@
       <category term="工作自动化" scheme="http://twocucao.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
     
       <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>MongoDB Cheatsheet</title>
+    <link href="http://twocucao.xyz/2016/12/09/MongoCheatSheet/"/>
+    <id>http://twocucao.xyz/2016/12/09/MongoCheatSheet/</id>
+    <published>2016-12-09T10:41:47.000Z</published>
+    <updated>2017-06-04T00:31:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。</p>
+<ul>
+<li>Mongo Shell</li>
+<li>Mongo 配套工具</li>
+<li>Python API</li>
+</ul>
+<p>不定期更新。</p>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># MacOS 安装</span></div><div class="line">brew install mongodb</div><div class="line">brew services start mongodb</div><div class="line"><span class="comment"># Ubuntu Server 16.04</span></div><div class="line">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927</div><div class="line"><span class="built_in">echo</span> <span class="string">"deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse"</span> | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list</div><div class="line">apt-get update -y</div><div class="line">apt-get install -y mongodb-org</div><div class="line">service mongod start</div></pre></td></tr></table></figure>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="IP-地址"><a href="#IP-地址" class="headerlink" title="IP 地址"></a>IP 地址</h3><h2 id="MongoDB-配套工具"><a href="#MongoDB-配套工具" class="headerlink" title="MongoDB 配套工具"></a>MongoDB 配套工具</h2><ul>
+<li>RoboMongo</li>
+<li>通过网络或者 Dash 查看文档</li>
+<li>Mongo 官方自带工具</li>
+</ul>
+<h2 id="MongoDB-Shell"><a href="#MongoDB-Shell" class="headerlink" title="MongoDB Shell"></a>MongoDB Shell</h2><h2 id="基本查询"><a href="#基本查询" class="headerlink" title="基本查询"></a>基本查询</h2><p>db.users.find({“name”: /.<em>m.</em>/})<br>db.users.find({‘name’: {‘$regex’: ‘sometext’}})</p>
+<p><a href="https://docs.mongodb.com/manual/" target="_blank" rel="external">https://docs.mongodb.com/manual/</a></p>
+<h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3><p>use myNewDatabase<br>db.myCollection.insert( { x: 1 } );</p>
+<h3 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h3><h2 id="PyMongo"><a href="#PyMongo" class="headerlink" title="PyMongo"></a>PyMongo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 建索引的时候,会阻塞当前的操作,甚至是查询操作</span></div><div class="line"><span class="comment"># 据说转为background方式不会阻塞但是,没有实践过</span></div><div class="line"><span class="string">"msg"</span> : <span class="string">"Index Build Index Build: 167413/751748 22%"</span>,</div><div class="line"><span class="string">"progress"</span> : &#123;</div><div class="line">	<span class="string">"done"</span> : 167413,</div><div class="line">	<span class="string">"total"</span> : 751748</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mongo Shell&lt;/li&gt;
+&lt;li&gt;Mongo 配套工具&lt;/li&gt;
+&lt;li&gt;Python API&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不定期更新。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="PC/MAC 使用心得技巧" scheme="http://twocucao.xyz/categories/PC-MAC-%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97%E6%8A%80%E5%B7%A7/"/>
+    
+    
+      <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
+    
+      <category term="工作自动化" scheme="http://twocucao.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+      <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
+    
+      <category term="MongoDB" scheme="http://twocucao.xyz/tags/MongoDB/"/>
     
   </entry>
   
