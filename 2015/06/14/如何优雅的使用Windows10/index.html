@@ -112,7 +112,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-d39ea3f078f1d800.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-efe86c9e4bd48b95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-1d8bc57d69948d60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-06-09T09:02:08.000Z">
+<meta property="og:updated_time" content="2017-06-09T09:05:54.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="如何优雅的使用 Windows 10">
 <meta name="twitter:description" content="0x00. 前言刚开始 Win10 发布没有多久的时候我就写了这篇回答，放在知乎上。发现好久没有在 Jianshu 上更新文章了，发现简书优化了不少东西嘛！现在用起来好舒服啊！  已经过了折腾的年龄，答案仅仅从提升效率方面来说，是否优雅就看诸位的审美了。  本文目录  文件夹与文件一定要分类命名好。 Win10 自带功能怎样提升效率。 2.1 快捷键 2.2 触摸板手势 2.3 Win+R   非">
@@ -488,7 +488,7 @@
 <p><img src="http://upload-images.jianshu.io/upload_images/52890-d39ea3f078f1d800.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
 <p>我将所有的便携与非便携软件的快捷方式放在这里并且配置环境变量。比如，我需要启动为知笔记，我就仅仅需要闭上眼睛输入 Win+R + wz +<enter></enter></p>
 <p>其他软件同理。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sublime text 打开需要输入 </div><div class="line"></div><div class="line">Win+R + st +&lt;Enter&gt;</div><div class="line"></div><div class="line">欧路词典 打开需要输入 </div><div class="line"></div><div class="line">Win+R + ol +&lt;Enter&gt;</div><div class="line"></div><div class="line">这里省去若干软件打开方式。</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># sublime text 打开需要输入 </span></div><div class="line">Win+R + st +&lt;Enter&gt;</div><div class="line"><span class="comment"># 欧路词典 打开需要输入 </span></div><div class="line">Win+R + ol +&lt;Enter&gt;</div><div class="line"><span class="comment"># 这里省去若干软件打开方式。</span></div></pre></td></tr></table></figure>
 <p>关于 Win+R 你可以参考善用佳软 <a href="http://xbeta.info/win-run.htm" target="_blank" rel="external">最绿色最高效，用 win+r 启动常用程序和文档</a> 的介绍。</p>
 <h2 id="0x03-非-Windows-自带的必备软件"><a href="#0x03-非-Windows-自带的必备软件" class="headerlink" title="0x03. 非 Windows 自带的必备软件"></a>0x03. 非 Windows 自带的必备软件</h2><ol>
 <li>非 Windows 自带的必备的提升效率，节省时间的软件。</li>
@@ -530,24 +530,25 @@
 <li>3.7 其他想到再补充</li>
 </ul>
 <h2 id="0x04-不写点代码优化一下工作流程，你都不好意思说自己逼格高。"><a href="#0x04-不写点代码优化一下工作流程，你都不好意思说自己逼格高。" class="headerlink" title="0x04. 不写点代码优化一下工作流程，你都不好意思说自己逼格高。"></a>0x04. 不写点代码优化一下工作流程，你都不好意思说自己逼格高。</h2><p>不写点代码优化一下工作流程，你都不好意思说自己逼格高。- autohotkey</p>
-<p>可以针对快捷键进行编程。有了它，妈妈再也不担心我操作速度慢的要死了。有如下场景：一大段文字中有一个网址，你需要访问它，我的解决方法就是选中那些文字，然后一个 Win+b，直接打开 chrome 进行搜索，如果文字中没有网址，那么对选中文字进行百度。同理可以推淘宝，京东 github 等等。或者这样一个场景，你需要大量的文本编辑，但是上下左右离自己的工作区比较远，你可以小拇指按住大写锁定按键，然后使用 HJKL 进行移动。</p>
+<p>可以针对快捷键进行编程。有了它，妈妈再也不担心我操作速度慢的要死了。</p>
+<p>有如下场景：一大段文字中有一个网址，你需要访问它，我的解决方法就是选中那些文字，然后一个 Win+b，直接打开 chrome 进行搜索，如果文字中没有网址，那么对选中文字进行百度。同理可以推淘宝，京东 github 等等。或者这样一个场景，你需要大量的文本编辑，但是上下左右离自己的工作区比较远，你可以小拇指按住大写锁定按键，然后使用 HJKL 进行移动。</p>
 <p>教程参考 <a href="http://zhuanlan.zhihu.com/autohotkey" target="_blank" rel="external">AutoHotkey 之美 - 知乎专栏</a></p>
 <p>新手可以先拿我搜刮整理的 AHK 代码看看。<a href="https://github.com/twocucao/ChortHotKey" target="_blank" rel="external">twocucao/ChortHotKey · GitHub</a></p>
-<p>PS：我上面提到的软件几乎都是神级软件，都是入门容易精通难得深坑，想调教好也不是想象中呢么简单的，但，书到用时方恨少，你可以先挑一些使用。如果你以后有不少的文件需要管理，在未来，你一定会用到。</p>
+<p>PS：我上面提到的软件几乎都是神级软件，都是入门容易精通难的深坑，想调教好也不是想象中呢么简单的，但，书到用时方恨少，你可以先挑一些使用。如果你以后有不少的文件需要管理，在未来，你一定会用到。</p>
 <p>至于哪些图标怎么搞定？步骤如下：制作出那样的图片文件 （PS）<br>转换成 ico 文件（Iconmaster），把 ico 文件拷贝到指定文件夹内部（这步是为了方便修改文件夹切换电脑带来的文件夹图标恢复原样）<br>ico 设置到文件夹上 （修改文件夹内部的 desktop.ini 文件）</p>
 <p>附上制作的 PSD 文件，ICONMASTER 以及一个样板文件夹（注意要开启显示系统文件以及隐藏文件两个选项，然后查看样板文件夹中的 desktop.ini 以及ico 文件。修改的话，也就是修改 desktop.ini 文件里面的对应文件名称就好了）</p>
 <p>链接：</p>
-<p><a href="http://pan.baidu.com/s/1qWyx6oc" target="_blank" rel="external">百度云 请输入提取密码</a> 密码：g9up</p>
-<p>foobar 地址：链接：<a href="http://pan.baidu.com/s/1e7xZC" target="_blank" rel="external">百度云 请输入提取密码</a> 密码：e0as</p>
+<p><a href="http://pan.baidu.com/s/1qWyx6oc" target="_blank" rel="external">百度云地址</a> 密码：g9up</p>
+<p>foobar 地址：链接：<a href="http://pan.baidu.com/s/1e7xZC" target="_blank" rel="external">百度云地址</a> 密码：e0as</p>
 <p>文件图标受此答案启发：<a href="http://www.zhihu.com/question/19901022" target="_blank" rel="external">如何整理电脑文件夹？ - 计算机</a></p>
 <blockquote>
 <p>2016-01-04 已经更换 Macbook Pro, 依然挂念 Windows.<br>2017-05-01 21:42:00 已经更换 2016 年 Macbook Pro With Multi-Touchbar, 再无挂念 Windows.</p>
 </blockquote>
 <p>ChangeLog:</p>
 <ul>
-<li>2017-03-08 09:32:15 补充现在使用的电脑信息</li>
+<li>2017-03-08 09:32:15 整理知乎回答,搬运到博客上.</li>
 <li>2017-05-01 09:32:15 补充现在使用的电脑信息</li>
-<li>2017-06-09 09:32:15 补充现在使用的电脑信息</li>
+<li>2017-06-09 09:32:15 重新排版</li>
 </ul>
 
       
