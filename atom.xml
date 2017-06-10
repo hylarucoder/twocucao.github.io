@@ -3005,24 +3005,24 @@
     <link href="http://twocucao.xyz/2016/12/11/RedisCheatSheet/"/>
     <id>http://twocucao.xyz/2016/12/11/RedisCheatSheet/</id>
     <published>2016-12-11T10:41:47.000Z</published>
-    <updated>2017-05-27T00:43:47.000Z</updated>
+    <updated>2017-06-10T01:12:46.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。</p>
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。</p>
 <ul>
 <li>Redis Shell</li>
 <li>Redis 配套工具</li>
-<li>Python API</li>
+<li>Redis-Py</li>
+<li>Django 中使用Redis进行缓存</li>
+<li>踩坑记录</li>
 </ul>
 <p>不定期更新。</p>
 <a id="more"></a>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="IP-地址"><a href="#IP-地址" class="headerlink" title="IP 地址"></a>IP 地址</h3><h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><ul>
+<h2 id="0x01-Redis-Shell"><a href="#0x01-Redis-Shell" class="headerlink" title="0x01. Redis Shell"></a>0x01. Redis Shell</h2><ul>
 <li>RedisClient</li>
 <li>通过网络或者 Dash 查看文档</li>
 <li>Redis 官方自带工具</li>
 </ul>
-<h2 id="Redis-Shell"><a href="#Redis-Shell" class="headerlink" title="Redis Shell"></a>Redis Shell</h2><h2 id="基本查询"><a href="#基本查询" class="headerlink" title="基本查询"></a>基本查询</h2><p><a href="https://docs.mongodb.com/manual/" target="_blank" rel="external">https://docs.mongodb.com/manual/</a></p>
-<h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3><p>use myNewDatabase<br>db.myCollection.insert( { x: 1 } );</p>
-<h3 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h3><h2 id="redis-py"><a href="#redis-py" class="headerlink" title="redis-py"></a>redis-py</h2><h2 id="常见小问题"><a href="#常见小问题" class="headerlink" title="常见小问题"></a>常见小问题</h2><h3 id="1-无法磁盘持久化"><a href="#1-无法磁盘持久化" class="headerlink" title="1. 无法磁盘持久化"></a>1. 无法磁盘持久化</h3><p>用 scrapy 配合 scrapy-redis 抓取网页并且存储到 MongoDB 里面。</p>
+<h2 id="0x02-Redis-配套工具"><a href="#0x02-Redis-配套工具" class="headerlink" title="0x02. Redis 配套工具"></a>0x02. Redis 配套工具</h2><h2 id="0x03-Redis-Py"><a href="#0x03-Redis-Py" class="headerlink" title="0x03. Redis-Py"></a>0x03. Redis-Py</h2><h2 id="0x04-踩坑记录"><a href="#0x04-踩坑记录" class="headerlink" title="0x04. 踩坑记录"></a>0x04. 踩坑记录</h2><h3 id="1-无法磁盘持久化"><a href="#1-无法磁盘持久化" class="headerlink" title="1. 无法磁盘持久化"></a>1. 无法磁盘持久化</h3><p>用 scrapy 配合 scrapy-redis 抓取网页并且存储到 MongoDB 里面。</p>
 <p>由于 scrapy-redis 重写了 scrapy 的几个核心模块，借助 redis 来实现多个 scrapy 节点从而实现分布式。</p>
 <p>默认的 scrapy 设置会把 items 放在 redis 从而方便程序对 items 进行后续处理。这个设计很完美，只是美中不足的是，我常常需要抓取大量页面直接缓存到数据库中。这就导致了 redis 很快就满了。</p>
 <p>于是很容易报出这么一个错误。</p>
@@ -3044,11 +3044,13 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。&lt;/p&gt;
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Redis Shell&lt;/li&gt;
 &lt;li&gt;Redis 配套工具&lt;/li&gt;
-&lt;li&gt;Python API&lt;/li&gt;
+&lt;li&gt;Redis-Py&lt;/li&gt;
+&lt;li&gt;Django 中使用Redis进行缓存&lt;/li&gt;
+&lt;li&gt;踩坑记录&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;不定期更新。&lt;/p&gt;
     
@@ -3072,7 +3074,7 @@
     <link href="http://twocucao.xyz/2016/12/10/CheatSheet/"/>
     <id>http://twocucao.xyz/2016/12/10/CheatSheet/</id>
     <published>2016-12-10T10:41:47.000Z</published>
-    <updated>2016-12-11T01:59:33.000Z</updated>
+    <updated>2017-06-10T02:10:52.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章的集合。</p>
 <p>编码最重要的是思路。</p>
@@ -3087,11 +3089,21 @@
 <a id="more"></a>
 <h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
 <li><a href="/2016/10/05/UbuntuCheatsheet/">Ubuntu CheatSheet</a></li>
-<li><a href="/2015/04/18/ShellCheatCheet/">Shell CheatSheet</a></li>
-<li><a href="/2016/12/05/MacCheatsheet/">Mac CheatSheet</a></li>
-<li><a href="/2016/12/03/XPathCheatsheet/">XPath CheatSheet</a></li>
-<li><a href="/2016/10/05/VimCheatsheet/">Vim CheatSheet</a></li>
+<li><p><a href="/2016/12/05/MacCheatsheet/">Mac CheatSheet</a></p>
+</li>
+<li><p><a href="/2016/10/05/VimCheatsheet/">Vim CheatSheet</a></p>
+</li>
+<li><p><a href="/2016/12/11/RedisCheatSheet/">VSCode CheatSheet</a></p>
+</li>
+<li><p><a href="/2015/04/18/ShellCheatCheet/">Shell CheatSheet</a></p>
+</li>
+<li><a href="/2016/12/11/RedisCheatSheet/">Pandas CheatSheet</a></li>
+<li><p><a href="/2016/12/03/XPathCheatsheet/">XPath CheatSheet</a></p>
+</li>
+<li><p><a href="/2016/09/12/MySQLCheatSheet/">Docker CheatSheet</a></p>
+</li>
 <li><a href="/2016/09/12/MySQLCheatSheet/">MySQL CheatSheet</a></li>
+<li><a href="/2016/09/12/MySQLCheatSheet/">PostgreSQL CheatSheet</a></li>
 <li><a href="/2016/12/09/MongoCheatSheet/">Mongo CheatSheet</a></li>
 <li><a href="/2016/12/11/RedisCheatSheet/">Redis CheatSheet</a></li>
 </ul>

@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Python API  不定期更新。">
+<meta name="description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py Django 中使用Redis进行缓存 踩坑记录  不定期更新。">
 <meta name="keywords" content="效率,工作自动化,Cheatsheet,Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis Cheatsheet">
 <meta property="og:url" content="http://twocucao.xyz/2016/12/11/RedisCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Python API  不定期更新。">
-<meta property="og:updated_time" content="2017-05-27T00:43:47.000Z">
+<meta property="og:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py Django 中使用Redis进行缓存 踩坑记录  不定期更新。">
+<meta property="og:updated_time" content="2017-06-10T01:12:46.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis Cheatsheet">
-<meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Python API  不定期更新。">
+<meta name="twitter:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py Django 中使用Redis进行缓存 踩坑记录  不定期更新。">
 
 
 
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  470
+                  460
                 </span>
               
 
@@ -417,22 +417,22 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。</p>
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。</p>
 <ul>
 <li>Redis Shell</li>
 <li>Redis 配套工具</li>
-<li>Python API</li>
+<li>Redis-Py</li>
+<li>Django 中使用Redis进行缓存</li>
+<li>踩坑记录</li>
 </ul>
 <p>不定期更新。</p>
 <a id="more"></a>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><h3 id="IP-地址"><a href="#IP-地址" class="headerlink" title="IP 地址"></a>IP 地址</h3><h2 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h2><ul>
+<h2 id="0x01-Redis-Shell"><a href="#0x01-Redis-Shell" class="headerlink" title="0x01. Redis Shell"></a>0x01. Redis Shell</h2><ul>
 <li>RedisClient</li>
 <li>通过网络或者 Dash 查看文档</li>
 <li>Redis 官方自带工具</li>
 </ul>
-<h2 id="Redis-Shell"><a href="#Redis-Shell" class="headerlink" title="Redis Shell"></a>Redis Shell</h2><h2 id="基本查询"><a href="#基本查询" class="headerlink" title="基本查询"></a>基本查询</h2><p><a href="https://docs.mongodb.com/manual/" target="_blank" rel="external">https://docs.mongodb.com/manual/</a></p>
-<h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3><p>use myNewDatabase<br>db.myCollection.insert( { x: 1 } );</p>
-<h3 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h3><h2 id="redis-py"><a href="#redis-py" class="headerlink" title="redis-py"></a>redis-py</h2><h2 id="常见小问题"><a href="#常见小问题" class="headerlink" title="常见小问题"></a>常见小问题</h2><h3 id="1-无法磁盘持久化"><a href="#1-无法磁盘持久化" class="headerlink" title="1. 无法磁盘持久化"></a>1. 无法磁盘持久化</h3><p>用 scrapy 配合 scrapy-redis 抓取网页并且存储到 MongoDB 里面。</p>
+<h2 id="0x02-Redis-配套工具"><a href="#0x02-Redis-配套工具" class="headerlink" title="0x02. Redis 配套工具"></a>0x02. Redis 配套工具</h2><h2 id="0x03-Redis-Py"><a href="#0x03-Redis-Py" class="headerlink" title="0x03. Redis-Py"></a>0x03. Redis-Py</h2><h2 id="0x04-踩坑记录"><a href="#0x04-踩坑记录" class="headerlink" title="0x04. 踩坑记录"></a>0x04. 踩坑记录</h2><h3 id="1-无法磁盘持久化"><a href="#1-无法磁盘持久化" class="headerlink" title="1. 无法磁盘持久化"></a>1. 无法磁盘持久化</h3><p>用 scrapy 配合 scrapy-redis 抓取网页并且存储到 MongoDB 里面。</p>
 <p>由于 scrapy-redis 重写了 scrapy 的几个核心模块，借助 redis 来实现多个 scrapy 节点从而实现分布式。</p>
 <p>默认的 scrapy 设置会把 items 放在 redis 从而方便程序对 items 进行后续处理。这个设计很完美，只是美中不足的是，我常常需要抓取大量页面直接缓存到数据库中。这就导致了 redis 很快就满了。</p>
 <p>于是很容易报出这么一个错误。</p>
@@ -675,7 +675,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IP-地址"><span class="nav-number">3.1.</span> <span class="nav-text">IP 地址</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis"><span class="nav-number">4.</span> <span class="nav-text">Redis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Redis-Shell"><span class="nav-number">5.</span> <span class="nav-text">Redis Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本查询"><span class="nav-number">6.</span> <span class="nav-text">基本查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#增删改查"><span class="nav-number">6.1.</span> <span class="nav-text">增删改查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合操作"><span class="nav-number">6.2.</span> <span class="nav-text">聚合操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#redis-py"><span class="nav-number">7.</span> <span class="nav-text">redis-py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#常见小问题"><span class="nav-number">8.</span> <span class="nav-text">常见小问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-无法磁盘持久化"><span class="nav-number">8.1.</span> <span class="nav-text">1. 无法磁盘持久化</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Redis-Shell"><span class="nav-number">2.</span> <span class="nav-text">0x01. Redis Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Redis-配套工具"><span class="nav-number">3.</span> <span class="nav-text">0x02. Redis 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Redis-Py"><span class="nav-number">4.</span> <span class="nav-text">0x03. Redis-Py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-踩坑记录"><span class="nav-number">5.</span> <span class="nav-text">0x04. 踩坑记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-无法磁盘持久化"><span class="nav-number">5.1.</span> <span class="nav-text">1. 无法磁盘持久化</span></a></li></ol></li></ol></div>
             
 
           </div>
