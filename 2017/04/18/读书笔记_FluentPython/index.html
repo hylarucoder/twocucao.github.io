@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/04/18/读书笔记_FluentPython/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="前言Fluent Python 适用于中级 Pythoner。  以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。">
-<meta property="og:updated_time" content="2017-05-11T09:52:50.000Z">
+<meta property="og:updated_time" content="2017-06-11T15:04:56.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="『Fluent Python』读书笔记">
 <meta name="twitter:description" content="前言Fluent Python 适用于中级 Pythoner。  以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,456
+                  3,534
                 </span>
               
 
@@ -952,8 +952,10 @@
 - Parameterized Decorators
 - Summary
 - Further Reading
-</code></pre><h2 id="P4-Object-Oriented-Idioms"><a href="#P4-Object-Oriented-Idioms" class="headerlink" title="P4. Object-Oriented Idioms"></a>P4. Object-Oriented Idioms</h2><h3 id="C08-Object-References-Mutability-and-Recycling"><a href="#C08-Object-References-Mutability-and-Recycling" class="headerlink" title="C08. Object References, Mutability, and Recycling"></a>C08. Object References, Mutability, and Recycling</h3><pre><code>- Variables Are Not Boxes
-- Identity, Equality , and Aliases
+</code></pre><h2 id="P4-Object-Oriented-Idioms"><a href="#P4-Object-Oriented-Idioms" class="headerlink" title="P4. Object-Oriented Idioms"></a>P4. Object-Oriented Idioms</h2><h3 id="C08-Object-References-Mutability-and-Recycling"><a href="#C08-Object-References-Mutability-and-Recycling" class="headerlink" title="C08. Object References, Mutability, and Recycling"></a>C08. Object References, Mutability, and Recycling</h3><p>reference variable : variable 不是盒子,贴在盒子上的标签.</p>
+<p>赋值并非创建Copy<br>赋值给一个值并非改变之前绑定的值,而仅仅是重新绑定<br>函数由于参数为reference,所以可以修改mutable的变量<br>函数参数不应当初始化为可修改的值.</p>
+<p>id 与 == </p>
+<pre><code>- Identity, Equality , and Aliases
 - Copies Are Shallow by Default
 - Function Parameters as References
 - del and Garbage Collection
@@ -1084,8 +1086,9 @@
 <li><a href="https://docs.python.org/3/reference/datamodel.html" target="_blank" rel="external">https://docs.python.org/3/reference/datamodel.html</a></li>
 <li>Python Cookbook</li>
 <li>Python Essential Reference, 4th Edition</li>
-<li>The Art of the Metaobject Protocol<br>UPDATE:</li>
+<li>The Art of the Metaobject Protocol</li>
 </ul>
+<p>UPDATE:</p>
 <table>
 <thead>
 <tr>
