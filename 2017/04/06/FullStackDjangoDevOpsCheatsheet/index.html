@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB,Ngnix 技术：爬虫技术，数据库设">
-<meta property="og:updated_time" content="2017-05-27T00:43:47.000Z">
+<meta property="og:updated_time" content="2017-06-19T06:13:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Full Stack Django DevOps Cheatsheet">
 <meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB,Ngnix 技术：爬虫技术，数据库设">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,976
+                  4,075
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  15
+                  16
                 </span>
               
             </div>
@@ -465,7 +465,7 @@
 <p>话虽然这么时候，但是在具体的实践过程中，还是有很多很多坑需要注意的。</p>
 <p>比如，仅仅就开发环节来说，团队协作怎么搞？你说可以用 GIT 作为版本管理工具，代码托管。那我问你，这个 Web 开发过程中前端开发模板，后端套用模板怎么搞？你说，前后端分离，那前后端分离后 Http 请求被劫持怎么办，跨站攻击怎么搞……<br>甚至如果是一个人开发的话，直接拉一台服务器做做部署，定期更新到网站上就行了。但如果是团队协作呢？前端提交了代码，产品经理过来说，你更新一下服务器，后端提交了代码，前端过来说，你更新一下服务器，过程琐碎而耗时。大量的时间就浪费在了这种枯燥的事情上了。两个后端，一个前端的情况下，每天本地发布（交付）的次数就已经是相当惊人（大概是前后端每天提交 5 次左右），如果以后是 3 个后端，三个前端，那我作为主程，每天就写不了代码了，这种情况是断不能忍的。</p>
 <p>这个时候，就需要想着把团队协作开发流程优化好：</p>
-<p>在我刚开始进行开发的时候，使用 bash 配合 Ansible 在本地和上线的 Ubuntu 16.04 上面自动化能够自动化的一切</p>
+<p>在我刚开始进行开发的时候，使用 bash 配合 Ansible 在本地和上线的 Ubuntu 16.04 上面自动化能够自动化的大部分工作,程序员在本地开发的时候,只需要进行开发,然后推送代码到repo,剩下的诸如自动化测试集成到系统中,则全部自动化.</p>
 <h3 id="2-1-使用场景"><a href="#2-1-使用场景" class="headerlink" title="2.1. 使用场景"></a>2.1. 使用场景</h3><p>经过研究，我确定了理想中的使用场景：</p>
 <blockquote>
 <p>前端与后端提交代码到代码托管上面的时候，直接集成，构建，Stage 到服务器。</p>
@@ -503,6 +503,8 @@
 <p><strong>Gitlab CI Multi Runner</strong></p>
 </blockquote>
 <p>在一台 stage 的机器上安装 gitlab ci multi runner , 并且在该机器上注册 runner 为 shell , 这意味着 runner 会以 gitlab-runner 用户的权限进行测试 , 你需要 uninstall<br>然后 install –user=root 一下，然后重启，即可在 gitlab-ci.yml 上。</p>
+<p>修改文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">gitlab-runner register <span class="comment"># 然后填入相关信息</span></div><div class="line">vim /etc/gitlab-runner/config.toml <span class="comment"># 接着进行修改</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">concurrent = 1</div><div class="line">check_interval = 0</div><div class="line"></div><div class="line">[[runners]]</div><div class="line">  name = <span class="string">"yadjangoweb"</span></div><div class="line">  url = <span class="string">"http://192.168.1.139/ci"</span></div><div class="line">  token = <span class="string">"325asd65f4e7xa9faasda8da"</span></div><div class="line">  executor = <span class="string">"shell"</span></div><div class="line">  [runners.cache]</div></pre></td></tr></table></figure>
 <h3 id="2-4-Dockerize-Application"><a href="#2-4-Dockerize-Application" class="headerlink" title="2.4. Dockerize Application"></a>2.4. Dockerize Application</h3><p>Docker 以其轻量级和类似于版本管理的软件方式吸引了我。于是，准备将所有的 Service 都 Docker 化。</p>
 <p>拿 Django 程序来说，首先 Django 程序依赖三个组件 redis / postgresql / rabbitmq , 完成这些组件的安装之后才能进行下一步的操作。</p>
 <h2 id="0x03-数据库相关"><a href="#0x03-数据库相关" class="headerlink" title="0x03 数据库相关"></a>0x03 数据库相关</h2><h3 id="1-数据库设计"><a href="#1-数据库设计" class="headerlink" title="1. 数据库设计"></a>1. 数据库设计</h3><p>PostgreSQL Array 在爬虫方面可以用来标记一个 Record 的处理状态<br>PostgreSQL Range 用来判断范围也是一个比较高效的选择（用空间 gist 索引取代两个索引）</p>
@@ -644,8 +646,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/21/LearnProgrammingLanguage/" rel="prev" title="Thinking In Programming Language">
-                Thinking In Programming Language <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/21/ThinkingInPython/" rel="prev" title="Thinking In Python Language">
+                Thinking In Python Language <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -718,7 +720,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">54</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
