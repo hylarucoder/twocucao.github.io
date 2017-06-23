@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB,Ngnix 技术：爬虫技术，数据库设">
-<meta property="og:updated_time" content="2017-06-19T06:13:44.000Z">
+<meta property="og:updated_time" content="2017-06-20T00:13:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Full Stack Django DevOps Cheatsheet">
 <meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。 不仅仅是 Django, 还有 Django 涉及到的：  组件：PostgreSQL,RabbitMQ,Redis,MongoDB,Ngnix 技术：爬虫技术，数据库设">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  4,075
+                  4,069
                 </span>
               
 
@@ -586,8 +586,7 @@
 <h2 id="0x04-其他踩坑相关"><a href="#0x04-其他踩坑相关" class="headerlink" title="0x04. 其他踩坑相关"></a>0x04. 其他踩坑相关</h2><h3 id="4-1-诊断思路"><a href="#4-1-诊断思路" class="headerlink" title="4.1 诊断思路"></a>4.1 诊断思路</h3><p>在某一天遇到了一个问题 往常的时候，当文件上传到 Django 中的时候，都可以正常的解析，但是这两天居然不能用了。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 问题代码出现在</span></div><div class="line">df = pd.read_excel(file_obj)</div><div class="line"><span class="comment"># 报这个问题 google 几乎没有什么解决方案</span></div><div class="line">Invalid file path <span class="keyword">or</span> buffer object type</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">django</span>.<span class="title">core</span>.<span class="title">files</span>.<span class="title">uploadedfile</span>.<span class="title">InMemoryUploadedFile</span>'&gt;</span></div></pre></td></tr></table></figure>
 <p>更加糟糕的问题出现了，我本人的开发环境和服务器的开发环境基本一致，但，但，但为什么不能用呢？</p>
-<p>对照 本机开发环境和服务器开发环境 的差异，我怀疑是 Nginx 的问题（上下文：我恰好在这个问题前我更新的 Nginx 的配置）.</p>
-<p>回滚 Nginx 后发现还是不行。</p>
+<p>分别回滚代码,Nginx设置,在线上打Log,最终确定了是Pandas从0.19升级到了0.20之后出现的一个小问题.最终还原线上python安装环境,搞定.</p>
 
       
     </div>
@@ -646,8 +645,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/03/21/ThinkingInPython/" rel="prev" title="Thinking In Python Language">
-                Thinking In Python Language <i class="fa fa-chevron-right"></i>
+              <a href="/2017/03/21/LearnProgrammingLanguage/" rel="prev" title="Thinking In Programming Language">
+                Thinking In Programming Language <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -720,7 +719,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>

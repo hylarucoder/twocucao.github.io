@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2017-06-16T05:35:40.000Z</updated>
+  <updated>2017-06-23T01:14:46.000Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -14,6 +14,38 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>写在生日时的碎碎念</title>
+    <link href="http://twocucao.xyz/2017/06/26/%E5%86%99%E5%9C%A8%E7%94%9F%E6%97%A5%E6%97%B6%E7%9A%84%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    <id>http://twocucao.xyz/2017/06/26/写在生日时的碎碎念/</id>
+    <published>2017-06-26T00:56:00.000Z</published>
+    <updated>2017-06-23T01:14:46.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>总是觉得自己还很年轻，实际上已经是一个不大不小的男人了。</p>
+<p>24 岁，对于一个男人来说，意味着什么呢？</p>
+<blockquote>
+<p>刚入社会，一无所有</p>
+</blockquote>
+<a id="more"></a>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;总是觉得自己还很年轻，实际上已经是一个不大不小的男人了。&lt;/p&gt;
+&lt;p&gt;24 岁，对于一个男人来说，意味着什么呢？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;刚入社会，一无所有&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
+    
+    
+      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+  </entry>
   
   <entry>
     <title>Git CheatSheet</title>
@@ -83,9 +115,9 @@
     <link href="http://twocucao.xyz/2017/06/03/PandasCheatSheet/"/>
     <id>http://twocucao.xyz/2017/06/03/PandasCheatSheet/</id>
     <published>2017-06-03T10:41:47.000Z</published>
-    <updated>2017-06-13T05:44:56.000Z</updated>
+    <updated>2017-06-20T08:04:14.000Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。</p>
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。当然,其中还包含Numpy等数据科学,统计学相关语句.</p>
 <p>主要包含：</p>
 <ul>
 <li>Pandas 与 SQL 等价的一些操作</li>
@@ -112,7 +144,7 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。&lt;/p&gt;
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。当然,其中还包含Numpy等数据科学,统计学相关语句.&lt;/p&gt;
 &lt;p&gt;主要包含：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Pandas 与 SQL 等价的一些操作&lt;/li&gt;
@@ -1121,7 +1153,7 @@
     <link href="http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/"/>
     <id>http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/</id>
     <published>2017-04-06T12:29:00.000Z</published>
-    <updated>2017-06-19T06:13:44.000Z</updated>
+    <updated>2017-06-20T00:13:26.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。</p>
 <p>不仅仅是 Django, 还有 Django 涉及到的：</p>
@@ -1292,8 +1324,7 @@
 <h2 id="0x04-其他踩坑相关"><a href="#0x04-其他踩坑相关" class="headerlink" title="0x04. 其他踩坑相关"></a>0x04. 其他踩坑相关</h2><h3 id="4-1-诊断思路"><a href="#4-1-诊断思路" class="headerlink" title="4.1 诊断思路"></a>4.1 诊断思路</h3><p>在某一天遇到了一个问题 往常的时候，当文件上传到 Django 中的时候，都可以正常的解析，但是这两天居然不能用了。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 问题代码出现在</span></div><div class="line">df = pd.read_excel(file_obj)</div><div class="line"><span class="comment"># 报这个问题 google 几乎没有什么解决方案</span></div><div class="line">Invalid file path <span class="keyword">or</span> buffer object type</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">django</span>.<span class="title">core</span>.<span class="title">files</span>.<span class="title">uploadedfile</span>.<span class="title">InMemoryUploadedFile</span>'&gt;</span></div></pre></td></tr></table></figure>
 <p>更加糟糕的问题出现了，我本人的开发环境和服务器的开发环境基本一致，但，但，但为什么不能用呢？</p>
-<p>对照 本机开发环境和服务器开发环境 的差异，我怀疑是 Nginx 的问题（上下文：我恰好在这个问题前我更新的 Nginx 的配置）.</p>
-<p>回滚 Nginx 后发现还是不行。</p>
+<p>分别回滚代码,Nginx设置,在线上打Log,最终确定了是Pandas从0.19升级到了0.20之后出现的一个小问题.最终还原线上python安装环境,搞定.</p>
 ]]></content>
     
     <summary type="html">
@@ -2301,6 +2332,63 @@
   </entry>
   
   <entry>
+    <title>『好好说话』读书笔记</title>
+    <link href="http://twocucao.xyz/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/"/>
+    <id>http://twocucao.xyz/2017/01/27/读书笔记_好好说话/</id>
+    <published>2017-01-27T10:40:59.000Z</published>
+    <updated>2017-03-14T02:31:12.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。</p>
+<p>于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。</p>
+<p>好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。</p>
+<blockquote>
+<p>真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。</p>
+</blockquote>
+<p>世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：</p>
+<a id="more"></a>
+<p>就像在书籍第一章开头所说，说话之伤都是暗伤。</p>
+<blockquote>
+<p>能意识到你问题所在的，通常都不会告诉你。心大点的，察人之过笑而不言，但是私下里知道你这个人不靠谱，以后有重要的事不能指望你，就会疏远你；心稍微小点的，不跟你计较，但是客客气气找个别的由头举了你；等而下之的人的，甚至会一边给你穿小鞋一边装大度，让你死都没有四个明白。</p>
+</blockquote>
+<p>回想起我前 25 年的很多糟糕的言行，现在想想，当时总归是可以有更优解的。</p>
+<p>但仔细一想，似乎寻常人总会去踩这些坑，吃过很多教训，才能明白。</p>
+<h3 id="说话是权利的游戏"><a href="#说话是权利的游戏" class="headerlink" title="说话是权利的游戏"></a>说话是权利的游戏</h3><p>五维话术：演讲，沟通，说服，谈判，辩论。</p>
+<ul>
+<li>演讲 A – 权力的形成（吸引，聚焦，引导）</li>
+<li>沟通 B – 权力的流动（避免冲突与协调转向）</li>
+<li>说服 C – 权力在对方（无权的一方要改变有权的一方）</li>
+<li>谈判 D – 权力在双方（双方要合作，才能解决问题）</li>
+<li>辩论 E – 权力在他方（双方无权决定胜负，通常由中立第三方裁决）</li>
+</ul>
+<p>这里面的纬度，并不是每一个场景下就对应某一纬度的，比如说，当你在沟通的时候，有的时候就也需要说服，有的时候又需要辩论，甚至谈判。</p>
+<p>所以，每一场复杂的说话场景实际上是在不断的变化当中，甚至可以用矢量 (A,B,C,D,E,T) 其中 T 表示的是 Times 次数. 即以 A 为演讲值，MAX 为 10,MIN 为 0 的情况下，第 T 次演讲的说法应该为 (A,B,C,D,E), 比如 (2,3,4,9,0) 表示此次对话应该着重于谈判.P20 有一个非常有趣的说明叫做色有三原，光分七彩。</p>
+<p>温和的的沟通，可能蕴含着辩论的机锋和谈判的策略；<br>娓娓道来的说服可能需要演讲的华彩的沟通的诀窍。</p>
+<p>而好好说话的工作流就是</p>
+<p>S1. 倾听 For 收集信息<br>S2. 判断 For 权力棍术<br>S3. 思考 For 应对之策 说话策略需要依据权力（大小）, 态度（反对 / 赞同）, 成本（低 / 高）, 方向（单向 / 双向）, 受众（多 / 少）<br>S4. 表达 For 语言输出，然后转 S1</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。&lt;/p&gt;
+&lt;p&gt;于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。&lt;/p&gt;
+&lt;p&gt;好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
+    
+    
+      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+      <category term="书单与简评" scheme="http://twocucao.xyz/tags/%E4%B9%A6%E5%8D%95%E4%B8%8E%E7%AE%80%E8%AF%84/"/>
+    
+  </entry>
+  
+  <entry>
     <title>『把时间当做朋友』读书笔记</title>
     <link href="http://twocucao.xyz/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E4%B8%8E%E6%97%B6%E9%97%B4%E5%81%9A%E6%9C%8B%E5%8F%8B/"/>
     <id>http://twocucao.xyz/2017/01/27/读书笔记_与时间做朋友/</id>
@@ -2523,63 +2611,6 @@
 &lt;p&gt;这本书放在公网上，并不需要购买即可免费查看，但，值得一提的是，第三版在排版上下足了功夫。阅读体验很好。推荐购买纸质书。&lt;/p&gt;
 &lt;p&gt;我是一个认为『术』重于『道』的人。『道』意味着对『术』进行抽象总结，并且艺术化的语言进行诠释，这个过程难保没有信息的损失。&lt;/p&gt;
 &lt;p&gt;这本书在四年后看的今天，依然读出了很多不一样的味道，这种惊喜恰如第一次读到这本书的时候那般惊奇。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
-    
-    
-      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-      <category term="书单与简评" scheme="http://twocucao.xyz/tags/%E4%B9%A6%E5%8D%95%E4%B8%8E%E7%AE%80%E8%AF%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>『好好说话』读书笔记</title>
-    <link href="http://twocucao.xyz/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/"/>
-    <id>http://twocucao.xyz/2017/01/27/读书笔记_好好说话/</id>
-    <published>2017-01-27T10:40:59.000Z</published>
-    <updated>2017-03-14T02:31:12.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。</p>
-<p>于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。</p>
-<p>好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。</p>
-<blockquote>
-<p>真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。</p>
-</blockquote>
-<p>世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：</p>
-<a id="more"></a>
-<p>就像在书籍第一章开头所说，说话之伤都是暗伤。</p>
-<blockquote>
-<p>能意识到你问题所在的，通常都不会告诉你。心大点的，察人之过笑而不言，但是私下里知道你这个人不靠谱，以后有重要的事不能指望你，就会疏远你；心稍微小点的，不跟你计较，但是客客气气找个别的由头举了你；等而下之的人的，甚至会一边给你穿小鞋一边装大度，让你死都没有四个明白。</p>
-</blockquote>
-<p>回想起我前 25 年的很多糟糕的言行，现在想想，当时总归是可以有更优解的。</p>
-<p>但仔细一想，似乎寻常人总会去踩这些坑，吃过很多教训，才能明白。</p>
-<h3 id="说话是权利的游戏"><a href="#说话是权利的游戏" class="headerlink" title="说话是权利的游戏"></a>说话是权利的游戏</h3><p>五维话术：演讲，沟通，说服，谈判，辩论。</p>
-<ul>
-<li>演讲 A – 权力的形成（吸引，聚焦，引导）</li>
-<li>沟通 B – 权力的流动（避免冲突与协调转向）</li>
-<li>说服 C – 权力在对方（无权的一方要改变有权的一方）</li>
-<li>谈判 D – 权力在双方（双方要合作，才能解决问题）</li>
-<li>辩论 E – 权力在他方（双方无权决定胜负，通常由中立第三方裁决）</li>
-</ul>
-<p>这里面的纬度，并不是每一个场景下就对应某一纬度的，比如说，当你在沟通的时候，有的时候就也需要说服，有的时候又需要辩论，甚至谈判。</p>
-<p>所以，每一场复杂的说话场景实际上是在不断的变化当中，甚至可以用矢量 (A,B,C,D,E,T) 其中 T 表示的是 Times 次数. 即以 A 为演讲值，MAX 为 10,MIN 为 0 的情况下，第 T 次演讲的说法应该为 (A,B,C,D,E), 比如 (2,3,4,9,0) 表示此次对话应该着重于谈判.P20 有一个非常有趣的说明叫做色有三原，光分七彩。</p>
-<p>温和的的沟通，可能蕴含着辩论的机锋和谈判的策略；<br>娓娓道来的说服可能需要演讲的华彩的沟通的诀窍。</p>
-<p>而好好说话的工作流就是</p>
-<p>S1. 倾听 For 收集信息<br>S2. 判断 For 权力棍术<br>S3. 思考 For 应对之策 说话策略需要依据权力（大小）, 态度（反对 / 赞同）, 成本（低 / 高）, 方向（单向 / 双向）, 受众（多 / 少）<br>S4. 表达 For 语言输出，然后转 S1</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。&lt;/p&gt;
-&lt;p&gt;于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了. 现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文. 本文是我的公开的笔记，私人的笔记就不分享了。&lt;/p&gt;
-&lt;p&gt;好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：&lt;/p&gt;
     
     </summary>
     
@@ -2839,7 +2870,7 @@
     <link href="http://twocucao.xyz/2017/01/05/PostgreSQLCheatSheet/"/>
     <id>http://twocucao.xyz/2017/01/05/PostgreSQLCheatSheet/</id>
     <published>2017-01-05T12:48:31.000Z</published>
-    <updated>2017-05-27T00:43:47.000Z</updated>
+    <updated>2017-06-20T00:27:27.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。</p>
 <ul>
@@ -2861,7 +2892,8 @@
 <h3 id="3-2-DCL-Data-Control-Languge"><a href="#3-2-DCL-Data-Control-Languge" class="headerlink" title="3.2 DCL ( Data Control Languge )"></a>3.2 DCL ( Data Control Languge )</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">-- 创建只读用户</div><div class="line">\c demoweb</div><div class="line">CREATE ROLE ro_user WITH LOGIN ENCRYPTED PASSWORD &apos;xxx123456&apos;;</div><div class="line">GRANT CONNECT ON DATABASE demoweb TO ro_user;</div><div class="line">-- This assumes you&apos;re actually connected to mydb..</div><div class="line">GRANT USAGE ON SCHEMA public TO ro_user;</div><div class="line">GRANT SELECT ON ALL TABLES IN SCHEMA public TO ro_user;</div><div class="line">GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO ro_user;</div><div class="line"></div><div class="line">-- 撤销数据库连接 ()</div><div class="line">REVOKE CONNECT ON DATABASE demoweb FROM PUBLIC, demoweb;</div></pre></td></tr></table></figure>
 <h3 id="3-3-DDL-Data-Definition-Language"><a href="#3-3-DDL-Data-Definition-Language" class="headerlink" title="3.3 DDL ( Data Definition Language )"></a>3.3 DDL ( Data Definition Language )</h3><p>CREATE<br>ALTER<br>DROP<br>TRUNCATE<br>COMMENT<br>RENAME</p>
 <h3 id="3-4-DML-Data-Manipulation-Languge"><a href="#3-4-DML-Data-Manipulation-Languge" class="headerlink" title="3.4 DML ( Data Manipulation Languge )"></a>3.4 DML ( Data Manipulation Languge )</h3><p>SELECT<br>INSERT<br>UPDATE<br>DELETE<br>MERGE<br>CALL<br>EXPLAIN PLAN<br>LOCK TABLE</p>
-<h3 id="3-5-TCL-Transaction-Control-Languge"><a href="#3-5-TCL-Transaction-Control-Languge" class="headerlink" title="3.5 TCL ( Transaction Control Languge )"></a>3.5 TCL ( Transaction Control Languge )</h3><h2 id="0x04-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy"><a href="#0x04-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy" class="headerlink" title="0x04 Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )"></a>0x04 Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )</h2>]]></content>
+<h3 id="3-5-TCL-Transaction-Control-Languge"><a href="#3-5-TCL-Transaction-Control-Languge" class="headerlink" title="3.5 TCL ( Transaction Control Languge )"></a>3.5 TCL ( Transaction Control Languge )</h3><h2 id="0x04-常用代码片段"><a href="#0x04-常用代码片段" class="headerlink" title="0x04. 常用代码片段"></a>0x04. 常用代码片段</h2><h3 id="4-1-Tips-And-Hacks"><a href="#4-1-Tips-And-Hacks" class="headerlink" title="4.1. Tips And Hacks"></a>4.1. Tips And Hacks</h3><h4 id="Recursive-Query"><a href="#Recursive-Query" class="headerlink" title="Recursive Query"></a>Recursive Query</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">WITH cte_name(</div><div class="line">    CTE_query_definition -- non-recursive term</div><div class="line">    UNION [ALL]</div><div class="line">    CTE_query_definition -- recursive term</div><div class="line">) SELECT * FROM cte_name;</div></pre></td></tr></table></figure>
+<h3 id="4-2-大数据量运算技巧"><a href="#4-2-大数据量运算技巧" class="headerlink" title="4.2. 大数据量运算技巧"></a>4.2. 大数据量运算技巧</h3><h3 id="4-3-PostGIS-相关"><a href="#4-3-PostGIS-相关" class="headerlink" title="4.3. PostGIS 相关"></a>4.3. PostGIS 相关</h3><h2 id="0x05-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy"><a href="#0x05-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy" class="headerlink" title="0x05. Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )"></a>0x05. Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )</h2>]]></content>
     
     <summary type="html">
     
@@ -3139,72 +3171,6 @@
       <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
     
       <category term="Redis" scheme="http://twocucao.xyz/tags/Redis/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Cheatsheet 集合篇</title>
-    <link href="http://twocucao.xyz/2016/12/10/CheatSheet/"/>
-    <id>http://twocucao.xyz/2016/12/10/CheatSheet/</id>
-    <published>2016-12-10T10:41:47.000Z</published>
-    <updated>2017-06-20T00:00:34.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章的集合。</p>
-<p>编码最重要的是思路。</p>
-<blockquote>
-<p>做什么不是呢？</p>
-</blockquote>
-<ul>
-<li>有人问：你想那么多不累吗？</li>
-<li>答：比起出乱子，想多当然是最省事的方式。</li>
-</ul>
-<p>截止今日已经更新 7 篇 CheatSheet 文章，打算不断完善它们。</p>
-<a id="more"></a>
-<h2 id="0x01-目录"><a href="#0x01-目录" class="headerlink" title="0x01. 目录"></a>0x01. 目录</h2><ul>
-<li><a href="/2016/10/05/UbuntuCheatsheet/">Ubuntu CheatSheet</a></li>
-<li><p><a href="/2016/12/05/MacCheatsheet/">Mac CheatSheet</a></p>
-</li>
-<li><p><a href="/2016/10/05/VimCheatsheet/">Vim CheatSheet</a></p>
-</li>
-<li><p><a href="/2016/12/11/RedisCheatSheet/">VSCode CheatSheet</a></p>
-</li>
-<li><p><a href="/2015/04/18/ShellCheatCheet/">Shell CheatSheet</a></p>
-</li>
-<li><a href="/2016/12/11/RedisCheatSheet/">Pandas CheatSheet</a></li>
-<li><p><a href="/2016/12/03/XPathCheatsheet/">XPath CheatSheet</a></p>
-</li>
-<li><p><a href="/2016/09/12/MySQLCheatSheet/">Docker CheatSheet</a></p>
-</li>
-<li><a href="/2016/09/12/MySQLCheatSheet/">MySQL CheatSheet</a></li>
-<li><a href="/2016/09/12/MySQLCheatSheet/">PostgreSQL CheatSheet</a></li>
-<li><a href="/2016/12/09/MongoCheatSheet/">Mongo CheatSheet</a></li>
-<li><a href="/2016/12/11/RedisCheatSheet/">Redis CheatSheet</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章的集合。&lt;/p&gt;
-&lt;p&gt;编码最重要的是思路。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;做什么不是呢？&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;有人问：你想那么多不累吗？&lt;/li&gt;
-&lt;li&gt;答：比起出乱子，想多当然是最省事的方式。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;截止今日已经更新 7 篇 CheatSheet 文章，打算不断完善它们。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="PC/MAC 使用心得技巧" scheme="http://twocucao.xyz/categories/PC-MAC-%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97%E6%8A%80%E5%B7%A7/"/>
-    
-    
-      <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
-    
-      <category term="工作自动化" scheme="http://twocucao.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
-    
-      <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
     
   </entry>
   
