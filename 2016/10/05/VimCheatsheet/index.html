@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。 不定期更新。">
+<meta name="description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中 Vim 使用场景。 不定期更新。">
 <meta name="keywords" content="效率,工作自动化,Cheatsheet,Vim">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vim Cheatsheet">
 <meta property="og:url" content="http://twocucao.xyz/2016/10/05/VimCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。 不定期更新。">
-<meta property="og:updated_time" content="2017-05-27T00:43:47.000Z">
+<meta property="og:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中 Vim 使用场景。 不定期更新。">
+<meta property="og:updated_time" content="2017-06-23T01:45:51.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vim Cheatsheet">
-<meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。 不定期更新。">
+<meta name="twitter:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中 Vim 使用场景。 不定期更新。">
 
 
 
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  208
+                  474
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -417,19 +417,43 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。</p>
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中 Vim 使用场景。</p>
 <p>不定期更新。</p>
 <a id="more"></a>
-<h2 id="Vim-Hacks"><a href="#Vim-Hacks" class="headerlink" title="Vim Hacks"></a>Vim Hacks</h2><h3 id="Insert-Mode"><a href="#Insert-Mode" class="headerlink" title="Insert Mode"></a>Insert Mode</h3><h3 id="Normal-Mode"><a href="#Normal-Mode" class="headerlink" title="Normal Mode"></a>Normal Mode</h3><p>gi 返回上次修改地点<br>d% 剪切包含括号的括号内部内容<br>U恢复单个句子<br>在命令状态下按c-d可以查看所有命令,相当于bash下面的tabtab</p>
-<h3 id="Command-Mode"><a href="#Command-Mode" class="headerlink" title="Command Mode"></a>Command Mode</h3><p>:%s/old/new/gc 可以一行一行查看</p>
-<h3 id="Visual-Mode"><a href="#Visual-Mode" class="headerlink" title="Visual Mode"></a>Visual Mode</h3><p>vib - 选框内<br>vi” - “” 内部<br>vi’ - ‘’ 内部<br>ggVG</p>
-<h3 id="行处理"><a href="#行处理" class="headerlink" title="行处理"></a>行处理</h3><h4 id="行排序"><a href="#行排序" class="headerlink" title="行排序"></a>行排序</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">行排序</div><div class="line">sort r /【.\+】/</div><div class="line">sort u</div><div class="line">sort n</div><div class="line">sort</div><div class="line">sort!</div><div class="line">g/start/+1,/end/-1 sort n</div><div class="line"></div><div class="line">:%!column -t</div><div class="line">:%!sort -k2nr</div></pre></td></tr></table></figure>
-<h4 id="行删除"><a href="#行删除" class="headerlink" title="行删除"></a>行删除</h4><p>删除html标签</p>
+<ul>
+<li>安装与配置</li>
+<li>基本使用技巧</li>
+<li>原生 Tips &amp; Hacks</li>
+<li>Vim 必备插件</li>
+</ul>
+<h2 id="0x01-安装与配置"><a href="#0x01-安装与配置" class="headerlink" title="0x01 安装与配置"></a>0x01 安装与配置</h2><h2 id="0x02-基本使用技巧"><a href="#0x02-基本使用技巧" class="headerlink" title="0x02 基本使用技巧"></a>0x02 基本使用技巧</h2><h3 id="2-1-Insert-Mode"><a href="#2-1-Insert-Mode" class="headerlink" title="2.1 Insert Mode"></a>2.1 Insert Mode</h3><h3 id="2-2-Normal-Mode"><a href="#2-2-Normal-Mode" class="headerlink" title="2.2 Normal Mode"></a>2.2 Normal Mode</h3><p>gi 返回上次修改地点<br>d% 剪切包含括号的括号内部内容<br>U 恢复单个句子<br>在命令状态下按 c-d 可以查看所有命令，相当于 bash 下面的 tabtab</p>
+<ul>
+<li>hjkl 左下上右</li>
+<li>EasyMotion 使用这个就可以代替乱七八糟的快速移动了。这是一个可以给当前的文字立即用打上 tag, 这样的话在 normal 情况下输入，,w  然后就可以看到很多 tag, 输入其中的 tag 就可以立即跳转到相应的 tag.</li>
+<li>insert 状态进行编辑 c-h c-w 删除一个字，删除一个词。</li>
+<li>normal 状态下进行删除 x dd  —— 删除一个字，剪切一行。</li>
+<li>. ..  —— 重复操作</li>
+<li><blockquote>
+<p>&lt;   —— 缩进 &gt;G <g <g="">g</g></p>
+</blockquote>
+</li>
+<li>c-b c-f back forth</li>
+<li>c-n c-p 代码补全，tips, 建议标点符号全部半角花，这样就会吧每段连起来的汉字当成一个单词，这样就可以减少输入代码。</li>
+</ul>
+<blockquote>
+<p>indent<br>&lt; outdent</p>
+</blockquote>
+<p>do it (&gt;)<br>repeat (.)<br>reverse (u)</p>
+<p>f{char}<br>repeat ;<br>reverse ,</p>
+<h3 id="2-3-Command-Mode"><a href="#2-3-Command-Mode" class="headerlink" title="2.3 Command Mode"></a>2.3 Command Mode</h3><p>:%s/old/new/gc 可以一行一行查看</p>
+<h3 id="2-4-Visual-Mode"><a href="#2-4-Visual-Mode" class="headerlink" title="2.4 Visual Mode"></a>2.4 Visual Mode</h3><p>vib - 选框内<br>vi” - “” 内部<br>vi’ - ‘’ 内部<br>ggVG</p>
+<h3 id="2-5-窗口管理"><a href="#2-5-窗口管理" class="headerlink" title="2.5 窗口管理"></a>2.5 窗口管理</h3><p>切换窗口：Ctrl+w+hjkl<br>分割窗口：Ctrl+w+vs<br>关闭窗口：Ctrl+w+q</p>
+<h2 id="0x03-原生-Tips-amp-Hacks"><a href="#0x03-原生-Tips-amp-Hacks" class="headerlink" title="0x03 原生 Tips &amp; Hacks"></a>0x03 原生 Tips &amp; Hacks</h2><h3 id="行处理"><a href="#行处理" class="headerlink" title="行处理"></a>行处理</h3><h4 id="行排序"><a href="#行排序" class="headerlink" title="行排序"></a>行排序</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">行排序</div><div class="line">sort r /【.\+】/</div><div class="line">sort u</div><div class="line">sort n</div><div class="line">sort</div><div class="line">sort!</div><div class="line">g/start/+1,/end/-1 sort n</div><div class="line"></div><div class="line">:%!column -t</div><div class="line">:%!sort -k2nr</div></pre></td></tr></table></figure>
+<h4 id="行删除"><a href="#行删除" class="headerlink" title="行删除"></a>行删除</h4><p>删除 html 标签</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:%s/&lt;\_.\&#123;-1,\&#125;&gt;//g</div></pre></td></tr></table></figure>
 <h4 id="删除空行"><a href="#删除空行" class="headerlink" title="删除空行"></a>删除空行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">:g/^$/d</div><div class="line">:g/^\s*$/d</div><div class="line">:%s/\n\&#123;3,&#125;/\r\r/e</div><div class="line">:g/^[ \t\u3000]*$/d</div><div class="line"></div><div class="line">:g/pattern/d</div><div class="line">:g!/pattern/d</div><div class="line"></div><div class="line">:g/pattern/t$</div><div class="line">:g/pattern/m$</div><div class="line">:s/ \&#123;2,&#125;/ /g</div></pre></td></tr></table></figure>
 <p>Use \r instead of \n</p>
-<h3 id="tab-转空格"><a href="#tab-转空格" class="headerlink" title="tab 转空格"></a>tab 转空格</h3><p>retab</p>
-<h2 id="SFAQ"><a href="#SFAQ" class="headerlink" title="SFAQ"></a>SFAQ</h2>
+<h2 id="0x04-Vim-必备插件"><a href="#0x04-Vim-必备插件" class="headerlink" title="0x04 Vim 必备插件"></a>0x04 Vim 必备插件</h2>
       
     </div>
 
@@ -477,8 +501,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2016/10/10/一个有趣的Ubuntu问题/" rel="next" title="一个有趣的 Ubuntu 安装问题">
-                <i class="fa fa-chevron-left"></i> 一个有趣的 Ubuntu 安装问题
+              <a href="/2016/10/05/UbuntuCheatSheet/" rel="next" title="Ubuntu16.04 Cheatsheet">
+                <i class="fa fa-chevron-left"></i> Ubuntu16.04 Cheatsheet
               </a>
             
           </div>
@@ -487,8 +511,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/10/05/UbuntuCheatSheet/" rel="prev" title="Ubuntu16.04 Cheatsheet">
-                Ubuntu16.04 Cheatsheet <i class="fa fa-chevron-right"></i>
+              <a href="/2016/09/20/IPynb和ECharts/" rel="prev" title="IPython Notebook 引入 ECharts 做可视化">
+                IPython Notebook 引入 ECharts 做可视化 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -561,7 +585,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -654,7 +678,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Vim-Hacks"><span class="nav-number">2.</span> <span class="nav-text">Vim Hacks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Insert-Mode"><span class="nav-number">2.1.</span> <span class="nav-text">Insert Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Normal-Mode"><span class="nav-number">2.2.</span> <span class="nav-text">Normal Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Command-Mode"><span class="nav-number">2.3.</span> <span class="nav-text">Command Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-Mode"><span class="nav-number">2.4.</span> <span class="nav-text">Visual Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#行处理"><span class="nav-number">2.5.</span> <span class="nav-text">行处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#行排序"><span class="nav-number">2.5.1.</span> <span class="nav-text">行排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#行删除"><span class="nav-number">2.5.2.</span> <span class="nav-text">行删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除空行"><span class="nav-number">2.5.3.</span> <span class="nav-text">删除空行</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#tab-转空格"><span class="nav-number">2.6.</span> <span class="nav-text">tab 转空格</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#SFAQ"><span class="nav-number">3.</span> <span class="nav-text">SFAQ</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安装与配置"><span class="nav-number">2.</span> <span class="nav-text">0x01 安装与配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-基本使用技巧"><span class="nav-number">3.</span> <span class="nav-text">0x02 基本使用技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Insert-Mode"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 Insert Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Normal-Mode"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 Normal Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Command-Mode"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 Command Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-Visual-Mode"><span class="nav-number">3.4.</span> <span class="nav-text">2.4 Visual Mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-窗口管理"><span class="nav-number">3.5.</span> <span class="nav-text">2.5 窗口管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-原生-Tips-amp-Hacks"><span class="nav-number">4.</span> <span class="nav-text">0x03 原生 Tips & Hacks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#行处理"><span class="nav-number">4.1.</span> <span class="nav-text">行处理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#行排序"><span class="nav-number">4.1.1.</span> <span class="nav-text">行排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#行删除"><span class="nav-number">4.1.2.</span> <span class="nav-text">行删除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除空行"><span class="nav-number">4.1.3.</span> <span class="nav-text">删除空行</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-Vim-必备插件"><span class="nav-number">5.</span> <span class="nav-text">0x04 Vim 必备插件</span></a></li></ol></div>
             
 
           </div>
