@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/06/23/VimCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中 Vim 使用场景。 不定期更新。">
-<meta property="og:updated_time" content="2017-06-23T01:48:21.000Z">
+<meta property="og:updated_time" content="2017-06-23T06:42:17.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vim Cheatsheet">
 <meta name="twitter:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中 Vim 使用场景。 不定期更新。">
@@ -426,8 +426,11 @@
 <li>原生 Tips &amp; Hacks</li>
 <li>Vim 必备插件</li>
 </ul>
-<h2 id="0x01-安装与配置"><a href="#0x01-安装与配置" class="headerlink" title="0x01 安装与配置"></a>0x01 安装与配置</h2><h2 id="0x02-基本使用技巧"><a href="#0x02-基本使用技巧" class="headerlink" title="0x02 基本使用技巧"></a>0x02 基本使用技巧</h2><h3 id="2-1-Insert-Mode"><a href="#2-1-Insert-Mode" class="headerlink" title="2.1 Insert Mode"></a>2.1 Insert Mode</h3><h3 id="2-2-Normal-Mode"><a href="#2-2-Normal-Mode" class="headerlink" title="2.2 Normal Mode"></a>2.2 Normal Mode</h3><p>gi 返回上次修改地点<br>d% 剪切包含括号的括号内部内容<br>U 恢复单个句子<br>在命令状态下按 c-d 可以查看所有命令，相当于 bash 下面的 tabtab</p>
-<ul>
+<h2 id="0x01-安装与配置"><a href="#0x01-安装与配置" class="headerlink" title="0x01 安装与配置"></a>0x01 安装与配置</h2><h2 id="0x02-基本使用技巧"><a href="#0x02-基本使用技巧" class="headerlink" title="0x02 基本使用技巧"></a>0x02 基本使用技巧</h2><h3 id="2-1-Insert-Mode"><a href="#2-1-Insert-Mode" class="headerlink" title="2.1 Insert Mode"></a>2.1 Insert Mode</h3><h3 id="2-2-Normal-Mode"><a href="#2-2-Normal-Mode" class="headerlink" title="2.2 Normal Mode"></a>2.2 Normal Mode</h3><ul>
+<li>gi 返回上次修改地点</li>
+<li>d% 剪切包含括号的括号内部内容</li>
+<li>U 恢复单个句子</li>
+<li>在命令状态下按 c-d 可以查看所有命令，相当于 bash 下面的 tabtab</li>
 <li>hjkl 左下上右</li>
 <li>EasyMotion 使用这个就可以代替乱七八糟的快速移动了。这是一个可以给当前的文字立即用打上 tag, 这样的话在 normal 情况下输入，,w  然后就可以看到很多 tag, 输入其中的 tag 就可以立即跳转到相应的 tag.</li>
 <li>insert 状态进行编辑 c-h c-w 删除一个字，删除一个词。</li>
@@ -439,12 +442,18 @@
 </li>
 <li>c-b c-f back forth</li>
 <li>c-n c-p 代码补全，tips, 建议标点符号全部半角花，这样就会吧每段连起来的汉字当成一个单词，这样就可以减少输入代码。</li>
-</ul>
-<blockquote>
-<p>indent<br>&lt; outdent</p>
+<li><blockquote>
+<p>indent</p>
 </blockquote>
-<p>do it (&gt;)<br>repeat (.)<br>reverse (u)</p>
-<p>f{char}<br>repeat ;<br>reverse ,</p>
+</li>
+<li>&lt; outdent</li>
+<li>do it (&gt;)</li>
+<li>repeat (.)</li>
+<li>reverse (u)</li>
+<li>f{char}</li>
+<li>repeat ;</li>
+<li>reverse ,</li>
+</ul>
 <h3 id="2-3-Command-Mode"><a href="#2-3-Command-Mode" class="headerlink" title="2.3 Command Mode"></a>2.3 Command Mode</h3><p>:%s/old/new/gc 可以一行一行查看</p>
 <h3 id="2-4-Visual-Mode"><a href="#2-4-Visual-Mode" class="headerlink" title="2.4 Visual Mode"></a>2.4 Visual Mode</h3><p>vib - 选框内<br>vi” - “” 内部<br>vi’ - ‘’ 内部<br>ggVG</p>
 <h3 id="2-5-窗口管理"><a href="#2-5-窗口管理" class="headerlink" title="2.5 窗口管理"></a>2.5 窗口管理</h3><p>切换窗口：Ctrl+w+hjkl<br>分割窗口：Ctrl+w+vs<br>关闭窗口：Ctrl+w+q</p>
