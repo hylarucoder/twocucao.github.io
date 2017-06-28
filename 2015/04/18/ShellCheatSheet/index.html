@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2015/04/18/ShellCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。 脚本主要适用于 BASH 环境，因为 Server 端的 Bash 主要还是 Bash 脚本居多。 不定期更新。  声明：Bash 命令适合那些十来行代码可以搞定的比较简单的逻辑，一般情况下用于处理一些服务的开启。至于部署，强烈推荐 Ansible. 目前在项目中使用 Ansible">
-<meta property="og:updated_time" content="2017-06-22T11:04:07.000Z">
+<meta property="og:updated_time" content="2017-06-28T08:20:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shell CheatSheet">
 <meta name="twitter:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。 脚本主要适用于 BASH 环境，因为 Server 端的 Bash 主要还是 Bash 脚本居多。 不定期更新。  声明：Bash 命令适合那些十来行代码可以搞定的比较简单的逻辑，一般情况下用于处理一些服务的开启。至于部署，强烈推荐 Ansible. 目前在项目中使用 Ansible">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,143
+                  2,201
                 </span>
               
 
@@ -493,6 +493,7 @@
 <p>top</p>
 <h3 id="Python-常用-Shell-命令"><a href="#Python-常用-Shell-命令" class="headerlink" title="Python 常用 Shell 命令"></a>Python 常用 Shell 命令</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># 升级当前所有第三方包</span></div><div class="line">pip install -i https://pypi.doubanio.com/simple -U pip</div><div class="line">pip freeze --local | grep -v <span class="string">'^\-e'</span> | cut <span class="_">-d</span> = <span class="_">-f</span> 1  | xargs -n1 pip install -U -i https://pypi.doubanio.com/simple</div></pre></td></tr></table></figure>
 <p>###</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">tig 字符模式下交互查看 git 项目</div><div class="line">jq 可以用于 json 文件处理以及何世华显示</div><div class="line">python -m json.tool</div><div class="line">axel -n 20 http://centos.ustc.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-Minimal-1511.iso</div><div class="line">cloc 用于统计代码</div></pre></td></tr></table></figure>
 <h2 id="Tips-amp-amp-Hacks"><a href="#Tips-amp-amp-Hacks" class="headerlink" title="Tips &amp;&amp; Hacks"></a>Tips &amp;&amp; Hacks</h2><h3 id="网络篇"><a href="#网络篇" class="headerlink" title="网络篇"></a>网络篇</h3><p>/etc/hostname /etc/hosts</p>
 <h3 id="磁盘篇"><a href="#磁盘篇" class="headerlink" title="磁盘篇"></a>磁盘篇</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 查看当前目录大小</span></div><div class="line">du -sh</div><div class="line"><span class="comment"># 查看当前目录的下一级文件和子目录的磁盘容量</span></div><div class="line">du -lh --max-depth=1</div></pre></td></tr></table></figure>
 <h3 id="文本篇"><a href="#文本篇" class="headerlink" title="文本篇"></a>文本篇</h3><p>sed -i ‘s/twocucao/micheal/g’ xx.dump.sql<br>sed -n 634428,887831p insert_doc_ids_new.sql &gt; uninserted_sql.sql</p>
@@ -639,7 +640,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">53</span>
+                <span class="site-state-item-count">52</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
