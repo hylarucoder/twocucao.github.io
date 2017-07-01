@@ -81,8 +81,8 @@
       </categories>
       <tags>
         <tag>效率</tag>
-        <tag>碎碎念</tag>
         <tag>编程工具</tag>
+        <tag>碎碎念</tag>
       </tags>
   </entry>
   <entry>
@@ -207,9 +207,9 @@
   <entry>
     <title><![CDATA[Geoprocessing With Python]]></title>
     <url>%2F2016%2F12%2F28%2FGeoProcessingWithPython%2F</url>
-    <content type="text"><![CDATA[0x00 前言16 年 12 月研究部分资料用于处理基本的 GIS 问题，最后完成了基本的 GIS 功能。17 年 5 月初需要进阶 GIS 地图相关概念。主要的资料来自于： 书籍： Geoprocessing With Python PostGIS In Action 2rd 框架： 前端 D3, 高德地图 后端 GeoDjango 其他零零碎碎的资料 特此记录。 0x01 基本概念1. Types of spatial data vector : points, lines, and polygons 以及其组合，适用于矢量图，地形边界，路线等。 raster : 2d/3d 包含数值的数组，适用于连续性数据，不仅仅适用于图片 raster 的 digital elevation model(DEM), 即每一个像素值包含一个 elevation value GDAL/OGR 0x01 几种独有的坐标系国内由于特殊的国情，导致技术上面的一些瓶颈。比如坐标与坐标之间的运算就是一个很麻烦的事情。 我们都知道一个坐标 (x,y) 可以表示为经纬度，甚至放在坐标系上，我们可以这么运算两点 (x1,y1) , (x2,y2) 之间的距离 12# z 表示比例系数distance = math.sqrt((x1-x2) ** 2 + (y1-y2) ** 2) * z 在近距离的时候的确是可以这么做的比如计算村里小芳和隔壁老王家的距离。当距离过大的时候，比如计算上海 A 区和 B 区的两个写字楼的距离的时候，则有相当大的误差。 那么问题来了： 挖掘技术哪家强 啊不是，是国内有哪些常用坐标标准呢？又是如何计算的呢？ GPS WGS-84 国际标准（原始） GCJ-02 国内标准（原始数据混淆） 其他坐标比如 BD-09（原始数据混淆再混淆） 对于小公司而言，我们是没有任何方法来通过 BD-09 以及 GCJ-02 这种坐标系进行运算的： 因为坐标点非线性偏移核心计算方法掌握在 GCJ-02 / BD-09 的公司里面，比如 Google 中国，高德地图，百度地图，腾讯地图。所以，为了研究，则必须要有能够对坐标进行运算的算法, 那这个东西有没有呢？答案是肯定的，因为国外使用的 WGS-84 标准，并且，计算坐标的算法早就开源。 那么，我们的思路就确定下来了。 各种地图的经纬度坐标比如 BD-09 或 GCJ-02 标转换成 WGS-84 坐标。 使用开源 GIS 软件进行对 WGS-84 进行运算。 感谢诸多在 GIS 运算上开源的中国先辈，我们轻而易举的获取到了坐标之间相互转化的方法： https://github.com/wandergis/coordTransform_py 也感谢在 GIS 上进行开源的程序员们搞出的 PostGIS 解决了运算的问题。 而我今日所做，不过是站在前人的肩膀上做一些搬运与整理分享的工作罢了。 12# ubuntu 下直接执行，然后配置好相关环境即可sudo apt install postgis -y 0x02 一些数据城市数据团的群里更新了一大批关于中国各类的 shp 图，但是这些图大多是 shp 类型，并且还有 GBK 这种令人猝不及防的文件编码，我一脸懵逼。 需要导入到数据库中。 1234567891011121314151617PGSQL_SERVER=&apos;127.0.0.1&apos;PGSQL_PORT=5432PGSQL_USER=twocucaoDB_NAME=basicgis;SHP_FILES_FOLDER=/Users/twocucao/Codes/GIS_DATA/china_basic_shps_dataSRID=4326cd $SHP_FILES_FOLDERecho $SHP_FILES_FOLDER# 创建for f in *.shpdo shp_basename=`basename $f .shp` echo $shp_basename shp2pgsql -W GBK -I -s $SRID $f public.$shp_basename | psql -U $PGSQL_USER -d $DB_NAMEdone 导入完毕之后，编写脚本迁移数据到 django, 就可以从后台看数据了，使用 QGIS 查看中国地图，对比省层 / 市层 / 县区层，缺少数据或者数据缺失则进行补充。 PostGIS 的一些概念基础版本 Point LineString Polygon MultiPoint MultiLineString MultiPolygon 中级概念 Raster / Tile (Bands 是什么鬼） PostGIS MetaTable spatial_ref_sys geography_columns geometry_columns raster_columns raster_overviews PostGIS 常用函数12345678910111213141516171819202122ST_AsText(geom) 用于查看 WKTST_GeometryType(geometry) returns the type of the geometryST_NDims(geometry) returns the number of dimensions of the geometryST_SRID(geometry) returns the spatial reference identifier number of the geometryST_X(geometry) returns the X ordinate , 如果作用在 Point 上，则返回经度ST_Y(geometry) returns the Y ordinate , 如果作用在 Point 上，则返回纬度ST_Length(geometry) returns the length of the linestringST_StartPoint(geometry) returns the first coordinate as a pointST_EndPoint(geometry) returns the last coordinate as a pointST_NPoints(geometry) returns the number of coordinates in the linestringST_Area(geometry) returns the area of the polygonsST_NRings(geometry) returns the number of rings (usually 1, more of there are holes)ST_ExteriorRing(geometry) returns the outer ring as a linestringST_InteriorRingN(geometry,n) returns a specified interior ring as a linestringST_Perimeter(geometry) returns the length of all the ringsST_NumGeometries(geometry) returns the number of parts in the collectionST_GeometryN(geometry,n) returns the specified partST_Area(geometry) returns the total area of all polygonal partsST_Length(geometry) returns the total length of all linear parts Snippets12345-- 合并多个区域并返回 multipolyUPDATE areas as ASET &quot;Boundary&quot; = ST_Multi(st_union(ARRAY(SELECT geom FROM county_boundary_region WHERE gid in ( &apos;foo_id&apos;,&apos;bar_id)&apos;))))WHERE A.&quot;ID&quot; = &apos;xxxxxx&apos; 其他参考链接 http://gis.stackexchange.com/questions/6681/what-are-the-pros-and-cons-of-postgis-geography-and-geometry-types Geo Processing with Python]]></content>
+    <content type="text"><![CDATA[0x00 前言16 年 12 月研究部分资料用于处理基本的 GIS 问题，最后完成了基本的 GIS 功能。17 年 5 月初需要进阶 GIS 地图相关概念。主要的资料来自于： 书籍： Geoprocessing With Python PostGIS In Action 2rd 框架： 前端 D3, 高德地图 后端 GeoDjango 其他零零碎碎的资料 特此记录。 本文目录 基本概念 Python 0x01 基本概念1.1. Types of spatial data vector : points, lines, and polygons 以及其组合，适用于矢量图，地形边界，路线等。 raster : 2d/3d 包含数值的数组，适用于连续性数据，不仅仅适用于图片 raster 的 digital elevation model(DEM), 即每一个像素值包含一个 elevation value GDAL/OGR 0x01 几种独有的坐标系国内由于特殊的国情，导致技术上面的一些瓶颈。比如坐标与坐标之间的运算就是一个很麻烦的事情。 我们都知道一个坐标 (x,y) 可以表示为经纬度，甚至放在坐标系上，我们可以这么运算两点 (x1,y1) , (x2,y2) 之间的距离 12# z 表示比例系数distance = math.sqrt((x1-x2) ** 2 + (y1-y2) ** 2) * z 在近距离的时候的确是可以这么做的比如计算村里小芳和隔壁老王家的距离。当距离过大的时候，比如计算上海 A 区和 B 区的两个写字楼的距离的时候，则有相当大的误差。 那么问题来了： 挖掘技术哪家强 啊不是，是国内有哪些常用坐标标准呢？又是如何计算的呢？ GPS WGS-84 国际标准（原始） GCJ-02 国内标准（原始数据混淆） 其他坐标比如 BD-09（原始数据混淆再混淆） 对于小公司而言，我们是没有任何方法来通过 BD-09 以及 GCJ-02 这种坐标系进行运算的： 因为坐标点非线性偏移核心计算方法掌握在 GCJ-02 / BD-09 的公司里面，比如 Google 中国，高德地图，百度地图，腾讯地图。所以，为了研究，则必须要有能够对坐标进行运算的算法, 那这个东西有没有呢？答案是肯定的，因为国外使用的 WGS-84 标准，并且，计算坐标的算法早就开源。 那么，我们的思路就确定下来了。 各种地图的经纬度坐标比如 BD-09 或 GCJ-02 标转换成 WGS-84 坐标。 使用开源 GIS 软件进行对 WGS-84 进行运算。 感谢诸多在 GIS 运算上开源的中国先辈，我们轻而易举的获取到了坐标之间相互转化的方法： https://github.com/wandergis/coordTransform_py 也感谢在 GIS 上进行开源的程序员们搞出的 PostGIS 解决了运算的问题。 而我今日所做，不过是站在前人的肩膀上做一些搬运与整理分享的工作罢了。 12# ubuntu 下直接执行，然后配置好相关环境即可sudo apt install postgis -y 0x02 一些数据城市数据团的群里更新了一大批关于中国各类的 shp 图，但是这些图大多是 shp 类型，并且还有 GBK 这种令人猝不及防的文件编码，我一脸懵逼。 需要导入到数据库中。 1234567891011121314151617PGSQL_SERVER=&apos;127.0.0.1&apos;PGSQL_PORT=5432PGSQL_USER=twocucaoDB_NAME=basicgis;SHP_FILES_FOLDER=/Users/twocucao/Codes/GIS_DATA/china_basic_shps_dataSRID=4326cd $SHP_FILES_FOLDERecho $SHP_FILES_FOLDER# 创建for f in *.shpdo shp_basename=`basename $f .shp` echo $shp_basename shp2pgsql -W GBK -I -s $SRID $f public.$shp_basename | psql -U $PGSQL_USER -d $DB_NAMEdone 导入完毕之后，编写脚本迁移数据到 django, 就可以从后台看数据了，使用 QGIS 查看中国地图，对比省层 / 市层 / 县区层，缺少数据或者数据缺失则进行补充。 PostGIS 的一些概念基础版本 Point LineString Polygon MultiPoint MultiLineString MultiPolygon 中级概念 Raster / Tile (Bands 是什么鬼） PostGIS MetaTable spatial_ref_sys geography_columns geometry_columns raster_columns raster_overviews PostGIS 常用函数12345678910111213141516171819202122ST_AsText(geom) 用于查看 WKTST_GeometryType(geometry) returns the type of the geometryST_NDims(geometry) returns the number of dimensions of the geometryST_SRID(geometry) returns the spatial reference identifier number of the geometryST_X(geometry) returns the X ordinate , 如果作用在 Point 上，则返回经度ST_Y(geometry) returns the Y ordinate , 如果作用在 Point 上，则返回纬度ST_Length(geometry) returns the length of the linestringST_StartPoint(geometry) returns the first coordinate as a pointST_EndPoint(geometry) returns the last coordinate as a pointST_NPoints(geometry) returns the number of coordinates in the linestringST_Area(geometry) returns the area of the polygonsST_NRings(geometry) returns the number of rings (usually 1, more of there are holes)ST_ExteriorRing(geometry) returns the outer ring as a linestringST_InteriorRingN(geometry,n) returns a specified interior ring as a linestringST_Perimeter(geometry) returns the length of all the ringsST_NumGeometries(geometry) returns the number of parts in the collectionST_GeometryN(geometry,n) returns the specified partST_Area(geometry) returns the total area of all polygonal partsST_Length(geometry) returns the total length of all linear parts Snippets12345-- 合并多个区域并返回 multipolyUPDATE areas as ASET &quot;Boundary&quot; = ST_Multi(st_union(ARRAY(SELECT geom FROM county_boundary_region WHERE gid in ( &apos;foo_id&apos;,&apos;bar_id)&apos;))))WHERE A.&quot;ID&quot; = &apos;xxxxxx&apos; 其他参考链接 http://gis.stackexchange.com/questions/6681/what-are-the-pros-and-cons-of-postgis-geography-and-geometry-types Geo Processing with Python]]></content>
       <categories>
-        <category>数据库与消息队列</category>
+        <category>Python 黑魔法</category>
       </categories>
       <tags>
         <tag>可视化</tag>
@@ -379,8 +379,8 @@
       </categories>
       <tags>
         <tag>效率</tag>
-        <tag>碎碎念</tag>
         <tag>编程工具</tag>
+        <tag>碎碎念</tag>
         <tag>ToyTools</tag>
       </tags>
   </entry>
@@ -406,8 +406,8 @@
       </categories>
       <tags>
         <tag>效率</tag>
-        <tag>碎碎念</tag>
         <tag>编程工具</tag>
+        <tag>碎碎念</tag>
         <tag>ToyTools</tag>
       </tags>
   </entry>
@@ -420,8 +420,8 @@
       </categories>
       <tags>
         <tag>效率</tag>
-        <tag>碎碎念</tag>
         <tag>编程工具</tag>
+        <tag>碎碎念</tag>
       </tags>
   </entry>
   <entry>
@@ -481,8 +481,8 @@
       </categories>
       <tags>
         <tag>效率</tag>
-        <tag>碎碎念</tag>
         <tag>编程工具</tag>
+        <tag>碎碎念</tag>
       </tags>
   </entry>
   <entry>

@@ -465,9 +465,9 @@
     
       <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
     
-      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
       <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
   </entry>
   
@@ -2963,7 +2963,7 @@
     <link href="http://twocucao.xyz/2016/12/28/GeoProcessingWithPython/"/>
     <id>http://twocucao.xyz/2016/12/28/GeoProcessingWithPython/</id>
     <published>2016-12-28T12:42:00.000Z</published>
-    <updated>2017-06-13T05:10:19.000Z</updated>
+    <updated>2017-06-30T07:28:38.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>16 年 12 月研究部分资料用于处理基本的 GIS 问题，最后完成了基本的 GIS 功能。17 年 5 月初需要进阶 GIS 地图相关概念。主要的资料来自于：</p>
 <ul>
@@ -2980,13 +2980,19 @@
 <li>其他零零碎碎的资料</li>
 </ul>
 <p>特此记录。</p>
-<h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-Types-of-spatial-data"><a href="#1-Types-of-spatial-data" class="headerlink" title="1. Types of spatial data"></a>1. Types of spatial data</h3><ul>
+<a id="more"></a>
+<p>本文目录</p>
+<ul>
+<li>基本概念</li>
+<li>Python</li>
+</ul>
+<h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-1-Types-of-spatial-data"><a href="#1-1-Types-of-spatial-data" class="headerlink" title="1.1. Types of spatial data"></a>1.1. Types of spatial data</h3><ul>
 <li>vector : points, lines, and polygons 以及其组合，适用于矢量图，地形边界，路线等。</li>
 <li>raster : 2d/3d 包含数值的数组，适用于连续性数据，不仅仅适用于图片</li>
 </ul>
 <p>raster 的 digital elevation model(DEM), 即每一个像素值包含一个 elevation value</p>
 <p>GDAL/OGR</p>
-<a id="more"></a>
+<!-- more -->
 <h2 id="0x01-几种独有的坐标系"><a href="#0x01-几种独有的坐标系" class="headerlink" title="0x01 几种独有的坐标系"></a>0x01 几种独有的坐标系</h2><p>国内由于特殊的国情，导致技术上面的一些瓶颈。比如坐标与坐标之间的运算就是一个很麻烦的事情。</p>
 <p>我们都知道一个坐标 (x,y) 可以表示为经纬度，甚至放在坐标系上，我们可以这么运算两点 (x1,y1) , (x2,y2) 之间的距离</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># z 表示比例系数</span></div><div class="line">distance = math.sqrt((x1-x2) ** <span class="number">2</span> + (y1-y2) ** <span class="number">2</span>) * z</div></pre></td></tr></table></figure>
@@ -3070,16 +3076,10 @@
 &lt;li&gt;其他零零碎碎的资料&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;特此记录。&lt;/p&gt;
-&lt;h2 id=&quot;0x01-基本概念&quot;&gt;&lt;a href=&quot;#0x01-基本概念&quot; class=&quot;headerlink&quot; title=&quot;0x01 基本概念&quot;&gt;&lt;/a&gt;0x01 基本概念&lt;/h2&gt;&lt;h3 id=&quot;1-Types-of-spatial-data&quot;&gt;&lt;a href=&quot;#1-Types-of-spatial-data&quot; class=&quot;headerlink&quot; title=&quot;1. Types of spatial data&quot;&gt;&lt;/a&gt;1. Types of spatial data&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;vector : points, lines, and polygons 以及其组合，适用于矢量图，地形边界，路线等。&lt;/li&gt;
-&lt;li&gt;raster : 2d/3d 包含数值的数组，适用于连续性数据，不仅仅适用于图片&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;raster 的 digital elevation model(DEM), 即每一个像素值包含一个 elevation value&lt;/p&gt;
-&lt;p&gt;GDAL/OGR&lt;/p&gt;
     
     </summary>
     
-      <category term="数据库与消息队列" scheme="http://twocucao.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"/>
+      <category term="Python 黑魔法" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/"/>
     
     
       <category term="可视化" scheme="http://twocucao.xyz/tags/%E5%8F%AF%E8%A7%86%E5%8C%96/"/>

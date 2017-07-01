@@ -96,18 +96,18 @@
 
 
 
-<meta name="description" content="0x00 前言16 年 12 月研究部分资料用于处理基本的 GIS 问题，最后完成了基本的 GIS 功能。17 年 5 月初需要进阶 GIS 地图相关概念。主要的资料来自于：  书籍： Geoprocessing With Python PostGIS In Action 2rd   框架： 前端 D3, 高德地图 后端 GeoDjango   其他零零碎碎的资料  特此记录。 0x01 基本概念">
+<meta name="description" content="0x00 前言16 年 12 月研究部分资料用于处理基本的 GIS 问题，最后完成了基本的 GIS 功能。17 年 5 月初需要进阶 GIS 地图相关概念。主要的资料来自于：  书籍： Geoprocessing With Python PostGIS In Action 2rd   框架： 前端 D3, 高德地图 后端 GeoDjango   其他零零碎碎的资料  特此记录。">
 <meta name="keywords" content="可视化,数据分析,GIS,Django">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Geoprocessing With Python">
 <meta property="og:url" content="http://twocucao.xyz/2016/12/28/GeoProcessingWithPython/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="0x00 前言16 年 12 月研究部分资料用于处理基本的 GIS 问题，最后完成了基本的 GIS 功能。17 年 5 月初需要进阶 GIS 地图相关概念。主要的资料来自于：  书籍： Geoprocessing With Python PostGIS In Action 2rd   框架： 前端 D3, 高德地图 后端 GeoDjango   其他零零碎碎的资料  特此记录。 0x01 基本概念">
+<meta property="og:description" content="0x00 前言16 年 12 月研究部分资料用于处理基本的 GIS 问题，最后完成了基本的 GIS 功能。17 年 5 月初需要进阶 GIS 地图相关概念。主要的资料来自于：  书籍： Geoprocessing With Python PostGIS In Action 2rd   框架： 前端 D3, 高德地图 后端 GeoDjango   其他零零碎碎的资料  特此记录。">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-e01da69c8cfaf777.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-06-13T05:10:19.000Z">
+<meta property="og:updated_time" content="2017-06-30T07:28:38.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Geoprocessing With Python">
-<meta name="twitter:description" content="0x00 前言16 年 12 月研究部分资料用于处理基本的 GIS 问题，最后完成了基本的 GIS 功能。17 年 5 月初需要进阶 GIS 地图相关概念。主要的资料来自于：  书籍： Geoprocessing With Python PostGIS In Action 2rd   框架： 前端 D3, 高德地图 后端 GeoDjango   其他零零碎碎的资料  特此记录。 0x01 基本概念">
+<meta name="twitter:description" content="0x00 前言16 年 12 月研究部分资料用于处理基本的 GIS 问题，最后完成了基本的 GIS 功能。17 年 5 月初需要进阶 GIS 地图相关概念。主要的资料来自于：  书籍： Geoprocessing With Python PostGIS In Action 2rd   框架： 前端 D3, 高德地图 后端 GeoDjango   其他零零碎碎的资料  特此记录。">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/52890-e01da69c8cfaf777.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
@@ -354,8 +354,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库与消息队列/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库与消息队列</span>
+                  <a href="/categories/Python-黑魔法/" itemprop="url" rel="index">
+                    <span itemprop="name">Python 黑魔法</span>
                   </a>
                 </span>
 
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,218
+                  1,228
                 </span>
               
 
@@ -434,13 +434,19 @@
 <li>其他零零碎碎的资料</li>
 </ul>
 <p>特此记录。</p>
-<h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-Types-of-spatial-data"><a href="#1-Types-of-spatial-data" class="headerlink" title="1. Types of spatial data"></a>1. Types of spatial data</h3><ul>
+<a id="more"></a>
+<p>本文目录</p>
+<ul>
+<li>基本概念</li>
+<li>Python</li>
+</ul>
+<h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-1-Types-of-spatial-data"><a href="#1-1-Types-of-spatial-data" class="headerlink" title="1.1. Types of spatial data"></a>1.1. Types of spatial data</h3><ul>
 <li>vector : points, lines, and polygons 以及其组合，适用于矢量图，地形边界，路线等。</li>
 <li>raster : 2d/3d 包含数值的数组，适用于连续性数据，不仅仅适用于图片</li>
 </ul>
 <p>raster 的 digital elevation model(DEM), 即每一个像素值包含一个 elevation value</p>
 <p>GDAL/OGR</p>
-<a id="more"></a>
+<!-- more -->
 <h2 id="0x01-几种独有的坐标系"><a href="#0x01-几种独有的坐标系" class="headerlink" title="0x01 几种独有的坐标系"></a>0x01 几种独有的坐标系</h2><p>国内由于特殊的国情，导致技术上面的一些瓶颈。比如坐标与坐标之间的运算就是一个很麻烦的事情。</p>
 <p>我们都知道一个坐标 (x,y) 可以表示为经纬度，甚至放在坐标系上，我们可以这么运算两点 (x1,y1) , (x2,y2) 之间的距离</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># z 表示比例系数</span></div><div class="line">distance = math.sqrt((x1-x2) ** <span class="number">2</span> + (y1-y2) ** <span class="number">2</span>) * z</div></pre></td></tr></table></figure>
@@ -730,7 +736,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-基本概念"><span class="nav-number">2.</span> <span class="nav-text">0x01 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Types-of-spatial-data"><span class="nav-number">2.1.</span> <span class="nav-text">1. Types of spatial data</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-几种独有的坐标系"><span class="nav-number">3.</span> <span class="nav-text">0x01 几种独有的坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-一些数据"><span class="nav-number">4.</span> <span class="nav-text">0x02 一些数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PostGIS-的一些概念"><span class="nav-number">5.</span> <span class="nav-text">PostGIS 的一些概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础版本"><span class="nav-number">5.1.</span> <span class="nav-text">基础版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中级概念"><span class="nav-number">5.2.</span> <span class="nav-text">中级概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-MetaTable"><span class="nav-number">5.3.</span> <span class="nav-text">PostGIS MetaTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-常用函数"><span class="nav-number">5.4.</span> <span class="nav-text">PostGIS 常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snippets"><span class="nav-number">5.5.</span> <span class="nav-text">Snippets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他参考链接"><span class="nav-number">5.6.</span> <span class="nav-text">其他参考链接</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-基本概念"><span class="nav-number">2.</span> <span class="nav-text">0x01 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Types-of-spatial-data"><span class="nav-number">2.1.</span> <span class="nav-text">1.1. Types of spatial data</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-几种独有的坐标系"><span class="nav-number">3.</span> <span class="nav-text">0x01 几种独有的坐标系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-一些数据"><span class="nav-number">4.</span> <span class="nav-text">0x02 一些数据</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#PostGIS-的一些概念"><span class="nav-number">5.</span> <span class="nav-text">PostGIS 的一些概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础版本"><span class="nav-number">5.1.</span> <span class="nav-text">基础版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中级概念"><span class="nav-number">5.2.</span> <span class="nav-text">中级概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-MetaTable"><span class="nav-number">5.3.</span> <span class="nav-text">PostGIS MetaTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-常用函数"><span class="nav-number">5.4.</span> <span class="nav-text">PostGIS 常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snippets"><span class="nav-number">5.5.</span> <span class="nav-text">Snippets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他参考链接"><span class="nav-number">5.6.</span> <span class="nav-text">其他参考链接</span></a></li></ol></li></ol></div>
             
 
           </div>
