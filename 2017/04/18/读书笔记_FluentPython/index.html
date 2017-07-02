@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/04/18/读书笔记_FluentPython/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="前言Fluent Python 适用于中级 Pythoner。  以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。">
-<meta property="og:updated_time" content="2017-06-11T15:04:56.000Z">
+<meta property="og:updated_time" content="2017-07-02T03:11:19.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="『Fluent Python』读书笔记">
 <meta name="twitter:description" content="前言Fluent Python 适用于中级 Pythoner。  以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,534
+                  3,660
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  19
+                  20
                 </span>
               
             </div>
@@ -952,14 +952,11 @@
 - Parameterized Decorators
 - Summary
 - Further Reading
-</code></pre><h2 id="P4-Object-Oriented-Idioms"><a href="#P4-Object-Oriented-Idioms" class="headerlink" title="P4. Object-Oriented Idioms"></a>P4. Object-Oriented Idioms</h2><h3 id="C08-Object-References-Mutability-and-Recycling"><a href="#C08-Object-References-Mutability-and-Recycling" class="headerlink" title="C08. Object References, Mutability, and Recycling"></a>C08. Object References, Mutability, and Recycling</h3><p>reference variable : variable 不是盒子,贴在盒子上的标签.</p>
-<p>赋值并非创建Copy<br>赋值给一个值并非改变之前绑定的值,而仅仅是重新绑定<br>函数由于参数为reference,所以可以修改mutable的变量<br>函数参数不应当初始化为可修改的值.</p>
-<p>id 与 == </p>
-<pre><code>- Identity, Equality , and Aliases
-- Copies Are Shallow by Default
-- Function Parameters as References
-- del and Garbage Collection
-- Weak References
+</code></pre><h2 id="P4-Object-Oriented-Idioms"><a href="#P4-Object-Oriented-Idioms" class="headerlink" title="P4. Object-Oriented Idioms"></a>P4. Object-Oriented Idioms</h2><h3 id="C08-Object-References-Mutability-and-Recycling"><a href="#C08-Object-References-Mutability-and-Recycling" class="headerlink" title="C08. Object References, Mutability, and Recycling"></a>C08. Object References, Mutability, and Recycling</h3><p>reference variable : variable 不是盒子，贴在盒子上的标签。</p>
+<p>赋值并非创建 Copy<br>赋值给一个值并非改变之前绑定的值，而仅仅是重新绑定 rebinding<br>函数由于参数为 reference, 所以可以修改 mutable 的变量<br>函数参数不应当初始化为可修改的值。</p>
+<p>id 与 == : 内存值 和 值相等<br>copy 默认是浅拷贝<br>函数参数是引用<br>GC 使用的引用计数，通过 weakref.finalize 可以增加 obj 被回收的回调函数<br>强引用和弱引用，weakref 具体使用场景？ <a href="https://pymotw.com/3/weakref/" target="_blank" rel="external">https://pymotw.com/3/weakref/</a><br>One example is a class that wants to keep track of all its current instances. This can be done with weak references, a low-level mechanism underlying the more useful collections WeakValueDictionary, WeakKey Dictionary, WeakSet, and the finalize function from the weakref module.<br>公用字符串字面量和小的数的技巧叫做 interning</p>
+<p>PS:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">在 IPython 中 _ 为某个表达式返回的值</div></pre></td></tr></table></figure></p>
+<pre><code>- Weak References
 - Tricts Python Plays with Immutables
 - Summary
 - Further Reading
