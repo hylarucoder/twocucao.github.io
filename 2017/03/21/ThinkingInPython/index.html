@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/03/21/ThinkingInPython/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="本文的内容都是一些简略的笔记。  前言本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。">
-<meta property="og:updated_time" content="2017-06-04T00:59:47.000Z">
+<meta property="og:updated_time" content="2017-07-04T04:39:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Thinking In Python Language">
 <meta name="twitter:description" content="本文的内容都是一些简略的笔记。  前言本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,054
+                  2,056
                 </span>
               
 
@@ -433,7 +433,7 @@
 <li>生态圈好</li>
 </ul>
 <p>写代码效率高，这指的是写 Python 代码，而不是运行时。</p>
-<p>生态圈好，Web 开发用 Django/Flask , 数据抓取用 Requests , 数据分析清洗用 Pandas, 数据</p>
+<p>生态圈好，Web 开发用 Django/Flask , 数据抓取用 Requests , 数据分析清洗用 Pandas, 机器学习。</p>
 <h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><blockquote>
 <p> 程序 = 算法 + 数据结构</p>
 </blockquote>
@@ -488,7 +488,7 @@
 <p>当 N 个线程在网络 I/O 堵塞，或等待重新获取 GIL，而一个线程运行 Python。</p>
 </blockquote>
 <p>让出之后还要执行代码呀，所以要有个收回 GIL 的动作。</p>
-<h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><p>Python 2 GIL , 尝试收回GIL为 执行 1000 字节码。<br>Python 3 GIL , 尝试收回GIL检测间隔为 15ms</p>
+<h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><p>Python 2 GIL , 尝试收回 GIL 为 执行 1000 字节码。<br>Python 3 GIL , 尝试收回 GIL 检测间隔为 15ms</p>
 <h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><p>原子操作：sort 之类不需要<br>非原子操作：n=n+2 的字节码分为 加载 n , 加载 2 , 相加，存储 n, 四个步骤，由于不是原子性，很可能被由于 15 ms 而被打断。</p>
 <p>当然，懒人一向是 : <strong>优先级不决加括号，线程不决加 lock</strong></p>
 <p>对于 Java, 程序员努力在尽可能短的时间内加锁存取共享数据，减轻线程的争夺，实现最大并行。但 Python 中，线程无法并行运行，细粒度的锁就没有了优势。</p>
@@ -702,7 +702,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-count">53</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
