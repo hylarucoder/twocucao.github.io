@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。 PostGIS 相关的资料参考文章 Geo Processing With Python  安装与基本配置 PostgreSQL 配套工具 PostgreSQL SQL 常用代码片段 Python Driver : psycopg2 , 与两个 ORM ( Django OR">
+<meta name="description" content="0x00. 前言之前一直使用 VueJS 进行开发，心血来潮想换换口味，于是就借着自己的一个开源的项目尝试一下 ReactJS , 代码分为两部分，如下：  前台系统（支持 SSR) YaReactBlog 后台系统 YaReactAdmin  12TODO:">
 <meta name="keywords" content="数据分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PostgreSQL CheatSheet">
-<meta property="og:url" content="http://twocucao.xyz/2017/01/05/PostgreSQLCheatSheet/index.html">
+<meta property="og:title" content="React CheatSheet">
+<meta property="og:url" content="http://twocucao.xyz/2017/07/26/ReactCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。 PostGIS 相关的资料参考文章 Geo Processing With Python  安装与基本配置 PostgreSQL 配套工具 PostgreSQL SQL 常用代码片段 Python Driver : psycopg2 , 与两个 ORM ( Django OR">
-<meta property="og:updated_time" content="2017-07-11T03:12:48.000Z">
+<meta property="og:description" content="0x00. 前言之前一直使用 VueJS 进行开发，心血来潮想换换口味，于是就借着自己的一个开源的项目尝试一下 ReactJS , 代码分为两部分，如下：  前台系统（支持 SSR) YaReactBlog 后台系统 YaReactAdmin  12TODO:">
+<meta property="og:updated_time" content="2017-07-26T03:03:25.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PostgreSQL CheatSheet">
-<meta name="twitter:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。 PostGIS 相关的资料参考文章 Geo Processing With Python  安装与基本配置 PostgreSQL 配套工具 PostgreSQL SQL 常用代码片段 Python Driver : psycopg2 , 与两个 ORM ( Django OR">
+<meta name="twitter:title" content="React CheatSheet">
+<meta name="twitter:description" content="0x00. 前言之前一直使用 VueJS 进行开发，心血来潮想换换口味，于是就借着自己的一个开源的项目尝试一下 ReactJS , 代码分为两部分，如下：  前台系统（支持 SSR) YaReactBlog 后台系统 YaReactAdmin  12TODO:">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://twocucao.xyz/2017/01/05/PostgreSQLCheatSheet/"/>
+  <link rel="canonical" href="http://twocucao.xyz/2017/07/26/ReactCheatSheet/"/>
 
 
 
 
 
-  <title>PostgreSQL CheatSheet | MG的编程小屋</title>
+  <title>React CheatSheet | MG的编程小屋</title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -300,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/01/05/PostgreSQLCheatSheet/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/07/26/ReactCheatSheet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Micheal Gardner">
@@ -317,7 +317,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">PostgreSQL CheatSheet</h2>
+          <h2 class="post-title" itemprop="name headline">React CheatSheet</h2>
         
 
         <div class="post-meta">
@@ -329,8 +329,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-05T20:48:31+08:00">
-                2017-01-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-26T20:06:05+08:00">
+                2017-07-26
               </time>
             
 
@@ -352,8 +352,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库与消息队列/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库与消息队列</span>
+                  <a href="/categories/学习资源/" itemprop="url" rel="index">
+                    <span itemprop="name">学习资源</span>
                   </a>
                 </span>
 
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  469
+                  693
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -417,29 +417,50 @@
       
 
       
-        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。</p>
-<p>PostGIS 相关的资料参考文章 <a href="/2016/10/05/UbuntuCheatsheet/">Geo Processing With Python</a></p>
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>之前一直使用 VueJS 进行开发，心血来潮想换换口味，于是就借着自己的一个开源的项目尝试一下 ReactJS , 代码分为两部分，如下：</p>
 <ul>
-<li>安装与基本配置</li>
-<li>PostgreSQL 配套工具</li>
-<li>PostgreSQL SQL 常用代码片段</li>
-<li>Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )</li>
+<li>前台系统（支持 SSR) <a href="https://github.com/twocucao/YaReactBlog" target="_blank" rel="external">YaReactBlog</a></li>
+<li>后台系统 <a href="https://github.com/twocucao/YaReactAdmin" target="_blank" rel="external">YaReactAdmin</a></li>
 </ul>
-<p>不定期更新。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">TODO:</div></pre></td></tr></table></figure>
 <a id="more"></a>
-<h2 id="0x01-安装，配置，基本-shell-命令"><a href="#0x01-安装，配置，基本-shell-命令" class="headerlink" title="0x01 安装，配置，基本 shell 命令"></a>0x01 安装，配置，基本 shell 命令</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h3 id="基本-Shell-命令"><a href="#基本-Shell-命令" class="headerlink" title="基本 Shell 命令"></a>基本 Shell 命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 开启关闭</div><div class="line">pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start</div><div class="line">pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop</div><div class="line">pg_ctl -D /usr/local/var/postgres start</div><div class="line">pg_ctl -D /usr/local/var/postgres stop -s -m fast</div></pre></td></tr></table></figure>
-<h3 id="数据的导入导出"><a href="#数据的导入导出" class="headerlink" title="数据的导入导出"></a>数据的导入导出</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">pg_dump -C -Fp <span class="_">-f</span> dump.sql -U twocucao QCS -h 192.168.2.175</div><div class="line">pg_dump -C -Fp <span class="_">-f</span> 20160602-150144-dump.sql -U twocucao QCS --column-inserts --data-only --table=users_table -h 192.168.2.175</div><div class="line"><span class="comment"># 插入数据</span></div><div class="line">psql -U twocucao <span class="_">-d</span> QCS <span class="_">-a</span> <span class="_">-f</span> insert_doc_ids.sql -h 192.168.2.175</div><div class="line">pg_restore --verbose --clean --no-acl --no-owner -h localhost example.dump</div></pre></td></tr></table></figure>
-<h2 id="0x02-PostgreSQL-配套工具"><a href="#0x02-PostgreSQL-配套工具" class="headerlink" title="0x02 PostgreSQL 配套工具"></a>0x02 PostgreSQL 配套工具</h2><ul>
-<li>JetBrain 的 Datagrip 作为 编写大段 SQL 语句的 IDE</li>
-<li>通过网络或者 Dash 查看文档</li>
-<li>PostgreSQL 官方自带工具</li>
+<p>本文目录</p>
+<ul>
+<li>前端、单页与 React 开发</li>
+<li>在 dva 下，编写 React 组件的正确姿势</li>
 </ul>
-<h2 id="0x03-PostgreSQL-SQL-常用代码"><a href="#0x03-PostgreSQL-SQL-常用代码" class="headerlink" title="0x03 PostgreSQL SQL 常用代码"></a>0x03 PostgreSQL SQL 常用代码</h2><h3 id="3-1-PostgreSQL-相关"><a href="#3-1-PostgreSQL-相关" class="headerlink" title="3.1 PostgreSQL 相关"></a>3.1 PostgreSQL 相关</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">-- 强行中断连接到此数据库的 session</span></div><div class="line"><span class="keyword">SELECT</span></div><div class="line">    pg_terminate_backend(pid)</div><div class="line"><span class="keyword">FROM</span></div><div class="line">    pg_stat_activity</div><div class="line"><span class="keyword">WHERE</span></div><div class="line">    <span class="comment">-- don't kill my own connection!</span></div><div class="line">    pid &lt;&gt; pg_backend_pid()</div><div class="line">    <span class="comment">-- don't kill the connections to other databases</span></div><div class="line">    <span class="keyword">AND</span> datname = <span class="string">'demoweb'</span> ;</div></pre></td></tr></table></figure>
-<h3 id="3-2-DCL-Data-Control-Languge"><a href="#3-2-DCL-Data-Control-Languge" class="headerlink" title="3.2 DCL ( Data Control Languge )"></a>3.2 DCL ( Data Control Languge )</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">-- 创建只读用户</div><div class="line">\c demoweb</div><div class="line">CREATE ROLE ro_user WITH LOGIN ENCRYPTED PASSWORD &apos;xxx123456&apos;;</div><div class="line">GRANT CONNECT ON DATABASE demoweb TO ro_user;</div><div class="line">-- This assumes you&apos;re actually connected to mydb..</div><div class="line">GRANT USAGE ON SCHEMA public TO ro_user;</div><div class="line">GRANT SELECT ON ALL TABLES IN SCHEMA public TO ro_user;</div><div class="line">GRANT SELECT ON ALL SEQUENCES IN SCHEMA public TO ro_user;</div><div class="line"></div><div class="line">-- 撤销数据库连接 ()</div><div class="line">REVOKE CONNECT ON DATABASE demoweb FROM PUBLIC, demoweb;</div></pre></td></tr></table></figure>
-<h3 id="3-3-DDL-Data-Definition-Language"><a href="#3-3-DDL-Data-Definition-Language" class="headerlink" title="3.3 DDL ( Data Definition Language )"></a>3.3 DDL ( Data Definition Language )</h3><p>CREATE<br>ALTER<br>DROP<br>TRUNCATE<br>COMMENT<br>RENAME</p>
-<h3 id="3-4-DML-Data-Manipulation-Languge"><a href="#3-4-DML-Data-Manipulation-Languge" class="headerlink" title="3.4 DML ( Data Manipulation Languge )"></a>3.4 DML ( Data Manipulation Languge )</h3><p>SELECT<br>INSERT<br>UPDATE<br>DELETE<br>MERGE<br>CALL<br>EXPLAIN PLAN<br>LOCK TABLE</p>
-<h3 id="3-5-TCL-Transaction-Control-Languge"><a href="#3-5-TCL-Transaction-Control-Languge" class="headerlink" title="3.5 TCL ( Transaction Control Languge )"></a>3.5 TCL ( Transaction Control Languge )</h3><h2 id="0x04-常用代码片段"><a href="#0x04-常用代码片段" class="headerlink" title="0x04. 常用代码片段"></a>0x04. 常用代码片段</h2><h3 id="4-1-Tips-And-Hacks"><a href="#4-1-Tips-And-Hacks" class="headerlink" title="4.1. Tips And Hacks"></a>4.1. Tips And Hacks</h3><h4 id="Recursive-Query"><a href="#Recursive-Query" class="headerlink" title="Recursive Query"></a>Recursive Query</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">WITH cte_name(</div><div class="line">    CTE_query_definition -- non-recursive term</div><div class="line">    UNION [ALL]</div><div class="line">    CTE_query_definition -- recursive term</div><div class="line">) SELECT * FROM cte_name;</div></pre></td></tr></table></figure>
-<h3 id="4-2-大数据量运算技巧"><a href="#4-2-大数据量运算技巧" class="headerlink" title="4.2. 大数据量运算技巧"></a>4.2. 大数据量运算技巧</h3><h2 id="0x05-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy"><a href="#0x05-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy" class="headerlink" title="0x05. Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )"></a>0x05. Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )</h2>
+<h2 id="0x00-前端、单页与-React-开发"><a href="#0x00-前端、单页与-React-开发" class="headerlink" title="0x00. 前端、单页与 React 开发"></a>0x00. 前端、单页与 React 开发</h2><h3 id="0-1-前端"><a href="#0-1-前端" class="headerlink" title="0.1. 前端"></a>0.1. 前端</h3><p>前端开发，是最近几年才出现的独立工种。</p>
+<p>在我的印象中，以前的人很少会区分前端和后端，现在的前端的职责往往是由后端的人顺手做掉的。</p>
+<p>后来，随着浏览器的功能越来越强大，性能越来越好，用户对于界面要求也就越来越高。甚至到后来，对于用户界面的操作的复杂程度要求也越来越高。传统的后端渲染 Template + 简单的 Ajax 不能满足要求了。</p>
+<p>于是便出现了单页应用。</p>
+<h3 id="0-2-单页"><a href="#0-2-单页" class="headerlink" title="0.2. 单页"></a>0.2. 单页</h3><p>单页完全可以当做一个性能不是很强的，运行在浏览器中的，使用 HTML CSS JS 来编写的小型客户端。</p>
+<p>写单页和写客户端基本一致的情况下，于是在这种情况下，前端开发在使用单页后，直接可以 Mock 数据，接着编写界面，接着调通页面的状态和操作，最后发布。</p>
+<h3 id="0-3-ReactJS"><a href="#0-3-ReactJS" class="headerlink" title="0.3. ReactJS"></a>0.3. ReactJS</h3><p>为什么选用 ReactJS 呢？</p>
+<ol>
+<li>尝试一下新技术。保持对技术的敏感性。</li>
+<li>React 是 FB 出的一套前端框架。大厂支持，不会轻易太监掉。</li>
+<li>写了一段时间 VueJS 换换口味。</li>
+</ol>
+<p>React 的开发速度还真的算不上快，除了 ReactJS 之外，还有什么？</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">后台系统</div><div class="line"></div><div class="line"> - ant.design</div><div class="line"></div><div class="line">打包构建</div><div class="line"></div><div class="line"> - webpack</div><div class="line"></div><div class="line">路由和状态管理</div><div class="line"></div><div class="line"> - react-router</div><div class="line"> - react-router-redux</div><div class="line"> - redux</div><div class="line"> - redux-saga</div><div class="line"></div><div class="line">为了更好的管理路由和状态，还是使用 dva 来管理比较好。</div><div class="line"></div><div class="line"> - [dva](https://github.com/dvajs/dva)</div><div class="line"> - [dva-cli](https://github.com/dvajs/dva-cli)</div><div class="line"></div><div class="line">开发构建工具</div><div class="line"></div><div class="line"> - [roadhog](https://github.com/sorrycc/roadhog)</div></pre></td></tr></table></figure>
+<h2 id="0x01-在-dva-下，编写-React-组件的正确姿势"><a href="#0x01-在-dva-下，编写-React-组件的正确姿势" class="headerlink" title="0x01. 在 dva 下，编写 React 组件的正确姿势"></a>0x01. 在 dva 下，编写 React 组件的正确姿势</h2><p>编写 React 的时候，我选用了 dva 框架配合 ReactJS 来编写单页。</p>
+<p>参考 FB 的这篇教程后，梳理了我编写组件的步骤 <a href="https://facebook.github.io/react/docs/thinking-in-react.html" target="_blank" rel="external">https://facebook.github.io/react/docs/thinking-in-react.html</a> :</p>
+<ol>
+<li>先构思出原型 （或者拿到 UI 图）</li>
+<li>Mock 出假数据</li>
+<li>分解页面 OR 组件为 组件树</li>
+<li>编写静态组件树</li>
+<li>确定最小表达 UI （加上满足要求的样式）</li>
+<li>确定什么时候需要什么状态（网络请求，键盘输入，位置变化等等）</li>
+<li>收尾美化</li>
+<li>在发现问题的时候进行优化</li>
+</ol>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-07-17</strong> 重修文字</li>
+</ul>
+
       
     </div>
 
@@ -481,18 +502,14 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/14/OneQuestionToSeePythonScope/" rel="next" title="从一个小问题来说 Python 的作用域">
-                <i class="fa fa-chevron-left"></i> 从一个小问题来说 Python 的作用域
-              </a>
-            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2016/12/21/LeetCodePythonSolution/" rel="prev" title="LeetCode Python 解法">
-                LeetCode Python 解法 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/07/17/数据科学的常识笔记/" rel="prev" title="数据科学的常识笔记">
+                数据科学的常识笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -658,7 +675,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安装，配置，基本-shell-命令"><span class="nav-number">2.</span> <span class="nav-text">0x01 安装，配置，基本 shell 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本-Shell-命令"><span class="nav-number">2.3.</span> <span class="nav-text">基本 Shell 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的导入导出"><span class="nav-number">2.4.</span> <span class="nav-text">数据的导入导出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-PostgreSQL-配套工具"><span class="nav-number">3.</span> <span class="nav-text">0x02 PostgreSQL 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-PostgreSQL-SQL-常用代码"><span class="nav-number">4.</span> <span class="nav-text">0x03 PostgreSQL SQL 常用代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-PostgreSQL-相关"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 PostgreSQL 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-DCL-Data-Control-Languge"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 DCL ( Data Control Languge )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-DDL-Data-Definition-Language"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 DDL ( Data Definition Language )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-DML-Data-Manipulation-Languge"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 DML ( Data Manipulation Languge )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-TCL-Transaction-Control-Languge"><span class="nav-number">4.5.</span> <span class="nav-text">3.5 TCL ( Transaction Control Languge )</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-常用代码片段"><span class="nav-number">5.</span> <span class="nav-text">0x04. 常用代码片段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Tips-And-Hacks"><span class="nav-number">5.1.</span> <span class="nav-text">4.1. Tips And Hacks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recursive-Query"><span class="nav-number">5.1.1.</span> <span class="nav-text">Recursive Query</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-大数据量运算技巧"><span class="nav-number">5.2.</span> <span class="nav-text">4.2. 大数据量运算技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy"><span class="nav-number">6.</span> <span class="nav-text">0x05. Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前端、单页与-React-开发"><span class="nav-number">2.</span> <span class="nav-text">0x00. 前端、单页与 React 开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-前端"><span class="nav-number">2.1.</span> <span class="nav-text">0.1. 前端</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-单页"><span class="nav-number">2.2.</span> <span class="nav-text">0.2. 单页</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-3-ReactJS"><span class="nav-number">2.3.</span> <span class="nav-text">0.3. ReactJS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-在-dva-下，编写-React-组件的正确姿势"><span class="nav-number">3.</span> <span class="nav-text">0x01. 在 dva 下，编写 React 组件的正确姿势</span></a></li></ol></div>
             
 
           </div>

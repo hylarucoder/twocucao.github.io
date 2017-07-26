@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/05/21/DockerCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。  Docker 相关概念 Docker 配套工具 Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化 Docker 踩坑记录  不定期更新。">
-<meta property="og:updated_time" content="2017-06-10T02:23:57.000Z">
+<meta property="og:updated_time" content="2017-07-23T07:43:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker CheatSheet">
 <meta name="twitter:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。  Docker 相关概念 Docker 配套工具 Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化 Docker 踩坑记录  不定期更新。">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  667
+                  702
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -451,7 +451,7 @@
 <p>当然，思路很简单，开发的时候使用虚拟机，拷贝给大家一起用，部署的时候多创建一些机器，然后上 Ansible 远程操控。即可。</p>
 <p>并不是不行，但是 Docker 由于更加轻量，操作粒度更加细腻，我可以销毁镜像，上传镜像，定制镜像，很轻松调整镜像包并且安装挂载文件。</p>
 <h2 id="0x02-Docker-配套工具"><a href="#0x02-Docker-配套工具" class="headerlink" title="0x02 Docker 配套工具"></a>0x02 Docker 配套工具</h2><h2 id="0x03-Django-技术栈-Docker-化"><a href="#0x03-Django-技术栈-Docker-化" class="headerlink" title="0x03 Django 技术栈 Docker 化"></a>0x03 Django 技术栈 Docker 化</h2><h2 id="0x04-Docker-踩坑记录"><a href="#0x04-Docker-踩坑记录" class="headerlink" title="0x04 Docker 踩坑记录"></a>0x04 Docker 踩坑记录</h2><h3 id="4-1-PostgreSQL-的初始化"><a href="#4-1-PostgreSQL-的初始化" class="headerlink" title="4.1 PostgreSQL 的初始化"></a>4.1 PostgreSQL 的初始化</h3><p>当 Docker 化 PostgreSQL 的时候，必须要把一些初始化脚本放在 docker-entrypoint-initdb.d 中，才能初始化，笔者在进行测试的时候多次发现无法进行初始化，究其原因，经过查找，如果没有及时删除 Volume 的话，则无论怎么初始化，或者 Build, 每一次都会挂载原来的文件夹。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ADD init_django_db.sh /docker-entrypoint-initdb.d/init_django_db.sh</div></pre></td></tr></table></figure></p>
-
+<h3 id="4-2-清空所有Image"><a href="#4-2-清空所有Image" class="headerlink" title="4.2 清空所有Image"></a>4.2 清空所有Image</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Delete all containers</span></div><div class="line">docker rm $(docker ps <span class="_">-a</span> -q)</div><div class="line"><span class="comment"># Delete all images</span></div><div class="line">docker rmi $(docker images -q)</div><div class="line"><span class="comment"># Force delete</span></div><div class="line">docker rmi $(docker images -q) <span class="_">-f</span></div><div class="line"><span class="comment"># Delete Unused Volume</span></div><div class="line">docker volume prune</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -577,7 +577,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -670,7 +670,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Docker-相关概念"><span class="nav-number">2.</span> <span class="nav-text">0x01 Docker 相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Docker-是什么？"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 Docker 是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Docker-是用来做什么的？"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 Docker 是用来做什么的？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Docker-配套工具"><span class="nav-number">3.</span> <span class="nav-text">0x02 Docker 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Django-技术栈-Docker-化"><span class="nav-number">4.</span> <span class="nav-text">0x03 Django 技术栈 Docker 化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-Docker-踩坑记录"><span class="nav-number">5.</span> <span class="nav-text">0x04 Docker 踩坑记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-PostgreSQL-的初始化"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 PostgreSQL 的初始化</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Docker-相关概念"><span class="nav-number">2.</span> <span class="nav-text">0x01 Docker 相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Docker-是什么？"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 Docker 是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Docker-是用来做什么的？"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 Docker 是用来做什么的？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Docker-配套工具"><span class="nav-number">3.</span> <span class="nav-text">0x02 Docker 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Django-技术栈-Docker-化"><span class="nav-number">4.</span> <span class="nav-text">0x03 Django 技术栈 Docker 化</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-Docker-踩坑记录"><span class="nav-number">5.</span> <span class="nav-text">0x04 Docker 踩坑记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-PostgreSQL-的初始化"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 PostgreSQL 的初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-清空所有Image"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 清空所有Image</span></a></li></ol></li></ol></div>
             
 
           </div>
