@@ -401,7 +401,7 @@
     <link href="http://twocucao.xyz/2017/10/05/Vue/"/>
     <id>http://twocucao.xyz/2017/10/05/Vue/</id>
     <published>2017-10-05T12:06:05.000Z</published>
-    <updated>2017-11-18T04:37:11.654Z</updated>
+    <updated>2017-11-18T05:22:21.672Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x01-Essential"><a href="#0x01-Essential" class="headerlink" title="0x01 Essential"></a>0x01 Essential</h2><h3 id="1-1-The-Vue-Instance"><a href="#1-1-The-Vue-Instance" class="headerlink" title="1.1 The Vue Instance"></a>1.1 The Vue Instance</h3><p>当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。</p>
 <blockquote>
@@ -478,7 +478,24 @@
 <li>如果模板是常用的组件，比如手风琴控件，Menu 控件，sidebar 控件</li>
 </ul>
 <p>Vue 通过组件来组织代码，但糟糕的是并不是一切都可以被组件化</p>
-<h2 id="0x02-Transitions-amp-Animation"><a href="#0x02-Transitions-amp-Animation" class="headerlink" title="0x02 Transitions &amp; Animation"></a>0x02 Transitions &amp; Animation</h2><h3 id="2-1-Event-Handling"><a href="#2-1-Event-Handling" class="headerlink" title="2.1 Event Handling"></a>2.1 Event Handling</h3><h3 id="2-2-Event-Handling"><a href="#2-2-Event-Handling" class="headerlink" title="2.2 Event Handling"></a>2.2 Event Handling</h3><h2 id="0x03-Reusability-amp-Composition"><a href="#0x03-Reusability-amp-Composition" class="headerlink" title="0x03 Reusability &amp; Composition"></a>0x03 Reusability &amp; Composition</h2><h2 id="0x04-Tooling"><a href="#0x04-Tooling" class="headerlink" title="0x04 Tooling"></a>0x04 Tooling</h2><h2 id="0x05-Scaling-Up"><a href="#0x05-Scaling-Up" class="headerlink" title="0x05 Scaling Up"></a>0x05 Scaling Up</h2><h2 id="0x06-Internals"><a href="#0x06-Internals" class="headerlink" title="0x06 Internals"></a>0x06 Internals</h2><h2 id="0xEE-TODO-TO-LIST"><a href="#0xEE-TODO-TO-LIST" class="headerlink" title="0xEE TODO TO LIST"></a>0xEE TODO TO LIST</h2>]]></content>
+<h2 id="0x02-Transitions-amp-Animation"><a href="#0x02-Transitions-amp-Animation" class="headerlink" title="0x02 Transitions &amp; Animation"></a>0x02 Transitions &amp; Animation</h2><h3 id="2-1-Event-Handling"><a href="#2-1-Event-Handling" class="headerlink" title="2.1 Event Handling"></a>2.1 Event Handling</h3><h3 id="2-2-Event-Handling"><a href="#2-2-Event-Handling" class="headerlink" title="2.2 Event Handling"></a>2.2 Event Handling</h3><h2 id="0x03-Reusability-amp-Composition"><a href="#0x03-Reusability-amp-Composition" class="headerlink" title="0x03 Reusability &amp; Composition"></a>0x03 Reusability &amp; Composition</h2><h2 id="0x04-Tooling"><a href="#0x04-Tooling" class="headerlink" title="0x04 Tooling"></a>0x04 Tooling</h2><h2 id="0x05-Scaling-Up"><a href="#0x05-Scaling-Up" class="headerlink" title="0x05 Scaling Up"></a>0x05 Scaling Up</h2><h2 id="0x06-Internals"><a href="#0x06-Internals" class="headerlink" title="0x06 Internals"></a>0x06 Internals</h2><h2 id="0x07-Vue-番外篇"><a href="#0x07-Vue-番外篇" class="headerlink" title="0x07 Vue 番外篇"></a>0x07 Vue 番外篇</h2><p>下面的内容从 Vue 作者的知乎 Live 上取来。</p>
+<h3 id="阅读源码的建议"><a href="#阅读源码的建议" class="headerlink" title="阅读源码的建议"></a>阅读源码的建议</h3><p><a href="http://hcysun.me/2017/03/03/Vue" target="_blank" rel="external">http://hcysun.me/2017/03/03/Vue</a> 源码学习 /</p>
+<h3 id="框架背后的要解决的原理"><a href="#框架背后的要解决的原理" class="headerlink" title="框架背后的要解决的原理"></a>框架背后的要解决的原理</h3><p>组件为基本单元</p>
+<p>页面 -&gt;应用（模块，组件树（偏展示））</p>
+<ul>
+<li>接入型 container</li>
+<li>展示型</li>
+<li>交互型 比如各类加强版的表单组件，通常强调复用</li>
+<li>功能型 比如 <code>&lt;router-view&gt;</code>，<code>&lt;transition&gt;</code>，作为一种扩展、抽象机制存在。</li>
+</ul>
+<p>view = render(state)</p>
+<ul>
+<li>命令式 (jquery)</li>
+<li>声明式</li>
+</ul>
+<h3 id="Virtual-Dom"><a href="#Virtual-Dom" class="headerlink" title="Virtual Dom"></a>Virtual Dom</h3><h3 id="变化侦测和渲染机制"><a href="#变化侦测和渲染机制" class="headerlink" title="变化侦测和渲染机制"></a>变化侦测和渲染机制</h3><p>push pull</p>
+<p>vue 混合式</p>
+<h3 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h3><h2 id="0xEE-TODO-TO-LIST"><a href="#0xEE-TODO-TO-LIST" class="headerlink" title="0xEE TODO TO LIST"></a>0xEE TODO TO LIST</h2>]]></content>
     
     <summary type="html">
     
@@ -498,33 +515,17 @@
     <link href="http://twocucao.xyz/2017/09/25/VueAll/"/>
     <id>http://twocucao.xyz/2017/09/25/VueAll/</id>
     <published>2017-09-25T12:06:05.000Z</published>
-    <updated>2017-11-18T05:04:44.981Z</updated>
+    <updated>2017-11-18T05:21:18.784Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我对 Vue 项目的开发理解。</p>
 <p>本文仅限于 VueCli 下面的开发：</p>
 <ul>
 <li>VueJS 2.5.2</li>
 </ul>
-<h2 id="0x01-项目结构"><a href="#0x01-项目结构" class="headerlink" title="0x01 项目结构"></a>0x01 项目结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">├── Makefile 恩，其实 package.json 也能代替这个功能。</div><div class="line">├── README.md</div><div class="line">├── build #</div><div class="line">├── config # 环境变量配置</div><div class="line">├── dist # 最后输出</div><div class="line">├── extra # 个人偏好，存放最终用于打包成 IconFont 的 svg</div><div class="line">├── index.html # 可以在这里加首屏 loading, 以及其他预先准备好的样式。</div><div class="line">├── node_modules</div><div class="line">├── package.json # 依赖，开发时</div><div class="line">├── src</div><div class="line">├── static # 存放静态资源</div><div class="line">├── test</div><div class="line">└── yarn.lock</div></pre></td></tr></table></figure>
+<h2 id="0x01-项目结构"><a href="#0x01-项目结构" class="headerlink" title="0x01 项目结构"></a>0x01 项目结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 根文件</div><div class="line">├── Makefile 恩，其实 package.json 也能代替这个功能。</div><div class="line">├── README.md</div><div class="line">├── build #</div><div class="line">├── config # 环境变量配置</div><div class="line">├── dist # 最后输出</div><div class="line">├── extra # 个人偏好，存放最终用于打包成 IconFont 的 svg</div><div class="line">├── index.html # 可以在这里加首屏 loading, 以及其他预先准备好的样式。</div><div class="line">├── node_modules</div><div class="line">├── package.json # 依赖，开发时</div><div class="line">├── src</div><div class="line">├── static # 存放静态资源</div><div class="line">├── test</div><div class="line">└── yarn.lock</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 在 SRC 下面</div><div class="line">├── App.vue # CORE 组件</div><div class="line">├── api # 相关的 Web API 定义</div><div class="line">├── assets # 静态资源，对于已经压缩的，还是直接放在 Static 下面</div><div class="line">├── components</div><div class="line">├── config # 定义常量名称</div><div class="line">├── filters # 定义过滤器</div><div class="line">├── directive # 定义指令，比如 v-loading</div><div class="line">├── main.js # 用于初始化项目，注册组件等等</div><div class="line">├── mixins # 混合</div><div class="line">├── routes.js # 路由</div><div class="line">├── store # vuex 状态</div><div class="line">└── utils # 工具方法</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># components</div><div class="line">├── fed-commons 定义通用型组件，如果是 PC 端的话，强烈建议使用 ElementUI</div><div class="line">└── views</div><div class="line">    ├── auth</div><div class="line">        ├── Login.vue</div><div class="line">        ├── Register.vue</div><div class="line">    ├── core</div><div class="line">        ├── Dashboard.vue</div><div class="line">        ├── Content.vue</div><div class="line">    ├── pages</div><div class="line">        ├── Dashboard.vue</div><div class="line">        ├── Content.vue</div><div class="line">└── pages 404,503,401 等等页面</div></pre></td></tr></table></figure>
-<h2 id="0x02-项目结构"><a href="#0x02-项目结构" class="headerlink" title="0x02 项目结构"></a>0x02 项目结构</h2><h2 id="0x03-Tips"><a href="#0x03-Tips" class="headerlink" title="0x03 Tips"></a>0x03 Tips</h2><h3 id="1-离线-IconFont-登录校验"><a href="#1-离线-IconFont-登录校验" class="headerlink" title="1. 离线 IconFont 登录校验"></a>1. 离线 IconFont 登录校验</h3><h3 id="2-配置不同的-WEB-API"><a href="#2-配置不同的-WEB-API" class="headerlink" title="2. 配置不同的 WEB API"></a>2. 配置不同的 WEB API</h3><h3 id="3-打包-DLL"><a href="#3-打包-DLL" class="headerlink" title="3. 打包 DLL"></a>3. 打包 DLL</h3><h2 id="阅读源码的建议"><a href="#阅读源码的建议" class="headerlink" title="阅读源码的建议"></a>阅读源码的建议</h2><p><a href="http://hcysun.me/2017/03/03/Vue" target="_blank" rel="external">http://hcysun.me/2017/03/03/Vue</a> 源码学习 /</p>
-<h2 id="框架背后的要解决的原理"><a href="#框架背后的要解决的原理" class="headerlink" title="框架背后的要解决的原理"></a>框架背后的要解决的原理</h2><p>组件为基本单元</p>
-<p>页面 -&gt;应用（模块，组件树（偏展示））</p>
-<ul>
-<li>接入型 container</li>
-<li>展示型</li>
-<li>交互型 比如各类加强版的表单组件，通常强调复用</li>
-<li>功能型 比如 <code>&lt;router-view&gt;</code>，<code>&lt;transition&gt;</code>，作为一种扩展、抽象机制存在。</li>
-</ul>
-<p>view = render(state)</p>
-<ul>
-<li>命令式 (jquery)</li>
-<li>声明式</li>
-</ul>
-<h2 id="Virtual-Dom"><a href="#Virtual-Dom" class="headerlink" title="Virtual Dom"></a>Virtual Dom</h2><h2 id="变化侦测和渲染机制"><a href="#变化侦测和渲染机制" class="headerlink" title="变化侦测和渲染机制"></a>变化侦测和渲染机制</h2><p>push pull</p>
-<p>vue 混合式</p>
-<h2 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h2>]]></content>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># components</div><div class="line">├── fed-commons 定义通用型组件，一般为了开发效率，如果是 PC 端的话，建议使用 ElementUI,ElementUI 不满足要求的时候，再考虑自己封装组件。</div><div class="line">└── views</div><div class="line">    ├── auth</div><div class="line">        ├── Login.vue</div><div class="line">        ├── Register.vue</div><div class="line">    ├── core</div><div class="line">        ├── Dashboard.vue</div><div class="line">        ├── Content.vue</div><div class="line">    ├── pages</div><div class="line">        ├── AModule</div><div class="line">            ├── AModulePart1.vue</div><div class="line">            ├── AModulePart2.vue</div><div class="line">        ├── BModule</div><div class="line">            ├── BModulePart1.vue</div><div class="line">            ├── BModulePart2.vue</div><div class="line">└── pages 404,503,401 等等页面</div></pre></td></tr></table></figure>
+<h2 id="0x02-环境配置"><a href="#0x02-环境配置" class="headerlink" title="0x02 环境配置"></a>0x02 环境配置</h2><h2 id="0x03-Tips"><a href="#0x03-Tips" class="headerlink" title="0x03 Tips"></a>0x03 Tips</h2><h3 id="1-离线-IconFont"><a href="#1-离线-IconFont" class="headerlink" title="1. 离线 IconFont"></a>1. 离线 IconFont</h3><h3 id="2-开发环境与部署环境"><a href="#2-开发环境与部署环境" class="headerlink" title="2. 开发环境与部署环境"></a>2. 开发环境与部署环境</h3><h3 id="3-打包-DLL"><a href="#3-打包-DLL" class="headerlink" title="3. 打包 DLL"></a>3. 打包 DLL</h3><h3 id="4-路由管理与嵌套"><a href="#4-路由管理与嵌套" class="headerlink" title="4. 路由管理与嵌套"></a>4. 路由管理与嵌套</h3><h3 id="5-登录校验"><a href="#5-登录校验" class="headerlink" title="5. 登录校验"></a>5. 登录校验</h3><h3 id="6-权限问题"><a href="#6-权限问题" class="headerlink" title="6. 权限问题"></a>6. 权限问题</h3><h3 id="7-首屏-Loading"><a href="#7-首屏-Loading" class="headerlink" title="7. 首屏 Loading"></a>7. 首屏 Loading</h3><h3 id="8-SSR（未测试）"><a href="#8-SSR（未测试）" class="headerlink" title="8. SSR（未测试）"></a>8. SSR（未测试）</h3><h2 id="0x04-关于提升代码质量的一些零散的想法"><a href="#0x04-关于提升代码质量的一些零散的想法" class="headerlink" title="0x04 关于提升代码质量的一些零散的想法"></a>0x04 关于提升代码质量的一些零散的想法</h2><h3 id="1-语义化与可读性"><a href="#1-语义化与可读性" class="headerlink" title="1. 语义化与可读性"></a>1. 语义化与可读性</h3><h3 id="2-提取公共逻辑（通过-Service-Mixin-来）"><a href="#2-提取公共逻辑（通过-Service-Mixin-来）" class="headerlink" title="2. 提取公共逻辑（通过 Service, Mixin 来）"></a>2. 提取公共逻辑（通过 Service, Mixin 来）</h3><h3 id="3-提取公共组件"><a href="#3-提取公共组件" class="headerlink" title="3. 提取公共组件"></a>3. 提取公共组件</h3>]]></content>
     
     <summary type="html">
     
@@ -913,54 +914,6 @@
   </entry>
   
   <entry>
-    <title>ReThinking In JavaScript</title>
-    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
-    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
-    <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-07-05T06:29:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
-<a id="more"></a>
-<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
-<p>因为太火，不得不认真学习一下。</p>
-<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
-<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
-<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
-<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
-<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
-<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
-<li>String</li>
-<li>Boolean</li>
-<li>Symbol (new in ES2015)</li>
-<li>Object<ul>
-<li>Function</li>
-<li>Array</li>
-<li>Date</li>
-<li>RegExp</li>
-</ul>
-</li>
-<li>null</li>
-<li>undefined</li>
-</ul>
-<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
-<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
-    
-    
-      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ReThinking In Python</title>
     <link href="http://twocucao.xyz/2017/07/04/RethinkingInPython/"/>
     <id>http://twocucao.xyz/2017/07/04/RethinkingInPython/</id>
@@ -1289,6 +1242,54 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <summary type="html">
     
       &lt;h1 id=&quot;生命苦短-我用-Python&quot;&gt;&lt;a href=&quot;#生命苦短-我用-Python&quot; class=&quot;headerlink&quot; title=&quot;生命苦短 我用 Python&quot;&gt;&lt;/a&gt;生命苦短 我用 Python&lt;/h1&gt;&lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=
+    
+    </summary>
+    
+      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+    
+    
+      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ReThinking In JavaScript</title>
+    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
+    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
+    <published>2017-07-04T12:08:21.000Z</published>
+    <updated>2017-07-05T06:29:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
+<a id="more"></a>
+<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
+<p>因为太火，不得不认真学习一下。</p>
+<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
+<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
+<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
+<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
+<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
+<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
+<li>String</li>
+<li>Boolean</li>
+<li>Symbol (new in ES2015)</li>
+<li>Object<ul>
+<li>Function</li>
+<li>Array</li>
+<li>Date</li>
+<li>RegExp</li>
+</ul>
+</li>
+<li>null</li>
+<li>undefined</li>
+</ul>
+<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
+<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
     
     </summary>
     
@@ -2685,186 +2686,6 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
   </entry>
   
   <entry>
-    <title>Thinking In Programming Language</title>
-    <link href="http://twocucao.xyz/2017/03/21/LearnProgrammingLanguage/"/>
-    <id>http://twocucao.xyz/2017/03/21/LearnProgrammingLanguage/</id>
-    <published>2017-03-21T12:05:00.000Z</published>
-    <updated>2017-11-18T04:40:23.939Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="如何学习一门编程语言"><a href="#如何学习一门编程语言" class="headerlink" title="如何学习一门编程语言"></a>如何学习一门编程语言</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文的内容都是一些个人的比较虚的经验。泛泛而谈。</p>
-<p>很多人得出一些结论，往往是样本就一个。比如说一个只用过 PHP 的人叫嚣 PHP 是最好的语言。</p>
-<p>但即便是用过几种语言，得出的经验依然是片面的。</p>
-<p>所以，我得出的结论，不完全是对的，至少是我个人的经验。</p>
-<p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍之际。</p>
-<h2 id="0x01-编程语言胡论"><a href="#0x01-编程语言胡论" class="headerlink" title="0x01 编程语言胡论"></a>0x01 编程语言胡论</h2><p>在我看来，一个人说他会且只精通一门编程语言是很让我不能理解的事情，在我看来，什么编程语言框架上手两三天就能去写，但是这严格意义上应该叫做能用，和精通相差甚远。那是不是说写的时间长的人经验就老道了呢？也不见得。下棋下了一辈子是烂棋篓子的人比比皆是。</p>
-<p>那我认为什么样子的人才是懂写代码的人。</p>
-<pre><code>拥有良好的组织代码的能力的人。
-</code></pre><p>恩，组织代码的能力，一个文件排布混乱的人，不太可能写出整齐严谨的代码，当然，人也可能是复杂的，比如，这个人写的代码挺好，但是生活住处一团糟。</p>
-<p>当然这是题外话了，依个人经验而言，学习任何一个复杂的系统，也需要像组织一个东西一样，系统性的学习。</p>
-<p>系统化的东西往往像《如何阅读一本书》里面描述一本书的复杂架构那样。</p>
-<pre><code>没有一种物质或产品是绝对简单的。所有的东西都是复杂的组合体。当你看一个整体组成复杂的东西的时候，如果只看它如何呈现一体的面貌，那是还没有掌握精髓，你还必须要明白它怎样呈现多个的面貌，但不是各自为政、互不相干的多个面貌，而是互相融合成有机体的多个面貌。如果组成的各个部分没有有机的关联，仅仅是一个集合体罢了。
-
-这就像是一堆砖头跟一栋又砖头建造起来的房子是有区别的。而单一的房子与建造的房子也不相同。一本书就像是一栋单一的房子。一栋大厦，拥有许多房间，每层楼都有房间，有不同的尺寸和形状，不同的外观，不同的用途，这些房间是独立的，分离的，每个房间都有自己的架构和装潢设计，但却不是完全独立与分离的，这些房间使用普通门 / 拱门 / 走廊 / 楼梯串联起来的，即建筑师错位的动线架构，因为这些架构师彼此联结的，因此每一个部分在整体的使用功能上要贡献出自己的力量。否则这栋房子便是不适合居住的。
-</code></pre><p>对于复杂的东西，系统内部的各个部分都是密切相关。</p>
-<pre><code>先模块化，用一个快速的方式获得每个模块的全貌，接着不断分解模块为知识单元，最后连接各个子模块和知识单元
-</code></pre><p>下面的内容就是我组织入手学习编程语言的思路。</p>
-<h3 id="1-1-编程语言的独一无二性"><a href="#1-1-编程语言的独一无二性" class="headerlink" title="1.1 编程语言的独一无二性"></a>1.1 编程语言的独一无二性</h3><p>有的人认为所有的编程语言都是一样的，我不这么认为。</p>
-<p>我觉得这种想法很初级，所有的编程语言都是有特点的，也是有优缺点的。</p>
-<p>举一个我朋友的爱说的很粗俗的例子：</p>
-<pre><code>虽然说关了灯全都一个样，但是每一个女孩子都有是独一无二的存在。
-</code></pre><p>这个例子即便是我这种 23 年丰富单身经验的人，依然可以在第一时间捕捉到我这个段子手朋友的意思。</p>
-<ul>
-<li>有的偏向于运行效率，有的偏向于开发效率。</li>
-<li>有的据说是让人编程时候感到快乐 (ruby)，有的说你生命苦短，为什么不用 Python。</li>
-<li>有的偏向于 Web 开发 (PHP)，有的偏向于并发操作</li>
-<li>有的是 Windows 上面自动化的小白工具 (Autohotkey)</li>
-<li>有的是据说是一次编译，到处运行 (Java)</li>
-</ul>
-<p>编程语言往往是上面这些因素的取舍。</p>
-<ul>
-<li>你要运行效率，往往开发效率就会打折。</li>
-<li>你要开发效率，往往就需要堆更多的机器来提升性能。</li>
-<li>你要充分利用某个平台，往往就没有极高兼容性。</li>
-<li>你要编程语言省心，往往编程语言就会自作聪明。</li>
-</ul>
-<h3 id="1-2-工具链"><a href="#1-2-工具链" class="headerlink" title="1.2 工具链"></a>1.2 工具链</h3><p>工欲善其事必先利其器，而这个器就是工具链。工具链大致有如下：</p>
-<ul>
-<li>Mac Homebrew</li>
-<li>集成开发环境</li>
-<li>编辑器</li>
-<li>开发环境里面的 shell</li>
-<li>cmake</li>
-</ul>
-<h3 id="1-3-文档"><a href="#1-3-文档" class="headerlink" title="1.3 文档"></a>1.3 文档</h3><p>官网的文档是最应该反复查看的东西，这是我现在依然喜欢强调的。</p>
-<p>而官网的文档也分为四种</p>
-<ul>
-<li>一种是 tutorial      – 用于<strong>上手</strong>对应的软件 / 编程语言</li>
-<li>一种是 guide         – 用于<strong> Topic Reading </strong></li>
-<li>一种是 api document  – 用于<strong>查看细节</strong></li>
-<li>一种是 RTFSC ( Read The Fucking Source Code ) 阅读源码</li>
-</ul>
-<blockquote>
-<p>注：把 StackOverFlow 中某个标签的 Most Votes 的答案，是除了大略看看 tutorial 之外的另一种快速熟悉入门时候的痛点的手段。</p>
-</blockquote>
-<p>当然，其实代码写的足够好的话本身就是一种注释。</p>
-<h3 id="1-4-社区"><a href="#1-4-社区" class="headerlink" title="1.4 社区"></a>1.4 社区</h3><p>社区一般情况下都会有的，但有几个网站特别值得提出来</p>
-<ul>
-<li>官网上一般都会放一些比较出色的社区</li>
-<li>Github</li>
-<li>reddit</li>
-<li>某个技术对应的 Weekly 订阅</li>
-</ul>
-<h3 id="1-5-书籍"><a href="#1-5-书籍" class="headerlink" title="1.5 书籍"></a>1.5 书籍</h3><p>特别值得一提的是有一个持续不断阅读到有趣的文章的方法：</p>
-<ol>
-<li>Google 出对应的 书 / Weekly 周报 / 博客，比如 Python Weekly 然后订阅</li>
-<li>接着不断的查看列入优质文章的作者的文章，Github 地址啦，他关注的 Repo 啦等等等等。</li>
-<li>然后去阅读他的代码 / 博客。</li>
-</ol>
-<h2 id="0x02-基础概念"><a href="#0x02-基础概念" class="headerlink" title="0x02 基础概念"></a>0x02 基础概念</h2><blockquote>
-<p> 程序 = 算法 + 数据结构</p>
-</blockquote>
-<p>这句话当然是不全面的，这句话经典就经典在高度概括了程序中算法和数据结构的重要性，但并不影响这句话在计算机世界里面的地位。</p>
-<p>依我看来，对我的启发是：</p>
-<blockquote>
-<p>我会把 API 的调用和数据结构以及算法想清楚，然后才动手把代码分解成伪代码。最后写成代码。</p>
-</blockquote>
-<h3 id="2-1-数据类型"><a href="#2-1-数据类型" class="headerlink" title="2.1 数据类型"></a>2.1 数据类型</h3><p>按照复杂性可划分为：</p>
-<ul>
-<li>简单类型</li>
-<li>复杂类型</li>
-</ul>
-<p>按照复杂性可划分为：</p>
-<ul>
-<li>基本类型</li>
-<li>引用类型</li>
-</ul>
-<p>按照数据结构可划分为：</p>
-<ul>
-<li>集合结构 : 串</li>
-<li>线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，<strong>栈，队列</strong>)</li>
-<li>树形结构 : 树（二叉树，B+ 树，红黑树）</li>
-<li>图形结构 : 图</li>
-</ul>
-<p>对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</p>
-<p>对于复杂的一些数据类型，则需要对数据结构多一些了解。</p>
-<p>比如，对队列而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对 hash 而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字典而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字符串而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？</p>
-<p>那字符串来说，Java 推荐使用 StringBuilder 来合并多个字符串，Python 推荐 join 多个字符串等等。</p>
-<h3 id="2-2-语句"><a href="#2-2-语句" class="headerlink" title="2.2 语句"></a>2.2 语句</h3><ul>
-<li>声明语句</li>
-<li>赋值语句</li>
-<li><p>条件语句</p>
-<ol>
-<li>判断的时候不确定操作符优先级的时候，加括号</li>
-<li>尽量显式判断，不要用隐式判断。</li>
-</ol>
-</li>
-<li><p>循环语句</p>
-<ol>
-<li>Break 和 Continue</li>
-</ol>
-</li>
-</ul>
-<h3 id="2-3-函数"><a href="#2-3-函数" class="headerlink" title="2.3 函数"></a>2.3 函数</h3><ol>
-<li>传值还是传引用</li>
-<li>参数</li>
-</ol>
-<p>函数或者叫做方法，叫法不同。</p>
-<p>函数，我有个很私人的称呼，称它为最小操作模块。</p>
-<p>实际上，在编程的过程中，程序员用面向对象的思想进行编码的人可能真的不是很多。把一段长程序按照自己的需求进行切分成若干个函数的倒是比比皆是。</p>
-<p>不过按照什么样子的标准来切分一段程序为多个函数，仁者见仁智者见智。</p>
-<p>这里面需要注意的事情是：</p>
-<ul>
-<li><ol>
-<li>注意传值（基本类型）和传引用（引用类型）</li>
-</ol>
-</li>
-<li><ol>
-<li>函数重载</li>
-</ol>
-</li>
-</ul>
-<p>对于不同的编程语言，传值（基本类型）和传引用（引用类型）基本上达成了共识。<br>但在实现函数重载的时候则是有所不同，</p>
-<p>比如，Java 里面选择了多写几个函数，Python 则没有这个机制，不过，通过默认参数却可以曲线救国，实现这个机制。</p>
-<p>递归<br>函数式编程<br>高阶函数 mapreduce/ filter / sorted / 返回函数 / 匿名函数 / 装饰器 / 偏函数</p>
-<h4 id="2-3-1-作用域"><a href="#2-3-1-作用域" class="headerlink" title="2.3.1 作用域"></a>2.3.1 作用域</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = <span class="number">1</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a = <span class="number">2</span></div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># 1</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = <span class="number">1</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a = <span class="number">2</span></div><div class="line">    print(a)</div><div class="line">    inner()</div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># 1</span></div><div class="line"><span class="comment"># 1</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = [<span class="number">1</span>]</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a.append(<span class="number">2</span>)</div><div class="line">    print(a)</div><div class="line">    inner()</div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># [1]</span></div><div class="line"><span class="comment"># [1, 2]</span></div></pre></td></tr></table></figure>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">var outer = function()&#123;</div><div class="line">    var a = 1;</div><div class="line">    var inner = function()&#123;</div><div class="line">        a = 2</div><div class="line">    &#125;;</div><div class="line">    console.log(a);</div><div class="line">    inner();</div><div class="line">    console.log(a);</div><div class="line">&#125;</div><div class="line">outer()</div><div class="line"># 1</div><div class="line"># 2</div><div class="line"></div><div class="line">var outer = function()&#123;</div><div class="line">    var a = 1;</div><div class="line">    var inner = function()&#123;</div><div class="line">        var a = 2</div><div class="line">    &#125;;</div><div class="line">    console.log(a);</div><div class="line">    inner();</div><div class="line">    console.log(a);</div><div class="line">&#125;</div><div class="line">outer()</div><div class="line"># 1</div><div class="line"># 1</div></pre></td></tr></table></figure>
-<h4 id="2-3-2-高阶函数"><a href="#2-3-2-高阶函数" class="headerlink" title="2.3.2 高阶函数"></a>2.3.2 高阶函数</h4><ul>
-<li>map</li>
-<li>reduce</li>
-<li>filter</li>
-</ul>
-<h2 id="0x03-中级概念"><a href="#0x03-中级概念" class="headerlink" title="0x03 中级概念"></a>0x03 中级概念</h2><h3 id="3-1-类和对象"><a href="#3-1-类和对象" class="headerlink" title="3.1 类和对象"></a>3.1 类和对象</h3><p>面向对象有三大概念：</p>
-<ul>
-<li>封装</li>
-<li>继承</li>
-<li>多态</li>
-</ul>
-<h3 id="3-2-模块与包"><a href="#3-2-模块与包" class="headerlink" title="3.2 模块与包"></a>3.2 模块与包</h3><p>模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。</p>
-<p>这里的模块指的是一个包下的函数。</p>
-<h3 id="3-3-错误-调试测试"><a href="#3-3-错误-调试测试" class="headerlink" title="3.3 错误 / 调试测试"></a>3.3 错误 / 调试测试</h3><p>异常处理实际上可以考验一个程序员编写代码的健壮性。</p>
-<p>事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。</p>
-<h3 id="3-4-IO-编程"><a href="#3-4-IO-编程" class="headerlink" title="3.4 IO 编程"></a>3.4 IO 编程</h3><h3 id="3-5-正则表达式"><a href="#3-5-正则表达式" class="headerlink" title="3.5 正则表达式"></a>3.5 正则表达式</h3><h2 id="0x04-高级概念"><a href="#0x04-高级概念" class="headerlink" title="0x04 高级概念"></a>0x04 高级概念</h2><h3 id="4-1-元编程"><a href="#4-1-元编程" class="headerlink" title="4.1 元编程"></a>4.1 元编程</h3><h3 id="4-2-并发编程"><a href="#4-2-并发编程" class="headerlink" title="4.2 并发编程"></a>4.2 并发编程</h3><h4 id="4-2-1-多线程"><a href="#4-2-1-多线程" class="headerlink" title="4.2.1 多线程"></a>4.2.1 多线程</h4><blockquote>
-<p>Python 多线程约等于并发。</p>
-</blockquote>
-<h4 id="4-2-2-多进程"><a href="#4-2-2-多进程" class="headerlink" title="4.2.2 多进程"></a>4.2.2 多进程</h4><h4 id="4-2-3-协程"><a href="#4-2-3-协程" class="headerlink" title="4.2.3 协程"></a>4.2.3 协程</h4><h2 id="0x05-标准库"><a href="#0x05-标准库" class="headerlink" title="0x05 标准库"></a>0x05 标准库</h2><h3 id="5-1-数据结构与算法"><a href="#5-1-数据结构与算法" class="headerlink" title="5.1 数据结构与算法"></a>5.1 数据结构与算法</h3><h3 id="5-2-字符串与文本"><a href="#5-2-字符串与文本" class="headerlink" title="5.2 字符串与文本"></a>5.2 字符串与文本</h3><h3 id="5-3-数字日期与时间"><a href="#5-3-数字日期与时间" class="headerlink" title="5.3 数字日期与时间"></a>5.3 数字日期与时间</h3><h3 id="5-4-迭代器与生成器"><a href="#5-4-迭代器与生成器" class="headerlink" title="5.4 迭代器与生成器"></a>5.4 迭代器与生成器</h3><h3 id="5-3-文本处理"><a href="#5-3-文本处理" class="headerlink" title="5.3 文本处理"></a>5.3 文本处理</h3><h2 id="0x06-可维护性代码"><a href="#0x06-可维护性代码" class="headerlink" title="0x06 可维护性代码"></a>0x06 可维护性代码</h2><h3 id="社区推崇的代码风格"><a href="#社区推崇的代码风格" class="headerlink" title="社区推崇的代码风格"></a>社区推崇的代码风格</h3><h3 id="调试的若干种姿势"><a href="#调试的若干种姿势" class="headerlink" title="调试的若干种姿势"></a>调试的若干种姿势</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
-<li><strong>2017-05-11 19:43:00</strong> : 增加代码质量模块</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;如何学习一门编程语言&quot;&gt;&lt;a href=&quot;#如何学习一门编程语言&quot; class=&quot;headerlink&quot; title=&quot;如何学习一门编程语言&quot;&gt;&lt;/a&gt;如何学习一门编程语言&lt;/h1&gt;&lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class
-    
-    </summary>
-    
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
-    
-    
-      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Thinking In Python Language</title>
     <link href="http://twocucao.xyz/2017/03/21/ThinkingInPython/"/>
     <id>http://twocucao.xyz/2017/03/21/ThinkingInPython/</id>
@@ -3038,6 +2859,186 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 &lt;p&gt;本文的内容都是一些简略的笔记。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+    
+    
+      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Thinking In Programming Language</title>
+    <link href="http://twocucao.xyz/2017/03/21/LearnProgrammingLanguage/"/>
+    <id>http://twocucao.xyz/2017/03/21/LearnProgrammingLanguage/</id>
+    <published>2017-03-21T12:05:00.000Z</published>
+    <updated>2017-11-18T04:40:23.939Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="如何学习一门编程语言"><a href="#如何学习一门编程语言" class="headerlink" title="如何学习一门编程语言"></a>如何学习一门编程语言</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文的内容都是一些个人的比较虚的经验。泛泛而谈。</p>
+<p>很多人得出一些结论，往往是样本就一个。比如说一个只用过 PHP 的人叫嚣 PHP 是最好的语言。</p>
+<p>但即便是用过几种语言，得出的经验依然是片面的。</p>
+<p>所以，我得出的结论，不完全是对的，至少是我个人的经验。</p>
+<p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍之际。</p>
+<h2 id="0x01-编程语言胡论"><a href="#0x01-编程语言胡论" class="headerlink" title="0x01 编程语言胡论"></a>0x01 编程语言胡论</h2><p>在我看来，一个人说他会且只精通一门编程语言是很让我不能理解的事情，在我看来，什么编程语言框架上手两三天就能去写，但是这严格意义上应该叫做能用，和精通相差甚远。那是不是说写的时间长的人经验就老道了呢？也不见得。下棋下了一辈子是烂棋篓子的人比比皆是。</p>
+<p>那我认为什么样子的人才是懂写代码的人。</p>
+<pre><code>拥有良好的组织代码的能力的人。
+</code></pre><p>恩，组织代码的能力，一个文件排布混乱的人，不太可能写出整齐严谨的代码，当然，人也可能是复杂的，比如，这个人写的代码挺好，但是生活住处一团糟。</p>
+<p>当然这是题外话了，依个人经验而言，学习任何一个复杂的系统，也需要像组织一个东西一样，系统性的学习。</p>
+<p>系统化的东西往往像《如何阅读一本书》里面描述一本书的复杂架构那样。</p>
+<pre><code>没有一种物质或产品是绝对简单的。所有的东西都是复杂的组合体。当你看一个整体组成复杂的东西的时候，如果只看它如何呈现一体的面貌，那是还没有掌握精髓，你还必须要明白它怎样呈现多个的面貌，但不是各自为政、互不相干的多个面貌，而是互相融合成有机体的多个面貌。如果组成的各个部分没有有机的关联，仅仅是一个集合体罢了。
+
+这就像是一堆砖头跟一栋又砖头建造起来的房子是有区别的。而单一的房子与建造的房子也不相同。一本书就像是一栋单一的房子。一栋大厦，拥有许多房间，每层楼都有房间，有不同的尺寸和形状，不同的外观，不同的用途，这些房间是独立的，分离的，每个房间都有自己的架构和装潢设计，但却不是完全独立与分离的，这些房间使用普通门 / 拱门 / 走廊 / 楼梯串联起来的，即建筑师错位的动线架构，因为这些架构师彼此联结的，因此每一个部分在整体的使用功能上要贡献出自己的力量。否则这栋房子便是不适合居住的。
+</code></pre><p>对于复杂的东西，系统内部的各个部分都是密切相关。</p>
+<pre><code>先模块化，用一个快速的方式获得每个模块的全貌，接着不断分解模块为知识单元，最后连接各个子模块和知识单元
+</code></pre><p>下面的内容就是我组织入手学习编程语言的思路。</p>
+<h3 id="1-1-编程语言的独一无二性"><a href="#1-1-编程语言的独一无二性" class="headerlink" title="1.1 编程语言的独一无二性"></a>1.1 编程语言的独一无二性</h3><p>有的人认为所有的编程语言都是一样的，我不这么认为。</p>
+<p>我觉得这种想法很初级，所有的编程语言都是有特点的，也是有优缺点的。</p>
+<p>举一个我朋友的爱说的很粗俗的例子：</p>
+<pre><code>虽然说关了灯全都一个样，但是每一个女孩子都有是独一无二的存在。
+</code></pre><p>这个例子即便是我这种 23 年丰富单身经验的人，依然可以在第一时间捕捉到我这个段子手朋友的意思。</p>
+<ul>
+<li>有的偏向于运行效率，有的偏向于开发效率。</li>
+<li>有的据说是让人编程时候感到快乐 (ruby)，有的说你生命苦短，为什么不用 Python。</li>
+<li>有的偏向于 Web 开发 (PHP)，有的偏向于并发操作</li>
+<li>有的是 Windows 上面自动化的小白工具 (Autohotkey)</li>
+<li>有的是据说是一次编译，到处运行 (Java)</li>
+</ul>
+<p>编程语言往往是上面这些因素的取舍。</p>
+<ul>
+<li>你要运行效率，往往开发效率就会打折。</li>
+<li>你要开发效率，往往就需要堆更多的机器来提升性能。</li>
+<li>你要充分利用某个平台，往往就没有极高兼容性。</li>
+<li>你要编程语言省心，往往编程语言就会自作聪明。</li>
+</ul>
+<h3 id="1-2-工具链"><a href="#1-2-工具链" class="headerlink" title="1.2 工具链"></a>1.2 工具链</h3><p>工欲善其事必先利其器，而这个器就是工具链。工具链大致有如下：</p>
+<ul>
+<li>Mac Homebrew</li>
+<li>集成开发环境</li>
+<li>编辑器</li>
+<li>开发环境里面的 shell</li>
+<li>cmake</li>
+</ul>
+<h3 id="1-3-文档"><a href="#1-3-文档" class="headerlink" title="1.3 文档"></a>1.3 文档</h3><p>官网的文档是最应该反复查看的东西，这是我现在依然喜欢强调的。</p>
+<p>而官网的文档也分为四种</p>
+<ul>
+<li>一种是 tutorial      – 用于<strong>上手</strong>对应的软件 / 编程语言</li>
+<li>一种是 guide         – 用于<strong> Topic Reading </strong></li>
+<li>一种是 api document  – 用于<strong>查看细节</strong></li>
+<li>一种是 RTFSC ( Read The Fucking Source Code ) 阅读源码</li>
+</ul>
+<blockquote>
+<p>注：把 StackOverFlow 中某个标签的 Most Votes 的答案，是除了大略看看 tutorial 之外的另一种快速熟悉入门时候的痛点的手段。</p>
+</blockquote>
+<p>当然，其实代码写的足够好的话本身就是一种注释。</p>
+<h3 id="1-4-社区"><a href="#1-4-社区" class="headerlink" title="1.4 社区"></a>1.4 社区</h3><p>社区一般情况下都会有的，但有几个网站特别值得提出来</p>
+<ul>
+<li>官网上一般都会放一些比较出色的社区</li>
+<li>Github</li>
+<li>reddit</li>
+<li>某个技术对应的 Weekly 订阅</li>
+</ul>
+<h3 id="1-5-书籍"><a href="#1-5-书籍" class="headerlink" title="1.5 书籍"></a>1.5 书籍</h3><p>特别值得一提的是有一个持续不断阅读到有趣的文章的方法：</p>
+<ol>
+<li>Google 出对应的 书 / Weekly 周报 / 博客，比如 Python Weekly 然后订阅</li>
+<li>接着不断的查看列入优质文章的作者的文章，Github 地址啦，他关注的 Repo 啦等等等等。</li>
+<li>然后去阅读他的代码 / 博客。</li>
+</ol>
+<h2 id="0x02-基础概念"><a href="#0x02-基础概念" class="headerlink" title="0x02 基础概念"></a>0x02 基础概念</h2><blockquote>
+<p> 程序 = 算法 + 数据结构</p>
+</blockquote>
+<p>这句话当然是不全面的，这句话经典就经典在高度概括了程序中算法和数据结构的重要性，但并不影响这句话在计算机世界里面的地位。</p>
+<p>依我看来，对我的启发是：</p>
+<blockquote>
+<p>我会把 API 的调用和数据结构以及算法想清楚，然后才动手把代码分解成伪代码。最后写成代码。</p>
+</blockquote>
+<h3 id="2-1-数据类型"><a href="#2-1-数据类型" class="headerlink" title="2.1 数据类型"></a>2.1 数据类型</h3><p>按照复杂性可划分为：</p>
+<ul>
+<li>简单类型</li>
+<li>复杂类型</li>
+</ul>
+<p>按照复杂性可划分为：</p>
+<ul>
+<li>基本类型</li>
+<li>引用类型</li>
+</ul>
+<p>按照数据结构可划分为：</p>
+<ul>
+<li>集合结构 : 串</li>
+<li>线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，<strong>栈，队列</strong>)</li>
+<li>树形结构 : 树（二叉树，B+ 树，红黑树）</li>
+<li>图形结构 : 图</li>
+</ul>
+<p>对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</p>
+<p>对于复杂的一些数据类型，则需要对数据结构多一些了解。</p>
+<p>比如，对队列而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对 hash 而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字典而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字符串而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？</p>
+<p>那字符串来说，Java 推荐使用 StringBuilder 来合并多个字符串，Python 推荐 join 多个字符串等等。</p>
+<h3 id="2-2-语句"><a href="#2-2-语句" class="headerlink" title="2.2 语句"></a>2.2 语句</h3><ul>
+<li>声明语句</li>
+<li>赋值语句</li>
+<li><p>条件语句</p>
+<ol>
+<li>判断的时候不确定操作符优先级的时候，加括号</li>
+<li>尽量显式判断，不要用隐式判断。</li>
+</ol>
+</li>
+<li><p>循环语句</p>
+<ol>
+<li>Break 和 Continue</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-3-函数"><a href="#2-3-函数" class="headerlink" title="2.3 函数"></a>2.3 函数</h3><ol>
+<li>传值还是传引用</li>
+<li>参数</li>
+</ol>
+<p>函数或者叫做方法，叫法不同。</p>
+<p>函数，我有个很私人的称呼，称它为最小操作模块。</p>
+<p>实际上，在编程的过程中，程序员用面向对象的思想进行编码的人可能真的不是很多。把一段长程序按照自己的需求进行切分成若干个函数的倒是比比皆是。</p>
+<p>不过按照什么样子的标准来切分一段程序为多个函数，仁者见仁智者见智。</p>
+<p>这里面需要注意的事情是：</p>
+<ul>
+<li><ol>
+<li>注意传值（基本类型）和传引用（引用类型）</li>
+</ol>
+</li>
+<li><ol>
+<li>函数重载</li>
+</ol>
+</li>
+</ul>
+<p>对于不同的编程语言，传值（基本类型）和传引用（引用类型）基本上达成了共识。<br>但在实现函数重载的时候则是有所不同，</p>
+<p>比如，Java 里面选择了多写几个函数，Python 则没有这个机制，不过，通过默认参数却可以曲线救国，实现这个机制。</p>
+<p>递归<br>函数式编程<br>高阶函数 mapreduce/ filter / sorted / 返回函数 / 匿名函数 / 装饰器 / 偏函数</p>
+<h4 id="2-3-1-作用域"><a href="#2-3-1-作用域" class="headerlink" title="2.3.1 作用域"></a>2.3.1 作用域</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = <span class="number">1</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a = <span class="number">2</span></div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># 1</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = <span class="number">1</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a = <span class="number">2</span></div><div class="line">    print(a)</div><div class="line">    inner()</div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># 1</span></div><div class="line"><span class="comment"># 1</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = [<span class="number">1</span>]</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a.append(<span class="number">2</span>)</div><div class="line">    print(a)</div><div class="line">    inner()</div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># [1]</span></div><div class="line"><span class="comment"># [1, 2]</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">var outer = function()&#123;</div><div class="line">    var a = 1;</div><div class="line">    var inner = function()&#123;</div><div class="line">        a = 2</div><div class="line">    &#125;;</div><div class="line">    console.log(a);</div><div class="line">    inner();</div><div class="line">    console.log(a);</div><div class="line">&#125;</div><div class="line">outer()</div><div class="line"># 1</div><div class="line"># 2</div><div class="line"></div><div class="line">var outer = function()&#123;</div><div class="line">    var a = 1;</div><div class="line">    var inner = function()&#123;</div><div class="line">        var a = 2</div><div class="line">    &#125;;</div><div class="line">    console.log(a);</div><div class="line">    inner();</div><div class="line">    console.log(a);</div><div class="line">&#125;</div><div class="line">outer()</div><div class="line"># 1</div><div class="line"># 1</div></pre></td></tr></table></figure>
+<h4 id="2-3-2-高阶函数"><a href="#2-3-2-高阶函数" class="headerlink" title="2.3.2 高阶函数"></a>2.3.2 高阶函数</h4><ul>
+<li>map</li>
+<li>reduce</li>
+<li>filter</li>
+</ul>
+<h2 id="0x03-中级概念"><a href="#0x03-中级概念" class="headerlink" title="0x03 中级概念"></a>0x03 中级概念</h2><h3 id="3-1-类和对象"><a href="#3-1-类和对象" class="headerlink" title="3.1 类和对象"></a>3.1 类和对象</h3><p>面向对象有三大概念：</p>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h3 id="3-2-模块与包"><a href="#3-2-模块与包" class="headerlink" title="3.2 模块与包"></a>3.2 模块与包</h3><p>模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。</p>
+<p>这里的模块指的是一个包下的函数。</p>
+<h3 id="3-3-错误-调试测试"><a href="#3-3-错误-调试测试" class="headerlink" title="3.3 错误 / 调试测试"></a>3.3 错误 / 调试测试</h3><p>异常处理实际上可以考验一个程序员编写代码的健壮性。</p>
+<p>事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。</p>
+<h3 id="3-4-IO-编程"><a href="#3-4-IO-编程" class="headerlink" title="3.4 IO 编程"></a>3.4 IO 编程</h3><h3 id="3-5-正则表达式"><a href="#3-5-正则表达式" class="headerlink" title="3.5 正则表达式"></a>3.5 正则表达式</h3><h2 id="0x04-高级概念"><a href="#0x04-高级概念" class="headerlink" title="0x04 高级概念"></a>0x04 高级概念</h2><h3 id="4-1-元编程"><a href="#4-1-元编程" class="headerlink" title="4.1 元编程"></a>4.1 元编程</h3><h3 id="4-2-并发编程"><a href="#4-2-并发编程" class="headerlink" title="4.2 并发编程"></a>4.2 并发编程</h3><h4 id="4-2-1-多线程"><a href="#4-2-1-多线程" class="headerlink" title="4.2.1 多线程"></a>4.2.1 多线程</h4><blockquote>
+<p>Python 多线程约等于并发。</p>
+</blockquote>
+<h4 id="4-2-2-多进程"><a href="#4-2-2-多进程" class="headerlink" title="4.2.2 多进程"></a>4.2.2 多进程</h4><h4 id="4-2-3-协程"><a href="#4-2-3-协程" class="headerlink" title="4.2.3 协程"></a>4.2.3 协程</h4><h2 id="0x05-标准库"><a href="#0x05-标准库" class="headerlink" title="0x05 标准库"></a>0x05 标准库</h2><h3 id="5-1-数据结构与算法"><a href="#5-1-数据结构与算法" class="headerlink" title="5.1 数据结构与算法"></a>5.1 数据结构与算法</h3><h3 id="5-2-字符串与文本"><a href="#5-2-字符串与文本" class="headerlink" title="5.2 字符串与文本"></a>5.2 字符串与文本</h3><h3 id="5-3-数字日期与时间"><a href="#5-3-数字日期与时间" class="headerlink" title="5.3 数字日期与时间"></a>5.3 数字日期与时间</h3><h3 id="5-4-迭代器与生成器"><a href="#5-4-迭代器与生成器" class="headerlink" title="5.4 迭代器与生成器"></a>5.4 迭代器与生成器</h3><h3 id="5-3-文本处理"><a href="#5-3-文本处理" class="headerlink" title="5.3 文本处理"></a>5.3 文本处理</h3><h2 id="0x06-可维护性代码"><a href="#0x06-可维护性代码" class="headerlink" title="0x06 可维护性代码"></a>0x06 可维护性代码</h2><h3 id="社区推崇的代码风格"><a href="#社区推崇的代码风格" class="headerlink" title="社区推崇的代码风格"></a>社区推崇的代码风格</h3><h3 id="调试的若干种姿势"><a href="#调试的若干种姿势" class="headerlink" title="调试的若干种姿势"></a>调试的若干种姿势</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
+<li><strong>2017-05-11 19:43:00</strong> : 增加代码质量模块</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;如何学习一门编程语言&quot;&gt;&lt;a href=&quot;#如何学习一门编程语言&quot; class=&quot;headerlink&quot; title=&quot;如何学习一门编程语言&quot;&gt;&lt;/a&gt;如何学习一门编程语言&lt;/h1&gt;&lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class
     
     </summary>
     
