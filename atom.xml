@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2017-11-18T03:29:02.839Z</updated>
+  <updated>2017-11-18T03:29:02.838Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://twocucao.xyz/2017/10/05/ElegantMac/"/>
     <id>http://twocucao.xyz/2017/10/05/ElegantMac/</id>
     <published>2017-10-05T12:06:05.000Z</published>
-    <updated>2017-11-18T03:29:02.839Z</updated>
+    <updated>2017-11-18T03:29:02.838Z</updated>
     
     <content type="html"><![CDATA[<p>当时写这篇文章的时候才接触 mac 没多久，使用快两年之后，再次修订了本文。</p>
 <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>谈及 macOS , 很多人喜欢和 Win 比个高下。在我看来， Win 虽在非编程类生态和易用性比 Mac 要好很多，可专业人士之所以专业是因为他能挑选适合的武器发挥最大的效用，不是吗？</p>
@@ -401,7 +401,7 @@
     <link href="http://twocucao.xyz/2017/10/05/Vue/"/>
     <id>http://twocucao.xyz/2017/10/05/Vue/</id>
     <published>2017-10-05T12:06:05.000Z</published>
-    <updated>2017-11-18T05:22:21.672Z</updated>
+    <updated>2017-11-18T05:22:21.671Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x01-Essential"><a href="#0x01-Essential" class="headerlink" title="0x01 Essential"></a>0x01 Essential</h2><h3 id="1-1-The-Vue-Instance"><a href="#1-1-The-Vue-Instance" class="headerlink" title="1.1 The Vue Instance"></a>1.1 The Vue Instance</h3><p>当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。</p>
 <blockquote>
@@ -918,7 +918,7 @@
     <link href="http://twocucao.xyz/2017/07/04/RethinkingInPython/"/>
     <id>http://twocucao.xyz/2017/07/04/RethinkingInPython/</id>
     <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-11-18T03:32:07.683Z</updated>
+    <updated>2017-11-18T03:32:07.682Z</updated>
     
     <content type="html"><![CDATA[<h1 id="生命苦短-我用-Python"><a href="#生命苦短-我用-Python" class="headerlink" title="生命苦短 我用 Python"></a>生命苦短 我用 Python</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。</p>
 <h2 id="0x01-Python-胡论"><a href="#0x01-Python-胡论" class="headerlink" title="0x01 Python 胡论"></a>0x01 Python 胡论</h2><h3 id="1-1-Python-的独一无二性"><a href="#1-1-Python-的独一无二性" class="headerlink" title="1.1 Python 的独一无二性"></a>1.1 Python 的独一无二性</h3><p>是要用一门编程语言无非是两种原因：</p>
@@ -2486,7 +2486,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/"/>
     <id>http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/</id>
     <published>2017-04-06T12:29:00.000Z</published>
-    <updated>2017-07-05T09:24:12.000Z</updated>
+    <updated>2017-11-18T05:25:16.111Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。</p>
 <p>不仅仅是 Django, 还有 Django 涉及到的：</p>
@@ -2640,7 +2640,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 </blockquote>
 <p>如果以后这个问题比较多的话，参考下面的源码对文本进行修改。</p>
 <p><a href="https://github.com/ASKBOT/django-postgresql-fix-sequences/blob/master/postgresql_sequence_utils/utils.py" target="_blank" rel="external">https://github.com/ASKBOT/django-postgresql-fix-sequences/blob/master/postgresql_sequence_utils/utils.py</a></p>
-<h2 id="WebServer"><a href="#WebServer" class="headerlink" title="WebServer"></a>WebServer</h2><p>目前使用的 WebServer 是用 Nginx 做反向代理，将请求通过 unix socket 转发到 gunicorn，gunicorn 作为 django 实际上的 webserver。</p>
+<h2 id="0x04-WebServer"><a href="#0x04-WebServer" class="headerlink" title="0x04 WebServer"></a>0x04 WebServer</h2><p>目前使用的 WebServer 是用 Nginx 做反向代理，将请求通过 unix socket 转发到 gunicorn，gunicorn 作为 django 实际上的 webserver。</p>
 <h3 id="unix-socket-和-gunicorn-的-REMOTE-ADDR-问题"><a href="#unix-socket-和-gunicorn-的-REMOTE-ADDR-问题" class="headerlink" title="unix socket 和 gunicorn 的 REMOTE_ADDR 问题"></a>unix socket 和 gunicorn 的 REMOTE_ADDR 问题</h3><p>Django Admin 模块在访问 某个页面的时候特别特别慢，而在我的机器上一切正常，我怀疑的是数据库的问题，于是，那么首先要知道数据库的查询语句，于是想借用 django debug toolbar 来 profiling, 于是问题来了，我在局域网模拟真机环境，结果无论如何都无法呈现 Django Debug Toolbar,</p>
 <p>问题八成出现在 Django 配置环境 或者 Nginx 上面（当然，最后发现是 Gunicorn 的锅）. 在</p>
 <p>经过一段时间的排查，认为是 Nginx 的问题，在相关配置添加下面设置 Header,</p>
