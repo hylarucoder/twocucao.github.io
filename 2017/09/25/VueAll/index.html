@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/09/25/VueAll/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00 前言最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 本文仅限于 VueCli 下面的开发：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 package.json 也能代替这个功能。├── RE">
-<meta property="og:updated_time" content="2017-11-19T05:13:02.784Z">
+<meta property="og:updated_time" content="2017-11-21T01:28:03.907Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进击的 VueJS">
 <meta name="twitter:description" content="0x00 前言最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 本文仅限于 VueCli 下面的开发：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 package.json 也能代替这个功能。├── RE">
@@ -423,6 +423,7 @@
 <li>VueJS 2.5.2</li>
 </ul>
 <h2 id="0x01-项目结构"><a href="#0x01-项目结构" class="headerlink" title="0x01 项目结构"></a>0x01 项目结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 根文件</div><div class="line">├── Makefile 恩，其实 package.json 也能代替这个功能。</div><div class="line">├── README.md</div><div class="line">├── build #</div><div class="line">├── config # 环境变量配置</div><div class="line">├── dist # 最后输出</div><div class="line">├── extra # 个人偏好，存放最终用于打包成 IconFont 的 svg</div><div class="line">├── index.html # 可以在这里加首屏 loading, 以及其他预先准备好的样式。</div><div class="line">├── node_modules</div><div class="line">├── package.json # 依赖，开发时</div><div class="line">├── src</div><div class="line">├── static # 存放静态资源</div><div class="line">├── test</div><div class="line">└── yarn.lock</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 在 SRC 下面</div><div class="line">├── App.vue # CORE 组件</div><div class="line">├── api # 相关的 Web API 定义</div><div class="line">├── assets # 静态资源，对于已经压缩的，还是直接放在 Static 下面</div><div class="line">├── components</div><div class="line">├── config # 定义常量名称</div><div class="line">├── filters # 定义过滤器</div><div class="line">├── directive # 定义指令，比如 v-loading</div><div class="line">├── main.js # 用于初始化项目，注册组件等等</div><div class="line">├── mixins # 混合</div><div class="line">├── routes.js # 路由</div><div class="line">├── store # vuex 状态</div><div class="line">└── utils # 工具方法</div></pre></td></tr></table></figure>
 <p>值得一提的就是 main.js 应该要做的事情</p>
 <ul>

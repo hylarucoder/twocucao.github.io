@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/01/05/PostgreSQLCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。 PostGIS 相关的资料参考文章 Geo Processing With Python  安装与基本配置 PostgreSQL 配套工具 PostgreSQL SQL 常用代码片段 Python Driver : psycopg2 , 与两个 ORM ( Django OR">
-<meta property="og:updated_time" content="2017-07-11T03:12:48.000Z">
+<meta property="og:updated_time" content="2017-11-21T06:00:56.557Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PostgreSQL CheatSheet">
 <meta name="twitter:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。 PostGIS 相关的资料参考文章 Geo Processing With Python  安装与基本配置 PostgreSQL 配套工具 PostgreSQL SQL 常用代码片段 Python Driver : psycopg2 , 与两个 ORM ( Django OR">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  469
+                  947
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  4
                 </span>
               
             </div>
@@ -439,7 +439,45 @@
 <h3 id="3-3-DDL-Data-Definition-Language"><a href="#3-3-DDL-Data-Definition-Language" class="headerlink" title="3.3 DDL ( Data Definition Language )"></a>3.3 DDL ( Data Definition Language )</h3><p>CREATE<br>ALTER<br>DROP<br>TRUNCATE<br>COMMENT<br>RENAME</p>
 <h3 id="3-4-DML-Data-Manipulation-Languge"><a href="#3-4-DML-Data-Manipulation-Languge" class="headerlink" title="3.4 DML ( Data Manipulation Languge )"></a>3.4 DML ( Data Manipulation Languge )</h3><p>SELECT<br>INSERT<br>UPDATE<br>DELETE<br>MERGE<br>CALL<br>EXPLAIN PLAN<br>LOCK TABLE</p>
 <h3 id="3-5-TCL-Transaction-Control-Languge"><a href="#3-5-TCL-Transaction-Control-Languge" class="headerlink" title="3.5 TCL ( Transaction Control Languge )"></a>3.5 TCL ( Transaction Control Languge )</h3><h2 id="0x04-常用代码片段"><a href="#0x04-常用代码片段" class="headerlink" title="0x04. 常用代码片段"></a>0x04. 常用代码片段</h2><h3 id="4-1-Tips-And-Hacks"><a href="#4-1-Tips-And-Hacks" class="headerlink" title="4.1. Tips And Hacks"></a>4.1. Tips And Hacks</h3><h4 id="Recursive-Query"><a href="#Recursive-Query" class="headerlink" title="Recursive Query"></a>Recursive Query</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">WITH cte_name(</div><div class="line">    CTE_query_definition -- non-recursive term</div><div class="line">    UNION [ALL]</div><div class="line">    CTE_query_definition -- recursive term</div><div class="line">) SELECT * FROM cte_name;</div></pre></td></tr></table></figure>
-<h3 id="4-2-大数据量运算技巧"><a href="#4-2-大数据量运算技巧" class="headerlink" title="4.2. 大数据量运算技巧"></a>4.2. 大数据量运算技巧</h3><h2 id="0x05-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy"><a href="#0x05-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy" class="headerlink" title="0x05. Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )"></a>0x05. Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )</h2>
+<h3 id="4-2-大数据量运算技巧"><a href="#4-2-大数据量运算技巧" class="headerlink" title="4.2. 大数据量运算技巧"></a>4.2. 大数据量运算技巧</h3><h2 id="0x05-并发优化技巧"><a href="#0x05-并发优化技巧" class="headerlink" title="0x05. 并发优化技巧"></a>0x05. 并发优化技巧</h2><h3 id="5-1-ACID"><a href="#5-1-ACID" class="headerlink" title="5.1 ACID"></a>5.1 ACID</h3><ul>
+<li>Atomicity     : 行不行，给个准话</li>
+<li>Consistency   : 完成时候，数据保持一致（多版本并发控制）</li>
+<li>Isolation     : 事务与事务之间是隔离的。即一事务无法查看另一个事务正在修改的数据（默认，如果不默认这玩意，则隔离程度是可以设置的）</li>
+<li>Durablity     : 就是存下来了。</li>
+</ul>
+<h4 id="多版本并发控制模型"><a href="#多版本并发控制模型" class="headerlink" title="多版本并发控制模型"></a>多版本并发控制模型</h4><ul>
+<li>Each query sees only transactions completed before it started</li>
+<li>On query start, PostgreSQL records:<ul>
+<li>the transaction counter</li>
+<li>all transaction id’s that are in-process</li>
+</ul>
+</li>
+<li>In a multi-statement transaction, a transaction’s own previous queries are also visible</li>
+<li>The above assumes the default read committed isolation level</li>
+</ul>
+<p>使用 MVCC 多版本并发控制比锁定模型的主要优点是在 MVCC 里， 对检索（读）数据的锁要求与写数据的锁要求不冲突， 所以读不会阻塞写，而写也从不阻塞读。<br>在数据库里也有表和行级别的锁定机制， 用于给那些无法轻松接受 MVCC 行为的应用。 不过，恰当地使用 MVCC 总会提供比锁更好地性能。</p>
+<h3 id="5-2-DDL-事务"><a href="#5-2-DDL-事务" class="headerlink" title="5.2 DDL 事务"></a>5.2 DDL 事务</h3><p>DDL 可以多条放在一起，然后直接 DDL, 据说可以在 sharding 时候用….</p>
+<h3 id="5-3-事务使用"><a href="#5-3-事务使用" class="headerlink" title="5.3 事务使用"></a>5.3 事务使用</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">begin</span>;</div><div class="line"><span class="comment">-- insert_somethings;</span></div><div class="line"><span class="keyword">savepoint</span> my_savepoint01;</div><div class="line"><span class="comment">-- wrong ops</span></div><div class="line"><span class="keyword">rollback</span> <span class="keyword">to</span> my_savepoint01;</div><div class="line"><span class="keyword">commit</span>;</div></pre></td></tr></table></figure>
+<h3 id="5-4-事务隔离级别"><a href="#5-4-事务隔离级别" class="headerlink" title="5.4 事务隔离级别"></a>5.4 事务隔离级别</h3><ul>
+<li>READ UNCOMMITED</li>
+<li>READ COMMITED</li>
+<li>REPEATABLE READ</li>
+<li><p>SEARLIZABLE</p>
+</li>
+<li><p>脏读          :  和程序的并发一致 默认是不可能的。</p>
+</li>
+<li>不可重复读    :  一个事物重新读取前面读过的数，但是发现被改过了。能读原来则是可重复读。读新的，则是不可重复读。</li>
+<li>幻读          :  （举一个为赋新词强说愁的例子）比如，先 count 一下，然后依照 count 值遍历 cursor, 结果发现数量发生变化。</li>
+</ul>
+<p>读已提交，是默认。在这里，脏读（不会）、不可重复读（可能）、幻读（可能）。</p>
+<h3 id="5-5-锁机制"><a href="#5-5-锁机制" class="headerlink" title="5.5 锁机制"></a>5.5 锁机制</h3><ul>
+<li>表级锁模式</li>
+<li>表级锁模式</li>
+</ul>
+<h2 id="0x06-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy"><a href="#0x06-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy" class="headerlink" title="0x06. Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )"></a>0x06. Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )</h2><h2 id="0x07-踩坑集"><a href="#0x07-踩坑集" class="headerlink" title="0x07. 踩坑集"></a>0x07. 踩坑集</h2><ul>
+<li>序列问题</li>
+</ul>
+
       
     </div>
 
@@ -658,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安装，配置，基本-shell-命令"><span class="nav-number">2.</span> <span class="nav-text">0x01 安装，配置，基本 shell 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本-Shell-命令"><span class="nav-number">2.3.</span> <span class="nav-text">基本 Shell 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的导入导出"><span class="nav-number">2.4.</span> <span class="nav-text">数据的导入导出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-PostgreSQL-配套工具"><span class="nav-number">3.</span> <span class="nav-text">0x02 PostgreSQL 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-PostgreSQL-SQL-常用代码"><span class="nav-number">4.</span> <span class="nav-text">0x03 PostgreSQL SQL 常用代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-PostgreSQL-相关"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 PostgreSQL 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-DCL-Data-Control-Languge"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 DCL ( Data Control Languge )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-DDL-Data-Definition-Language"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 DDL ( Data Definition Language )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-DML-Data-Manipulation-Languge"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 DML ( Data Manipulation Languge )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-TCL-Transaction-Control-Languge"><span class="nav-number">4.5.</span> <span class="nav-text">3.5 TCL ( Transaction Control Languge )</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-常用代码片段"><span class="nav-number">5.</span> <span class="nav-text">0x04. 常用代码片段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Tips-And-Hacks"><span class="nav-number">5.1.</span> <span class="nav-text">4.1. Tips And Hacks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recursive-Query"><span class="nav-number">5.1.1.</span> <span class="nav-text">Recursive Query</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-大数据量运算技巧"><span class="nav-number">5.2.</span> <span class="nav-text">4.2. 大数据量运算技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy"><span class="nav-number">6.</span> <span class="nav-text">0x05. Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安装，配置，基本-shell-命令"><span class="nav-number">2.</span> <span class="nav-text">0x01 安装，配置，基本 shell 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置"><span class="nav-number">2.2.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本-Shell-命令"><span class="nav-number">2.3.</span> <span class="nav-text">基本 Shell 命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据的导入导出"><span class="nav-number">2.4.</span> <span class="nav-text">数据的导入导出</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-PostgreSQL-配套工具"><span class="nav-number">3.</span> <span class="nav-text">0x02 PostgreSQL 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-PostgreSQL-SQL-常用代码"><span class="nav-number">4.</span> <span class="nav-text">0x03 PostgreSQL SQL 常用代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-PostgreSQL-相关"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 PostgreSQL 相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-DCL-Data-Control-Languge"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 DCL ( Data Control Languge )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-DDL-Data-Definition-Language"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 DDL ( Data Definition Language )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-DML-Data-Manipulation-Languge"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 DML ( Data Manipulation Languge )</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-5-TCL-Transaction-Control-Languge"><span class="nav-number">4.5.</span> <span class="nav-text">3.5 TCL ( Transaction Control Languge )</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-常用代码片段"><span class="nav-number">5.</span> <span class="nav-text">0x04. 常用代码片段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Tips-And-Hacks"><span class="nav-number">5.1.</span> <span class="nav-text">4.1. Tips And Hacks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Recursive-Query"><span class="nav-number">5.1.1.</span> <span class="nav-text">Recursive Query</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-大数据量运算技巧"><span class="nav-number">5.2.</span> <span class="nav-text">4.2. 大数据量运算技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-并发优化技巧"><span class="nav-number">6.</span> <span class="nav-text">0x05. 并发优化技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-ACID"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 ACID</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#多版本并发控制模型"><span class="nav-number">6.1.1.</span> <span class="nav-text">多版本并发控制模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-DDL-事务"><span class="nav-number">6.2.</span> <span class="nav-text">5.2 DDL 事务</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-3-事务使用"><span class="nav-number">6.3.</span> <span class="nav-text">5.3 事务使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-4-事务隔离级别"><span class="nav-number">6.4.</span> <span class="nav-text">5.4 事务隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-5-锁机制"><span class="nav-number">6.5.</span> <span class="nav-text">5.5 锁机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-Python-Driver-psycopg2-与两个-ORM-Django-ORM-SQLAlchemy"><span class="nav-number">7.</span> <span class="nav-text">0x06. Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-踩坑集"><span class="nav-number">8.</span> <span class="nav-text">0x07. 踩坑集</span></a></li></ol></div>
             
 
           </div>

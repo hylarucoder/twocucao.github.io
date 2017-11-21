@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2017-11-18T03:29:02.839Z</updated>
+  <updated>2017-11-18T03:29:02.838Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://twocucao.xyz/2017/10/05/ElegantMac/"/>
     <id>http://twocucao.xyz/2017/10/05/ElegantMac/</id>
     <published>2017-10-05T12:06:05.000Z</published>
-    <updated>2017-11-18T03:29:02.839Z</updated>
+    <updated>2017-11-18T03:29:02.838Z</updated>
     
     <content type="html"><![CDATA[<p>当时写这篇文章的时候才接触 mac 没多久，使用快两年之后，再次修订了本文。</p>
 <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>谈及 macOS , 很多人喜欢和 Win 比个高下。在我看来， Win 虽在非编程类生态和易用性比 Mac 要好很多，可专业人士之所以专业是因为他能挑选适合的武器发挥最大的效用，不是吗？</p>
@@ -401,7 +401,7 @@
     <link href="http://twocucao.xyz/2017/09/25/VueAll/"/>
     <id>http://twocucao.xyz/2017/09/25/VueAll/</id>
     <published>2017-09-25T12:06:05.000Z</published>
-    <updated>2017-11-19T05:13:02.784Z</updated>
+    <updated>2017-11-21T01:28:03.907Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。</p>
 <p>本文仅限于 VueCli 下面的开发：</p>
@@ -409,6 +409,7 @@
 <li>VueJS 2.5.2</li>
 </ul>
 <h2 id="0x01-项目结构"><a href="#0x01-项目结构" class="headerlink" title="0x01 项目结构"></a>0x01 项目结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 根文件</div><div class="line">├── Makefile 恩，其实 package.json 也能代替这个功能。</div><div class="line">├── README.md</div><div class="line">├── build #</div><div class="line">├── config # 环境变量配置</div><div class="line">├── dist # 最后输出</div><div class="line">├── extra # 个人偏好，存放最终用于打包成 IconFont 的 svg</div><div class="line">├── index.html # 可以在这里加首屏 loading, 以及其他预先准备好的样式。</div><div class="line">├── node_modules</div><div class="line">├── package.json # 依赖，开发时</div><div class="line">├── src</div><div class="line">├── static # 存放静态资源</div><div class="line">├── test</div><div class="line">└── yarn.lock</div></pre></td></tr></table></figure>
+<a id="more"></a>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 在 SRC 下面</div><div class="line">├── App.vue # CORE 组件</div><div class="line">├── api # 相关的 Web API 定义</div><div class="line">├── assets # 静态资源，对于已经压缩的，还是直接放在 Static 下面</div><div class="line">├── components</div><div class="line">├── config # 定义常量名称</div><div class="line">├── filters # 定义过滤器</div><div class="line">├── directive # 定义指令，比如 v-loading</div><div class="line">├── main.js # 用于初始化项目，注册组件等等</div><div class="line">├── mixins # 混合</div><div class="line">├── routes.js # 路由</div><div class="line">├── store # vuex 状态</div><div class="line">└── utils # 工具方法</div></pre></td></tr></table></figure>
 <p>值得一提的就是 main.js 应该要做的事情</p>
 <ul>
@@ -489,7 +490,12 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。&lt;/p&gt;
+&lt;p&gt;本文仅限于 VueCli 下面的开发：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;VueJS 2.5.2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&quot;0x01-项目结构&quot;&gt;&lt;a href=&quot;#0x01-项目结构&quot; class=&quot;headerlink&quot; title=&quot;0x01 项目结构&quot;&gt;&lt;/a&gt;0x01 项目结构&lt;/h2&gt;&lt;figure class=&quot;highlight plain&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;2&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;3&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;4&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;5&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;6&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;7&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;8&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;9&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;10&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;11&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;12&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;13&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;14&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;# 根文件&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── Makefile 恩，其实 package.json 也能代替这个功能。&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── README.md&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── build #&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── config # 环境变量配置&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── dist # 最后输出&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── extra # 个人偏好，存放最终用于打包成 IconFont 的 svg&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── index.html # 可以在这里加首屏 loading, 以及其他预先准备好的样式。&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── node_modules&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── package.json # 依赖，开发时&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── src&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── static # 存放静态资源&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;├── test&lt;/div&gt;&lt;div class=&quot;line&quot;&gt;└── yarn.lock&lt;/div&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
     
     </summary>
     
@@ -505,7 +511,7 @@
     <link href="http://twocucao.xyz/2017/09/15/Vue/"/>
     <id>http://twocucao.xyz/2017/09/15/Vue/</id>
     <published>2017-09-15T12:06:05.000Z</published>
-    <updated>2017-11-19T00:16:40.785Z</updated>
+    <updated>2017-11-21T01:27:51.680Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x01-Essential"><a href="#0x01-Essential" class="headerlink" title="0x01 Essential"></a>0x01 Essential</h2><h3 id="1-1-The-Vue-Instance"><a href="#1-1-The-Vue-Instance" class="headerlink" title="1.1 The Vue Instance"></a>1.1 The Vue Instance</h3><p>当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。</p>
 <blockquote>
@@ -513,6 +519,7 @@
 </blockquote>
 <p>而实例被创建之时，会自带前缀为 $ 的一系列属性和方法</p>
 <h4 id="1-1-1-内置方法和属性"><a href="#1-1-1-内置方法和属性" class="headerlink" title="1.1.1 内置方法和属性"></a>1.1.1 内置方法和属性</h4><h5 id="Instance-Properties"><a href="#Instance-Properties" class="headerlink" title="Instance Properties"></a>Instance Properties</h5><p>vm.$data<br>vm.$props<br>vm.$el<br>vm.$options<br>vm.$parent<br>vm.$root<br>vm.$children<br>vm.$slots<br>vm.$scopedSlots<br>vm.$refs<br>vm.$isServer<br>vm.$attrs<br>vm.$listeners</p>
+<a id="more"></a>
 <h5 id="Instance-Methods-Data"><a href="#Instance-Methods-Data" class="headerlink" title="Instance Methods / Data"></a>Instance Methods / Data</h5><p>vm.$watch<br>vm.$set<br>vm.$delete</p>
 <h5 id="Instance-Methods-Events"><a href="#Instance-Methods-Events" class="headerlink" title="Instance Methods / Events"></a>Instance Methods / Events</h5><p>vm.$on<br>vm.$once<br>vm.$off<br>vm.$emit</p>
 <h5 id="Instance-Methods-Lifecycle"><a href="#Instance-Methods-Lifecycle" class="headerlink" title="Instance Methods / Lifecycle"></a>Instance Methods / Lifecycle</h5><p>vm.$mount<br>vm.$forceUpdate<br>vm.$nextTick<br>vm.$destroy</p>
@@ -603,7 +610,12 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;0x01-Essential&quot;&gt;&lt;a href=&quot;#0x01-Essential&quot; class=&quot;headerlink&quot; title=&quot;0x01 Essential&quot;&gt;&lt;/a&gt;0x01 Essential&lt;/h2&gt;&lt;h3 id=&quot;1-1-The-Vue-Insta
+      &lt;h2 id=&quot;0x01-Essential&quot;&gt;&lt;a href=&quot;#0x01-Essential&quot; class=&quot;headerlink&quot; title=&quot;0x01 Essential&quot;&gt;&lt;/a&gt;0x01 Essential&lt;/h2&gt;&lt;h3 id=&quot;1-1-The-Vue-Instance&quot;&gt;&lt;a href=&quot;#1-1-The-Vue-Instance&quot; class=&quot;headerlink&quot; title=&quot;1.1 The Vue Instance&quot;&gt;&lt;/a&gt;1.1 The Vue Instance&lt;/h3&gt;&lt;p&gt;当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;而创建之后添加赋值新属性，则不 Reactive&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;而实例被创建之时，会自带前缀为 $ 的一系列属性和方法&lt;/p&gt;
+&lt;h4 id=&quot;1-1-1-内置方法和属性&quot;&gt;&lt;a href=&quot;#1-1-1-内置方法和属性&quot; class=&quot;headerlink&quot; title=&quot;1.1.1 内置方法和属性&quot;&gt;&lt;/a&gt;1.1.1 内置方法和属性&lt;/h4&gt;&lt;h5 id=&quot;Instance-Properties&quot;&gt;&lt;a href=&quot;#Instance-Properties&quot; class=&quot;headerlink&quot; title=&quot;Instance Properties&quot;&gt;&lt;/a&gt;Instance Properties&lt;/h5&gt;&lt;p&gt;vm.$data&lt;br&gt;vm.$props&lt;br&gt;vm.$el&lt;br&gt;vm.$options&lt;br&gt;vm.$parent&lt;br&gt;vm.$root&lt;br&gt;vm.$children&lt;br&gt;vm.$slots&lt;br&gt;vm.$scopedSlots&lt;br&gt;vm.$refs&lt;br&gt;vm.$isServer&lt;br&gt;vm.$attrs&lt;br&gt;vm.$listeners&lt;/p&gt;
     
     </summary>
     
@@ -988,59 +1000,11 @@
   </entry>
   
   <entry>
-    <title>ReThinking In JavaScript</title>
-    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
-    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
-    <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-07-05T06:29:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
-<a id="more"></a>
-<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
-<p>因为太火，不得不认真学习一下。</p>
-<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
-<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
-<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
-<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
-<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
-<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
-<li>String</li>
-<li>Boolean</li>
-<li>Symbol (new in ES2015)</li>
-<li>Object<ul>
-<li>Function</li>
-<li>Array</li>
-<li>Date</li>
-<li>RegExp</li>
-</ul>
-</li>
-<li>null</li>
-<li>undefined</li>
-</ul>
-<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
-<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
-    
-    
-      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ReThinking In Python</title>
     <link href="http://twocucao.xyz/2017/07/04/RethinkingInPython/"/>
     <id>http://twocucao.xyz/2017/07/04/RethinkingInPython/</id>
     <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-11-18T03:32:07.683Z</updated>
+    <updated>2017-11-21T01:27:43.372Z</updated>
     
     <content type="html"><![CDATA[<h1 id="生命苦短-我用-Python"><a href="#生命苦短-我用-Python" class="headerlink" title="生命苦短 我用 Python"></a>生命苦短 我用 Python</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。</p>
 <h2 id="0x01-Python-胡论"><a href="#0x01-Python-胡论" class="headerlink" title="0x01 Python 胡论"></a>0x01 Python 胡论</h2><h3 id="1-1-Python-的独一无二性"><a href="#1-1-Python-的独一无二性" class="headerlink" title="1.1 Python 的独一无二性"></a>1.1 Python 的独一无二性</h3><p>是要用一门编程语言无非是两种原因：</p>
@@ -1053,6 +1017,7 @@
 <p>Python 写起来真的特别舒服，语法简洁，第三方库丰富，而且也比较火。</p>
 <p>有什么东西比，写代码效率高、生态圈好还重要了。</p>
 <p>生态圈好，比如 Web 开发用 Django/Flask , 数据抓取用 Requests , 数据分析清洗用 Pandas, 机器学习。</p>
+<a id="more"></a>
 <h3 id="1-2-工具链"><a href="#1-2-工具链" class="headerlink" title="1.2 工具链"></a>1.2 工具链</h3><p><a href="./ch04/s03_Pythonista_的工具集.md">Pythonista 的工具集</a></p>
 <h3 id="1-3-文档"><a href="#1-3-文档" class="headerlink" title="1.3 文档"></a>1.3 文档</h3><h3 id="1-4-社区"><a href="#1-4-社区" class="headerlink" title="1.4 社区"></a>1.4 社区</h3><h3 id="1-5-书籍"><a href="#1-5-书籍" class="headerlink" title="1.5 书籍"></a>1.5 书籍</h3><h2 id="0x02-基础概念"><a href="#0x02-基础概念" class="headerlink" title="0x02 基础概念"></a>0x02 基础概念</h2><h3 id="2-1-数据类型"><a href="#2-1-数据类型" class="headerlink" title="2.1 数据类型"></a>2.1 数据类型</h3><h4 id="2-1-1-常量"><a href="#2-1-1-常量" class="headerlink" title="2.1.1 常量"></a>2.1.1 常量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">False</div><div class="line">True</div><div class="line">None</div><div class="line">NotImplemented</div><div class="line">Elilipsis ...</div></pre></td></tr></table></figure>
 <h5 id="布尔常量"><a href="#布尔常量" class="headerlink" title="布尔常量"></a>布尔常量</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">None</div><div class="line">False</div><div class="line">0 0.0 0j</div><div class="line">&apos;&apos; () []</div><div class="line">&#123;&#125;</div><div class="line">一个对象 __bool__() = False , 如果上一个为 True 则__len__()</div></pre></td></tr></table></figure>
@@ -1363,7 +1328,65 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     <summary type="html">
     
-      &lt;h1 id=&quot;生命苦短-我用-Python&quot;&gt;&lt;a href=&quot;#生命苦短-我用-Python&quot; class=&quot;headerlink&quot; title=&quot;生命苦短 我用 Python&quot;&gt;&lt;/a&gt;生命苦短 我用 Python&lt;/h1&gt;&lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=
+      &lt;h1 id=&quot;生命苦短-我用-Python&quot;&gt;&lt;a href=&quot;#生命苦短-我用-Python&quot; class=&quot;headerlink&quot; title=&quot;生命苦短 我用 Python&quot;&gt;&lt;/a&gt;生命苦短 我用 Python&lt;/h1&gt;&lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。&lt;/p&gt;
+&lt;h2 id=&quot;0x01-Python-胡论&quot;&gt;&lt;a href=&quot;#0x01-Python-胡论&quot; class=&quot;headerlink&quot; title=&quot;0x01 Python 胡论&quot;&gt;&lt;/a&gt;0x01 Python 胡论&lt;/h2&gt;&lt;h3 id=&quot;1-1-Python-的独一无二性&quot;&gt;&lt;a href=&quot;#1-1-Python-的独一无二性&quot; class=&quot;headerlink&quot; title=&quot;1.1 Python 的独一无二性&quot;&gt;&lt;/a&gt;1.1 Python 的独一无二性&lt;/h3&gt;&lt;p&gt;是要用一门编程语言无非是两种原因：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;这门技术很火，能挣钱&lt;/li&gt;
+&lt;li&gt;写起来很舒服，开发效率高&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这也是我在涉猎了很多编程语言为什么选择了 Python 和 TypeScript 作为自己的主要技能树。&lt;/p&gt;
+&lt;p&gt;Python 具备这两点，TS （更加准确的说是 JavaScript）具备前一点。&lt;/p&gt;
+&lt;p&gt;Python 写起来真的特别舒服，语法简洁，第三方库丰富，而且也比较火。&lt;/p&gt;
+&lt;p&gt;有什么东西比，写代码效率高、生态圈好还重要了。&lt;/p&gt;
+&lt;p&gt;生态圈好，比如 Web 开发用 Django/Flask , 数据抓取用 Requests , 数据分析清洗用 Pandas, 机器学习。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+    
+    
+      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ReThinking In JavaScript</title>
+    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
+    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
+    <published>2017-07-04T12:08:21.000Z</published>
+    <updated>2017-07-05T06:29:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
+<a id="more"></a>
+<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
+<p>因为太火，不得不认真学习一下。</p>
+<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
+<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
+<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
+<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
+<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
+<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
+<li>String</li>
+<li>Boolean</li>
+<li>Symbol (new in ES2015)</li>
+<li>Object<ul>
+<li>Function</li>
+<li>Array</li>
+<li>Date</li>
+<li>RegExp</li>
+</ul>
+</li>
+<li>null</li>
+<li>undefined</li>
+</ul>
+<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
+<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
     
     </summary>
     
@@ -2560,7 +2583,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/"/>
     <id>http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/</id>
     <published>2017-04-06T12:29:00.000Z</published>
-    <updated>2017-11-18T05:25:16.112Z</updated>
+    <updated>2017-11-18T05:25:16.111Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。</p>
 <p>不仅仅是 Django, 还有 Django 涉及到的：</p>
