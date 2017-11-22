@@ -92,13 +92,14 @@
     <link href="http://twocucao.xyz/2017/10/05/ElegantMac/"/>
     <id>http://twocucao.xyz/2017/10/05/ElegantMac/</id>
     <published>2017-10-05T12:06:05.000Z</published>
-    <updated>2017-11-18T03:29:02.838Z</updated>
+    <updated>2017-11-22T08:44:08.761Z</updated>
     
     <content type="html"><![CDATA[<p>当时写这篇文章的时候才接触 mac 没多久，使用快两年之后，再次修订了本文。</p>
 <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>谈及 macOS , 很多人喜欢和 Win 比个高下。在我看来， Win 虽在非编程类生态和易用性比 Mac 要好很多，可专业人士之所以专业是因为他能挑选适合的武器发挥最大的效用，不是吗？</p>
 <blockquote>
 <p>适合自己的，能让自己用最大效率生产或者是娱乐的，才是更好的工具。</p>
 </blockquote>
+<a id="more"></a>
 <p>Win 的优点如下：</p>
 <ul>
 <li>优良的兼容性。</li>
@@ -425,7 +426,18 @@
 <blockquote>
 <p>这代表着，只要一个就行了。</p>
 </blockquote>
-<h3 id="2-4-必备软件-之-dotfiles"><a href="#2-4-必备软件-之-dotfiles" class="headerlink" title="2.4 必备软件 之 dotfiles"></a>2.4 必备软件 之 dotfiles</h3><p>详细内容请见</p>
+<h4 id="2-3-3-JavaScript-与-Node-环境"><a href="#2-3-3-JavaScript-与-Node-环境" class="headerlink" title="2.3.3 JavaScript 与 Node 环境"></a>2.3.3 JavaScript 与 Node 环境</h4><h5 id="nvm-amp-amp-npm-amp-amp-yarn"><a href="#nvm-amp-amp-npm-amp-amp-yarn" class="headerlink" title="nvm &amp;&amp; npm &amp;&amp; yarn"></a>nvm &amp;&amp; npm &amp;&amp; yarn</h5><p>nvm 主要用户管理 node 的版本，linux / mac only ,windower 最好下载 node 版本安装，记得配置环境变量。</p>
+<p>npm 主要用户管理包，国内人喜欢使用 cnpm, 但是 cnpm 包管理比较渣，所以一般情况下选择 Yarn 配合管理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">npm install cnpm</div><div class="line">cnpm install yarn -g</div><div class="line"><span class="comment"># 查看下载源</span></div><div class="line"><span class="comment"># yarn config get registry</span></div><div class="line">yarn config set registry https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
+<p>yarn 在使用包管理的时候会分析依赖，这对总是 BUG 不断的 node_module 简直是福音。</p>
+<h4 id="2-3-4-Java"><a href="#2-3-4-Java" class="headerlink" title="2.3.4 Java"></a>2.3.4 Java</h4><p>Java 环境安装稍微有一丢丢蛋疼。特别是多版本管理。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TODO: 以后补充 JAVA 环境安装</div></pre></td></tr></table></figure>
+<h3 id="2-4-必备配置-之-dotfiles"><a href="#2-4-必备配置-之-dotfiles" class="headerlink" title="2.4 必备配置 之 dotfiles"></a>2.4 必备配置 之 dotfiles</h3><p>详细内容请见 <a href="https://github.com/twocucao/yadotfiles" target="_blank" rel="external">yadotfiles</a></p>
+<ul>
+<li>依照我个人的习惯，在 OhMyZsh 基础上增加了个人习惯的环境变量的配置，一些函数的封装。</li>
+</ul>
+<p>比如，当我在写本文的目录中输入 todos, 就可以查看该我在写文章的时候里面挖了多少个还没有填上去的 TODO（坑）。如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">3e383c54 (Micheal Gardner 2017-11-18 12:40:38 +0800 422) ## 0xEE TODO TO LIST</div><div class="line">ae86b7cb (Micheal Gardner 2017-11-19 21:39:49 +0800 245) ### 5. TODO</div><div class="line">c0d51990 (Micheal Gardner 2017-11-22 16:42:08 +0800 552) TODO: 以后补充 JAVA 环境安装</div><div class="line">c0d51990 (Micheal Gardner 2017-11-22 16:42:08 +0800 561) 比如，当我在写本文的目录中输入 todos, 就可以查看该我在写文章的时候里面挖了多少个还没有填上去的 TODO（坑）。</div></pre></td></tr></table></figure>
 <h2 id="0x03-踩坑史"><a href="#0x03-踩坑史" class="headerlink" title="0x03 踩坑史"></a>0x03 踩坑史</h2><h3 id="3-1-日常类"><a href="#3-1-日常类" class="headerlink" title="3.1 日常类"></a>3.1 日常类</h3><h4 id="01-时间机器无法完成备份"><a href="#01-时间机器无法完成备份" class="headerlink" title="01. 时间机器无法完成备份"></a>01. 时间机器无法完成备份</h4><p>我有定期备份的习惯，在一次备份中，意外的发现怎么备份都无法备份完毕，经过几次测试：</p>
 <ol>
 <li>我首先猜测是硬盘问题，换了一块硬盘，问题依旧。</li>
@@ -457,7 +469,10 @@
     <summary type="html">
     
       &lt;p&gt;当时写这篇文章的时候才接触 mac 没多久，使用快两年之后，再次修订了本文。&lt;/p&gt;
-&lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;谈及 m
+&lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;谈及 macOS , 很多人喜欢和 Win 比个高下。在我看来， Win 虽在非编程类生态和易用性比 Mac 要好很多，可专业人士之所以专业是因为他能挑选适合的武器发挥最大的效用，不是吗？&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;适合自己的，能让自己用最大效率生产或者是娱乐的，才是更好的工具。&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
@@ -795,27 +810,18 @@
     <link href="http://twocucao.xyz/2017/07/17/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%9A%84%E5%B8%B8%E8%AF%86%E7%AC%94%E8%AE%B0/"/>
     <id>http://twocucao.xyz/2017/07/17/数据科学的常识笔记/</id>
     <published>2017-07-17T12:00:00.000Z</published>
-    <updated>2017-07-18T05:27:38.000Z</updated>
+    <updated>2017-11-22T10:25:31.498Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>2017 年 07 月，为了解统计学和机器学习的基本常识，开了这篇文章。</p>
 <p>当然，仅仅是为了了解，所以也就写的随性（不严谨）一些，想到哪里就记录到哪里。</p>
 <p>特此记录。</p>
 <a id="more"></a>
-<p>本文目录</p>
-<ul>
-<li>数据科学的含义与内容</li>
-<li>Vertor 分析</li>
-<li>Raster 分析</li>
-<li>Vertor 与 Raster</li>
-</ul>
-<h2 id="0x00-数据科学的含义与内容"><a href="#0x00-数据科学的含义与内容" class="headerlink" title="0x00. 数据科学的含义与内容"></a>0x00. 数据科学的含义与内容</h2><h3 id="0-1-WHAT"><a href="#0-1-WHAT" class="headerlink" title="0.1. WHAT?"></a>0.1. WHAT?</h3><blockquote>
+<h2 id="0x01-数据科学的含义与内容"><a href="#0x01-数据科学的含义与内容" class="headerlink" title="0x01. 数据科学的含义与内容"></a>0x01. 数据科学的含义与内容</h2><h3 id="0-1-WHAT"><a href="#0-1-WHAT" class="headerlink" title="0.1. WHAT?"></a>0.1. WHAT?</h3><blockquote>
 <p>To gain insights into data through computation, statistics , and visualization.</p>
 </blockquote>
 <p>Josh Blumenstock 认为 数据科学家就是比计算机科学家多点统计技术，比统计学家多点计算机技术。</p>
 <p>Shlomo Aragmon 认为 数据科学家 = 统计学家 + 程序员 + 教练 + 讲故事者 + 艺术家</p>
-<hr>
-<p>一些准则</p>
-<ul>
+<h4 id="一些准则"><a href="#一些准则" class="headerlink" title="一些准则"></a>一些准则</h4><ul>
 <li>多数据源</li>
 <li>懂得数据如何被采集</li>
 <li>对数据进行权重</li>
@@ -824,17 +830,13 @@
 <li>像 Bayesian 一样思考，像 frequentist 一样检验</li>
 <li>良好的沟通能力（代表什么，如何可视化，检验，理解结论）</li>
 </ul>
-<hr>
-<p>一些挑战</p>
-<ul>
+<h4 id="一些挑战"><a href="#一些挑战" class="headerlink" title="一些挑战"></a>一些挑战</h4><ul>
 <li>数据量大</li>
 <li>高维诅咒</li>
 <li>数据缺失</li>
 <li>需要避免过度拟合 (test data vs. training data)</li>
 </ul>
-<hr>
-<p>Data Science 涉及到哪些领域呢？</p>
-<ul>
+<h4 id="Data-Science-涉及到哪些领域呢？"><a href="#Data-Science-涉及到哪些领域呢？" class="headerlink" title="Data Science 涉及到哪些领域呢？"></a>Data Science 涉及到哪些领域呢？</h4><ul>
 <li>Data Management</li>
 <li>Data Mining</li>
 <li>Machine Learning</li>
@@ -872,6 +874,16 @@
 <li>相关与回归</li>
 </ul>
 </li>
+<li><p>数据挖掘基本扫盲</p>
+<ul>
+<li>推荐系统入门</li>
+<li>隐式评价和基于物品的过滤算法</li>
+<li>分类与分类进阶</li>
+<li>朴素贝叶斯</li>
+<li>朴素贝叶斯算法和非结构化文本</li>
+<li>聚类</li>
+</ul>
+</li>
 <li><p>机器学习</p>
 <ul>
 <li>分类与回归</li>
@@ -886,10 +898,17 @@
 <li>聚类</li>
 </ul>
 </li>
-<li>深度学习</li>
+<li><p>深度学习</p>
+</li>
+<li><p>自然语言 NLP</p>
+<ul>
+<li>中文分词</li>
+<li>新词发现</li>
 </ul>
-<h2 id="0x01-统计学与数据分析"><a href="#0x01-统计学与数据分析" class="headerlink" title="0x01. 统计学与数据分析"></a>0x01. 统计学与数据分析</h2><h3 id="1-1-信息可视化"><a href="#1-1-信息可视化" class="headerlink" title="1.1. 信息可视化"></a>1.1. 信息可视化</h3><p>建议直接阅读 AntV 的可视化基础 <a href="https://antv.alipay.com/vis/doc/chart/index.html" target="_blank" rel="external">https://antv.alipay.com/vis/doc/chart/index.html</a></p>
-<h3 id="1-2-集中趋势的量度"><a href="#1-2-集中趋势的量度" class="headerlink" title="1.2. 集中趋势的量度"></a>1.2. 集中趋势的量度</h3><blockquote>
+</li>
+</ul>
+<h2 id="0x02-统计学与数据分析"><a href="#0x02-统计学与数据分析" class="headerlink" title="0x02  统计学与数据分析"></a>0x02  统计学与数据分析</h2><h3 id="2-1-信息可视化"><a href="#2-1-信息可视化" class="headerlink" title="2.1  信息可视化"></a>2.1  信息可视化</h3><p>建议直接阅读 AntV 的可视化基础 <a href="https://antv.alipay.com/vis/doc/chart/index.html" target="_blank" rel="external">https://antv.alipay.com/vis/doc/chart/index.html</a></p>
+<h3 id="2-2-集中趋势的量度"><a href="#2-2-集中趋势的量度" class="headerlink" title="2.2  集中趋势的量度"></a>2.2  集中趋势的量度</h3><blockquote>
 <p>目的：找出能够反映集中趋势的一个数值</p>
 </blockquote>
 <p>PS: 可以用分布图看它的均值和平均数是否落在集中趋势，数据向右偏斜，均值位于中位数右侧</p>
@@ -898,18 +917,39 @@
 <li>中位数</li>
 <li>众数</li>
 </ul>
-<h3 id="1-3-分散性与变异的量度"><a href="#1-3-分散性与变异的量度" class="headerlink" title="1.3. 分散性与变异的量度"></a>1.3. 分散性与变异的量度</h3><blockquote>
+<h3 id="2-3-分散性与变异的量度"><a href="#2-3-分散性与变异的量度" class="headerlink" title="2.3 分散性与变异的量度"></a>2.3 分散性与变异的量度</h3><blockquote>
 <p>目的：仅有均值，中位数，众数是不够的，还需要距和差</p>
 </blockquote>
 <ul>
 <li>全距：MAX（上界） - MIN（下界）</li>
 <li>按照四分位书的切分方式： 下界 - 下四分位数目 (Q1) - 中位数 - 上四分位数 - 上界</li>
 <li>四分位距：上四分位数 - 下四分位数 （当然，可以使用箱线图进行绘制，从而判断出数据集中的地方）</li>
-<li>百分位距</li>
+<li>百分位距：在统计的时候，往往需要避免极值对数据的影响</li>
 <li>方差：量度数据分散性</li>
-<li>标准差：典型值与均值的距离，体现了数值的变异程度. 即加入有一批数据的标准差为 3cm, 代表着平均而言，这些数值与均值的距离为 3cm</li>
+<li>标准差：典型值与均值的距离，体现了数值的变异程度。即加入有一批数据的标准差为 3cm, 代表着平均而言，这些数值与均值的距离为 3cm</li>
 </ul>
-<hr>
+<h2 id="0x03-数据挖掘"><a href="#0x03-数据挖掘" class="headerlink" title="0x03 数据挖掘"></a>0x03 数据挖掘</h2><p>数据挖掘是深一步的分析统计。</p>
+<p>基本的距离算法</p>
+<blockquote>
+<p>擦擦擦，LaTeX 公式 居然不能用…</p>
+</blockquote>
+<ul>
+<li>曼哈顿距离       如果在 n 维坐标上，即绝对值。</li>
+<li>欧几里得距离     就是其实就是 n 维勾股定理。</li>
+</ul>
+<p>曼哈顿距离和欧几里得距离在判断 同样是 n 维的数据是完全 OK 的。即总量为 m 部电影的情况下，k 个人同样评价了 n 部电影，比较容易算出距离。</p>
+<p>但，n 纬和比他更小的纬度算出的距离，似乎并不应该相等。 如何处理这些缺失的数据呢？如果是我的话，会设定一个默认值吧。（半值，均值）</p>
+<ul>
+<li>闵科夫斯基距离</li>
+</ul>
+<blockquote>
+<p>r 值越大，单个维度的差值大小会对整体距离有更大的影响。</p>
+</blockquote>
+<ul>
+<li>皮尔森相关系数</li>
+<li>余弦相似度</li>
+</ul>
+<h2 id="0x03-机器学习"><a href="#0x03-机器学习" class="headerlink" title="0x03. 机器学习"></a>0x03. 机器学习</h2><h2 id="0x04-深度学习"><a href="#0x04-深度学习" class="headerlink" title="0x04. 深度学习"></a>0x04. 深度学习</h2><h2 id="0x05-自然语言-NLP"><a href="#0x05-自然语言-NLP" class="headerlink" title="0x05. 自然语言 NLP"></a>0x05. 自然语言 NLP</h2><hr>
 <p>ChangeLog:</p>
 <ul>
 <li><strong>2017-07-17</strong> 重修文字</li>
@@ -1671,12 +1711,13 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/05/29/%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8ETensorFlow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/"/>
     <id>http://twocucao.xyz/2017/05/29/一个基于TensorFlow的分类器/</id>
     <published>2017-05-29T00:46:00.000Z</published>
-    <updated>2017-06-14T10:06:46.000Z</updated>
+    <updated>2017-11-22T08:59:46.140Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。<br>所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。<br>本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。</p>
 <p>本文的目的是：</p>
 <blockquote>
 <p>通过 TensorFlow 训练一个小型的分类器，用这个分类器通过照片识别出明星的姓名。</p>
+<p>备注：本文训练效果太差</p>
 </blockquote>
 <p>即我们要训练一个小 AI, 这个小 AI 能分辨欢乐颂里面的五美：</p>
 <ul>
@@ -1690,13 +1731,13 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 <p>注意：本文主要在 MacOS 上进行测试。<br>本文的目录结构如下：</p>
 <ul>
 <li>准备训练数据和测试数据</li>
-<li>TensorFlow 环境配置 </li>
+<li>TensorFlow 环境配置</li>
 <li>开始训练图片</li>
 <li>对图片进行分类</li>
 <li>文章回顾</li>
 <li>参考链接</li>
 </ul>
-<p>首先克隆我的 Repo,（我的 Repo 在这里)[<a href="https://github.com/twocucao/the-machine" target="_blank" rel="external">https://github.com/twocucao/the-machine</a>] .</p>
+<p>首先克隆我的 Repo,（我的 Repo 在这里）[<a href="https://github.com/twocucao/the-machine" target="_blank" rel="external">https://github.com/twocucao/the-machine</a>] .</p>
 <p>仓库结构大致如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">├── README.md</div><div class="line">├── compose</div><div class="line">│   └── tensorflow</div><div class="line">│       ├── Dockerfile</div><div class="line">│       └── Dockerfile-dev</div><div class="line">├── config</div><div class="line">├── doc</div><div class="line">├── image_classifier</div><div class="line">│   ├── __init__.py</div><div class="line">│   ├── label_dir.py</div><div class="line">│   ├── label_image.py</div><div class="line">│   ├── retrain.py</div><div class="line">│   └── train.sh</div><div class="line">└── bootstrap.sh</div></pre></td></tr></table></figure></p>
 <h2 id="0x01-准备训练数据和测试数据"><a href="#0x01-准备训练数据和测试数据" class="headerlink" title="0x01 准备训练数据和测试数据"></a>0x01 准备训练数据和测试数据</h2><p>准备训练数据，数据从哪里来呢？从百度来。我们从百度抓取大约 5 组图片，每组图片大约 1000 张图片，并且从每组里面留下 900 组作为训练数据，抽出 100 作为测试数据。</p>
 <h3 id="1-1-抓取图片"><a href="#1-1-抓取图片" class="headerlink" title="1.1 抓取图片"></a>1.1 抓取图片</h3><p>抓取代码放在代码仓库中，比较简单，下载即可用。</p>
@@ -1716,7 +1757,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 <p><img src="http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png" alt=""></p>
 <p>我们先移除非 JPEG 的图片。如果是 mac 系统需要先安装 jpeginfo , brew install jpeginfo 即可。<br>进入 /Users/twocucao/Codes/Repos/image_classifier_train 执行下面脚本 <strong>去除非 JPG 的图片</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">find . -iname &quot;*.jpg&quot; -exec jpeginfo -c &#123;&#125; \; | grep -E &quot;WARNING|ERROR&quot; &gt; need_delete.sh</div><div class="line">cat need_delete.sh | awk &apos;&#123;print $1&#125;&apos; | xargs rm</div><div class="line">rm need_delete.sh</div></pre></td></tr></table></figure>
-<p>好了接下来，我们需要到每一个文件夹下进行人工<del>鉴黄</del>检验图片是不是五美，比如，到 liutao 文件夹下检查，删除图片基本上没有清晰面容的照片。<br>为了速度，我们把图片转成缩略图大致看一下,去除明显不是五美的照片,我们进行下一步的筛选.</p>
+<p>好了接下来，我们需要到每一个文件夹下进行人工<del>鉴黄</del>检验图片是不是五美，比如，到 liutao 文件夹下检查，删除图片基本上没有清晰面容的照片。<br>为了速度，我们把图片转成缩略图大致看一下，去除明显不是五美的照片，我们进行下一步的筛选。</p>
 <h3 id="1-3-找出对应的头像"><a href="#1-3-找出对应的头像" class="headerlink" title="1.3 找出对应的头像"></a>1.3 找出对应的头像</h3><p>我们需要从图片库中选出五美的头像来</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pyenv global system</div><div class="line"></div><div class="line">brew reinstall boost-python --with-python3 --without-python</div><div class="line">conda install -c menpo dlib=19.4</div></pre></td></tr></table></figure>
 <h2 id="0x02-TensorFlow-环境配置"><a href="#0x02-TensorFlow-环境配置" class="headerlink" title="0x02 TensorFlow 环境配置"></a>0x02 TensorFlow 环境配置</h2><h3 id="2-1-Docker-的安装和镜像加速"><a href="#2-1-Docker-的安装和镜像加速" class="headerlink" title="2.1 Docker 的安装和镜像加速"></a>2.1 Docker 的安装和镜像加速</h3><p>本文需要使用 Docker 作为环境配置，也正是因为如此，我们可以在很快的时间内搭建起来 tensorflow 的运行环境。目测，Docker 也是未来几年内搭建环境分发环境的首选。<br>Docker 下载不必多说，需要补充一句的是，我们可以在阿里云账户上使用一个 registry 对 Docker 镜像进行加速。<br>在阿里云的容器界面获取加速链接填到 docker 里面即可。如图。</p>
@@ -1731,9 +1772,10 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 <blockquote>
 <p>那么，当 TensorFlow 在训练的时候，我们要谈些什么？</p>
 </blockquote>
-<p>Google 开源了 Inception 模型，这个模型从 ImageNet 的上千个分类的图片训练而来，而我们所做的工作，便是在此基础上做最后的增量训练。然而，我们只用来区分女明星，似乎这个 Inception 的模型有点大材小用？<br>好，训练结束之后我们查看一下文件夹 /Users/twocucao/Codes/Repos/image_classifier_train 下，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">├── bottlenecks</div><div class="line">│   ├── jiangxin</div><div class="line">│   ├── liutao</div><div class="line">│   ├── qiaoxin</div><div class="line">│   ├── wangziwen</div><div class="line">│   └── yangzi</div><div class="line">├── data</div><div class="line">│   ├── jiangxin</div><div class="line">│   ├── liutao</div><div class="line">│   ├── qiaoxin</div><div class="line">│   ├── wangziwen</div><div class="line">│   └── yangzi</div><div class="line">├── inception</div><div class="line">│   ├── LICENSE</div><div class="line">│   ├── classify_image_graph_def.pb</div><div class="line">│   ├── cropped_panda.jpg</div><div class="line">│   ├── imagenet_2012_challenge_label_map_proto.pbtxt</div><div class="line">│   ├── imagenet_synset_to_human_label_map.txt</div><div class="line">│   └── inception-2015-12-05.tgz</div><div class="line">├── retrained_graph.pb</div><div class="line">├── retrained_labels.txt</div><div class="line">└── test_data</div><div class="line">    ├── src</div><div class="line">    └── target</div></pre></td></tr></table></figure></p>
+<p>Google 开源了 Inception 模型，这个模型从 ImageNet 的上千个分类的图片训练而来，而我们所做的工作，便是在此基础上做最后的增量训练。然而，我们只用来区分女明星，似乎这个 Inception 的模型有点大材小用？好，训练结束之后我们查看一下文件夹 /Users/twocucao/Codes/Repos/image_classifier_train 下，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">├── bottlenecks</div><div class="line">│   ├── jiangxin</div><div class="line">│   ├── liutao</div><div class="line">│   ├── qiaoxin</div><div class="line">│   ├── wangziwen</div><div class="line">│   └── yangzi</div><div class="line">├── data</div><div class="line">│   ├── jiangxin</div><div class="line">│   ├── liutao</div><div class="line">│   ├── qiaoxin</div><div class="line">│   ├── wangziwen</div><div class="line">│   └── yangzi</div><div class="line">├── inception</div><div class="line">│   ├── LICENSE</div><div class="line">│   ├── classify_image_graph_def.pb</div><div class="line">│   ├── cropped_panda.jpg</div><div class="line">│   ├── imagenet_2012_challenge_label_map_proto.pbtxt</div><div class="line">│   ├── imagenet_synset_to_human_label_map.txt</div><div class="line">│   └── inception-2015-12-05.tgz</div><div class="line">├── retrained_graph.pb</div><div class="line">├── retrained_labels.txt</div><div class="line">└── test_data</div><div class="line">    ├── src</div><div class="line">    └── target</div></pre></td></tr></table></figure>
 <p>Bottlenecks 文件夹为我们将每一张 JPG 转成矩阵的文本<br>Inception 为 Google 开源的模型文件。<br>retrained_graph.pb 为训练出来的图的模型文件。<br>retrained_labels.txt 为标签。</p>
-<p>如下图不断刷出的一坨坨的文字是什么呢?</p>
+<p>如下图不断刷出的一坨坨的文字是什么呢？</p>
 <ul>
 <li>时间 , 无需多说</li>
 <li>当前训练次数</li>
@@ -1741,7 +1783,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 <li>Cross entropy = 0.499145</li>
 <li>Validation accuracy = 52.0% (N=100)</li>
 </ul>
-<p>看到 Train accuracy &gt;&gt; Validation accuracy 估计是模型过度拟合了,嗯,看来这个模型还是有点问题的.</p>
+<p>看到 Train accuracy &gt;&gt; Validation accuracy 估计是模型过度拟合了，嗯，看来这个模型还是有点问题的。</p>
 <h2 id="0x04-对图片进行分类"><a href="#0x04-对图片进行分类" class="headerlink" title="0x04 对图片进行分类"></a>0x04 对图片进行分类</h2><h3 id="4-1-开始分类"><a href="#4-1-开始分类" class="headerlink" title="4.1 开始分类"></a>4.1 开始分类</h3><h3 id="4-2-对分类结果进行评估"><a href="#4-2-对分类结果进行评估" class="headerlink" title="4.2 对分类结果进行评估"></a>4.2 对分类结果进行评估</h3><h2 id="0x05-文章回顾"><a href="#0x05-文章回顾" class="headerlink" title="0x05 文章回顾"></a>0x05 文章回顾</h2><h2 id="0x06-参考链接"><a href="#0x06-参考链接" class="headerlink" title="0x06 参考链接"></a>0x06 参考链接</h2><ul>
 <li><a href="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html" target="_blank" rel="external">https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html</a></li>
 </ul>
@@ -1753,6 +1795,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 &lt;p&gt;本文的目的是：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;通过 TensorFlow 训练一个小型的分类器，用这个分类器通过照片识别出明星的姓名。&lt;/p&gt;
+&lt;p&gt;备注：本文训练效果太差&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;即我们要训练一个小 AI, 这个小 AI 能分辨欢乐颂里面的五美：&lt;/p&gt;
 &lt;ul&gt;

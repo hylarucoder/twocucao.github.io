@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
@@ -105,7 +105,7 @@
 <meta property="og:description" content="0x00 前言这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Rep">
 <meta property="og:image" content="http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png">
 <meta property="og:image" content="http://oriw7hkjj.bkt.clouddn.com/WX20170529-162953@2x.png">
-<meta property="og:updated_time" content="2017-06-14T10:06:46.000Z">
+<meta property="og:updated_time" content="2017-11-22T08:59:46.140Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个基于 TensorFlow 的图片分类器">
 <meta name="twitter:description" content="0x00 前言这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Rep">
@@ -143,7 +143,7 @@
 
 
 
-  <title>一个基于 TensorFlow 的图片分类器 | MG的编程小屋</title>
+  <title>一个基于 TensorFlow 的图片分类器 | MG的编程小屋</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -154,7 +154,7 @@
 
 
 
-  <script type="text/javascript">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,699
+                  1,709
                 </span>
               
 
@@ -402,7 +402,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  6
+                  7
                 </span>
               
             </div>
@@ -424,6 +424,7 @@
 <p>本文的目的是：</p>
 <blockquote>
 <p>通过 TensorFlow 训练一个小型的分类器，用这个分类器通过照片识别出明星的姓名。</p>
+<p>备注：本文训练效果太差</p>
 </blockquote>
 <p>即我们要训练一个小 AI, 这个小 AI 能分辨欢乐颂里面的五美：</p>
 <ul>
@@ -437,13 +438,13 @@
 <p>注意：本文主要在 MacOS 上进行测试。<br>本文的目录结构如下：</p>
 <ul>
 <li>准备训练数据和测试数据</li>
-<li>TensorFlow 环境配置 </li>
+<li>TensorFlow 环境配置</li>
 <li>开始训练图片</li>
 <li>对图片进行分类</li>
 <li>文章回顾</li>
 <li>参考链接</li>
 </ul>
-<p>首先克隆我的 Repo,（我的 Repo 在这里)[<a href="https://github.com/twocucao/the-machine" target="_blank" rel="external">https://github.com/twocucao/the-machine</a>] .</p>
+<p>首先克隆我的 Repo,（我的 Repo 在这里）[<a href="https://github.com/twocucao/the-machine" target="_blank" rel="external">https://github.com/twocucao/the-machine</a>] .</p>
 <p>仓库结构大致如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">├── README.md</div><div class="line">├── compose</div><div class="line">│   └── tensorflow</div><div class="line">│       ├── Dockerfile</div><div class="line">│       └── Dockerfile-dev</div><div class="line">├── config</div><div class="line">├── doc</div><div class="line">├── image_classifier</div><div class="line">│   ├── __init__.py</div><div class="line">│   ├── label_dir.py</div><div class="line">│   ├── label_image.py</div><div class="line">│   ├── retrain.py</div><div class="line">│   └── train.sh</div><div class="line">└── bootstrap.sh</div></pre></td></tr></table></figure></p>
 <h2 id="0x01-准备训练数据和测试数据"><a href="#0x01-准备训练数据和测试数据" class="headerlink" title="0x01 准备训练数据和测试数据"></a>0x01 准备训练数据和测试数据</h2><p>准备训练数据，数据从哪里来呢？从百度来。我们从百度抓取大约 5 组图片，每组图片大约 1000 张图片，并且从每组里面留下 900 组作为训练数据，抽出 100 作为测试数据。</p>
 <h3 id="1-1-抓取图片"><a href="#1-1-抓取图片" class="headerlink" title="1.1 抓取图片"></a>1.1 抓取图片</h3><p>抓取代码放在代码仓库中，比较简单，下载即可用。</p>
@@ -463,7 +464,7 @@
 <p><img src="http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png" alt=""></p>
 <p>我们先移除非 JPEG 的图片。如果是 mac 系统需要先安装 jpeginfo , brew install jpeginfo 即可。<br>进入 /Users/twocucao/Codes/Repos/image_classifier_train 执行下面脚本 <strong>去除非 JPG 的图片</strong></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">find . -iname &quot;*.jpg&quot; -exec jpeginfo -c &#123;&#125; \; | grep -E &quot;WARNING|ERROR&quot; &gt; need_delete.sh</div><div class="line">cat need_delete.sh | awk &apos;&#123;print $1&#125;&apos; | xargs rm</div><div class="line">rm need_delete.sh</div></pre></td></tr></table></figure>
-<p>好了接下来，我们需要到每一个文件夹下进行人工<del>鉴黄</del>检验图片是不是五美，比如，到 liutao 文件夹下检查，删除图片基本上没有清晰面容的照片。<br>为了速度，我们把图片转成缩略图大致看一下,去除明显不是五美的照片,我们进行下一步的筛选.</p>
+<p>好了接下来，我们需要到每一个文件夹下进行人工<del>鉴黄</del>检验图片是不是五美，比如，到 liutao 文件夹下检查，删除图片基本上没有清晰面容的照片。<br>为了速度，我们把图片转成缩略图大致看一下，去除明显不是五美的照片，我们进行下一步的筛选。</p>
 <h3 id="1-3-找出对应的头像"><a href="#1-3-找出对应的头像" class="headerlink" title="1.3 找出对应的头像"></a>1.3 找出对应的头像</h3><p>我们需要从图片库中选出五美的头像来</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pyenv global system</div><div class="line"></div><div class="line">brew reinstall boost-python --with-python3 --without-python</div><div class="line">conda install -c menpo dlib=19.4</div></pre></td></tr></table></figure>
 <h2 id="0x02-TensorFlow-环境配置"><a href="#0x02-TensorFlow-环境配置" class="headerlink" title="0x02 TensorFlow 环境配置"></a>0x02 TensorFlow 环境配置</h2><h3 id="2-1-Docker-的安装和镜像加速"><a href="#2-1-Docker-的安装和镜像加速" class="headerlink" title="2.1 Docker 的安装和镜像加速"></a>2.1 Docker 的安装和镜像加速</h3><p>本文需要使用 Docker 作为环境配置，也正是因为如此，我们可以在很快的时间内搭建起来 tensorflow 的运行环境。目测，Docker 也是未来几年内搭建环境分发环境的首选。<br>Docker 下载不必多说，需要补充一句的是，我们可以在阿里云账户上使用一个 registry 对 Docker 镜像进行加速。<br>在阿里云的容器界面获取加速链接填到 docker 里面即可。如图。</p>
@@ -478,9 +479,10 @@
 <blockquote>
 <p>那么，当 TensorFlow 在训练的时候，我们要谈些什么？</p>
 </blockquote>
-<p>Google 开源了 Inception 模型，这个模型从 ImageNet 的上千个分类的图片训练而来，而我们所做的工作，便是在此基础上做最后的增量训练。然而，我们只用来区分女明星，似乎这个 Inception 的模型有点大材小用？<br>好，训练结束之后我们查看一下文件夹 /Users/twocucao/Codes/Repos/image_classifier_train 下，<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">├── bottlenecks</div><div class="line">│   ├── jiangxin</div><div class="line">│   ├── liutao</div><div class="line">│   ├── qiaoxin</div><div class="line">│   ├── wangziwen</div><div class="line">│   └── yangzi</div><div class="line">├── data</div><div class="line">│   ├── jiangxin</div><div class="line">│   ├── liutao</div><div class="line">│   ├── qiaoxin</div><div class="line">│   ├── wangziwen</div><div class="line">│   └── yangzi</div><div class="line">├── inception</div><div class="line">│   ├── LICENSE</div><div class="line">│   ├── classify_image_graph_def.pb</div><div class="line">│   ├── cropped_panda.jpg</div><div class="line">│   ├── imagenet_2012_challenge_label_map_proto.pbtxt</div><div class="line">│   ├── imagenet_synset_to_human_label_map.txt</div><div class="line">│   └── inception-2015-12-05.tgz</div><div class="line">├── retrained_graph.pb</div><div class="line">├── retrained_labels.txt</div><div class="line">└── test_data</div><div class="line">    ├── src</div><div class="line">    └── target</div></pre></td></tr></table></figure></p>
+<p>Google 开源了 Inception 模型，这个模型从 ImageNet 的上千个分类的图片训练而来，而我们所做的工作，便是在此基础上做最后的增量训练。然而，我们只用来区分女明星，似乎这个 Inception 的模型有点大材小用？好，训练结束之后我们查看一下文件夹 /Users/twocucao/Codes/Repos/image_classifier_train 下，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">├── bottlenecks</div><div class="line">│   ├── jiangxin</div><div class="line">│   ├── liutao</div><div class="line">│   ├── qiaoxin</div><div class="line">│   ├── wangziwen</div><div class="line">│   └── yangzi</div><div class="line">├── data</div><div class="line">│   ├── jiangxin</div><div class="line">│   ├── liutao</div><div class="line">│   ├── qiaoxin</div><div class="line">│   ├── wangziwen</div><div class="line">│   └── yangzi</div><div class="line">├── inception</div><div class="line">│   ├── LICENSE</div><div class="line">│   ├── classify_image_graph_def.pb</div><div class="line">│   ├── cropped_panda.jpg</div><div class="line">│   ├── imagenet_2012_challenge_label_map_proto.pbtxt</div><div class="line">│   ├── imagenet_synset_to_human_label_map.txt</div><div class="line">│   └── inception-2015-12-05.tgz</div><div class="line">├── retrained_graph.pb</div><div class="line">├── retrained_labels.txt</div><div class="line">└── test_data</div><div class="line">    ├── src</div><div class="line">    └── target</div></pre></td></tr></table></figure>
 <p>Bottlenecks 文件夹为我们将每一张 JPG 转成矩阵的文本<br>Inception 为 Google 开源的模型文件。<br>retrained_graph.pb 为训练出来的图的模型文件。<br>retrained_labels.txt 为标签。</p>
-<p>如下图不断刷出的一坨坨的文字是什么呢?</p>
+<p>如下图不断刷出的一坨坨的文字是什么呢？</p>
 <ul>
 <li>时间 , 无需多说</li>
 <li>当前训练次数</li>
@@ -488,7 +490,7 @@
 <li>Cross entropy = 0.499145</li>
 <li>Validation accuracy = 52.0% (N=100)</li>
 </ul>
-<p>看到 Train accuracy &gt;&gt; Validation accuracy 估计是模型过度拟合了,嗯,看来这个模型还是有点问题的.</p>
+<p>看到 Train accuracy &gt;&gt; Validation accuracy 估计是模型过度拟合了，嗯，看来这个模型还是有点问题的。</p>
 <h2 id="0x04-对图片进行分类"><a href="#0x04-对图片进行分类" class="headerlink" title="0x04 对图片进行分类"></a>0x04 对图片进行分类</h2><h3 id="4-1-开始分类"><a href="#4-1-开始分类" class="headerlink" title="4.1 开始分类"></a>4.1 开始分类</h3><h3 id="4-2-对分类结果进行评估"><a href="#4-2-对分类结果进行评估" class="headerlink" title="4.2 对分类结果进行评估"></a>4.2 对分类结果进行评估</h3><h2 id="0x05-文章回顾"><a href="#0x05-文章回顾" class="headerlink" title="0x05 文章回顾"></a>0x05 文章回顾</h2><h2 id="0x06-参考链接"><a href="#0x06-参考链接" class="headerlink" title="0x06 参考链接"></a>0x06 参考链接</h2><ul>
 <li><a href="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html" target="_blank" rel="external">https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html</a></li>
 </ul>
@@ -882,10 +884,32 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
   <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
-  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
   
