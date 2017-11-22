@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2017-11-18T03:29:02.838Z</updated>
+  <updated>2017-11-22T07:46:00.569Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -14,6 +14,78 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Ubuntu16.04 Cheatsheet</title>
+    <link href="http://twocucao.xyz/2017/10/20/UbuntuCheatSheet/"/>
+    <id>http://twocucao.xyz/2017/10/20/UbuntuCheatSheet/</id>
+    <published>2017-10-20T10:41:47.000Z</published>
+    <updated>2017-11-22T07:46:00.569Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。</p>
+<p>不定期更新。</p>
+<p>桌面版和 Server 版的操作系统版本均为 Ubuntu 16.04 , 数据库为 MySQL / PostgreSQL , Python 3.5.2 开发和运行环境。</p>
+<p>由于部分 Mac 上面的配置与 Ubuntu 上配置几乎相同，特别是一些桌面端，跨平台，强烈建议使用。</p>
+<p>每次来一个新同事就需要给他们的环境进行配置，配置其实挺麻烦的，虽然可以花一天的时间配置一遍，但总觉得如果多来几个同事的话我基本上就废掉了。<br>于是抛弃 bash 脚本，修改为 Ansible 脚本，将当前的配置任务彻底脚本化。</p>
+<a id="more"></a>
+<h2 id="0x01-Ubuntu-桌面版开发基本配置"><a href="#0x01-Ubuntu-桌面版开发基本配置" class="headerlink" title="0x01 Ubuntu 桌面版开发基本配置"></a>0x01 Ubuntu 桌面版开发基本配置</h2><p>语言级别配置，请参考我的其他文章，如何优雅的使用 MAC</p>
+<h2 id="0x02-Ubuntu-服务器版本基本配置"><a href="#0x02-Ubuntu-服务器版本基本配置" class="headerlink" title="0x02 Ubuntu 服务器版本基本配置"></a>0x02 Ubuntu 服务器版本基本配置</h2><p>第一步，更新源：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># deb cdrom:[Ubuntu 16.04 LTS _Xenial Xerus_ - Release amd64 (20160420.1)]/ xenial main restricted</span></div><div class="line">deb-src http://archive.ubuntu.com/ubuntu xenial main restricted <span class="comment">#Added by software-properties</span></div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial main restricted multiverse universe <span class="comment">#Added by software-properties</span></div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted multiverse universe <span class="comment">#Added by software-properties</span></div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial universe</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-updates multiverse</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse <span class="comment">#Added by software-properties</span></div><div class="line">deb http://archive.canonical.com/ubuntu xenial partner</div><div class="line">deb-src http://archive.canonical.com/ubuntu xenial partner</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted</div><div class="line">deb-src http://mirrors.aliyun.com/ubuntu/ xenial-security main restricted multiverse universe <span class="comment">#Added by software-properties</span></div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security universe</div><div class="line">deb http://mirrors.aliyun.com/ubuntu/ xenial-security multiverse</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 更换源</span></div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev</div><div class="line">sudo apt-get install zsh tree htop</div><div class="line">sudo apt-get install build-essential acl ntp htop git libpq-dev libmysqlclient-dev libffi-dev libfreetype6-dev libjpeg8-dev liblcms2-dev libtiff5-dev libwebp-dev libxml2-dev libxslt1-dev tcl8.6-dev tk8.6-dev zlib1g-dev python-dev python-pip python-pycurl python-tk ipython supervisor python3.5 python3.5-dev python3-pip python3-lxml python3-tk ipython3</div><div class="line">sudo apt-get install mysql-server mysql-client libmysqlclient-dev slurm</div><div class="line"></div><div class="line"><span class="comment"># GIT 配置</span></div><div class="line">git config --global color.ui <span class="literal">true</span></div><div class="line">git config --global user.name <span class="string">"twocucao"</span></div><div class="line">git config --global user.email <span class="string">"twocucao@gmail.com"</span></div><div class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">"twocucao@gmail.com"</span></div></pre></td></tr></table></figure>
+<h3 id="2-1-设置无登录密钥"><a href="#2-1-设置无登录密钥" class="headerlink" title="2.1 设置无登录密钥"></a>2.1 设置无登录密钥</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 刚开始用了一个很蠢的方法</span></div><div class="line">scp ~/.ssh/id_rsa.pub twocucao@192.168.2.156:.ssh/id_rsa.pub</div><div class="line">ssh twocucao@192.168.2.156 <span class="string">"mkdir .ssh;chmod 0700 .ssh"</span></div><div class="line"></div><div class="line"><span class="comment"># 现在想想，可以直接 ssh-copy-id</span></div><div class="line">ssh-copy-id twocucao@192.168.2.156</div></pre></td></tr></table></figure>
+<p><a href="http://askubuntu.com/questions/46930/how-can-i-set-up-password-less-ssh-login" target="_blank" rel="external">http://askubuntu.com/questions/46930/how-can-i-set-up-password-less-ssh-login</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 服务器</span></div><div class="line"></div><div class="line">sudo apt-get install openssh-server</div><div class="line">sudo vi /etc/ssh/sshd_config <span class="comment"># 找到 PermitRootLogin no 一行，改为 PermitRootLogin yes</span></div><div class="line">sudo service ssh restart</div><div class="line"></div><div class="line">sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev</div><div class="line"></div><div class="line">sudo adduser deploy</div><div class="line">sudo adduser deploy sudo</div><div class="line">su deploy</div><div class="line"></div><div class="line"><span class="comment"># 开发机复制 ssh 公钥。</span></div><div class="line"><span class="comment"># 可以用下面的命令，汗，之前都是在服务器上面创建.ssh 文件夹，然后在本地 scp 拷贝过去，现在想想这个方法还是挺笨的。</span></div><div class="line"><span class="comment"># 就像这样</span></div><div class="line">scp ~/.ssh/id_rsa.pub deploy@192.168.1.143:/webapps/xxxapp/.ssh/authorized_keys</div><div class="line"><span class="comment"># 其实这个命令就 OK 了。</span></div><div class="line">ssh-copy-id deploy@IPADDRESS</div><div class="line"></div><div class="line"><span class="comment"># 服务器</span></div><div class="line">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7</div><div class="line">sudo apt-get install -y apt-transport-https ca-certificates</div><div class="line"></div><div class="line">sudo apt-get install -y nginx-extras</div><div class="line">sudo service nginx start</div></pre></td></tr></table></figure></p>
+<h2 id="0x02-Ubuntu-服务器版本基本配置-1"><a href="#0x02-Ubuntu-服务器版本基本配置-1" class="headerlink" title="0x02 Ubuntu 服务器版本基本配置"></a>0x02 Ubuntu 服务器版本基本配置</h2><h2 id="0x03-了解-Linux-服务器运行情况"><a href="#0x03-了解-Linux-服务器运行情况" class="headerlink" title="0x03 了解 Linux 服务器运行情况"></a>0x03 了解 Linux 服务器运行情况</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 运行时间</span></div><div class="line">uptime</div><div class="line"></div><div class="line"><span class="comment"># 内存情况</span></div><div class="line">free -h</div><div class="line"></div><div class="line"><span class="comment"># 网络类</span></div><div class="line"><span class="comment">## 实时流量监控</span></div><div class="line">iftop</div><div class="line"><span class="comment">## 进程占用带宽</span></div><div class="line">nethogs</div><div class="line"><span class="comment">## sudo nethogs eth0</span></div><div class="line">iptraf</div><div class="line"></div><div class="line"><span class="comment"># 磁盘类</span></div><div class="line">iotop</div><div class="line"><span class="comment">## 当 dstat 的 wai 字段值比较大时，可以使用 iotop 找出哪些进程出了问题</span></div><div class="line"></div><div class="line"><span class="comment"># 综合类 之 监控进程，进程管理</span></div><div class="line">top</div><div class="line">htop</div><div class="line">glance <span class="comment"># PS , 这个监控粒度更细</span></div><div class="line"></div><div class="line"><span class="comment"># 综合类 可以取代 vmstat , iostat , netstat , ifstat</span></div><div class="line">dstat</div><div class="line"></div><div class="line"><span class="comment"># 综合类</span></div><div class="line"><span class="comment"># 约等于 strace + tcpdump + htop + iftop + lsof</span></div><div class="line">sysdig</div></pre></td></tr></table></figure>
+<h2 id="0x04-踩坑集合"><a href="#0x04-踩坑集合" class="headerlink" title="0x04 踩坑集合"></a>0x04 踩坑集合</h2><p>前段时间公司新买了一台 Thinkpad Server 作为内网服务器。</p>
+<p>于是在安装 Ubuntu16.04 的时候就遇到了一个令人哭笑不得的问题。</p>
+<blockquote>
+<p><strong>无法正常安装</strong> 报 ubuntu 的 initramfs 错误。</p>
+</blockquote>
+<p>于是，我下意识的去 Google 问题，在 Ubuntu 的一个论坛上面找到了对应的答案：</p>
+<blockquote>
+<p>是 Superblock 的问题。</p>
+</blockquote>
+<p>对应措施如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 找到分区号</span></div><div class="line">sudo fdisk <span class="_">-l</span>|grep Linux|grep -Ev <span class="string">'swap'</span></div><div class="line"><span class="comment"># 找到超级块</span></div><div class="line">sudo dumpe2fs /dev/sda2 | grep superblock</div><div class="line"><span class="comment"># 修复超级块</span></div><div class="line">sudo fsck -b 32768 /dev/sda2 -y</div></pre></td></tr></table></figure>
+<p>然后重启即可。</p>
+<p>当然，问题并没有结束，还是在老地方发现 initramfs 错误。</p>
+<p>就在我哭笑不得的准备最后一搏，实在不行就安装 CentOS 作为系统的时候，由于安装时候选择 language 的时候选择英文，结果居然安装成功了。</p>
+<blockquote>
+<p>所以，解决问题的方式就是<strong>不要使用简体中文进行安装</strong>.</p>
+</blockquote>
+<p>虽然这是一个很奇怪的问题，至今我也没有探索出来具体的原因。想到问题居然是因为安装的时候因为选择了中文安装。</p>
+<blockquote>
+<p>这个问题还真的是…..</p>
+</blockquote>
+<p><strong>最后知道真相的我眼泪掉下来</strong></p>
+<h3 id="3-1-磁盘问题"><a href="#3-1-磁盘问题" class="headerlink" title="3.1 磁盘问题"></a>3.1 磁盘问题</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">df -h 查看磁盘块占用的文件（block）</div><div class="line">df -i 查看索引节点的占用（Inodes）</div><div class="line">find / -size +100M |xargs ls -lh</div><div class="line"># 删除 5 天前的文件</div><div class="line">find /path/to/files* -mtime +5 -exec rm &#123;&#125; \;</div><div class="line">du -h</div><div class="line">rm xxx.log</div><div class="line">echo &quot;&quot; &gt; xxx.log</div></pre></td></tr></table></figure>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-03-19</strong> 重修文字，准备整理安装配置将结果转化为 Ansible PlayBook</li>
+<li><strong>2017-10-20</strong> 重修文字，准备整理安装配置将结果转化为 Ansible PlayBook</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。&lt;/p&gt;
+&lt;p&gt;不定期更新。&lt;/p&gt;
+&lt;p&gt;桌面版和 Server 版的操作系统版本均为 Ubuntu 16.04 , 数据库为 MySQL / PostgreSQL , Python 3.5.2 开发和运行环境。&lt;/p&gt;
+&lt;p&gt;由于部分 Mac 上面的配置与 Ubuntu 上配置几乎相同，特别是一些桌面端，跨平台，强烈建议使用。&lt;/p&gt;
+&lt;p&gt;每次来一个新同事就需要给他们的环境进行配置，配置其实挺麻烦的，虽然可以花一天的时间配置一遍，但总觉得如果多来几个同事的话我基本上就废掉了。&lt;br&gt;于是抛弃 bash 脚本，修改为 Ansible 脚本，将当前的配置任务彻底脚本化。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Linux" scheme="http://twocucao.xyz/categories/Linux/"/>
+    
+    
+      <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
+    
+      <category term="工作自动化" scheme="http://twocucao.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
+    
+      <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
+    
+  </entry>
   
   <entry>
     <title>如何优雅地使用 macOS</title>
@@ -401,7 +473,7 @@
     <link href="http://twocucao.xyz/2017/09/25/VueAll/"/>
     <id>http://twocucao.xyz/2017/09/25/VueAll/</id>
     <published>2017-09-25T12:06:05.000Z</published>
-    <updated>2017-11-21T01:28:03.907Z</updated>
+    <updated>2017-11-22T08:12:30.010Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。</p>
 <p>本文仅限于 VueCli 下面的开发：</p>
@@ -419,7 +491,7 @@
 <li>注册路由切换的时候的调用的各类方法</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># components</div><div class="line">├── fed-commons 定义通用型组件，比如手风琴，tab 卡，全局的卡片，一般为了开发效率，如果是 PC 端的话，建议使用 ElementUI,ElementUI 不满足要求的时候，再考虑自己封装组件。</div><div class="line">└── views</div><div class="line">    ├── auth</div><div class="line">        ├── Login.vue</div><div class="line">        ├── Register.vue</div><div class="line">    ├── commons</div><div class="line">        ├── 404.vue</div><div class="line">        ├── 401.vue</div><div class="line">    ├── core</div><div class="line">        ├── Dashboard.vue</div><div class="line">        ├── Content.vue</div><div class="line">    ├── pages</div><div class="line">        ├── AModule</div><div class="line">            ├── AModulePart1Componennt</div><div class="line">                ├── Charts01.vue</div><div class="line">                ├── Map02.vue</div><div class="line">                ├── Editor03.vue</div><div class="line">            ├── AModulePart1.vue</div><div class="line">            ├── AModulePart2.vue</div><div class="line">        ├── BModule</div><div class="line">            ├── BModulePart1.vue</div><div class="line">            ├── BModulePart2.vue</div></pre></td></tr></table></figure>
-<p>指的一提的是，AModulePart1.vue 页面的同级 AModulePart1Componennt 下面如果有多个 ECharts 图表，实际上可以通过 mixin 来达到减少代码量的目的。</p>
+<p>值得一提的是，AModulePart1.vue 页面的同级 AModulePart1Componennt 下面如果有多个 ECharts 图表，实际上可以通过 mixin 来达到减少代码量的目的。</p>
 <h2 id="0x02-一些零散技巧"><a href="#0x02-一些零散技巧" class="headerlink" title="0x02 一些零散技巧"></a>0x02 一些零散技巧</h2><h3 id="1-离线-IconFont"><a href="#1-离线-IconFont" class="headerlink" title="1. 离线 IconFont"></a>1. 离线 IconFont</h3><p>不太喜欢用在线的东西，当然，这并不是说 iconfont 不好，只是个人偏好而已。</p>
 <p>所以，我就查找了一些资料，正好之前研究过某个网站的反爬机制，研究了一下他们的 iconfont, 知道了 font-carrier, 然后调用 node 脚本打包字体文件，并在这个过程中自动生成对应的 iconfont.css</p>
 <p>最后的结果就是，当我放一个文件到 svg 文件夹下面的时候，比如 bank.svg , 我执行一下脚本，生成对应的字体文件，在 vue 组件中直接输入</p>
@@ -438,7 +510,9 @@
 <blockquote>
 <p>但这不应该是 Webpack 本身就应该做的吗？为嘛还要配置，还要不伦不类的生成一个配置文件和一个 JS 文件，再从 index.html 里面导入？</p>
 </blockquote>
-<p>当然，后来出来了一个 <a href="https://github.com/asfktz/autodll-webpack-plugin" target="_blank" rel="external">https://github.com/asfktz/autodll-webpack-plugin</a> 尝试了之后。感觉很赞。可惜在 mac 上一切安好，Windows 上晴天霹雳，debug 了一下，发现是这个库的一个依赖对 windows 的路径处理好像还有点小问题。而公司的前端小伙伴是 Windowser, 只好作罢。</p>
+<p>当然，后来出来了一个 <a href="https://github.com/asfktz/autodll-webpack-plugin" target="_blank" rel="external">https://github.com/asfktz/autodll-webpack-plugin</a> 尝试了之后。感觉很赞。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// windows 系统不兼容，暂时去掉</span></div><div class="line"><span class="keyword">new</span> AutoDllPlugin(&#123;</div><div class="line">  <span class="attr">inject</span>: <span class="literal">true</span>, <span class="comment">// will inject the DLL bundles to index.html</span></div><div class="line">  filename: <span class="string">'[name]_[hash].js'</span>,</div><div class="line">  <span class="attr">path</span>: <span class="string">'./static/js/'</span>,</div><div class="line">  <span class="attr">entry</span>: &#123;</div><div class="line">    <span class="attr">vendor</span>: [</div><div class="line">      <span class="string">'mapbox-gl'</span>,</div><div class="line">      <span class="string">'d3'</span>,</div><div class="line">      <span class="string">'echarts'</span>,</div><div class="line">      <span class="string">'echarts-gl'</span>,</div><div class="line">      <span class="string">'leaflet'</span>,</div><div class="line">      <span class="string">'axios'</span>,</div><div class="line">      <span class="string">'vue'</span>,</div><div class="line">      <span class="string">'vue-router'</span>,</div><div class="line">      <span class="string">'vuex'</span></div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">plugins</span>: [</div><div class="line">    <span class="keyword">new</span> webpack.optimize.UglifyJsPlugin(&#123;</div><div class="line">      <span class="attr">compress</span>: &#123;</div><div class="line">        <span class="attr">comparisons</span>: <span class="literal">false</span>  <span class="comment">// don't optimize comparisons</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">sourceMap</span>: <span class="literal">true</span></div><div class="line">    &#125;),</div><div class="line">  ]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>可惜在 mac 上一切安好，Windows 上晴天霹雳，debug 了一下，发现是这个库的一个依赖库对 windows 的路径处理好像还有点小问题。而公司的前端小伙伴是 Windowser, 只好作罢。</p>
 <p>Macer 可以先用试试，至于 Windowser, 那就去这个 ISSUE 下面催催作者吧… 哈哈哈</p>
 <h3 id="3-开发环境与部署环境"><a href="#3-开发环境与部署环境" class="headerlink" title="3. 开发环境与部署环境"></a>3. 开发环境与部署环境</h3><p>VueCLI 内置了变量的管理，你可以定义 config/dev.js</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = merge(prodEnv, &#123;</div><div class="line">  <span class="attr">NODE_ENV</span>: <span class="string">'"development"'</span>,</div><div class="line">  <span class="attr">API_ROOT</span>: <span class="string">'"http://dev-data.twocucao.xyz"'</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -1482,16 +1556,9 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/06/15/GitCheatSheet/"/>
     <id>http://twocucao.xyz/2017/06/15/GitCheatSheet/</id>
     <published>2017-06-15T12:46:00.000Z</published>
-    <updated>2017-06-23T06:43:26.000Z</updated>
+    <updated>2017-11-21T11:39:42.101Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我使用 Git 的一些开发小技巧。</p>
-<p>不定期更新。</p>
-<a id="more"></a>
-<p>Git 是一种代码版本管理工具，是团队配合用于管理代码的一种工具。</p>
-<p>本文的目录结构如下：</p>
-<ul>
-<li>Git 常用命令</li>
-</ul>
+    <content type="html"><![CDATA[<h1 id="如何优雅地使用-Git"><a href="#如何优雅地使用-Git" class="headerlink" title="如何优雅地使用 Git"></a>如何优雅地使用 Git</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>Git 是一种分布式版本管理工具。</p>
 <h2 id="0x01-Git-命令范论"><a href="#0x01-Git-命令范论" class="headerlink" title="0x01 Git 命令范论"></a>0x01 Git 命令范论</h2><ol>
 <li>基础命令 （本地修改类）</li>
 <li>合作命令 （本地与仓库类）</li>
@@ -1523,14 +1590,13 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 </ul>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="comment">## clone 修改 提交</span></div><div class="line">$ git <span class="built_in">clone</span> git://git.kernel.org/pub/scm/.../torvalds/linux-2.6 my2.6</div><div class="line">$ <span class="built_in">cd</span> my2.6</div><div class="line">$ git checkout -b mine master (1)</div><div class="line">$ edit/compile/<span class="built_in">test</span>; git commit <span class="_">-a</span> <span class="_">-s</span> (2)</div><div class="line">$ git format-patch master (3)</div><div class="line">$ git send-email --to=<span class="string">"person &lt;email@example.com&gt;"</span> 00*.patch (4)</div><div class="line">$ git checkout master (5)</div><div class="line">$ git pull (6)</div><div class="line">$ git <span class="built_in">log</span> -p ORIG_HEAD.. arch/i386 include/asm-i386 (7) <span class="comment"># 查看感兴趣的部分</span></div><div class="line">$ git ls-remote --heads http://git.kernel.org/.../jgarzik/libata-dev.git (8) <span class="comment"># 查看分支</span></div><div class="line">$ git pull git://git.kernel.org/pub/.../jgarzik/libata-dev.git ALL (9) <span class="comment"># 从一个特地</span></div><div class="line">$ git reset --hard ORIG_HEAD (10) <span class="comment"># 撤销 pull</span></div><div class="line">$ git gc (11) <span class="comment"># garbage collect leftover objects from reverted pull</span></div><div class="line"><span class="comment"># 推送到其他 repo</span></div><div class="line"></div><div class="line">satellite$ git <span class="built_in">clone</span> mothership:frotz frotz (1)</div><div class="line">satellite$ <span class="built_in">cd</span> frotz</div><div class="line">satellite$ git config --get-regexp <span class="string">'^(remote|branch)\.'</span> (2)</div><div class="line">remote.origin.url mothership:frotz</div><div class="line">remote.origin.fetch refs/heads/*:refs/remotes/origin/*</div><div class="line">branch.master.remote origin</div><div class="line">branch.master.merge refs/heads/master</div><div class="line">satellite$ git config remote.origin.push \</div><div class="line">            +refs/heads/*:refs/remotes/satellite/* (3)</div><div class="line">satellite$ edit/compile/<span class="built_in">test</span>/commit</div><div class="line">satellite$ git push origin (4)</div><div class="line"></div><div class="line">mothership$ <span class="built_in">cd</span> frotz</div><div class="line">mothership$ git checkout master</div><div class="line">mothership$ git merge satellite/master (5)</div><div class="line"></div><div class="line">           1. mothership machine has a frotz repository under your home directory; <span class="built_in">clone</span> from it to start a repository on the satellite machine.</div><div class="line">           2. <span class="built_in">clone</span> sets these configuration variables by default. It arranges git pull to fetch and store the branches of mothership machine to <span class="built_in">local</span> remotes/origin/* remote-tracking</div><div class="line">           branches.</div><div class="line">           3. arrange git push to push all <span class="built_in">local</span> branches to their corresponding branch of the mothership machine.</div><div class="line">           4. push will stash all our work away on remotes/satellite/* remote-tracking branches on the mothership machine. You could use this as a back-up method. Likewise, you can</div><div class="line">           pretend that mothership <span class="string">"fetched"</span> from you (useful when access is one sided).</div><div class="line">           5. on mothership machine, merge the work <span class="keyword">done</span> on the satellite machine into the master branch.</div><div class="line"></div><div class="line">       Branch off of a specific tag.</div><div class="line"></div><div class="line">               $ git checkout -b private2.6.14 v2.6.14 (1)</div><div class="line">               $ edit/compile/<span class="built_in">test</span>; git commit <span class="_">-a</span></div><div class="line">               $ git checkout master</div><div class="line">               $ git cherry-pick v2.6.14..private2.6.14 (2)</div><div class="line"></div><div class="line">           1. create a private branch based on a well known (but somewhat behind) tag.</div><div class="line">           2. forward port all changes <span class="keyword">in</span> private2.6.14 branch to master branch without a formal <span class="string">"merging"</span>. Or longhand git format-patch -k -m --stdout v2.6.14..private2.6.14 | git am -3</div><div class="line">           -k</div></pre></td></tr></table></figure>
 <h3 id="1-3-综合个体"><a href="#1-3-综合个体" class="headerlink" title="1.3 综合个体"></a>1.3 综合个体</h3><h3 id="1-4-仓库管理"><a href="#1-4-仓库管理" class="headerlink" title="1.4 仓库管理"></a>1.4 仓库管理</h3><p>安装完毕之后，cmd-s-p shell command install</p>
-<h2 id="0x02-Git-Hacks"><a href="#0x02-Git-Hacks" class="headerlink" title="0x02 Git Hacks"></a>0x02 Git Hacks</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 搜索代码的变化</span></div><div class="line">git <span class="built_in">log</span> -S<span class="string">'&lt;a term in the source&gt;'</span></div><div class="line"><span class="comment"># 放弃本地修改，与远程同步</span></div><div class="line">git fetch origin &amp;&amp; git reset --hard origin/master &amp;&amp; git clean <span class="_">-f</span> <span class="_">-d</span></div><div class="line"><span class="comment"># 列出所有冲突文件</span></div><div class="line">git diff --name-only --diff-filter=U</div><div class="line"></div><div class="line"><span class="comment"># 手贱错误提交，但是没有 push</span></div><div class="line">git commit -m <span class="string">"Something terribly misguided"</span>              (1)</div><div class="line">git reset HEAD~                                           (2)</div><div class="line"><span class="comment"># edit needing changed files</span></div><div class="line">git add needing changed files                             (4)</div><div class="line">git commit -c ORIG_HEAD                                   (5)</div></pre></td></tr></table></figure>
+<h2 id="0x02-Git-Hacks"><a href="#0x02-Git-Hacks" class="headerlink" title="0x02 Git Hacks"></a>0x02 Git Hacks</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 搜索代码的变化</span></div><div class="line">git <span class="built_in">log</span> -S<span class="string">'&lt;a term in the source&gt;'</span></div><div class="line"><span class="comment"># 放弃本地修改，与远程同步</span></div><div class="line">git fetch origin &amp;&amp; git reset --hard origin/master &amp;&amp; git clean <span class="_">-f</span> <span class="_">-d</span></div><div class="line"><span class="comment"># 列出所有冲突文件</span></div><div class="line">git diff --name-only --diff-filter=U</div><div class="line"></div><div class="line"><span class="comment"># 手贱错误提交，但是没有 push</span></div><div class="line">git commit -m <span class="string">"Something terribly misguided"</span>              (1)</div><div class="line">git reset HEAD~                                           (2)</div><div class="line"><span class="comment"># edit needing changed files</span></div><div class="line">git add needing changed files                             (4)</div><div class="line">git commit -c ORIG_HEAD                                   (5)</div><div class="line"></div><div class="line"><span class="comment"># Delete all changes in the Git repository, but leave unstaged things</span></div><div class="line">git checkout .</div><div class="line"><span class="comment"># Delete all changes in the Git repository, including untracked files</span></div><div class="line">git clean <span class="_">-f</span></div></pre></td></tr></table></figure>
 <h2 id="0x03-Git-和-我的-Workflow"><a href="#0x03-Git-和-我的-Workflow" class="headerlink" title="0x03 Git 和 我的 Workflow"></a>0x03 Git 和 我的 Workflow</h2><p>一切工具都是为思路服务。</p>
-]]></content>
+<h2 id="0xEE-扩展阅读"><a href="#0xEE-扩展阅读" class="headerlink" title="0xEE 扩展阅读"></a>0xEE 扩展阅读</h2>]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我使用 Git 的一些开发小技巧。&lt;/p&gt;
-&lt;p&gt;不定期更新。&lt;/p&gt;
+      &lt;h1 id=&quot;如何优雅地使用-Git&quot;&gt;&lt;a href=&quot;#如何优雅地使用-Git&quot; class=&quot;headerlink&quot; title=&quot;如何优雅地使用 Git&quot;&gt;&lt;/a&gt;如何优雅地使用 Git&lt;/h1&gt;&lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; c
     
     </summary>
     
@@ -3143,592 +3209,6 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     
       <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>『如何阅读一本书』读书笔记</title>
-    <link href="http://twocucao.xyz/2017/02/10/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/"/>
-    <id>http://twocucao.xyz/2017/02/10/读书笔记_如何阅读一本书/</id>
-    <published>2017-02-10T15:54:00.000Z</published>
-    <updated>2017-03-14T02:31:16.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>选择了这本书进行精读是有原因的：</p>
-<blockquote>
-<p>在一个需要大量阅读的时代里，读东西更加有策略。</p>
-</blockquote>
-<p>记得大约是初三的考试比赛，监考老师发了卷子，我们这些人拿到卷子捋起袖子就是写，而监考老师说了一句话：</p>
-<blockquote>
-<p>先看看卷子，然后再写，不要上来就做题。</p>
-</blockquote>
-<p>虽然那次考试并不算理想，最大的收获应该就是这句话。</p>
-<blockquote>
-<p>通过’先预估，然后再做’的意识，我应该是少走了一些弯路的。至少工作效率稍微提升了一些。</p>
-</blockquote>
-<p>但，有了这个先预估一下，然后再做的意识可以减少很多问题，然而并不能更好解决的问题。因为意识这玩意，不是方法，不是策略。知道考虑火候，不懂得把握火候照样做不出好菜。</p>
-<a id="more"></a>
-<p>对应到我看这本书的目的，即是，当需要我能在捋起袖子干之前，找到一个更好的策略，对读书，有一个更好的方法。而不是仅仅是埋下头一通看。</p>
-<p>也是为了给自己更好的啃源码，看文档激发一些更好的灵感。</p>
-<p>这是从非专业领域里面找灵感的一种方式，即所谓：汝果欲学诗，工夫在诗外。</p>
-<h2 id="本文目录"><a href="#本文目录" class="headerlink" title="本文目录"></a>本文目录</h2><!-- markdown-toc start - Don't edit this section. Run M-x markdown-toc-generate-toc again -->
-<p><strong>Table of Contents</strong></p>
-<ul>
-<li><a href="#-">-</a></li>
-<li><a href="#本文目录">本文目录</a></li>
-<li><a href="#如何阅读一本书目录简评">《如何阅读一本书》目录简评</a></li>
-<li><a href="#问与答">问与答</a><ul>
-<li><a href="#cq1- 本书整体讲了什么">CQ1: 本书整体讲了什么？</a></li>
-<li><a href="#sq1- 较好的阅读一本书的步骤">SQ1: 较好的阅读一本书的步骤</a><ul>
-<li><a href="#确定要补充那些知识 -- 技能体系">确定要补充那些知识 / 技能体系</a></li>
-<li><a href="#筛选书籍阶段 -- 过滤不适合的书">筛选书籍阶段 : 过滤不适合的书</a></li>
-<li><a href="#检视阅读阶段 -- 判断一本书的质量">检视阅读阶段 : 判断一本书的质量</a><ul>
-<li><a href="#检视阅读阶段 -step1-- 大体定位这本书">检视阅读阶段 STEP1 : 大体定位这本书。</a></li>
-<li><a href="#检视阅读阶段 -step2-">检视阅读阶段 STEP2 :</a></li>
-<li><a href="#检视阅读的一些误区：">检视阅读的一些误区：</a></li>
-<li><a href="#分析阅读阶段 -- 全方位吃透这本书">分析阅读阶段 : 全方位吃透这本书</a><ul>
-<li><a href="#分析阅读第一阶段：找出一本书在谈写什么的规则">分析阅读第一阶段：找出一本书在谈写什么的规则</a></li>
-<li><a href="#分析阅读第二阶段：诠释一本书的内容的规则">分析阅读第二阶段：诠释一本书的内容的规则。</a></li>
-<li><a href="#分析阅读第三阶段：评论一本书的规则">分析阅读第三阶段：评论一本书的规则</a></li>
-</ul>
-</li>
-<li><a href="#主题阅读阶段 -- 纳入自己的知识体系">主题阅读阶段 : 纳入自己的知识体系</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#sq2- 上面关于阅读一本书的步骤是适用于所有书即使通用的步骤吗">SQ2: 上面关于阅读一本书的步骤是适用于所有书，即使通用的步骤吗？</a><ul>
-<li><a href="#分析阅读之如何阅读实用型的书">分析阅读之如何阅读实用型的书</a></li>
-<li><a href="#分析阅读之如何阅读历史书">分析阅读之如何阅读历史书</a></li>
-</ul>
-</li>
-<li><a href="#sq3- 关于读书的有哪些误区">SQ3: 关于读书的有哪些误区</a><ul>
-<li><a href="#速读">速读</a></li>
-<li><a href="#随便翻翻">随便翻翻</a></li>
-<li><a href="#陷入细枝末节">陷入细枝末节</a></li>
-</ul>
-</li>
-<li><a href="#eq1- 为什么要重新学习如何阅读书籍的策略与方法">EQ1: 为什么要<strong>重新学习</strong>如何阅读书籍的策略与方法</a></li>
-</ul>
-</li>
-<li><a href="#相关链接">相关链接</a></li>
-</ul>
-<!-- markdown-toc end -->
-<h2 id="《如何阅读一本书》目录简评"><a href="#《如何阅读一本书》目录简评" class="headerlink" title="《如何阅读一本书》目录简评"></a>《如何阅读一本书》目录简评</h2><p>本书的翻译版书籍的目录如下：</p>
-<ul>
-<li>第一篇：阅读的层次<ul>
-<li>ch01: 阅读的活力与艺术</li>
-<li>ch02: 阅读的层次</li>
-<li>ch03: 阅读的第一个层次：基础阅读</li>
-<li>ch04: 阅读的第二个层次：检视阅读</li>
-<li>ch05: 如何做一个自我要求的读者</li>
-</ul>
-</li>
-<li>第二篇：阅读的第三个层次：分析阅读<ul>
-<li>ch06: 一本书的分类</li>
-<li>ch07: 透视一本书</li>
-<li>ch08: 与作者找出共通的词义</li>
-<li>ch09: 判断作者的主旨</li>
-<li>ch10: 公正的评断一本书</li>
-<li>ch11: 赞同或反对作者</li>
-<li>ch12: 辅助阅读</li>
-</ul>
-</li>
-<li>第三篇：阅读不同读物的方法<ul>
-<li>ch13: 如何阅读实用型的书</li>
-<li>ch14: 如何阅读想象文学</li>
-<li>ch15: 阅读故事，戏剧，诗的一些建议</li>
-<li>ch16: 如何阅读历史书</li>
-<li>ch17: 如何阅读科学和数学</li>
-<li>ch18: 如何阅读哲学书</li>
-<li>ch19: 如何阅读社会科学</li>
-</ul>
-</li>
-<li>第四篇：阅读的最终目标<ul>
-<li>ch20: 阅读的第四个层次：主题阅读</li>
-<li>ch21: 阅读与心智的成长</li>
-</ul>
-</li>
-</ul>
-<p>这本书的目录看起来比较奇怪，分为四个部分，但是第一篇和第二篇分类比较混乱，ch03,ch04, 第二篇，ch20 不是应该是同一级嘛？</p>
-<p>以为找英文原版的目录拿来对照，译者还是严格的遵守了原文目录的排布。</p>
-<p>译者把<strong>Part</strong>翻译为<strong>篇</strong>, 我觉得就直接翻译为<strong>部分</strong>比较好。整理目录，补充一部分 Part,Chapter,Section 的标题。</p>
-<p>于是做了点体力活，把英文书籍的目录部分搬运过来。</p>
-<ul>
-<li>第一篇：阅读的层次 <the dimensions="" of="" reading=""><ul>
-<li>ch01: 阅读的活力与艺术 <the activity="" and="" art="" of="" reading=""><ol>
-<li>Active Reading</li>
-<li>The Goals of Reading: Reading for Information and Reading for Understanding</li>
-<li>Reading as Learning: The Difference Betweenn Learning By Instruction and Learning by Instruction and Learning by Discovery</li>
-<li>Present and Absent Teachers</li>
-</ol>
-</the></li>
-<li>ch02: 阅读的层次 <the levels="" of="" reading=""></the></li>
-<li>ch03: 阅读的第一个层次：基础阅读 <the first="" level="" of="" reading:="" elementary="" reading=""><ol>
-<li>Stages Of Learning to Read</li>
-<li>Stages and Levels</li>
-<li>Higher Levels of Reading and Higher Education</li>
-<li>Reading and the Democratic Ideal of Education</li>
-</ol>
-</the></li>
-<li>ch04: 阅读的第二个层次：检视阅读 <the second="" level="" of="" reading:="" inspectional="" reading=""><ol>
-<li>Inspectional Reading I: Systemmatic Skimming or Pre-reading</li>
-<li>Inspectional Reading II: Superficial Reading</li>
-<li>On Reading Speeds</li>
-<li>Fixations and Regressions</li>
-<li>The Problem of Comprehension</li>
-<li>Summary of Inspectional Reading</li>
-</ol>
-</the></li>
-<li>ch05: 如何做一个自我要求的读者 <how to="" be="" a="" demanding="" reader=""><ol>
-<li>The Essence of Active Reading: The Four Basic Questions a Reader Asks</li>
-<li>How to Make a Book Your Own</li>
-<li>The Three Kinds of Note-making</li>
-<li>Forming the Habit of Reading</li>
-<li>From Many Rules to One Habit</li>
-</ol>
-</how></li>
-</ul>
-</the></li>
-<li>第二篇：阅读的第三个层次：分析阅读 <the third="" level="" of="" reading:="" analytical="" reading=""><ul>
-<li>ch06: 分类一本书 <pigeonholing a="" book=""><ol>
-<li>The Importance of Classifying Books</li>
-<li>What You Can Learn from the Title of a Book</li>
-<li>Practical vs. Theoretical Books</li>
-<li>Kinds of Theoretical Books</li>
-</ol>
-</pigeonholing></li>
-<li>ch07: 透视一本书 <x-raying a="" book=""><ol>
-<li>Of Plots and Plans: Stating the Unity of a Book</li>
-<li>Mastering the Multiplicity: The Art of Outlining a Book</li>
-<li>The Reciprocal Arts of Reading and Writing</li>
-<li>Discovering the Author’s Intentions</li>
-<li>The First Stage of Analytical Reading</li>
-</ol>
-</x-raying></li>
-<li>ch08: 与作者找出共通的词义 <coming to="" terms="" with="" and="" author=""><ol>
-<li>Words vs. Terms</li>
-<li>Finding the Key Words</li>
-<li>Technical Words and Special Vocabularies</li>
-<li>Finding the Meanings</li>
-</ol>
-</coming></li>
-<li>ch09: 判断作者的主旨 &lt;Determing an Author’s Message&gt;<ol>
-<li>Sentences vs. Propositions</li>
-<li>Finding the Key Sentences</li>
-<li>Finding the Arguments</li>
-<li>Finding the Solutions</li>
-<li>The Second Stage of Analytical Reading</li>
-</ol>
-</li>
-<li>ch10: 公正的评断一本书 <critizing a="" book="" fairly=""><ol>
-<li>Teachability as a Virtue</li>
-<li>The Role of Rhetoric</li>
-<li>The importance of Suspending Judgement</li>
-<li>The Importance of Avoiding Contentiousness</li>
-<li>On the Resolution of Disagreements</li>
-</ol>
-</critizing></li>
-<li>ch11: 赞同或反对作者 <agreeing or="" disagreeing="" with="" an="" author=""><ol>
-<li>Prejudice and Judgment</li>
-<li>Judging the Author’s Soundness</li>
-<li>Judging the Author’s Completeness</li>
-<li>The Third Stage of Analytical Reading</li>
-</ol>
-</agreeing></li>
-<li>ch12: 辅助阅读 <aids to="" reading=""><ol>
-<li>The Role Of Relevant Experience</li>
-<li>Other Books as Extrinsic Aids to Reading</li>
-<li>How to Use Commentaries and Abstracts</li>
-<li>How to Reference Books</li>
-<li>How to Use a Dictionary</li>
-<li>How to Use an Encyclopedia</li>
-</ol>
-</aids></li>
-</ul>
-</the></li>
-<li>第三篇：阅读不同读物的方法 <approaches to="" different="" kinds="" of="" reading="" matter=""><ul>
-<li>ch13: 如何阅读实用型的书 <how to="" read="" practical="" books=""><ol>
-<li>The Two Kinds of Practical Books</li>
-<li>The Role of Persuation</li>
-<li>What Does Agreement Entail in the Case of a Practical Book?</li>
-</ol>
-</how></li>
-<li>ch14: 如何阅读想象文学 <how to="" read="" imaginative="" literature=""><ol>
-<li>How Not to Read Imageinative Literature</li>
-<li>Genaral Rules for Reading Imaginative Literature</li>
-</ol>
-</how></li>
-<li>ch15: 阅读故事，戏剧，诗的一些建议 <suggestion for="" reading="" stories="" ,="" plays="" and="" poems=""><ol>
-<li>How to Read Stories</li>
-<li>A Note About Epics</li>
-<li>How to Read Plays</li>
-<li>A Note About Tragedy</li>
-<li>How to Read Lyric Poetry</li>
-</ol>
-</suggestion></li>
-<li>ch16: 如何阅读历史书 <how to="" read="" history=""><ol>
-<li>The Elusiveness of Historial Facts</li>
-<li>Theories of History</li>
-<li>Questions to Ask of Historical Book</li>
-<li>How to Reading Biography and Autobiography</li>
-<li>How to Read About Current Events</li>
-<li>A Note on Digests</li>
-</ol>
-</how></li>
-<li>ch17: 如何阅读科学和数学 <how to="" read="" science="" and="" mathematics=""><ol>
-<li>Understanding the Scientific Enterprise</li>
-<li>Suggestions for Reading Classical Scientific Books</li>
-<li>Facing the Problem of Mathematics</li>
-<li>Handlding the Mathematics in Scientific Books</li>
-<li>A Note on Popular Science</li>
-</ol>
-</how></li>
-<li>ch18: 如何阅读哲学书 <how to="" read="" philosophy=""><ol>
-<li>The Questions Philosophers Ask</li>
-<li>Modern Philosophy and the Great Tradition</li>
-<li>On Philosophical Method</li>
-<li>On Philosophical Styles</li>
-<li>Hints for Reading Philosophy</li>
-<li>On Making Up Your Own Mind</li>
-<li>A Note on Theology</li>
-<li>How to Read “Canoncial”</li>
-</ol>
-</how></li>
-<li>ch19: 如何阅读社会科学 <how to="" read="" social="" science=""><ol>
-<li>What Is Social Science?</li>
-<li>The Apparent Ease of Reading Social Science</li>
-<li>Didfficulties of Reading Social Science</li>
-<li>Reading Social Science Literature</li>
-</ol>
-<ul>
-<li>第四篇：阅读的最终目标 <the ultimate="" goals="" of="" reading=""></the></li>
-</ul>
-</how></li>
-<li>ch20: 阅读的第四个层次：主题阅读 <the fourth="" level="" of="" reading:="" syntopical="" reading=""><ol>
-<li>The Role of Inspection in Syntopical Reading</li>
-<li>The Five Steps in Syntopical Reading</li>
-<li>The Need for Objectivity</li>
-<li>An Example of an Exercise in Syntopical Reading: The Idea of Progress</li>
-<li>The Syntopicon and How to Use It</li>
-<li>On the Principles That Underlie Syntopical Reading</li>
-<li>Summary of Syntopical Reading</li>
-</ol>
-</the></li>
-<li>ch21: 阅读与心智的成长 <reading and="" the="" growth="" of="" mind=""><ol>
-<li>What Good Books Can Do For Us</li>
-<li>The Pyramid of Books</li>
-<li>The Life and Growth of the Mind</li>
-</ol>
-</reading></li>
-</ul>
-</approaches></li>
-</ul>
-<h2 id="问与答"><a href="#问与答" class="headerlink" title="问与答"></a>问与答</h2><p>如何阅读一本书里面有很多技巧，其中有个就是通过<strong>提问</strong>的方式来使得读书效率更高。</p>
-<p>下文是我在读这本书之前和读这本书之后提出的部分问题，挑选一部分写出来作为自己的读书笔记。</p>
-<p>我把提问类型标记为如下：</p>
-<ul>
-<li>CQ  Common Question   : 所有书提问。</li>
-<li>SQ  Specific Question : 本类书提问。</li>
-<li>EQ  Extended Question : 脑洞类提问。</li>
-</ul>
-<h3 id="CQ1-本书整体讲了什么？"><a href="#CQ1-本书整体讲了什么？" class="headerlink" title="CQ1: 本书整体讲了什么？"></a>CQ1: 本书整体讲了什么？</h3><blockquote>
-<p>You see, but you do not observe. The distinction is clear.</p>
-<ul>
-<li>Sherlock Holmes/Arthur Conan Doyle, A Scandal in Bohemia (1891)</li>
-</ul>
-</blockquote>
-<p>一句话概括：</p>
-<blockquote>
-<p>本书讲的是读书的策略与技巧 (HOW).</p>
-</blockquote>
-<p>再详细一些：</p>
-<blockquote>
-<p>本书讲的是，当面对不同层次的书，不同种类的书，同一本书的不同部分，挑书，看书，读书，吃透书的策略与技巧。</p>
-</blockquote>
-<p>作者从阅读的活力与艺术入手，介绍了阅读的必要性，然后介绍了阅读的四种层次，接着点出了阅读层次的进入一些阅读层次的要求，方法，技巧。着重介绍了分析阅读，以及面对各种各样的读物的阅读技巧。</p>
-<p>第一部分 花了一章简单的介绍了基础阅读。花了一章介绍了检视阅读，附加另一章介绍做一个自我要求的读者。</p>
-<p>接着是第二部分重点介绍阅读的第三个层次，分析阅读：</p>
-<p>这个层次需要</p>
-<ul>
-<li>『分类这本书』</li>
-<li>『透视这本书』</li>
-<li>『判断作者主旨』</li>
-<li>『评断一本书』</li>
-<li>『赞同或者反对』</li>
-</ul>
-<p>PS: 译者把 Pigeonholing a Book 翻译为一本书的分类，这个放在标题上和分类一本书意思相差大了。</p>
-<p>也介绍了辅助阅读的通用的一些方法和手段。</p>
-<p>接着进入第三部分，作者用自己的经验来分享对于每一种不同类型（阅读使用类书籍，想象文学，故事 / 戏剧 / 诗篇，历史，科学与数学，哲学，社科）的书籍，有哪些注意点（抓重点）, 有哪些技巧。</p>
-<p>第四个部分则是介绍了阅读的终极目的：</p>
-<p>其实每一个人的读书都是主题阅读</p>
-<p>挑选《沟通的艺术》基本上都是为了提升沟通上的技巧。换而言之，其实我们都是为了丰富自己在沟通上面的知识体系从而选择了看这本书。</p>
-<p>当然，作者并不是新造一个概念，然后一本正经的说没有干货的道理，作者还举了一个例子用于如何在主题之间作取舍，更加有条理的去看某些类别的书。</p>
-<h3 id="SQ1-较好的阅读一本书的步骤"><a href="#SQ1-较好的阅读一本书的步骤" class="headerlink" title="SQ1: 较好的阅读一本书的步骤"></a>SQ1: 较好的阅读一本书的步骤</h3><h4 id="确定要补充那些知识-技能体系"><a href="#确定要补充那些知识-技能体系" class="headerlink" title="确定要补充那些知识 / 技能体系"></a>确定要补充那些知识 / 技能体系</h4><blockquote>
-<p>“Some books are to be tasted, others to be swallowed, and some few to be chewed and digested” - Francis Bacon</p>
-</blockquote>
-<p>有的书适合浅尝，有的书适合吞咽，只有少部分适合咀嚼和消化到变为身体的一部分。 培根对书归类的这句话相当形象。</p>
-<p>看书除非是热爱读书，否则随便拿起一本书，实在是难以激发自己探索这本书的冲动。</p>
-<p>而，这里面有一个隐藏的问题，就是<strong>要补充哪些知识 / 技能体系</strong>, 首先是要知道有哪些知识体系。</p>
-<ul>
-<li>维护健康</li>
-<li>高效自学</li>
-<li>逻辑思考</li>
-<li>规划管理</li>
-<li>沟通表达</li>
-<li>团队协作</li>
-<li>……</li>
-</ul>
-<h4 id="筛选书籍阶段-过滤不适合的书"><a href="#筛选书籍阶段-过滤不适合的书" class="headerlink" title="筛选书籍阶段 : 过滤不适合的书"></a>筛选书籍阶段 : 过滤不适合的书</h4><blockquote>
-<p>目的：用一些比较通用的技巧筛选出书籍。然后进入下一阶段</p>
-</blockquote>
-<p>技巧：</p>
-<ul>
-<li>泛读书衣：书衣和封面是重要的宣传点，书衣没有亮点。基本上这本书也不会有太大亮点。</li>
-<li>泛读封面：<ul>
-<li>出版社不行，基本上这本书也不行，出版社的可能在某个领域特别牛，比如图灵 / 机械在计算机方面特别牛，我就特别青睐于选这两家的新出来的技术书籍。但不管外面怎么说，反正我自从不考试了之后，我就拒绝看清华大学出版社的所有计算机相关的书籍。清华大学出版社的计算机类作者就几乎进入了我的计算机不读书籍作者的黑名单。</li>
-<li>作者的其他书不行，新书八成也不怎么样。作者有一本书写的巨牛无比，他的其他书籍也不会差到哪里去。假如《母猪的产后护理》质量很高甚至连高科技养猪的网易老总都专门给这本书作序，那作者的《世界如此残酷，你一定要内心强大》一定是另一本仙风道骨的自传。</li>
-<li>一本精心构造的书的内容，插画都是有一定的寓意的。很少有作家出一本书是忍心让自己的书封面长的巨丑。</li>
-<li>这也需要注意的是：有的烂作品也会在封面下一番功夫，这就需要进入下一阶段的的探索了。</li>
-<li>版次越高，则越好。</li>
-<li>印次越高，则越好。</li>
-<li>首印数量很少，则出版社对这本书没有多大信心。</li>
-<li>编著，著是原创，编则是整合。</li>
-<li>如果可以的话，优先阅读英文书。</li>
-<li>豆瓣和亚马逊的书评。</li>
-</ul>
-</li>
-<li>泛读目录：好的书籍的目录一定是（注意是一定是）逻辑清晰，结构层次分明，足以概括该章节的，甚至对如果稍微懂一点点的人，仅仅凭着目录就可以脑补出整本书的结构。</li>
-<li>其他技巧：比如，直接买某个社群推荐的书单。我在不懂编程的时候就是这么做的。当然，后来稍微入了编程的大门才发现当初买了很多烂书。当然，用别人的书单也会逐渐让自己挑选书的能力退化。</li>
-</ul>
-<p>如果不适合口味，比如你想看《面向对象编程思想》过程中的翻到了一本《找对象，就这么做》的书，果断换一本；或者这书质量实在是太差，比如你翻到了《公猪在母猪的产后护理过程中不得不做的 138 件小事》, 书总共就 350 页，居然讲什么是母猪花了 147.6 页，果断换一本书。这样你就节约了看一本不合适的书的时间。</p>
-<h4 id="检视阅读阶段-判断一本书的质量"><a href="#检视阅读阶段-判断一本书的质量" class="headerlink" title="检视阅读阶段 : 判断一本书的质量"></a>检视阅读阶段 : 判断一本书的质量</h4><blockquote>
-<p>目的：判断一本书的质量，以及评估当前的书本是否值得进入下一阶段。然后进入下一阶段。</p>
-<p>适用场景：不知道这本书适不适合进行更高质量的阅读。或者时间有限并且急于挖掘书中的知识。</p>
-</blockquote>
-<p>经过上个阶段的过滤，不合适的书基本上也就差不了多少了，这时候就需要对这本书进行检视阅读了：</p>
-<h5 id="检视阅读阶段-STEP1-大体定位这本书。"><a href="#检视阅读阶段-STEP1-大体定位这本书。" class="headerlink" title="检视阅读阶段 STEP1 : 大体定位这本书。"></a>检视阅读阶段 STEP1 : 大体定位这本书。</h5><ol>
-<li>看书名页 / 序 : 了解这本书的主题，归类这本书的类型。</li>
-<li>研究目录页  : 对这本书的基本架构做概括性的理解。</li>
-<li>查看索引</li>
-<li>出版者的介绍</li>
-<li>挑选几个和主题相关的篇章，着重看篇章的开头或结尾。</li>
-<li>把书打开，随意翻，有时候连续看几页，但不要太多。</li>
-</ol>
-<p>定位这本书的用途：</p>
-<ol>
-<li>弃而不看。</li>
-<li>放着做参考书。</li>
-<li>进行检视阅读的第二阶段</li>
-</ol>
-<h5 id="检视阅读阶段-STEP2"><a href="#检视阅读阶段-STEP2" class="headerlink" title="检视阅读阶段 STEP2 :"></a>检视阅读阶段 STEP2 :</h5><p>这篇作者 / 译者使用了一个很容易被误会词，粗读。</p>
-<p>即：</p>
-<blockquote>
-<p>头一次面对一本难读的书的时候，从头到尾先读完一遍，碰到不懂的地方不要停下来查询或者思索。</p>
-</blockquote>
-<p>那什么标准的读才叫粗读呢？</p>
-<blockquote>
-<p>把握主干，不拘泥于细枝末节，把握大原则，不拘泥于细微的重点，而不是那种随便翻翻的”粗读”.</p>
-</blockquote>
-<h5 id="检视阅读的一些误区："><a href="#检视阅读的一些误区：" class="headerlink" title="检视阅读的一些误区："></a>检视阅读的一些误区：</h5><blockquote>
-<p>速读也只能回答出”这是在说什么的”的问题。对深入理解，回答更深层次的问题没有大帮助。</p>
-</blockquote>
-<h4 id="分析阅读阶段-全方位吃透这本书"><a href="#分析阅读阶段-全方位吃透这本书" class="headerlink" title="分析阅读阶段 : 全方位吃透这本书"></a>分析阅读阶段 : 全方位吃透这本书</h4><p>经过筛选与检视，剩下的书则是很有价值的书。</p>
-<blockquote>
-<p>而，读一本书的阅读技巧，明显是高于比书本长度少，比书本难度易的读物。即 <strong>这些阅读技巧也同样适用于非书籍的读物上</strong></p>
-</blockquote>
-<h5 id="分析阅读第一阶段：找出一本书在谈写什么的规则"><a href="#分析阅读第一阶段：找出一本书在谈写什么的规则" class="headerlink" title="分析阅读第一阶段：找出一本书在谈写什么的规则"></a>分析阅读第一阶段：找出一本书在谈写什么的规则</h5><p>步骤：</p>
-<ol>
-<li>依照书的种类与主题来分类</li>
-<li>使用最简短的文字说明整本书在谈些什么</li>
-<li>将主要部分按顺序和关联性列举出来。将全书的大纲列举出来，并将各个部分的大纲也列出来。</li>
-<li>确定作者想要解决的问题。</li>
-</ol>
-<blockquote>
-<p>如果心中没有一个分类的标准，再清楚的书名也没有用。</p>
-<p>每一本书都有一个骨架，作为一个合格的读者，目的就是找出这个骨架。</p>
-</blockquote>
-<ol>
-<li>掌握一本书的架构</li>
-<li>使用单一的句子，或者最多几句话来叙述整本书的内容。</li>
-<li>将书中的重要篇章列举出来，说明他们如何按照顺序组成一个整体的架构。</li>
-</ol>
-<blockquote>
-<p>PS: 建筑架构与书本架构的那个比方真的是精彩。</p>
-</blockquote>
-<p>第三点可以用列提纲来解决：</p>
-<ul>
-<li>作者将全数分为五个部分，第 1/2/3/4/5 部分讲的是什么</li>
-<li>第一部分的第一节（注：Section, 译者翻译为段落）, 有 X/Y/Z 节 /</li>
-<li>X 节作者做出四个观点 (Point),I/II/III</li>
-</ul>
-<blockquote>
-<p>由于纸笔速度跟不上大脑运转速度，对每一本书这样读并且列提纲的话相当耗费精力，但是具备这样的意识还是很重要的。</p>
-</blockquote>
-<h5 id="分析阅读第二阶段：诠释一本书的内容的规则。"><a href="#分析阅读第二阶段：诠释一本书的内容的规则。" class="headerlink" title="分析阅读第二阶段：诠释一本书的内容的规则。"></a>分析阅读第二阶段：诠释一本书的内容的规则。</h5><p>步骤：</p>
-<ol>
-<li>诠释作者的关键字，与他达成共识。</li>
-<li>由最重要的句子中，抓住作者的重要主旨。</li>
-<li>知道作者的论述是什么，从内容中找出相关的句子，再重新架构出来。</li>
-<li>确定作者已经解决了哪些问题，还有哪些问题是没有解决的，在判断那些是作者知道他没有解决的问题。</li>
-</ol>
-<blockquote>
-<ol>
-<li>作者的主旨如果没有理论的支持，只是在书法个人想法罢了。2. 为什么他认为我们应该被说服，以接受这样的观点。</li>
-</ol>
-</blockquote>
-<ol>
-<li>找出关键句</li>
-<li>找出主旨</li>
-<li>找出论述</li>
-<li>找出解答</li>
-</ol>
-<p>他沟通的主要核心是他所辖的肯定与否定的判断，以及他为什么会这么做的立构。</p>
-<blockquote>
-<p>不能用他们自己的话，重述你的观点。则是代表不理解。</p>
-</blockquote>
-<h5 id="分析阅读第三阶段：评论一本书的规则"><a href="#分析阅读第三阶段：评论一本书的规则" class="headerlink" title="分析阅读第三阶段：评论一本书的规则"></a>分析阅读第三阶段：评论一本书的规则</h5><p>规则：</p>
-<p>A. 智慧礼节的一般规则</p>
-<ol>
-<li>除非你已经完成了大纲架构，也能诠释整本书了，否则不要轻易评断。</li>
-<li>不要争强好胜，非辩到底不可。</li>
-<li>在说出评论之前，你要能证明自己区别得出真正的知识与个人观点的不同。<br>B. 批评观点的特别标准<ol>
-<li>证明作者的知识不足。</li>
-<li>证明作者的知识错误。</li>
-<li>证明作者不合逻辑。</li>
-<li>证明作者的分析与理由是不完整的。</li>
-</ol>
-</li>
-</ol>
-<p>甚至，可以用于其他的类型的学习。</p>
-<h4 id="主题阅读阶段-纳入自己的知识体系"><a href="#主题阅读阶段-纳入自己的知识体系" class="headerlink" title="主题阅读阶段 : 纳入自己的知识体系"></a>主题阅读阶段 : 纳入自己的知识体系</h4><p>主题阅读其实就是对同一个主题挑选几本书进行查看。</p>
-<p>多问问自己：这本书谈的内容对我研究的主题内容道理有没有帮助？</p>
-<p>主题阅读 STEP1. 找到与主题相关的章节。只看与该章节相关的内容。<br>主题阅读 STEP2. 带领作者与你达成共识。与检视阅读的第二步骤相反。<br>主题阅读 STEP3. 理清问题。<br>主题阅读 STEP4. 界定议题。<br>主题阅读 STEP5. 分析讨论。</p>
-<h3 id="SQ2-上面关于阅读一本书的步骤是适用于所有书，即是通用的步骤吗？"><a href="#SQ2-上面关于阅读一本书的步骤是适用于所有书，即是通用的步骤吗？" class="headerlink" title="SQ2: 上面关于阅读一本书的步骤是适用于所有书，即是通用的步骤吗？"></a>SQ2: 上面关于阅读一本书的步骤是适用于所有书，即是通用的步骤吗？</h3><blockquote>
-<p>不是</p>
-</blockquote>
-<p>作者在书中介绍了四个问题，用来帮助读者进行更好的阅读，这些问题除了不适合小说类的书籍，基本上可以适用于绝大部分的书籍。</p>
-<ul>
-<li>CQ1 : <strong>本书整体讲了什么？</strong> （主题，作者如何依次发展主题，如何逐步从核心主题分解出从属的关键议题来）</li>
-<li>CQ2 : <strong>作者细说了什么？怎么说的？</strong> （找出主要的 ideas,assertions,arguments, 汗，译者翻译为了 想法，声明，论点，实际上应该翻译为想法，主张，论据……)</li>
-<li>CQ3 : <strong>这本书说的有道理吗？是全部有道理，还是部分有道理？</strong></li>
-<li>CQ4 : <strong>这本书跟我有什么关系？</strong> 如果是资讯，则询问是否有意义。是否值得有更深入的了解。这本书可以补充我哪些知识体系</li>
-</ul>
-<p>作者在书中已经介绍完分析阅读，按理来说应该进入的是下一部分，即主题阅读。</p>
-<p>但是第三部分<strong>莫名其妙</strong>硬塞了一部分内容叫做<strong>阅读不同读物的方法</strong></p>
-<p>内容是如何阅读下面的读物：</p>
-<ul>
-<li>实用型的书</li>
-<li>想象文学</li>
-<li>故事，戏剧，诗</li>
-<li>历史书</li>
-<li>科学与数学</li>
-<li>哲学书</li>
-<li>社会科学</li>
-</ul>
-<p>而这么做的答案在第十三章的开头（不是应该在第三部分的开头嘛？).</p>
-<blockquote>
-<p>在任何艺术或实务领域，规则太通用是一件令人扫兴的事情。少量的通用性规则是优势。越通用的规则也就意味着越易懂，而与此同时当遇到真实案例的时候，往往通用规则太宽泛而难以应用。</p>
-<p>即，尽管作者做了抽象的总结的经验，但还是要具体落实到具体的案例上。</p>
-</blockquote>
-<h5 id="分析阅读之如何阅读实用型的书"><a href="#分析阅读之如何阅读实用型的书" class="headerlink" title="分析阅读之如何阅读实用型的书"></a>分析阅读之如何阅读实用型的书</h5><blockquote>
-<p>注：由于时间有限，仅仅对阅读实用类和历史书籍做了笔记，以后补上。</p>
-<p>注意：<strong>任何一本实用性的书不能解决该书所关心的实际问题.</strong></p>
-</blockquote>
-<p>就像学会<strong>如何阅读一本书</strong>, 看完做好笔记并不意味着<strong>你不会阅读一本书</strong>这个问题<strong>消失了</strong>, 只有行动才能解决问题。</p>
-<blockquote>
-<p><strong>听过那么多道理，却不行动，不能过好这一生</strong>也没有那必要怪道理。</p>
-<p><strong>Just Do It</strong></p>
-</blockquote>
-<ul>
-<li>如果是阅读数学类的书，可能了解作者本人是没有任何必要的。</li>
-<li>如果是阅读道德论述，经济论文和经济论著，则非常有必要了解作者的人格，生活所处的时代背景。</li>
-</ul>
-<p>第一个问题：这本书是在谈些什么。<br>第二个问题：这本书的意义或内容，共识，主旨，论述。<br>第三个问题：内容真实吗？<br>第四个问题：这本书与我何干？</p>
-<h5 id="分析阅读之如何阅读历史书"><a href="#分析阅读之如何阅读历史书" class="headerlink" title="分析阅读之如何阅读历史书"></a>分析阅读之如何阅读历史书</h5><p>这部分刚开始就通过法庭陪审团的车祸事件来说明，在严格规范的证据之下，加上详细检验之后，身为陪审员都很难百分之百的确定一件事情的真相。</p>
-<p>而，一个人连一件单纯的事都难以确知真相，遑论历史？</p>
-<p>由于历史的理论不同，历史学家对历史事件的描述则不同。</p>
-<p>阅读历史的两个要点：</p>
-<ol>
-<li>对你感兴趣的时间或者时期，尽量阅读一种以上的历史书</li>
-<li>不要只关心在过去某个时间地点真正发生了什么事情，还要读懂在任何时空中，尤其是现在，人们为什么会有这般行动的原因。</li>
-</ol>
-<h3 id="SQ3-关于读书的有哪些误区"><a href="#SQ3-关于读书的有哪些误区" class="headerlink" title="SQ3: 关于读书的有哪些误区"></a>SQ3: 关于读书的有哪些误区</h3><h4 id="速读"><a href="#速读" class="headerlink" title="速读"></a>速读</h4><ol>
-<li>许多书连略读都是不值得的，另外一些书只需要快速读过就行了。有少数的书需要用某种速度，通常是相当慢的速度，才能完全理解。</li>
-<li>一本只需要快速阅读的书，却用很慢的速度来读，就是在浪费时间，这时速读的技巧就能帮你解决问题。</li>
-</ol>
-<p>PS: 无论是多么难读的书，在无关精要的间隙部分都可以读快一些。而那些比较困难的部分，应该慢慢阅读。</p>
-<blockquote>
-<p>核心的注意点应该放在：理解了多少。<br>恰似沟通需要注意的：不是你说了多少，说的多快，而是对方理解了多少。</p>
-</blockquote>
-<h4 id="随便翻翻"><a href="#随便翻翻" class="headerlink" title="随便翻翻"></a>随便翻翻</h4><p>读书如果不是为了娱乐消遣，切忌进行在很松散的状态下随便拿一本书看看。</p>
-<blockquote>
-<p>为了解决很随便的看一本书，我的技巧就是带着问题去看。</p>
-</blockquote>
-<h4 id="陷入细枝末节"><a href="#陷入细枝末节" class="headerlink" title="陷入细枝末节"></a>陷入细枝末节</h4><blockquote>
-<p>头一次面对一本难读的书的时候，从头到尾先读完一遍，碰到不懂的地方不要停下来查询或者思索。</p>
-</blockquote>
-<p>不停的停下来查一些陌生的知识会不断的破坏兴趣。并且会忽略掉一些大的原则性的东西。<br>比如：当你努力的去了解那些细微的重点时，就会错过大原则：关于成本中包含的薪水，租金，利润与利息种种因素，市场在定价中的角色，垄断专卖的害处，自由贸易的理由等等。</p>
-<blockquote>
-<p>作者的意思其实就是从枝干再到树叶。不要上来就陷入一些细小的琐碎事物中。</p>
-</blockquote>
-<h3 id="EQ1-为什么要重新学习如何阅读书籍的策略与方法"><a href="#EQ1-为什么要重新学习如何阅读书籍的策略与方法" class="headerlink" title="EQ1: 为什么要重新学习如何阅读书籍的策略与方法"></a>EQ1: 为什么要<strong>重新学习</strong>如何阅读书籍的策略与方法</h3><blockquote>
-<p>初学者的无知在于未学，而学者的无知在于学后</p>
-</blockquote>
-<p>以上。</p>
-<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><p><a href="https://en.wikipedia.org/wiki/How_to_Read_A_Book" target="_blank" rel="external">https://en.wikipedia.org/wiki/How_to_Read_A_Book</a><br><a href="https://en.wikipedia.org/wiki/How_to_Read_Literature_Like_a_Professor" target="_blank" rel="external">https://en.wikipedia.org/wiki/How_to_Read_Literature_Like_a_Professor</a><br><a href="https://www.amazon.com/How-Read-Book-Intelligent-Touchstone/dp/0671212095/ref=pd_bxgy_14_2?_encoding=UTF8&amp;psc=1&amp;refRID=MMHSVKSVYBBGSMZRWDQE" target="_blank" rel="external">亚马逊地址《如何阅读一本书》</a></p>
-<p>UPDATE:</p>
-<table>
-<thead>
-<tr>
-<th>日期</th>
-<th>类型</th>
-<th>详细操作</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>2017-02-13</strong></td>
-<td>创建</td>
-<td>初始化本文</td>
-</tr>
-<tr>
-<td><strong>2017-02-17</strong></td>
-<td>重构</td>
-<td>删除零散笔记，重新组织本文结构</td>
-</tr>
-<tr>
-<td><strong>2017-02-26</strong></td>
-<td>重构</td>
-<td>调整部分内容</td>
-</tr>
-</tbody>
-</table>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;选择了这本书进行精读是有原因的：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在一个需要大量阅读的时代里，读东西更加有策略。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;记得大约是初三的考试比赛，监考老师发了卷子，我们这些人拿到卷子捋起袖子就是写，而监考老师说了一句话：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;先看看卷子，然后再写，不要上来就做题。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;虽然那次考试并不算理想，最大的收获应该就是这句话。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;通过’先预估，然后再做’的意识，我应该是少走了一些弯路的。至少工作效率稍微提升了一些。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;但，有了这个先预估一下，然后再做的意识可以减少很多问题，然而并不能更好解决的问题。因为意识这玩意，不是方法，不是策略。知道考虑火候，不懂得把握火候照样做不出好菜。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
-    
-    
-      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-      <category term="书单与简评" scheme="http://twocucao.xyz/tags/%E4%B9%A6%E5%8D%95%E4%B8%8E%E7%AE%80%E8%AF%84/"/>
     
   </entry>
   

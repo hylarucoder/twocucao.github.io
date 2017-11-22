@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/09/25/VueAll/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00 前言最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 本文仅限于 VueCli 下面的开发：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 package.json 也能代替这个功能。├── RE">
-<meta property="og:updated_time" content="2017-11-21T01:28:03.907Z">
+<meta property="og:updated_time" content="2017-11-22T08:12:30.010Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进击的 VueJS">
 <meta name="twitter:description" content="0x00 前言最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 本文仅限于 VueCli 下面的开发：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 package.json 也能代替这个功能。├── RE">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,331
+                  2,391
                 </span>
               
 
@@ -433,7 +433,7 @@
 <li>注册路由切换的时候的调用的各类方法</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># components</div><div class="line">├── fed-commons 定义通用型组件，比如手风琴，tab 卡，全局的卡片，一般为了开发效率，如果是 PC 端的话，建议使用 ElementUI,ElementUI 不满足要求的时候，再考虑自己封装组件。</div><div class="line">└── views</div><div class="line">    ├── auth</div><div class="line">        ├── Login.vue</div><div class="line">        ├── Register.vue</div><div class="line">    ├── commons</div><div class="line">        ├── 404.vue</div><div class="line">        ├── 401.vue</div><div class="line">    ├── core</div><div class="line">        ├── Dashboard.vue</div><div class="line">        ├── Content.vue</div><div class="line">    ├── pages</div><div class="line">        ├── AModule</div><div class="line">            ├── AModulePart1Componennt</div><div class="line">                ├── Charts01.vue</div><div class="line">                ├── Map02.vue</div><div class="line">                ├── Editor03.vue</div><div class="line">            ├── AModulePart1.vue</div><div class="line">            ├── AModulePart2.vue</div><div class="line">        ├── BModule</div><div class="line">            ├── BModulePart1.vue</div><div class="line">            ├── BModulePart2.vue</div></pre></td></tr></table></figure>
-<p>指的一提的是，AModulePart1.vue 页面的同级 AModulePart1Componennt 下面如果有多个 ECharts 图表，实际上可以通过 mixin 来达到减少代码量的目的。</p>
+<p>值得一提的是，AModulePart1.vue 页面的同级 AModulePart1Componennt 下面如果有多个 ECharts 图表，实际上可以通过 mixin 来达到减少代码量的目的。</p>
 <h2 id="0x02-一些零散技巧"><a href="#0x02-一些零散技巧" class="headerlink" title="0x02 一些零散技巧"></a>0x02 一些零散技巧</h2><h3 id="1-离线-IconFont"><a href="#1-离线-IconFont" class="headerlink" title="1. 离线 IconFont"></a>1. 离线 IconFont</h3><p>不太喜欢用在线的东西，当然，这并不是说 iconfont 不好，只是个人偏好而已。</p>
 <p>所以，我就查找了一些资料，正好之前研究过某个网站的反爬机制，研究了一下他们的 iconfont, 知道了 font-carrier, 然后调用 node 脚本打包字体文件，并在这个过程中自动生成对应的 iconfont.css</p>
 <p>最后的结果就是，当我放一个文件到 svg 文件夹下面的时候，比如 bank.svg , 我执行一下脚本，生成对应的字体文件，在 vue 组件中直接输入</p>
@@ -452,7 +452,9 @@
 <blockquote>
 <p>但这不应该是 Webpack 本身就应该做的吗？为嘛还要配置，还要不伦不类的生成一个配置文件和一个 JS 文件，再从 index.html 里面导入？</p>
 </blockquote>
-<p>当然，后来出来了一个 <a href="https://github.com/asfktz/autodll-webpack-plugin" target="_blank" rel="external">https://github.com/asfktz/autodll-webpack-plugin</a> 尝试了之后。感觉很赞。可惜在 mac 上一切安好，Windows 上晴天霹雳，debug 了一下，发现是这个库的一个依赖对 windows 的路径处理好像还有点小问题。而公司的前端小伙伴是 Windowser, 只好作罢。</p>
+<p>当然，后来出来了一个 <a href="https://github.com/asfktz/autodll-webpack-plugin" target="_blank" rel="external">https://github.com/asfktz/autodll-webpack-plugin</a> 尝试了之后。感觉很赞。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// windows 系统不兼容，暂时去掉</span></div><div class="line"><span class="keyword">new</span> AutoDllPlugin(&#123;</div><div class="line">  <span class="attr">inject</span>: <span class="literal">true</span>, <span class="comment">// will inject the DLL bundles to index.html</span></div><div class="line">  filename: <span class="string">'[name]_[hash].js'</span>,</div><div class="line">  <span class="attr">path</span>: <span class="string">'./static/js/'</span>,</div><div class="line">  <span class="attr">entry</span>: &#123;</div><div class="line">    <span class="attr">vendor</span>: [</div><div class="line">      <span class="string">'mapbox-gl'</span>,</div><div class="line">      <span class="string">'d3'</span>,</div><div class="line">      <span class="string">'echarts'</span>,</div><div class="line">      <span class="string">'echarts-gl'</span>,</div><div class="line">      <span class="string">'leaflet'</span>,</div><div class="line">      <span class="string">'axios'</span>,</div><div class="line">      <span class="string">'vue'</span>,</div><div class="line">      <span class="string">'vue-router'</span>,</div><div class="line">      <span class="string">'vuex'</span></div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">plugins</span>: [</div><div class="line">    <span class="keyword">new</span> webpack.optimize.UglifyJsPlugin(&#123;</div><div class="line">      <span class="attr">compress</span>: &#123;</div><div class="line">        <span class="attr">comparisons</span>: <span class="literal">false</span>  <span class="comment">// don't optimize comparisons</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">sourceMap</span>: <span class="literal">true</span></div><div class="line">    &#125;),</div><div class="line">  ]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>可惜在 mac 上一切安好，Windows 上晴天霹雳，debug 了一下，发现是这个库的一个依赖库对 windows 的路径处理好像还有点小问题。而公司的前端小伙伴是 Windowser, 只好作罢。</p>
 <p>Macer 可以先用试试，至于 Windowser, 那就去这个 ISSUE 下面催催作者吧… 哈哈哈</p>
 <h3 id="3-开发环境与部署环境"><a href="#3-开发环境与部署环境" class="headerlink" title="3. 开发环境与部署环境"></a>3. 开发环境与部署环境</h3><p>VueCLI 内置了变量的管理，你可以定义 config/dev.js</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = merge(prodEnv, &#123;</div><div class="line">  <span class="attr">NODE_ENV</span>: <span class="string">'"development"'</span>,</div><div class="line">  <span class="attr">API_ROOT</span>: <span class="string">'"http://dev-data.twocucao.xyz"'</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -626,7 +628,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-count">57</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -648,7 +650,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
