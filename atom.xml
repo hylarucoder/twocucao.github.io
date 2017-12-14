@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2017-11-24T04:16:12.405Z</updated>
+  <updated>2017-12-14T07:15:07.166Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -16,11 +16,125 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>记一次小机器的Python大数据分析</title>
+    <link href="http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/"/>
+    <id>http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/</id>
+    <published>2017-12-07T08:56:12.000Z</published>
+    <updated>2017-12-14T07:15:07.166Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>机缘巧合，最近公司突然要搞一波大量数据的分析。属于进店客流类的分析，原始数据非常大。 数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在180亿左右。</p>
+<p>解压后…… 差不多一个 T 吧。</p>
+<p>如果是人民币玩家，自然是直接购置几十台高配置机器，做个 mysql shard 或者直接上大数据全家桶比如 hadoop 和 hive 之类，让程序员去往死里折腾吧。</p>
+<blockquote>
+<p>嗯，然而对于我这种非人民币玩家，就要用单机硬扛。</p>
+</blockquote>
+<p>我的配置简单来说如下：</p>
+<ul>
+<li>局域网服务器 （ Ubuntu 16.04 LTS ）<ul>
+<li>Xeon(R) CPU E3-1225 v5 @ 3.30GHz</li>
+<li>16G 内存</li>
+<li>1T 硬盘</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>苹果电脑 2016 年 15寸 最高配<ul>
+<li>1T 硬盘</li>
+<li>i7 四核</li>
+</ul>
+</li>
+</ul>
+<h2 id="0x01-准备数据阶段"><a href="#0x01-准备数据阶段" class="headerlink" title="0x01 准备数据阶段"></a>0x01 准备数据阶段</h2><p>用低配机器分析大数据的<strong>首要原则</strong>，就是<strong>不要分析大数据</strong>。</p>
+<blockquote>
+<p>换而言之就是<strong>尽可能的抽取所得结论所需分析数据的最小超集</strong>, 小机器是海量计算的，但通过一定的过滤和筛选可以将数据筛选出到一台机器能扛得住的计算量。</p>
+</blockquote>
+<h3 id="1-1-将数据导入-MySQL-中"><a href="#1-1-将数据导入-MySQL-中" class="headerlink" title="1.1 将数据导入 MySQL 中"></a>1.1 将数据导入 MySQL 中</h3><p>我们先不管三七二十一，既然给了 SQL 文件，肯定要入库的，那么问题来了：</p>
+<blockquote>
+<p><del>将大象关进冰箱要几个步骤</del> 将数据导入数据库中需要几个步骤</p>
+</blockquote>
+<p>或者说，如何更快的导入300余张不同表的数据。</p>
+<p>大致步骤如下：</p>
+<ul>
+<li>初始化硬盘</li>
+<li>配置 MySQL</li>
+<li>解压文件 (7za x)</li>
+<li>导入数据 (PV &amp; MySQL)</li>
+<li>删除已完成数据包，节省磁盘空间 (rm)</li>
+</ul>
+<p>第二步和第四步无需解释。提一下配置MySQL和导入数据包两个步骤。</p>
+<h4 id="初始化硬盘"><a href="#初始化硬盘" class="headerlink" title="初始化硬盘"></a>初始化硬盘</h4><p>首先，<strong>插入硬盘</strong></p>
+<p>使用lshw 查看硬盘信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">root@ubuntu:~# lshw -C disk</div><div class="line">  *-disk</div><div class="line">       description: SCSI Disk</div><div class="line">       product: My Passport 25E2</div><div class="line">       vendor: WD</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@7:0.0.0</div><div class="line">       logical name: /dev/sdb</div><div class="line">       version: 4004</div><div class="line">       serial: WX888888HALK</div><div class="line">       size: 3725GiB (4TB)</div><div class="line">       capabilities: gpt-1.00 partitioned partitioned:gpt</div><div class="line">       configuration: ansiversion=6 guid=88e88888-422d-49f0-9ba9-221db75fe4b4 logicalsectorsize=512 sectorsize=4096</div><div class="line">  *-disk</div><div class="line">       description: ATA Disk</div><div class="line">       product: WDC WD10EZEX-08W</div><div class="line">       vendor: Western Digital</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@0:0.0.0</div><div class="line">       logical name: /dev/sda</div><div class="line">       version: 1A01</div><div class="line">       serial: WD-WC888888888U</div><div class="line">       size: 931GiB (1TB)</div><div class="line">       capabilities: partitioned partitioned:dos</div><div class="line">       configuration: ansiversion=5 logicalsectorsize=512 sectorsize=4096 signature=f1b42036</div><div class="line">  *-cdrom</div><div class="line">       description: DVD reader</div><div class="line">       product: DVDROM DH1XXX8SH</div><div class="line">       vendor: PLDS</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@5:0.0.0</div><div class="line">       logical name: /dev/cdrom</div><div class="line">       logical name: /dev/dvd</div><div class="line">       logical name: /dev/sr0</div><div class="line">       version: ML31</div><div class="line">       capabilities: removable audio dvd</div><div class="line">       configuration: ansiversion=5 status=nodisc</div></pre></td></tr></table></figure>
+<p>使用fdisk 格式化硬盘，并且分区</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fdisk /dev/sdb</div><div class="line">#输入 n</div><div class="line">#输入 p</div><div class="line">#输入 1</div><div class="line">#输入 w</div><div class="line">sudo mkfs -t ext4 /dev/sdb1</div><div class="line">mkdir -p /media/mynewdrive</div><div class="line">vim /etc/fstab</div><div class="line"># /dev/sdb1    /media/mynewdrive   ext4    defaults     0        2</div><div class="line"># 直接挂载所有，或者 reboot</div><div class="line">mount -a</div></pre></td></tr></table></figure>
+<p>至此为止，硬盘就格式化完成了。关于安装硬盘，可以参考 <a href="https://help.ubuntu.com/community/InstallingANewHardDrive" target="_blank" rel="external">https://help.ubuntu.com/community/InstallingANewHardDrive</a></p>
+<h4 id="配置-MySQL"><a href="#配置-MySQL" class="headerlink" title="配置 MySQL"></a>配置 MySQL</h4><p>篇幅有限，只简介配置 MySQL 的 DataDIR ，省去安装和基本登录认证的配置。</p>
+<p>其次，配置 DataDIR</p>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-move-a-mysql-data-directory-to-a-new-location-on-ubuntu-16-04" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-move-a-mysql-data-directory-to-a-new-location-on-ubuntu-16-04</a></p>
+<p>默认文件如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">/var/lib/mysql/</div><div class="line">systemctl stop mysql</div><div class="line">rsync -av /var/lib/mysql /mnt/volume-nyc1-01</div><div class="line">mv /var/lib/mysql /var/lib/mysql.bak</div><div class="line">vim /etc/mysql/mysql.conf.d/mysqld.cnf</div><div class="line"># 修改至 datadir=/mnt/volume-nyc1-01/mysql</div><div class="line">vim /etc/apparmor.d/tunables/alias</div><div class="line"># alias /var/lib/mysql/ -&gt; /mnt/volume-nyc1-01/mysql/</div><div class="line">sudo systemctl restart apparmor</div><div class="line">vim /usr/share/mysql/mysql-systemd-start</div><div class="line"># 修改成</div><div class="line">if [ ! -d /var/lib/mysql ] &amp;&amp; [ ! -L /var/lib/mysql ]; then</div><div class="line"> echo &quot;MySQL data dir not found at /var/lib/mysql. Please create one.&quot;</div><div class="line"> exit 1</div><div class="line">fi</div><div class="line"></div><div class="line">if [ ! -d /var/lib/mysql/mysql ] &amp;&amp; [ ! -L /var/lib/mysql/mysql ]; then</div><div class="line"> echo &quot;MySQL system database not found. Please run mysql_install_db tool.&quot;</div><div class="line"> exit 1</div><div class="line">fi</div><div class="line"></div><div class="line"># 最后</div><div class="line">sudo mkdir /var/lib/mysql/mysql -p</div><div class="line">sudo systemctl restart mysql</div><div class="line"></div><div class="line"># 记得配置文件</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TODO: 配置 DataDIR</div></pre></td></tr></table></figure>
+<p>将 DataDIR 配置完成之后，就可以导入数据了。</p>
+<h4 id="导入数据-之-MySQL-PV"><a href="#导入数据-之-MySQL-PV" class="headerlink" title="导入数据 之 MySQL + PV"></a>导入数据 之 MySQL + PV</h4><p>我们使用 mysql 导入脚本的时候，有几种导入方式</p>
+<ul>
+<li>source 命令，然而这个命令容易在数据量很大的时候直接卡掉。（印象中是直接把 sql 文件加载到内存中，然后执行）</li>
+<li>mysql 命令</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mysql 命令的典型导入场景就是这样</div><div class="line">mysql -uadmin -p123456 some_db &lt; tb.sql</div></pre></td></tr></table></figure>
+<p>加上 PV 命令的话，比较神奇了。有进度条了！!</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 附加进度条的导入场景</div><div class="line">pv -i 1 -p -t -e ./xxxx_probe.sql | mysql -uadmin -p123456 some_db</div></pre></td></tr></table></figure>
+<p>然后，可以查看一下磁盘 CPU 内存的占用情况，如果可能的话，使用 tmux 多开几个进程导入数据。</p>
+<p>因为每个 SQL 文件对应的表不一样，所以多开几个进程批量insert的话并不会锁表，这样可以显著提升导入速度。</p>
+<h3 id="1-2-导出数据"><a href="#1-2-导出数据" class="headerlink" title="1.2 导出数据"></a>1.2 导出数据</h3><h4 id="过滤掉不需要的行与列"><a href="#过滤掉不需要的行与列" class="headerlink" title="过滤掉不需要的行与列"></a>过滤掉不需要的行与列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select col_a , col_b from some_table where col_c in (&apos;xx&apos;,&apos;yy&apos;,&apos;zz&apos;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># TODO : 这里其实也会有一些优化点</div></pre></td></tr></table></figure>
+<h4 id="尽量拆分数据为最小单元的-CSV-文件"><a href="#尽量拆分数据为最小单元的-CSV-文件" class="headerlink" title="尽量拆分数据为最小单元的 CSV 文件"></a>尽量拆分数据为最小单元的 CSV 文件</h4><p>经过初步观察，数据量特别大。如果把所有的数据拿出来进行计算的话，距离算出结果就遥遥无期了。</p>
+<blockquote>
+<p>其实这个时候给 CSV 文件进行分析会比给 SQL 分析会好很多。</p>
+<p>PS : 如果每个文件的数据量不是很大的话，直接给 CSV 文件进行分析会快很多很多。</p>
+</blockquote>
+<h3 id="1-3-校验数据完备性"><a href="#1-3-校验数据完备性" class="headerlink" title="1.3 校验数据完备性"></a>1.3 校验数据完备性</h3><p>第三方给的数据多多少少会有这些或者那些的问题，一般情况下，可以通过检查数据完备性来尽可能的减少数据的不靠谱性。</p>
+<p>我习惯性在这样表里面详细记录数据完备性的各种参数与进度。</p>
+<p>比如：</p>
+<ul>
+<li>数据的提供情况和实际情况</li>
+<li>阶段性的记录条数和点位的统计值</li>
+<li>max，min，mean，median 用来避免异常值</li>
+</ul>
+<h2 id="0x02-分析阶段"><a href="#0x02-分析阶段" class="headerlink" title="0x02 分析阶段"></a>0x02 分析阶段</h2><p>经过上一步处理，数据的文件总大小大约从 1000GB -&gt; 10GB 左右，然后拆分成若干个文件。</p>
+<ul>
+<li>分析性能要点1：简单的统计用读写文件系统是最快的</li>
+<li>分析性能要点2：拆分数据成若干个文件,使得自己可以在比较短的时间内读取。</li>
+<li>分析性能要点3：排序后的list和set谁查找速度最快？</li>
+<li>分析性能要点4：reduce 加 python 里面唯一的set update的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。</li>
+<li>分析性能要点5：IPython 给性能带来的影响，Dateframe 释放内存的失败以及Process来解决这个问题。</li>
+<li>分析性能要点6：</li>
+</ul>
+<h2 id="0x03-测试"><a href="#0x03-测试" class="headerlink" title="0x03 测试"></a>0x03 测试</h2><h2 id="0xDD-番外篇"><a href="#0xDD-番外篇" class="headerlink" title="0xDD 番外篇"></a>0xDD 番外篇</h2><p>在分析这次的数据过程中，自己的 Mac 本子也坏掉了，幸好还在保修期，送到苹果店维修了一下。</p>
+<p>要不然，这工伤其实还是挺严重的。</p>
+<h2 id="0xEE-更新"><a href="#0xEE-更新" class="headerlink" title="0xEE 更新"></a>0xEE 更新</h2><ul>
+<li><strong>2017-12-07</strong> 初始化本文</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;机缘巧合，最近公司突然要搞一波大量数据的分析。属于进店客流类的分析，原始数据非常大。 数据量级也还算
+    
+    </summary>
+    
+      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+    
+    
+      <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Python 中的作用域准则</title>
     <link href="http://twocucao.xyz/2017/11/20/PythonClosureAndScopes/"/>
     <id>http://twocucao.xyz/2017/11/20/PythonClosureAndScopes/</id>
     <published>2017-11-20T01:33:58.000Z</published>
-    <updated>2017-11-24T04:16:12.405Z</updated>
+    <updated>2017-11-24T04:16:12.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>因为最早用的是 Java 和 C#，写 Python 的时候自然也把 Python 作用域的想的和原有的一致。</p>
 <p>Python 的作用域变量遵循在大部分情况下是一致的，但也有例外的情况。</p>
@@ -123,7 +237,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/10/20/UbuntuCheatSheet/"/>
     <id>http://twocucao.xyz/2017/10/20/UbuntuCheatSheet/</id>
     <published>2017-10-20T10:41:47.000Z</published>
-    <updated>2017-11-22T07:46:00.569Z</updated>
+    <updated>2017-11-22T07:46:00.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。</p>
 <p>不定期更新。</p>
@@ -195,7 +309,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/10/05/ElegantMac/"/>
     <id>http://twocucao.xyz/2017/10/05/ElegantMac/</id>
     <published>2017-10-05T12:06:05.000Z</published>
-    <updated>2017-11-24T05:22:36.647Z</updated>
+    <updated>2017-11-24T05:22:36.000Z</updated>
     
     <content type="html"><![CDATA[<p>当时写这篇文章的时候才接触 mac 没多久，使用快两年之后，再次修订了本文。</p>
 <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>谈及 macOS , 很多人喜欢和 Win 比个高下。在我看来， Win 虽在非编程类生态和易用性比 Mac 要好很多，可专业人士之所以专业是因为他能挑选适合的武器发挥最大的效用，不是吗？</p>
@@ -592,7 +706,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/09/25/VueAll/"/>
     <id>http://twocucao.xyz/2017/09/25/VueAll/</id>
     <published>2017-09-25T12:06:05.000Z</published>
-    <updated>2017-11-23T05:28:32.111Z</updated>
+    <updated>2017-11-23T05:28:32.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。</p>
 <p>本文仅限于 VueCli 下面的开发：</p>
@@ -709,7 +823,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/09/15/Vue/"/>
     <id>http://twocucao.xyz/2017/09/15/Vue/</id>
     <published>2017-09-15T12:06:05.000Z</published>
-    <updated>2017-11-23T05:28:52.116Z</updated>
+    <updated>2017-11-23T05:28:52.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x01-Essential"><a href="#0x01-Essential" class="headerlink" title="0x01 Essential"></a>0x01 Essential</h2><h3 id="1-1-The-Vue-Instance"><a href="#1-1-The-Vue-Instance" class="headerlink" title="1.1 The Vue Instance"></a>1.1 The Vue Instance</h3><p>当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。</p>
 <blockquote>
@@ -834,7 +948,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/07/26/ReactCheatSheet/"/>
     <id>http://twocucao.xyz/2017/07/26/ReactCheatSheet/</id>
     <published>2017-07-26T12:06:05.000Z</published>
-    <updated>2017-11-18T03:29:51.577Z</updated>
+    <updated>2017-11-18T03:29:51.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><blockquote>
 <p>备注：本文已太监</p>
@@ -924,7 +1038,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/07/17/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%9A%84%E5%B8%B8%E8%AF%86%E7%AC%94%E8%AE%B0/"/>
     <id>http://twocucao.xyz/2017/07/17/数据科学的常识笔记/</id>
     <published>2017-07-17T12:00:00.000Z</published>
-    <updated>2017-11-23T05:27:57.103Z</updated>
+    <updated>2017-11-23T05:27:57.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>2017 年 07 月，为了解统计学和机器学习的基本常识，开了这篇文章。</p>
 <p>当然，仅仅是为了了解，所以也就写的随性（不严谨）一些，排版什么的也都详细推敲。想到哪里就记录到哪里。</p>
@@ -1290,11 +1404,59 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
   </entry>
   
   <entry>
+    <title>ReThinking In JavaScript</title>
+    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
+    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
+    <published>2017-07-04T12:08:21.000Z</published>
+    <updated>2017-07-05T06:29:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
+<a id="more"></a>
+<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
+<p>因为太火，不得不认真学习一下。</p>
+<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
+<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
+<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
+<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
+<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
+<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
+<li>String</li>
+<li>Boolean</li>
+<li>Symbol (new in ES2015)</li>
+<li>Object<ul>
+<li>Function</li>
+<li>Array</li>
+<li>Date</li>
+<li>RegExp</li>
+</ul>
+</li>
+<li>null</li>
+<li>undefined</li>
+</ul>
+<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
+<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+    
+    
+      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ReThinking In Python</title>
     <link href="http://twocucao.xyz/2017/07/04/RethinkingInPython/"/>
     <id>http://twocucao.xyz/2017/07/04/RethinkingInPython/</id>
     <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-11-24T01:35:57.949Z</updated>
+    <updated>2017-11-24T01:35:57.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="生命苦短-我用-Python"><a href="#生命苦短-我用-Python" class="headerlink" title="生命苦短 我用 Python"></a>生命苦短 我用 Python</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。</p>
 <h2 id="0x01-Python-胡论"><a href="#0x01-Python-胡论" class="headerlink" title="0x01 Python 胡论"></a>0x01 Python 胡论</h2><h3 id="1-1-Python-的独一无二性"><a href="#1-1-Python-的独一无二性" class="headerlink" title="1.1 Python 的独一无二性"></a>1.1 Python 的独一无二性</h3><p>是要用一门编程语言无非是两种原因：</p>
@@ -1659,54 +1821,6 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
   </entry>
   
   <entry>
-    <title>ReThinking In JavaScript</title>
-    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
-    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
-    <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-07-05T06:29:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
-<a id="more"></a>
-<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
-<p>因为太火，不得不认真学习一下。</p>
-<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
-<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
-<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
-<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
-<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
-<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
-<li>String</li>
-<li>Boolean</li>
-<li>Symbol (new in ES2015)</li>
-<li>Object<ul>
-<li>Function</li>
-<li>Array</li>
-<li>Date</li>
-<li>RegExp</li>
-</ul>
-</li>
-<li>null</li>
-<li>undefined</li>
-</ul>
-<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
-<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
-    
-    
-      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Vim Cheatsheet</title>
     <link href="http://twocucao.xyz/2017/06/23/VimCheatSheet/"/>
     <id>http://twocucao.xyz/2017/06/23/VimCheatSheet/</id>
@@ -1791,7 +1905,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/06/15/GitCheatSheet/"/>
     <id>http://twocucao.xyz/2017/06/15/GitCheatSheet/</id>
     <published>2017-06-15T12:46:00.000Z</published>
-    <updated>2017-11-21T11:39:42.101Z</updated>
+    <updated>2017-11-21T11:39:42.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="如何优雅地使用-Git"><a href="#如何优雅地使用-Git" class="headerlink" title="如何优雅地使用 Git"></a>如何优雅地使用 Git</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>Git 是一种分布式版本管理工具。</p>
 <h2 id="0x01-Git-命令范论"><a href="#0x01-Git-命令范论" class="headerlink" title="0x01 Git 命令范论"></a>0x01 Git 命令范论</h2><ol>
@@ -1906,7 +2020,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/05/29/%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8ETensorFlow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/"/>
     <id>http://twocucao.xyz/2017/05/29/一个基于TensorFlow的分类器/</id>
     <published>2017-05-29T00:46:00.000Z</published>
-    <updated>2017-11-22T08:59:46.140Z</updated>
+    <updated>2017-11-22T08:59:46.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。<br>所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。<br>本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。</p>
 <p>本文的目的是：</p>
@@ -2170,7 +2284,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/04/18/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_FluentPython/"/>
     <id>http://twocucao.xyz/2017/04/18/读书笔记_FluentPython/</id>
     <published>2017-04-18T12:16:37.000Z</published>
-    <updated>2017-11-08T09:06:00.758Z</updated>
+    <updated>2017-11-08T09:06:00.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Fluent Python 适用于中级 Pythoner。</p>
 <blockquote>
@@ -2887,7 +3001,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/"/>
     <id>http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/</id>
     <published>2017-04-06T12:29:00.000Z</published>
-    <updated>2017-11-18T05:25:16.111Z</updated>
+    <updated>2017-11-18T05:25:16.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。</p>
 <p>不仅仅是 Django, 还有 Django 涉及到的：</p>
@@ -3083,186 +3197,6 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
       <category term="工作自动化" scheme="http://twocucao.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
     
       <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Thinking In Programming Language</title>
-    <link href="http://twocucao.xyz/2017/03/21/LearnProgrammingLanguage/"/>
-    <id>http://twocucao.xyz/2017/03/21/LearnProgrammingLanguage/</id>
-    <published>2017-03-21T12:05:00.000Z</published>
-    <updated>2017-11-18T04:40:23.939Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="如何学习一门编程语言"><a href="#如何学习一门编程语言" class="headerlink" title="如何学习一门编程语言"></a>如何学习一门编程语言</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文的内容都是一些个人的比较虚的经验。泛泛而谈。</p>
-<p>很多人得出一些结论，往往是样本就一个。比如说一个只用过 PHP 的人叫嚣 PHP 是最好的语言。</p>
-<p>但即便是用过几种语言，得出的经验依然是片面的。</p>
-<p>所以，我得出的结论，不完全是对的，至少是我个人的经验。</p>
-<p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍之际。</p>
-<h2 id="0x01-编程语言胡论"><a href="#0x01-编程语言胡论" class="headerlink" title="0x01 编程语言胡论"></a>0x01 编程语言胡论</h2><p>在我看来，一个人说他会且只精通一门编程语言是很让我不能理解的事情，在我看来，什么编程语言框架上手两三天就能去写，但是这严格意义上应该叫做能用，和精通相差甚远。那是不是说写的时间长的人经验就老道了呢？也不见得。下棋下了一辈子是烂棋篓子的人比比皆是。</p>
-<p>那我认为什么样子的人才是懂写代码的人。</p>
-<pre><code>拥有良好的组织代码的能力的人。
-</code></pre><p>恩，组织代码的能力，一个文件排布混乱的人，不太可能写出整齐严谨的代码，当然，人也可能是复杂的，比如，这个人写的代码挺好，但是生活住处一团糟。</p>
-<p>当然这是题外话了，依个人经验而言，学习任何一个复杂的系统，也需要像组织一个东西一样，系统性的学习。</p>
-<p>系统化的东西往往像《如何阅读一本书》里面描述一本书的复杂架构那样。</p>
-<pre><code>没有一种物质或产品是绝对简单的。所有的东西都是复杂的组合体。当你看一个整体组成复杂的东西的时候，如果只看它如何呈现一体的面貌，那是还没有掌握精髓，你还必须要明白它怎样呈现多个的面貌，但不是各自为政、互不相干的多个面貌，而是互相融合成有机体的多个面貌。如果组成的各个部分没有有机的关联，仅仅是一个集合体罢了。
-
-这就像是一堆砖头跟一栋又砖头建造起来的房子是有区别的。而单一的房子与建造的房子也不相同。一本书就像是一栋单一的房子。一栋大厦，拥有许多房间，每层楼都有房间，有不同的尺寸和形状，不同的外观，不同的用途，这些房间是独立的，分离的，每个房间都有自己的架构和装潢设计，但却不是完全独立与分离的，这些房间使用普通门 / 拱门 / 走廊 / 楼梯串联起来的，即建筑师错位的动线架构，因为这些架构师彼此联结的，因此每一个部分在整体的使用功能上要贡献出自己的力量。否则这栋房子便是不适合居住的。
-</code></pre><p>对于复杂的东西，系统内部的各个部分都是密切相关。</p>
-<pre><code>先模块化，用一个快速的方式获得每个模块的全貌，接着不断分解模块为知识单元，最后连接各个子模块和知识单元
-</code></pre><p>下面的内容就是我组织入手学习编程语言的思路。</p>
-<h3 id="1-1-编程语言的独一无二性"><a href="#1-1-编程语言的独一无二性" class="headerlink" title="1.1 编程语言的独一无二性"></a>1.1 编程语言的独一无二性</h3><p>有的人认为所有的编程语言都是一样的，我不这么认为。</p>
-<p>我觉得这种想法很初级，所有的编程语言都是有特点的，也是有优缺点的。</p>
-<p>举一个我朋友的爱说的很粗俗的例子：</p>
-<pre><code>虽然说关了灯全都一个样，但是每一个女孩子都有是独一无二的存在。
-</code></pre><p>这个例子即便是我这种 23 年丰富单身经验的人，依然可以在第一时间捕捉到我这个段子手朋友的意思。</p>
-<ul>
-<li>有的偏向于运行效率，有的偏向于开发效率。</li>
-<li>有的据说是让人编程时候感到快乐 (ruby)，有的说你生命苦短，为什么不用 Python。</li>
-<li>有的偏向于 Web 开发 (PHP)，有的偏向于并发操作</li>
-<li>有的是 Windows 上面自动化的小白工具 (Autohotkey)</li>
-<li>有的是据说是一次编译，到处运行 (Java)</li>
-</ul>
-<p>编程语言往往是上面这些因素的取舍。</p>
-<ul>
-<li>你要运行效率，往往开发效率就会打折。</li>
-<li>你要开发效率，往往就需要堆更多的机器来提升性能。</li>
-<li>你要充分利用某个平台，往往就没有极高兼容性。</li>
-<li>你要编程语言省心，往往编程语言就会自作聪明。</li>
-</ul>
-<h3 id="1-2-工具链"><a href="#1-2-工具链" class="headerlink" title="1.2 工具链"></a>1.2 工具链</h3><p>工欲善其事必先利其器，而这个器就是工具链。工具链大致有如下：</p>
-<ul>
-<li>Mac Homebrew</li>
-<li>集成开发环境</li>
-<li>编辑器</li>
-<li>开发环境里面的 shell</li>
-<li>cmake</li>
-</ul>
-<h3 id="1-3-文档"><a href="#1-3-文档" class="headerlink" title="1.3 文档"></a>1.3 文档</h3><p>官网的文档是最应该反复查看的东西，这是我现在依然喜欢强调的。</p>
-<p>而官网的文档也分为四种</p>
-<ul>
-<li>一种是 tutorial      – 用于<strong>上手</strong>对应的软件 / 编程语言</li>
-<li>一种是 guide         – 用于<strong> Topic Reading </strong></li>
-<li>一种是 api document  – 用于<strong>查看细节</strong></li>
-<li>一种是 RTFSC ( Read The Fucking Source Code ) 阅读源码</li>
-</ul>
-<blockquote>
-<p>注：把 StackOverFlow 中某个标签的 Most Votes 的答案，是除了大略看看 tutorial 之外的另一种快速熟悉入门时候的痛点的手段。</p>
-</blockquote>
-<p>当然，其实代码写的足够好的话本身就是一种注释。</p>
-<h3 id="1-4-社区"><a href="#1-4-社区" class="headerlink" title="1.4 社区"></a>1.4 社区</h3><p>社区一般情况下都会有的，但有几个网站特别值得提出来</p>
-<ul>
-<li>官网上一般都会放一些比较出色的社区</li>
-<li>Github</li>
-<li>reddit</li>
-<li>某个技术对应的 Weekly 订阅</li>
-</ul>
-<h3 id="1-5-书籍"><a href="#1-5-书籍" class="headerlink" title="1.5 书籍"></a>1.5 书籍</h3><p>特别值得一提的是有一个持续不断阅读到有趣的文章的方法：</p>
-<ol>
-<li>Google 出对应的 书 / Weekly 周报 / 博客，比如 Python Weekly 然后订阅</li>
-<li>接着不断的查看列入优质文章的作者的文章，Github 地址啦，他关注的 Repo 啦等等等等。</li>
-<li>然后去阅读他的代码 / 博客。</li>
-</ol>
-<h2 id="0x02-基础概念"><a href="#0x02-基础概念" class="headerlink" title="0x02 基础概念"></a>0x02 基础概念</h2><blockquote>
-<p> 程序 = 算法 + 数据结构</p>
-</blockquote>
-<p>这句话当然是不全面的，这句话经典就经典在高度概括了程序中算法和数据结构的重要性，但并不影响这句话在计算机世界里面的地位。</p>
-<p>依我看来，对我的启发是：</p>
-<blockquote>
-<p>我会把 API 的调用和数据结构以及算法想清楚，然后才动手把代码分解成伪代码。最后写成代码。</p>
-</blockquote>
-<h3 id="2-1-数据类型"><a href="#2-1-数据类型" class="headerlink" title="2.1 数据类型"></a>2.1 数据类型</h3><p>按照复杂性可划分为：</p>
-<ul>
-<li>简单类型</li>
-<li>复杂类型</li>
-</ul>
-<p>按照复杂性可划分为：</p>
-<ul>
-<li>基本类型</li>
-<li>引用类型</li>
-</ul>
-<p>按照数据结构可划分为：</p>
-<ul>
-<li>集合结构 : 串</li>
-<li>线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，<strong>栈，队列</strong>)</li>
-<li>树形结构 : 树（二叉树，B+ 树，红黑树）</li>
-<li>图形结构 : 图</li>
-</ul>
-<p>对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</p>
-<p>对于复杂的一些数据类型，则需要对数据结构多一些了解。</p>
-<p>比如，对队列而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对 hash 而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字典而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字符串而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？</p>
-<p>那字符串来说，Java 推荐使用 StringBuilder 来合并多个字符串，Python 推荐 join 多个字符串等等。</p>
-<h3 id="2-2-语句"><a href="#2-2-语句" class="headerlink" title="2.2 语句"></a>2.2 语句</h3><ul>
-<li>声明语句</li>
-<li>赋值语句</li>
-<li><p>条件语句</p>
-<ol>
-<li>判断的时候不确定操作符优先级的时候，加括号</li>
-<li>尽量显式判断，不要用隐式判断。</li>
-</ol>
-</li>
-<li><p>循环语句</p>
-<ol>
-<li>Break 和 Continue</li>
-</ol>
-</li>
-</ul>
-<h3 id="2-3-函数"><a href="#2-3-函数" class="headerlink" title="2.3 函数"></a>2.3 函数</h3><ol>
-<li>传值还是传引用</li>
-<li>参数</li>
-</ol>
-<p>函数或者叫做方法，叫法不同。</p>
-<p>函数，我有个很私人的称呼，称它为最小操作模块。</p>
-<p>实际上，在编程的过程中，程序员用面向对象的思想进行编码的人可能真的不是很多。把一段长程序按照自己的需求进行切分成若干个函数的倒是比比皆是。</p>
-<p>不过按照什么样子的标准来切分一段程序为多个函数，仁者见仁智者见智。</p>
-<p>这里面需要注意的事情是：</p>
-<ul>
-<li><ol>
-<li>注意传值（基本类型）和传引用（引用类型）</li>
-</ol>
-</li>
-<li><ol>
-<li>函数重载</li>
-</ol>
-</li>
-</ul>
-<p>对于不同的编程语言，传值（基本类型）和传引用（引用类型）基本上达成了共识。<br>但在实现函数重载的时候则是有所不同，</p>
-<p>比如，Java 里面选择了多写几个函数，Python 则没有这个机制，不过，通过默认参数却可以曲线救国，实现这个机制。</p>
-<p>递归<br>函数式编程<br>高阶函数 mapreduce/ filter / sorted / 返回函数 / 匿名函数 / 装饰器 / 偏函数</p>
-<h4 id="2-3-1-作用域"><a href="#2-3-1-作用域" class="headerlink" title="2.3.1 作用域"></a>2.3.1 作用域</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = <span class="number">1</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a = <span class="number">2</span></div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># 1</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = <span class="number">1</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a = <span class="number">2</span></div><div class="line">    print(a)</div><div class="line">    inner()</div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># 1</span></div><div class="line"><span class="comment"># 1</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = [<span class="number">1</span>]</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a.append(<span class="number">2</span>)</div><div class="line">    print(a)</div><div class="line">    inner()</div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># [1]</span></div><div class="line"><span class="comment"># [1, 2]</span></div></pre></td></tr></table></figure>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">var outer = function()&#123;</div><div class="line">    var a = 1;</div><div class="line">    var inner = function()&#123;</div><div class="line">        a = 2</div><div class="line">    &#125;;</div><div class="line">    console.log(a);</div><div class="line">    inner();</div><div class="line">    console.log(a);</div><div class="line">&#125;</div><div class="line">outer()</div><div class="line"># 1</div><div class="line"># 2</div><div class="line"></div><div class="line">var outer = function()&#123;</div><div class="line">    var a = 1;</div><div class="line">    var inner = function()&#123;</div><div class="line">        var a = 2</div><div class="line">    &#125;;</div><div class="line">    console.log(a);</div><div class="line">    inner();</div><div class="line">    console.log(a);</div><div class="line">&#125;</div><div class="line">outer()</div><div class="line"># 1</div><div class="line"># 1</div></pre></td></tr></table></figure>
-<h4 id="2-3-2-高阶函数"><a href="#2-3-2-高阶函数" class="headerlink" title="2.3.2 高阶函数"></a>2.3.2 高阶函数</h4><ul>
-<li>map</li>
-<li>reduce</li>
-<li>filter</li>
-</ul>
-<h2 id="0x03-中级概念"><a href="#0x03-中级概念" class="headerlink" title="0x03 中级概念"></a>0x03 中级概念</h2><h3 id="3-1-类和对象"><a href="#3-1-类和对象" class="headerlink" title="3.1 类和对象"></a>3.1 类和对象</h3><p>面向对象有三大概念：</p>
-<ul>
-<li>封装</li>
-<li>继承</li>
-<li>多态</li>
-</ul>
-<h3 id="3-2-模块与包"><a href="#3-2-模块与包" class="headerlink" title="3.2 模块与包"></a>3.2 模块与包</h3><p>模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。</p>
-<p>这里的模块指的是一个包下的函数。</p>
-<h3 id="3-3-错误-调试测试"><a href="#3-3-错误-调试测试" class="headerlink" title="3.3 错误 / 调试测试"></a>3.3 错误 / 调试测试</h3><p>异常处理实际上可以考验一个程序员编写代码的健壮性。</p>
-<p>事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。</p>
-<h3 id="3-4-IO-编程"><a href="#3-4-IO-编程" class="headerlink" title="3.4 IO 编程"></a>3.4 IO 编程</h3><h3 id="3-5-正则表达式"><a href="#3-5-正则表达式" class="headerlink" title="3.5 正则表达式"></a>3.5 正则表达式</h3><h2 id="0x04-高级概念"><a href="#0x04-高级概念" class="headerlink" title="0x04 高级概念"></a>0x04 高级概念</h2><h3 id="4-1-元编程"><a href="#4-1-元编程" class="headerlink" title="4.1 元编程"></a>4.1 元编程</h3><h3 id="4-2-并发编程"><a href="#4-2-并发编程" class="headerlink" title="4.2 并发编程"></a>4.2 并发编程</h3><h4 id="4-2-1-多线程"><a href="#4-2-1-多线程" class="headerlink" title="4.2.1 多线程"></a>4.2.1 多线程</h4><blockquote>
-<p>Python 多线程约等于并发。</p>
-</blockquote>
-<h4 id="4-2-2-多进程"><a href="#4-2-2-多进程" class="headerlink" title="4.2.2 多进程"></a>4.2.2 多进程</h4><h4 id="4-2-3-协程"><a href="#4-2-3-协程" class="headerlink" title="4.2.3 协程"></a>4.2.3 协程</h4><h2 id="0x05-标准库"><a href="#0x05-标准库" class="headerlink" title="0x05 标准库"></a>0x05 标准库</h2><h3 id="5-1-数据结构与算法"><a href="#5-1-数据结构与算法" class="headerlink" title="5.1 数据结构与算法"></a>5.1 数据结构与算法</h3><h3 id="5-2-字符串与文本"><a href="#5-2-字符串与文本" class="headerlink" title="5.2 字符串与文本"></a>5.2 字符串与文本</h3><h3 id="5-3-数字日期与时间"><a href="#5-3-数字日期与时间" class="headerlink" title="5.3 数字日期与时间"></a>5.3 数字日期与时间</h3><h3 id="5-4-迭代器与生成器"><a href="#5-4-迭代器与生成器" class="headerlink" title="5.4 迭代器与生成器"></a>5.4 迭代器与生成器</h3><h3 id="5-3-文本处理"><a href="#5-3-文本处理" class="headerlink" title="5.3 文本处理"></a>5.3 文本处理</h3><h2 id="0x06-可维护性代码"><a href="#0x06-可维护性代码" class="headerlink" title="0x06 可维护性代码"></a>0x06 可维护性代码</h2><h3 id="社区推崇的代码风格"><a href="#社区推崇的代码风格" class="headerlink" title="社区推崇的代码风格"></a>社区推崇的代码风格</h3><h3 id="调试的若干种姿势"><a href="#调试的若干种姿势" class="headerlink" title="调试的若干种姿势"></a>调试的若干种姿势</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
-<li><strong>2017-05-11 19:43:00</strong> : 增加代码质量模块</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;如何学习一门编程语言&quot;&gt;&lt;a href=&quot;#如何学习一门编程语言&quot; class=&quot;headerlink&quot; title=&quot;如何学习一门编程语言&quot;&gt;&lt;/a&gt;如何学习一门编程语言&lt;/h1&gt;&lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class
-    
-    </summary>
-    
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
-    
-    
-      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
