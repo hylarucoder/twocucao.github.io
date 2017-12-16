@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2017-12-14T07:15:07.166Z</updated>
+  <updated>2017-12-16T04:24:19.311Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -16,13 +16,13 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>记一次小机器的Python大数据分析</title>
+    <title>记一次小机器的 Python 大数据分析</title>
     <link href="http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/"/>
     <id>http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/</id>
     <published>2017-12-07T08:56:12.000Z</published>
-    <updated>2017-12-14T07:15:07.166Z</updated>
+    <updated>2017-12-16T04:24:19.311Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>机缘巧合，最近公司突然要搞一波大量数据的分析。属于进店客流类的分析，原始数据非常大。 数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在180亿左右。</p>
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>机缘巧合，最近公司突然要搞一波大量数据的分析。属于进店客流类的分析，原始数据非常大。 数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在 180 亿左右。</p>
 <p>解压后…… 差不多一个 T 吧。</p>
 <p>如果是人民币玩家，自然是直接购置几十台高配置机器，做个 mysql shard 或者直接上大数据全家桶比如 hadoop 和 hive 之类，让程序员去往死里折腾吧。</p>
 <blockquote>
@@ -30,15 +30,15 @@
 </blockquote>
 <p>我的配置简单来说如下：</p>
 <ul>
-<li>局域网服务器 （ Ubuntu 16.04 LTS ）<ul>
+<li><p>局域网服务器 （ Ubuntu 16.04 LTS ）</p>
+<ul>
 <li>Xeon(R) CPU E3-1225 v5 @ 3.30GHz</li>
 <li>16G 内存</li>
 <li>1T 硬盘</li>
 </ul>
 </li>
-</ul>
+<li><p>苹果电脑 2016 年 15 寸 最高配</p>
 <ul>
-<li>苹果电脑 2016 年 15寸 最高配<ul>
 <li>1T 硬盘</li>
 <li>i7 四核</li>
 </ul>
@@ -46,26 +46,23 @@
 </ul>
 <h2 id="0x01-准备数据阶段"><a href="#0x01-准备数据阶段" class="headerlink" title="0x01 准备数据阶段"></a>0x01 准备数据阶段</h2><p>用低配机器分析大数据的<strong>首要原则</strong>，就是<strong>不要分析大数据</strong>。</p>
 <blockquote>
-<p>换而言之就是<strong>尽可能的抽取所得结论所需分析数据的最小超集</strong>, 小机器是海量计算的，但通过一定的过滤和筛选可以将数据筛选出到一台机器能扛得住的计算量。</p>
+<p>换而言之就是<strong>尽可能的抽取所得结论所需分析数据的最小超集</strong>, 小机器是无法完成海量计算的，但通过一定的过滤和筛选可以将数据筛选出到一台机器能扛得住的计算量。从而达到可以可以分析海量数据的目的。</p>
 </blockquote>
 <h3 id="1-1-将数据导入-MySQL-中"><a href="#1-1-将数据导入-MySQL-中" class="headerlink" title="1.1 将数据导入 MySQL 中"></a>1.1 将数据导入 MySQL 中</h3><p>我们先不管三七二十一，既然给了 SQL 文件，肯定要入库的，那么问题来了：</p>
 <blockquote>
 <p><del>将大象关进冰箱要几个步骤</del> 将数据导入数据库中需要几个步骤</p>
 </blockquote>
-<p>或者说，如何更快的导入300余张不同表的数据。</p>
+<p>或者说，如何更快的导入 300 余张不同表的数据。</p>
 <p>大致步骤如下：</p>
 <ul>
-<li>初始化硬盘</li>
-<li>配置 MySQL</li>
-<li>解压文件 (7za x)</li>
+<li>新增硬盘，并初始化</li>
+<li>配置 MySQL 的 datadir 到新增硬盘上</li>
 <li>导入数据 (PV &amp; MySQL)</li>
-<li>删除已完成数据包，节省磁盘空间 (rm)</li>
 </ul>
-<p>第二步和第四步无需解释。提一下配置MySQL和导入数据包两个步骤。</p>
-<h4 id="初始化硬盘"><a href="#初始化硬盘" class="headerlink" title="初始化硬盘"></a>初始化硬盘</h4><p>首先，<strong>插入硬盘</strong></p>
-<p>使用lshw 查看硬盘信息</p>
+<h4 id="新增硬盘，并初始化"><a href="#新增硬盘，并初始化" class="headerlink" title="新增硬盘，并初始化"></a>新增硬盘，并初始化</h4><p>首先，<strong>购买并插入硬盘</strong></p>
+<p>使用 lshw 查看硬盘信息</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">root@ubuntu:~# lshw -C disk</div><div class="line">  *-disk</div><div class="line">       description: SCSI Disk</div><div class="line">       product: My Passport 25E2</div><div class="line">       vendor: WD</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@7:0.0.0</div><div class="line">       logical name: /dev/sdb</div><div class="line">       version: 4004</div><div class="line">       serial: WX888888HALK</div><div class="line">       size: 3725GiB (4TB)</div><div class="line">       capabilities: gpt-1.00 partitioned partitioned:gpt</div><div class="line">       configuration: ansiversion=6 guid=88e88888-422d-49f0-9ba9-221db75fe4b4 logicalsectorsize=512 sectorsize=4096</div><div class="line">  *-disk</div><div class="line">       description: ATA Disk</div><div class="line">       product: WDC WD10EZEX-08W</div><div class="line">       vendor: Western Digital</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@0:0.0.0</div><div class="line">       logical name: /dev/sda</div><div class="line">       version: 1A01</div><div class="line">       serial: WD-WC888888888U</div><div class="line">       size: 931GiB (1TB)</div><div class="line">       capabilities: partitioned partitioned:dos</div><div class="line">       configuration: ansiversion=5 logicalsectorsize=512 sectorsize=4096 signature=f1b42036</div><div class="line">  *-cdrom</div><div class="line">       description: DVD reader</div><div class="line">       product: DVDROM DH1XXX8SH</div><div class="line">       vendor: PLDS</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@5:0.0.0</div><div class="line">       logical name: /dev/cdrom</div><div class="line">       logical name: /dev/dvd</div><div class="line">       logical name: /dev/sr0</div><div class="line">       version: ML31</div><div class="line">       capabilities: removable audio dvd</div><div class="line">       configuration: ansiversion=5 status=nodisc</div></pre></td></tr></table></figure>
-<p>使用fdisk 格式化硬盘，并且分区</p>
+<p>使用 fdisk 格式化硬盘，并且分区</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fdisk /dev/sdb</div><div class="line">#输入 n</div><div class="line">#输入 p</div><div class="line">#输入 1</div><div class="line">#输入 w</div><div class="line">sudo mkfs -t ext4 /dev/sdb1</div><div class="line">mkdir -p /media/mynewdrive</div><div class="line">vim /etc/fstab</div><div class="line"># /dev/sdb1    /media/mynewdrive   ext4    defaults     0        2</div><div class="line"># 直接挂载所有，或者 reboot</div><div class="line">mount -a</div></pre></td></tr></table></figure>
 <p>至此为止，硬盘就格式化完成了。关于安装硬盘，可以参考 <a href="https://help.ubuntu.com/community/InstallingANewHardDrive" target="_blank" rel="external">https://help.ubuntu.com/community/InstallingANewHardDrive</a></p>
 <h4 id="配置-MySQL"><a href="#配置-MySQL" class="headerlink" title="配置 MySQL"></a>配置 MySQL</h4><p>篇幅有限，只简介配置 MySQL 的 DataDIR ，省去安装和基本登录认证的配置。</p>
@@ -75,44 +72,50 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">/var/lib/mysql/</div><div class="line">systemctl stop mysql</div><div class="line">rsync -av /var/lib/mysql /mnt/volume-nyc1-01</div><div class="line">mv /var/lib/mysql /var/lib/mysql.bak</div><div class="line">vim /etc/mysql/mysql.conf.d/mysqld.cnf</div><div class="line"># 修改至 datadir=/mnt/volume-nyc1-01/mysql</div><div class="line">vim /etc/apparmor.d/tunables/alias</div><div class="line"># alias /var/lib/mysql/ -&gt; /mnt/volume-nyc1-01/mysql/</div><div class="line">sudo systemctl restart apparmor</div><div class="line">vim /usr/share/mysql/mysql-systemd-start</div><div class="line"># 修改成</div><div class="line">if [ ! -d /var/lib/mysql ] &amp;&amp; [ ! -L /var/lib/mysql ]; then</div><div class="line"> echo &quot;MySQL data dir not found at /var/lib/mysql. Please create one.&quot;</div><div class="line"> exit 1</div><div class="line">fi</div><div class="line"></div><div class="line">if [ ! -d /var/lib/mysql/mysql ] &amp;&amp; [ ! -L /var/lib/mysql/mysql ]; then</div><div class="line"> echo &quot;MySQL system database not found. Please run mysql_install_db tool.&quot;</div><div class="line"> exit 1</div><div class="line">fi</div><div class="line"></div><div class="line"># 最后</div><div class="line">sudo mkdir /var/lib/mysql/mysql -p</div><div class="line">sudo systemctl restart mysql</div><div class="line"></div><div class="line"># 记得配置文件</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TODO: 配置 DataDIR</div></pre></td></tr></table></figure>
 <p>将 DataDIR 配置完成之后，就可以导入数据了。</p>
+<blockquote>
+<p>PS：其实，在 Ubuntu 配置 datadir 的的确确是挺麻烦的事情。</p>
+<p>站在现在看，如果重来的话，我肯定会用 Docker 然后挂载新增硬盘到 DataDIR 的方式来处理这种问题。</p>
+</blockquote>
 <h4 id="导入数据-之-MySQL-PV"><a href="#导入数据-之-MySQL-PV" class="headerlink" title="导入数据 之 MySQL + PV"></a>导入数据 之 MySQL + PV</h4><p>我们使用 mysql 导入脚本的时候，有几种导入方式</p>
 <ul>
-<li>source 命令，然而这个命令容易在数据量很大的时候直接卡掉。（印象中是直接把 sql 文件加载到内存中，然后执行）</li>
+<li>source 命令，然而这个命令容易在数据量很大的时候直接卡掉。（印象中是直接把 sql 文件加载到内存中，然后执行，然而，只要涉及到大量文本打印出来并且执行，速度一定会变慢很多）</li>
 <li>mysql 命令</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mysql 命令的典型导入场景就是这样</div><div class="line">mysql -uadmin -p123456 some_db &lt; tb.sql</div></pre></td></tr></table></figure>
 <p>加上 PV 命令的话，比较神奇了。有进度条了！!</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 附加进度条的导入场景</div><div class="line">pv -i 1 -p -t -e ./xxxx_probe.sql | mysql -uadmin -p123456 some_db</div></pre></td></tr></table></figure>
-<p>然后，可以查看一下磁盘 CPU 内存的占用情况，如果可能的话，使用 tmux 多开几个进程导入数据。</p>
-<p>因为每个 SQL 文件对应的表不一样，所以多开几个进程批量insert的话并不会锁表，这样可以显著提升导入速度。</p>
-<h3 id="1-2-导出数据"><a href="#1-2-导出数据" class="headerlink" title="1.2 导出数据"></a>1.2 导出数据</h3><h4 id="过滤掉不需要的行与列"><a href="#过滤掉不需要的行与列" class="headerlink" title="过滤掉不需要的行与列"></a>过滤掉不需要的行与列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select col_a , col_b from some_table where col_c in (&apos;xx&apos;,&apos;yy&apos;,&apos;zz&apos;);</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># TODO : 这里其实也会有一些优化点</div></pre></td></tr></table></figure>
+<p>然后，可以查看一下磁盘 CPU 内存的占用情况。如果负载（着重注意 IO，内存）还不够满，使用 tmux 多开几个进程导入数据。</p>
+<p>因为每个 SQL 文件对应的表不一样，所以多开几个进程批量 insert 的话并不会锁表，这样可以显著提升导入速度。</p>
+<h3 id="1-2-导出数据"><a href="#1-2-导出数据" class="headerlink" title="1.2 导出数据"></a>1.2 导出数据</h3><h4 id="过滤掉不需要的行与列"><a href="#过滤掉不需要的行与列" class="headerlink" title="过滤掉不需要的行与列"></a>过滤掉不需要的行与列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select col_a , col_b from some_table where Acondition and bcondition and col_c in (&apos;xx&apos;,&apos;yy&apos;,&apos;zz&apos;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># TODO : 这里其实也会有一些优化点</div><div class="line">比如，尽量把简单的高效的判断逻辑写在左边。</div><div class="line">当然，因为是走全表进行筛选（次数唯一），也就忘掉索引这种东西吧，索引加上去虽然查找会变快一点点，但因为是查找一次，所以对性能影响并没有很大。</div></pre></td></tr></table></figure>
+<p>为啥是查找一次？</p>
+<p>因为，有 python 里面的神器 pandas，为嘛一定要用数据库呢？直接读写 CSV 多好。</p>
+<p>那你可能又问了，为什么不直接 readsql 呢。因为读取速度没有 CSV 文件快，而且数据探索过程中需要对文件进行反复的读取和探索，如果每一次都是读海量的数据库，也不是不行，速度上就没有那么快了。</p>
 <h4 id="尽量拆分数据为最小单元的-CSV-文件"><a href="#尽量拆分数据为最小单元的-CSV-文件" class="headerlink" title="尽量拆分数据为最小单元的 CSV 文件"></a>尽量拆分数据为最小单元的 CSV 文件</h4><p>经过初步观察，数据量特别大。如果把所有的数据拿出来进行计算的话，距离算出结果就遥遥无期了。</p>
 <blockquote>
-<p>其实这个时候给 CSV 文件进行分析会比给 SQL 分析会好很多。</p>
-<p>PS : 如果每个文件的数据量不是很大的话，直接给 CSV 文件进行分析会快很多很多。</p>
+<p>其实这个时候给 CSV 文件进行分析会比给 SQL 分析会好很多。一来速度快，</p>
 </blockquote>
 <h3 id="1-3-校验数据完备性"><a href="#1-3-校验数据完备性" class="headerlink" title="1.3 校验数据完备性"></a>1.3 校验数据完备性</h3><p>第三方给的数据多多少少会有这些或者那些的问题，一般情况下，可以通过检查数据完备性来尽可能的减少数据的不靠谱性。</p>
-<p>我习惯性在这样表里面详细记录数据完备性的各种参数与进度。</p>
+<p>我习惯性在这样 de 表里面详细记录数据完备性的各种参数与进度。</p>
 <p>比如：</p>
 <ul>
 <li>数据的提供情况和实际情况</li>
 <li>阶段性的记录条数和点位的统计值</li>
 <li>max，min，mean，median 用来避免异常值</li>
+<li>如果是分年份，则必须要统计每一天的情况，否则也不知道数据的缺失成都。</li>
 </ul>
 <h2 id="0x02-分析阶段"><a href="#0x02-分析阶段" class="headerlink" title="0x02 分析阶段"></a>0x02 分析阶段</h2><p>经过上一步处理，数据的文件总大小大约从 1000GB -&gt; 10GB 左右，然后拆分成若干个文件。</p>
-<ul>
-<li>分析性能要点1：简单的统计用读写文件系统是最快的</li>
-<li>分析性能要点2：拆分数据成若干个文件,使得自己可以在比较短的时间内读取。</li>
-<li>分析性能要点3：排序后的list和set谁查找速度最快？</li>
-<li>分析性能要点4：reduce 加 python 里面唯一的set update的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。</li>
-<li>分析性能要点5：IPython 给性能带来的影响，Dateframe 释放内存的失败以及Process来解决这个问题。</li>
-<li>分析性能要点6：</li>
-</ul>
+<h3 id="2-1-性能要点-1：文件系统"><a href="#2-1-性能要点-1：文件系统" class="headerlink" title="2.1 性能要点 1：文件系统"></a>2.1 性能要点 1：文件系统</h3><p>读取文件进行统计速度是最快的。</p>
+<h3 id="2-2-性能要点-2：化整为零，然后-map-reduce。"><a href="#2-2-性能要点-2：化整为零，然后-map-reduce。" class="headerlink" title="2.2 性能要点 2：化整为零，然后 map reduce。"></a>2.2 性能要点 2：化整为零，然后 map reduce。</h3><p>拆分数据成若干个文件<br>将大数据量拆分为若干个文件。</p>
+<h3 id="2-3-性能要点-3：排序后的-list-和-set-谁查找速度最快？"><a href="#2-3-性能要点-3：排序后的-list-和-set-谁查找速度最快？" class="headerlink" title="2.3 性能要点 3：排序后的 list 和 set 谁查找速度最快？"></a>2.3 性能要点 3：排序后的 list 和 set 谁查找速度最快？</h3><p>将大数据量拆分为若干个文件。</p>
+<h3 id="2-4-性能要点-4：python-里面唯一的-set-update-的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。"><a href="#2-4-性能要点-4：python-里面唯一的-set-update-的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。" class="headerlink" title="2.4 性能要点 4：python 里面唯一的 set update 的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。"></a>2.4 性能要点 4：python 里面唯一的 set update 的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。</h3><p>将大数据量拆分为若干个文件。</p>
+<h3 id="2-5-性能要点-5：IPython-给性能带来的影响，Dateframe-释放内存的失败以及-Process-来解决这个问题。"><a href="#2-5-性能要点-5：IPython-给性能带来的影响，Dateframe-释放内存的失败以及-Process-来解决这个问题。" class="headerlink" title="2.5 性能要点 5：IPython 给性能带来的影响，Dateframe 释放内存的失败以及 Process 来解决这个问题。"></a>2.5 性能要点 5：IPython 给性能带来的影响，Dateframe 释放内存的失败以及 Process 来解决这个问题。</h3><p>将大数据量拆分为若干个文件。</p>
+<h3 id="2-6-性能要点-6：多-set-reduce-效果是不是不如多-list-reduce-最后-set-一下（20000W-gt-5000W-条记录）。"><a href="#2-6-性能要点-6：多-set-reduce-效果是不是不如多-list-reduce-最后-set-一下（20000W-gt-5000W-条记录）。" class="headerlink" title="2.6 性能要点 6：多 set reduce 效果是不是不如多 list reduce 最后 set 一下（20000W -&gt; 5000W 条记录）。"></a>2.6 性能要点 6：多 set reduce 效果是不是不如多 list reduce 最后 set 一下（20000W -&gt; 5000W 条记录）。</h3><p>将大数据量拆分为若干个文件。</p>
 <h2 id="0x03-测试"><a href="#0x03-测试" class="headerlink" title="0x03 测试"></a>0x03 测试</h2><h2 id="0xDD-番外篇"><a href="#0xDD-番外篇" class="headerlink" title="0xDD 番外篇"></a>0xDD 番外篇</h2><p>在分析这次的数据过程中，自己的 Mac 本子也坏掉了，幸好还在保修期，送到苹果店维修了一下。</p>
 <p>要不然，这工伤其实还是挺严重的。</p>
 <h2 id="0xEE-更新"><a href="#0xEE-更新" class="headerlink" title="0xEE 更新"></a>0xEE 更新</h2><ul>
 <li><strong>2017-12-07</strong> 初始化本文</li>
+<li><strong>2017-12-16</strong> 增加分析阶段的文字</li>
 </ul>
 ]]></content>
     
@@ -237,7 +240,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/10/20/UbuntuCheatSheet/"/>
     <id>http://twocucao.xyz/2017/10/20/UbuntuCheatSheet/</id>
     <published>2017-10-20T10:41:47.000Z</published>
-    <updated>2017-11-22T07:46:00.000Z</updated>
+    <updated>2017-12-16T03:15:22.232Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。</p>
 <p>不定期更新。</p>
@@ -251,7 +254,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 更换源</span></div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev</div><div class="line">sudo apt-get install zsh tree htop</div><div class="line">sudo apt-get install build-essential acl ntp htop git libpq-dev libmysqlclient-dev libffi-dev libfreetype6-dev libjpeg8-dev liblcms2-dev libtiff5-dev libwebp-dev libxml2-dev libxslt1-dev tcl8.6-dev tk8.6-dev zlib1g-dev python-dev python-pip python-pycurl python-tk ipython supervisor python3.5 python3.5-dev python3-pip python3-lxml python3-tk ipython3</div><div class="line">sudo apt-get install mysql-server mysql-client libmysqlclient-dev slurm</div><div class="line"></div><div class="line"><span class="comment"># GIT 配置</span></div><div class="line">git config --global color.ui <span class="literal">true</span></div><div class="line">git config --global user.name <span class="string">"twocucao"</span></div><div class="line">git config --global user.email <span class="string">"twocucao@gmail.com"</span></div><div class="line">ssh-keygen -t rsa -b 4096 -C <span class="string">"twocucao@gmail.com"</span></div></pre></td></tr></table></figure>
 <h3 id="2-1-设置无登录密钥"><a href="#2-1-设置无登录密钥" class="headerlink" title="2.1 设置无登录密钥"></a>2.1 设置无登录密钥</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 刚开始用了一个很蠢的方法</span></div><div class="line">scp ~/.ssh/id_rsa.pub twocucao@192.168.2.156:.ssh/id_rsa.pub</div><div class="line">ssh twocucao@192.168.2.156 <span class="string">"mkdir .ssh;chmod 0700 .ssh"</span></div><div class="line"></div><div class="line"><span class="comment"># 现在想想，可以直接 ssh-copy-id</span></div><div class="line">ssh-copy-id twocucao@192.168.2.156</div></pre></td></tr></table></figure>
 <p><a href="http://askubuntu.com/questions/46930/how-can-i-set-up-password-less-ssh-login" target="_blank" rel="external">http://askubuntu.com/questions/46930/how-can-i-set-up-password-less-ssh-login</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 服务器</span></div><div class="line"></div><div class="line">sudo apt-get install openssh-server</div><div class="line">sudo vi /etc/ssh/sshd_config <span class="comment"># 找到 PermitRootLogin no 一行，改为 PermitRootLogin yes</span></div><div class="line">sudo service ssh restart</div><div class="line"></div><div class="line">sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev</div><div class="line"></div><div class="line">sudo adduser deploy</div><div class="line">sudo adduser deploy sudo</div><div class="line">su deploy</div><div class="line"></div><div class="line"><span class="comment"># 开发机复制 ssh 公钥。</span></div><div class="line"><span class="comment"># 可以用下面的命令，汗，之前都是在服务器上面创建.ssh 文件夹，然后在本地 scp 拷贝过去，现在想想这个方法还是挺笨的。</span></div><div class="line"><span class="comment"># 就像这样</span></div><div class="line">scp ~/.ssh/id_rsa.pub deploy@192.168.1.143:/webapps/xxxapp/.ssh/authorized_keys</div><div class="line"><span class="comment"># 其实这个命令就 OK 了。</span></div><div class="line">ssh-copy-id deploy@IPADDRESS</div><div class="line"></div><div class="line"><span class="comment"># 服务器</span></div><div class="line">sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 561F9B9CAC40B2F7</div><div class="line">sudo apt-get install -y apt-transport-https ca-certificates</div><div class="line"></div><div class="line">sudo apt-get install -y nginx-extras</div><div class="line">sudo service nginx start</div></pre></td></tr></table></figure></p>
-<h2 id="0x02-Ubuntu-服务器版本基本配置-1"><a href="#0x02-Ubuntu-服务器版本基本配置-1" class="headerlink" title="0x02 Ubuntu 服务器版本基本配置"></a>0x02 Ubuntu 服务器版本基本配置</h2><h2 id="0x03-了解-Linux-服务器运行情况"><a href="#0x03-了解-Linux-服务器运行情况" class="headerlink" title="0x03 了解 Linux 服务器运行情况"></a>0x03 了解 Linux 服务器运行情况</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 运行时间</span></div><div class="line">uptime</div><div class="line"></div><div class="line"><span class="comment"># 内存情况</span></div><div class="line">free -h</div><div class="line"></div><div class="line"><span class="comment"># 网络类</span></div><div class="line"><span class="comment">## 实时流量监控</span></div><div class="line">iftop</div><div class="line"><span class="comment">## 进程占用带宽</span></div><div class="line">nethogs</div><div class="line"><span class="comment">## sudo nethogs eth0</span></div><div class="line">iptraf</div><div class="line"></div><div class="line"><span class="comment"># 磁盘类</span></div><div class="line">iotop</div><div class="line"><span class="comment">## 当 dstat 的 wai 字段值比较大时，可以使用 iotop 找出哪些进程出了问题</span></div><div class="line"></div><div class="line"><span class="comment"># 综合类 之 监控进程，进程管理</span></div><div class="line">top</div><div class="line">htop</div><div class="line">glance <span class="comment"># PS , 这个监控粒度更细</span></div><div class="line"></div><div class="line"><span class="comment"># 综合类 可以取代 vmstat , iostat , netstat , ifstat</span></div><div class="line">dstat</div><div class="line"></div><div class="line"><span class="comment"># 综合类</span></div><div class="line"><span class="comment"># 约等于 strace + tcpdump + htop + iftop + lsof</span></div><div class="line">sysdig</div></pre></td></tr></table></figure>
+<h2 id="0x02-Ubuntu-服务器版本基本配置-1"><a href="#0x02-Ubuntu-服务器版本基本配置-1" class="headerlink" title="0x02 Ubuntu 服务器版本基本配置"></a>0x02 Ubuntu 服务器版本基本配置</h2><h2 id="0x03-了解-Linux-服务器运行情况"><a href="#0x03-了解-Linux-服务器运行情况" class="headerlink" title="0x03 了解 Linux 服务器运行情况"></a>0x03 了解 Linux 服务器运行情况</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 运行时间</span></div><div class="line">uptime</div><div class="line"></div><div class="line"><span class="comment"># 内存情况</span></div><div class="line">free -h</div><div class="line"></div><div class="line"><span class="comment"># 网络类</span></div><div class="line"><span class="comment">## 实时流量监控</span></div><div class="line">iftop</div><div class="line"><span class="comment">## 进程占用带宽</span></div><div class="line">nethogs</div><div class="line"><span class="comment">## sudo nethogs eth0</span></div><div class="line">iptraf</div><div class="line"></div><div class="line"><span class="comment"># 磁盘类</span></div><div class="line">iotop</div><div class="line"><span class="comment">## 当 dstat 的 wai 字段值比较大时，可以使用 iotop 找出哪些进程出了问题</span></div><div class="line"></div><div class="line"><span class="comment"># 综合类 之 监控进程，进程管理</span></div><div class="line">top</div><div class="line">htop</div><div class="line">glances <span class="comment"># PS , 这个监控粒度更细</span></div><div class="line"></div><div class="line"><span class="comment"># 综合类 可以取代 vmstat , iostat , netstat , ifstat</span></div><div class="line">dstat</div><div class="line"></div><div class="line"><span class="comment"># 综合类</span></div><div class="line"><span class="comment"># 约等于 strace + tcpdump + htop + iftop + lsof</span></div><div class="line">sysdig</div></pre></td></tr></table></figure>
 <h2 id="0x04-踩坑集合"><a href="#0x04-踩坑集合" class="headerlink" title="0x04 踩坑集合"></a>0x04 踩坑集合</h2><p>前段时间公司新买了一台 Thinkpad Server 作为内网服务器。</p>
 <p>于是在安装 Ubuntu16.04 的时候就遇到了一个令人哭笑不得的问题。</p>
 <blockquote>
@@ -309,7 +312,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/10/05/ElegantMac/"/>
     <id>http://twocucao.xyz/2017/10/05/ElegantMac/</id>
     <published>2017-10-05T12:06:05.000Z</published>
-    <updated>2017-11-24T05:22:36.000Z</updated>
+    <updated>2017-12-15T07:43:40.203Z</updated>
     
     <content type="html"><![CDATA[<p>当时写这篇文章的时候才接触 mac 没多久，使用快两年之后，再次修订了本文。</p>
 <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>谈及 macOS , 很多人喜欢和 Win 比个高下。在我看来， Win 虽在非编程类生态和易用性比 Mac 要好很多，可专业人士之所以专业是因为他能挑选适合的武器发挥最大的效用，不是吗？</p>
@@ -649,7 +652,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
 <p>yarn 在使用包管理的时候会分析依赖，这对总是 BUG 不断的 node_module 简直是福音。</p>
 <h4 id="2-3-4-Java"><a href="#2-3-4-Java" class="headerlink" title="2.3.4 Java"></a>2.3.4 Java</h4><p>Java 环境安装稍微有一丢丢蛋疼。特别是多版本管理。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TODO: 以后补充 JAVA 环境安装</div></pre></td></tr></table></figure>
-<h3 id="2-4-必备配置-之-dotfiles"><a href="#2-4-必备配置-之-dotfiles" class="headerlink" title="2.4 必备配置 之 dotfiles"></a>2.4 必备配置 之 dotfiles</h3><p>详细内容请见 <a href="https://github.com/twocucao/yadotfiles" target="_blank" rel="external">yadotfiles</a></p>
+<h4 id="2-3-5-macOS-与-ios-开发"><a href="#2-3-5-macOS-与-ios-开发" class="headerlink" title="2.3.5 macOS 与 ios 开发"></a>2.3.5 macOS 与 ios 开发</h4><h3 id="2-4-必备配置-之-dotfiles"><a href="#2-4-必备配置-之-dotfiles" class="headerlink" title="2.4 必备配置 之 dotfiles"></a>2.4 必备配置 之 dotfiles</h3><p>详细内容请见 <a href="https://github.com/twocucao/yadotfiles" target="_blank" rel="external">yadotfiles</a></p>
 <ul>
 <li>依照我个人的习惯，在 OhMyZsh 基础上增加了个人习惯的环境变量的配置，一些函数的封装。</li>
 </ul>
@@ -1825,7 +1828,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/06/23/VimCheatSheet/"/>
     <id>http://twocucao.xyz/2017/06/23/VimCheatSheet/</id>
     <published>2017-06-23T11:48:00.000Z</published>
-    <updated>2017-08-04T17:02:53.000Z</updated>
+    <updated>2017-12-16T03:24:11.786Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中 Vim 使用场景。</p>
 <p>不定期更新。</p>
@@ -1961,7 +1964,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/06/03/PandasCheatSheet/"/>
     <id>http://twocucao.xyz/2017/06/03/PandasCheatSheet/</id>
     <published>2017-06-03T10:41:47.000Z</published>
-    <updated>2017-08-28T09:38:27.000Z</updated>
+    <updated>2017-12-16T03:24:19.037Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。当然，其中还包含 Numpy 等数据科学，统计学相关语句。</p>
 <p>主要包含：</p>
@@ -2020,7 +2023,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/05/29/%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8ETensorFlow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/"/>
     <id>http://twocucao.xyz/2017/05/29/一个基于TensorFlow的分类器/</id>
     <published>2017-05-29T00:46:00.000Z</published>
-    <updated>2017-11-22T08:59:46.000Z</updated>
+    <updated>2017-12-16T03:23:56.581Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。<br>所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。<br>本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。</p>
 <p>本文的目的是：</p>
@@ -2182,7 +2185,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/05/21/DockerCheatSheet/"/>
     <id>http://twocucao.xyz/2017/05/21/DockerCheatSheet/</id>
     <published>2017-05-21T02:57:00.000Z</published>
-    <updated>2017-07-23T07:43:42.000Z</updated>
+    <updated>2017-12-15T09:07:23.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。</p>
 <ul>
@@ -2217,7 +2220,9 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 <p>部署环境也会有问题，比如，开发部突然想使用更高版本的软件，比如突然需要更多的 Django 应用来负担海量请求的怎么办？Hadoop 不够用怎么办？</p>
 <p>当然，思路很简单，开发的时候使用虚拟机，拷贝给大家一起用，部署的时候多创建一些机器，然后上 Ansible 远程操控。即可。</p>
 <p>并不是不行，但是 Docker 由于更加轻量，操作粒度更加细腻，我可以销毁镜像，上传镜像，定制镜像，很轻松调整镜像包并且安装挂载文件。</p>
-<h2 id="0x02-Docker-配套工具"><a href="#0x02-Docker-配套工具" class="headerlink" title="0x02 Docker 配套工具"></a>0x02 Docker 配套工具</h2><h2 id="0x03-Django-技术栈-Docker-化"><a href="#0x03-Django-技术栈-Docker-化" class="headerlink" title="0x03 Django 技术栈 Docker 化"></a>0x03 Django 技术栈 Docker 化</h2><h2 id="0x04-Docker-踩坑记录"><a href="#0x04-Docker-踩坑记录" class="headerlink" title="0x04 Docker 踩坑记录"></a>0x04 Docker 踩坑记录</h2><h3 id="4-1-PostgreSQL-的初始化"><a href="#4-1-PostgreSQL-的初始化" class="headerlink" title="4.1 PostgreSQL 的初始化"></a>4.1 PostgreSQL 的初始化</h3><p>当 Docker 化 PostgreSQL 的时候，必须要把一些初始化脚本放在 docker-entrypoint-initdb.d 中，才能初始化，笔者在进行测试的时候多次发现无法进行初始化，究其原因，经过查找，如果没有及时删除 Volume 的话，则无论怎么初始化，或者 Build, 每一次都会挂载原来的文件夹。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ADD init_django_db.sh /docker-entrypoint-initdb.d/init_django_db.sh</div></pre></td></tr></table></figure></p>
+<h2 id="0x02-Docker-配套工具"><a href="#0x02-Docker-配套工具" class="headerlink" title="0x02 Docker 配套工具"></a>0x02 Docker 配套工具</h2><h2 id="0x03-Django-技术栈-Docker-化"><a href="#0x03-Django-技术栈-Docker-化" class="headerlink" title="0x03 Django 技术栈 Docker 化"></a>0x03 Django 技术栈 Docker 化</h2><p>为了理解这个过程，下面我将我Docker化django应用的流程按照一定步骤演示出来。我将我使用Django的部分经验搞出来，做成了一个django-bpc ，即 django best practice。如果诸位有兴趣研究的话，拿来看看源码倒是倒是非常好。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 演示环境为MAC,在此之前，务必安装好docker for mac 以及 virual machine</span></div><div class="line"><span class="comment"># xxxxxx 为 阿里云分配的容器 registry</span></div><div class="line">docker-machine create --engine-registry-mirror=https://xxxxxx.mirror.aliyuncs.com <span class="_">-d</span> virtualbox default</div><div class="line">docker-compose <span class="_">-f</span> dev.yml build  &amp;&amp; docker-compose <span class="_">-f</span> dev.yml up</div></pre></td></tr></table></figure>
+<h2 id="0x04-Docker-踩坑记录"><a href="#0x04-Docker-踩坑记录" class="headerlink" title="0x04 Docker 踩坑记录"></a>0x04 Docker 踩坑记录</h2><h3 id="4-1-PostgreSQL-的初始化"><a href="#4-1-PostgreSQL-的初始化" class="headerlink" title="4.1 PostgreSQL 的初始化"></a>4.1 PostgreSQL 的初始化</h3><p>当 Docker 化 PostgreSQL 的时候，必须要把一些初始化脚本放在 docker-entrypoint-initdb.d 中，才能初始化，笔者在进行测试的时候多次发现无法进行初始化，究其原因，经过查找，如果没有及时删除 Volume 的话，则无论怎么初始化，或者 Build, 每一次都会挂载原来的文件夹。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ADD init_django_db.sh /docker-entrypoint-initdb.d/init_django_db.sh</div></pre></td></tr></table></figure></p>
 <h3 id="4-2-清空所有Image"><a href="#4-2-清空所有Image" class="headerlink" title="4.2 清空所有Image"></a>4.2 清空所有Image</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Delete all containers</span></div><div class="line">docker rm $(docker ps <span class="_">-a</span> -q)</div><div class="line"><span class="comment"># Delete all images</span></div><div class="line">docker rmi $(docker images -q)</div><div class="line"><span class="comment"># Force delete</span></div><div class="line">docker rmi $(docker images -q) <span class="_">-f</span></div><div class="line"><span class="comment"># Delete Unused Volume</span></div><div class="line">docker volume prune</div></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
@@ -2245,9 +2250,10 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/05/01/OhMyNewMac/"/>
     <id>http://twocucao.xyz/2017/05/01/OhMyNewMac/</id>
     <published>2017-05-01T13:45:00.000Z</published>
-    <updated>2017-05-07T05:55:06.000Z</updated>
+    <updated>2017-12-16T03:23:39.769Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一个月前换了这台新电脑 MacBook Pro 15.4 Multi-Touch Bar (Core i7/16GB/512GB)，感觉每天打字都很舒服，也算是实现了一个梦寐以求的小目标吧。<br><a id="more"></a></p>
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一个月前换了这台新电脑 MacBook Pro 15.4 Multi-Touch Bar (Core i7/16GB/512GB)，感觉每天打字都很舒服，也算是实现了一个梦寐以求的小目标吧。</p>
+<a id="more"></a>
 <p>在此之前，用我的<strong>前任</strong>有下面几款：</p>
 <ul>
 <li>大一时候从网吧买的 400 块钱的台式机</li>
@@ -2256,7 +2262,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 <li>大三上学期买的 3200 块钱的笔记本，后来花了 2000 块升级了一下下</li>
 <li>大四上学期买的 5000 块的二手 MacBook Pro</li>
 </ul>
-<p>后来手贱买了降噪耳机，机械键盘，手机，pad , 这些都没有花家人的钱。</p>
+<p>后来手贱买了降噪耳机，机械键盘，手机，pad , 花的都是自己的钱。</p>
 <p>能把一手烂牌打出不错的结果，这才是让人自豪的事情啊！</p>
 <p>晚安，以及劳动节快乐。</p>
 <h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>2017-05-01: 初始化本文的开头</p>
@@ -2264,7 +2270,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     <summary type="html">
     
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;一个月前换了这台新电脑 MacBook Pro 15.4 Multi-Touch Bar (Core i7/16GB/512GB)，感觉每天打字都很舒服，也算是实现了一个梦寐以求的小目标吧。&lt;br&gt;
+      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;一个月前换了这台新电脑 MacBook Pro 15.4 Multi-Touch Bar (Core i7/16GB/512GB)，感觉每天打字都很舒服，也算是实现了一个梦寐以求的小目标吧。&lt;/p&gt;
     
     </summary>
     
@@ -3001,7 +3007,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/"/>
     <id>http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/</id>
     <published>2017-04-06T12:29:00.000Z</published>
-    <updated>2017-11-18T05:25:16.000Z</updated>
+    <updated>2017-12-16T03:22:23.075Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。</p>
 <p>不仅仅是 Django, 还有 Django 涉及到的：</p>

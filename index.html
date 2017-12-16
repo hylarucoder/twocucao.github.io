@@ -319,7 +319,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/07/ANoteWithSmallMachineAndBigData/" itemprop="url">记一次小机器的Python大数据分析</a></h2>
+                <a class="post-title-link" href="/2017/12/07/ANoteWithSmallMachineAndBigData/" itemprop="url">记一次小机器的 Python 大数据分析</a></h2>
         
 
         <div class="post-meta">
@@ -385,7 +385,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,725
+                  2,104
                 </span>
               
 
@@ -401,7 +401,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  7
+                  8
                 </span>
               
             </div>
@@ -421,7 +421,7 @@
       
         
           
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>机缘巧合，最近公司突然要搞一波大量数据的分析。属于进店客流类的分析，原始数据非常大。 数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在180亿左右。</p>
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>机缘巧合，最近公司突然要搞一波大量数据的分析。属于进店客流类的分析，原始数据非常大。 数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在 180 亿左右。</p>
 <p>解压后…… 差不多一个 T 吧。</p>
 <p>如果是人民币玩家，自然是直接购置几十台高配置机器，做个 mysql shard 或者直接上大数据全家桶比如 hadoop 和 hive 之类，让程序员去往死里折腾吧。</p>
 <blockquote>
@@ -429,15 +429,15 @@
 </blockquote>
 <p>我的配置简单来说如下：</p>
 <ul>
-<li>局域网服务器 （ Ubuntu 16.04 LTS ）<ul>
+<li><p>局域网服务器 （ Ubuntu 16.04 LTS ）</p>
+<ul>
 <li>Xeon(R) CPU E3-1225 v5 @ 3.30GHz</li>
 <li>16G 内存</li>
 <li>1T 硬盘</li>
 </ul>
 </li>
-</ul>
+<li><p>苹果电脑 2016 年 15 寸 最高配</p>
 <ul>
-<li>苹果电脑 2016 年 15寸 最高配<ul>
 <li>1T 硬盘</li>
 <li>i7 四核</li>
 </ul>
@@ -445,26 +445,23 @@
 </ul>
 <h2 id="0x01-准备数据阶段"><a href="#0x01-准备数据阶段" class="headerlink" title="0x01 准备数据阶段"></a>0x01 准备数据阶段</h2><p>用低配机器分析大数据的<strong>首要原则</strong>，就是<strong>不要分析大数据</strong>。</p>
 <blockquote>
-<p>换而言之就是<strong>尽可能的抽取所得结论所需分析数据的最小超集</strong>, 小机器是海量计算的，但通过一定的过滤和筛选可以将数据筛选出到一台机器能扛得住的计算量。</p>
+<p>换而言之就是<strong>尽可能的抽取所得结论所需分析数据的最小超集</strong>, 小机器是无法完成海量计算的，但通过一定的过滤和筛选可以将数据筛选出到一台机器能扛得住的计算量。从而达到可以可以分析海量数据的目的。</p>
 </blockquote>
 <h3 id="1-1-将数据导入-MySQL-中"><a href="#1-1-将数据导入-MySQL-中" class="headerlink" title="1.1 将数据导入 MySQL 中"></a>1.1 将数据导入 MySQL 中</h3><p>我们先不管三七二十一，既然给了 SQL 文件，肯定要入库的，那么问题来了：</p>
 <blockquote>
 <p><del>将大象关进冰箱要几个步骤</del> 将数据导入数据库中需要几个步骤</p>
 </blockquote>
-<p>或者说，如何更快的导入300余张不同表的数据。</p>
+<p>或者说，如何更快的导入 300 余张不同表的数据。</p>
 <p>大致步骤如下：</p>
 <ul>
-<li>初始化硬盘</li>
-<li>配置 MySQL</li>
-<li>解压文件 (7za x)</li>
+<li>新增硬盘，并初始化</li>
+<li>配置 MySQL 的 datadir 到新增硬盘上</li>
 <li>导入数据 (PV &amp; MySQL)</li>
-<li>删除已完成数据包，节省磁盘空间 (rm)</li>
 </ul>
-<p>第二步和第四步无需解释。提一下配置MySQL和导入数据包两个步骤。</p>
-<h4 id="初始化硬盘"><a href="#初始化硬盘" class="headerlink" title="初始化硬盘"></a>初始化硬盘</h4><p>首先，<strong>插入硬盘</strong></p>
-<p>使用lshw 查看硬盘信息</p>
+<h4 id="新增硬盘，并初始化"><a href="#新增硬盘，并初始化" class="headerlink" title="新增硬盘，并初始化"></a>新增硬盘，并初始化</h4><p>首先，<strong>购买并插入硬盘</strong></p>
+<p>使用 lshw 查看硬盘信息</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">root@ubuntu:~# lshw -C disk</div><div class="line">  *-disk</div><div class="line">       description: SCSI Disk</div><div class="line">       product: My Passport 25E2</div><div class="line">       vendor: WD</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@7:0.0.0</div><div class="line">       logical name: /dev/sdb</div><div class="line">       version: 4004</div><div class="line">       serial: WX888888HALK</div><div class="line">       size: 3725GiB (4TB)</div><div class="line">       capabilities: gpt-1.00 partitioned partitioned:gpt</div><div class="line">       configuration: ansiversion=6 guid=88e88888-422d-49f0-9ba9-221db75fe4b4 logicalsectorsize=512 sectorsize=4096</div><div class="line">  *-disk</div><div class="line">       description: ATA Disk</div><div class="line">       product: WDC WD10EZEX-08W</div><div class="line">       vendor: Western Digital</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@0:0.0.0</div><div class="line">       logical name: /dev/sda</div><div class="line">       version: 1A01</div><div class="line">       serial: WD-WC888888888U</div><div class="line">       size: 931GiB (1TB)</div><div class="line">       capabilities: partitioned partitioned:dos</div><div class="line">       configuration: ansiversion=5 logicalsectorsize=512 sectorsize=4096 signature=f1b42036</div><div class="line">  *-cdrom</div><div class="line">       description: DVD reader</div><div class="line">       product: DVDROM DH1XXX8SH</div><div class="line">       vendor: PLDS</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@5:0.0.0</div><div class="line">       logical name: /dev/cdrom</div><div class="line">       logical name: /dev/dvd</div><div class="line">       logical name: /dev/sr0</div><div class="line">       version: ML31</div><div class="line">       capabilities: removable audio dvd</div><div class="line">       configuration: ansiversion=5 status=nodisc</div></pre></td></tr></table></figure>
-<p>使用fdisk 格式化硬盘，并且分区</p>
+<p>使用 fdisk 格式化硬盘，并且分区</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fdisk /dev/sdb</div><div class="line">#输入 n</div><div class="line">#输入 p</div><div class="line">#输入 1</div><div class="line">#输入 w</div><div class="line">sudo mkfs -t ext4 /dev/sdb1</div><div class="line">mkdir -p /media/mynewdrive</div><div class="line">vim /etc/fstab</div><div class="line"># /dev/sdb1    /media/mynewdrive   ext4    defaults     0        2</div><div class="line"># 直接挂载所有，或者 reboot</div><div class="line">mount -a</div></pre></td></tr></table></figure>
 <p>至此为止，硬盘就格式化完成了。关于安装硬盘，可以参考 <a href="https://help.ubuntu.com/community/InstallingANewHardDrive" target="_blank" rel="external">https://help.ubuntu.com/community/InstallingANewHardDrive</a></p>
 <h4 id="配置-MySQL"><a href="#配置-MySQL" class="headerlink" title="配置 MySQL"></a>配置 MySQL</h4><p>篇幅有限，只简介配置 MySQL 的 DataDIR ，省去安装和基本登录认证的配置。</p>
@@ -474,44 +471,50 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">/var/lib/mysql/</div><div class="line">systemctl stop mysql</div><div class="line">rsync -av /var/lib/mysql /mnt/volume-nyc1-01</div><div class="line">mv /var/lib/mysql /var/lib/mysql.bak</div><div class="line">vim /etc/mysql/mysql.conf.d/mysqld.cnf</div><div class="line"># 修改至 datadir=/mnt/volume-nyc1-01/mysql</div><div class="line">vim /etc/apparmor.d/tunables/alias</div><div class="line"># alias /var/lib/mysql/ -&gt; /mnt/volume-nyc1-01/mysql/</div><div class="line">sudo systemctl restart apparmor</div><div class="line">vim /usr/share/mysql/mysql-systemd-start</div><div class="line"># 修改成</div><div class="line">if [ ! -d /var/lib/mysql ] &amp;&amp; [ ! -L /var/lib/mysql ]; then</div><div class="line"> echo &quot;MySQL data dir not found at /var/lib/mysql. Please create one.&quot;</div><div class="line"> exit 1</div><div class="line">fi</div><div class="line"></div><div class="line">if [ ! -d /var/lib/mysql/mysql ] &amp;&amp; [ ! -L /var/lib/mysql/mysql ]; then</div><div class="line"> echo &quot;MySQL system database not found. Please run mysql_install_db tool.&quot;</div><div class="line"> exit 1</div><div class="line">fi</div><div class="line"></div><div class="line"># 最后</div><div class="line">sudo mkdir /var/lib/mysql/mysql -p</div><div class="line">sudo systemctl restart mysql</div><div class="line"></div><div class="line"># 记得配置文件</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TODO: 配置 DataDIR</div></pre></td></tr></table></figure>
 <p>将 DataDIR 配置完成之后，就可以导入数据了。</p>
+<blockquote>
+<p>PS：其实，在 Ubuntu 配置 datadir 的的确确是挺麻烦的事情。</p>
+<p>站在现在看，如果重来的话，我肯定会用 Docker 然后挂载新增硬盘到 DataDIR 的方式来处理这种问题。</p>
+</blockquote>
 <h4 id="导入数据-之-MySQL-PV"><a href="#导入数据-之-MySQL-PV" class="headerlink" title="导入数据 之 MySQL + PV"></a>导入数据 之 MySQL + PV</h4><p>我们使用 mysql 导入脚本的时候，有几种导入方式</p>
 <ul>
-<li>source 命令，然而这个命令容易在数据量很大的时候直接卡掉。（印象中是直接把 sql 文件加载到内存中，然后执行）</li>
+<li>source 命令，然而这个命令容易在数据量很大的时候直接卡掉。（印象中是直接把 sql 文件加载到内存中，然后执行，然而，只要涉及到大量文本打印出来并且执行，速度一定会变慢很多）</li>
 <li>mysql 命令</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># mysql 命令的典型导入场景就是这样</div><div class="line">mysql -uadmin -p123456 some_db &lt; tb.sql</div></pre></td></tr></table></figure>
 <p>加上 PV 命令的话，比较神奇了。有进度条了！!</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 附加进度条的导入场景</div><div class="line">pv -i 1 -p -t -e ./xxxx_probe.sql | mysql -uadmin -p123456 some_db</div></pre></td></tr></table></figure>
-<p>然后，可以查看一下磁盘 CPU 内存的占用情况，如果可能的话，使用 tmux 多开几个进程导入数据。</p>
-<p>因为每个 SQL 文件对应的表不一样，所以多开几个进程批量insert的话并不会锁表，这样可以显著提升导入速度。</p>
-<h3 id="1-2-导出数据"><a href="#1-2-导出数据" class="headerlink" title="1.2 导出数据"></a>1.2 导出数据</h3><h4 id="过滤掉不需要的行与列"><a href="#过滤掉不需要的行与列" class="headerlink" title="过滤掉不需要的行与列"></a>过滤掉不需要的行与列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select col_a , col_b from some_table where col_c in (&apos;xx&apos;,&apos;yy&apos;,&apos;zz&apos;);</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># TODO : 这里其实也会有一些优化点</div></pre></td></tr></table></figure>
+<p>然后，可以查看一下磁盘 CPU 内存的占用情况。如果负载（着重注意 IO，内存）还不够满，使用 tmux 多开几个进程导入数据。</p>
+<p>因为每个 SQL 文件对应的表不一样，所以多开几个进程批量 insert 的话并不会锁表，这样可以显著提升导入速度。</p>
+<h3 id="1-2-导出数据"><a href="#1-2-导出数据" class="headerlink" title="1.2 导出数据"></a>1.2 导出数据</h3><h4 id="过滤掉不需要的行与列"><a href="#过滤掉不需要的行与列" class="headerlink" title="过滤掉不需要的行与列"></a>过滤掉不需要的行与列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select col_a , col_b from some_table where Acondition and bcondition and col_c in (&apos;xx&apos;,&apos;yy&apos;,&apos;zz&apos;);</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># TODO : 这里其实也会有一些优化点</div><div class="line">比如，尽量把简单的高效的判断逻辑写在左边。</div><div class="line">当然，因为是走全表进行筛选（次数唯一），也就忘掉索引这种东西吧，索引加上去虽然查找会变快一点点，但因为是查找一次，所以对性能影响并没有很大。</div></pre></td></tr></table></figure>
+<p>为啥是查找一次？</p>
+<p>因为，有 python 里面的神器 pandas，为嘛一定要用数据库呢？直接读写 CSV 多好。</p>
+<p>那你可能又问了，为什么不直接 readsql 呢。因为读取速度没有 CSV 文件快，而且数据探索过程中需要对文件进行反复的读取和探索，如果每一次都是读海量的数据库，也不是不行，速度上就没有那么快了。</p>
 <h4 id="尽量拆分数据为最小单元的-CSV-文件"><a href="#尽量拆分数据为最小单元的-CSV-文件" class="headerlink" title="尽量拆分数据为最小单元的 CSV 文件"></a>尽量拆分数据为最小单元的 CSV 文件</h4><p>经过初步观察，数据量特别大。如果把所有的数据拿出来进行计算的话，距离算出结果就遥遥无期了。</p>
 <blockquote>
-<p>其实这个时候给 CSV 文件进行分析会比给 SQL 分析会好很多。</p>
-<p>PS : 如果每个文件的数据量不是很大的话，直接给 CSV 文件进行分析会快很多很多。</p>
+<p>其实这个时候给 CSV 文件进行分析会比给 SQL 分析会好很多。一来速度快，</p>
 </blockquote>
 <h3 id="1-3-校验数据完备性"><a href="#1-3-校验数据完备性" class="headerlink" title="1.3 校验数据完备性"></a>1.3 校验数据完备性</h3><p>第三方给的数据多多少少会有这些或者那些的问题，一般情况下，可以通过检查数据完备性来尽可能的减少数据的不靠谱性。</p>
-<p>我习惯性在这样表里面详细记录数据完备性的各种参数与进度。</p>
+<p>我习惯性在这样 de 表里面详细记录数据完备性的各种参数与进度。</p>
 <p>比如：</p>
 <ul>
 <li>数据的提供情况和实际情况</li>
 <li>阶段性的记录条数和点位的统计值</li>
 <li>max，min，mean，median 用来避免异常值</li>
+<li>如果是分年份，则必须要统计每一天的情况，否则也不知道数据的缺失成都。</li>
 </ul>
 <h2 id="0x02-分析阶段"><a href="#0x02-分析阶段" class="headerlink" title="0x02 分析阶段"></a>0x02 分析阶段</h2><p>经过上一步处理，数据的文件总大小大约从 1000GB -&gt; 10GB 左右，然后拆分成若干个文件。</p>
-<ul>
-<li>分析性能要点1：简单的统计用读写文件系统是最快的</li>
-<li>分析性能要点2：拆分数据成若干个文件,使得自己可以在比较短的时间内读取。</li>
-<li>分析性能要点3：排序后的list和set谁查找速度最快？</li>
-<li>分析性能要点4：reduce 加 python 里面唯一的set update的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。</li>
-<li>分析性能要点5：IPython 给性能带来的影响，Dateframe 释放内存的失败以及Process来解决这个问题。</li>
-<li>分析性能要点6：</li>
-</ul>
+<h3 id="2-1-性能要点-1：文件系统"><a href="#2-1-性能要点-1：文件系统" class="headerlink" title="2.1 性能要点 1：文件系统"></a>2.1 性能要点 1：文件系统</h3><p>读取文件进行统计速度是最快的。</p>
+<h3 id="2-2-性能要点-2：化整为零，然后-map-reduce。"><a href="#2-2-性能要点-2：化整为零，然后-map-reduce。" class="headerlink" title="2.2 性能要点 2：化整为零，然后 map reduce。"></a>2.2 性能要点 2：化整为零，然后 map reduce。</h3><p>拆分数据成若干个文件<br>将大数据量拆分为若干个文件。</p>
+<h3 id="2-3-性能要点-3：排序后的-list-和-set-谁查找速度最快？"><a href="#2-3-性能要点-3：排序后的-list-和-set-谁查找速度最快？" class="headerlink" title="2.3 性能要点 3：排序后的 list 和 set 谁查找速度最快？"></a>2.3 性能要点 3：排序后的 list 和 set 谁查找速度最快？</h3><p>将大数据量拆分为若干个文件。</p>
+<h3 id="2-4-性能要点-4：python-里面唯一的-set-update-的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。"><a href="#2-4-性能要点-4：python-里面唯一的-set-update-的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。" class="headerlink" title="2.4 性能要点 4：python 里面唯一的 set update 的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。"></a>2.4 性能要点 4：python 里面唯一的 set update 的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。</h3><p>将大数据量拆分为若干个文件。</p>
+<h3 id="2-5-性能要点-5：IPython-给性能带来的影响，Dateframe-释放内存的失败以及-Process-来解决这个问题。"><a href="#2-5-性能要点-5：IPython-给性能带来的影响，Dateframe-释放内存的失败以及-Process-来解决这个问题。" class="headerlink" title="2.5 性能要点 5：IPython 给性能带来的影响，Dateframe 释放内存的失败以及 Process 来解决这个问题。"></a>2.5 性能要点 5：IPython 给性能带来的影响，Dateframe 释放内存的失败以及 Process 来解决这个问题。</h3><p>将大数据量拆分为若干个文件。</p>
+<h3 id="2-6-性能要点-6：多-set-reduce-效果是不是不如多-list-reduce-最后-set-一下（20000W-gt-5000W-条记录）。"><a href="#2-6-性能要点-6：多-set-reduce-效果是不是不如多-list-reduce-最后-set-一下（20000W-gt-5000W-条记录）。" class="headerlink" title="2.6 性能要点 6：多 set reduce 效果是不是不如多 list reduce 最后 set 一下（20000W -&gt; 5000W 条记录）。"></a>2.6 性能要点 6：多 set reduce 效果是不是不如多 list reduce 最后 set 一下（20000W -&gt; 5000W 条记录）。</h3><p>将大数据量拆分为若干个文件。</p>
 <h2 id="0x03-测试"><a href="#0x03-测试" class="headerlink" title="0x03 测试"></a>0x03 测试</h2><h2 id="0xDD-番外篇"><a href="#0xDD-番外篇" class="headerlink" title="0xDD 番外篇"></a>0xDD 番外篇</h2><p>在分析这次的数据过程中，自己的 Mac 本子也坏掉了，幸好还在保修期，送到苹果店维修了一下。</p>
 <p>要不然，这工伤其实还是挺严重的。</p>
 <h2 id="0xEE-更新"><a href="#0xEE-更新" class="headerlink" title="0xEE 更新"></a>0xEE 更新</h2><ul>
 <li><strong>2017-12-07</strong> 初始化本文</li>
+<li><strong>2017-12-16</strong> 增加分析阶段的文字</li>
 </ul>
 
           
@@ -985,7 +988,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,934
+                  3,942
                 </span>
               
 
