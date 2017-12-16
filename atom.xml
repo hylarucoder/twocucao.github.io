@@ -1964,7 +1964,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/06/03/PandasCheatSheet/"/>
     <id>http://twocucao.xyz/2017/06/03/PandasCheatSheet/</id>
     <published>2017-06-03T10:41:47.000Z</published>
-    <updated>2017-12-16T03:24:19.037Z</updated>
+    <updated>2017-12-16T06:26:06.941Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。当然，其中还包含 Numpy 等数据科学，统计学相关语句。</p>
 <p>主要包含：</p>
@@ -2023,7 +2023,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/05/29/%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8ETensorFlow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/"/>
     <id>http://twocucao.xyz/2017/05/29/一个基于TensorFlow的分类器/</id>
     <published>2017-05-29T00:46:00.000Z</published>
-    <updated>2017-12-16T03:23:56.581Z</updated>
+    <updated>2017-12-16T06:26:01.556Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。<br>所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。<br>本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。</p>
 <p>本文的目的是：</p>
@@ -2120,7 +2120,9 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     </summary>
     
-      <category term="PC/MAC 使用心得技巧" scheme="http://twocucao.xyz/categories/PC-MAC-%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97%E6%8A%80%E5%B7%A7/"/>
+      <category term="Python 黑魔法" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/"/>
+    
+      <category term="学习资源" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
     
     
       <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
@@ -2185,7 +2187,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/05/21/DockerCheatSheet/"/>
     <id>http://twocucao.xyz/2017/05/21/DockerCheatSheet/</id>
     <published>2017-05-21T02:57:00.000Z</published>
-    <updated>2017-12-15T09:07:23.000Z</updated>
+    <updated>2017-12-16T06:25:36.186Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。</p>
 <ul>
@@ -2220,10 +2222,11 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 <p>部署环境也会有问题，比如，开发部突然想使用更高版本的软件，比如突然需要更多的 Django 应用来负担海量请求的怎么办？Hadoop 不够用怎么办？</p>
 <p>当然，思路很简单，开发的时候使用虚拟机，拷贝给大家一起用，部署的时候多创建一些机器，然后上 Ansible 远程操控。即可。</p>
 <p>并不是不行，但是 Docker 由于更加轻量，操作粒度更加细腻，我可以销毁镜像，上传镜像，定制镜像，很轻松调整镜像包并且安装挂载文件。</p>
-<h2 id="0x02-Docker-配套工具"><a href="#0x02-Docker-配套工具" class="headerlink" title="0x02 Docker 配套工具"></a>0x02 Docker 配套工具</h2><h2 id="0x03-Django-技术栈-Docker-化"><a href="#0x03-Django-技术栈-Docker-化" class="headerlink" title="0x03 Django 技术栈 Docker 化"></a>0x03 Django 技术栈 Docker 化</h2><p>为了理解这个过程，下面我将我Docker化django应用的流程按照一定步骤演示出来。我将我使用Django的部分经验搞出来，做成了一个django-bpc ，即 django best practice。如果诸位有兴趣研究的话，拿来看看源码倒是倒是非常好。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 演示环境为MAC,在此之前，务必安装好docker for mac 以及 virual machine</span></div><div class="line"><span class="comment"># xxxxxx 为 阿里云分配的容器 registry</span></div><div class="line">docker-machine create --engine-registry-mirror=https://xxxxxx.mirror.aliyuncs.com <span class="_">-d</span> virtualbox default</div><div class="line">docker-compose <span class="_">-f</span> dev.yml build  &amp;&amp; docker-compose <span class="_">-f</span> dev.yml up</div></pre></td></tr></table></figure>
+<h2 id="0x02-Docker-配套工具"><a href="#0x02-Docker-配套工具" class="headerlink" title="0x02 Docker 配套工具"></a>0x02 Docker 配套工具</h2><h2 id="0x03-Django-技术栈-Docker-化"><a href="#0x03-Django-技术栈-Docker-化" class="headerlink" title="0x03 Django 技术栈 Docker 化"></a>0x03 Django 技术栈 Docker 化</h2><p>为了理解这个过程，下面我将我 Docker 化 django 应用的流程按照一定步骤演示出来。我将我使用 Django 的部分经验搞出来，做成了一个 django-bpc ，即 django best practice。如果诸位有兴趣研究的话，拿来看看源码倒是倒是非常好。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 演示环境为 MAC, 在此之前，务必安装好 docker for mac 以及 virual machine</span></div><div class="line"><span class="comment"># xxxxxx 为 阿里云分配的容器 registry</span></div><div class="line">docker-machine create --engine-registry-mirror=https://xxxxxx.mirror.aliyuncs.com <span class="_">-d</span> virtualbox default</div><div class="line">docker-compose <span class="_">-f</span> dev.yml build  &amp;&amp; docker-compose <span class="_">-f</span> dev.yml up</div></pre></td></tr></table></figure>
 <h2 id="0x04-Docker-踩坑记录"><a href="#0x04-Docker-踩坑记录" class="headerlink" title="0x04 Docker 踩坑记录"></a>0x04 Docker 踩坑记录</h2><h3 id="4-1-PostgreSQL-的初始化"><a href="#4-1-PostgreSQL-的初始化" class="headerlink" title="4.1 PostgreSQL 的初始化"></a>4.1 PostgreSQL 的初始化</h3><p>当 Docker 化 PostgreSQL 的时候，必须要把一些初始化脚本放在 docker-entrypoint-initdb.d 中，才能初始化，笔者在进行测试的时候多次发现无法进行初始化，究其原因，经过查找，如果没有及时删除 Volume 的话，则无论怎么初始化，或者 Build, 每一次都会挂载原来的文件夹。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ADD init_django_db.sh /docker-entrypoint-initdb.d/init_django_db.sh</div></pre></td></tr></table></figure></p>
-<h3 id="4-2-清空所有Image"><a href="#4-2-清空所有Image" class="headerlink" title="4.2 清空所有Image"></a>4.2 清空所有Image</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Delete all containers</span></div><div class="line">docker rm $(docker ps <span class="_">-a</span> -q)</div><div class="line"><span class="comment"># Delete all images</span></div><div class="line">docker rmi $(docker images -q)</div><div class="line"><span class="comment"># Force delete</span></div><div class="line">docker rmi $(docker images -q) <span class="_">-f</span></div><div class="line"><span class="comment"># Delete Unused Volume</span></div><div class="line">docker volume prune</div></pre></td></tr></table></figure>]]></content>
+<h3 id="4-2-清空所有-Image"><a href="#4-2-清空所有-Image" class="headerlink" title="4.2 清空所有 Image"></a>4.2 清空所有 Image</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Delete all containers</span></div><div class="line">docker rm $(docker ps <span class="_">-a</span> -q)</div><div class="line"><span class="comment"># Delete all images</span></div><div class="line">docker rmi $(docker images -q)</div><div class="line"><span class="comment"># Force delete</span></div><div class="line">docker rmi $(docker images -q) <span class="_">-f</span></div><div class="line"><span class="comment"># Delete Unused Volume</span></div><div class="line">docker volume prune</div></pre></td></tr></table></figure>
+]]></content>
     
     <summary type="html">
     

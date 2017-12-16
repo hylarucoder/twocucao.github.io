@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2016/12/09/MongoCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Mongo Shell Mongo 配套工具 Python API  不定期更新。">
-<meta property="og:updated_time" content="2017-06-20T08:08:51.000Z">
+<meta property="og:updated_time" content="2017-12-16T06:22:04.700Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MongoDB Cheatsheet">
 <meta name="twitter:description" content="前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Mongo Shell Mongo 配套工具 Python API  不定期更新。">
@@ -352,8 +352,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
-                    <span itemprop="name">PC/MAC 使用心得技巧</span>
+                  <a href="/categories/数据库与消息队列/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库与消息队列</span>
                   </a>
                 </span>
 
@@ -434,7 +434,7 @@
 <h2 id="MongoDB-Shell"><a href="#MongoDB-Shell" class="headerlink" title="MongoDB Shell"></a>MongoDB Shell</h2><h2 id="基本查询"><a href="#基本查询" class="headerlink" title="基本查询"></a>基本查询</h2><p>db.users.find({“name”: /.<em>m.</em>/})<br>db.users.find({‘name’: {‘$regex’: ‘sometext’}})</p>
 <p><a href="https://docs.mongodb.com/manual/" target="_blank" rel="external">https://docs.mongodb.com/manual/</a></p>
 <h3 id="增删改查"><a href="#增删改查" class="headerlink" title="增删改查"></a>增删改查</h3><p>use myNewDatabase<br>db.myCollection.insert( { x: 1 } );</p>
-<h3 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h3><h2 id="PyMongo"><a href="#PyMongo" class="headerlink" title="PyMongo"></a>PyMongo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 建索引的时候,会阻塞当前的操作,甚至是查询操作</span></div><div class="line"><span class="comment"># 据说转为background方式不会阻塞但是,没有实践过</span></div><div class="line"><span class="string">"msg"</span> : <span class="string">"Index Build Index Build: 167413/751748 22%"</span>,</div><div class="line"><span class="string">"progress"</span> : &#123;</div><div class="line">	<span class="string">"done"</span> : 167413,</div><div class="line">	<span class="string">"total"</span> : 751748</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
+<h3 id="聚合操作"><a href="#聚合操作" class="headerlink" title="聚合操作"></a>聚合操作</h3><h2 id="PyMongo"><a href="#PyMongo" class="headerlink" title="PyMongo"></a>PyMongo</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 建索引的时候，会阻塞当前的操作，甚至是查询操作</span></div><div class="line"><span class="comment"># 据说转为 background 方式不会阻塞但是，没有实践过</span></div><div class="line"><span class="string">"msg"</span> : <span class="string">"Index Build Index Build: 167413/751748 22%"</span>,</div><div class="line"><span class="string">"progress"</span> : &#123;</div><div class="line">	<span class="string">"done"</span> : 167413,</div><div class="line">	<span class="string">"total"</span> : 751748</div><div class="line">&#125;,</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -578,7 +578,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -589,7 +589,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>

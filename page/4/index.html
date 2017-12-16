@@ -532,8 +532,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
-                    <span itemprop="name">PC/MAC 使用心得技巧</span>
+                  <a href="/categories/数据库与消息队列/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库与消息队列</span>
                   </a>
                 </span>
 
@@ -707,7 +707,40 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/爬虫-Crawler/" itemprop="url" rel="index">
+                  <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">PC/MAC 使用心得技巧</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PC-MAC-使用心得技巧/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PC-MAC-使用心得技巧/Linux/Python-黑魔法/" itemprop="url" rel="index">
+                    <span itemprop="name">Python 黑魔法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PC-MAC-使用心得技巧/Linux/Python-黑魔法/爬虫-Crawler/" itemprop="url" rel="index">
                     <span itemprop="name">爬虫 Crawler</span>
                   </a>
                 </span>
@@ -738,7 +771,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,569
+                  1,573
                 </span>
               
 
@@ -781,10 +814,10 @@
 <li>HTML/XML 处理相关</li>
 <li>Python 中的文本处理</li>
 </ul>
-<h2 id="0x01-正则处理相关"><a href="#0x01-正则处理相关" class="headerlink" title="0x01 正则处理相关"></a>0x01 正则处理相关</h2><h3 id="1-1-正则表达式"><a href="#1-1-正则表达式" class="headerlink" title="1.1. 正则表达式"></a>1.1. 正则表达式</h3><p>正则是个很奇葩的名字，为什么叫做正则表达式呢，首先是个表达式，其次，这是一种叫做正则 (regular expression, rational expression) 的表达式。<br>名称为什么叫做 regular 呢，因为它基于 regular language. 而 regular language 是一种 formal language. 得，现在又开始是编译原理相关概念了。为了逃避概念,通过用途来简单定义正则表达式.</p>
-<p>简而言之,就是一种用于字符串搜索的模式.或者就是一种领域专用编程语言.</p>
+<h2 id="0x01-正则处理相关"><a href="#0x01-正则处理相关" class="headerlink" title="0x01 正则处理相关"></a>0x01 正则处理相关</h2><h3 id="1-1-正则表达式"><a href="#1-1-正则表达式" class="headerlink" title="1.1. 正则表达式"></a>1.1. 正则表达式</h3><p>正则是个很奇葩的名字，为什么叫做正则表达式呢，首先是个表达式，其次，这是一种叫做正则 (regular expression, rational expression) 的表达式。<br>名称为什么叫做 regular 呢，因为它基于 regular language. 而 regular language 是一种 formal language. 得，现在又开始是编译原理相关概念了。为了逃避概念，通过用途来简单定义正则表达式。</p>
+<p>简而言之，就是一种用于字符串搜索的模式. 或者就是一种领域专用编程语言。</p>
 <p><a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank" rel="external">https://en.wikipedia.org/wiki/Regular_expression</a></p>
-<h3 id="1-2-Python-中正则表达式语法"><a href="#1-2-Python-中正则表达式语法" class="headerlink" title="1.2. Python 中正则表达式语法"></a>1.2. Python 中正则表达式语法</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"># 元字符</div><div class="line">. ^ $ * + ? &#123; &#125; [ ] \ | ( )</div><div class="line"></div><div class="line">* # 速记,天上一个星星都没有,0到多个.</div><div class="line">+ # 一加手机..... 1 到多个.</div><div class="line">? # 有还是没有 即 0 or 1</div><div class="line">*? # 没有疑问就是贪婪,有疑问就是非贪婪</div><div class="line">+?</div><div class="line">?? </div><div class="line"></div><div class="line">&#123;m&#125; # m 份</div><div class="line">&#123;m,n&#125; # 优先匹配 a&#123;2,&#125;b 优先匹配aaaab中aaaab</div><div class="line">&#123;m,n&#125;? # 优先匹配 a&#123;2,&#125;b 优先匹配aaaab中aab</div><div class="line"></div><div class="line">[] # [a\-z] == [az-]</div><div class="line"># 1. [\w] [\S]</div><div class="line"># 2. [^5]</div><div class="line"># 3. [akm$]  在[]中$并不具备元字符特点</div><div class="line"></div><div class="line">PattenA | PattenB</div><div class="line">(...) # 捕获 , 引用可以使用\1 , 但是还有一种扩展语法</div><div class="line"></div><div class="line">(?...) # 扩展</div><div class="line"># - (?aiLmsux)</div><div class="line"># - (?:...) 不捕获</div><div class="line"># - (?P&lt;quote&gt;...) 正则内引用(?P=quote);python内获取m.group('quote') ,m.end('quote');re.sub内repl参数为\g&lt;quote&gt; \g&lt;1&gt; \1</div></pre></td></tr></table></figure>
+<h3 id="1-2-Python-中正则表达式语法"><a href="#1-2-Python-中正则表达式语法" class="headerlink" title="1.2. Python 中正则表达式语法"></a>1.2. Python 中正则表达式语法</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"># 元字符</div><div class="line">. ^ $ * + ? &#123; &#125; [ ] \ | ( )</div><div class="line"></div><div class="line">* # 速记，天上一个星星都没有，0 到多个。</div><div class="line">+ # 一加手机..... 1 到多个。</div><div class="line">? # 有还是没有 即 0 or 1</div><div class="line">*? # 没有疑问就是贪婪，有疑问就是非贪婪</div><div class="line">+?</div><div class="line">??</div><div class="line"></div><div class="line">&#123;m&#125; # m 份</div><div class="line">&#123;m,n&#125; # 优先匹配 a&#123;2,&#125;b 优先匹配 aaaab 中 aaaab</div><div class="line">&#123;m,n&#125;? # 优先匹配 a&#123;2,&#125;b 优先匹配 aaaab 中 aab</div><div class="line"></div><div class="line">[] # [a\-z] == [az-]</div><div class="line"># 1. [\w] [\S]</div><div class="line"># 2. [^5]</div><div class="line"># 3. [akm$]  在 [] 中 $ 并不具备元字符特点</div><div class="line"></div><div class="line">PattenA | PattenB</div><div class="line">(...) # 捕获 , 引用可以使用、1 , 但是还有一种扩展语法</div><div class="line"></div><div class="line">(?...) # 扩展</div><div class="line"># - (?aiLmsux)</div><div class="line"># - (?:...) 不捕获</div><div class="line"># - (?P&lt;quote&gt;...) 正则内引用 (?P=quote);python 内获取 m.group('quote') ,m.end('quote');re.sub 内 repl 参数为、g&lt;quote&gt; \g&lt;1&gt; \1</div></pre></td></tr></table></figure>
 <h3 id="1-3-Python-中使用正则的方法"><a href="#1-3-Python-中使用正则的方法" class="headerlink" title="1.3. Python 中使用正则的方法"></a>1.3. Python 中使用正则的方法</h3><h4 id="1-3-1-re-模块的用法"><a href="#1-3-1-re-模块的用法" class="headerlink" title="1.3.1. re 模块的用法"></a>1.3.1. re 模块的用法</h4><ul>
 <li>sub 替换</li>
 <li>match / fullmatch 匹配</li>
@@ -808,7 +841,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sel.xpath(<span class="string">'//div[@id="lal"]/*[contains(text(),"地址")]/text()'</span>).extract_first()</div><div class="line"><span class="comment"># 如果还需要添加筛选名称，则可是使用</span></div><div class="line">sel.xpath(<span class="string">'//div[@id="lal"]/*[contains(text(),"名称")]/text()'</span>).extract_first()</div></pre></td></tr></table></figure>
 <p>这样可以极大的提升开发效率。</p>
 <p>页面的结构越复杂，则 xpath 带来的开发效率越高。</p>
-<h3 id="2-2-XPath-处理-HTML"><a href="#2-2-XPath-处理-HTML" class="headerlink" title="2.2. XPath 处理 HTML"></a>2.2. XPath 处理 HTML</h3><h4 id="2-2-1-概念"><a href="#2-2-1-概念" class="headerlink" title="2.2.1. 概念"></a>2.2.1. 概念</h4><p>XPath 是一种通过路径表达式定位 XML 文档内容的语法。<br>由于内置了大量的表达式函数，可以通过极少的代码完成定位。<br>有七种<strong>节点类型</strong>: </p>
+<h3 id="2-2-XPath-处理-HTML"><a href="#2-2-XPath-处理-HTML" class="headerlink" title="2.2. XPath 处理 HTML"></a>2.2. XPath 处理 HTML</h3><h4 id="2-2-1-概念"><a href="#2-2-1-概念" class="headerlink" title="2.2.1. 概念"></a>2.2.1. 概念</h4><p>XPath 是一种通过路径表达式定位 XML 文档内容的语法。<br>由于内置了大量的表达式函数，可以通过极少的代码完成定位。<br>有七种<strong>节点类型</strong>:</p>
 <ul>
 <li>element</li>
 <li>attribute</li>
@@ -1161,7 +1194,29 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习资源/" itemprop="url" rel="index">
+                  <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
+                    <span itemprop="name">PC/MAC 使用心得技巧</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PC-MAC-使用心得技巧/Python-黑魔法/" itemprop="url" rel="index">
+                    <span itemprop="name">Python 黑魔法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PC-MAC-使用心得技巧/Python-黑魔法/学习资源/" itemprop="url" rel="index">
                     <span itemprop="name">学习资源</span>
                   </a>
                 </span>
@@ -1503,8 +1558,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/爬虫-Crawler/" itemprop="url" rel="index">
-                    <span itemprop="name">爬虫 Crawler</span>
+                  <a href="/categories/Python-黑魔法/" itemprop="url" rel="index">
+                    <span itemprop="name">Python 黑魔法</span>
                   </a>
                 </span>
 
@@ -1705,8 +1760,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
-                    <span itemprop="name">PC/MAC 使用心得技巧</span>
+                  <a href="/categories/数据库与消息队列/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库与消息队列</span>
                   </a>
                 </span>
 
@@ -1736,7 +1791,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,879
+                  1,880
                 </span>
               
 
@@ -1880,7 +1935,18 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
+                  <a href="/categories/Python-黑魔法/" itemprop="url" rel="index">
+                    <span itemprop="name">Python 黑魔法</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-黑魔法/PC-MAC-使用心得技巧/" itemprop="url" rel="index">
                     <span itemprop="name">PC/MAC 使用心得技巧</span>
                   </a>
                 </span>
@@ -2307,7 +2373,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">19</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2318,7 +2384,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-count">35</span>
                 <span class="site-state-item-name">标签</span>
               
             </div>
