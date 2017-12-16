@@ -1407,54 +1407,6 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
   </entry>
   
   <entry>
-    <title>ReThinking In JavaScript</title>
-    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
-    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
-    <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-07-05T06:29:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
-<a id="more"></a>
-<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
-<p>因为太火，不得不认真学习一下。</p>
-<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
-<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
-<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
-<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
-<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
-<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
-<li>String</li>
-<li>Boolean</li>
-<li>Symbol (new in ES2015)</li>
-<li>Object<ul>
-<li>Function</li>
-<li>Array</li>
-<li>Date</li>
-<li>RegExp</li>
-</ul>
-</li>
-<li>null</li>
-<li>undefined</li>
-</ul>
-<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
-<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
-    
-    
-      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ReThinking In Python</title>
     <link href="http://twocucao.xyz/2017/07/04/RethinkingInPython/"/>
     <id>http://twocucao.xyz/2017/07/04/RethinkingInPython/</id>
@@ -1813,6 +1765,54 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 &lt;li&gt;数据分析清洗用 Pandas&lt;/li&gt;
 &lt;li&gt;机器学习 Tensorflow SCIPY&lt;/li&gt;
 &lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+    
+    
+      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ReThinking In JavaScript</title>
+    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
+    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
+    <published>2017-07-04T12:08:21.000Z</published>
+    <updated>2017-07-05T06:29:36.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
+<a id="more"></a>
+<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
+<p>因为太火，不得不认真学习一下。</p>
+<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
+<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
+<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
+<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
+<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
+<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
+<li>String</li>
+<li>Boolean</li>
+<li>Symbol (new in ES2015)</li>
+<li>Object<ul>
+<li>Function</li>
+<li>Array</li>
+<li>Date</li>
+<li>RegExp</li>
+</ul>
+</li>
+<li>null</li>
+<li>undefined</li>
+</ul>
+<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
+<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
     
     </summary>
     
