@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2017-12-19T04:22:42.738Z</updated>
+  <updated>2017-12-19T05:31:13.501Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -16,11 +16,44 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Review Writing</title>
+    <link href="http://twocucao.xyz/2017/12/20/ReviewWriting/"/>
+    <id>http://twocucao.xyz/2017/12/20/ReviewWriting/</id>
+    <published>2017-12-20T10:41:47.000Z</published>
+    <updated>2017-12-19T05:31:13.501Z</updated>
+    
+    <content type="html"><![CDATA[<p>大约一年前，认为自己还在语言的凝练上欠缺一些功夫，嫌自己说话啰嗦，于是把自己的博客整理了一遍，删掉了不少的文字。</p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-12-20</strong> 初始化本文</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;大约一年前，认为自己还在语言的凝练上欠缺一些功夫，嫌自己说话啰嗦，于是把自己的博客整理了一遍，删掉了不少的文字。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;ChangeLog:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;2017-12-20&lt;/strong&gt; 初始化本文&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
+    
+    
+      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
+    
+  </entry>
+  
+  <entry>
     <title>记一次小机器的 Python 大数据分析</title>
     <link href="http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/"/>
     <id>http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/</id>
     <published>2017-12-07T08:56:12.000Z</published>
-    <updated>2017-12-19T04:22:42.738Z</updated>
+    <updated>2017-12-19T05:12:47.632Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>机缘巧合，最近公司突然要搞一波大量数据的分析。属于进店客流类的分析，原始数据非常大。 数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在 180 亿左右。</p>
 <p>解压后…… 差不多一个 T 吧。</p>
@@ -132,6 +165,8 @@
     
       <category term="性能优化" scheme="http://twocucao.xyz/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
     
+      <category term="多进程" scheme="http://twocucao.xyz/tags/%E5%A4%9A%E8%BF%9B%E7%A8%8B/"/>
+    
   </entry>
   
   <entry>
@@ -242,7 +277,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/10/20/UbuntuCheatSheet/"/>
     <id>http://twocucao.xyz/2017/10/20/UbuntuCheatSheet/</id>
     <published>2017-10-20T10:41:47.000Z</published>
-    <updated>2017-12-16T03:15:22.232Z</updated>
+    <updated>2017-12-19T05:18:34.152Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。</p>
 <p>不定期更新。</p>
@@ -307,6 +342,8 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
       <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
     
+      <category term="Ubuntu" scheme="http://twocucao.xyz/tags/Ubuntu/"/>
+    
   </entry>
   
   <entry>
@@ -314,7 +351,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/10/05/ElegantMac/"/>
     <id>http://twocucao.xyz/2017/10/05/ElegantMac/</id>
     <published>2017-10-05T12:06:05.000Z</published>
-    <updated>2017-12-19T04:21:58.587Z</updated>
+    <updated>2017-12-19T05:12:56.342Z</updated>
     
     <content type="html"><![CDATA[<p>当时写这篇文章的时候才接触 mac 没多久，使用快两年之后，再次修订了本文。</p>
 <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>谈及 macOS , 很多人喜欢和 Win 比个高下。在我看来， Win 虽在非编程类生态和易用性比 Mac 要好很多，可专业人士之所以专业是因为他能挑选适合的武器发挥最大的效用，不是吗？</p>
@@ -711,7 +748,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/09/25/VueProjectTalking/"/>
     <id>http://twocucao.xyz/2017/09/25/VueProjectTalking/</id>
     <published>2017-09-25T12:06:05.000Z</published>
-    <updated>2017-12-19T03:52:06.806Z</updated>
+    <updated>2017-12-19T05:13:25.230Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。</p>
 <p>本文仅限于 VueCli 下面的开发：</p>
@@ -822,6 +859,8 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
       <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
     
       <category term="全栈" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88/"/>
+    
+      <category term="项目经验" scheme="http://twocucao.xyz/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/"/>
     
   </entry>
   
@@ -959,7 +998,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/07/26/ReactCheatSheet/"/>
     <id>http://twocucao.xyz/2017/07/26/ReactCheatSheet/</id>
     <published>2017-07-26T12:06:05.000Z</published>
-    <updated>2017-12-19T03:53:01.045Z</updated>
+    <updated>2017-12-19T05:16:02.548Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><blockquote>
 <p>备注：本文已太监</p>
@@ -1037,10 +1076,12 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
     </summary>
     
-      <category term="已太监" scheme="http://twocucao.xyz/categories/%E5%B7%B2%E5%A4%AA%E7%9B%91/"/>
+      <category term="未分类" scheme="http://twocucao.xyz/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/"/>
     
     
-      <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="JavaScript" scheme="http://twocucao.xyz/tags/JavaScript/"/>
+    
+      <category term="React" scheme="http://twocucao.xyz/tags/React/"/>
     
   </entry>
   
@@ -1049,7 +1090,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/07/17/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%9A%84%E5%B8%B8%E8%AF%86%E7%AC%94%E8%AE%B0/"/>
     <id>http://twocucao.xyz/2017/07/17/数据科学的常识笔记/</id>
     <published>2017-07-17T12:00:00.000Z</published>
-    <updated>2017-12-19T03:53:19.187Z</updated>
+    <updated>2017-12-19T05:15:09.650Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>2017 年 07 月，为了解统计学和机器学习的基本常识，开了这篇文章。</p>
 <p>当然，仅仅是为了了解，所以也就写的随性（不严谨）一些，排版什么的也都详细推敲。想到哪里就记录到哪里。</p>
@@ -1270,6 +1311,14 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
       <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
+      <category term="机器学习" scheme="http://twocucao.xyz/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数学概念" scheme="http://twocucao.xyz/tags/%E6%95%B0%E5%AD%A6%E6%A6%82%E5%BF%B5/"/>
+    
+      <category term="自然语言" scheme="http://twocucao.xyz/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="深度学习" scheme="http://twocucao.xyz/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
   </entry>
   
   <entry>
@@ -1419,7 +1468,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
     <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
     <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-12-19T04:21:09.556Z</updated>
+    <updated>2017-12-19T05:15:36.359Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
 <a id="more"></a>
@@ -1458,7 +1507,9 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
       <category term="进击的 JavaScript" scheme="http://twocucao.xyz/categories/%E8%BF%9B%E5%87%BB%E7%9A%84-JavaScript/"/>
     
     
-      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
+      <category term="编程语言" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="编程思考" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E8%80%83/"/>
     
   </entry>
   
@@ -1467,7 +1518,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/07/04/RethinkingInPython/"/>
     <id>http://twocucao.xyz/2017/07/04/RethinkingInPython/</id>
     <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-12-19T04:24:33.502Z</updated>
+    <updated>2017-12-19T05:16:14.706Z</updated>
     
     <content type="html"><![CDATA[<h1 id="生命苦短-我用-Python"><a href="#生命苦短-我用-Python" class="headerlink" title="生命苦短 我用 Python"></a>生命苦短 我用 Python</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。</p>
 <h2 id="0x01-Python-胡论"><a href="#0x01-Python-胡论" class="headerlink" title="0x01 Python 胡论"></a>0x01 Python 胡论</h2><h3 id="1-1-Python-的独一无二性"><a href="#1-1-Python-的独一无二性" class="headerlink" title="1.1 Python 的独一无二性"></a>1.1 Python 的独一无二性</h3><p>是要用一门编程语言无非是两种原因：</p>
@@ -1827,7 +1878,11 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
       <category term="Python 黑魔法" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/"/>
     
     
-      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
+      <category term="编程语言" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="编程思考" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E8%80%83/"/>
+    
+      <category term="Python" scheme="http://twocucao.xyz/tags/Python/"/>
     
   </entry>
   
@@ -2297,7 +2352,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/04/18/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_FluentPython/"/>
     <id>http://twocucao.xyz/2017/04/18/读书笔记_FluentPython/</id>
     <published>2017-04-18T12:16:37.000Z</published>
-    <updated>2017-12-19T03:53:42.186Z</updated>
+    <updated>2017-12-19T05:16:25.382Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Fluent Python 适用于中级 Pythoner。</p>
 <blockquote>
@@ -3007,209 +3062,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
       <category term="书单与简评" scheme="http://twocucao.xyz/tags/%E4%B9%A6%E5%8D%95%E4%B8%8E%E7%AE%80%E8%AF%84/"/>
     
-  </entry>
-  
-  <entry>
-    <title>Full Stack Django DevOps Cheatsheet</title>
-    <link href="http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/"/>
-    <id>http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/</id>
-    <published>2017-04-06T12:29:00.000Z</published>
-    <updated>2017-12-19T03:54:17.109Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。</p>
-<p>不仅仅是 Django, 还有 Django 涉及到的：</p>
-<ul>
-<li>组件：PostgreSQL,RabbitMQ,Redis,MongoDB,Ngnix</li>
-<li>技术：爬虫技术，数据库设计，GIS 记录，单页 / 多页 (VueJS+Webpack+DjangoRestFramework), 自动化部署</li>
-<li>轮子：Django 紧密关联的可以极大推进项目开发的轮子</li>
-</ul>
-<a id="more"></a>
-<p>于是，本文的内容就如下：</p>
-<ul>
-<li>前后端分离</li>
-<li>自动化部署</li>
-<li>数据库相关</li>
-<li>其他踩坑经历</li>
-</ul>
-<!-- more -->
-<h2 id="0x01-前后端分离"><a href="#0x01-前后端分离" class="headerlink" title="0x01. 前后端分离"></a>0x01. 前后端分离</h2><p>前后端分离是提高团队开发的一个重要的开发策略，前后端分离之后，后端和前端交流好 JSON 格式，并行开发，局域网中放置一台服务器，后端写好一个功能，推送代码，由 gitlab 触发 Runner 自动交付到局域网的服务器上。这样的话，前后端可以并行开发，从而摆脱每一次开发过程不可避免，前端编写模板，然后由后端套用模板，出了问题，前端修改模板，后端接着修改模板… 循环往复，不曾更改的问题，在这种职责分明的情况下也不会出现背锅侠的问题。</p>
-<p>在往常的开发过程中，而如果 Ajax 比较多或者前端写的代码质量稍微低一些，那么倒霉的事情就发生了，后端和前端的沟通成本那是相当的高。推锅的事情也会发生。</p>
-<p>而新的开发过程中，如果上级有界面上的需求，基本上只需要前端更新一下代码，推送，就可以立即看到效果。<br>同样的，后端也是如此。</p>
-<blockquote>
-<p>这就是我选择前后端分离的初衷 – 将主要的精力放在开发上面。而不是套用模板和编辑 Ajax 过程中带来的沟通问题。</p>
-</blockquote>
-<p>在前后端配合上：</p>
-<ul>
-<li>后端选择 Django,Restful 框架选择了 DjangoRestFramework, DRF 的优点在于可以自动生成 API 界面，让前端对照着表单进行请求接口的测试。于是局域网的那一台可以配置为 Debug 模式，生产机器就可以关闭 DEBUG 模式。</li>
-<li>前端选择 VueJS, 选择这个小而精美的框架一方面是基于团队的开发水平考虑，如果使用太激进的框架 React, 可能遇到问题无法在短时间内解决。由于选用了 VueJS, 也就选用了 Vue 全家桶，通过 Webpack2 进行配置完成基本的打包任务，通过 config 读取环境变量进行生产环境和发布环境的 apiurl 的分离</li>
-<li>代码提交选择 Coding.NET 用于提交代码，在局域网中选择 Gitlab 用于提交代码，配上 Gitlab CI 进行持续集成，每次提交代码直接直接构建本地发布。前后端合作亲密无间。</li>
-</ul>
-<p>前后端分离有什么缺点呢？</p>
-<ol>
-<li>必须强行升级 Https</li>
-<li>开发时候需要关掉 Django 的同源策略</li>
-<li>IE8– 不兼容</li>
-</ol>
-<h3 id="1-1-Django-和-他的小伙伴们"><a href="#1-1-Django-和-他的小伙伴们" class="headerlink" title="1.1. Django 和 他的小伙伴们"></a>1.1. Django 和 他的小伙伴们</h3><p>Django 适用于快速开发，对于创业公司来说，是不错的快速开发语言。</p>
-<p>不仅仅是因为 Python 表达力比较强，更重要的是 Django 有很多高质量的包可以使用。</p>
-<ul>
-<li>Django Debug Toolbar</li>
-<li>DjangoRestFramework</li>
-<li>Django Extensions</li>
-</ul>
-<h3 id="1-4-Django-的奇技淫巧"><a href="#1-4-Django-的奇技淫巧" class="headerlink" title="1.4. Django 的奇技淫巧"></a>1.4. Django 的奇技淫巧</h3><h4 id="Django-Model"><a href="#Django-Model" class="headerlink" title="Django Model"></a>Django Model</h4><ul>
-<li><a href="http://stackoverflow.com/questions/1355150/django-when-saving-how-can-you-check-if-a-field-has-changed" target="_blank" rel="external">Save If Changed</a></li>
-</ul>
-<h2 id="0x02-自动化部署"><a href="#0x02-自动化部署" class="headerlink" title="0x02. 自动化部署"></a>0x02. 自动化部署</h2><p>写程序 一般就是开发测试部署。</p>
-<p>话虽然这么时候，但是在具体的实践过程中，还是有很多很多坑需要注意的。</p>
-<p>比如，仅仅就开发环节来说，团队协作怎么搞？你说可以用 GIT 作为版本管理工具，代码托管。那我问你，这个 Web 开发过程中前端开发模板，后端套用模板怎么搞？你说，前后端分离，那前后端分离后 Http 请求被劫持怎么办，跨站攻击怎么搞……<br>甚至如果是一个人开发的话，直接拉一台服务器做做部署，定期更新到网站上就行了。但如果是团队协作呢？前端提交了代码，产品经理过来说，你更新一下服务器，后端提交了代码，前端过来说，你更新一下服务器，过程琐碎而耗时。大量的时间就浪费在了这种枯燥的事情上了。两个后端，一个前端的情况下，每天本地发布（交付）的次数就已经是相当惊人（大概是前后端每天提交 5 次左右），如果以后是 3 个后端，三个前端，那我作为主程，每天就写不了代码了，这种情况是断不能忍的。</p>
-<p>这个时候，就需要想着把团队协作开发流程优化好：</p>
-<p>在我刚开始进行开发的时候，使用 bash 配合 Ansible 在本地和上线的 Ubuntu 16.04 上面自动化能够自动化的大部分工作，程序员在本地开发的时候，只需要进行开发，然后推送代码到 repo, 剩下的诸如自动化测试集成到系统中，则全部自动化。</p>
-<h3 id="2-1-使用场景"><a href="#2-1-使用场景" class="headerlink" title="2.1. 使用场景"></a>2.1. 使用场景</h3><p>经过研究，我确定了理想中的使用场景：</p>
-<blockquote>
-<p>前端与后端提交代码到代码托管上面的时候，直接集成，构建，Stage 到服务器。</p>
-<p>到上线的时候，由我执行 Ansible 进行上线。</p>
-</blockquote>
-<h3 id="2-2-实施方案"><a href="#2-2-实施方案" class="headerlink" title="2.2. 实施方案"></a>2.2. 实施方案</h3><p>在这个流程中，我需要安装如下的软件：</p>
-<ul>
-<li>Gitlab Gitlab-CI-Runner : 用于解决代码托管，项目的基本成长，以及持续化集成</li>
-<li>PostgreSQL</li>
-<li>MongoDB</li>
-<li>Redis</li>
-<li>RabbitMQ</li>
-<li>Nginx</li>
-<li>Python 以及 Python 扩展的依赖包</li>
-<li>其他</li>
-</ul>
-<p>配置文件为 3 类：</p>
-<ul>
-<li>test</li>
-<li>stage</li>
-<li>production</li>
-</ul>
-<p>硬件设备 3 台：</p>
-<ol>
-<li>第一台为 Gitlab 部署的软件</li>
-<li>第二台为 Stage 环境 （本地局域网持续交付）的机器</li>
-<li>第三台为 Server （阿里云） 机器</li>
-</ol>
-<blockquote>
-<p>注：最初使用 Ubuntu 机器，最终确定使用 Docker 镜像进行构建</p>
-</blockquote>
-<h3 id="2-3-持续交付"><a href="#2-3-持续交付" class="headerlink" title="2.3. 持续交付"></a>2.3. 持续交付</h3><p>当前端工程师 Push Master 分支到 Repo 上的时候，执行 Job 更新网站<br>当后端工程师 Push Master 分支到 Repo 上的时候，执行 Job 更新网站</p>
-<p>Push Master 分支，这个自然无需多说，问题是怎么执行 Job 呢？</p>
-<blockquote>
-<p><strong>Gitlab CI Multi Runner</strong></p>
-</blockquote>
-<p>在一台 stage 的机器上安装 gitlab ci multi runner , 并且在该机器上注册 runner 为 shell , 这意味着 runner 会以 gitlab-runner 用户的权限进行测试 , 你需要 uninstall<br>然后 install –user=root 一下，然后重启，即可在 gitlab-ci.yml 上。</p>
-<p>修改文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">gitlab-runner register <span class="comment"># 然后填入相关信息</span></div><div class="line">vim /etc/gitlab-runner/config.toml <span class="comment"># 接着进行修改</span></div></pre></td></tr></table></figure></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">concurrent = 1</div><div class="line">check_interval = 0</div><div class="line"></div><div class="line">[[runners]]</div><div class="line">  name = <span class="string">"yadjangoweb"</span></div><div class="line">  url = <span class="string">"http://192.168.1.139/ci"</span></div><div class="line">  token = <span class="string">"325asd65f4e7xa9faasda8da"</span></div><div class="line">  executor = <span class="string">"shell"</span></div><div class="line">  [runners.cache]</div></pre></td></tr></table></figure>
-<h3 id="2-4-Dockerize-Application"><a href="#2-4-Dockerize-Application" class="headerlink" title="2.4. Dockerize Application"></a>2.4. Dockerize Application</h3><p>Docker 以其轻量级和类似于版本管理的软件方式吸引了我。于是，准备将所有的 Service 都 Docker 化。</p>
-<p>拿 Django 程序来说，首先 Django 程序依赖三个组件 redis / postgresql / rabbitmq , 完成这些组件的安装之后才能进行下一步的操作。</p>
-<h2 id="0x03-数据库相关"><a href="#0x03-数据库相关" class="headerlink" title="0x03 数据库相关"></a>0x03 数据库相关</h2><h3 id="1-数据库设计"><a href="#1-数据库设计" class="headerlink" title="1. 数据库设计"></a>1. 数据库设计</h3><p>PostgreSQL Array 在爬虫方面可以用来标记一个 Record 的处理状态<br>PostgreSQL Range 用来判断范围也是一个比较高效的选择（用空间 gist 索引取代两个索引）</p>
-<p>GeoDjango 和 PostGIS 非常配</p>
-<h3 id="2-数据迁移"><a href="#2-数据迁移" class="headerlink" title="2. 数据迁移"></a>2. 数据迁移</h3><h4 id="1-1-第一次数据迁移之-MySQL-转-PostgreSQL"><a href="#1-1-第一次数据迁移之-MySQL-转-PostgreSQL" class="headerlink" title="1.1. 第一次数据迁移之 MySQL 转 PostgreSQL"></a>1.1. 第一次数据迁移之 MySQL 转 PostgreSQL</h4><p>第一次数据迁移的时候基于 PostgreSQL 社区里面有个大杀器，叫做 PostGIS, 通过 PostGIS, 可以很方便的拥有和国内一些地图公司匹敌的算法。抛开算法实现的效率问题，基本上可以满足日常的开发需求，当时数据量不算大，使用 mysqldump 下来也就 500M 左右，而且行数大约 700W 条，于是使用了一个很笨的方法，就是将数据库使用 Django 命令 dump 成 json, 接着修改配置重新导入新数据库。</p>
-<p>这种方式的缺点就是效率低而且太吃内存了，当时 16G 的服务器满内存，满交换内存地搞了一个上午。</p>
-<h4 id="1-2-第二次数据迁移之重新-makemigrations"><a href="#1-2-第二次数据迁移之重新-makemigrations" class="headerlink" title="1.2. 第二次数据迁移之重新 makemigrations"></a>1.2. 第二次数据迁移之重新 makemigrations</h4><p>为什么要重新 makemigrations 呢，因为糟糕的事情发生了。</p>
-<p>有个需求，需要重新定制用户登录认证系统。用户登录认证系统是最最应该在项目开始的时候编写的，这就是项目的基石，这个需求就恰似在房子盖到第三层的时候突然要把地基给加固。</p>
-<p>Django 中如果使用了 auth 模块，则 auth.user 是最先被迁移到数据库中的，而如果你经过权衡继承 AbstractUser 并且 makemigrations 生成个迁移文件 0001_initial.py 后，在正常的情况下不容易将 migration 修改应用到数据库中。</p>
-<blockquote>
-<p>如果我偏要勉强呢？</p>
-</blockquote>
-<p>当然是可以勉强的，删掉数据库中已经记录下来的 auth.user migration 的相关记录即可。</p>
-<p>那我为什么还是需要重新编写 migration 呢？</p>
-<ol>
-<li>因为之前对数据库的结构调整比较频繁，多达 138 次，而在 138 次调整数据结构之后，再去撤销第一次数据表的迁移操作的时候，则无异于厨子做菜要把牛排做 8 分熟，但是厨子做到 7 分熟的时候，突然顾客说，我要 5 分熟的牛排。那只能重新来了。</li>
-<li>顺手精简掉 138 个文件。</li>
-</ol>
-<p>如何做呢？</p>
-<ol>
-<li>数据的迁移在没有表与表之间的关联的时候是很好办的，CSV, 标准 SQL 文件。</li>
-<li>有表关联的情况下则需要权衡数据量来进行迁移，假如数据量在 10 来个 G 的时候，读到内存中，按照数据表的依赖关系，自下而上逐层迁移即可。</li>
-<li>数据量大的时候，则需要去约束，去索引，然后转 CSV/SQL, 迁移到数据表中。如果表依赖不复杂的话，直接 psql 命令重定向数据也可以。</li>
-</ol>
-<p>但是呢，由于使用了 Django, 在数据量不大的时候，完全可以使用 Django 的 ORM 来做迁移。</p>
-<p>我在 Google 了一下，发现下面一个脚本，于是设置数据库为新数据库 default 和 depressed</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">batch_migrate</span><span class="params">(model)</span>:</span></div><div class="line">    <span class="comment"># remove data from destination db before copying</span></div><div class="line">    <span class="comment"># to avoid primary key conflicts or mismatches</span></div><div class="line">    <span class="keyword">if</span> model.objects.using(<span class="string">'default'</span>).exists():</div><div class="line">        model.objects.using(<span class="string">'default'</span>).all().delete()</div><div class="line"></div><div class="line">    <span class="comment"># get data form the source database</span></div><div class="line">    items = model.objects.using(<span class="string">'depressed'</span>).order_by(<span class="string">"pk"</span>).all()</div><div class="line">    count = len(items)</div><div class="line">    <span class="comment"># process in chunks, to handle models with lots of data</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">0</span>, count, <span class="number">10000</span>):</div><div class="line">        chunk_items = items[i:i + <span class="number">10000</span>]</div><div class="line">        print(<span class="string">"已经迁移数据"</span>, i)</div><div class="line">        model.objects.using(<span class="string">'default'</span>).bulk_create(chunk_items)</div><div class="line"></div><div class="line">    <span class="comment"># many-to-many fields are NOT handled by bulk create; check for</span></div><div class="line">    <span class="comment"># them and use the existing implicit through models to copy them</span></div><div class="line">    <span class="keyword">for</span> m2mfield <span class="keyword">in</span> model._meta.many_to_many:</div><div class="line">        m2m_model = getattr(model, m2mfield.name).through</div><div class="line">        batch_migrate(m2m_model)</div></pre></td></tr></table></figure>
-<p>按照表与表之间的依赖关系，逐个迁移到数据库中搞定。</p>
-<h3 id="1-3-sequence-问题"><a href="#1-3-sequence-问题" class="headerlink" title="1.3 sequence 问题"></a>1.3 sequence 问题</h3><p>在写 Django 的时候发现的时候无论如何都无法保存新的 item.</p>
-<p>原来的代码为：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">item = Item.objects.get_or_create()</div><div class="line">item.foo = <span class="number">1</span></div><div class="line">item.save()</div></pre></td></tr></table></figure>
-<p>报错信息是 Integrety, 报 duplicated 错误（下面的代码当然是打了马赛克了）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">django.db.utils.IntegrityError: duplicate key value violates unique constraint <span class="string">"foo_item_pkey"</span></div><div class="line">DETAIL:  Key (id)=(<span class="number">111111</span>) already exists.</div></pre></td></tr></table></figure>
-<p>那么，问题来了：</p>
-<blockquote>
-<p><del>挖掘技术哪家强？</del></p>
-</blockquote>
-<p>啊，不是</p>
-<blockquote>
-<p>How To Solve This?</p>
-</blockquote>
-<p>经过猜测，而 get 到已有的 item 设置并且保存的话，并不会出现这个问题。问题主要出在 create 上面。</p>
-<p>于是编写代码验证一下是不是猜想正确</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>:</div><div class="line">    item = Item.objects.get()</div><div class="line"><span class="keyword">except</span> Exception:</div><div class="line">    item = Item.objects.create()</div><div class="line"></div><div class="line"><span class="comment"># do something</span></div><div class="line"></div><div class="line">item.save()</div></pre></td></tr></table></figure>
-<p>duplicate 的问题肯定是多次存同样的不能重复的字段。</p>
-<p><strong>但尼玛，我之前做测试的时候考虑过这个逻辑呀？</strong>换而言之，这种问题不应该出现，如果出现了问题，八成是 ORM 用的不对。</p>
-<p>印象中这种问题 Google 一下 Integrety Duplicate Django PostgreSQL 一般就能出来了。</p>
-<p>最后找到解决方案：<a href="http://centoshowtos.org/web-services/django-and-postgres-duplicate-key/" target="_blank" rel="external">http://centoshowtos.org/web-services/django-and-postgres-duplicate-key/</a></p>
-<p>在终端进入 psql 查询 sequence 最新值</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">select</span> start_value, <span class="keyword">last_value</span>, max_value <span class="keyword">from</span> dt_crawler_item_item_id_seq;</div><div class="line"></div><div class="line"> start_value | last_value |      max_value</div><div class="line"><span class="comment">-------------|------------|---------------------</span></div><div class="line">           1 |    111110 | 9223372036854775807</div></pre></td></tr></table></figure>
-<p>而我们查看一下 item_id 的最大值</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">select max(item_id) from app_model_item;</div><div class="line"></div><div class="line">   max</div><div class="line">---------</div><div class="line"> 111111</div></pre></td></tr></table></figure>
-<p>重置 sequence last_value 值到最新即可。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">alter sequence app_model_item_item_id_seq restart with 111111;</div></pre></td></tr></table></figure>
-<blockquote>
-<p>当数据库每次插入一条非指定主键的记录，则获取 last_value(111110), 加 1 得到当前的主键接着插入。但这个过程无异于数据库中已经有了一个 pk 为 111111 的记录，再插入一条。于是报错。</p>
-</blockquote>
-<p>回顾这个问题，该问题是由于 PostGres 的 sequence 造成 pkey 相等，换而言之，postgres 应该在有一个 pk 值为 111111 的时候，插入一个无主键的记录，PostgreSQL 获取 sequence+1(111110 + 1) 得到它认为当前的主键值，接着再一次插入了主键为 111111 的这个值。</p>
-<p>这个过程相当于依次插入两个条 ID 相同的记录。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span>(<span class="keyword">id</span>, column2, …) <span class="keyword">VALUES</span> (<span class="number">111111</span>, value2, …);</div><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> <span class="keyword">table</span>(<span class="keyword">id</span>, column2, …) <span class="keyword">VALUES</span> (<span class="number">111111</span>, value2, …);</div></pre></td></tr></table></figure></p>
-<blockquote>
-<p>sequence 避免了每一次 max 查找带来的性能损失，一方面带来了方便，也带来了隐藏的坑。</p>
-</blockquote>
-<p>如果以后这个问题比较多的话，参考下面的源码对文本进行修改。</p>
-<p><a href="https://github.com/ASKBOT/django-postgresql-fix-sequences/blob/master/postgresql_sequence_utils/utils.py" target="_blank" rel="external">https://github.com/ASKBOT/django-postgresql-fix-sequences/blob/master/postgresql_sequence_utils/utils.py</a></p>
-<h2 id="0x04-WebServer"><a href="#0x04-WebServer" class="headerlink" title="0x04 WebServer"></a>0x04 WebServer</h2><p>目前使用的 WebServer 是用 Nginx 做反向代理，将请求通过 unix socket 转发到 gunicorn，gunicorn 作为 django 实际上的 webserver。</p>
-<h3 id="unix-socket-和-gunicorn-的-REMOTE-ADDR-问题"><a href="#unix-socket-和-gunicorn-的-REMOTE-ADDR-问题" class="headerlink" title="unix socket 和 gunicorn 的 REMOTE_ADDR 问题"></a>unix socket 和 gunicorn 的 REMOTE_ADDR 问题</h3><p>Django Admin 模块在访问 某个页面的时候特别特别慢，而在我的机器上一切正常，我怀疑的是数据库的问题，于是，那么首先要知道数据库的查询语句，于是想借用 django debug toolbar 来 profiling, 于是问题来了，我在局域网模拟真机环境，结果无论如何都无法呈现 Django Debug Toolbar,</p>
-<p>问题八成出现在 Django 配置环境 或者 Nginx 上面（当然，最后发现是 Gunicorn 的锅）. 在</p>
-<p>经过一段时间的排查，认为是 Nginx 的问题，在相关配置添加下面设置 Header,</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">proxy_set_header X-Forwarded-For $remote_addr;</div></pre></td></tr></table></figure>
-<p>结果依旧无法获取 request.Meta[“REMOTE-ADDR”]</p>
-<p>经过搜索发现不止我一个人的问题：<a href="https://github.com/benoitc/gunicorn/issues/797" target="_blank" rel="external">https://github.com/benoitc/gunicorn/issues/797</a></p>
-<p>最后发现是 Http 请求从 nginx 这儿经过 unix socket 转发到 gunicorn.sock 下默认是没有赋值 REMOTE-ADDR 的，</p>
-<p>那么，这个在 HTTP Header 层次的东西，没有在 gunicorn 层次解决，那就只能在 django 层次解决。</p>
-<p>给 Django 添加中间件如下，放在 djangodebugtools 的前面。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">XForwardedForMiddleware</span><span class="params">(MiddlewareMixin)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_request</span><span class="params">(self, request)</span>:</span></div><div class="line">        <span class="keyword">if</span> request.META.get(<span class="string">"HTTP_X_FORWARDED_FOR"</span>, <span class="keyword">False</span>):</div><div class="line">            request.META[<span class="string">"HTTP_X_PROXY_REMOTE_ADDR"</span>] = request.META[<span class="string">"REMOTE_ADDR"</span>]</div><div class="line">            parts = request.META[<span class="string">"HTTP_X_FORWARDED_FOR"</span>].split(<span class="string">","</span>, <span class="number">1</span>)</div><div class="line">            request.META[<span class="string">"REMOTE_ADDR"</span>] = parts[<span class="number">0</span>]</div></pre></td></tr></table></figure></p>
-<p>解决。</p>
-<h3 id="Nginx-Gzip-压缩"><a href="#Nginx-Gzip-压缩" class="headerlink" title="Nginx Gzip 压缩"></a>Nginx Gzip 压缩</h3><p>当 json 数据量比较大的时候，则必须要考虑开启压缩。一般情况下，虽然这个可以在 Django 层次完成，但是这么做还不如在 nginx 层次完成。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">gzip on;</div><div class="line">gzip_disable <span class="string">"msie6"</span>;</div><div class="line">gzip_vary on;</div><div class="line">gzip_proxied any;</div><div class="line">gzip_comp_level <span class="number">6</span>;</div><div class="line">gzip_buffers <span class="number">16</span> <span class="number">8</span>k;</div><div class="line">gzip_http_version <span class="number">1.1</span>;</div><div class="line">gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;</div></pre></td></tr></table></figure>
-<p>开启之后，我这边的 一个 220k 的数据缩减到 54k</p>
-<h2 id="0x04-其他踩坑相关"><a href="#0x04-其他踩坑相关" class="headerlink" title="0x04. 其他踩坑相关"></a>0x04. 其他踩坑相关</h2><h3 id="4-1-奇怪的文件问题"><a href="#4-1-奇怪的文件问题" class="headerlink" title="4.1 奇怪的文件问题"></a>4.1 奇怪的文件问题</h3><p>在某一天遇到了一个问题 往常的时候，当文件上传到 Django 中的时候，都可以正常的解析，但是这两天居然不能用了。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 问题代码出现在</span></div><div class="line">df = pd.read_excel(file_obj)</div><div class="line"><span class="comment"># 报这个问题 google 几乎没有什么解决方案</span></div><div class="line">Invalid file path <span class="keyword">or</span> buffer object type</div><div class="line">&lt;<span class="class"><span class="keyword">class</span> '<span class="title">django</span>.<span class="title">core</span>.<span class="title">files</span>.<span class="title">uploadedfile</span>.<span class="title">InMemoryUploadedFile</span>'&gt;</span></div></pre></td></tr></table></figure>
-<p>更加糟糕的问题出现了，我本人的开发环境和服务器的开发环境基本一致，但，但，但为什么不能用呢？</p>
-<p>分别回滚代码，Nginx 设置，在线上打 Log, 最终确定了是 Pandas 从 0.19 升级到了 0.20 之后出现的一个小问题。最终还原线上 python 安装环境，搞定。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。&lt;/p&gt;
-&lt;p&gt;不仅仅是 Django, 还有 Django 涉及到的：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;组件：PostgreSQL,RabbitMQ,Redis,MongoDB,Ngnix&lt;/li&gt;
-&lt;li&gt;技术：爬虫技术，数据库设计，GIS 记录，单页 / 多页 (VueJS+Webpack+DjangoRestFramework), 自动化部署&lt;/li&gt;
-&lt;li&gt;轮子：Django 紧密关联的可以极大推进项目开发的轮子&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="后端框架之 Django 进阶" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6%E4%B9%8B-Django-%E8%BF%9B%E9%98%B6/"/>
-    
-    
-      <category term="Pandas" scheme="http://twocucao.xyz/tags/Pandas/"/>
-    
-      <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
-    
-      <category term="工作自动化" scheme="http://twocucao.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
-    
-      <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
+      <category term="Python" scheme="http://twocucao.xyz/tags/Python/"/>
     
   </entry>
   
