@@ -1,0 +1,945 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="VueJS,文档阅读笔记,前端框架," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="0x01 Essential1.1 The Vue Instance当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。  而创建之后添加赋值新属性，则不 Reactive  而实例被创建之时，会自带前缀为 $ 的一系列属性和方法 1.1.1 内置方法和属性Instance Propertiesvm.$datavm.$propsvm.$elvm.">
+<meta name="keywords" content="VueJS,文档阅读笔记,前端框架">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VueJS 文档阅读笔记">
+<meta property="og:url" content="http://twocucao.xyz/2017/09/15/ReadingVueDocuments/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x01 Essential1.1 The Vue Instance当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。  而创建之后添加赋值新属性，则不 Reactive  而实例被创建之时，会自带前缀为 $ 的一系列属性和方法 1.1.1 内置方法和属性Instance Propertiesvm.$datavm.$propsvm.$elvm.">
+<meta property="og:image" content="https://vuejs.org/images/lifecycle.png">
+<meta property="og:updated_time" content="2017-12-19T04:21:39.401Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VueJS 文档阅读笔记">
+<meta name="twitter:description" content="0x01 Essential1.1 The Vue Instance当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。  而创建之后添加赋值新属性，则不 Reactive  而实例被创建之时，会自带前缀为 $ 的一系列属性和方法 1.1.1 内置方法和属性Instance Propertiesvm.$datavm.$propsvm.$elvm.">
+<meta name="twitter:image" content="https://vuejs.org/images/lifecycle.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://twocucao.xyz/2017/09/15/ReadingVueDocuments/"/>
+
+
+
+
+
+  <title>VueJS 文档阅读笔记 | MG的编程小屋</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?299254d95898cdfa110fc6d914eba9c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MG的编程小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/09/15/ReadingVueDocuments/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">VueJS 文档阅读笔记</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-15T20:06:05+08:00">
+                2017-09-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端框架之-Vue-进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">前端框架之 Vue 进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,464
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="0x01-Essential"><a href="#0x01-Essential" class="headerlink" title="0x01 Essential"></a>0x01 Essential</h2><h3 id="1-1-The-Vue-Instance"><a href="#1-1-The-Vue-Instance" class="headerlink" title="1.1 The Vue Instance"></a>1.1 The Vue Instance</h3><p>当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。</p>
+<blockquote>
+<p>而创建之后添加赋值新属性，则不 Reactive</p>
+</blockquote>
+<p>而实例被创建之时，会自带前缀为 $ 的一系列属性和方法</p>
+<h4 id="1-1-1-内置方法和属性"><a href="#1-1-1-内置方法和属性" class="headerlink" title="1.1.1 内置方法和属性"></a>1.1.1 内置方法和属性</h4><h5 id="Instance-Properties"><a href="#Instance-Properties" class="headerlink" title="Instance Properties"></a>Instance Properties</h5><p>vm.$data<br>vm.$props<br>vm.$el<br>vm.$options<br>vm.$parent<br>vm.$root<br>vm.$children<br>vm.$slots<br>vm.$scopedSlots<br>vm.$refs<br>vm.$isServer<br>vm.$attrs<br>vm.$listeners</p>
+<a id="more"></a>
+<h5 id="Instance-Methods-Data"><a href="#Instance-Methods-Data" class="headerlink" title="Instance Methods / Data"></a>Instance Methods / Data</h5><p>vm.$watch<br>vm.$set<br>vm.$delete</p>
+<h5 id="Instance-Methods-Events"><a href="#Instance-Methods-Events" class="headerlink" title="Instance Methods / Events"></a>Instance Methods / Events</h5><p>vm.$on<br>vm.$once<br>vm.$off<br>vm.$emit</p>
+<h5 id="Instance-Methods-Lifecycle"><a href="#Instance-Methods-Lifecycle" class="headerlink" title="Instance Methods / Lifecycle"></a>Instance Methods / Lifecycle</h5><p>vm.$mount<br>vm.$forceUpdate<br>vm.$nextTick<br>vm.$destroy</p>
+<h4 id="1-1-2-生命周期"><a href="#1-1-2-生命周期" class="headerlink" title="1.1.2 生命周期"></a>1.1.2 生命周期</h4><p><img src="https://vuejs.org/images/lifecycle.png" alt="生命周期"></p>
+<h3 id="1-2-Template-Syntax"><a href="#1-2-Template-Syntax" class="headerlink" title="1.2 Template Syntax"></a>1.2 Template Syntax</h3><p>VueJS 编译 模板为 VirtualDOM render 函数，如果对 VirtualDom 非常熟悉的话，则可以使用</p>
+<h4 id="1-2-1-插值"><a href="#1-2-1-插值" class="headerlink" title="1.2.1 插值"></a>1.2.1 插值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"># text</div><div class="line">&#123;&#123; msg &#125;&#125;</div><div class="line">&lt;span v-once&gt; &#123;&#123; msg &#125;&#125; &lt;span&gt;</div><div class="line"># raw html</div><div class="line">&lt;div v-html=&quot;rawHTML&quot;&gt;&lt;/div&gt;</div><div class="line"># attributes</div><div class="line">&lt;div v-bind:id=&quot;dynamicID&quot;&gt;&lt;/div&gt;</div><div class="line"># JS Expressions</div><div class="line">&#123;&#123; number + 1 &#125;&#125;</div><div class="line">&#123;&#123; ok ? &apos;YES&apos; : &apos;NO&apos; &#125;&#125;</div><div class="line">&#123;&#123; message.split(&apos;&apos;).reverse().join(&apos;&apos;) &#125;&#125;</div><div class="line">&lt;div v-bind:id=&quot;&apos;list-&apos; + id&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<h4 id="1-2-2-指令"><a href="#1-2-2-指令" class="headerlink" title="1.2.2 指令"></a>1.2.2 指令</h4><ul>
+<li>v-bind -&gt; :</li>
+<li>v-on   -&gt; @</li>
+<li>v-on:submit.prevent=”onSubmit”</li>
+</ul>
+<h3 id="1-3-Computed-Properties-and-Watchers"><a href="#1-3-Computed-Properties-and-Watchers" class="headerlink" title="1.3 Computed Properties and Watchers"></a>1.3 Computed Properties and Watchers</h3><ul>
+<li>当使用 Computed 的时候，一旦其依赖的 reactive 的 data 发生变化之后，则其值发生变化。</li>
+<li>其实，可以在模板中调用方法，但只能在项目中。</li>
+</ul>
+<h3 id="1-4-Class-and-Style-Bindings"><a href="#1-4-Class-and-Style-Bindings" class="headerlink" title="1.4 Class and Style Bindings"></a>1.4 Class and Style Bindings</h3><h4 id="1-4-1-Object-语法"><a href="#1-4-1-Object-语法" class="headerlink" title="1.4.1 Object 语法"></a>1.4.1 Object 语法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;div class=&quot;static&quot;</div><div class="line">     :class=&quot;&#123; active: isActive, &apos;text-danger&apos;: hasError &#125;&quot;&gt;</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<h4 id="1-4-2-Array-语法"><a href="#1-4-2-Array-语法" class="headerlink" title="1.4.2 Array 语法"></a>1.4.2 Array 语法</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div v-bind:class=&quot;[isActive ? activeClass : &apos;&apos;, errorClass]&quot;&gt;&lt;/div&gt;</div></pre></td></tr></table></figure>
+<h4 id="1-4-3-组件"><a href="#1-4-3-组件" class="headerlink" title="1.4.3 组件"></a>1.4.3 组件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;my-component class=&quot;baz boo&quot;&gt;&lt;/my-component&gt;</div><div class="line"></div><div class="line">&lt;p  class=&quot;origin baz boo&quot;&gt;</div></pre></td></tr></table></figure>
+<h3 id="1-5-Conditional-Rendering"><a href="#1-5-Conditional-Rendering" class="headerlink" title="1.5 Conditional Rendering"></a>1.5 Conditional Rendering</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">&lt;h1 v-if=&quot;ok&quot;&gt;Yes&lt;/h1&gt;</div><div class="line"></div><div class="line">&lt;h1 v-if=&quot;ok&quot;&gt;Yes&lt;/h1&gt;</div><div class="line">&lt;h1 v-else&gt;No&lt;/h1&gt;</div><div class="line"></div><div class="line">&lt;div v-if=&quot;type === &apos;A&apos;&quot;&gt;</div><div class="line">  A</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div v-else-if=&quot;type === &apos;B&apos;&quot;&gt;</div><div class="line">  B</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div v-else-if=&quot;type === &apos;C&apos;&quot;&gt;</div><div class="line">  C</div><div class="line">&lt;/div&gt;</div><div class="line">&lt;div v-else&gt;</div><div class="line">  Not A/B/C</div><div class="line">&lt;/div&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>v-if  是否</li>
+<li>v-for 优先级高于 v-if</li>
+</ul>
+<h3 id="1-6-List-Rendering"><a href="#1-6-List-Rendering" class="headerlink" title="1.6 List Rendering"></a>1.6 List Rendering</h3><p>对于数组</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=&quot;example-2&quot;&gt;</div><div class="line">  &lt;li v-for=&quot;(item, index) in items&quot;&gt;</div><div class="line">    &#123;&#123; parentMessage &#125;&#125; - &#123;&#123; index &#125;&#125; - &#123;&#123; item.message &#125;&#125;</div><div class="line">  &lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<p>对于对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul id=&quot;example-2&quot;&gt;</div><div class="line">  &lt;li v-for=&quot;(item, index) in items&quot;&gt;</div><div class="line">    &#123;&#123; parentMessage &#125;&#125; - &#123;&#123; index &#125;&#125; - &#123;&#123; item.message &#125;&#125;</div><div class="line">  &lt;/li&gt;</div><div class="line">&lt;/ul&gt;</div></pre></td></tr></table></figure>
+<h4 id="1-6-1-ARRAY-修改检测"><a href="#1-6-1-ARRAY-修改检测" class="headerlink" title="1.6.1 ARRAY 修改检测"></a>1.6.1 ARRAY 修改检测</h4><h5 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h5><ul>
+<li>push()</li>
+<li>pop()</li>
+<li>shift()</li>
+<li>unshift()</li>
+<li>splice()</li>
+<li>sort()</li>
+<li>reverse()</li>
+</ul>
+<h5 id="取代数组"><a href="#取代数组" class="headerlink" title="取代数组"></a>取代数组</h5><p>filter</p>
+<h5 id="警告"><a href="#警告" class="headerlink" title="警告"></a>警告</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">直接通过 index 对数组进行修改</div><div class="line"></div><div class="line">不应该</div><div class="line"></div><div class="line">vm.items[indexOfItem] = newValue</div><div class="line"></div><div class="line">应该</div><div class="line"></div><div class="line">// Vue.set</div><div class="line">Vue.set(example1.items, indexOfItem, newValue)</div><div class="line"></div><div class="line">// Array.prototype.splice</div><div class="line">example1.items.splice(indexOfItem, 1, newValue)</div><div class="line"></div><div class="line">修改 length</div><div class="line"></div><div class="line">不该 vm.items.length = newLength</div><div class="line"></div><div class="line">应该 example1.items.splice(newLength)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>猜测背后可能是因为这种方式是无法监测设置</p>
+</blockquote>
+<h4 id="1-6-2-Object-修改检测警告"><a href="#1-6-2-Object-修改检测警告" class="headerlink" title="1.6.2 Object 修改检测警告"></a>1.6.2 Object 修改检测警告</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">js 无法直接提供对</div><div class="line"></div><div class="line"><span class="keyword">this</span>.$set(<span class="keyword">this</span>.userProfile, <span class="string">'age'</span>, <span class="number">27</span>)</div></pre></td></tr></table></figure>
+<h3 id="1-7-Event-Handling"><a href="#1-7-Event-Handling" class="headerlink" title="1.7 Event Handling"></a>1.7 Event Handling</h3><h4 id="1-7-1-Listening-to-Events"><a href="#1-7-1-Listening-to-Events" class="headerlink" title="1.7.1 Listening to Events"></a>1.7.1 Listening to Events</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"example-1"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"counter += 1"</span>&gt;</span>Add 1<span class="tag">&lt;/<span class="name">button</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>The button above has been clicked &#123;&#123; counter &#125;&#125; times.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>PS: 注意，前面 v-on v-bind 所有的绑定可以绑在方法上，也可以直接填单行表达式。可以提高可阅读性</p>
+<h4 id="1-7-2-Method-Event-Handlers"><a href="#1-7-2-Method-Event-Handlers" class="headerlink" title="1.7.2 Method Event Handlers"></a>1.7.2 Method Event Handlers</h4><p>可以绑定方法</p>
+<h4 id="1-7-3-Methods-in-Inline-Handlers"><a href="#1-7-3-Methods-in-Inline-Handlers" class="headerlink" title="1.7.3 Methods in Inline Handlers"></a>1.7.3 Methods in Inline Handlers</h4><p>可以绑定方法加参数，配合 for / if</p>
+<h4 id="1-7-4-Event-Modifiers"><a href="#1-7-4-Event-Modifiers" class="headerlink" title="1.7.4 Event Modifiers"></a>1.7.4 Event Modifiers</h4><p>事件修饰符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">.stop</div><div class="line">.prevent</div><div class="line">.capture</div><div class="line">.self</div><div class="line">.once</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- the click event's propagation will be stopped --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop</span>=<span class="string">"doThis"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- the submit event will no longer reload the page --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>=<span class="string">"onSubmit"</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- modifiers can be chained --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">v-on:click.stop.prevent</span>=<span class="string">"doThat"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- just the modifier --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">form</span> <span class="attr">v-on:submit.prevent</span>&gt;</span><span class="tag">&lt;/<span class="name">form</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- use capture mode when adding the event listener --&gt;</span></div><div class="line"><span class="comment">&lt;!-- i.e. an event targeting an inner element is handled here before being handled by that element --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.capture</span>=<span class="string">"doThis"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- only trigger handler if event.target is the element itself --&gt;</span></div><div class="line"><span class="comment">&lt;!-- i.e. not from a child element --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-on:click.self</span>=<span class="string">"doThat"</span>&gt;</span>...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="1-7-5-Key-Modifiers"><a href="#1-7-5-Key-Modifiers" class="headerlink" title="1.7.5 Key Modifiers"></a>1.7.5 Key Modifiers</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">.enter</div><div class="line">.tab</div><div class="line">.delete (captures both “Delete” and “Backspace” keys)</div><div class="line">.esc</div><div class="line">.space</div><div class="line">.up</div><div class="line">.down</div><div class="line">.left</div><div class="line">.right</div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!-- same as above --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-on:keyup.enter</span>=<span class="string">"submit"</span>&gt;</span></div><div class="line"><span class="comment">&lt;!-- also works for shorthand --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">input</span> @<span class="attr">keyup.enter</span>=<span class="string">"submit"</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="1-7-6-System-Modifier-Keys"><a href="#1-7-6-System-Modifier-Keys" class="headerlink" title="1.7.6 System Modifier Keys"></a>1.7.6 System Modifier Keys</h4><p>键盘</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">.ctrl</div><div class="line">.alt</div><div class="line">.shift</div><div class="line">.meta</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;!-- Alt + C --&gt;</div><div class="line">&lt;input @keyup.alt.67=&quot;clear&quot;&gt;</div><div class="line">&lt;!-- Ctrl + Click --&gt;</div><div class="line">&lt;div @click.ctrl=&quot;doSomething&quot;&gt;Do something&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p>鼠标</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">.left</div><div class="line">.right</div><div class="line">.middle</div></pre></td></tr></table></figure>
+<h4 id="1-7-7-Why-Listeners-in-HTML"><a href="#1-7-7-Why-Listeners-in-HTML" class="headerlink" title="1.7.7 Why Listeners in HTML?"></a>1.7.7 Why Listeners in HTML?</h4><p>在以往的开发中，直接写在 html 的 onclick 是很糟糕的方式，因为这违反了局部变量准则。将 onclick 变量提升为整个页面很容易导致，页面内部组织混乱。</p>
+<p>而 v-on 则仅执行 viewmodel 的方法，不会绑定到其他方法里。</p>
+<h3 id="1-8-Form-Input-Bindings"><a href="#1-8-Form-Input-Bindings" class="headerlink" title="1.8 Form Input Bindings"></a>1.8 Form Input Bindings</h3><p><a href="https://vuejs.org/v2/guide/forms.html" target="_blank" rel="external">https://vuejs.org/v2/guide/forms.html</a></p>
+<p>对于每个 Form 空间，可以进行一定的封装。</p>
+<p>比如拖拽上传啦，比如 RadioGroup 啦等等。通过封装，可以进行相关的分析。</p>
+<h3 id="1-9-Components"><a href="#1-9-Components" class="headerlink" title="1.9 Components"></a>1.9 Components</h3><p>Using Components<br>Global Registration<br>Local Registration<br>DOM Template Parsing Caveats<br>data Must Be a Function<br>Composing Components<br>Props<br>Passing Data with Props<br>camelCase vs. kebab-case<br>Dynamic Props<br>Literal vs. Dynamic<br>One-Way Data Flow<br>Prop Validation<br>Non-Prop Attributes<br>Replacing/Merging with Existing Attributes<br>Custom Events<br>Using v-on with Custom Events<br>Binding Native Events to Components<br>.sync Modifier<br>Form Input Components using Custom Events<br>Customizing Component v-model<br>Non Parent-Child Communication<br>Content Distribution with Slots<br>Compilation Scope<br>Single Slot<br>Named Slots<br>Scoped Slots<br>Dynamic Components<br>keep-alive<br>Misc<br>Authoring Reusable Components<br>Child Component Refs<br>Async Components<br>Advanced Async Components<br>Component Naming Conventions<br>Recursive Components<br>Circular References Between Components<br>Inline Templates<br>X-Templates<br>Cheap Static Components with v-once</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>组件化是 Vue 模块化组织前端网页的方式。</p>
+<p>Vue 的组件化，将模板，JavaScript 与样式放在一起。出于代码的复用性：</p>
+<p>组件化可以给组件子组件们组织起来，起一个阅读性更好的名称，从而使得编写 Vue 组件更加语义化。</p>
+<ul>
+<li>如果模板是常用的组件，比如手风琴控件，Menu 控件，sidebar 控件</li>
+</ul>
+<p>Vue 通过组件来组织代码，但糟糕的是并不是一切都可以被组件化</p>
+<h2 id="0x02-Transitions-amp-Animation"><a href="#0x02-Transitions-amp-Animation" class="headerlink" title="0x02 Transitions &amp; Animation"></a>0x02 Transitions &amp; Animation</h2><h3 id="2-1-Event-Handling"><a href="#2-1-Event-Handling" class="headerlink" title="2.1 Event Handling"></a>2.1 Event Handling</h3><h3 id="2-2-Event-Handling"><a href="#2-2-Event-Handling" class="headerlink" title="2.2 Event Handling"></a>2.2 Event Handling</h3><h2 id="0x03-Reusability-amp-Composition"><a href="#0x03-Reusability-amp-Composition" class="headerlink" title="0x03 Reusability &amp; Composition"></a>0x03 Reusability &amp; Composition</h2><h2 id="0x04-Tooling"><a href="#0x04-Tooling" class="headerlink" title="0x04 Tooling"></a>0x04 Tooling</h2><h2 id="0x05-Scaling-Up"><a href="#0x05-Scaling-Up" class="headerlink" title="0x05 Scaling Up"></a>0x05 Scaling Up</h2><h2 id="0x06-Internals"><a href="#0x06-Internals" class="headerlink" title="0x06 Internals"></a>0x06 Internals</h2><h2 id="0x07-Vue-番外篇"><a href="#0x07-Vue-番外篇" class="headerlink" title="0x07 Vue 番外篇"></a>0x07 Vue 番外篇</h2><p>下面的内容从 Vue 作者的知乎 Live 上取来。</p>
+<h3 id="阅读源码的建议"><a href="#阅读源码的建议" class="headerlink" title="阅读源码的建议"></a>阅读源码的建议</h3><p><a href="http://hcysun.me/2017/03/03/Vue" target="_blank" rel="external">http://hcysun.me/2017/03/03/Vue</a> 源码学习 /</p>
+<h3 id="框架背后的要解决的原理"><a href="#框架背后的要解决的原理" class="headerlink" title="框架背后的要解决的原理"></a>框架背后的要解决的原理</h3><p>组件为基本单元</p>
+<p>页面 -&gt;应用（模块，组件树（偏展示））</p>
+<ul>
+<li>接入型 container</li>
+<li>展示型</li>
+<li>交互型 比如各类加强版的表单组件，通常强调复用</li>
+<li>功能型 比如 <code>&lt;router-view&gt;</code>，<code>&lt;transition&gt;</code>，作为一种扩展、抽象机制存在。</li>
+</ul>
+<p>view = render(state)</p>
+<ul>
+<li>命令式 (jquery)</li>
+<li>声明式</li>
+</ul>
+<h3 id="Virtual-Dom"><a href="#Virtual-Dom" class="headerlink" title="Virtual Dom"></a>Virtual Dom</h3><h3 id="变化侦测和渲染机制"><a href="#变化侦测和渲染机制" class="headerlink" title="变化侦测和渲染机制"></a>变化侦测和渲染机制</h3><p>push pull</p>
+<p>vue 混合式</p>
+<h3 id="状态管理"><a href="#状态管理" class="headerlink" title="状态管理"></a>状态管理</h3><h2 id="0xEE-TODO-TO-LIST"><a href="#0xEE-TODO-TO-LIST" class="headerlink" title="0xEE TODO TO LIST"></a>0xEE TODO TO LIST</h2><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-09-15</strong> 初始化本文</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/VueJS/" rel="tag"># VueJS</a>
+          
+            <a href="/tags/文档阅读笔记/" rel="tag"># 文档阅读笔记</a>
+          
+            <a href="/tags/前端框架/" rel="tag"># 前端框架</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/25/VueProjectTalking/" rel="next" title="Vue 项目漫谈">
+                <i class="fa fa-chevron-left"></i> Vue 项目漫谈
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/26/ReactCheatSheet/" rel="prev" title="React CheatSheet">
+                React CheatSheet <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oh1n2bfoj.bkt.clouddn.com/avatar.png"
+               alt="Micheal Gardner" />
+          <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/twocucao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/twocucao" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/twocucao" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Essential"><span class="nav-number">1.</span> <span class="nav-text">0x01 Essential</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-The-Vue-Instance"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 The Vue Instance</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-内置方法和属性"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.1.1 内置方法和属性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Instance-Properties"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">Instance Properties</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Instance-Methods-Data"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">Instance Methods / Data</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Instance-Methods-Events"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">Instance Methods / Events</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Instance-Methods-Lifecycle"><span class="nav-number">1.1.1.4.</span> <span class="nav-text">Instance Methods / Lifecycle</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-生命周期"><span class="nav-number">1.1.2.</span> <span class="nav-text">1.1.2 生命周期</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Template-Syntax"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 Template Syntax</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-插值"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.2.1 插值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-指令"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2.2 指令</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Computed-Properties-and-Watchers"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 Computed Properties and Watchers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-Class-and-Style-Bindings"><span class="nav-number">1.4.</span> <span class="nav-text">1.4 Class and Style Bindings</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-1-Object-语法"><span class="nav-number">1.4.1.</span> <span class="nav-text">1.4.1 Object 语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-2-Array-语法"><span class="nav-number">1.4.2.</span> <span class="nav-text">1.4.2 Array 语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-4-3-组件"><span class="nav-number">1.4.3.</span> <span class="nav-text">1.4.3 组件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-Conditional-Rendering"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 Conditional Rendering</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-List-Rendering"><span class="nav-number">1.6.</span> <span class="nav-text">1.6 List Rendering</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-1-ARRAY-修改检测"><span class="nav-number">1.6.1.</span> <span class="nav-text">1.6.1 ARRAY 修改检测</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法"><span class="nav-number">1.6.1.1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#取代数组"><span class="nav-number">1.6.1.2.</span> <span class="nav-text">取代数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#警告"><span class="nav-number">1.6.1.3.</span> <span class="nav-text">警告</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-6-2-Object-修改检测警告"><span class="nav-number">1.6.2.</span> <span class="nav-text">1.6.2 Object 修改检测警告</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-Event-Handling"><span class="nav-number">1.7.</span> <span class="nav-text">1.7 Event Handling</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-1-Listening-to-Events"><span class="nav-number">1.7.1.</span> <span class="nav-text">1.7.1 Listening to Events</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-2-Method-Event-Handlers"><span class="nav-number">1.7.2.</span> <span class="nav-text">1.7.2 Method Event Handlers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-3-Methods-in-Inline-Handlers"><span class="nav-number">1.7.3.</span> <span class="nav-text">1.7.3 Methods in Inline Handlers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-4-Event-Modifiers"><span class="nav-number">1.7.4.</span> <span class="nav-text">1.7.4 Event Modifiers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-5-Key-Modifiers"><span class="nav-number">1.7.5.</span> <span class="nav-text">1.7.5 Key Modifiers</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-6-System-Modifier-Keys"><span class="nav-number">1.7.6.</span> <span class="nav-text">1.7.6 System Modifier Keys</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-7-7-Why-Listeners-in-HTML"><span class="nav-number">1.7.7.</span> <span class="nav-text">1.7.7 Why Listeners in HTML?</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-Form-Input-Bindings"><span class="nav-number">1.8.</span> <span class="nav-text">1.8 Form Input Bindings</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-Components"><span class="nav-number">1.9.</span> <span class="nav-text">1.9 Components</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.10.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Transitions-amp-Animation"><span class="nav-number">2.</span> <span class="nav-text">0x02 Transitions & Animation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Event-Handling"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 Event Handling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Event-Handling"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 Event Handling</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Reusability-amp-Composition"><span class="nav-number">3.</span> <span class="nav-text">0x03 Reusability & Composition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-Tooling"><span class="nav-number">4.</span> <span class="nav-text">0x04 Tooling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-Scaling-Up"><span class="nav-number">5.</span> <span class="nav-text">0x05 Scaling Up</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-Internals"><span class="nav-number">6.</span> <span class="nav-text">0x06 Internals</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-Vue-番外篇"><span class="nav-number">7.</span> <span class="nav-text">0x07 Vue 番外篇</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#阅读源码的建议"><span class="nav-number">7.1.</span> <span class="nav-text">阅读源码的建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#框架背后的要解决的原理"><span class="nav-number">7.2.</span> <span class="nav-text">框架背后的要解决的原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Virtual-Dom"><span class="nav-number">7.3.</span> <span class="nav-text">Virtual Dom</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变化侦测和渲染机制"><span class="nav-number">7.4.</span> <span class="nav-text">变化侦测和渲染机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#状态管理"><span class="nav-number">7.5.</span> <span class="nav-text">状态管理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-TODO-TO-LIST"><span class="nav-number">8.</span> <span class="nav-text">0xEE TODO TO LIST</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+</body>
+</html>

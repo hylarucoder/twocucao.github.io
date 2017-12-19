@@ -1,0 +1,933 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="VueJS,全栈," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="0x00 前言最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 本文仅限于 VueCli 下面的开发：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 package.json 也能代替这个功能。├── RE">
+<meta name="keywords" content="VueJS,全栈">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 项目漫谈">
+<meta property="og:url" content="http://twocucao.xyz/2017/09/25/VueProjectTalking/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 本文仅限于 VueCli 下面的开发：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 package.json 也能代替这个功能。├── RE">
+<meta property="og:updated_time" content="2017-12-19T03:52:06.806Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue 项目漫谈">
+<meta name="twitter:description" content="0x00 前言最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 本文仅限于 VueCli 下面的开发：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 package.json 也能代替这个功能。├── RE">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://twocucao.xyz/2017/09/25/VueProjectTalking/"/>
+
+
+
+
+
+  <title>Vue 项目漫谈 | MG的编程小屋</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?299254d95898cdfa110fc6d914eba9c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MG的编程小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/09/25/VueProjectTalking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">Vue 项目漫谈</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T20:06:05+08:00">
+                2017-09-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端框架之-Vue-进阶/" itemprop="url" rel="index">
+                    <span itemprop="name">前端框架之 Vue 进阶</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,400
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。</p>
+<p>本文仅限于 VueCli 下面的开发：</p>
+<ul>
+<li>VueJS 2.5.2</li>
+</ul>
+<h2 id="0x01-项目结构"><a href="#0x01-项目结构" class="headerlink" title="0x01 项目结构"></a>0x01 项目结构</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 根文件</div><div class="line">├── Makefile 恩，其实 package.json 也能代替这个功能。</div><div class="line">├── README.md</div><div class="line">├── build #</div><div class="line">├── config # 环境变量配置</div><div class="line">├── dist # 最后输出</div><div class="line">├── extra # 个人偏好，存放最终用于打包成 IconFont 的 svg</div><div class="line">├── index.html # 可以在这里加首屏 loading, 以及其他预先准备好的样式。</div><div class="line">├── node_modules</div><div class="line">├── package.json # 依赖，开发时</div><div class="line">├── src</div><div class="line">├── static # 存放静态资源</div><div class="line">├── test</div><div class="line">└── yarn.lock</div></pre></td></tr></table></figure>
+<a id="more"></a>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"># 在 SRC 下面</div><div class="line">├── App.vue # CORE 组件</div><div class="line">├── api # 相关的 Web API 定义</div><div class="line">├── assets # 静态资源，对于已经压缩的，还是直接放在 Static 下面</div><div class="line">├── components</div><div class="line">├── config # 定义常量名称</div><div class="line">├── filters # 定义过滤器</div><div class="line">├── directive # 定义指令，比如 v-loading</div><div class="line">├── main.js # 用于初始化项目，注册组件等等</div><div class="line">├── mixins # 混合</div><div class="line">├── routes.js # 路由</div><div class="line">├── store # vuex 状态</div><div class="line">└── utils # 工具方法</div></pre></td></tr></table></figure>
+<p>值得一提的就是 main.js 应该要做的事情</p>
+<ul>
+<li>注册全局组件和过滤器</li>
+<li>给 Vue 实例加戏，哦，说错了，给实例加一些全局性的方法，比如 $comfirm 等对话框 $verbose $warning 等日志</li>
+<li>完成刷新界面之后的从 localStorage 的重新赋值</li>
+<li>注册路由切换的时候的调用的各类方法</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"># components</div><div class="line">├── fed-commons 定义通用型组件，比如手风琴，tab 卡，全局的卡片，一般为了开发效率，如果是 PC 端的话，建议使用 ElementUI,ElementUI 不满足要求的时候，再考虑自己封装组件。</div><div class="line">└── views</div><div class="line">    ├── auth</div><div class="line">        ├── Login.vue</div><div class="line">        ├── Register.vue</div><div class="line">    ├── commons</div><div class="line">        ├── 404.vue</div><div class="line">        ├── 401.vue</div><div class="line">    ├── core</div><div class="line">        ├── Dashboard.vue</div><div class="line">        ├── Content.vue</div><div class="line">    ├── pages</div><div class="line">        ├── AModule</div><div class="line">            ├── AModulePart1Componennt</div><div class="line">                ├── Charts01.vue</div><div class="line">                ├── Map02.vue</div><div class="line">                ├── Editor03.vue</div><div class="line">            ├── AModulePart1.vue</div><div class="line">            ├── AModulePart2.vue</div><div class="line">        ├── BModule</div><div class="line">            ├── BModulePart1.vue</div><div class="line">            ├── BModulePart2.vue</div></pre></td></tr></table></figure>
+<p>值得一提的是，AModulePart1.vue 页面的同级 AModulePart1Componennt 下面如果有多个 ECharts 图表，实际上可以通过 mixin 来达到减少代码量的目的。</p>
+<h2 id="0x02-一些零散技巧"><a href="#0x02-一些零散技巧" class="headerlink" title="0x02 一些零散技巧"></a>0x02 一些零散技巧</h2><h3 id="1-离线-IconFont"><a href="#1-离线-IconFont" class="headerlink" title="1. 离线 IconFont"></a>1. 离线 IconFont</h3><p>不太喜欢用在线的东西，当然，这并不是说 iconfont 不好，只是个人偏好而已。</p>
+<p>所以，我就查找了一些资料，正好之前研究过某个网站的反爬机制，研究了一下他们的 iconfont, 知道了 font-carrier, 然后调用 node 脚本打包字体文件，并在这个过程中自动生成对应的 iconfont.css</p>
+<p>最后的结果就是，当我放一个文件到 svg 文件夹下面的时候，比如 bank.svg , 我执行一下脚本，生成对应的字体文件，在 vue 组件中直接输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;span class=&quot;iconfont iconfont-bank&quot; &gt;&lt;/span&gt;</div></pre></td></tr></table></figure>
+<p>然后就呈现出来了。</p>
+<h3 id="2-打包-DLL"><a href="#2-打包-DLL" class="headerlink" title="2. 打包 DLL"></a>2. 打包 DLL</h3><p>大约在半年前，开发过程中突然在使用 ECharts 后，仅仅不到 10M 大小的项目居然开发 build 的时间需要 5MIN, 打包出来的文件超级大。居然接近了 100 多 M</p>
+<p>震惊之余，差点准备写一篇骗点击量的文章：<strong>看完震惊了！！前端和后端男程序员都无法忍受的大小！</strong>, 然后文章内就介绍 Webpack 打包文件居然没有避免重复引入依赖库导致打包文件太大提出抗议。</p>
+<p>回到主题，使用 npm run analyze 发现问题出现在 ECharts 上， 每一个图表组件都是依赖于 ECharts, 而每一个组件都包含了一个完整的 ECharts 库的大小。</p>
+<p>于是，我一边吐槽 webpack 考虑不周，另一方面寻找解决方案。最后找到了 DLL 方案</p>
+<p>这个方案的原理大致是：</p>
+<ul>
+<li>编写独立的脚本，把几个需要复用的库一个配置文件 (manifest.json), 以及打包库到一个 JS 文件中。</li>
+<li>然后从 index.html 引入这个 JS 文件。</li>
+<li>接着在 webpack 配置中使之每次引入一个库的时候，避免重复引入。</li>
+</ul>
+<blockquote>
+<p>但这不应该是 Webpack 本身就应该做的吗？为嘛还要配置，还要不伦不类的生成一个配置文件和一个 JS 文件，再从 index.html 里面导入？</p>
+</blockquote>
+<p>当然，后来出来了一个 <a href="https://github.com/asfktz/autodll-webpack-plugin" target="_blank" rel="external">https://github.com/asfktz/autodll-webpack-plugin</a> 尝试了之后。感觉很赞。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// windows 系统不兼容，暂时去掉</span></div><div class="line"><span class="keyword">new</span> AutoDllPlugin(&#123;</div><div class="line">  <span class="attr">inject</span>: <span class="literal">true</span>, <span class="comment">// will inject the DLL bundles to index.html</span></div><div class="line">  filename: <span class="string">'[name]_[hash].js'</span>,</div><div class="line">  <span class="attr">path</span>: <span class="string">'./static/js/'</span>,</div><div class="line">  <span class="attr">entry</span>: &#123;</div><div class="line">    <span class="attr">vendor</span>: [</div><div class="line">      <span class="string">'mapbox-gl'</span>,</div><div class="line">      <span class="string">'d3'</span>,</div><div class="line">      <span class="string">'echarts'</span>,</div><div class="line">      <span class="string">'echarts-gl'</span>,</div><div class="line">      <span class="string">'leaflet'</span>,</div><div class="line">      <span class="string">'axios'</span>,</div><div class="line">      <span class="string">'vue'</span>,</div><div class="line">      <span class="string">'vue-router'</span>,</div><div class="line">      <span class="string">'vuex'</span></div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">plugins</span>: [</div><div class="line">    <span class="keyword">new</span> webpack.optimize.UglifyJsPlugin(&#123;</div><div class="line">      <span class="attr">compress</span>: &#123;</div><div class="line">        <span class="attr">comparisons</span>: <span class="literal">false</span>  <span class="comment">// don't optimize comparisons</span></div><div class="line">      &#125;,</div><div class="line">      <span class="attr">sourceMap</span>: <span class="literal">true</span></div><div class="line">    &#125;),</div><div class="line">  ]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>可惜在 mac 上一切安好，Windows 上晴天霹雳，debug 了一下，发现是这个库的一个依赖库对 windows 的路径处理好像还有点小问题。而公司的前端小伙伴是 Windowser, 只好作罢。</p>
+<p>Macer 可以先用试试，至于 Windowser, 那就去这个 ISSUE 下面催催作者吧… 哈哈哈</p>
+<h3 id="3-开发环境与部署环境"><a href="#3-开发环境与部署环境" class="headerlink" title="3. 开发环境与部署环境"></a>3. 开发环境与部署环境</h3><p>VueCLI 内置了变量的管理，你可以定义 config/dev.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = merge(prodEnv, &#123;</div><div class="line">  <span class="attr">NODE_ENV</span>: <span class="string">'"development"'</span>,</div><div class="line">  <span class="attr">API_ROOT</span>: <span class="string">'"http://dev-data.twocucao.xyz"'</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>其实，开发的环境用一组变量是不行的。比如，开发的人分为纯前端，纯后端，我这样的前后都会一些的人，每个对于环境的配置都是不太一样的。</p>
+<ul>
+<li>对于前端 Windowser 直接执行 npm run dev 对接到局域网服务器</li>
+<li>对于单个人同时调试后端和前端的时候，一般要把 Web API 对应到本地的机器上。可是使用环境便来配置不同的 DEBUG_MODE=True npm run dev</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// dev.js 应该如下</span></div><div class="line"><span class="keyword">var</span> merge = <span class="built_in">require</span>(<span class="string">'webpack-merge'</span>);</div><div class="line"><span class="keyword">var</span> prodEnv = <span class="built_in">require</span>(<span class="string">'./prod.env'</span>);</div><div class="line"></div><div class="line"><span class="keyword">if</span> (process.env.DEBUG_MODE === <span class="string">'True'</span>)&#123;</div><div class="line">  <span class="built_in">module</span>.exports = merge(prodEnv, &#123;</div><div class="line">    <span class="attr">NODE_ENV</span>: <span class="string">'"development"'</span>,</div><div class="line">    <span class="attr">API_ROOT</span>: <span class="string">'"http://local-dev-data.twocucao.xyz"'</span></div><div class="line">  &#125;);</div><div class="line">&#125;<span class="keyword">else</span>&#123;</div><div class="line">  <span class="built_in">module</span>.exports = merge(prodEnv, &#123;</div><div class="line">    <span class="attr">NODE_ENV</span>: <span class="string">'"development"'</span>,</div><div class="line">    <span class="attr">API_ROOT</span>: <span class="string">'"http://dev-data.twocucao.xyz"'</span></div><div class="line">  &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-路由管理与嵌套路由"><a href="#4-路由管理与嵌套路由" class="headerlink" title="4. 路由管理与嵌套路由"></a>4. 路由管理与嵌套路由</h3><p>路由管理</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">const routes = [</div><div class="line">  &#123;</div><div class="line">    path: &apos;/login&apos;,</div><div class="line">    component: Login  // 似乎路由中的 component 至少要有一个不是懒加载的，否则会出奇怪的 BUG</div><div class="line">  &#125;,</div><div class="line">  &#123;</div><div class="line">    path: &apos;/&apos;,</div><div class="line">    redirect: &apos;AModule/APage&apos;</div><div class="line">  &#125;,</div><div class="line">  &#123;</div><div class="line">    path: &apos;/&apos;,</div><div class="line">    meta: &#123;</div><div class="line">      requiresAuth: true // 通过这个用来区分网页是否需要注册用户登录</div><div class="line">    &#125;,</div><div class="line">    component: Dashboard,</div><div class="line">    children: [</div><div class="line">      &#123;</div><div class="line">        path: &apos;AModule&apos;,</div><div class="line">        component: AModule.vue,</div><div class="line">        name: &apos;AModule&apos;,</div><div class="line">        meta: &#123;</div><div class="line">          requiresAuth: true</div><div class="line">        &#125;,</div><div class="line">        children: [</div><div class="line">          &#123;</div><div class="line">            path: &apos;AModulePart1&apos;,</div><div class="line">            name: &apos;AModulePart1&apos;,</div><div class="line">            component: () =&gt; import(&apos;./components/views/pages/AModule&apos;)</div><div class="line">          &#125;,</div><div class="line">          &#123;</div><div class="line">            path: &apos;AModulePart2&apos;,</div><div class="line">            name: &apos;AModulePart2&apos;,</div><div class="line">            component: () =&gt; import(&apos;./components/views/pages/AModule&apos;)</div><div class="line">          &#125;,</div><div class="line">        ]</div><div class="line">      &#125;,</div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  &#123;</div><div class="line">    // not found handler</div><div class="line">    path: &apos;*&apos;,</div><div class="line">    component: NotFoundView</div><div class="line">  &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
+<h3 id="5-TODO"><a href="#5-TODO" class="headerlink" title="5. TODO"></a>5. TODO</h3><h3 id="6-登录，登录校验以及权限"><a href="#6-登录，登录校验以及权限" class="headerlink" title="6. 登录，登录校验以及权限"></a>6. 登录，登录校验以及权限</h3><p>登录可以使用 Mixin 来混入每一个需要校验登录权限的</p>
+<h3 id="7-首屏-Loading"><a href="#7-首屏-Loading" class="headerlink" title="7. 首屏 Loading"></a>7. 首屏 Loading</h3><p>这个可以放在 index.html 里面</p>
+<h3 id="8-日志管理"><a href="#8-日志管理" class="headerlink" title="8. 日志管理"></a>8. 日志管理</h3><p>我觉得日志管理也应该是比较重要的部分，不管是调试程序，还是用于检查用户浏览器这块的错误日志，甚至是埋点。</p>
+<h3 id="9-SSR（未测试）"><a href="#9-SSR（未测试）" class="headerlink" title="9. SSR（未测试）"></a>9. SSR（未测试）</h3><h2 id="0x03-关于提升代码质量的一些零散的想法"><a href="#0x03-关于提升代码质量的一些零散的想法" class="headerlink" title="0x03 关于提升代码质量的一些零散的想法"></a>0x03 关于提升代码质量的一些零散的想法</h2><h3 id="1-语义化与可读性"><a href="#1-语义化与可读性" class="headerlink" title="1. 语义化与可读性"></a>1. 语义化与可读性</h3><h3 id="2-提取公共逻辑（通过-Service-Mixin-来）"><a href="#2-提取公共逻辑（通过-Service-Mixin-来）" class="headerlink" title="2. 提取公共逻辑（通过 Service, Mixin 来）"></a>2. 提取公共逻辑（通过 Service, Mixin 来）</h3><h3 id="3-CSS-管理"><a href="#3-CSS-管理" class="headerlink" title="3. CSS 管理"></a>3. CSS 管理</h3><p>在项目中，我采用 SCSS 来管理 CSS 代码，</p>
+<p>过去的时候有两种 css 的代码命名方法</p>
+<p>第一种，我管他叫做<strong>配置式写法</strong>，通过将 CSS 语法的几个片段转化成名称，从而实现快速配置出效果的的 CSS</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.fl</span> &#123;</div><div class="line">  <span class="attribute">float</span>: left</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.fr</span> &#123;</div><div class="line">  <span class="attribute">float</span>: right</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.mr10</span> &#123;</div><div class="line">  <span class="attribute">margin-right</span>: <span class="number">10px</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-class">.pb10</span> &#123;</div><div class="line">  <span class="attribute">padding-bottom</span>: <span class="number">10px</span></div><div class="line">&#125;</div><div class="line">....</div></pre></td></tr></table></figure>
+<p>这种写法对于简单页面来说确实也是可以使用的。缺点就是当页面变得复杂一些的时候，则比较难控制这种短小精捍（不直观）的变量。比如</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.tmd01</span>&#123;</div><div class="line">  <span class="attribute">padding-bottom</span>: <span class="number">10px</span></div><div class="line">  font-size: <span class="number">16px</span>;</div><div class="line">  <span class="attribute">position</span>: relative;</div><div class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">color</span>: <span class="number">#2d3c48</span>;</div><div class="line">  <span class="attribute">line-height</span>: <span class="number">1.6</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>请脑补一下我的黄人问号脸</p>
+</blockquote>
+<p>当然，如果用得好的话，自然是 OK, 如果用不好的话，</p>
+<p>后来进入了嵌套写法时代（感谢伟大的 Rails 社区出的 SASS）, 下面的语法都是 SCSS.</p>
+<p>第二种写法就变成了这样</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.actions</span> &#123;</div><div class="line">  <span class="selector-class">.card_wrapper</span> &#123;</div><div class="line">    <span class="selector-class">.card</span> &#123;</div><div class="line">      <span class="selector-class">.title</span> &#123;</div><div class="line">      &#125;</div><div class="line">      <span class="selector-class">.content</span> &#123;</div><div class="line">        <span class="selector-class">.list</span> &#123;</div><div class="line">          <span class="selector-class">.fa</span> &#123;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>外加变量和 mixin 以及函数的话，基本上就可以完成代码的组织了。</p>
+<p>这种写法倒是比原来不知道高到哪里去了，但问题依旧存在，比如 title,content 这些玩意太多，完完全全的看不懂。更加糟糕的事情是，有的小伙伴直接是乱用嵌套，也不用伪类和伪选择器，从而达到单页面调出来小伙比较快，但因为代码不能重用，调多个页面的时候速度巨慢无比。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">.apage &#123;</div><div class="line">  bbizlogic &#123;</div><div class="line">    .actions &#123;</div><div class="line">      .card_wrapper &#123;</div><div class="line">        .card &#123;</div><div class="line">          .title &#123;</div><div class="line">          &#125;</div><div class="line">          .content &#123;</div><div class="line">            .list &#123;</div><div class="line">              .fa &#123;</div><div class="line">              &#125;</div><div class="line">            &#125;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我本人推荐（其实我是写 Python Web 后端的，逃… ) 代码风格比较倾向于 BEM 命名，关于 BEM 的介绍，请参考简单心理团队的教程。</p>
+<ul>
+<li><a href="https://jiandanxinli.github.io/2016-08-11.html" target="_blank" rel="external">https://jiandanxinli.github.io/2016-08-11.html</a></li>
+<li><a href="https://juejin.im/post/58d0e5caa22b9d00643e8b51" target="_blank" rel="external">https://juejin.im/post/58d0e5caa22b9d00643e8b51</a></li>
+</ul>
+<p>然而，最好的方式，就是读一个非常使用 SCSS 来组织项目的 CSS 代码的成熟项目。</p>
+<p>我推荐两个：</p>
+<ul>
+<li>BOOTSTRAP V4: Bootstrap V4 使用 SCSS 来写</li>
+<li>ELEMENT UI: 饿了么的团队出的，前段时间从 v1 版本升级到 v2 版本，发现网站大部分样式都没有出现大变动，在这里给个赞。</li>
+</ul>
+<h4 id="1-style-标签的-Scoped-的滥用"><a href="#1-style-标签的-Scoped-的滥用" class="headerlink" title="1. style 标签的 Scoped 的滥用"></a>1. style 标签的 Scoped 的滥用</h4><p>我印象中，有个小伙伴把一个比较大的 CSS 库多次 import 到被 Scoped 的组件中，于是开发时猛然发现 head 处多了大量的 style 标签，除了 css 选择器后面随机的属性 hash, 文件内容都一样。</p>
+<blockquote>
+<p>公共组件往往可以通过嵌套和加前缀的方式来防止污染。如果 scoped 的属性里面有成吨的 style, 慎用 import.</p>
+</blockquote>
+<h4 id="2-保持代码的通用性"><a href="#2-保持代码的通用性" class="headerlink" title="2. 保持代码的通用性"></a>2. 保持代码的通用性</h4><p>一般，当同一段逻辑出现三次的时候，是要停下来重构一下的，这样的话，就可以节省很多时间。</p>
+<p>套用在 CSS 的样式上也是如此。</p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-09-25</strong> 初始化本文</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/VueJS/" rel="tag"># VueJS</a>
+          
+            <a href="/tags/全栈/" rel="tag"># 全栈</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/05/ElegantMac/" rel="next" title="如何优雅地使用 macOS">
+                <i class="fa fa-chevron-left"></i> 如何优雅地使用 macOS
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/09/15/ReadingVueDocuments/" rel="prev" title="VueJS 文档阅读笔记">
+                VueJS 文档阅读笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oh1n2bfoj.bkt.clouddn.com/avatar.png"
+               alt="Micheal Gardner" />
+          <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">27</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-name">标签</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/twocucao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/twocucao" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/twocucao" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-项目结构"><span class="nav-number">2.</span> <span class="nav-text">0x01 项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-一些零散技巧"><span class="nav-number">3.</span> <span class="nav-text">0x02 一些零散技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-离线-IconFont"><span class="nav-number">3.1.</span> <span class="nav-text">1. 离线 IconFont</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-打包-DLL"><span class="nav-number">3.2.</span> <span class="nav-text">2. 打包 DLL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-开发环境与部署环境"><span class="nav-number">3.3.</span> <span class="nav-text">3. 开发环境与部署环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-路由管理与嵌套路由"><span class="nav-number">3.4.</span> <span class="nav-text">4. 路由管理与嵌套路由</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-TODO"><span class="nav-number">3.5.</span> <span class="nav-text">5. TODO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-登录，登录校验以及权限"><span class="nav-number">3.6.</span> <span class="nav-text">6. 登录，登录校验以及权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-首屏-Loading"><span class="nav-number">3.7.</span> <span class="nav-text">7. 首屏 Loading</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-日志管理"><span class="nav-number">3.8.</span> <span class="nav-text">8. 日志管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-SSR（未测试）"><span class="nav-number">3.9.</span> <span class="nav-text">9. SSR（未测试）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-关于提升代码质量的一些零散的想法"><span class="nav-number">4.</span> <span class="nav-text">0x03 关于提升代码质量的一些零散的想法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-语义化与可读性"><span class="nav-number">4.1.</span> <span class="nav-text">1. 语义化与可读性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-提取公共逻辑（通过-Service-Mixin-来）"><span class="nav-number">4.2.</span> <span class="nav-text">2. 提取公共逻辑（通过 Service, Mixin 来）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-CSS-管理"><span class="nav-number">4.3.</span> <span class="nav-text">3. CSS 管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-style-标签的-Scoped-的滥用"><span class="nav-number">4.3.1.</span> <span class="nav-text">1. style 标签的 Scoped 的滥用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-保持代码的通用性"><span class="nav-number">4.3.2.</span> <span class="nav-text">2. 保持代码的通用性</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+</body>
+</html>

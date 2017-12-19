@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2017-12-16T06:32:33.879Z</updated>
+  <updated>2017-12-19T04:22:42.738Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/"/>
     <id>http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/</id>
     <published>2017-12-07T08:56:12.000Z</published>
-    <updated>2017-12-16T06:32:33.879Z</updated>
+    <updated>2017-12-19T04:22:42.738Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>机缘巧合，最近公司突然要搞一波大量数据的分析。属于进店客流类的分析，原始数据非常大。 数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在 180 亿左右。</p>
 <p>解压后…… 差不多一个 T 吧。</p>
@@ -130,6 +130,8 @@
     
       <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
+      <category term="性能优化" scheme="http://twocucao.xyz/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/"/>
+    
   </entry>
   
   <entry>
@@ -137,7 +139,7 @@
     <link href="http://twocucao.xyz/2017/11/20/PythonClosureAndScopes/"/>
     <id>http://twocucao.xyz/2017/11/20/PythonClosureAndScopes/</id>
     <published>2017-11-20T01:33:58.000Z</published>
-    <updated>2017-12-16T06:32:53.953Z</updated>
+    <updated>2017-12-19T04:22:20.786Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>因为最早用的是 Java 和 C#，写 Python 的时候自然也把 Python 作用域的想的和原有的一致。</p>
 <p>Python 的作用域变量遵循在大部分情况下是一致的，但也有例外的情况。</p>
@@ -231,7 +233,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
       <category term="Python 黑魔法" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/"/>
     
     
-      <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="作用域" scheme="http://twocucao.xyz/tags/%E4%BD%9C%E7%94%A8%E5%9F%9F/"/>
     
   </entry>
   
@@ -312,7 +314,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/10/05/ElegantMac/"/>
     <id>http://twocucao.xyz/2017/10/05/ElegantMac/</id>
     <published>2017-10-05T12:06:05.000Z</published>
-    <updated>2017-12-15T07:43:40.203Z</updated>
+    <updated>2017-12-19T04:21:58.587Z</updated>
     
     <content type="html"><![CDATA[<p>当时写这篇文章的时候才接触 mac 没多久，使用快两年之后，再次修订了本文。</p>
 <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>谈及 macOS , 很多人喜欢和 Win 比个高下。在我看来， Win 虽在非编程类生态和易用性比 Mac 要好很多，可专业人士之所以专业是因为他能挑选适合的武器发挥最大的效用，不是吗？</p>
@@ -697,7 +699,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
     </summary>
     
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+      <category term="深入理解 macOS" scheme="http://twocucao.xyz/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-macOS/"/>
     
     
       <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
@@ -705,11 +707,11 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
   </entry>
   
   <entry>
-    <title>进击的 VueJS</title>
-    <link href="http://twocucao.xyz/2017/09/25/VueAll/"/>
-    <id>http://twocucao.xyz/2017/09/25/VueAll/</id>
+    <title>Vue 项目漫谈</title>
+    <link href="http://twocucao.xyz/2017/09/25/VueProjectTalking/"/>
+    <id>http://twocucao.xyz/2017/09/25/VueProjectTalking/</id>
     <published>2017-09-25T12:06:05.000Z</published>
-    <updated>2017-11-23T05:28:32.000Z</updated>
+    <updated>2017-12-19T03:52:06.806Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。</p>
 <p>本文仅限于 VueCli 下面的开发：</p>
@@ -814,19 +816,21 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
     </summary>
     
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+      <category term="前端框架之 Vue 进阶" scheme="http://twocucao.xyz/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E4%B9%8B-Vue-%E8%BF%9B%E9%98%B6/"/>
     
     
       <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
+    
+      <category term="全栈" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88/"/>
     
   </entry>
   
   <entry>
     <title>VueJS 文档阅读笔记</title>
-    <link href="http://twocucao.xyz/2017/09/15/Vue/"/>
-    <id>http://twocucao.xyz/2017/09/15/Vue/</id>
+    <link href="http://twocucao.xyz/2017/09/15/ReadingVueDocuments/"/>
+    <id>http://twocucao.xyz/2017/09/15/ReadingVueDocuments/</id>
     <published>2017-09-15T12:06:05.000Z</published>
-    <updated>2017-11-23T05:28:52.000Z</updated>
+    <updated>2017-12-19T04:21:39.401Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x01-Essential"><a href="#0x01-Essential" class="headerlink" title="0x01 Essential"></a>0x01 Essential</h2><h3 id="1-1-The-Vue-Instance"><a href="#1-1-The-Vue-Instance" class="headerlink" title="1.1 The Vue Instance"></a>1.1 The Vue Instance</h3><p>当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。</p>
 <blockquote>
@@ -939,10 +943,14 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
     </summary>
     
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+      <category term="前端框架之 Vue 进阶" scheme="http://twocucao.xyz/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E4%B9%8B-Vue-%E8%BF%9B%E9%98%B6/"/>
     
     
-      <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
+    
+      <category term="文档阅读笔记" scheme="http://twocucao.xyz/tags/%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="前端框架" scheme="http://twocucao.xyz/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
     
   </entry>
   
@@ -951,7 +959,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/07/26/ReactCheatSheet/"/>
     <id>http://twocucao.xyz/2017/07/26/ReactCheatSheet/</id>
     <published>2017-07-26T12:06:05.000Z</published>
-    <updated>2017-11-18T03:29:51.000Z</updated>
+    <updated>2017-12-19T03:53:01.045Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><blockquote>
 <p>备注：本文已太监</p>
@@ -1029,7 +1037,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
     </summary>
     
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+      <category term="已太监" scheme="http://twocucao.xyz/categories/%E5%B7%B2%E5%A4%AA%E7%9B%91/"/>
     
     
       <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
@@ -1041,7 +1049,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/07/17/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%9A%84%E5%B8%B8%E8%AF%86%E7%AC%94%E8%AE%B0/"/>
     <id>http://twocucao.xyz/2017/07/17/数据科学的常识笔记/</id>
     <published>2017-07-17T12:00:00.000Z</published>
-    <updated>2017-11-23T05:27:57.000Z</updated>
+    <updated>2017-12-19T03:53:19.187Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>2017 年 07 月，为了解统计学和机器学习的基本常识，开了这篇文章。</p>
 <p>当然，仅仅是为了了解，所以也就写的随性（不严谨）一些，排版什么的也都详细推敲。想到哪里就记录到哪里。</p>
@@ -1257,7 +1265,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
     </summary>
     
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+      <category term="数据科学" scheme="http://twocucao.xyz/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/"/>
     
     
       <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
@@ -1407,11 +1415,59 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
   </entry>
   
   <entry>
+    <title>ReThinking In JavaScript</title>
+    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
+    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
+    <published>2017-07-04T12:08:21.000Z</published>
+    <updated>2017-12-19T04:21:09.556Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
+<a id="more"></a>
+<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
+<p>因为太火，不得不认真学习一下。</p>
+<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
+<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
+<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
+<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
+<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
+<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
+<li>String</li>
+<li>Boolean</li>
+<li>Symbol (new in ES2015)</li>
+<li>Object<ul>
+<li>Function</li>
+<li>Array</li>
+<li>Date</li>
+<li>RegExp</li>
+</ul>
+</li>
+<li>null</li>
+<li>undefined</li>
+</ul>
+<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
+<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="进击的 JavaScript" scheme="http://twocucao.xyz/categories/%E8%BF%9B%E5%87%BB%E7%9A%84-JavaScript/"/>
+    
+    
+      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ReThinking In Python</title>
     <link href="http://twocucao.xyz/2017/07/04/RethinkingInPython/"/>
     <id>http://twocucao.xyz/2017/07/04/RethinkingInPython/</id>
     <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-11-24T01:35:57.000Z</updated>
+    <updated>2017-12-19T04:24:33.502Z</updated>
     
     <content type="html"><![CDATA[<h1 id="生命苦短-我用-Python"><a href="#生命苦短-我用-Python" class="headerlink" title="生命苦短 我用 Python"></a>生命苦短 我用 Python</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。</p>
 <h2 id="0x01-Python-胡论"><a href="#0x01-Python-胡论" class="headerlink" title="0x01 Python 胡论"></a>0x01 Python 胡论</h2><h3 id="1-1-Python-的独一无二性"><a href="#1-1-Python-的独一无二性" class="headerlink" title="1.1 Python 的独一无二性"></a>1.1 Python 的独一无二性</h3><p>是要用一门编程语言无非是两种原因：</p>
@@ -1768,55 +1824,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     </summary>
     
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
-    
-    
-      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ReThinking In JavaScript</title>
-    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
-    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
-    <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-07-05T06:29:36.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
-<a id="more"></a>
-<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
-<p>因为太火，不得不认真学习一下。</p>
-<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
-<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
-<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
-<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
-<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
-<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
-<li>String</li>
-<li>Boolean</li>
-<li>Symbol (new in ES2015)</li>
-<li>Object<ul>
-<li>Function</li>
-<li>Array</li>
-<li>Date</li>
-<li>RegExp</li>
-</ul>
-</li>
-<li>null</li>
-<li>undefined</li>
-</ul>
-<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
-<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
+      <category term="Python 黑魔法" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/"/>
     
     
       <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
@@ -1828,7 +1836,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/06/23/VimCheatSheet/"/>
     <id>http://twocucao.xyz/2017/06/23/VimCheatSheet/</id>
     <published>2017-06-23T11:48:00.000Z</published>
-    <updated>2017-12-16T03:24:11.786Z</updated>
+    <updated>2017-12-19T03:42:18.086Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中 Vim 使用场景。</p>
 <p>不定期更新。</p>
@@ -1890,7 +1898,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     </summary>
     
-      <category term="PC/MAC 使用心得技巧" scheme="http://twocucao.xyz/categories/PC-MAC-%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97%E6%8A%80%E5%B7%A7/"/>
+      <category term="编程利器" scheme="http://twocucao.xyz/categories/%E7%BC%96%E7%A8%8B%E5%88%A9%E5%99%A8/"/>
     
     
       <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
@@ -1908,7 +1916,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/06/15/GitCheatSheet/"/>
     <id>http://twocucao.xyz/2017/06/15/GitCheatSheet/</id>
     <published>2017-06-15T12:46:00.000Z</published>
-    <updated>2017-11-21T11:39:42.000Z</updated>
+    <updated>2017-12-19T03:42:02.104Z</updated>
     
     <content type="html"><![CDATA[<h1 id="如何优雅地使用-Git"><a href="#如何优雅地使用-Git" class="headerlink" title="如何优雅地使用 Git"></a>如何优雅地使用 Git</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>Git 是一种分布式版本管理工具。</p>
 <h2 id="0x01-Git-命令范论"><a href="#0x01-Git-命令范论" class="headerlink" title="0x01 Git 命令范论"></a>0x01 Git 命令范论</h2><ol>
@@ -1952,7 +1960,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     </summary>
     
-      <category term="PC/MAC 使用心得技巧" scheme="http://twocucao.xyz/categories/PC-MAC-%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97%E6%8A%80%E5%B7%A7/"/>
+      <category term="编程利器" scheme="http://twocucao.xyz/categories/%E7%BC%96%E7%A8%8B%E5%88%A9%E5%99%A8/"/>
     
     
       <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
@@ -1964,7 +1972,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/06/03/PandasCheatSheet/"/>
     <id>http://twocucao.xyz/2017/06/03/PandasCheatSheet/</id>
     <published>2017-06-03T10:41:47.000Z</published>
-    <updated>2017-12-16T06:26:06.941Z</updated>
+    <updated>2017-12-19T03:40:59.529Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。当然，其中还包含 Numpy 等数据科学，统计学相关语句。</p>
 <p>主要包含：</p>
@@ -2005,7 +2013,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     </summary>
     
-      <category term="爬虫 Crawler" scheme="http://twocucao.xyz/categories/%E7%88%AC%E8%99%AB-Crawler/"/>
+      <category term="数据科学" scheme="http://twocucao.xyz/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/"/>
     
     
       <category term="Pandas" scheme="http://twocucao.xyz/tags/Pandas/"/>
@@ -2023,7 +2031,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/05/29/%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8ETensorFlow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/"/>
     <id>http://twocucao.xyz/2017/05/29/一个基于TensorFlow的分类器/</id>
     <published>2017-05-29T00:46:00.000Z</published>
-    <updated>2017-12-16T06:26:01.556Z</updated>
+    <updated>2017-12-19T04:20:44.216Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。<br>所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。<br>本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。</p>
 <p>本文的目的是：</p>
@@ -2122,8 +2130,6 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
       <category term="Python 黑魔法" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/"/>
     
-      <category term="学习资源" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
-    
     
       <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
@@ -2134,7 +2140,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/05/27/VSCodeCheatSheet/"/>
     <id>http://twocucao.xyz/2017/05/27/VSCodeCheatSheet/</id>
     <published>2017-05-27T00:46:00.000Z</published>
-    <updated>2017-05-27T01:19:25.000Z</updated>
+    <updated>2017-12-19T04:20:34.092Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我使用 VSCode 的一些开发小技巧。</p>
 <p>不定期更新。</p>
@@ -2175,7 +2181,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     </summary>
     
-      <category term="PC/MAC 使用心得技巧" scheme="http://twocucao.xyz/categories/PC-MAC-%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97%E6%8A%80%E5%B7%A7/"/>
+      <category term="编程利器" scheme="http://twocucao.xyz/categories/%E7%BC%96%E7%A8%8B%E5%88%A9%E5%99%A8/"/>
     
     
       <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
@@ -2187,7 +2193,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/05/21/DockerCheatSheet/"/>
     <id>http://twocucao.xyz/2017/05/21/DockerCheatSheet/</id>
     <published>2017-05-21T02:57:00.000Z</published>
-    <updated>2017-12-16T06:25:36.186Z</updated>
+    <updated>2017-12-19T04:20:07.931Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。</p>
 <ul>
@@ -2241,10 +2247,12 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     </summary>
     
-      <category term="数据库与消息队列" scheme="http://twocucao.xyz/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%8E%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"/>
+      <category term="后台组件" scheme="http://twocucao.xyz/categories/%E5%90%8E%E5%8F%B0%E7%BB%84%E4%BB%B6/"/>
     
     
-      <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
+      <category term="Docker" scheme="http://twocucao.xyz/tags/Docker/"/>
+    
+      <category term="DevOps" scheme="http://twocucao.xyz/tags/DevOps/"/>
     
   </entry>
   
@@ -2253,7 +2261,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/05/01/OhMyNewMac/"/>
     <id>http://twocucao.xyz/2017/05/01/OhMyNewMac/</id>
     <published>2017-05-01T13:45:00.000Z</published>
-    <updated>2017-12-16T03:23:39.769Z</updated>
+    <updated>2017-12-19T04:20:17.128Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一个月前换了这台新电脑 MacBook Pro 15.4 Multi-Touch Bar (Core i7/16GB/512GB)，感觉每天打字都很舒服，也算是实现了一个梦寐以求的小目标吧。</p>
 <a id="more"></a>
@@ -2268,7 +2276,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
 <p>后来手贱买了降噪耳机，机械键盘，手机，pad , 花的都是自己的钱。</p>
 <p>能把一手烂牌打出不错的结果，这才是让人自豪的事情啊！</p>
 <p>晚安，以及劳动节快乐。</p>
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>2017-05-01: 初始化本文的开头</p>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>2017-05-01: 初始化本文</p>
 ]]></content>
     
     <summary type="html">
@@ -2277,14 +2285,10 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     </summary>
     
-      <category term="PC/MAC 使用心得技巧" scheme="http://twocucao.xyz/categories/PC-MAC-%E4%BD%BF%E7%94%A8%E5%BF%83%E5%BE%97%E6%8A%80%E5%B7%A7/"/>
+      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
     
-    
-      <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
     
       <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
-    
-      <category term="编程工具" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
@@ -2293,7 +2297,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/04/18/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_FluentPython/"/>
     <id>http://twocucao.xyz/2017/04/18/读书笔记_FluentPython/</id>
     <published>2017-04-18T12:16:37.000Z</published>
-    <updated>2017-11-08T09:06:00.000Z</updated>
+    <updated>2017-12-19T03:53:42.186Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Fluent Python 适用于中级 Pythoner。</p>
 <blockquote>
@@ -2996,7 +3000,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     </summary>
     
-      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
+      <category term="Python 黑魔法" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/"/>
     
     
       <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
@@ -3010,7 +3014,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/"/>
     <id>http://twocucao.xyz/2017/04/06/FullStackDjangoDevOpsCheatsheet/</id>
     <published>2017-04-06T12:29:00.000Z</published>
-    <updated>2017-12-16T03:22:23.075Z</updated>
+    <updated>2017-12-19T03:54:17.109Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Django 全栈开发 的一些小经验和踩坑记录。本文没有安装和常识性配置的介绍，仅仅是一笔带过项目中遇到的一些点点滴滴的小问题。算是踩坑和心得笔记吧。</p>
 <p>不仅仅是 Django, 还有 Django 涉及到的：</p>
@@ -3196,7 +3200,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     </summary>
     
-      <category term="Django" scheme="http://twocucao.xyz/categories/Django/"/>
+      <category term="后端框架之 Django 进阶" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E6%A1%86%E6%9E%B6%E4%B9%8B-Django-%E8%BF%9B%E9%98%B6/"/>
     
     
       <category term="Pandas" scheme="http://twocucao.xyz/tags/Pandas/"/>
