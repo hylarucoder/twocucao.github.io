@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2017-12-19T10:20:30.688Z</updated>
+  <updated>2017-12-27T00:59:18.270Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -14,6 +14,65 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>关于 CSS 你应该知道的一切</title>
+    <link href="http://twocucao.xyz/2017/12/28/AllStuffAboutCSS/"/>
+    <id>http://twocucao.xyz/2017/12/28/AllStuffAboutCSS/</id>
+    <published>2017-12-28T10:41:47.000Z</published>
+    <updated>2017-12-27T00:59:18.270Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本笔记诞生于很久前零零散散记录的笔记，拿出来公开一下。</p>
+<p>学习 CSS, 主要靠多推导式记忆。</p>
+<h2 id="0x01-CSS-是如何工作的？"><a href="#0x01-CSS-是如何工作的？" class="headerlink" title="0x01 CSS 是如何工作的？"></a>0x01 CSS 是如何工作的？</h2><p>HTML 是元素的标记语言。</p>
+<p>CSS 被用来 样式和网页布局的。</p>
+<p>样式和布局都有哪些呢？</p>
+<ul>
+<li>字体</li>
+<li>颜色</li>
+<li>大小</li>
+<li>内容间距</li>
+<li>多列</li>
+<li>动画</li>
+</ul>
+<p>通过 DOM 树的节点和样式节点结合，生成渲染树，然后交给浏览器进行渲染从而使得外观发生变化。</p>
+<h2 id="0x02-CSS-基本语法"><a href="#0x02-CSS-基本语法" class="headerlink" title="0x02 CSS 基本语法"></a>0x02 CSS 基本语法</h2><p>CSS 基本语法有三个组成部分：</p>
+<ol>
+<li>规则</li>
+<li>选择器</li>
+<li>属性</li>
+</ol>
+<h3 id="2-1-CSS-规则"><a href="#2-1-CSS-规则" class="headerlink" title="2.1 CSS 规则"></a>2.1 CSS 规则</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">h1 &#123;</div><div class="line">    colour: blue;</div><div class="line">    background-color: yellow;</div><div class="line">    border: 1px solid black;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// @规则</div><div class="line"></div><div class="line">@import</div><div class="line">@charset</div><div class="line">@media</div><div class="line">@font-face</div><div class="line"></div><div class="line">/* in shorthand like padding and margin, the values are applied</div><div class="line">in the order top, right, bottom, left (the same order as an analog clock). There are also other</div><div class="line">shorthand types, for example two values, which set for example</div><div class="line">the padding for top/bottom, then left/right */</div><div class="line">padding: 10px 15px 15px 5px;</div></pre></td></tr></table></figure>
+<h3 id="2-2-选择器"><a href="#2-2-选择器" class="headerlink" title="2.2 选择器"></a>2.2 选择器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div></pre></td><td class="code"><pre><div class="line">// Simple selectors: Match one or more elements based on element type, class, or id.</div><div class="line">/* All div elements are blue */</div><div class="line">div &#123;</div><div class="line">    color: blue;</div><div class="line">&#125;</div><div class="line"></div><div class="line">h1 &#123;</div><div class="line">    color: red;</div><div class="line">    text-shadow: 1px 1px 1px black;</div><div class="line">    background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.1));</div><div class="line">    padding: 3px;</div><div class="line">    text-align: center;</div><div class="line">    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.5);</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Attribute selectors: Match one or more elements based on their attributes/attribute values.</div><div class="line">/* All elements with the attribute &quot;data-vegetable&quot;</div><div class="line">are given green text */</div><div class="line"></div><div class="line">[data-vegetable] &#123;</div><div class="line">    color: green;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* All elements with the attribute &quot;data-vegetable&quot;</div><div class="line">with the exact value &quot;liquid&quot; are given a golden</div><div class="line">background color */</div><div class="line"></div><div class="line">[data-vegetable=&quot;liquid&quot;] &#123;</div><div class="line">    background-color: goldenrod;</div><div class="line">&#125;</div><div class="line"></div><div class="line">/* All elements with the attribute &quot;data-vegetable&quot;,</div><div class="line">containing the value &quot;spicy&quot;, even among others,</div><div class="line">are given a red text color */</div><div class="line"></div><div class="line">[data-vegetable~=&quot;spicy&quot;] &#123;</div><div class="line">    color: red;</div><div class="line">&#125;</div><div class="line"></div><div class="line">// Pseudo-classes: Match one or more elements that exist in a certain state, such as an element that is being hovered over by the mouse pointer, or a checkbox that is currently disabled or checked, or an element that is the first child of its parent in the DOM tree.</div><div class="line">// Pseudo-elements: Match one or more parts of content that are in a certain position in relation to an element, for example the first word of each paragraph, or generated content appearing just before an element.</div><div class="line"></div><div class="line">:active</div><div class="line">:any</div><div class="line">:checked</div><div class="line">:default</div><div class="line">:dir()</div><div class="line">:disabled</div><div class="line">:empty</div><div class="line">:enabled</div><div class="line">:first</div><div class="line">:first-child</div><div class="line">:first-of-type</div><div class="line">:fullscreen</div><div class="line">:focus</div><div class="line">:focus-within</div><div class="line">:hover</div><div class="line">:indeterminate</div><div class="line">:in-range</div><div class="line">:invalid</div><div class="line">:lang()</div><div class="line">:last-child</div><div class="line">:last-of-type</div><div class="line">:left</div><div class="line">:link</div><div class="line">:not()</div><div class="line">:nth-child()</div><div class="line">:nth-last-child()</div><div class="line">:nth-last-of-type()</div><div class="line">:nth-of-type()</div><div class="line">:only-child</div><div class="line">:only-of-type</div><div class="line">:optional</div><div class="line">:out-of-range</div><div class="line">:read-only</div><div class="line">:read-write</div><div class="line">:required</div><div class="line">:right</div><div class="line">:root</div><div class="line">:scope</div><div class="line">:target</div><div class="line">:valid</div><div class="line">:visited</div><div class="line"></div><div class="line">// Combinators: These are not exactly selectors themselves, but ways of combining two or more selectors in useful ways for very specific selections. So for example, you could select only paragraphs that are direct descendants of divs, or paragraphs that come directly after headings.</div><div class="line"></div><div class="line">A, B	匹配 A 或 B</div><div class="line">A B	    匹配 A 里面的 B</div><div class="line">A &gt; B	匹配 A 里面的直属 B</div><div class="line">A + B	匹配 A 下一个兄弟节点 B</div><div class="line">A ~ B	匹配 A 的下一群兄弟节点 B</div><div class="line"></div><div class="line">// Multiple selectors: Again, these are not separate selectors; the idea is that you can put multiple selectors on the same CSS rule, separated by commas, to apply a single set of declarations to all the elements selected by those selectors.</div></pre></td></tr></table></figure>
+<h3 id="2-3-属性"><a href="#2-3-属性" class="headerlink" title="2.3 属性"></a>2.3 属性</h3><h4 id="Position"><a href="#Position" class="headerlink" title="Position"></a>Position</h4><p><a href="http://cssreference.io/positioning/" target="_blank" rel="external">http://cssreference.io/positioning/</a></p>
+<h4 id="Display"><a href="#Display" class="headerlink" title="Display"></a>Display</h4><h4 id="Box-Model"><a href="#Box-Model" class="headerlink" title="Box Model"></a>Box Model</h4><p>块级元素 (Block)<br>  新开始一行并且尽可能撑满容器，p,form,header,footer,section<br>  设置块级元素的 width 可以防止它从左到右撑满整个容器<br>行内元素 (inline)<br>  包裹一些文字，而不会打乱段落的布局，a,span<br>none<br>  script 默认 display:none,visibility:hidden 是占据空间</p>
+<p>盒模型</p>
+<p>属性</p>
+<p>三，层叠与继承</p>
+<p>既然是层叠，就要有层叠的规律</p>
+<h2 id="0x03-CSS-新语法"><a href="#0x03-CSS-新语法" class="headerlink" title="0x03 CSS 新语法"></a>0x03 CSS 新语法</h2><p>布局</p>
+<h3 id="3-1-Flex-Layout"><a href="#3-1-Flex-Layout" class="headerlink" title="3.1 Flex Layout"></a>3.1 Flex Layout</h3><h3 id="3-2-Grid-Layout"><a href="#3-2-Grid-Layout" class="headerlink" title="3.2 Grid Layout"></a>3.2 Grid Layout</h3><h2 id="0x04-SCSS"><a href="#0x04-SCSS" class="headerlink" title="0x04 SCSS"></a>0x04 SCSS</h2><h3 id="4-1-如何组织-SCSS-代码"><a href="#4-1-如何组织-SCSS-代码" class="headerlink" title="4.1 如何组织 SCSS 代码"></a>4.1 如何组织 SCSS 代码</h3><h2 id="0x05-常见的设计"><a href="#0x05-常见的设计" class="headerlink" title="0x05 常见的设计"></a>0x05 常见的设计</h2><h3 id="5-1-圣杯"><a href="#5-1-圣杯" class="headerlink" title="5.1 圣杯"></a>5.1 圣杯</h3><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-12-20</strong> 初始化本文</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本笔记诞生于很久前零零散散记录的笔记，拿出来公开一下。&lt;/p&gt;
+&lt;p&gt;学习 CSS, 主要靠多推导式
+    
+    </summary>
+    
+      <category term="未分类" scheme="http://twocucao.xyz/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/"/>
+    
+    
+      <category term="前端开发" scheme="http://twocucao.xyz/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="CSS" scheme="http://twocucao.xyz/tags/CSS/"/>
+    
+  </entry>
   
   <entry>
     <title>关于 Mac 的一些常识</title>
@@ -89,13 +148,13 @@
     <link href="http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/"/>
     <id>http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/</id>
     <published>2017-12-07T08:56:12.000Z</published>
-    <updated>2017-12-19T05:12:47.632Z</updated>
+    <updated>2017-12-27T00:59:18.270Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>机缘巧合，最近公司突然要搞一波大量数据的分析。属于进店客流类的分析，原始数据非常大。 数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在 180 亿左右。</p>
 <p>解压后…… 差不多一个 T 吧。</p>
 <p>如果是人民币玩家，自然是直接购置几十台高配置机器，做个 mysql shard 或者直接上大数据全家桶比如 hadoop 和 hive 之类，让程序员去往死里折腾吧。</p>
 <blockquote>
-<p>嗯，然而对于我这种非人民币玩家，就要用单机硬扛。</p>
+<p>嗯，然而对于我这种非人民币玩家，就要用单人单机硬扛。</p>
 </blockquote>
 <p>我的配置简单来说如下：</p>
 <ul>
@@ -114,13 +173,16 @@
 </li>
 </ul>
 <h2 id="0x01-准备数据阶段"><a href="#0x01-准备数据阶段" class="headerlink" title="0x01 准备数据阶段"></a>0x01 准备数据阶段</h2><p>用低配机器分析大数据的<strong>首要原则</strong>，就是<strong>不要分析大数据</strong>。</p>
+<p>何也？</p>
 <blockquote>
-<p>换而言之就是<strong>尽可能的抽取所得结论所需分析数据的最小超集</strong>, 小机器是无法完成海量计算的，但通过一定的过滤和筛选可以将数据筛选出到一台机器能扛得住的计算量。从而达到可以可以分析海量数据的目的。</p>
+<p>就是<strong>尽可能的抽取所得结论所需分析数据的最小超集</strong></p>
 </blockquote>
+<p>小机器是无法完成海量计算的，但通过一定的过滤和筛选可以将数据筛选出到一台机器能扛得住的计算量。从而达到可以可以分析海量数据的目的。</p>
 <h3 id="1-1-将数据导入-MySQL-中"><a href="#1-1-将数据导入-MySQL-中" class="headerlink" title="1.1 将数据导入 MySQL 中"></a>1.1 将数据导入 MySQL 中</h3><p>我们先不管三七二十一，既然给了 SQL 文件，肯定要入库的，那么问题来了：</p>
 <blockquote>
-<p><del>将大象关进冰箱要几个步骤</del> 将数据导入数据库中需要几个步骤</p>
+<p><del>将大象关进冰箱要几个步骤</del></p>
 </blockquote>
+<p>将数据导入数据库中需要几个步骤</p>
 <p>或者说，如何更快的导入 300 余张不同表的数据。</p>
 <p>大致步骤如下：</p>
 <ul>
@@ -133,18 +195,24 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">root@ubuntu:~# lshw -C disk</div><div class="line">  *-disk</div><div class="line">       description: SCSI Disk</div><div class="line">       product: My Passport 25E2</div><div class="line">       vendor: WD</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@7:0.0.0</div><div class="line">       logical name: /dev/sdb</div><div class="line">       version: 4004</div><div class="line">       serial: WX888888HALK</div><div class="line">       size: 3725GiB (4TB)</div><div class="line">       capabilities: gpt-1.00 partitioned partitioned:gpt</div><div class="line">       configuration: ansiversion=6 guid=88e88888-422d-49f0-9ba9-221db75fe4b4 logicalsectorsize=512 sectorsize=4096</div><div class="line">  *-disk</div><div class="line">       description: ATA Disk</div><div class="line">       product: WDC WD10EZEX-08W</div><div class="line">       vendor: Western Digital</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@0:0.0.0</div><div class="line">       logical name: /dev/sda</div><div class="line">       version: 1A01</div><div class="line">       serial: WD-WC888888888U</div><div class="line">       size: 931GiB (1TB)</div><div class="line">       capabilities: partitioned partitioned:dos</div><div class="line">       configuration: ansiversion=5 logicalsectorsize=512 sectorsize=4096 signature=f1b42036</div><div class="line">  *-cdrom</div><div class="line">       description: DVD reader</div><div class="line">       product: DVDROM DH1XXX8SH</div><div class="line">       vendor: PLDS</div><div class="line">       physical id: 0.0.0</div><div class="line">       bus info: scsi@5:0.0.0</div><div class="line">       logical name: /dev/cdrom</div><div class="line">       logical name: /dev/dvd</div><div class="line">       logical name: /dev/sr0</div><div class="line">       version: ML31</div><div class="line">       capabilities: removable audio dvd</div><div class="line">       configuration: ansiversion=5 status=nodisc</div></pre></td></tr></table></figure>
 <p>使用 fdisk 格式化硬盘，并且分区</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">fdisk /dev/sdb</div><div class="line">#输入 n</div><div class="line">#输入 p</div><div class="line">#输入 1</div><div class="line">#输入 w</div><div class="line">sudo mkfs -t ext4 /dev/sdb1</div><div class="line">mkdir -p /media/mynewdrive</div><div class="line">vim /etc/fstab</div><div class="line"># /dev/sdb1    /media/mynewdrive   ext4    defaults     0        2</div><div class="line"># 直接挂载所有，或者 reboot</div><div class="line">mount -a</div></pre></td></tr></table></figure>
-<p>至此为止，硬盘就格式化完成了。关于安装硬盘，可以参考 <a href="https://help.ubuntu.com/community/InstallingANewHardDrive" target="_blank" rel="external">https://help.ubuntu.com/community/InstallingANewHardDrive</a></p>
-<h4 id="配置-MySQL"><a href="#配置-MySQL" class="headerlink" title="配置 MySQL"></a>配置 MySQL</h4><p>篇幅有限，只简介配置 MySQL 的 DataDIR ，省去安装和基本登录认证的配置。</p>
-<p>其次，配置 DataDIR</p>
-<p><a href="https://www.digitalocean.com/community/tutorials/how-to-move-a-mysql-data-directory-to-a-new-location-on-ubuntu-16-04" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-move-a-mysql-data-directory-to-a-new-location-on-ubuntu-16-04</a></p>
-<p>默认文件如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">/var/lib/mysql/</div><div class="line">systemctl stop mysql</div><div class="line">rsync -av /var/lib/mysql /mnt/volume-nyc1-01</div><div class="line">mv /var/lib/mysql /var/lib/mysql.bak</div><div class="line">vim /etc/mysql/mysql.conf.d/mysqld.cnf</div><div class="line"># 修改至 datadir=/mnt/volume-nyc1-01/mysql</div><div class="line">vim /etc/apparmor.d/tunables/alias</div><div class="line"># alias /var/lib/mysql/ -&gt; /mnt/volume-nyc1-01/mysql/</div><div class="line">sudo systemctl restart apparmor</div><div class="line">vim /usr/share/mysql/mysql-systemd-start</div><div class="line"># 修改成</div><div class="line">if [ ! -d /var/lib/mysql ] &amp;&amp; [ ! -L /var/lib/mysql ]; then</div><div class="line"> echo &quot;MySQL data dir not found at /var/lib/mysql. Please create one.&quot;</div><div class="line"> exit 1</div><div class="line">fi</div><div class="line"></div><div class="line">if [ ! -d /var/lib/mysql/mysql ] &amp;&amp; [ ! -L /var/lib/mysql/mysql ]; then</div><div class="line"> echo &quot;MySQL system database not found. Please run mysql_install_db tool.&quot;</div><div class="line"> exit 1</div><div class="line">fi</div><div class="line"></div><div class="line"># 最后</div><div class="line">sudo mkdir /var/lib/mysql/mysql -p</div><div class="line">sudo systemctl restart mysql</div><div class="line"></div><div class="line"># 记得配置文件</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">TODO: 配置 DataDIR</div></pre></td></tr></table></figure>
-<p>将 DataDIR 配置完成之后，就可以导入数据了。</p>
+<p>至此为止，硬盘就格式化完成了。</p>
 <blockquote>
-<p>PS：其实，在 Ubuntu 配置 datadir 的的确确是挺麻烦的事情。</p>
-<p>站在现在看，如果重来的话，我肯定会用 Docker 然后挂载新增硬盘到 DataDIR 的方式来处理这种问题。</p>
+<p>关于安装硬盘，可以参考 <a href="https://help.ubuntu.com/community/InstallingANewHardDrive" target="_blank" rel="external">https://help.ubuntu.com/community/InstallingANewHardDrive</a></p>
 </blockquote>
+<h4 id="配置-MySQL"><a href="#配置-MySQL" class="headerlink" title="配置 MySQL"></a>配置 MySQL</h4><p>篇幅有限，只简介具体在 Ubuntu 16.04 上面 配置 MySQL 的 DataDIR ，省去安装和基本登录认证的配置。</p>
+<p>mysql 在 ubuntu 下面默认的路径如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/var/lib/mysql/</div></pre></td></tr></table></figure>
+<p>我们开始配置 DataDIR</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">systemctl stop mysql</div><div class="line">rsync -av /var/lib/mysql /mnt/volume-nyc1-01</div><div class="line">mv /var/lib/mysql /var/lib/mysql.bak</div><div class="line">vim /etc/mysql/mysql.conf.d/mysqld.cnf</div><div class="line"># 修改至 datadir=/mnt/volume-nyc1-01/mysql</div><div class="line">vim /etc/apparmor.d/tunables/alias</div><div class="line"># alias /var/lib/mysql/ -&gt; /mnt/volume-nyc1-01/mysql/</div><div class="line">sudo systemctl restart apparmor</div><div class="line">vim /usr/share/mysql/mysql-systemd-start</div><div class="line"># 修改成</div><div class="line">if [ ! -d /var/lib/mysql ] &amp;&amp; [ ! -L /var/lib/mysql ]; then</div><div class="line"> echo &quot;MySQL data dir not found at /var/lib/mysql. Please create one.&quot;</div><div class="line"> exit 1</div><div class="line">fi</div><div class="line"></div><div class="line">if [ ! -d /var/lib/mysql/mysql ] &amp;&amp; [ ! -L /var/lib/mysql/mysql ]; then</div><div class="line"> echo &quot;MySQL system database not found. Please run mysql_install_db tool.&quot;</div><div class="line"> exit 1</div><div class="line">fi</div><div class="line"></div><div class="line"># 接下来</div><div class="line">sudo mkdir /var/lib/mysql/mysql -p</div><div class="line">sudo systemctl restart mysql</div><div class="line"></div><div class="line"># 最后 my.conf 修改相关文件路径</div></pre></td></tr></table></figure>
+<blockquote>
+<p>详细请参考这篇文章 <a href="https://www.digitalocean.com/community/tutorials/how-to-move-a-mysql-data-directory-to-a-new-location-on-ubuntu-16-04" target="_blank" rel="external">https://www.digitalocean.com/community/tutorials/how-to-move-a-mysql-data-directory-to-a-new-location-on-ubuntu-16-04</a></p>
+</blockquote>
+<p>将 DataDIR 配置完成之后，就可以导入数据了。嗯，经过这么麻烦的事情之后，我决定下次遇到这种情况首选 Docker 而不是在 Ubuntu Server 上面搞这个。</p>
+<blockquote>
+<p>站在现在看，如果重来的话，我肯定会用 Docker 然后把数据盘挂载到新硬盘到。</p>
+</blockquote>
+<p>比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run --name some-mysql -v /my/own/datadir:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:tag</div></pre></td></tr></table></figure>
 <h4 id="导入数据-之-MySQL-PV"><a href="#导入数据-之-MySQL-PV" class="headerlink" title="导入数据 之 MySQL + PV"></a>导入数据 之 MySQL + PV</h4><p>我们使用 mysql 导入脚本的时候，有几种导入方式</p>
 <ul>
 <li>source 命令，然而这个命令容易在数据量很大的时候直接卡掉。（印象中是直接把 sql 文件加载到内存中，然后执行，然而，只要涉及到大量文本打印出来并且执行，速度一定会变慢很多）</li>
@@ -155,36 +223,92 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 附加进度条的导入场景</div><div class="line">pv -i 1 -p -t -e ./xxxx_probe.sql | mysql -uadmin -p123456 some_db</div></pre></td></tr></table></figure>
 <p>然后，可以查看一下磁盘 CPU 内存的占用情况。如果负载（着重注意 IO，内存）还不够满，使用 tmux 多开几个进程导入数据。</p>
 <p>因为每个 SQL 文件对应的表不一样，所以多开几个进程批量 insert 的话并不会锁表，这样可以显著提升导入速度。</p>
-<h3 id="1-2-导出数据"><a href="#1-2-导出数据" class="headerlink" title="1.2 导出数据"></a>1.2 导出数据</h3><h4 id="过滤掉不需要的行与列"><a href="#过滤掉不需要的行与列" class="headerlink" title="过滤掉不需要的行与列"></a>过滤掉不需要的行与列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select col_a , col_b from some_table where Acondition and bcondition and col_c in (&apos;xx&apos;,&apos;yy&apos;,&apos;zz&apos;);</div></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"># TODO : 这里其实也会有一些优化点</div><div class="line">比如，尽量把简单的高效的判断逻辑写在左边。</div><div class="line">当然，因为是走全表进行筛选（次数唯一），也就忘掉索引这种东西吧，索引加上去虽然查找会变快一点点，但因为是查找一次，所以对性能影响并没有很大。</div></pre></td></tr></table></figure>
-<p>为啥是查找一次？</p>
-<p>因为，有 python 里面的神器 pandas，为嘛一定要用数据库呢？直接读写 CSV 多好。</p>
-<p>那你可能又问了，为什么不直接 readsql 呢。因为读取速度没有 CSV 文件快，而且数据探索过程中需要对文件进行反复的读取和探索，如果每一次都是读海量的数据库，也不是不行，速度上就没有那么快了。</p>
-<h4 id="尽量拆分数据为最小单元的-CSV-文件"><a href="#尽量拆分数据为最小单元的-CSV-文件" class="headerlink" title="尽量拆分数据为最小单元的 CSV 文件"></a>尽量拆分数据为最小单元的 CSV 文件</h4><p>经过初步观察，数据量特别大。如果把所有的数据拿出来进行计算的话，距离算出结果就遥遥无期了。</p>
-<blockquote>
-<p>其实这个时候给 CSV 文件进行分析会比给 SQL 分析会好很多。一来速度快，</p>
-</blockquote>
+<h3 id="1-2-导出数据"><a href="#1-2-导出数据" class="headerlink" title="1.2 导出数据"></a>1.2 导出数据</h3><p>既然已经导入了数据，为什么需要导出数据呢？</p>
+<p>因为数据量比较大，需要进行初步清洗。而我们最后肯定使用 Pandas 进行分析，从局域网数据库中读取大量的数据的时候，pandas 速度会非常的慢（具体是因为网络传输速度？)。所以，为了后面分析省事，我批量导出了数据，然后按照我的习惯进行了归类。</p>
+<p>在这个过程中，我还进行了一小部分的数据过滤，比如：</p>
+<ul>
+<li>只选取对自己有用的行与列。</li>
+<li>化整为零，拆分数据为最小单元的 CSV 文件</li>
+</ul>
+<h4 id="只选取对自己有用的行与列"><a href="#只选取对自己有用的行与列" class="headerlink" title="只选取对自己有用的行与列"></a>只选取对自己有用的行与列</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select col_a , col_b from some_table where Acondition and bcondition and col_c in (&apos;xx&apos;,&apos;yy&apos;,&apos;zz&apos;);</div></pre></td></tr></table></figure>
+<p>这里面有一些值得注意的地方</p>
+<ul>
+<li>尽量把简单的判断写在左边。</li>
+<li>如果不是反复查询，则没有必要建立索引。</li>
+</ul>
+<h4 id="尽量拆分数据为最小单元的-CSV-文件"><a href="#尽量拆分数据为最小单元的-CSV-文件" class="headerlink" title="尽量拆分数据为最小单元的 CSV 文件"></a>尽量拆分数据为最小单元的 CSV 文件</h4><p>如果按照某类，某段时间进行拆分可以在分析的时候随时取随时分析那就进行拆分。</p>
+<p>比如，某个大的 CSV 包含琼瑶里面各种人物情节地点的位置就可以拆分为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">201712_大明湖畔_夏雨荷_还珠格格_你还记得吗.csv</div><div class="line">201711_老街_可云_情深深雨蒙蒙_谁来救我.csv</div><div class="line">201710_屋子里_云帆_又见一帘幽梦_你的腿不及紫菱的爱情.csv</div></pre></td></tr></table></figure>
+<p>当我们需要取这坨数据的时候，可以直接 glob 一下，然后 sort, 接着二分查找。就可以快速读取这块数据了。</p>
 <h3 id="1-3-校验数据完备性"><a href="#1-3-校验数据完备性" class="headerlink" title="1.3 校验数据完备性"></a>1.3 校验数据完备性</h3><p>第三方给的数据多多少少会有这些或者那些的问题，一般情况下，可以通过检查数据完备性来尽可能的减少数据的不靠谱性。</p>
-<p>我习惯性在这样 de 表里面详细记录数据完备性的各种参数与进度。</p>
+<p>我习惯性在这样的表里面详细记录数据完备性的各种参数与进度。</p>
 <p>比如：</p>
 <ul>
 <li>数据的提供情况和实际情况</li>
 <li>阶段性的记录条数和点位的统计值</li>
 <li>max，min，mean，median 用来避免异常值</li>
-<li>如果是分年份，则必须要统计每一天的情况，否则也不知道数据的缺失成都。</li>
+<li>如果是分年份，则必须要统计每一天的情况，否则也不知道数据的缺失程度。</li>
 </ul>
-<h2 id="0x02-分析阶段"><a href="#0x02-分析阶段" class="headerlink" title="0x02 分析阶段"></a>0x02 分析阶段</h2><p>经过上一步处理，数据的文件总大小大约从 1000GB -&gt; 10GB 左右，然后拆分成若干个文件。</p>
-<h3 id="2-1-性能要点-1：文件系统"><a href="#2-1-性能要点-1：文件系统" class="headerlink" title="2.1 性能要点 1：文件系统"></a>2.1 性能要点 1：文件系统</h3><p>读取文件进行统计速度是最快的。</p>
-<h3 id="2-2-性能要点-2：化整为零，然后-map-reduce。"><a href="#2-2-性能要点-2：化整为零，然后-map-reduce。" class="headerlink" title="2.2 性能要点 2：化整为零，然后 map reduce。"></a>2.2 性能要点 2：化整为零，然后 map reduce。</h3><p>拆分数据成若干个文件<br>将大数据量拆分为若干个文件。</p>
-<h3 id="2-3-性能要点-3：排序后的-list-和-set-谁查找速度最快？"><a href="#2-3-性能要点-3：排序后的-list-和-set-谁查找速度最快？" class="headerlink" title="2.3 性能要点 3：排序后的 list 和 set 谁查找速度最快？"></a>2.3 性能要点 3：排序后的 list 和 set 谁查找速度最快？</h3><p>将大数据量拆分为若干个文件。</p>
-<h3 id="2-4-性能要点-4：python-里面唯一的-set-update-的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。"><a href="#2-4-性能要点-4：python-里面唯一的-set-update-的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。" class="headerlink" title="2.4 性能要点 4：python 里面唯一的 set update 的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。"></a>2.4 性能要点 4：python 里面唯一的 set update 的时候是不是用空间换时间。可用空间换时间也会带来内存不够的情况下，空间换时间效果也不好。</h3><p>将大数据量拆分为若干个文件。</p>
-<h3 id="2-5-性能要点-5：IPython-给性能带来的影响，Dateframe-释放内存的失败以及-Process-来解决这个问题。"><a href="#2-5-性能要点-5：IPython-给性能带来的影响，Dateframe-释放内存的失败以及-Process-来解决这个问题。" class="headerlink" title="2.5 性能要点 5：IPython 给性能带来的影响，Dateframe 释放内存的失败以及 Process 来解决这个问题。"></a>2.5 性能要点 5：IPython 给性能带来的影响，Dateframe 释放内存的失败以及 Process 来解决这个问题。</h3><p>将大数据量拆分为若干个文件。</p>
-<h3 id="2-6-性能要点-6：多-set-reduce-效果是不是不如多-list-reduce-最后-set-一下（20000W-gt-5000W-条记录）。"><a href="#2-6-性能要点-6：多-set-reduce-效果是不是不如多-list-reduce-最后-set-一下（20000W-gt-5000W-条记录）。" class="headerlink" title="2.6 性能要点 6：多 set reduce 效果是不是不如多 list reduce 最后 set 一下（20000W -&gt; 5000W 条记录）。"></a>2.6 性能要点 6：多 set reduce 效果是不是不如多 list reduce 最后 set 一下（20000W -&gt; 5000W 条记录）。</h3><p>将大数据量拆分为若干个文件。</p>
-<h2 id="0x03-测试"><a href="#0x03-测试" class="headerlink" title="0x03 测试"></a>0x03 测试</h2><h2 id="0xDD-番外篇"><a href="#0xDD-番外篇" class="headerlink" title="0xDD 番外篇"></a>0xDD 番外篇</h2><p>在分析这次的数据过程中，自己的 Mac 本子也坏掉了，幸好还在保修期，送到苹果店维修了一下。</p>
-<p>要不然，这工伤其实还是挺严重的。</p>
+<h2 id="0x02-分析阶段"><a href="#0x02-分析阶段" class="headerlink" title="0x02 分析阶段"></a>0x02 分析阶段</h2><p>经过上一步处理，数据的文件总大小大约从 1000GB (uncompressed) -&gt; 10GB 左右 （拆分成若干个文件 compressed) 。每个文件大约是几百兆。</p>
+<h3 id="2-1-性能要点-1：文件系统"><a href="#2-1-性能要点-1：文件系统" class="headerlink" title="2.1 性能要点 1：文件系统"></a>2.1 性能要点 1：文件系统</h3><p>如果统计逻辑很简单，但是数量多，首选使用读取文件。读取文件进行统计速度是非常快的。（人民币玩家走开）</p>
+<p>像 linux 里面的 wc,grep,sort,uniq 在这种场景有时候也能用到。</p>
+<p>但，注意，如果文件特别大，一定要迭代器一个一个读取。</p>
+<h3 id="2-2-性能要点-2：化整为零，然后-map-reduce"><a href="#2-2-性能要点-2：化整为零，然后-map-reduce" class="headerlink" title="2.2 性能要点 2：化整为零，然后 map reduce"></a>2.2 性能要点 2：化整为零，然后 map reduce</h3><p>化整为零这个已经在上面的 1.2 节讲过了。</p>
+<p>那么，map reduce 也是我们在统计的过程中需要用到的东西。</p>
+<p>进程池的 Map 绝对是神器。</p>
+<h3 id="2-3-性能要点-3：进程池的两种作用"><a href="#2-3-性能要点-3：进程池的两种作用" class="headerlink" title="2.3 性能要点 3：进程池的两种作用"></a>2.3 性能要点 3：进程池的两种作用</h3><p>我们都知道，当 Python 需要计算密集的程序的时候，就需要使用到多进程：</p>
+<p>即为了加速计算，此为作用一。</p>
+<p>其实进程的销毁本身就可以给我带来第二个作用<strong>管理内存</strong>。</p>
+<p>具体原因会在 2.6 中的 DataFrame 里面解释。</p>
+<h3 id="2-4-性能要点-4：List-和-Set"><a href="#2-4-性能要点-4：List-和-Set" class="headerlink" title="2.4 性能要点 4：List 和 Set"></a>2.4 性能要点 4：List 和 Set</h3><p>有 300 组 UUID 集合，每个列表数量在 1000000 左右，列表和列表之间重复部分并不是很大。我想拿到去重之后的所有 UUID，应该怎么处理</p>
+<p>在去重的时候，自然而然想到了使用集合来处理。</p>
+<p>最初的做法是</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">list_of_uuid_set = [ set1 , set2 ... set300 ]</div><div class="line">all_uuid_set = reduce(<span class="keyword">lambda</span> x: x | y, list_of_uuid_set)</div></pre></td></tr></table></figure>
+<p>1 小时过去了。 突然之间，四下里万籁无声。公司内外聚集数百之众，竟不约而同的谁都没有出声，便有人想说话的，也为这寂静的气氛所慑，话到嘴边都缩了回去。似乎硬盘的指示灯也熄灭了，发出轻柔异常的声音。我心中忽想：</p>
+<blockquote>
+<p>~小师妹这时候不知在干甚么？~ 卧槽，程序是不是又卡死了？</p>
+</blockquote>
+<p>SSH 上去 htop 一下机器。发现实存和内存都满了。直觉告诉我，CPython 的集合运算应该是挺耗内存的。</p>
+<p>嗯，这怎么行，试试用列表吧。列表占用内存应该是比较小的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span><span class="params">(list1,list2)</span>:</span></div><div class="line">    list1.append(list2)</div><div class="line">    <span class="keyword">return</span> list1</div><div class="line"></div><div class="line">list_of_uuid_list = [ list1 , list2 ... list300 ]</div><div class="line">all_uuid_set = set(reduce(merge, list_of_uuid_list))</div></pre></td></tr></table></figure>
+<p>1 小时过去了。 我一拍大腿，道：</p>
+<blockquote>
+<p>~小师妹这时候不知在干甚么？~ 卧槽，程序是不是又卡死了？</p>
+</blockquote>
+<p>最后在 StackOverFlow 上找到了更好的解决方案。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">list_of_uuid_list = [ list1 , list2 ... list300 ]</div><div class="line">all_uuid_set = set(list(itertools.chain(*list_of_uuid_list)))</div></pre></td></tr></table></figure>
+<p>运行一下，10s 不到出了结果。</p>
+<h3 id="2-5-性能要点-5：IPython-给性能带来的影响"><a href="#2-5-性能要点-5：IPython-给性能带来的影响" class="headerlink" title="2.5 性能要点 5：IPython 给性能带来的影响"></a>2.5 性能要点 5：IPython 给性能带来的影响</h3><p>当我们在分析数据的时候，往往使用的是 IPython, 或者 Jupyter Notebook</p>
+<p>但是，方便的同时，如果不加以注意的话，就会带来一点点小问题。</p>
+<p>比如下划线和双下划线分别存储上一个 CELL 的返回值，和上上个 CELL 的返回值。</p>
+<h3 id="2-6-性能要点-6：DataFrame-带来的-GC-问题"><a href="#2-6-性能要点-6：DataFrame-带来的-GC-问题" class="headerlink" title="2.6 性能要点 6：DataFrame 带来的 GC 问题"></a>2.6 性能要点 6：DataFrame 带来的 GC 问题</h3><p>DataFrame 是我用 Pandas 的原因，在这次使用 DataFrame 的过程中，还是出现一些头疼的问题的。比如内存。</p>
+<ol>
+<li>我在 For 循环中读取 DataFrame 赋值给 df, 然后统计出一个结果。内存还是 biubiubiubiu 的增长。（即便是 del df 也不顶用，说好的引用计数呢）</li>
+<li>Python 程序 在 Linux 或者 Mac 中，哪怕是 del 这个对象，Python 依旧<strong>站着茅坑不拉屎（就是不把内存还给系统，自己先占着）, 有本事你打死我啊（直到进程销毁）</strong>。</li>
+</ol>
+<p>参考：<a href="https://stackoverflow.com/questions/23183958/python-memory-management-dictionary" target="_blank" rel="external">https://stackoverflow.com/questions/23183958/python-memory-management-dictionary</a></p>
+<p>用 GC 能不能解决我暂时是不清楚的。有机会研究一下。</p>
+<p>我的处理 DataFrame 的占用内存问题方式一般如下：</p>
+<ol>
+<li>尽量来回赋值导致的 COPY</li>
+<li>读取 CSV 的时候指定相关列的类型 {‘col_a’: np.float64, ‘col_b’: np.int32}，否则 pandas 会产生大量的 object</li>
+<li>尽量修改的时候带上 inplace=True</li>
+</ol>
+<p>但是，最终我发现这么写之后还是很难管理日渐膨胀的内存，可是每次只分析一张表呀的统计结果呀，按理来说，不应该会出现这种不够用内存的问题。</p>
+<p>于是我是用了进程池。将需要计算的函数和参数 map 一下，进程销毁后自动帮我 GC , 我只需最后存一下统计结果即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">def stat_by_date(date):</div><div class="line">    raw_df = pd.read_csv()</div><div class="line">    # do stat</div><div class="line">    return stat_df</div><div class="line"></div><div class="line">dates = [...]</div><div class="line"></div><div class="line">with ProcessPoolExecutor() as pool:</div><div class="line">    list_stat_dfs_mapped = pool.map(stat_by_date, dates):</div><div class="line">    list_stat_dfs = pd.concat(list_stat_dfs_mapped)</div></pre></td></tr></table></figure>
+<p>如果有人像我一样每次跑数据的时候盯着 Htop 界面看的话，应该还会发现一个现象，Python ProcessPoolExecutor map 出来的进程 PID 就没有发生过变化，怎么会帮你 GC 掉不容易释放的内存呢？</p>
+<p>为了验证这个问题，</p>
+<p>:TODO</p>
+<ol>
+<li>写入 python 源码观察是最好的结果了</li>
+<li>检查是否真的存在内存暴增</li>
+</ol>
+<h2 id="0xDD-番外篇"><a href="#0xDD-番外篇" class="headerlink" title="0xDD 番外篇"></a>0xDD 番外篇</h2><p>在分析这次的数据过程中，自己的 Mac 主板也坏掉了，幸好还在保修期，送到苹果店维修了一下。给苹果的售后点个赞。</p>
 <h2 id="0xEE-更新"><a href="#0xEE-更新" class="headerlink" title="0xEE 更新"></a>0xEE 更新</h2><ul>
 <li><strong>2017-12-07</strong> 初始化本文</li>
 <li><strong>2017-12-16</strong> 增加分析阶段的文字</li>
+<li><strong>2017-12-26</strong> 去掉一些 TODO, 发布</li>
 </ul>
 ]]></content>
     
@@ -1500,56 +1624,6 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
   </entry>
   
   <entry>
-    <title>ReThinking In JavaScript</title>
-    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
-    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
-    <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2017-12-19T05:15:36.359Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
-<a id="more"></a>
-<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
-<p>因为太火，不得不认真学习一下。</p>
-<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
-<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
-<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
-<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
-<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
-<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
-<li>String</li>
-<li>Boolean</li>
-<li>Symbol (new in ES2015)</li>
-<li>Object<ul>
-<li>Function</li>
-<li>Array</li>
-<li>Date</li>
-<li>RegExp</li>
-</ul>
-</li>
-<li>null</li>
-<li>undefined</li>
-</ul>
-<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
-<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="进击的 JavaScript" scheme="http://twocucao.xyz/categories/%E8%BF%9B%E5%87%BB%E7%9A%84-JavaScript/"/>
-    
-    
-      <category term="编程语言" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-      <category term="编程思考" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E8%80%83/"/>
-    
-  </entry>
-  
-  <entry>
     <title>ReThinking In Python</title>
     <link href="http://twocucao.xyz/2017/07/04/RethinkingInPython/"/>
     <id>http://twocucao.xyz/2017/07/04/RethinkingInPython/</id>
@@ -1915,6 +1989,56 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     
     
       <category term="Python" scheme="http://twocucao.xyz/tags/Python/"/>
+    
+      <category term="编程语言" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
+    
+      <category term="编程思考" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E6%80%9D%E8%80%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ReThinking In JavaScript</title>
+    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
+    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
+    <published>2017-07-04T12:08:21.000Z</published>
+    <updated>2017-12-19T05:15:36.359Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
+<a id="more"></a>
+<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
+<p>因为太火，不得不认真学习一下。</p>
+<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
+<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
+<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
+<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
+<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
+<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
+<li>String</li>
+<li>Boolean</li>
+<li>Symbol (new in ES2015)</li>
+<li>Object<ul>
+<li>Function</li>
+<li>Array</li>
+<li>Date</li>
+<li>RegExp</li>
+</ul>
+</li>
+<li>null</li>
+<li>undefined</li>
+</ul>
+<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
+<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="进击的 JavaScript" scheme="http://twocucao.xyz/categories/%E8%BF%9B%E5%87%BB%E7%9A%84-JavaScript/"/>
+    
     
       <category term="编程语言" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
     
@@ -2344,42 +2468,6 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
       <category term="Docker" scheme="http://twocucao.xyz/tags/Docker/"/>
     
       <category term="DevOps" scheme="http://twocucao.xyz/tags/DevOps/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>MacBook Pro 15.4 Multi-Touch Bar</title>
-    <link href="http://twocucao.xyz/2017/05/01/OhMyNewMac/"/>
-    <id>http://twocucao.xyz/2017/05/01/OhMyNewMac/</id>
-    <published>2017-05-01T13:45:00.000Z</published>
-    <updated>2017-12-19T04:20:17.128Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一个月前换了这台新电脑 MacBook Pro 15.4 Multi-Touch Bar (Core i7/16GB/512GB)，感觉每天打字都很舒服，也算是实现了一个梦寐以求的小目标吧。</p>
-<a id="more"></a>
-<p>在此之前，用我的<strong>前任</strong>有下面几款：</p>
-<ul>
-<li>大一时候从网吧买的 400 块钱的台式机</li>
-<li>大一时候从淘宝买的 700 块钱的笔记本</li>
-<li>大二上学期买的 1200 块钱的笔记本</li>
-<li>大三上学期买的 3200 块钱的笔记本，后来花了 2000 块升级了一下下</li>
-<li>大四上学期买的 5000 块的二手 MacBook Pro</li>
-</ul>
-<p>后来手贱买了降噪耳机，机械键盘，手机，pad , 花的都是自己的钱。</p>
-<p>能把一手烂牌打出不错的结果，这才是让人自豪的事情啊！</p>
-<p>晚安，以及劳动节快乐。</p>
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p>2017-05-01: 初始化本文</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;一个月前换了这台新电脑 MacBook Pro 15.4 Multi-Touch Bar (Core i7/16GB/512GB)，感觉每天打字都很舒服，也算是实现了一个梦寐以求的小目标吧。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
-    
-    
-      <category term="碎碎念" scheme="http://twocucao.xyz/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"/>
     
   </entry>
   
