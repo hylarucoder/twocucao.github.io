@@ -925,7 +925,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  4,293
+                  4,294
                 </span>
               
 
@@ -1076,15 +1076,17 @@
 <p>最初的做法是</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">list_of_uuid_set = [ set1 , set2 ... set300 ]</div><div class="line">all_uuid_set = reduce(<span class="keyword">lambda</span> x: x | y, list_of_uuid_set)</div></pre></td></tr></table></figure>
 <p>1 小时过去了。 突然之间，四下里万籁无声。公司内外聚集数百之众，竟不约而同的谁都没有出声，便有人想说话的，也为这寂静的气氛所慑，话到嘴边都缩了回去。似乎硬盘的指示灯也熄灭了，发出轻柔异常的声音。我心中忽想：</p>
+<p>~小师妹这时候不知在干甚么？~</p>
 <blockquote>
-<p>~小师妹这时候不知在干甚么？~ 卧槽，程序是不是又卡死了？</p>
+<p>卧槽，程序是不是又卡死了？</p>
 </blockquote>
 <p>SSH 上去 htop 一下机器。发现实存和内存都满了。直觉告诉我，CPython 的集合运算应该是挺耗内存的。</p>
 <p>嗯，这怎么行，试试用列表吧。列表占用内存应该是比较小的。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">merge</span><span class="params">(list1,list2)</span>:</span></div><div class="line">    list1.append(list2)</div><div class="line">    <span class="keyword">return</span> list1</div><div class="line"></div><div class="line">list_of_uuid_list = [ list1 , list2 ... list300 ]</div><div class="line">all_uuid_set = set(reduce(merge, list_of_uuid_list))</div></pre></td></tr></table></figure>
-<p>1 小时过去了。 我一拍大腿，道：</p>
+<p>1 个晚上过去了。 我一拍大腿，道：</p>
+<p>~小师妹这时候不知在干甚么？~</p>
 <blockquote>
-<p>~小师妹这时候不知在干甚么？~ 卧槽，程序是不是又卡死了？</p>
+<p>卧槽，程序是不是又卡死了？</p>
 </blockquote>
 <p>最后在 StackOverFlow 上找到了更好的解决方案。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">list_of_uuid_list = [ list1 , list2 ... list300 ]</div><div class="line">all_uuid_set = set(list(itertools.chain(*list_of_uuid_list)))</div></pre></td></tr></table></figure>
