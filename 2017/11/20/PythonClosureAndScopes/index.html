@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="作用域," />
+  <meta name="keywords" content="作用域,语言细节," />
 
 
 
@@ -97,13 +97,13 @@
 
 
 <meta name="description" content="0x00 前言因为最早用的是 Java 和 C#，写 Python 的时候自然也把 Python 作用域的想的和原有的一致。 Python 的作用域变量遵循在大部分情况下是一致的，但也有例外的情况。 本文着通过遇到的一个作用域的小问题来说说 Python 的作用域">
-<meta name="keywords" content="作用域">
+<meta name="keywords" content="作用域,语言细节">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 中的作用域准则">
 <meta property="og:url" content="http://twocucao.xyz/2017/11/20/PythonClosureAndScopes/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00 前言因为最早用的是 Java 和 C#，写 Python 的时候自然也把 Python 作用域的想的和原有的一致。 Python 的作用域变量遵循在大部分情况下是一致的，但也有例外的情况。 本文着通过遇到的一个作用域的小问题来说说 Python 的作用域">
-<meta property="og:updated_time" content="2017-12-19T04:22:20.786Z">
+<meta property="og:updated_time" content="2018-01-28T01:36:15.295Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 中的作用域准则">
 <meta name="twitter:description" content="0x00 前言因为最早用的是 Java 和 C#，写 Python 的时候自然也把 Python 作用域的想的和原有的一致。 Python 的作用域变量遵循在大部分情况下是一致的，但也有例外的情况。 本文着通过遇到的一个作用域的小问题来说说 Python 的作用域">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,830
+                  1,851
                 </span>
               
 
@@ -421,7 +421,7 @@
 <p>Python 的作用域变量遵循在大部分情况下是一致的，但也有例外的情况。</p>
 <p>本文着通过遇到的一个作用域的小问题来说说 Python 的作用域</p>
 <a id="more"></a>
-<h2 id="0x01-作用域的几个实例"><a href="#0x01-作用域的几个实例" class="headerlink" title="0x01 作用域的几个实例"></a>0x01 作用域的几个实例</h2><p>但也有部分例外的情况，比如：</p>
+<h2 id="0x01-作用域的几个实例"><a href="#0x01-作用域的几个实例" class="headerlink" title="0x01 作用域的几个实例"></a>0x01 作用域的几个实例</h2><p>Python 的作用域变量遵循在大部分情况下与其他语言一致，但也有例外的情况。比如：</p>
 <h3 id="1-1-第一个例子"><a href="#1-1-第一个例子" class="headerlink" title="1.1 第一个例子"></a>1.1 第一个例子</h3><p>作用域第一版代码如下</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">a = <span class="number">1</span></div><div class="line">print(a, id(a)) <span class="comment"># 打印 1 4465620064</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">func1</span><span class="params">()</span>:</span></div><div class="line">    print(a, id(a))</div><div class="line">func1()  <span class="comment"># 打印 1 4465620064</span></div></pre></td></tr></table></figure>
 <p>作用域第一版对应字节码如下</p>
@@ -526,6 +526,8 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
         <div class="post-tags">
           
             <a href="/tags/作用域/" rel="tag"># 作用域</a>
+          
+            <a href="/tags/语言细节/" rel="tag"># 语言细节</a>
           
         </div>
       
@@ -644,7 +646,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">68</span>
+                <span class="site-state-item-count">78</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

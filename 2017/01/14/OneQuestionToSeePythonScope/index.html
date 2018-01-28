@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/01/14/OneQuestionToSeePythonScope/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="前言整理工具字符类的时候，想借助正则表达式来实现一部分的文字判断抽取等操作。 比如实现：  判断文字是否为 UUID 判断文字是否包含 UUID 抽取文字是中第一个 UUID 抽取文字是中所有 UUID">
-<meta property="og:updated_time" content="2017-12-19T06:08:15.680Z">
+<meta property="og:updated_time" content="2018-01-28T01:21:54.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从一个小问题来说 Python 的作用域">
 <meta name="twitter:description" content="前言整理工具字符类的时候，想借助正则表达式来实现一部分的文字判断抽取等操作。 比如实现：  判断文字是否为 UUID 判断文字是否包含 UUID 抽取文字是中第一个 UUID 抽取文字是中所有 UUID">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  831
+                  847
                 </span>
               
 
@@ -469,6 +469,9 @@
 <p>对程序植入一些 print 代码来 Debug 一下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">for regex, regex_pattern in REGEXES.items():</div><div class="line">    def has_regex_func(_str, regex_pattern=regex_pattern):</div><div class="line">        # 当函数被调用之后，打印 regex_pattern 查看对应的字符串</div><div class="line">        print(regex_pattern)</div><div class="line">        return has_pattern(_str, regex_pattern)</div><div class="line"></div><div class="line">    def is_regex_func(_str, regex_pattern=regex_pattern):</div><div class="line">        return match_pattern(_str, regex_pattern)</div><div class="line"></div><div class="line">    def extract_first_regex_func(_str, regex_pattern=regex_pattern):</div><div class="line">        return find_first_matched_pattern(_str, regex_pattern)</div><div class="line"></div><div class="line">    def extract_all_regex_func(_str, regex_pattern=regex_pattern):</div><div class="line">        return find_all_matched_pattern(_str, regex_pattern)</div><div class="line"></div><div class="line">    # 查看是否为同一个函数</div><div class="line">    print(id(has_regex_func))</div><div class="line"></div><div class="line">    setattr(sys.modules[__name__], &apos;has_&#123;regex_suffix&#125;&apos;.format(regex_suffix=regex), has_regex_func)</div><div class="line">    setattr(sys.modules[__name__], &apos;is_&#123;regex_suffix&#125;&apos;.format(regex_suffix=regex), is_regex_func)</div><div class="line">    setattr(sys.modules[__name__], &apos;extract_first_&#123;regex_suffix&#125;&apos;.format(regex_suffix=regex), extract_first_regex_func)</div><div class="line">    setattr(sys.modules[__name__], &apos;extract_all_&#123;regex_suffix&#125;&apos;.format(regex_suffix=regex), extract_all_regex_func)</div></pre></td></tr></table></figure>
 <p>于是发现问题，所有打印出来的 regex_pattern 都是一致的。也就是，不管是 has_uuid 还是 has_qq_num 还是其他，最后 regex_pattern 都是我在字典中实现的</p>
+<blockquote>
+<p>备注，这种动态设置 module 里的方法不推荐</p>
+</blockquote>
 
       
     </div>
@@ -617,7 +620,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">68</span>
+                <span class="site-state-item-count">78</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
