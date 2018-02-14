@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00 前言机缘巧合，最近公司突然要搞一波大量数据的分析。属于客流类的分析。 数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在 180 亿左右。 解压后…… 差不多一个 T 吧。 如果是人民币玩家，自然是直接购置几十台高配置机器，做个 mysql shard 或者直接上大数据全家桶比如">
-<meta property="og:updated_time" content="2018-01-28T01:36:24.090Z">
+<meta property="og:updated_time" content="2018-02-11T01:14:31.549Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次小机器的 Python 大数据分析">
 <meta name="twitter:description" content="0x00 前言机缘巧合，最近公司突然要搞一波大量数据的分析。属于客流类的分析。 数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在 180 亿左右。 解压后…… 差不多一个 T 吧。 如果是人民币玩家，自然是直接购置几十台高配置机器，做个 mysql shard 或者直接上大数据全家桶比如">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,957
+                  3,993
                 </span>
               
 
@@ -521,7 +521,10 @@
 <h2 id="0x02-分析阶段"><a href="#0x02-分析阶段" class="headerlink" title="0x02 分析阶段"></a>0x02 分析阶段</h2><p>经过上一步处理，数据的文件总大小大约从 1000GB (uncompressed) -&gt; 30GB 左右 （拆分成若干个文件 compressed) 。每个文件大约是几百兆。</p>
 <h3 id="2-1-性能要点-1：文件系统"><a href="#2-1-性能要点-1：文件系统" class="headerlink" title="2.1 性能要点 1：文件系统"></a>2.1 性能要点 1：文件系统</h3><p>如果统计逻辑很简单，但是数量多，首选使用读取文件。读取文件进行统计速度是非常快的。（人民币玩家走开）</p>
 <p>像 linux 里面的 wc,grep,sort,uniq 在这种场景有时候也能用到。</p>
-<p>但，注意，如果文件特别大，一定要迭代器一个一个读取。</p>
+<blockquote>
+<p>注意，如果文件特别大，一定要迭代器一个一个读取。</p>
+</blockquote>
+<p>对于超大文件，比如说，上百 G 文件，可以先分成小片的文件，然后多进程批量读取并且处理。</p>
 <h3 id="2-2-性能要点-2：化整为零，map-reduce-filter"><a href="#2-2-性能要点-2：化整为零，map-reduce-filter" class="headerlink" title="2.2 性能要点 2：化整为零，map reduce filter"></a>2.2 性能要点 2：化整为零，map reduce filter</h3><p>化整为零这个已经在上面的 1.2 节讲过了。</p>
 <p>map/reduce/filter 可以极大的减少代码。</p>
 <blockquote>
@@ -664,8 +667,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/12/23/macOSInDepth/" rel="next" title="关于 Mac 的一些常识">
-                <i class="fa fa-chevron-left"></i> 关于 Mac 的一些常识
+              <a href="/2017/12/23/macOSInDepth/" rel="next" title="macOS 的系统与软件">
+                <i class="fa fa-chevron-left"></i> macOS 的系统与软件
               </a>
             
           </div>
@@ -748,7 +751,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -759,7 +762,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -770,7 +773,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

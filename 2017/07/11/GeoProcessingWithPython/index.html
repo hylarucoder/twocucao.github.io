@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/07/11/GeoProcessingWithPython/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00. 前言16 年 12 月研究 GIS 相关资料用于处理 GIS 相关问题，完成基本 GIS 功能。最新需要进阶相关内容用于更好的处理相关数据。  书籍： Geoprocessing With Python PostGIS In Action 2rd   框架： 前端 Leaflets D3 后端 GeoDjango   其他零零碎碎的资料  特此记录。">
-<meta property="og:updated_time" content="2018-01-28T01:29:18.567Z">
+<meta property="og:updated_time" content="2018-02-11T01:14:31.548Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Geoprocessing With Python">
 <meta name="twitter:description" content="0x00. 前言16 年 12 月研究 GIS 相关资料用于处理 GIS 相关问题，完成基本 GIS 功能。最新需要进阶相关内容用于更好的处理相关数据。  书籍： Geoprocessing With Python PostGIS In Action 2rd   框架： 前端 Leaflets D3 后端 GeoDjango   其他零零碎碎的资料  特此记录。">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,145
+                  1,144
                 </span>
               
 
@@ -508,7 +508,7 @@
 </ul>
 <h3 id="PostGIS-常用函数"><a href="#PostGIS-常用函数" class="headerlink" title="PostGIS 常用函数"></a>PostGIS 常用函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">ST_AsText(geom) 用于查看 WKT</div><div class="line">ST_GeometryType(geometry) returns the type of the geometry</div><div class="line">ST_NDims(geometry) returns the number of dimensions of the geometry</div><div class="line">ST_SRID(geometry) returns the spatial reference identifier number of the geometry</div><div class="line">ST_X(geometry) returns the X ordinate , 如果作用在 Point 上，则返回经度</div><div class="line">ST_Y(geometry) returns the Y ordinate , 如果作用在 Point 上，则返回纬度</div><div class="line"></div><div class="line">ST_Length(geometry) returns the length of the linestring</div><div class="line">ST_StartPoint(geometry) returns the first coordinate as a point</div><div class="line">ST_EndPoint(geometry) returns the last coordinate as a point</div><div class="line">ST_NPoints(geometry) returns the number of coordinates in the linestring</div><div class="line"></div><div class="line">ST_Area(geometry) returns the area of the polygons</div><div class="line">ST_NRings(geometry) returns the number of rings (usually 1, more of there are holes)</div><div class="line">ST_ExteriorRing(geometry) returns the outer ring as a linestring</div><div class="line">ST_InteriorRingN(geometry,n) returns a specified interior ring as a linestring</div><div class="line">ST_Perimeter(geometry) returns the length of all the rings</div><div class="line"></div><div class="line">ST_NumGeometries(geometry) returns the number of parts in the collection</div><div class="line">ST_GeometryN(geometry,n) returns the specified part</div><div class="line">ST_Area(geometry) returns the total area of all polygonal parts</div><div class="line">ST_Length(geometry) returns the total length of all linear parts</div></pre></td></tr></table></figure>
 <h3 id="Snippets"><a href="#Snippets" class="headerlink" title="Snippets"></a>Snippets</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-- 合并多个区域并返回 multipoly</div><div class="line">UPDATE areas as A</div><div class="line">SET &quot;Boundary&quot; = ST_Multi(st_union(ARRAY(SELECT geom FROM county_boundary_region WHERE gid in ( &apos;foo_id&apos;,&apos;bar_id)&apos;)</div><div class="line">)))</div><div class="line">WHERE A.&quot;ID&quot; = &apos;xxxxxx&apos;</div></pre></td></tr></table></figure>
-<h3 id="其他参考链接"><a href="#其他参考链接" class="headerlink" title="其他参考链接"></a>其他参考链接</h3><ol>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ol>
 <li><a href="http://gis.stackexchange.com/questions/6681/what-are-the-pros-and-cons-of-postgis-geography-and-geometry-types" target="_blank" rel="external">http://gis.stackexchange.com/questions/6681/what-are-the-pros-and-cons-of-postgis-geography-and-geometry-types</a></li>
 <li>Geo Processing with Python</li>
 </ol>
@@ -649,7 +649,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -660,7 +660,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -671,7 +671,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -742,7 +742,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-基本概念"><span class="nav-number">2.</span> <span class="nav-text">0x01 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Vertor-VS-Raster"><span class="nav-number">2.1.</span> <span class="nav-text">1.1. Vertor VS Raster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Vertor-相关类型与坐标系"><span class="nav-number">2.2.</span> <span class="nav-text">1.2. Vertor 相关类型与坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-国内常见的几种坐标系"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1. 国内常见的几种坐标系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-形状"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.2. 形状</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Raster-相关类型"><span class="nav-number">2.3.</span> <span class="nav-text">1.3. Raster 相关类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Vertor-分析"><span class="nav-number">3.</span> <span class="nav-text">0x02. Vertor 分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Raster-分析"><span class="nav-number">4.</span> <span class="nav-text">0x03. Raster 分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-教程"><span class="nav-number">4.1.</span> <span class="nav-text">3.1. 教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-教程"><span class="nav-number">4.2.</span> <span class="nav-text">3.2. 教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-教程笔记"><span class="nav-number">4.3.</span> <span class="nav-text">3.3. 教程笔记</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-Vertor-与-Raster"><span class="nav-number">5.</span> <span class="nav-text">0x04. Vertor 与 Raster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础版本"><span class="nav-number">5.1.</span> <span class="nav-text">基础版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中级概念"><span class="nav-number">5.2.</span> <span class="nav-text">中级概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-MetaTable"><span class="nav-number">5.3.</span> <span class="nav-text">PostGIS MetaTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-常用函数"><span class="nav-number">5.4.</span> <span class="nav-text">PostGIS 常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snippets"><span class="nav-number">5.5.</span> <span class="nav-text">Snippets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他参考链接"><span class="nav-number">5.6.</span> <span class="nav-text">其他参考链接</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-基本概念"><span class="nav-number">2.</span> <span class="nav-text">0x01 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Vertor-VS-Raster"><span class="nav-number">2.1.</span> <span class="nav-text">1.1. Vertor VS Raster</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Vertor-相关类型与坐标系"><span class="nav-number">2.2.</span> <span class="nav-text">1.2. Vertor 相关类型与坐标系</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-1-国内常见的几种坐标系"><span class="nav-number">2.2.1.</span> <span class="nav-text">1.2.1. 国内常见的几种坐标系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-2-形状"><span class="nav-number">2.2.2.</span> <span class="nav-text">1.2.2. 形状</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Raster-相关类型"><span class="nav-number">2.3.</span> <span class="nav-text">1.3. Raster 相关类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Vertor-分析"><span class="nav-number">3.</span> <span class="nav-text">0x02. Vertor 分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Raster-分析"><span class="nav-number">4.</span> <span class="nav-text">0x03. Raster 分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-教程"><span class="nav-number">4.1.</span> <span class="nav-text">3.1. 教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-教程"><span class="nav-number">4.2.</span> <span class="nav-text">3.2. 教程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-教程笔记"><span class="nav-number">4.3.</span> <span class="nav-text">3.3. 教程笔记</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-Vertor-与-Raster"><span class="nav-number">5.</span> <span class="nav-text">0x04. Vertor 与 Raster</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基础版本"><span class="nav-number">5.1.</span> <span class="nav-text">基础版本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#中级概念"><span class="nav-number">5.2.</span> <span class="nav-text">中级概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-MetaTable"><span class="nav-number">5.3.</span> <span class="nav-text">PostGIS MetaTable</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PostGIS-常用函数"><span class="nav-number">5.4.</span> <span class="nav-text">PostGIS 常用函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Snippets"><span class="nav-number">5.5.</span> <span class="nav-text">Snippets</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-参考链接"><span class="nav-number">6.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
             
 
           </div>

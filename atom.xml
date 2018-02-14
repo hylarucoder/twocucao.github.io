@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2018-01-28T07:42:18.848Z</updated>
+  <updated>2018-02-14T08:20:22.842Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -16,11 +16,351 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>ElasticSearch CheatSheet</title>
+    <link href="http://twocucao.xyz/2018/02/13/ElasticSearchCheatSheet/"/>
+    <id>http://twocucao.xyz/2018/02/13/ElasticSearchCheatSheet/</id>
+    <published>2018-02-13T02:25:39.000Z</published>
+    <updated>2018-02-14T08:20:22.842Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。</p>
+<p>不定期更新。</p>
+<p>最早使用 ElasticSearch 是两年前了。最近准备用 Django 写一个全栈式的应用，借用强大的 ES 来做搜索。这是我在写程序之余写这篇文章的原因。</p>
+<p>官网介绍 ElasticSearch 不仅仅是全文搜索，也可以结构化搜索（这里用结构化查询会更准确一些），分析，处理人类语言，地理位置，以及关系。</p>
+<p>然而，我在项目使用过程中还是主要用到了全文搜索以及推荐。</p>
+<p>不用其他的主要原因是因为 ES 尺有所短寸有所长：</p>
+<ol>
+<li>geo 处理方面 postgis 完全就是神一般的存在。为什么还要用 ES 呢？</li>
+<li>关系型数据库的核心不就是处理关系？复杂的关系肯定还是放在关系数据库里面。</li>
+</ol>
+<p>highlighted search snippets, and search-as-you-type and did-you-mean suggestions.</p>
+<p>我对 ElasticSearch 在后台组件里的作用在于搜索与推荐：</p>
+<ol>
+<li>整站的搜索功能<ul>
+<li>全文搜索</li>
+</ul>
+</li>
+<li>推荐<ul>
+<li>依据某几个维度的数据进行排序</li>
+</ul>
+</li>
+</ol>
+<a id="more"></a>
+<h2 id="0x01-安装，配置，基本-shell-命令"><a href="#0x01-安装，配置，基本-shell-命令" class="headerlink" title="0x01 安装，配置，基本 shell 命令"></a>0x01 安装，配置，基本 shell 命令</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"># 执行如下的命令</div><div class="line">curl &apos;http://localhost:9200/?pretty&apos;</div><div class="line"># 输出结果</div><div class="line">&#123;</div><div class="line">  &quot;name&quot; : &quot;XOGvo8a&quot;,</div><div class="line">  &quot;cluster_name&quot; : &quot;docker-cluster&quot;,</div><div class="line">  &quot;cluster_uuid&quot; : &quot;fAwp341bQzalzBxRFyD1YA&quot;,</div><div class="line">  &quot;version&quot; : &#123;</div><div class="line">    &quot;number&quot; : &quot;6.2.1&quot;,</div><div class="line">    &quot;build_hash&quot; : &quot;7299dc3&quot;,</div><div class="line">    &quot;build_date&quot; : &quot;2018-02-07T19:34:26.990113Z&quot;,</div><div class="line">    &quot;build_snapshot&quot; : false,</div><div class="line">    &quot;lucene_version&quot; : &quot;7.2.1&quot;,</div><div class="line">    &quot;minimum_wire_compatibility_version&quot; : &quot;5.6.0&quot;,</div><div class="line">    &quot;minimum_index_compatibility_version&quot; : &quot;5.0.0&quot;</div><div class="line">  &#125;,</div><div class="line">  &quot;tagline&quot; : &quot;You Know, for Search&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="2-配置"><a href="#2-配置" class="headerlink" title="2. 配置"></a>2. 配置</h3><h3 id="3-插件"><a href="#3-插件" class="headerlink" title="3. 插件"></a>3. 插件</h3><p>ES 的插件有很多，比这使用现在最新的版本是 6.2.1 版本。</p>
+<blockquote>
+<p>PS: 两年前我用的还是 2.3.3 版本。新版本有很多插件配置起来已经有所不同了。比如说 head 现在已经被独立出来作为一个单纯的网页，chrome 商店可以直接下载。</p>
+</blockquote>
+<h2 id="0x02-ElasticSearch-配套工具"><a href="#0x02-ElasticSearch-配套工具" class="headerlink" title="0x02 ElasticSearch 配套工具"></a>0x02 ElasticSearch 配套工具</h2><p>建议使用 Head 插件来进行简单的查询与调试。</p>
+<h2 id="0x03-ElasticSearch-常用代码"><a href="#0x03-ElasticSearch-常用代码" class="headerlink" title="0x03 ElasticSearch 常用代码"></a>0x03 ElasticSearch 常用代码</h2><h3 id="3-1-Elasticsearch-基本概念"><a href="#3-1-Elasticsearch-基本概念" class="headerlink" title="3.1 Elasticsearch 基本概念"></a>3.1 Elasticsearch 基本概念</h3><p>ES 使用的是 RESTFUL API 接口</p>
+<p>这也就意味着：</p>
+<ul>
+<li>GET 获取记录</li>
+<li>POST 更新记录</li>
+<li>PUT 创建记录</li>
+<li>DELETE 删除记录</li>
+<li>HEAD 是否存在</li>
+</ul>
+<h3 id="3-2-全文搜索的难点"><a href="#3-2-全文搜索的难点" class="headerlink" title="3.2 全文搜索的难点"></a>3.2 全文搜索的难点</h3><p>要想知道全文搜索难在哪，就要知道全文搜索蠢在哪？</p>
+<ul>
+<li>一是传统的 RDBMS 的 LIKE 查询速度非常之慢</li>
+<li>二是传统的 RDBMS 的 LIKE 查询效果非常之蠢</li>
+</ul>
+<p>先说说慢，当我在图书馆里面查询书籍的时候，每一次输入书名进行查找，就会默认使用 LIKE 查询。而 LIKE 查询 几乎是走全表，走全表，然后通过通配符对几十万的长文的进行文本匹配，最后返回结果。这会导致性能很糟糕，这点其实也不能算是硬伤。如果做好分库分表，放几台 slave, 然后在应用层分别读数据库倒也能使得性能提上来。</p>
+<p>我们主要说说蠢。常规的 RDBMS 在解决下面的问题时候显得捉襟掣肘。</p>
+<ol>
+<li>大小写匹配 （当然，现在有很多数据库支持了 ilike 和 regex 匹配了，这点其实可以忽略掉.)</li>
+<li>去除附加标点。（比如英文 / 法语）</li>
+<li>stemming each word to its root form 单复数。（主要针对英文）</li>
+<li>移除<strong>常用词</strong>和<strong>停止词</strong>从而提升性能和精准度</li>
+<li>包含同义词</li>
+<li>检查错误拼写</li>
+</ol>
+<h4 id="1-流程"><a href="#1-流程" class="headerlink" title="1. 流程"></a>1. 流程</h4><p>一般会有如下的流程，这个流程可以交给 analyzer 进行处理。</p>
+<ol>
+<li>文本令牌化为独立的词。</li>
+<li>小写</li>
+<li>移除停止词</li>
+<li>还原词源</li>
+</ol>
+<p>而每一个 analyzer 还针对具体情况做优化。比如说，我们看上述流程的<strong>第一步</strong>，Tokenize 文本为独立的词。 实际上，英文的文本分词特别容易，因为单词和单词之间存在空格，而中文则不然，中文的词和词之间无空格，总要分词。 <a href="https://github.com/medcl/elasticsearch-analysis-ik" target="_blank" rel="external">https://github.com/medcl/elasticsearch-analysis-ik</a> 就是为了解决这个问题。</p>
+<h3 id="3-3-全文搜索的-ES-解决方案"><a href="#3-3-全文搜索的-ES-解决方案" class="headerlink" title="3.3 全文搜索的 ES 解决方案"></a>3.3 全文搜索的 ES 解决方案</h3><blockquote>
+<p>TODO: 全文搜索 RDBMS like 的效率问题。</p>
+</blockquote>
+<p>全文搜索包含两个重要方面：</p>
+<ul>
+<li>相关性：通过 TF/IDF , 距离 , 模糊相似度，以及其他算法</li>
+<li><p>分析：将大片文字转为 distinct, normalized tokens</p>
+</li>
+<li><p>Term-Based : term or fuzzy</p>
+</li>
+<li>Full-Text : match or query_string</li>
+</ul>
+<p>TERM 查找-&gt;精确查找</p>
+<blockquote>
+<p>加上 constant_score 和 filter 的话，就成了常亮？麻痹的，这两个又是啥</p>
+</blockquote>
+<p> inverted index</p>
+<p>内部过滤操作：</p>
+<p>1.</p>
+<h3 id="3-4-进阶搜索"><a href="#3-4-进阶搜索" class="headerlink" title="3.4 进阶搜索"></a>3.4 进阶搜索</h3><p>所谓搜索，其实就是</p>
+<h2 id="0x04-常用代码片段"><a href="#0x04-常用代码片段" class="headerlink" title="0x04 常用代码片段"></a>0x04 常用代码片段</h2><h3 id="4-1-Tips-And-Hacks"><a href="#4-1-Tips-And-Hacks" class="headerlink" title="4.1 Tips And Hacks"></a>4.1 Tips And Hacks</h3><h2 id="0x06-Python-SDK"><a href="#0x06-Python-SDK" class="headerlink" title="0x06 Python SDK"></a>0x06 Python SDK</h2><p>官方提供了两个 SDK 方便我们进行日常的开发：</p>
+<ul>
+<li>elasticsearch</li>
+<li>elasticsearch_dsl</li>
+</ul>
+<p>前者偏底层一些，后者偏高层一些，高低层的有点类似于 psycopg2 和 sqlalchemy 之间的关系。</p>
+<h2 id="0x07-踩坑集"><a href="#0x07-踩坑集" class="headerlink" title="0x07 踩坑集"></a>0x07 踩坑集</h2><ul>
+<li>序列问题</li>
+</ul>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。&lt;/p&gt;
+&lt;p&gt;不定期更新。&lt;/p&gt;
+&lt;p&gt;最早使用 ElasticSearch 是两年前了。最近准备用 Django 写一个全栈式的应用，借用强大的 ES 来做搜索。这是我在写程序之余写这篇文章的原因。&lt;/p&gt;
+&lt;p&gt;官网介绍 ElasticSearch 不仅仅是全文搜索，也可以结构化搜索（这里用结构化查询会更准确一些），分析，处理人类语言，地理位置，以及关系。&lt;/p&gt;
+&lt;p&gt;然而，我在项目使用过程中还是主要用到了全文搜索以及推荐。&lt;/p&gt;
+&lt;p&gt;不用其他的主要原因是因为 ES 尺有所短寸有所长：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;geo 处理方面 postgis 完全就是神一般的存在。为什么还要用 ES 呢？&lt;/li&gt;
+&lt;li&gt;关系型数据库的核心不就是处理关系？复杂的关系肯定还是放在关系数据库里面。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;highlighted search snippets, and search-as-you-type and did-you-mean suggestions.&lt;/p&gt;
+&lt;p&gt;我对 ElasticSearch 在后台组件里的作用在于搜索与推荐：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;整站的搜索功能&lt;ul&gt;
+&lt;li&gt;全文搜索&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;推荐&lt;ul&gt;
+&lt;li&gt;依据某几个维度的数据进行排序&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="后台组件" scheme="http://twocucao.xyz/categories/%E5%90%8E%E5%8F%B0%E7%BB%84%E4%BB%B6/"/>
+    
+    
+      <category term="CheatSheet" scheme="http://twocucao.xyz/tags/CheatSheet/"/>
+    
+      <category term="ElasticSearch" scheme="http://twocucao.xyz/tags/ElasticSearch/"/>
+    
+      <category term="搜索排序" scheme="http://twocucao.xyz/tags/%E6%90%9C%E7%B4%A2%E6%8E%92%E5%BA%8F/"/>
+    
+      <category term="搜索引擎" scheme="http://twocucao.xyz/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Docker CheatSheet</title>
+    <link href="http://twocucao.xyz/2018/02/10/DockerCheatSheet/"/>
+    <id>http://twocucao.xyz/2018/02/10/DockerCheatSheet/</id>
+    <published>2018-02-10T01:01:55.000Z</published>
+    <updated>2018-02-11T01:14:31.550Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。</p>
+<ul>
+<li>Docker 相关概念</li>
+<li>Docker 配套工具</li>
+<li>Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化</li>
+<li>Docker 踩坑记录</li>
+</ul>
+<p>不定期更新。</p>
+<a id="more"></a>
+<h2 id="0x01-Docker-相关概念"><a href="#0x01-Docker-相关概念" class="headerlink" title="0x01 Docker 相关概念"></a>0x01 Docker 相关概念</h2><h3 id="1-1-Docker-是什么？"><a href="#1-1-Docker-是什么？" class="headerlink" title="1.1 Docker 是什么？"></a>1.1 Docker 是什么？</h3><p>在认知 Docker 这种相对而言比较新概念的时候，只要从以往的经验中拿出一个词语来概括新词汇即可。</p>
+<p>于是，我们便可以这么理解：</p>
+<blockquote>
+<p>Docker 是一种比虚拟机轻量的用来存放职责比较单一的应用的容器。</p>
+</blockquote>
+<p>也就是三点：</p>
+<ul>
+<li>比虚拟机轻量</li>
+<li>用来存放职责单一的应用</li>
+<li>容器</li>
+</ul>
+<p>显然这是一种理解，而不是一种定义。</p>
+<h3 id="1-2-Docker-是用来做什么的？"><a href="#1-2-Docker-是用来做什么的？" class="headerlink" title="1.2 Docker 是用来做什么的？"></a>1.2 Docker 是用来做什么的？</h3><p>新技术本质是什么？工具也。<br>每一个新的技术都是为了提升效率才被创造出来，那么，究竟 Docker 可以从哪些方面提升我们的效率呢？</p>
+<p>我们知道开发一个有些规模的网站的话，需要严格遵守如下的开发流程：</p>
+<ul>
+<li>编码</li>
+<li>测试</li>
+<li>集成到系统中</li>
+<li>部署</li>
+</ul>
+<p>但如果人员比较多，则会出现问题，有的人喜欢用 MacOS, 有的人喜欢用 Ubuntu, 开发测试环境怎么统一呢？如果开发人员明明使用的是某个版本的 PostgreSQL, 用了最新的功能，但是测试和运维用的就是老版本的功能怎么办？</p>
+<p>部署环境也会有问题，比如，开发部突然想使用更高版本的软件，比如突然需要更多的 Django 应用来负担海量请求的怎么办？Hadoop 不够用怎么办？</p>
+<p>当然，思路很简单，开发的时候使用虚拟机，拷贝给大家一起用，部署的时候多创建一些机器，然后上 Ansible 远程操控。即可。</p>
+<p>并不是不行，但是 Docker 由于更加轻量，操作粒度更加细腻，我可以销毁镜像，上传镜像，定制镜像，很轻松调整镜像包并且安装挂载文件。</p>
+<h2 id="0x02-Docker-初始配置"><a href="#0x02-Docker-初始配置" class="headerlink" title="0x02 Docker 初始配置"></a>0x02 Docker 初始配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">docker-machine create --driver=virtualbox default</div><div class="line">docker-machine ls</div><div class="line">eval &quot;$(docker-machine env default)&quot;</div></pre></td></tr></table></figure>
+<h2 id="0x03-Django-技术栈-Docker-化"><a href="#0x03-Django-技术栈-Docker-化" class="headerlink" title="0x03 Django 技术栈 Docker 化"></a>0x03 Django 技术栈 Docker 化</h2><p>为了理解这个过程，下面我将我 Docker 化 django 应用的流程按照一定步骤演示出来。我将我使用 Django 的部分经验搞出来，做成了一个 django-bpc ，即 django best practice。如果诸位有兴趣研究的话，拿来看看源码倒是倒是非常好。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 演示环境为 MAC, 在此之前，务必安装好 docker for mac 以及 virualbox</span></div><div class="line"><span class="comment"># xxxxxx 为 阿里云分配的容器 registry</span></div><div class="line">docker-machine create --engine-registry-mirror=https://xxxxxx.mirror.aliyuncs.com <span class="_">-d</span> virtualbox default</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line">├── AUTHORS.md</div><div class="line">├── HISTORY.md</div><div class="line">├── LICENSE</div><div class="line">├── MANIFEST.in</div><div class="line">├── Makefile</div><div class="line">├── README.md</div><div class="line">├── assets</div><div class="line">├── compose</div><div class="line">│   ├── django</div><div class="line">│   ├── elasticsearch</div><div class="line">│   ├── nginx</div><div class="line">│   ├── postgres</div><div class="line">│   ├── rabbitmq</div><div class="line">│   └── redis</div><div class="line">├── config</div><div class="line">│   ├── __init__.py</div><div class="line">│   ├── settings</div><div class="line">│   ├── urls.py</div><div class="line">│   └── wsgi.py</div><div class="line">├── dev.yml</div><div class="line">├── docker-compose.yml</div><div class="line">├── docs</div><div class="line">│   ├── Makefile</div><div class="line">│   ├── exts</div><div class="line">│   ├── make.bat</div><div class="line">│   ├── make_pdf.sh</div><div class="line">│   └── <span class="built_in">source</span></div><div class="line">├── manage.py</div><div class="line">├── pytest.ini</div><div class="line">├── requirements</div><div class="line">│   ├── base.txt</div><div class="line">│   ├── local.txt</div><div class="line">│   ├── production.txt</div><div class="line">│   └── test.txt</div><div class="line">├── scripts</div><div class="line">├── setup.cfg</div><div class="line">├── tests</div><div class="line">│   ├── __init__.py</div><div class="line">│   ├── conftest.py</div><div class="line">│   └── test_basics.py</div><div class="line">└── yadjangoblog</div><div class="line">    ├── __init__.py</div><div class="line">    ├── contrib</div><div class="line">    ├── static</div><div class="line">    ├── templates</div><div class="line">    ├── yaaccounts</div><div class="line">    ├── yaadmin</div><div class="line">    ├── yaapi</div><div class="line">    ├── yablog</div><div class="line">    ├── yacommon</div><div class="line">    └── yataskapp</div></pre></td></tr></table></figure>
+<h3 id="3-1-开发时"><a href="#3-1-开发时" class="headerlink" title="3.1 开发时"></a>3.1 开发时</h3><h4 id="1-运行所需组件"><a href="#1-运行所需组件" class="headerlink" title="1. 运行所需组件"></a>1. 运行所需组件</h4><p>在开发时候需要使用几个后台的组件</p>
+<ul>
+<li>PostgreSQL 用于做数据存储</li>
+<li>Redis 用于做缓存 和 Session 等等</li>
+<li>RedditMQ 用于消息队列</li>
+<li>ElasticSearch 用于做搜索与推荐</li>
+</ul>
+<p>目录中的组件基本上都在这儿了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">├── compose</div><div class="line">│   ├── django</div><div class="line">│   ├── elasticsearch</div><div class="line">│   ├── nginx</div><div class="line">│   ├── postgres</div><div class="line">│   ├── rabbitmq</div><div class="line">│   └── redis</div></pre></td></tr></table></figure>
+<p>进行初步的封装和添加脚本，不直接采用官网的配置需要是因为添加一些的定制版本。</p>
+<h4 id="2-Vue-JS-运行环境"><a href="#2-Vue-JS-运行环境" class="headerlink" title="2. Vue.JS 运行环境"></a>2. Vue.JS 运行环境</h4><p>Vue.JS 使用 Vue-Cli 搭建的脚手架还是挺方便的，这个就无需 Docker 化了，需要注意的是，建议配置一下开发时候请求的 API 地址。</p>
+<p>我本人用于请求本地地址的 8080 端口，并且 8080 端口映射到 Docker 容器里面的 Django App</p>
+<h4 id="3-Django-App"><a href="#3-Django-App" class="headerlink" title="3. Django App"></a>3. Django App</h4><p>配置 Django, 我使用的是 ubuntu 16.04 基础镜像，然后安装必备的依赖。</p>
+<p>接着指定 workdir 为当前目录</p>
+<p>需要注意的是，Django App 里面需要等待 PostgreSQL 初始化完毕才能进行正常的运行接下来需要运行的命令，比如 runserver 之类的命令。</p>
+<p>entrypoint 的左右即是放在命令执行之前，这样的话，重写掉 entrypoint 文件，就可以实现上面的功能了</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 本段代码来自 cookiecutter Django</span></div><div class="line">function postgres_ready()&#123;</div><div class="line">python &lt;&lt; END</div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> psycopg2</div><div class="line"><span class="keyword">try</span>:</div><div class="line">    conn = psycopg2.connect(dbname=<span class="string">"$POSTGRES_USER"</span>, user=<span class="string">"$POSTGRES_USER"</span>, password=<span class="string">"$POSTGRES_PASSWORD"</span>, host=<span class="string">"postgres"</span>)</div><div class="line"><span class="keyword">except</span> psycopg2.OperationalError:</div><div class="line">    sys.exit(<span class="number">-1</span>)</div><div class="line">sys.exit(<span class="number">0</span>)</div><div class="line">END</div><div class="line">&#125;</div><div class="line"></div><div class="line">until postgres_ready; do</div><div class="line">  &gt;&amp;<span class="number">2</span> echo <span class="string">"Postgres is unavailable - sleeping"</span></div><div class="line">  sleep <span class="number">1</span></div><div class="line">done</div></pre></td></tr></table></figure>
+<p>最后封装一些命令到，比如启动 Celery 之类的。</p>
+<h4 id="4-Celery-运行环境"><a href="#4-Celery-运行环境" class="headerlink" title="4. Celery 运行环境"></a>4. Celery 运行环境</h4><h4 id="5-其他零散的重要配置"><a href="#5-其他零散的重要配置" class="headerlink" title="5. 其他零散的重要配置"></a>5. 其他零散的重要配置</h4><h3 id="3-2-具体开发"><a href="#3-2-具体开发" class="headerlink" title="3.2 具体开发"></a>3.2 具体开发</h3><p>我编写了一整套 makefile 的命令，我会先进入项目 YaDjangoBlog , 然后执行 make ; 执行 make 之后，显示了我编写的一些便于开发测试的命令如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">sep--sep-a           ========== 开发时命令 ==============</div><div class="line">django-build-up      build and compose up</div><div class="line">force_djnago_build-up django / pg / es</div><div class="line">django-before-up     e.g pg / es / redis</div><div class="line">django-runserver     runserver</div><div class="line">django-celerybeat    celerybeat</div><div class="line">django-celeryworker  celeryworker</div><div class="line">django-just-up       build and up</div><div class="line">django-manager       Enter python manage.py</div><div class="line">django-console       Enter Django Console</div><div class="line">shell                Enter Shell</div><div class="line">dbshell              Enter psql as yadjangoweb</div><div class="line">sep--sep-b           ========== 测试与代码质量 ==============</div><div class="line">lint                 check style with flake8</div><div class="line">test                 run tests quickly with the default Python</div><div class="line">coverage             check code coverage quickly with the default Python</div><div class="line">sep--sep-c           ========== 文档生成相关 ==============</div><div class="line">docs                 generate Sphinx HTML documentation, including API docs</div><div class="line">servedocs            compile the docs watching for changes</div><div class="line">sep--sep-d           ========== 程序发布相关 ==============</div><div class="line">release              package and upload a release</div><div class="line">dist                 builds source and wheel package</div><div class="line">install              install the package to the active Python&apos;s site-packages</div><div class="line">sep--sep-e           ========== Docker 镜像相关 ==============</div><div class="line">build-postgres       &gt; Postgres</div><div class="line">force-build-postgres &gt; Postgres</div><div class="line">build-ubuntu         &gt; base ubuntu</div><div class="line">force_build-ubuntu   &gt; base ubuntu</div><div class="line">build-django         &gt; base django</div><div class="line">force_build-django   &gt; base django</div><div class="line">sep--sep-f           ========== 文件清理相关 ==============</div><div class="line">clean                remove all build, test, coverage and Python artifacts</div><div class="line">clean-build          remove build artifacts</div><div class="line">clean-pyc            remove Python file artifacts</div><div class="line">clean-test           remove test and coverage artifacts</div></pre></td></tr></table></figure>
+<h4 id="1-构建镜像"><a href="#1-构建镜像" class="headerlink" title="1. 构建镜像"></a>1. 构建镜像</h4><p>执行 build 命令即可。</p>
+<h4 id="2-使用-Tmuxinator-批量运行命令"><a href="#2-使用-Tmuxinator-批量运行命令" class="headerlink" title="2. 使用 Tmuxinator 批量运行命令"></a>2. 使用 Tmuxinator 批量运行命令</h4><p>现在，我有这么一个需求，就是在 iterm 中开启如下的终端：</p>
+<ul>
+<li>第 1 个终端，运行的命令是 Vue.JS 的启动命令 npm run dev。</li>
+<li>第 2 个终端，有两个分屏，其一用于构建 iconfont 字体文件的命令，其二用于 Gulp 动态编译 SCSS 文件的命令。</li>
+<li>第 3 个终端，运行的命令是 Django 的 runserver 的命令。</li>
+<li>第 4 个终端，有两个分屏，一个是 Django 容器的 bash 环境，另一个是 PostgreSQL 的 命令行环境。</li>
+<li>第 5 个终端，有两个分屏，一者运行 Celery Beat，另一者则是运行 Celery Worker.</li>
+</ul>
+<blockquote>
+<p>当然，目前没有添加 redis 和 RabbitMQ 的命令行环境</p>
+</blockquote>
+<h4 id="3-使用-PyCharm-进行开发"><a href="#3-使用-PyCharm-进行开发" class="headerlink" title="3. 使用 PyCharm 进行开发"></a>3. 使用 PyCharm 进行开发</h4><h3 id="3-3-部署时"><a href="#3-3-部署时" class="headerlink" title="3.3 部署时"></a>3.3 部署时</h3><p>Docker 部署需要解决的问题，是裸机部署的 Docker 化。</p>
+<blockquote>
+<p>TODO: 目前 Docker 部署的脚本还在编写中，这部分的文字可能后期会调整</p>
+</blockquote>
+<h4 id="0-Django-生产环境和开发环境之间的区别"><a href="#0-Django-生产环境和开发环境之间的区别" class="headerlink" title="0. Django 生产环境和开发环境之间的区别"></a>0. Django 生产环境和开发环境之间的区别</h4><p>生产环境和开发环境除了一些文字配置上的不同，还有一些不同，比如：</p>
+<ol>
+<li>新增了 uwsgi / gunicorn 作为新的 web 容器</li>
+<li>新增了 Ngnix 作为反向代理</li>
+<li>Celery Worker 数量的变化</li>
+<li>Supervisor 进程守护</li>
+</ol>
+<p>首先说第一点带来的区别，我们使用 Django 内置的 runserver 的时候，其实这个命令可以用于做生产环境的 Web 服务器。</p>
+<p>比如，只需如此 python manage.py runserver 0.0.0.0:8888</p>
+<p>可以用，但不推荐用。没什么负载量。这时候就需要 gunicorn 了。你可以理解 Gunicorn 是进阶的 runserver,</p>
+<p>可以参考：<a href="https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/gunicorn/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/gunicorn/</a></p>
+<p>同时，Gunicorn 可以进行颗粒度更细致的操作，但负载量不如 uwsgi, 毕竟前者 python 写的，后者是 C 写的。</p>
+<p>一般 Gunicorn 也会配上 NGNIX,</p>
+<p>简单来说，Nginx 至少可以解决下面的问题：</p>
+<ul>
+<li>匹配域名</li>
+<li>转发请求<ul>
+<li>设置请求头</li>
+<li>转发本地的静态文件 (static / media）</li>
+<li>映射部分请求到 gunicorn , 然后 gunicorn 开启一个线程到 Django</li>
+<li>负载均衡</li>
+</ul>
+</li>
+</ul>
+<p>需要注意的是 gunicorn 这种关键性的进程，一定要用 Supervisor 进行守护，否则挂掉了就完蛋了，</p>
+<h4 id="1-裸机部署-Django-程序"><a href="#1-裸机部署-Django-程序" class="headerlink" title="1. 裸机部署 Django 程序"></a>1. 裸机部署 Django 程序</h4><h4 id="2-Docker-部署"><a href="#2-Docker-部署" class="headerlink" title="2. Docker 部署"></a>2. Docker 部署</h4><h2 id="0x04-Docker-踩坑记录"><a href="#0x04-Docker-踩坑记录" class="headerlink" title="0x04 Docker 踩坑记录"></a>0x04 Docker 踩坑记录</h2><h3 id="4-1-PostgreSQL-的初始化"><a href="#4-1-PostgreSQL-的初始化" class="headerlink" title="4.1 PostgreSQL 的初始化"></a>4.1 PostgreSQL 的初始化</h3><p>当 Docker 化 PostgreSQL 的时候，必须要把一些初始化脚本放在 docker-entrypoint-initdb.d 中，才能初始化，笔者在进行测试的时候多次发现无法进行初始化，究其原因，经过查找，如果没有及时删除 Volume 的话，则无论怎么初始化，或者 Build, 每一次都会挂载原来的文件夹。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ADD init_django_db.sh /docker-entrypoint-initdb.d/init_django_db.sh</div></pre></td></tr></table></figure>
+<h3 id="4-2-清空所有-Image"><a href="#4-2-清空所有-Image" class="headerlink" title="4.2 清空所有 Image"></a>4.2 清空所有 Image</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Delete all containers</span></div><div class="line">docker rm $(docker ps <span class="_">-a</span> -q)</div><div class="line"><span class="comment"># Delete all images</span></div><div class="line">docker rmi $(docker images -q)</div><div class="line"><span class="comment"># Force delete</span></div><div class="line">docker rmi $(docker images -q) <span class="_">-f</span></div><div class="line"><span class="comment"># Delete Unused Volume</span></div><div class="line">docker volume prune</div></pre></td></tr></table></figure>
+<h1 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h1><ul>
+<li><a href="https://github.com/wsargent/docker-cheat-sheet" target="_blank" rel="external">https://github.com/wsargent/docker-cheat-sheet</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-01-20</strong> 初始化本文</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Docker 相关概念&lt;/li&gt;
+&lt;li&gt;Docker 配套工具&lt;/li&gt;
+&lt;li&gt;Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化&lt;/li&gt;
+&lt;li&gt;Docker 踩坑记录&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不定期更新。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="我的开源项目" scheme="http://twocucao.xyz/categories/%E6%88%91%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
+    
+    
+      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
+    
+      <category term="Docker" scheme="http://twocucao.xyz/tags/Docker/"/>
+    
+      <category term="DevOps" scheme="http://twocucao.xyz/tags/DevOps/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Numpy Cheatsheet</title>
+    <link href="http://twocucao.xyz/2018/02/03/NumpyCheatSheet/"/>
+    <id>http://twocucao.xyz/2018/02/03/NumpyCheatSheet/</id>
+    <published>2018-02-03T02:37:53.000Z</published>
+    <updated>2018-02-11T01:19:55.176Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Numpy 相关语句。</p>
+<p>主要包含：</p>
+<h1 id="Numpy-库"><a href="#Numpy-库" class="headerlink" title="Numpy 库"></a>Numpy 库</h1><h2 id="0x00-前言-1"><a href="#0x00-前言-1" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Numpy 相关语句。</p>
+<p>对于数据分析应用而言，最应该关注：</p>
+<ul>
+<li>用于数据整理和清理、子集构造和过滤、转换等快速的矢量化数组运算。</li>
+<li>常用的数组算法，如排序、唯一化、集合运算等。</li>
+<li>高效的描述统计和数据聚合 / 摘要运算。</li>
+<li>用于异构数据集的合并 / 连接运算的数据对齐和关系型数据运算。</li>
+<li>将条件逻辑表述为数组表达式（而不是带有 if-else-if 分支的循环）</li>
+<li>数据的分组运算（聚合、转换、函数应用等）。</li>
+</ul>
+<blockquote>
+<p>学习 Numpy 本质上是为了更好的使用 Pandas</p>
+</blockquote>
+<h2 id="0x01-ndarray"><a href="#0x01-ndarray" class="headerlink" title="0x01 ndarray"></a>0x01 ndarray</h2><h3 id="1-1-数据类型"><a href="#1-1-数据类型" class="headerlink" title="1.1 数据类型"></a>1.1 数据类型</h3><h3 id="1-2-创建-ndarray"><a href="#1-2-创建-ndarray" class="headerlink" title="1.2 创建 ndarray"></a>1.2 创建 ndarray</h3><h3 id="1-3-数组和标量之间的运算"><a href="#1-3-数组和标量之间的运算" class="headerlink" title="1.3 数组和标量之间的运算"></a>1.3 数组和标量之间的运算</h3><p>当我们把数组当做矢量的时候。</p>
+<ol>
+<li>两个大小相同的矢量将运算到元素级</li>
+<li>矢量和标量将作用与每一个元素</li>
+<li>不同大小的矢量之间的运算叫做广播</li>
+</ol>
+<h3 id="1-4-索引和切片"><a href="#1-4-索引和切片" class="headerlink" title="1.4 索引和切片"></a>1.4 索引和切片</h3><h3 id="1-4-1-一般索引和一般切片"><a href="#1-4-1-一般索引和一般切片" class="headerlink" title="1.4.1 一般索引和一般切片"></a>1.4.1 一般索引和一般切片</h3><p>对于一维数组的话，如果没有显式 copy 则会修改原来的值。</p>
+<p>切片语法与 Python 相近</p>
+<h3 id="1-4-2-切片型索引"><a href="#1-4-2-切片型索引" class="headerlink" title="1.4.2 切片型索引"></a>1.4.2 切片型索引</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a[:<span class="number">2</span>,<span class="number">1</span>:]</div><div class="line">a[<span class="number">2</span>,<span class="number">1</span>:]</div></pre></td></tr></table></figure>
+<h3 id="1-4-3-布尔型索引"><a href="#1-4-3-布尔型索引" class="headerlink" title="1.4.3 布尔型索引"></a>1.4.3 布尔型索引</h3><p>参考 pandas 语法</p>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-06-03</strong> 初始化本文</li>
+<li><strong>2018-02-03</strong> 重修文字</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Numpy 相关语句。&lt;/
+    
+    </summary>
+    
+      <category term="数据科学" scheme="http://twocucao.xyz/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/"/>
+    
+    
+      <category term="Pandas" scheme="http://twocucao.xyz/tags/Pandas/"/>
+    
+      <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
+    
+      <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
+    
+      <category term="Numpy" scheme="http://twocucao.xyz/tags/Numpy/"/>
+    
+  </entry>
+  
+  <entry>
     <title>用 tmux 与 tmuxinator 打造开发工作流</title>
     <link href="http://twocucao.xyz/2018/01/28/TmuxWithTmuxinatorWorkflow/"/>
     <id>http://twocucao.xyz/2018/01/28/TmuxWithTmuxinatorWorkflow/</id>
     <published>2018-01-28T02:57:41.000Z</published>
-    <updated>2018-01-28T07:42:18.848Z</updated>
+    <updated>2018-01-28T08:01:27.689Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文就我最近开发的一个前后端的项目（名字叫做 yavueblog) 来简单介绍两个神器</p>
 <ul>
@@ -96,40 +436,6 @@
   </entry>
   
   <entry>
-    <title>Review Writing</title>
-    <link href="http://twocucao.xyz/2018/01/28/ReviewWriting/"/>
-    <id>http://twocucao.xyz/2018/01/28/ReviewWriting/</id>
-    <published>2018-01-28T01:38:16.000Z</published>
-    <updated>2018-01-28T01:38:21.797Z</updated>
-    
-    <content type="html"><![CDATA[<p>大约一年前，认为自己还在语言的凝练上欠缺一些功夫，嫌自己说话啰嗦，于是把自己的博客整理了一遍，删掉了不少的文字。</p>
-<p>这次又精简了相当一部分的文字。</p>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2017-12-20</strong> 初始化本文</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;大约一年前，认为自己还在语言的凝练上欠缺一些功夫，嫌自己说话啰嗦，于是把自己的博客整理了一遍，删掉了不少的文字。&lt;/p&gt;
-&lt;p&gt;这次又精简了相当一部分的文字。&lt;/p&gt;
-&lt;hr&gt;
-&lt;p&gt;ChangeLog:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;2017-12-20&lt;/s
-    
-    </summary>
-    
-      <category term="写在人生的边上" scheme="http://twocucao.xyz/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/"/>
-    
-    
-      <category term="随笔" scheme="http://twocucao.xyz/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Python 中的数据压缩和存档</title>
     <link href="http://twocucao.xyz/2018/01/23/PythonCompression/"/>
     <id>http://twocucao.xyz/2018/01/23/PythonCompression/</id>
@@ -171,10 +477,9 @@
     <link href="http://twocucao.xyz/2017/12/28/AllStuffAboutCSS/"/>
     <id>http://twocucao.xyz/2017/12/28/AllStuffAboutCSS/</id>
     <published>2017-12-28T10:41:47.000Z</published>
-    <updated>2018-01-28T01:37:14.963Z</updated>
+    <updated>2018-02-12T05:46:07.062Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本笔记诞生于很久前零零散散记录的笔记，拿出来公开一下。</p>
-<p>学习 CSS, 主要靠多推导式记忆。</p>
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本笔记诞生于很久前零零散散记录的笔记，拿出来发布一下。</p>
 <h2 id="0x01-CSS-是如何工作的？"><a href="#0x01-CSS-是如何工作的？" class="headerlink" title="0x01 CSS 是如何工作的？"></a>0x01 CSS 是如何工作的？</h2><p>HTML 是元素的标记语言。</p>
 <p>CSS 被用来 样式和网页布局的。</p>
 <p>样式和布局都有哪些呢？</p>
@@ -201,8 +506,35 @@
 <p>属性</p>
 <p>三，层叠与继承</p>
 <p>既然是层叠，就要有层叠的规律</p>
-<h2 id="0x03-CSS-新语法"><a href="#0x03-CSS-新语法" class="headerlink" title="0x03 CSS 新语法"></a>0x03 CSS 新语法</h2><p>布局</p>
-<h3 id="3-1-Flex-Layout"><a href="#3-1-Flex-Layout" class="headerlink" title="3.1 Flex Layout"></a>3.1 Flex Layout</h3><h3 id="3-2-Grid-Layout"><a href="#3-2-Grid-Layout" class="headerlink" title="3.2 Grid Layout"></a>3.2 Grid Layout</h3><h2 id="0x04-SCSS"><a href="#0x04-SCSS" class="headerlink" title="0x04 SCSS"></a>0x04 SCSS</h2><h3 id="4-1-如何组织-SCSS-代码"><a href="#4-1-如何组织-SCSS-代码" class="headerlink" title="4.1 如何组织 SCSS 代码"></a>4.1 如何组织 SCSS 代码</h3><h2 id="0x05-常见的设计"><a href="#0x05-常见的设计" class="headerlink" title="0x05 常见的设计"></a>0x05 常见的设计</h2><h3 id="5-1-圣杯"><a href="#5-1-圣杯" class="headerlink" title="5.1 圣杯"></a>5.1 圣杯</h3><hr>
+<h2 id="0x03-CSS-新语法"><a href="#0x03-CSS-新语法" class="headerlink" title="0x03 CSS 新语法"></a>0x03 CSS 新语法</h2><h3 id="3-1-Flex-Layout"><a href="#3-1-Flex-Layout" class="headerlink" title="3.1 Flex Layout"></a>3.1 Flex Layout</h3><ul>
+<li><a href="https://github.com/philipwalton/solved-by-flexbox" target="_blank" rel="external">https://github.com/philipwalton/solved-by-flexbox</a></li>
+</ul>
+<h3 id="3-2-Grid-Layout"><a href="#3-2-Grid-Layout" class="headerlink" title="3.2 Grid Layout"></a>3.2 Grid Layout</h3><h2 id="0x04-SCSS"><a href="#0x04-SCSS" class="headerlink" title="0x04 SCSS"></a>0x04 SCSS</h2><p>这是一种兼容 CSS 语法的新语言。主要用于提升代码的可维护性。</p>
+<p>至于其他 less 之类大同小异。只选取了功能最强大的部分进行间接。</p>
+<h3 id="4-1-OOCSS-BEM-我的实践"><a href="#4-1-OOCSS-BEM-我的实践" class="headerlink" title="4.1 OOCSS / BEM / 我的实践"></a>4.1 OOCSS / BEM / 我的实践</h3><h3 id="4-1-如何组织-SCSS-代码-—-布局篇"><a href="#4-1-如何组织-SCSS-代码-—-布局篇" class="headerlink" title="4.1 如何组织 SCSS 代码 — 布局篇"></a>4.1 如何组织 SCSS 代码 — 布局篇</h3><h3 id="4-2-如何组织-SCSS-代码-—-组件篇"><a href="#4-2-如何组织-SCSS-代码-—-组件篇" class="headerlink" title="4.2 如何组织 SCSS 代码 — 组件篇"></a>4.2 如何组织 SCSS 代码 — 组件篇</h3><h4 id="4-2-BEM"><a href="#4-2-BEM" class="headerlink" title="4.2 BEM"></a>4.2 BEM</h4><h2 id="0x05-CSS-规范"><a href="#0x05-CSS-规范" class="headerlink" title="0x05 CSS 规范"></a>0x05 CSS 规范</h2><ul>
+<li><p><a href="https://github.com/airbnb/css" target="_blank" rel="external">https://github.com/airbnb/css</a></p>
+</li>
+<li><p>Use soft tabs (2 spaces) for indentation</p>
+</li>
+<li>Prefer dashes over camelCasing in class names.<ul>
+<li>Underscores and PascalCasing are okay if you are using BEM (see OOCSS and BEM below).</li>
+</ul>
+</li>
+<li>Do not use ID selectors</li>
+<li>When using multiple selectors in a rule declaration, give each selector its own line.</li>
+<li>Put a space before the opening brace { in rule declarations</li>
+<li>In properties, put a space after, but not before, the : character.</li>
+<li>Put closing braces } of rule declarations on a new line</li>
+<li>Put blank lines between rule declarations</li>
+</ul>
+<p>OOCSS 与 BEM 混用</p>
+<blockquote>
+<p>只要是可维护的好代码，并不需要拘泥于用什么风格</p>
+</blockquote>
+<h3 id="5-1-圣杯"><a href="#5-1-圣杯" class="headerlink" title="5.1 圣杯"></a>5.1 圣杯</h3><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<li><a href="https://github.com/picturepan2/spectre" target="_blank" rel="external">https://github.com/picturepan2/spectre</a></li>
+</ul>
+<hr>
 <p>ChangeLog:</p>
 <ul>
 <li><strong>2017-12-20</strong> 初始化本文</li>
@@ -211,48 +543,99 @@
     
     <summary type="html">
     
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本笔记诞生于很久前零零散散记录的笔记，拿出来公开一下。&lt;/p&gt;
-&lt;p&gt;学习 CSS, 主要靠多推导式
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本笔记诞生于很久前零零散散记录的笔记，拿出来发布一下。&lt;/p&gt;
+&lt;h2 id=&quot;0x01-CSS-是
     
     </summary>
     
-      <category term="未分类" scheme="http://twocucao.xyz/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/"/>
+      <category term="前端开发" scheme="http://twocucao.xyz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
-    
-      <category term="前端开发" scheme="http://twocucao.xyz/tags/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
       <category term="CSS" scheme="http://twocucao.xyz/tags/CSS/"/>
+    
+      <category term="SASS" scheme="http://twocucao.xyz/tags/SASS/"/>
     
   </entry>
   
   <entry>
-    <title>关于 Mac 的一些常识</title>
+    <title>macOS 的系统与软件</title>
     <link href="http://twocucao.xyz/2017/12/23/macOSInDepth/"/>
     <id>http://twocucao.xyz/2017/12/23/macOSInDepth/</id>
     <published>2017-12-23T10:41:47.000Z</published>
-    <updated>2018-01-28T01:37:09.335Z</updated>
+    <updated>2018-02-11T01:14:31.550Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>折腾了 Windows 很多年，后来出于个人偏好转投 Mac，使用起来一直很顺手。现在也开始从顺手开始，研究更深一点的东西。</p>
-<h2 id="0x01-应用程序"><a href="#0x01-应用程序" class="headerlink" title="0x01 应用程序"></a>0x01 应用程序</h2><p>应用程序是一个 bundle 文件，一般为 xxx.app 文件夹，</p>
-<h2 id="0x02-前言"><a href="#0x02-前言" class="headerlink" title="0x02 前言"></a>0x02 前言</h2><h2 id="0x03-前言"><a href="#0x03-前言" class="headerlink" title="0x03 前言"></a>0x03 前言</h2><hr>
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>折腾了 Windows 很多年，后来出于个人开发需求转投 Mac，使用起来一直很顺手。现在也开始从顺手开始到了解更深一点的东西。</p>
+<h2 id="0x01-系统安全架构"><a href="#0x01-系统安全架构" class="headerlink" title="0x01 系统安全架构"></a>0x01 系统安全架构</h2><h3 id="1-1-系统架构概述"><a href="#1-1-系统架构概述" class="headerlink" title="1.1 系统架构概述"></a>1.1 系统架构概述</h3><p>非开发人员分层：</p>
+<ul>
+<li>User Experience<ul>
+<li>Aqua</li>
+<li>Dashboard</li>
+<li>Spotlight</li>
+<li>Dock</li>
+<li>输入法</li>
+<li>屏保</li>
+<li>辅助功能</li>
+<li>语音</li>
+<li>位置与地图</li>
+<li>搜索</li>
+<li>etc</li>
+</ul>
+</li>
+<li>Application Framework<ul>
+<li>Cocoa</li>
+</ul>
+</li>
+<li>Graphics and Media<ul>
+<li>核心框架，OpenAL,Quartz,SceneKit,SpriteKit</li>
+</ul>
+</li>
+<li>Darwin<ul>
+<li>系统内核与 Shell 环境</li>
+</ul>
+</li>
+</ul>
+<p>开发人员分层：</p>
+<ul>
+<li>Cocoa Layer: Cocoa 框架层 包括了用于开发界面程序的框架集合。</li>
+<li>Foundation Layer: 提供了程序开发室使用到的基础数据类型、数值处理、网络、IO 和 日期等</li>
+<li>Media Layer: 提供了图像、声音、视频、动画及游戏开发需要的接口</li>
+<li>Core Service Layer: 系统安全、底层内部数据访问以及存储接口。比如 AddressBook,CoreData,QuickLook 用于快速浏览插件开发。CoreFoundation 框架也属于这一层。</li>
+<li>Core OS Layer: 加速器，蓝牙，异常处理，网络扩展，系统配置</li>
+<li>Kernel &amp; Driver Layer: 内核与驱动层。包括开发设备驱动程序与内核扩展所需的一些框架。</li>
+</ul>
+<p>应用程序是一个 bundle 文件，一般为 xxx.app 文件夹，</p>
+<h3 id="1-1-一些常用软件"><a href="#1-1-一些常用软件" class="headerlink" title="1.1 一些常用软件"></a>1.1 一些常用软件</h3><p>Clang<br>LLVM</p>
+<p>HT Editor</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install ht</div></pre></td></tr></table></figure>
+<h2 id="0x02-前言"><a href="#0x02-前言" class="headerlink" title="0x02 前言"></a>0x02 前言</h2><h2 id="0x03-前言"><a href="#0x03-前言" class="headerlink" title="0x03 前言"></a>0x03 前言</h2><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<li>macOS 软件安全和逆向分析</li>
+</ul>
+<hr>
 <p>ChangeLog:</p>
 <ul>
 <li><strong>2017-12-20</strong> 初始化本文</li>
+<li><strong>2018-02-10</strong> 添加笔记</li>
 </ul>
 ]]></content>
     
     <summary type="html">
     
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;折腾了 Windows 很多年，后来出于个人偏好转投 Mac，使用起来一直很顺手。现在也开始从顺手开
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;折腾了 Windows 很多年，后来出于个人开发需求转投 Mac，使用起来一直很顺手。现在也开始从顺
     
     </summary>
     
-      <category term="深入理解 macOS" scheme="http://twocucao.xyz/categories/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3-macOS/"/>
+      <category term="善用佳软" scheme="http://twocucao.xyz/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"/>
     
     
       <category term="macOS" scheme="http://twocucao.xyz/tags/macOS/"/>
     
       <category term="XCode" scheme="http://twocucao.xyz/tags/XCode/"/>
+    
+      <category term="App Store" scheme="http://twocucao.xyz/tags/App-Store/"/>
+    
+      <category term="Apple Store" scheme="http://twocucao.xyz/tags/Apple-Store/"/>
+    
+      <category term="iTunes Store" scheme="http://twocucao.xyz/tags/iTunes-Store/"/>
     
   </entry>
   
@@ -261,7 +644,7 @@
     <link href="http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/"/>
     <id>http://twocucao.xyz/2017/12/07/ANoteWithSmallMachineAndBigData/</id>
     <published>2017-12-07T08:56:12.000Z</published>
-    <updated>2018-01-28T01:36:24.090Z</updated>
+    <updated>2018-02-11T01:14:31.549Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>机缘巧合，最近公司突然要搞一波大量数据的分析。属于客流类的分析。</p>
 <p>数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在 180 亿左右。</p>
@@ -367,7 +750,10 @@
 <h2 id="0x02-分析阶段"><a href="#0x02-分析阶段" class="headerlink" title="0x02 分析阶段"></a>0x02 分析阶段</h2><p>经过上一步处理，数据的文件总大小大约从 1000GB (uncompressed) -&gt; 30GB 左右 （拆分成若干个文件 compressed) 。每个文件大约是几百兆。</p>
 <h3 id="2-1-性能要点-1：文件系统"><a href="#2-1-性能要点-1：文件系统" class="headerlink" title="2.1 性能要点 1：文件系统"></a>2.1 性能要点 1：文件系统</h3><p>如果统计逻辑很简单，但是数量多，首选使用读取文件。读取文件进行统计速度是非常快的。（人民币玩家走开）</p>
 <p>像 linux 里面的 wc,grep,sort,uniq 在这种场景有时候也能用到。</p>
-<p>但，注意，如果文件特别大，一定要迭代器一个一个读取。</p>
+<blockquote>
+<p>注意，如果文件特别大，一定要迭代器一个一个读取。</p>
+</blockquote>
+<p>对于超大文件，比如说，上百 G 文件，可以先分成小片的文件，然后多进程批量读取并且处理。</p>
 <h3 id="2-2-性能要点-2：化整为零，map-reduce-filter"><a href="#2-2-性能要点-2：化整为零，map-reduce-filter" class="headerlink" title="2.2 性能要点 2：化整为零，map reduce filter"></a>2.2 性能要点 2：化整为零，map reduce filter</h3><p>化整为零这个已经在上面的 1.2 节讲过了。</p>
 <p>map/reduce/filter 可以极大的减少代码。</p>
 <blockquote>
@@ -594,7 +980,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/10/20/UbuntuCheatSheet/"/>
     <id>http://twocucao.xyz/2017/10/20/UbuntuCheatSheet/</id>
     <published>2017-10-20T10:41:47.000Z</published>
-    <updated>2018-01-28T01:12:48.466Z</updated>
+    <updated>2018-01-28T11:43:27.547Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Shell 单行命令。</p>
 <p>不定期更新。</p>
@@ -650,7 +1036,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
     </summary>
     
-      <category term="Linux" scheme="http://twocucao.xyz/categories/Linux/"/>
+      <category term="善用佳软" scheme="http://twocucao.xyz/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"/>
     
     
       <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
@@ -1067,10 +1453,11 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/09/25/VueProjectTalking/"/>
     <id>http://twocucao.xyz/2017/09/25/VueProjectTalking/</id>
     <published>2017-09-25T12:06:05.000Z</published>
-    <updated>2018-01-28T02:30:02.079Z</updated>
+    <updated>2018-01-30T11:48:07.632Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。</p>
-<p>本文仅限于 VueCli 下面的开发：</p>
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级 Vue 项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。</p>
+<p>欢迎切磋。</p>
+<p>项目使用的脚手架为 VueCli 提供的 webpack 脚手架：</p>
 <ul>
 <li>VueJS 2.5.2</li>
 </ul>
@@ -1099,11 +1486,11 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
 <li>便于定制面包屑组件</li>
 <li>其他</li>
 </ol>
-<h2 id="0x03-构建技巧"><a href="#0x03-构建技巧" class="headerlink" title="0x03 构建技巧"></a>0x03 构建技巧</h2><h3 id="3-1-离线-IconFont"><a href="#3-1-离线-IconFont" class="headerlink" title="3.1 离线 IconFont"></a>3.1 离线 IconFont</h3><p>经常需要离线调试网页，顺手写了这个脚本，这并不是说 iconfont 不好，只是个人偏好而已。</p>
-<p>所以，我就查找了一些资料，正好之前研究过某个网站的反爬机制，研究了一下他们的 iconfont, 知道了 font-carrier, 然后调用 node 脚本打包字体文件，并在这个过程中自动生成对应的 iconfont.css</p>
-<p>最后的结果就是，当我放一个文件到 svg 文件夹下面的时候，比如 bank.svg , 我执行一下脚本，生成对应的字体文件，在 vue 组件中直接输入</p>
+<h2 id="0x03-构建技巧"><a href="#0x03-构建技巧" class="headerlink" title="0x03 构建技巧"></a>0x03 构建技巧</h2><h3 id="3-1-离线-IconFont"><a href="#3-1-离线-IconFont" class="headerlink" title="3.1 离线 IconFont"></a>3.1 离线 IconFont</h3><p>经常需要离线调试网页，顺手写了这个脚本。</p>
+<p>之前在研究某个网站的反爬机制的时候发现时动态生成 iconfont, 然后通过 unicode 码来实现数字的显示，从而让爬虫小白无法爬取。研究了一下他们的 iconfont, 知道了 font-carrier, 然后调用 node 脚本打包字体文件，并在这个过程中自动生成对应的 iconfont.css</p>
+<p>最后的结果就是，当我放一个文件到 svg 文件夹下面的时候，比如 bank.svg , 我执行一下脚本，生成对应的字体文件，在 html 里面编写脚本</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;span class=&quot;iconfont iconfont-bank&quot; &gt;&lt;/span&gt;</div></pre></td></tr></table></figure>
-<p>然后就呈现出来了。</p>
+<p>然后对应图标就呈现出来了。</p>
 <h3 id="3-2-Webpack-构建工具"><a href="#3-2-Webpack-构建工具" class="headerlink" title="3.2 Webpack 构建工具"></a>3.2 Webpack 构建工具</h3><p>日常开发用的是 VueCli, 配置还是非常人性化的。开箱即用。</p>
 <h4 id="开发环境与部署环境"><a href="#开发环境与部署环境" class="headerlink" title="开发环境与部署环境"></a>开发环境与部署环境</h4><p>VueCLI 内置了变量的管理，你可以定义 config/dev.js</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = merge(prodEnv, &#123;</div><div class="line">  <span class="attr">NODE_ENV</span>: <span class="string">'"development"'</span>,</div><div class="line">  <span class="attr">API_ROOT</span>: <span class="string">'"http://dev-data.twocucao.xyz"'</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -1192,8 +1579,9 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
     <summary type="html">
     
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。&lt;/p&gt;
-&lt;p&gt;本文仅限于 VueCli 下面的开发：&lt;/p&gt;
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;最近升级 Vue 项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。&lt;/p&gt;
+&lt;p&gt;欢迎切磋。&lt;/p&gt;
+&lt;p&gt;项目使用的脚手架为 VueCli 提供的 webpack 脚手架：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;VueJS 2.5.2&lt;/li&gt;
 &lt;/ul&gt;
@@ -1201,7 +1589,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
     </summary>
     
-      <category term="前端框架之 Vue 进阶" scheme="http://twocucao.xyz/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E4%B9%8B-Vue-%E8%BF%9B%E9%98%B6/"/>
+      <category term="前端开发" scheme="http://twocucao.xyz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
     
       <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
@@ -1217,7 +1605,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/09/15/ReadingVueDocuments/"/>
     <id>http://twocucao.xyz/2017/09/15/ReadingVueDocuments/</id>
     <published>2017-09-15T12:06:05.000Z</published>
-    <updated>2017-12-19T04:21:39.401Z</updated>
+    <updated>2018-01-28T11:41:38.340Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x01-Essential"><a href="#0x01-Essential" class="headerlink" title="0x01 Essential"></a>0x01 Essential</h2><h3 id="1-1-The-Vue-Instance"><a href="#1-1-The-Vue-Instance" class="headerlink" title="1.1 The Vue Instance"></a>1.1 The Vue Instance</h3><p>当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。</p>
 <blockquote>
@@ -1330,12 +1718,12 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
     </summary>
     
-      <category term="前端框架之 Vue 进阶" scheme="http://twocucao.xyz/categories/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6%E4%B9%8B-Vue-%E8%BF%9B%E9%98%B6/"/>
+      <category term="前端开发" scheme="http://twocucao.xyz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
     
       <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
     
-      <category term="文档阅读笔记" scheme="http://twocucao.xyz/tags/%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+      <category term="文档阅读" scheme="http://twocucao.xyz/tags/%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB/"/>
     
       <category term="前端框架" scheme="http://twocucao.xyz/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/"/>
     
@@ -1346,7 +1734,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/07/26/ReactCheatSheet/"/>
     <id>http://twocucao.xyz/2017/07/26/ReactCheatSheet/</id>
     <published>2017-07-26T12:06:05.000Z</published>
-    <updated>2018-01-28T01:30:31.667Z</updated>
+    <updated>2018-01-30T08:05:23.876Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><blockquote>
 <p>备注：由于目前没有上 React 的打算，本文暂时太监</p>
@@ -1424,12 +1812,14 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     
     </summary>
     
-      <category term="未分类" scheme="http://twocucao.xyz/categories/%E6%9C%AA%E5%88%86%E7%B1%BB/"/>
+      <category term="前端开发" scheme="http://twocucao.xyz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
     
       <category term="JavaScript" scheme="http://twocucao.xyz/tags/JavaScript/"/>
     
       <category term="React" scheme="http://twocucao.xyz/tags/React/"/>
+    
+      <category term="Ant Design" scheme="http://twocucao.xyz/tags/Ant-Design/"/>
     
   </entry>
   
@@ -1438,7 +1828,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/07/17/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%9A%84%E5%B8%B8%E8%AF%86%E7%AC%94%E8%AE%B0/"/>
     <id>http://twocucao.xyz/2017/07/17/数据科学的常识笔记/</id>
     <published>2017-07-17T12:00:00.000Z</published>
-    <updated>2017-12-19T05:15:09.650Z</updated>
+    <updated>2018-01-30T09:20:33.306Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>2017 年 07 月，为了解统计学和机器学习的基本常识，开了这篇文章。</p>
 <p>当然，仅仅是为了了解，所以也就写的随性（不严谨）一些，排版什么的也都详细推敲。想到哪里就记录到哪里。</p>
@@ -1596,7 +1986,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
 <ul>
 <li>K 最邻近算法</li>
 </ul>
-<h3 id="第二章-隐式评价和基于物品的过滤算法"><a href="#第二章-隐式评价和基于物品的过滤算法" class="headerlink" title="第二章 隐式评价和基于物品的过滤算法"></a>第二章 隐式评价和基于物品的过滤算法</h3><p>显式评价：豆瓣的五星，用户的评论</p>
+<h3 id="隐式评价和基于物品的过滤算法"><a href="#隐式评价和基于物品的过滤算法" class="headerlink" title="隐式评价和基于物品的过滤算法"></a>隐式评价和基于物品的过滤算法</h3><p>显式评价：豆瓣的五星，用户的评论</p>
 <p>显式评价可能存在下面几个问题：</p>
 <ol>
 <li>懒得评价</li>
@@ -1636,7 +2026,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
 </ul>
 </li>
 </ul>
-<h3 id="2-分类方法"><a href="#2-分类方法" class="headerlink" title="2 分类方法"></a>2 分类方法</h3><h2 id="0x03-机器学习"><a href="#0x03-机器学习" class="headerlink" title="0x03 机器学习"></a>0x03 机器学习</h2><h2 id="0x04-深度学习"><a href="#0x04-深度学习" class="headerlink" title="0x04 深度学习"></a>0x04 深度学习</h2><h2 id="0x05-自然语言-NLP"><a href="#0x05-自然语言-NLP" class="headerlink" title="0x05 自然语言 NLP"></a>0x05 自然语言 NLP</h2><h2 id="0xEE-链接"><a href="#0xEE-链接" class="headerlink" title="0xEE 链接"></a>0xEE 链接</h2><ul>
+<h3 id="分类方法"><a href="#分类方法" class="headerlink" title="分类方法"></a>分类方法</h3><h2 id="0x03-机器学习"><a href="#0x03-机器学习" class="headerlink" title="0x03 机器学习"></a>0x03 机器学习</h2><h2 id="0x04-深度学习"><a href="#0x04-深度学习" class="headerlink" title="0x04 深度学习"></a>0x04 深度学习</h2><h2 id="0x05-自然语言-NLP"><a href="#0x05-自然语言-NLP" class="headerlink" title="0x05 自然语言 NLP"></a>0x05 自然语言 NLP</h2><h2 id="0xEE-链接"><a href="#0xEE-链接" class="headerlink" title="0xEE 链接"></a>0xEE 链接</h2><ul>
 <li><a href="https://dataminingguide.books.yourtion.com/" target="_blank" rel="external">面向程序员的数据挖掘指南</a></li>
 </ul>
 <hr>
@@ -1674,7 +2064,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
     <link href="http://twocucao.xyz/2017/07/11/GeoProcessingWithPython/"/>
     <id>http://twocucao.xyz/2017/07/11/GeoProcessingWithPython/</id>
     <published>2017-07-11T04:13:20.000Z</published>
-    <updated>2018-01-28T01:29:18.567Z</updated>
+    <updated>2018-02-11T01:14:31.548Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>16 年 12 月研究 GIS 相关资料用于处理 GIS 相关问题，完成基本 GIS 功能。<br>最新需要进阶相关内容用于更好的处理相关数据。</p>
 <ul>
@@ -1767,7 +2157,7 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
 </ul>
 <h3 id="PostGIS-常用函数"><a href="#PostGIS-常用函数" class="headerlink" title="PostGIS 常用函数"></a>PostGIS 常用函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">ST_AsText(geom) 用于查看 WKT</div><div class="line">ST_GeometryType(geometry) returns the type of the geometry</div><div class="line">ST_NDims(geometry) returns the number of dimensions of the geometry</div><div class="line">ST_SRID(geometry) returns the spatial reference identifier number of the geometry</div><div class="line">ST_X(geometry) returns the X ordinate , 如果作用在 Point 上，则返回经度</div><div class="line">ST_Y(geometry) returns the Y ordinate , 如果作用在 Point 上，则返回纬度</div><div class="line"></div><div class="line">ST_Length(geometry) returns the length of the linestring</div><div class="line">ST_StartPoint(geometry) returns the first coordinate as a point</div><div class="line">ST_EndPoint(geometry) returns the last coordinate as a point</div><div class="line">ST_NPoints(geometry) returns the number of coordinates in the linestring</div><div class="line"></div><div class="line">ST_Area(geometry) returns the area of the polygons</div><div class="line">ST_NRings(geometry) returns the number of rings (usually 1, more of there are holes)</div><div class="line">ST_ExteriorRing(geometry) returns the outer ring as a linestring</div><div class="line">ST_InteriorRingN(geometry,n) returns a specified interior ring as a linestring</div><div class="line">ST_Perimeter(geometry) returns the length of all the rings</div><div class="line"></div><div class="line">ST_NumGeometries(geometry) returns the number of parts in the collection</div><div class="line">ST_GeometryN(geometry,n) returns the specified part</div><div class="line">ST_Area(geometry) returns the total area of all polygonal parts</div><div class="line">ST_Length(geometry) returns the total length of all linear parts</div></pre></td></tr></table></figure>
 <h3 id="Snippets"><a href="#Snippets" class="headerlink" title="Snippets"></a>Snippets</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-- 合并多个区域并返回 multipoly</div><div class="line">UPDATE areas as A</div><div class="line">SET &quot;Boundary&quot; = ST_Multi(st_union(ARRAY(SELECT geom FROM county_boundary_region WHERE gid in ( &apos;foo_id&apos;,&apos;bar_id)&apos;)</div><div class="line">)))</div><div class="line">WHERE A.&quot;ID&quot; = &apos;xxxxxx&apos;</div></pre></td></tr></table></figure>
-<h3 id="其他参考链接"><a href="#其他参考链接" class="headerlink" title="其他参考链接"></a>其他参考链接</h3><ol>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ol>
 <li><a href="http://gis.stackexchange.com/questions/6681/what-are-the-pros-and-cons-of-postgis-geography-and-geometry-types" target="_blank" rel="external">http://gis.stackexchange.com/questions/6681/what-are-the-pros-and-cons-of-postgis-geography-and-geometry-types</a></li>
 <li>Geo Processing with Python</li>
 </ol>
@@ -2241,7 +2631,7 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     <link href="http://twocucao.xyz/2017/06/23/VimCheatSheet/"/>
     <id>http://twocucao.xyz/2017/06/23/VimCheatSheet/</id>
     <published>2017-06-23T11:48:00.000Z</published>
-    <updated>2017-12-19T03:42:18.086Z</updated>
+    <updated>2018-01-30T09:27:08.132Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中 Vim 使用场景。</p>
 <p>不定期更新。</p>
@@ -2366,174 +2756,6 @@ Namespaces are one honking great idea -- let&apos;s do more of those!
     </summary>
     
       <category term="编程利器" scheme="http://twocucao.xyz/categories/%E7%BC%96%E7%A8%8B%E5%88%A9%E5%99%A8/"/>
-    
-    
-      <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Pandas Cheatsheet</title>
-    <link href="http://twocucao.xyz/2017/06/03/PandasCheatSheet/"/>
-    <id>http://twocucao.xyz/2017/06/03/PandasCheatSheet/</id>
-    <published>2017-06-03T10:41:47.000Z</published>
-    <updated>2017-12-19T03:40:59.529Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。当然，其中还包含 Numpy 等数据科学，统计学相关语句。</p>
-<p>主要包含：</p>
-<ul>
-<li>Pandas 与 SQL 等价的一些操作</li>
-<li>Pandas 使用过程中的一些细节</li>
-</ul>
-<p>不定期更新。</p>
-<a id="more"></a>
-<blockquote>
-<p>SQL 是一种面向集合的处理工具 / 语言<br>Pandas 是一种面向数组的处理工具</p>
-<p><strong>而一般处理 pandas 的数据往往以二维表的形式存在。所以，可以类比为更加强大的 SQL 语言。</strong></p>
-</blockquote>
-<h2 id="0x01-DataFrame-相关"><a href="#0x01-DataFrame-相关" class="headerlink" title="0x01. DataFrame 相关"></a>0x01. DataFrame 相关</h2><h3 id="1-1-定义并初始化"><a href="#1-1-定义并初始化" class="headerlink" title="1.1. 定义并初始化"></a>1.1. 定义并初始化</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="comment"># 1. 内存变量转 Dataframe</span></div><div class="line"><span class="comment">## 1.1. 通过二位矩阵 , index , columns</span></div><div class="line">dates = pd.date_range(<span class="string">'20130101'</span>, periods=<span class="number">6</span>)</div><div class="line">pd = pd.DataFrame(np.random.randn(<span class="number">6</span>,<span class="number">4</span>), index=dates, columns=list(<span class="string">'ABCD'</span>))</div><div class="line"><span class="comment">## 1.2. 通过字典 Key 为 Column , Value 为 list,timestamp,np.array,value</span></div><div class="line">df2 = pd.DataFrame(&#123; <span class="string">'A'</span> : <span class="number">1.</span>,</div><div class="line">                     <span class="string">'B'</span> : pd.Timestamp(<span class="string">'20130102'</span>),</div><div class="line">                     <span class="string">'C'</span> : pd.Series(<span class="number">1</span>,index=list(range(<span class="number">4</span>)),dtype=<span class="string">'float32'</span>),</div><div class="line">                     <span class="string">'D'</span> : np.array([<span class="number">3</span>] * <span class="number">4</span>,dtype=<span class="string">'int32'</span>),</div><div class="line">                     <span class="string">'E'</span> : pd.Categorical([<span class="string">"test"</span>,<span class="string">"train"</span>,<span class="string">"test"</span>,<span class="string">"train"</span>]),</div><div class="line">                     <span class="string">'F'</span> : <span class="string">'foo'</span> &#125;)</div><div class="line"><span class="comment"># 长度无需统一，会自动填充</span></div><div class="line"></div><div class="line"><span class="comment"># 2. 从文件中读取</span></div><div class="line">pd.read_excel(<span class="string">"./data_set.xlsx"</span>,index_col=<span class="keyword">False</span>) <span class="comment"># 关掉 Index</span></div><div class="line"></div><div class="line"><span class="comment"># 3. 合并多个同样的 DataFrame</span></div><div class="line">df_items = [df_item1,df_item2,...]</div><div class="line">df = pd.concat(df_items).drop_duplicates()</div><div class="line">df.merge(data_set_df, left_on=<span class="string">"lno"</span>, right_on=<span class="string">"rno"</span>, how=<span class="string">"outer"</span>)</div><div class="line"></div><div class="line"><span class="comment"># 4.series to dataframe</span></div><div class="line">df = s.to_frame()</div></pre></td></tr></table></figure>
-<h3 id="1-2-查看并修改表结构"><a href="#1-2-查看并修改表结构" class="headerlink" title="1.2. 查看并修改表结构"></a>1.2. 查看并修改表结构</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 1. 查看表结构</span></div><div class="line"></div><div class="line">df.head()</div><div class="line">df.tail(<span class="number">3</span>)</div><div class="line">df.index</div><div class="line"><span class="comment"># df.index = ['日期','小时']</span></div><div class="line">df.columns</div><div class="line">df.columns = map(str.lower, df.columns)</div><div class="line"></div><div class="line">df.values</div><div class="line"></div><div class="line">df[<span class="string">'col'</span>] = df[<span class="string">'col'</span>].astype(str).convert_objects(convert_numeric=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment"># 2. 删除 col_name</span></div><div class="line"></div><div class="line">df.drop([<span class="string">'col_name_1'</span>,<span class="string">'col_name_2'</span>,...,<span class="string">'col_name_N'</span>],inplace=<span class="keyword">True</span>,axis=<span class="number">1</span>,errors=<span class="string">'ignore'</span>)</div><div class="line"></div><div class="line"><span class="keyword">del</span> df[<span class="string">'cola'</span>]</div><div class="line"></div><div class="line"><span class="comment"># 3. 修改元数据</span></div><div class="line">df.rename(columns=<span class="keyword">lambda</span> x: x.split(<span class="string">'.'</span>)[<span class="number">-1</span>], inplace=<span class="keyword">True</span>)</div><div class="line">df.rename(columns=&#123;<span class="string">'oldName1'</span>: <span class="string">'newName1'</span>, <span class="string">'oldName2'</span>: <span class="string">'newName2'</span>&#125;, inplace=<span class="keyword">True</span>)</div><div class="line">df.rename(columns = &#123;<span class="number">0</span>: <span class="string">'cola'</span>, <span class="number">1</span>: <span class="string">'colb'</span>, <span class="number">2</span>: <span class="string">'colc'</span>&#125;, inplace=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment"># 2.</span></div><div class="line"><span class="comment">## 2. 遍历</span></div><div class="line"><span class="keyword">for</span> index, row <span class="keyword">in</span> df.iterrows():</div><div class="line">    <span class="keyword">print</span> row[<span class="string">"c1"</span>], row[<span class="string">"c2"</span>]</div><div class="line"><span class="keyword">for</span> row <span class="keyword">in</span> df.itertuples(index=<span class="keyword">True</span>, name=<span class="string">'Pandas'</span>):</div><div class="line">    <span class="keyword">print</span> getattr(row, <span class="string">"c1"</span>), getattr(row, <span class="string">"c2"</span>)</div><div class="line">= IF([@price] &lt; <span class="number">1</span>, <span class="string">"未知"</span>,IF([@price] &lt; <span class="number">30000</span>, <span class="string">"三万以下"</span>, IF([@price] &lt;= <span class="number">50000</span>, <span class="string">"三万到五万"</span>, IF([@price] &lt;= <span class="number">100000</span>, <span class="string">"五万到十万"</span>, IF([@price] &lt;= <span class="number">10000000</span>, <span class="string">"十万以上"</span>, <span class="string">"其他"</span>)))))</div></pre></td></tr></table></figure>
-<h3 id="1-3-修改表内容"><a href="#1-3-修改表内容" class="headerlink" title="1.3. 修改表内容"></a>1.3. 修改表内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">df.drop_duplicates([<span class="string">'col_a'</span>,<span class="string">'col_b'</span>])</div></pre></td></tr></table></figure>
-<h3 id="1-4-查看表内容"><a href="#1-4-查看表内容" class="headerlink" title="1.4. 查看表内容"></a>1.4. 查看表内容</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 选择</span></div><div class="line">df[<span class="string">'A'</span>] <span class="comment"># 列选</span></div><div class="line">df[<span class="number">0</span>:<span class="number">30</span>] <span class="comment"># 行选</span></div><div class="line">df[<span class="string">'20130102'</span>:<span class="string">'20130104'</span>] <span class="comment"># 行选</span></div><div class="line">df.loc[<span class="string">'20130102'</span>:<span class="string">'20130104'</span>,[<span class="string">'A'</span>,<span class="string">'B'</span>]] <span class="comment"># by label</span></div><div class="line">df.loc[condition,[<span class="string">'cola'</span>,<span class="string">'colb'</span>]]</div><div class="line">df.loc[[<span class="string">'ri01'</span>,<span class="string">'ri02'</span>] , [<span class="string">"cola"</span>,<span class="string">"colb"</span>,<span class="string">"colc"</span>]]</div><div class="line"></div><div class="line">df.iloc[<span class="number">1</span>:<span class="number">5</span>, <span class="number">2</span>:<span class="number">4</span>] <span class="comment"># by position</span></div><div class="line">df.iloc[: , <span class="number">0</span>:<span class="number">7</span>] <span class="comment"># 全部列，0-7 索引</span></div><div class="line"></div><div class="line">df.ix[[<span class="string">'ri02'</span>, <span class="string">'ri09'</span>]] <span class="comment"># 选取行</span></div><div class="line"></div><div class="line">total_rows=len(df.axes[<span class="number">0</span>])</div><div class="line">total_cols=len(df.axes[<span class="number">1</span>])</div><div class="line"></div><div class="line">df.sample(<span class="number">3000</span>) <span class="comment"># 随机抽取 3000 行，可以用于快速验证算法</span></div><div class="line"></div><div class="line">criterion = df2[<span class="string">'a'</span>].map(<span class="keyword">lambda</span> x: x.startswith(<span class="string">'t'</span>))</div><div class="line">df2[criterion]</div><div class="line"></div><div class="line">df2[[x.startswith(<span class="string">'t'</span>) <span class="keyword">for</span> x <span class="keyword">in</span> df2[<span class="string">'a'</span>]]]</div><div class="line"><span class="comment"># select * from df limit 5</span></div><div class="line">df.head()</div><div class="line"><span class="comment"># select a,b,c from df</span></div><div class="line">df[[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]].head()</div><div class="line"><span class="comment"># select a,b,c from df where a = 11 and b = 'xx'</span></div><div class="line">df[ ( df[<span class="string">'a'</span>] == <span class="number">11</span>) &amp; ( df[<span class="string">'b'</span>] == <span class="string">'xx'</span>) ][[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>]]</div><div class="line">df[<span class="string">'a'</span>].value_counts()</div><div class="line"></div><div class="line"><span class="comment"># SELECT * FROM df ORDER BY a DESC LIMIT 10 OFFSET 5;</span></div><div class="line">df.nlargest(<span class="number">10</span>+<span class="number">5</span>, columns=<span class="string">'a'</span>).tail(<span class="number">10</span>)</div><div class="line"></div><div class="line">df.column.str[<span class="number">0</span>:<span class="number">2</span>]</div><div class="line">df.column_name.str.len()</div><div class="line">two_groups = <span class="string">'(?P&lt;letter&gt;[a-z])(?P&lt;digit&gt;[0-9])'</span></div><div class="line">s.str.extract(two_groups, expand=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment"># 排序</span></div><div class="line"></div><div class="line">df.sort_index(axis=<span class="number">1</span>, ascending=<span class="keyword">False</span>)</div><div class="line">df.sort_values(by=<span class="string">'B'</span>)</div><div class="line">df = df.sort([<span class="string">'col1'</span>,<span class="string">'col2'</span>,<span class="string">'col3'</span>],ascending=[<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>])</div><div class="line"><span class="comment">#</span></div><div class="line"></div><div class="line"><span class="comment"># window function</span></div><div class="line"><span class="comment"># SELECT a, b, c, rank() OVER (PARTITION BY a ORDER BY b DESC) as rn FROM df;</span></div><div class="line"><span class="comment"># 如果没有这个 window function 的话，可以 groupby 一下，然后生成表和原有表进行 JOIN</span></div><div class="line">tips.assign(rn=tips.sort_values([<span class="string">'b'</span>], ascending=<span class="keyword">False</span>).groupby([<span class="string">'a'</span>]).cumcount() + <span class="number">1</span>)</div><div class="line"></div><div class="line"><span class="comment"># Top N rows per group</span></div><div class="line"><span class="comment"># rank 代表等级 如果两人并列第一名，则不存在第二名，直接是第三名 , row_number 代表排名，即即便两个人分数一样，也无法并列第一名</span></div><div class="line"></div><div class="line"><span class="comment"># PostGRESQL's ROW_NUMBER() analytic function</span></div><div class="line">SELECT * FROM (</div><div class="line">  SELECT</div><div class="line">    t.*,</div><div class="line">    ROW_NUMBER() OVER(PARTITION BY day ORDER BY total_bill DESC) AS rn</div><div class="line">  FROM tips t</div><div class="line">) tt</div><div class="line">WHERE rn &lt; <span class="number">3</span></div><div class="line">ORDER BY day, rn;</div><div class="line"></div><div class="line">(tips.assign(rn=tips.sort_values([<span class="string">'total_bill'</span>], ascending=<span class="keyword">False</span>)</div><div class="line">                    .groupby([<span class="string">'day'</span>])</div><div class="line">                    .cumcount() + <span class="number">1</span>)</div><div class="line">     .query(<span class="string">'rn &lt; 3'</span>)</div><div class="line">     .sort_values([<span class="string">'day'</span>,<span class="string">'rn'</span>])</div><div class="line">)</div><div class="line"></div><div class="line">(tips.assign(rnk=tips.groupby([<span class="string">'day'</span>])[<span class="string">'total_bill'</span>]</div><div class="line">                     .rank(method=<span class="string">'first'</span>, ascending=<span class="keyword">False</span>))</div><div class="line">     .query(<span class="string">'rnk &lt; 3'</span>)</div><div class="line">     .sort_values([<span class="string">'day'</span>,<span class="string">'rnk'</span>])</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># PostGRESQL's RANK() analytic function</span></div><div class="line">SELECT * FROM (</div><div class="line">  SELECT</div><div class="line">    t.*,</div><div class="line">    RANK() OVER(PARTITION BY sex ORDER BY tip) AS rnk</div><div class="line">  FROM tips t</div><div class="line">  WHERE tip &lt; <span class="number">2</span></div><div class="line">)</div><div class="line">WHERE rnk &lt; <span class="number">3</span></div><div class="line">ORDER BY sex, rnk;</div><div class="line"></div><div class="line">(tips[tips[<span class="string">'tip'</span>] &lt; <span class="number">2</span>]</div><div class="line">     .assign(rnk_min=tips.groupby([<span class="string">'sex'</span>])[<span class="string">'tip'</span>]</div><div class="line">                         .rank(method=<span class="string">'min'</span>))</div><div class="line">     .query(<span class="string">'rnk_min &lt; 3'</span>)</div><div class="line">     .sort_values([<span class="string">'sex'</span>,<span class="string">'rnk_min'</span>])</div><div class="line">)</div><div class="line"></div><div class="line"><span class="comment"># where 语句</span></div><div class="line">df[<span class="string">'a'</span>].isnull()</div><div class="line">df[<span class="string">'a'</span>].isin(arr)</div><div class="line"></div><div class="line"><span class="comment"># groupby</span></div><div class="line">df.groupby(<span class="string">'a'</span>).size() <span class="comment"># 计算 a</span></div><div class="line">df.groupby(<span class="string">'a'</span>)[<span class="string">'b'</span>].count() <span class="comment"># 同上计算 a</span></div><div class="line">df.groupby(<span class="string">'a'</span>).count() <span class="comment"># 计算所有 cols</span></div><div class="line">agg_fun_dict = &#123;<span class="string">'tip'</span>: np.mean, <span class="string">'day'</span>: np.size&#125;</div><div class="line">agg_fun_dict_new = &#123;<span class="string">'tip'</span>: [np.mean, np.size]&#125;</div><div class="line">df.groupby(<span class="string">'a'</span>)[[<span class="string">'b'</span>,<span class="string">'c'</span>]].agg(agg_fun_dict)</div><div class="line">df.groupby(<span class="string">'a'</span>)[<span class="string">'b'</span>].describe()</div><div class="line">df.age.agg([<span class="string">'min'</span>, <span class="string">'max'</span>])</div><div class="line">df.applymap(multiply_10_for_every_int) <span class="comment">#</span></div><div class="line"></div><div class="line">calc_groups = df.groupby([date])</div><div class="line">calc_groups[<span class="string">'id_aa'</span>].nunique().reset_index().to_excel(<span class="string">"123.xlsx"</span>)</div><div class="line"></div><div class="line"><span class="comment"># pivot</span></div><div class="line">pd.pivot_table(data=df,values=<span class="string">'value_col'</span>, index=<span class="string">'A_FROM'</span>, columns=<span class="string">'B_TO'</span>, aggfunc=<span class="keyword">lambda</span> x: len(x.unique()),margins=<span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment"># CONCAT</span></div><div class="line">append</div><div class="line"><span class="comment"># JOIN</span></div><div class="line">pd.merge(df1, df2, on=<span class="string">'key'</span>, how=<span class="string">'outer'</span>)</div><div class="line"></div><div class="line"><span class="comment"># UPDATE tips SET tip = tip*2 WHERE tip &lt; 2;</span></div><div class="line">tips.loc[tips[<span class="string">'tip'</span>] &lt; <span class="number">2</span>, <span class="string">'tip'</span>] *= <span class="number">2</span></div><div class="line"></div><div class="line"><span class="comment"># <span class="doctag">TODO:</span></span></div></pre></td></tr></table></figure>
-<h3 id="1-5-表变换"><a href="#1-5-表变换" class="headerlink" title="1.5. 表变换"></a>1.5. 表变换</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># apply , apply map</span></div><div class="line">DataFrame.apply operates on entire rows <span class="keyword">or</span> columns at a time.</div><div class="line">DataFrame.applymap, Series.apply, <span class="keyword">and</span> Series.map operate on one element at time.</div></pre></td></tr></table></figure>
-<h3 id="1-6-表遍历"><a href="#1-6-表遍历" class="headerlink" title="1.6. 表遍历"></a>1.6. 表遍历</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df.iterrows()</div><div class="line">df.itertuples()</div></pre></td></tr></table></figure>
-<h2 id="0x02-可视化技术"><a href="#0x02-可视化技术" class="headerlink" title="0x02. 可视化技术"></a>0x02. 可视化技术</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 绘制</span></div><div class="line">df.plot(kind=<span class="string">'bar'</span>)</div><div class="line"></div><div class="line">plt.xlabel(<span class="string">'xlable'</span>)</div><div class="line">plt.ylabel(<span class="string">'ylable'</span>)</div><div class="line">plt.title(<span class="string">'title name'</span>)</div><div class="line"></div><div class="line">plt.show()</div><div class="line"></div><div class="line">df[<span class="string">'数量'</span>].plot(kind=<span class="string">'bar'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 批量创建图</span></div><div class="line">g = sns.FacetGrid(customers, col=<span class="string">"cola"</span>)</div><div class="line">g.map(plt.scatter, <span class="string">"数量"</span>, <span class="string">"单位"</span>, alpha=<span class="number">1</span>)</div><div class="line">g.add_legend();</div><div class="line"></div><div class="line">ttbill = sns.distplot(tips[<span class="string">"总价格"</span>]);</div><div class="line">ttbill.set(xlabel = <span class="string">'价值'</span>, ylabel = <span class="string">'频率'</span>, title = <span class="string">"标题名"</span>)</div><div class="line">sns.despine()</div><div class="line"></div><div class="line">sns.jointplot(x =<span class="string">"total_bill"</span>, y =<span class="string">"tip"</span>, data = tips)</div><div class="line"><span class="comment"># https://github.com/guipsamora/pandas_exercises/blob/master/07_Visualization/Tips/Exercises_with_code_and_solutions.ipynb</span></div><div class="line"></div><div class="line">plt.pie(</div><div class="line">    [<span class="number">100</span>,<span class="number">300</span>],</div><div class="line">    labels = [<span class="string">'男'</span>, <span class="string">'女'</span>],</div><div class="line">    shadow = <span class="keyword">False</span>,</div><div class="line">    colors = [<span class="string">'blue'</span>,<span class="string">'red'</span>],</div><div class="line">    explode = (<span class="number">0.15</span> , <span class="number">0</span>),</div><div class="line">    startangle = <span class="number">90</span>,</div><div class="line">    autopct = <span class="string">'%1.1f%%'</span></div><div class="line">    )</div><div class="line">plt.axis(<span class="string">'equal'</span>)</div><div class="line">plt.title(<span class="string">"男女比例"</span>)</div><div class="line">plt.tight_layout()</div><div class="line">plt.show()</div></pre></td></tr></table></figure>
-<h2 id="0x03-asd1"><a href="#0x03-asd1" class="headerlink" title="0x03. asd1"></a>0x03. asd1</h2><h2 id="0x04-Performance-Tips"><a href="#0x04-Performance-Tips" class="headerlink" title="0x04. Performance Tips"></a>0x04. Performance Tips</h2><p>最近遇到了数据量比较大的数据处理，数据条数差不多在 3 千万条。加载到内存中大约 1GB.</p>
-<h3 id="4-1-精简行列"><a href="#4-1-精简行列" class="headerlink" title="4.1. 精简行列"></a>4.1. 精简行列</h3><ol>
-<li>读入 dataframe 的时候就排除多余的行列。</li>
-<li>Merge 时候需要精简行列。</li>
-</ol>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">df1.merge(df2[list(<span class="string">'xab'</span>)])</div><div class="line">pandas.merge(dataframe1, dataframe2.iloc[:, [<span class="number">0</span>:<span class="number">5</span>]], how=<span class="string">'left'</span>, on=<span class="string">'key'</span>)</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。当然，其中还包含 Numpy 等数据科学，统计学相关语句。&lt;/p&gt;
-&lt;p&gt;主要包含：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Pandas 与 SQL 等价的一些操作&lt;/li&gt;
-&lt;li&gt;Pandas 使用过程中的一些细节&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;不定期更新。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="数据科学" scheme="http://twocucao.xyz/categories/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/"/>
-    
-    
-      <category term="Pandas" scheme="http://twocucao.xyz/tags/Pandas/"/>
-    
-      <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
-    
-      <category term="工作自动化" scheme="http://twocucao.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
-    
-      <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>一个基于 TensorFlow 的图片分类器</title>
-    <link href="http://twocucao.xyz/2017/05/29/%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8ETensorFlow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/"/>
-    <id>http://twocucao.xyz/2017/05/29/一个基于TensorFlow的分类器/</id>
-    <published>2017-05-29T00:46:00.000Z</published>
-    <updated>2017-12-19T04:20:44.216Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。<br>所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。<br>本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。</p>
-<p>本文的目的是：</p>
-<blockquote>
-<p>通过 TensorFlow 训练一个小型的分类器，用这个分类器通过照片识别出明星的姓名。</p>
-<p>备注：本文训练效果太差</p>
-</blockquote>
-<p>即我们要训练一个小 AI, 这个小 AI 能分辨欢乐颂里面的五美：</p>
-<ul>
-<li>乔欣</li>
-<li>刘涛</li>
-<li>王子文</li>
-<li>杨紫</li>
-<li>蒋欣</li>
-</ul>
-<a id="more"></a>
-<p>注意：本文主要在 MacOS 上进行测试。<br>本文的目录结构如下：</p>
-<ul>
-<li>准备训练数据和测试数据</li>
-<li>TensorFlow 环境配置</li>
-<li>开始训练图片</li>
-<li>对图片进行分类</li>
-<li>文章回顾</li>
-<li>参考链接</li>
-</ul>
-<p>首先克隆我的 Repo,（我的 Repo 在这里）[<a href="https://github.com/twocucao/the-machine" target="_blank" rel="external">https://github.com/twocucao/the-machine</a>] .</p>
-<p>仓库结构大致如下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">├── README.md</div><div class="line">├── compose</div><div class="line">│   └── tensorflow</div><div class="line">│       ├── Dockerfile</div><div class="line">│       └── Dockerfile-dev</div><div class="line">├── config</div><div class="line">├── doc</div><div class="line">├── image_classifier</div><div class="line">│   ├── __init__.py</div><div class="line">│   ├── label_dir.py</div><div class="line">│   ├── label_image.py</div><div class="line">│   ├── retrain.py</div><div class="line">│   └── train.sh</div><div class="line">└── bootstrap.sh</div></pre></td></tr></table></figure></p>
-<h2 id="0x01-准备训练数据和测试数据"><a href="#0x01-准备训练数据和测试数据" class="headerlink" title="0x01 准备训练数据和测试数据"></a>0x01 准备训练数据和测试数据</h2><p>准备训练数据，数据从哪里来呢？从百度来。我们从百度抓取大约 5 组图片，每组图片大约 1000 张图片，并且从每组里面留下 900 组作为训练数据，抽出 100 作为测试数据。</p>
-<h3 id="1-1-抓取图片"><a href="#1-1-抓取图片" class="headerlink" title="1.1 抓取图片"></a>1.1 抓取图片</h3><p>抓取代码放在代码仓库中，比较简单，下载即可用。</p>
-<p>在 crawl_baidu_images.py 中填入五美的姓名，运行脚本即可。<br>脚本会请求百度图片的图片，然后下载下来，程序跑完会有如下的图片数据。<br>好，抓取图片我们就完成了。</p>
-<h3 id="1-2-归类训练数据"><a href="#1-2-归类训练数据" class="headerlink" title="1.2 归类训练数据"></a>1.2 归类训练数据</h3><p>归类训练数据，其实就是把刚刚下载下来的图片，分类为五美，也就是把刘涛的照片放到刘涛文件夹中。看一下现在的文件夹，似乎已经分类完毕了，是不是这样呢？显然不是，因为：</p>
-<ul>
-<li>下载下来的图片貌似 JPG 结尾的图片，但是文件内容是不是 JPEG 的格式就不好说了，也可 GIF 也可能是 PNG.</li>
-<li>当你搜索刘涛的时候，百度图片给出的不仅仅是刘涛。也可能有胡歌《琅琊榜》, 也可能有胡军《天龙八部》</li>
-</ul>
-<p>所以下面需要做的是：</p>
-<ol>
-<li>移除非 JPG 的文件格式</li>
-<li>人工确 (jian) 定 (huang) 文件夹中的图片。</li>
-</ol>
-<p>在做上面这两步之前，我们先新建文件夹 image_classifier_train ( 笔者放在 /Users/twocucao/Codes/Repos/image_classifier_train ), 注意，这个文件夹不要放在代码下面，把五美的文件夹放到这个文件夹下面的 data 文件夹下。并且用拼音命名。</p>
-<p>如下：</p>
-<p><img src="http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png" alt=""></p>
-<p>我们先移除非 JPEG 的图片。如果是 mac 系统需要先安装 jpeginfo , brew install jpeginfo 即可。<br>进入 /Users/twocucao/Codes/Repos/image_classifier_train 执行下面脚本 <strong>去除非 JPG 的图片</strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">find . -iname &quot;*.jpg&quot; -exec jpeginfo -c &#123;&#125; \; | grep -E &quot;WARNING|ERROR&quot; &gt; need_delete.sh</div><div class="line">cat need_delete.sh | awk &apos;&#123;print $1&#125;&apos; | xargs rm</div><div class="line">rm need_delete.sh</div></pre></td></tr></table></figure>
-<p>好了接下来，我们需要到每一个文件夹下进行人工<del>鉴黄</del>检验图片是不是五美，比如，到 liutao 文件夹下检查，删除图片基本上没有清晰面容的照片。<br>为了速度，我们把图片转成缩略图大致看一下，去除明显不是五美的照片，我们进行下一步的筛选。</p>
-<h3 id="1-3-找出对应的头像"><a href="#1-3-找出对应的头像" class="headerlink" title="1.3 找出对应的头像"></a>1.3 找出对应的头像</h3><p>我们需要从图片库中选出五美的头像来</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">pyenv global system</div><div class="line"></div><div class="line">brew reinstall boost-python --with-python3 --without-python</div><div class="line">conda install -c menpo dlib=19.4</div></pre></td></tr></table></figure>
-<h2 id="0x02-TensorFlow-环境配置"><a href="#0x02-TensorFlow-环境配置" class="headerlink" title="0x02 TensorFlow 环境配置"></a>0x02 TensorFlow 环境配置</h2><h3 id="2-1-Docker-的安装和镜像加速"><a href="#2-1-Docker-的安装和镜像加速" class="headerlink" title="2.1 Docker 的安装和镜像加速"></a>2.1 Docker 的安装和镜像加速</h3><p>本文需要使用 Docker 作为环境配置，也正是因为如此，我们可以在很快的时间内搭建起来 tensorflow 的运行环境。目测，Docker 也是未来几年内搭建环境分发环境的首选。<br>Docker 下载不必多说，需要补充一句的是，我们可以在阿里云账户上使用一个 registry 对 Docker 镜像进行加速。<br>在阿里云的容器界面获取加速链接填到 docker 里面即可。如图。</p>
-<p><img src="http://oriw7hkjj.bkt.clouddn.com/WX20170529-162953@2x.png" alt=""></p>
-<h3 id="2-2-构建镜像文件并且构建镜像"><a href="#2-2-构建镜像文件并且构建镜像" class="headerlink" title="2.2 构建镜像文件并且构建镜像"></a>2.2 构建镜像文件并且构建镜像</h3><p>建议在执行构建镜像之前，务必先完成本文的第二小节的图片准备。然后执行下面的命令，将镜像文件构建成镜像。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /Users/twocucao/Codes/Repos/the-machine</div><div class="line">docker build <span class="_">-f</span> compose/tensorflow/Dockerfile-dev -t twocucao/tensorflow .</div></pre></td></tr></table></figure></p>
-<p>该行命令使用 compose/tensorflow/Dockerfile-dev 作为 Dockerfile 文件，构建镜像名称为 twocucao/tensorflow , 传入的 context 为 当前路径。</p>
-<h3 id="2-3-测试-Tensorflow-容器"><a href="#2-3-测试-Tensorflow-容器" class="headerlink" title="2.3 测试 Tensorflow 容器"></a>2.3 测试 Tensorflow 容器</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">docker run -it twocucao/tensorflow /bin/bash</div><div class="line"><span class="built_in">echo</span> <span class="string">'hello tensorflow'</span></div></pre></td></tr></table></figure>
-<p>如果运行正常，则一切正常。可以进行下一步骤了。</p>
-<h2 id="0x03-开始训练"><a href="#0x03-开始训练" class="headerlink" title="0x03 开始训练"></a>0x03 开始训练</h2><p>执行命令开始训练。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./train.sh /Users/twocucao/Codes/Repos/image_classifier_train</div></pre></td></tr></table></figure>
-<p>我设置的训练次数为 20000, 在我的本子上基本两个小时，可能时间有些长，没有耐心的童鞋可以吧训练次数调整低一些。然后重新构建镜像。</p>
-<blockquote>
-<p>那么，当 TensorFlow 在训练的时候，我们要谈些什么？</p>
-</blockquote>
-<p>Google 开源了 Inception 模型，这个模型从 ImageNet 的上千个分类的图片训练而来，而我们所做的工作，便是在此基础上做最后的增量训练。然而，我们只用来区分女明星，似乎这个 Inception 的模型有点大材小用？好，训练结束之后我们查看一下文件夹 /Users/twocucao/Codes/Repos/image_classifier_train 下，</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">├── bottlenecks</div><div class="line">│   ├── jiangxin</div><div class="line">│   ├── liutao</div><div class="line">│   ├── qiaoxin</div><div class="line">│   ├── wangziwen</div><div class="line">│   └── yangzi</div><div class="line">├── data</div><div class="line">│   ├── jiangxin</div><div class="line">│   ├── liutao</div><div class="line">│   ├── qiaoxin</div><div class="line">│   ├── wangziwen</div><div class="line">│   └── yangzi</div><div class="line">├── inception</div><div class="line">│   ├── LICENSE</div><div class="line">│   ├── classify_image_graph_def.pb</div><div class="line">│   ├── cropped_panda.jpg</div><div class="line">│   ├── imagenet_2012_challenge_label_map_proto.pbtxt</div><div class="line">│   ├── imagenet_synset_to_human_label_map.txt</div><div class="line">│   └── inception-2015-12-05.tgz</div><div class="line">├── retrained_graph.pb</div><div class="line">├── retrained_labels.txt</div><div class="line">└── test_data</div><div class="line">    ├── src</div><div class="line">    └── target</div></pre></td></tr></table></figure>
-<p>Bottlenecks 文件夹为我们将每一张 JPG 转成矩阵的文本<br>Inception 为 Google 开源的模型文件。<br>retrained_graph.pb 为训练出来的图的模型文件。<br>retrained_labels.txt 为标签。</p>
-<p>如下图不断刷出的一坨坨的文字是什么呢？</p>
-<ul>
-<li>时间 , 无需多说</li>
-<li>当前训练次数</li>
-<li>Train accuracy = 87.0%</li>
-<li>Cross entropy = 0.499145</li>
-<li>Validation accuracy = 52.0% (N=100)</li>
-</ul>
-<p>看到 Train accuracy &gt;&gt; Validation accuracy 估计是模型过度拟合了，嗯，看来这个模型还是有点问题的。</p>
-<h2 id="0x04-对图片进行分类"><a href="#0x04-对图片进行分类" class="headerlink" title="0x04 对图片进行分类"></a>0x04 对图片进行分类</h2><h3 id="4-1-开始分类"><a href="#4-1-开始分类" class="headerlink" title="4.1 开始分类"></a>4.1 开始分类</h3><h3 id="4-2-对分类结果进行评估"><a href="#4-2-对分类结果进行评估" class="headerlink" title="4.2 对分类结果进行评估"></a>4.2 对分类结果进行评估</h3><h2 id="0x05-文章回顾"><a href="#0x05-文章回顾" class="headerlink" title="0x05 文章回顾"></a>0x05 文章回顾</h2><h2 id="0x06-参考链接"><a href="#0x06-参考链接" class="headerlink" title="0x06 参考链接"></a>0x06 参考链接</h2><ul>
-<li><a href="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html" target="_blank" rel="external">https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html</a></li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。&lt;br&gt;所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。&lt;br&gt;本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。&lt;/p&gt;
-&lt;p&gt;本文的目的是：&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;通过 TensorFlow 训练一个小型的分类器，用这个分类器通过照片识别出明星的姓名。&lt;/p&gt;
-&lt;p&gt;备注：本文训练效果太差&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;即我们要训练一个小 AI, 这个小 AI 能分辨欢乐颂里面的五美：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;乔欣&lt;/li&gt;
-&lt;li&gt;刘涛&lt;/li&gt;
-&lt;li&gt;王子文&lt;/li&gt;
-&lt;li&gt;杨紫&lt;/li&gt;
-&lt;li&gt;蒋欣&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="Python 黑魔法" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/"/>
     
     
       <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>

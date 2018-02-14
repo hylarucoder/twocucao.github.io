@@ -300,6 +300,567 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/13/ElasticSearchCheatSheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/13/ElasticSearchCheatSheet/" itemprop="url">ElasticSearch CheatSheet</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-13T10:25:39+08:00">
+                2018-02-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后台组件/" itemprop="url" rel="index">
+                    <span itemprop="name">后台组件</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,231
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。</p>
+<p>不定期更新。</p>
+<p>最早使用 ElasticSearch 是两年前了。最近准备用 Django 写一个全栈式的应用，借用强大的 ES 来做搜索。这是我在写程序之余写这篇文章的原因。</p>
+<p>官网介绍 ElasticSearch 不仅仅是全文搜索，也可以结构化搜索（这里用结构化查询会更准确一些），分析，处理人类语言，地理位置，以及关系。</p>
+<p>然而，我在项目使用过程中还是主要用到了全文搜索以及推荐。</p>
+<p>不用其他的主要原因是因为 ES 尺有所短寸有所长：</p>
+<ol>
+<li>geo 处理方面 postgis 完全就是神一般的存在。为什么还要用 ES 呢？</li>
+<li>关系型数据库的核心不就是处理关系？复杂的关系肯定还是放在关系数据库里面。</li>
+</ol>
+<p>highlighted search snippets, and search-as-you-type and did-you-mean suggestions.</p>
+<p>我对 ElasticSearch 在后台组件里的作用在于搜索与推荐：</p>
+<ol>
+<li>整站的搜索功能<ul>
+<li>全文搜索</li>
+</ul>
+</li>
+<li>推荐<ul>
+<li>依据某几个维度的数据进行排序</li>
+</ul>
+</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/13/ElasticSearchCheatSheet/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/10/DockerCheatSheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/10/DockerCheatSheet/" itemprop="url">Docker CheatSheet</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T09:01:55+08:00">
+                2018-02-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/我的开源项目/" itemprop="url" rel="index">
+                    <span itemprop="name">我的开源项目</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,179
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。</p>
+<ul>
+<li>Docker 相关概念</li>
+<li>Docker 配套工具</li>
+<li>Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化</li>
+<li>Docker 踩坑记录</li>
+</ul>
+<p>不定期更新。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/02/10/DockerCheatSheet/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/03/NumpyCheatSheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/02/03/NumpyCheatSheet/" itemprop="url">Numpy Cheatsheet</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-03T10:37:53+08:00">
+                2018-02-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/数据科学/" itemprop="url" rel="index">
+                    <span itemprop="name">数据科学</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  418
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Numpy 相关语句。</p>
+<p>主要包含：</p>
+<h1 id="Numpy-库"><a href="#Numpy-库" class="headerlink" title="Numpy 库"></a>Numpy 库</h1><h2 id="0x00-前言-1"><a href="#0x00-前言-1" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Numpy 相关语句。</p>
+<p>对于数据分析应用而言，最应该关注：</p>
+<ul>
+<li>用于数据整理和清理、子集构造和过滤、转换等快速的矢量化数组运算。</li>
+<li>常用的数组算法，如排序、唯一化、集合运算等。</li>
+<li>高效的描述统计和数据聚合 / 摘要运算。</li>
+<li>用于异构数据集的合并 / 连接运算的数据对齐和关系型数据运算。</li>
+<li>将条件逻辑表述为数组表达式（而不是带有 if-else-if 分支的循环）</li>
+<li>数据的分组运算（聚合、转换、函数应用等）。</li>
+</ul>
+<blockquote>
+<p>学习 Numpy 本质上是为了更好的使用 Pandas</p>
+</blockquote>
+<h2 id="0x01-ndarray"><a href="#0x01-ndarray" class="headerlink" title="0x01 ndarray"></a>0x01 ndarray</h2><h3 id="1-1-数据类型"><a href="#1-1-数据类型" class="headerlink" title="1.1 数据类型"></a>1.1 数据类型</h3><h3 id="1-2-创建-ndarray"><a href="#1-2-创建-ndarray" class="headerlink" title="1.2 创建 ndarray"></a>1.2 创建 ndarray</h3><h3 id="1-3-数组和标量之间的运算"><a href="#1-3-数组和标量之间的运算" class="headerlink" title="1.3 数组和标量之间的运算"></a>1.3 数组和标量之间的运算</h3><p>当我们把数组当做矢量的时候。</p>
+<ol>
+<li>两个大小相同的矢量将运算到元素级</li>
+<li>矢量和标量将作用与每一个元素</li>
+<li>不同大小的矢量之间的运算叫做广播</li>
+</ol>
+<h3 id="1-4-索引和切片"><a href="#1-4-索引和切片" class="headerlink" title="1.4 索引和切片"></a>1.4 索引和切片</h3><h3 id="1-4-1-一般索引和一般切片"><a href="#1-4-1-一般索引和一般切片" class="headerlink" title="1.4.1 一般索引和一般切片"></a>1.4.1 一般索引和一般切片</h3><p>对于一维数组的话，如果没有显式 copy 则会修改原来的值。</p>
+<p>切片语法与 Python 相近</p>
+<h3 id="1-4-2-切片型索引"><a href="#1-4-2-切片型索引" class="headerlink" title="1.4.2 切片型索引"></a>1.4.2 切片型索引</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">a[:<span class="number">2</span>,<span class="number">1</span>:]</div><div class="line">a[<span class="number">2</span>,<span class="number">1</span>:]</div></pre></td></tr></table></figure>
+<h3 id="1-4-3-布尔型索引"><a href="#1-4-3-布尔型索引" class="headerlink" title="1.4.3 布尔型索引"></a>1.4.3 布尔型索引</h3><p>参考 pandas 语法</p>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-06-03</strong> 初始化本文</li>
+<li><strong>2018-02-03</strong> 重修文字</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/01/28/TmuxWithTmuxinatorWorkflow/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -473,177 +1034,6 @@
 <ul>
 <li><strong>2017-03-08 09:33:37</strong> 重新润饰文字，弃用 Rails 开发一年。现在主 DjangoRestFrameWork+VueJS</li>
 <li><strong>2018-01-28 11:44:00</strong> 重修文字，适配本文</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/01/28/ReviewWriting/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/01/28/ReviewWriting/" itemprop="url">Review Writing</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T09:38:16+08:00">
-                2018-01-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/写在人生的边上/" itemprop="url" rel="index">
-                    <span itemprop="name">写在人生的边上</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  74
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>大约一年前，认为自己还在语言的凝练上欠缺一些功夫，嫌自己说话啰嗦，于是把自己的博客整理了一遍，删掉了不少的文字。</p>
-<p>这次又精简了相当一部分的文字。</p>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2017-12-20</strong> 初始化本文</li>
 </ul>
 
           
@@ -920,8 +1310,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/未分类/" itemprop="url" rel="index">
-                    <span itemprop="name">未分类</span>
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
                   </a>
                 </span>
 
@@ -951,7 +1341,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  836
+                  1,033
                 </span>
               
 
@@ -967,7 +1357,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -987,8 +1377,7 @@
       
         
           
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本笔记诞生于很久前零零散散记录的笔记，拿出来公开一下。</p>
-<p>学习 CSS, 主要靠多推导式记忆。</p>
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本笔记诞生于很久前零零散散记录的笔记，拿出来发布一下。</p>
 <h2 id="0x01-CSS-是如何工作的？"><a href="#0x01-CSS-是如何工作的？" class="headerlink" title="0x01 CSS 是如何工作的？"></a>0x01 CSS 是如何工作的？</h2><p>HTML 是元素的标记语言。</p>
 <p>CSS 被用来 样式和网页布局的。</p>
 <p>样式和布局都有哪些呢？</p>
@@ -1015,8 +1404,35 @@
 <p>属性</p>
 <p>三，层叠与继承</p>
 <p>既然是层叠，就要有层叠的规律</p>
-<h2 id="0x03-CSS-新语法"><a href="#0x03-CSS-新语法" class="headerlink" title="0x03 CSS 新语法"></a>0x03 CSS 新语法</h2><p>布局</p>
-<h3 id="3-1-Flex-Layout"><a href="#3-1-Flex-Layout" class="headerlink" title="3.1 Flex Layout"></a>3.1 Flex Layout</h3><h3 id="3-2-Grid-Layout"><a href="#3-2-Grid-Layout" class="headerlink" title="3.2 Grid Layout"></a>3.2 Grid Layout</h3><h2 id="0x04-SCSS"><a href="#0x04-SCSS" class="headerlink" title="0x04 SCSS"></a>0x04 SCSS</h2><h3 id="4-1-如何组织-SCSS-代码"><a href="#4-1-如何组织-SCSS-代码" class="headerlink" title="4.1 如何组织 SCSS 代码"></a>4.1 如何组织 SCSS 代码</h3><h2 id="0x05-常见的设计"><a href="#0x05-常见的设计" class="headerlink" title="0x05 常见的设计"></a>0x05 常见的设计</h2><h3 id="5-1-圣杯"><a href="#5-1-圣杯" class="headerlink" title="5.1 圣杯"></a>5.1 圣杯</h3><hr>
+<h2 id="0x03-CSS-新语法"><a href="#0x03-CSS-新语法" class="headerlink" title="0x03 CSS 新语法"></a>0x03 CSS 新语法</h2><h3 id="3-1-Flex-Layout"><a href="#3-1-Flex-Layout" class="headerlink" title="3.1 Flex Layout"></a>3.1 Flex Layout</h3><ul>
+<li><a href="https://github.com/philipwalton/solved-by-flexbox" target="_blank" rel="external">https://github.com/philipwalton/solved-by-flexbox</a></li>
+</ul>
+<h3 id="3-2-Grid-Layout"><a href="#3-2-Grid-Layout" class="headerlink" title="3.2 Grid Layout"></a>3.2 Grid Layout</h3><h2 id="0x04-SCSS"><a href="#0x04-SCSS" class="headerlink" title="0x04 SCSS"></a>0x04 SCSS</h2><p>这是一种兼容 CSS 语法的新语言。主要用于提升代码的可维护性。</p>
+<p>至于其他 less 之类大同小异。只选取了功能最强大的部分进行间接。</p>
+<h3 id="4-1-OOCSS-BEM-我的实践"><a href="#4-1-OOCSS-BEM-我的实践" class="headerlink" title="4.1 OOCSS / BEM / 我的实践"></a>4.1 OOCSS / BEM / 我的实践</h3><h3 id="4-1-如何组织-SCSS-代码-—-布局篇"><a href="#4-1-如何组织-SCSS-代码-—-布局篇" class="headerlink" title="4.1 如何组织 SCSS 代码 — 布局篇"></a>4.1 如何组织 SCSS 代码 — 布局篇</h3><h3 id="4-2-如何组织-SCSS-代码-—-组件篇"><a href="#4-2-如何组织-SCSS-代码-—-组件篇" class="headerlink" title="4.2 如何组织 SCSS 代码 — 组件篇"></a>4.2 如何组织 SCSS 代码 — 组件篇</h3><h4 id="4-2-BEM"><a href="#4-2-BEM" class="headerlink" title="4.2 BEM"></a>4.2 BEM</h4><h2 id="0x05-CSS-规范"><a href="#0x05-CSS-规范" class="headerlink" title="0x05 CSS 规范"></a>0x05 CSS 规范</h2><ul>
+<li><p><a href="https://github.com/airbnb/css" target="_blank" rel="external">https://github.com/airbnb/css</a></p>
+</li>
+<li><p>Use soft tabs (2 spaces) for indentation</p>
+</li>
+<li>Prefer dashes over camelCasing in class names.<ul>
+<li>Underscores and PascalCasing are okay if you are using BEM (see OOCSS and BEM below).</li>
+</ul>
+</li>
+<li>Do not use ID selectors</li>
+<li>When using multiple selectors in a rule declaration, give each selector its own line.</li>
+<li>Put a space before the opening brace { in rule declarations</li>
+<li>In properties, put a space after, but not before, the : character.</li>
+<li>Put closing braces } of rule declarations on a new line</li>
+<li>Put blank lines between rule declarations</li>
+</ul>
+<p>OOCSS 与 BEM 混用</p>
+<blockquote>
+<p>只要是可维护的好代码，并不需要拘泥于用什么风格</p>
+</blockquote>
+<h3 id="5-1-圣杯"><a href="#5-1-圣杯" class="headerlink" title="5.1 圣杯"></a>5.1 圣杯</h3><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<li><a href="https://github.com/picturepan2/spectre" target="_blank" rel="external">https://github.com/picturepan2/spectre</a></li>
+</ul>
+<hr>
 <p>ChangeLog:</p>
 <ul>
 <li><strong>2017-12-20</strong> 初始化本文</li>
@@ -1083,7 +1499,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/12/23/macOSInDepth/" itemprop="url">关于 Mac 的一些常识</a></h2>
+                <a class="post-title-link" href="/2017/12/23/macOSInDepth/" itemprop="url">macOS 的系统与软件</a></h2>
         
 
         <div class="post-meta">
@@ -1118,8 +1534,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/深入理解-macOS/" itemprop="url" rel="index">
-                    <span itemprop="name">深入理解 macOS</span>
+                  <a href="/categories/善用佳软/" itemprop="url" rel="index">
+                    <span itemprop="name">善用佳软</span>
                   </a>
                 </span>
 
@@ -1149,7 +1565,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  87
+                  371
                 </span>
               
 
@@ -1185,12 +1601,57 @@
       
         
           
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>折腾了 Windows 很多年，后来出于个人偏好转投 Mac，使用起来一直很顺手。现在也开始从顺手开始，研究更深一点的东西。</p>
-<h2 id="0x01-应用程序"><a href="#0x01-应用程序" class="headerlink" title="0x01 应用程序"></a>0x01 应用程序</h2><p>应用程序是一个 bundle 文件，一般为 xxx.app 文件夹，</p>
-<h2 id="0x02-前言"><a href="#0x02-前言" class="headerlink" title="0x02 前言"></a>0x02 前言</h2><h2 id="0x03-前言"><a href="#0x03-前言" class="headerlink" title="0x03 前言"></a>0x03 前言</h2><hr>
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>折腾了 Windows 很多年，后来出于个人开发需求转投 Mac，使用起来一直很顺手。现在也开始从顺手开始到了解更深一点的东西。</p>
+<h2 id="0x01-系统安全架构"><a href="#0x01-系统安全架构" class="headerlink" title="0x01 系统安全架构"></a>0x01 系统安全架构</h2><h3 id="1-1-系统架构概述"><a href="#1-1-系统架构概述" class="headerlink" title="1.1 系统架构概述"></a>1.1 系统架构概述</h3><p>非开发人员分层：</p>
+<ul>
+<li>User Experience<ul>
+<li>Aqua</li>
+<li>Dashboard</li>
+<li>Spotlight</li>
+<li>Dock</li>
+<li>输入法</li>
+<li>屏保</li>
+<li>辅助功能</li>
+<li>语音</li>
+<li>位置与地图</li>
+<li>搜索</li>
+<li>etc</li>
+</ul>
+</li>
+<li>Application Framework<ul>
+<li>Cocoa</li>
+</ul>
+</li>
+<li>Graphics and Media<ul>
+<li>核心框架，OpenAL,Quartz,SceneKit,SpriteKit</li>
+</ul>
+</li>
+<li>Darwin<ul>
+<li>系统内核与 Shell 环境</li>
+</ul>
+</li>
+</ul>
+<p>开发人员分层：</p>
+<ul>
+<li>Cocoa Layer: Cocoa 框架层 包括了用于开发界面程序的框架集合。</li>
+<li>Foundation Layer: 提供了程序开发室使用到的基础数据类型、数值处理、网络、IO 和 日期等</li>
+<li>Media Layer: 提供了图像、声音、视频、动画及游戏开发需要的接口</li>
+<li>Core Service Layer: 系统安全、底层内部数据访问以及存储接口。比如 AddressBook,CoreData,QuickLook 用于快速浏览插件开发。CoreFoundation 框架也属于这一层。</li>
+<li>Core OS Layer: 加速器，蓝牙，异常处理，网络扩展，系统配置</li>
+<li>Kernel &amp; Driver Layer: 内核与驱动层。包括开发设备驱动程序与内核扩展所需的一些框架。</li>
+</ul>
+<p>应用程序是一个 bundle 文件，一般为 xxx.app 文件夹，</p>
+<h3 id="1-1-一些常用软件"><a href="#1-1-一些常用软件" class="headerlink" title="1.1 一些常用软件"></a>1.1 一些常用软件</h3><p>Clang<br>LLVM</p>
+<p>HT Editor</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install ht</div></pre></td></tr></table></figure>
+<h2 id="0x02-前言"><a href="#0x02-前言" class="headerlink" title="0x02 前言"></a>0x02 前言</h2><h2 id="0x03-前言"><a href="#0x03-前言" class="headerlink" title="0x03 前言"></a>0x03 前言</h2><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<li>macOS 软件安全和逆向分析</li>
+</ul>
+<hr>
 <p>ChangeLog:</p>
 <ul>
 <li><strong>2017-12-20</strong> 初始化本文</li>
+<li><strong>2018-02-10</strong> 添加笔记</li>
 </ul>
 
           
@@ -1320,7 +1781,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,957
+                  3,993
                 </span>
               
 
@@ -1460,7 +1921,10 @@
 <h2 id="0x02-分析阶段"><a href="#0x02-分析阶段" class="headerlink" title="0x02 分析阶段"></a>0x02 分析阶段</h2><p>经过上一步处理，数据的文件总大小大约从 1000GB (uncompressed) -&gt; 30GB 左右 （拆分成若干个文件 compressed) 。每个文件大约是几百兆。</p>
 <h3 id="2-1-性能要点-1：文件系统"><a href="#2-1-性能要点-1：文件系统" class="headerlink" title="2.1 性能要点 1：文件系统"></a>2.1 性能要点 1：文件系统</h3><p>如果统计逻辑很简单，但是数量多，首选使用读取文件。读取文件进行统计速度是非常快的。（人民币玩家走开）</p>
 <p>像 linux 里面的 wc,grep,sort,uniq 在这种场景有时候也能用到。</p>
-<p>但，注意，如果文件特别大，一定要迭代器一个一个读取。</p>
+<blockquote>
+<p>注意，如果文件特别大，一定要迭代器一个一个读取。</p>
+</blockquote>
+<p>对于超大文件，比如说，上百 G 文件，可以先分成小片的文件，然后多进程批量读取并且处理。</p>
 <h3 id="2-2-性能要点-2：化整为零，map-reduce-filter"><a href="#2-2-性能要点-2：化整为零，map-reduce-filter" class="headerlink" title="2.2 性能要点 2：化整为零，map reduce filter"></a>2.2 性能要点 2：化整为零，map reduce filter</h3><p>化整为零这个已经在上面的 1.2 节讲过了。</p>
 <p>map/reduce/filter 可以极大的减少代码。</p>
 <blockquote>
@@ -1825,8 +2289,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux</span>
+                  <a href="/categories/善用佳软/" itemprop="url" rel="index">
+                    <span itemprop="name">善用佳软</span>
                   </a>
                 </span>
 
@@ -1935,353 +2399,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/10/05/ElegantMac/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/05/ElegantMac/" itemprop="url">如何优雅地使用 macOS</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-05T20:06:05+08:00">
-                2017-10-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/善用佳软/" itemprop="url" rel="index">
-                    <span itemprop="name">善用佳软</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  4,049
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  18
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>当时写这篇文章的时候才接触 mac 没多久，使用快两年之后，再次修订了本文。</p>
-<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>谈及 macOS , 很多人喜欢和 Win 比个高下。在我看来， Win 虽在非编程类生态和易用性比 Mac 要好很多，可专业人士之所以专业是因为他能挑选适合的武器发挥最大的效用，不是吗？</p>
-<blockquote>
-<p>适合自己的，能让自己用最大效率生产或者是娱乐的，才是更好的工具。</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/05/ElegantMac/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/09/25/VueProjectTalking/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/09/25/VueProjectTalking/" itemprop="url">Vue 项目漫谈</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-25T20:06:05+08:00">
-                2017-09-25
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端框架之-Vue-进阶/" itemprop="url" rel="index">
-                    <span itemprop="name">前端框架之 Vue 进阶</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2,916
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  11
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。</p>
-<p>本文仅限于 VueCli 下面的开发：</p>
-<ul>
-<li>VueJS 2.5.2</li>
-</ul>
-<h2 id="0x01-项目结构"><a href="#0x01-项目结构" class="headerlink" title="0x01 项目结构"></a>0x01 项目结构</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 根文件</span></div><div class="line">├── Makefile 恩，其实 package.json 也能代替这个功能。</div><div class="line">├── README.md</div><div class="line">├── build <span class="comment">#</span></div><div class="line">├── config <span class="comment"># 环境变量配置</span></div><div class="line">├── dist <span class="comment"># 最后输出</span></div><div class="line">├── extra <span class="comment"># 个人偏好，存放最终用于打包成 IconFont 的 svg</span></div><div class="line">├── index.html <span class="comment"># 可以在这里加首屏 loading, 以及其他预先准备好的样式。</span></div><div class="line">├── node_modules</div><div class="line">├── package.json <span class="comment"># 依赖，开发时</span></div><div class="line">├── src</div><div class="line">├── static <span class="comment"># 存放静态资源</span></div><div class="line">├── <span class="built_in">test</span></div><div class="line">└── yarn.lock</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/09/25/VueProjectTalking/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2331,7 +2448,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2342,7 +2459,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2353,7 +2470,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="前端开发,CSS," />
+  <meta name="keywords" content="CSS,SASS," />
 
 
 
@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="0x00 前言本笔记诞生于很久前零零散散记录的笔记，拿出来公开一下。 学习 CSS, 主要靠多推导式记忆。 0x01 CSS 是如何工作的？HTML 是元素的标记语言。 CSS 被用来 样式和网页布局的。 样式和布局都有哪些呢？  字体 颜色 大小 内容间距 多列 动画  通过 DOM 树的节点和样式节点结合，生成渲染树，然后交给浏览器进行渲染从而使得外观发生变化。 0x02 CSS 基本语法CS">
-<meta name="keywords" content="前端开发,CSS">
+<meta name="description" content="0x00 前言本笔记诞生于很久前零零散散记录的笔记，拿出来发布一下。 0x01 CSS 是如何工作的？HTML 是元素的标记语言。 CSS 被用来 样式和网页布局的。 样式和布局都有哪些呢？  字体 颜色 大小 内容间距 多列 动画  通过 DOM 树的节点和样式节点结合，生成渲染树，然后交给浏览器进行渲染从而使得外观发生变化。 0x02 CSS 基本语法CSS 基本语法有三个组成部分：  规则">
+<meta name="keywords" content="CSS,SASS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="关于 CSS 你应该知道的一切">
 <meta property="og:url" content="http://twocucao.xyz/2017/12/28/AllStuffAboutCSS/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="0x00 前言本笔记诞生于很久前零零散散记录的笔记，拿出来公开一下。 学习 CSS, 主要靠多推导式记忆。 0x01 CSS 是如何工作的？HTML 是元素的标记语言。 CSS 被用来 样式和网页布局的。 样式和布局都有哪些呢？  字体 颜色 大小 内容间距 多列 动画  通过 DOM 树的节点和样式节点结合，生成渲染树，然后交给浏览器进行渲染从而使得外观发生变化。 0x02 CSS 基本语法CS">
-<meta property="og:updated_time" content="2018-01-28T01:37:14.963Z">
+<meta property="og:description" content="0x00 前言本笔记诞生于很久前零零散散记录的笔记，拿出来发布一下。 0x01 CSS 是如何工作的？HTML 是元素的标记语言。 CSS 被用来 样式和网页布局的。 样式和布局都有哪些呢？  字体 颜色 大小 内容间距 多列 动画  通过 DOM 树的节点和样式节点结合，生成渲染树，然后交给浏览器进行渲染从而使得外观发生变化。 0x02 CSS 基本语法CSS 基本语法有三个组成部分：  规则">
+<meta property="og:updated_time" content="2018-02-12T05:46:07.062Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="关于 CSS 你应该知道的一切">
-<meta name="twitter:description" content="0x00 前言本笔记诞生于很久前零零散散记录的笔记，拿出来公开一下。 学习 CSS, 主要靠多推导式记忆。 0x01 CSS 是如何工作的？HTML 是元素的标记语言。 CSS 被用来 样式和网页布局的。 样式和布局都有哪些呢？  字体 颜色 大小 内容间距 多列 动画  通过 DOM 树的节点和样式节点结合，生成渲染树，然后交给浏览器进行渲染从而使得外观发生变化。 0x02 CSS 基本语法CS">
+<meta name="twitter:description" content="0x00 前言本笔记诞生于很久前零零散散记录的笔记，拿出来发布一下。 0x01 CSS 是如何工作的？HTML 是元素的标记语言。 CSS 被用来 样式和网页布局的。 样式和布局都有哪些呢？  字体 颜色 大小 内容间距 多列 动画  通过 DOM 树的节点和样式节点结合，生成渲染树，然后交给浏览器进行渲染从而使得外观发生变化。 0x02 CSS 基本语法CSS 基本语法有三个组成部分：  规则">
 
 
 
@@ -352,8 +352,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/未分类/" itemprop="url" rel="index">
-                    <span itemprop="name">未分类</span>
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
                   </a>
                 </span>
 
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  836
+                  1,033
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  4
+                  5
                 </span>
               
             </div>
@@ -417,8 +417,7 @@
       
 
       
-        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本笔记诞生于很久前零零散散记录的笔记，拿出来公开一下。</p>
-<p>学习 CSS, 主要靠多推导式记忆。</p>
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本笔记诞生于很久前零零散散记录的笔记，拿出来发布一下。</p>
 <h2 id="0x01-CSS-是如何工作的？"><a href="#0x01-CSS-是如何工作的？" class="headerlink" title="0x01 CSS 是如何工作的？"></a>0x01 CSS 是如何工作的？</h2><p>HTML 是元素的标记语言。</p>
 <p>CSS 被用来 样式和网页布局的。</p>
 <p>样式和布局都有哪些呢？</p>
@@ -445,8 +444,35 @@
 <p>属性</p>
 <p>三，层叠与继承</p>
 <p>既然是层叠，就要有层叠的规律</p>
-<h2 id="0x03-CSS-新语法"><a href="#0x03-CSS-新语法" class="headerlink" title="0x03 CSS 新语法"></a>0x03 CSS 新语法</h2><p>布局</p>
-<h3 id="3-1-Flex-Layout"><a href="#3-1-Flex-Layout" class="headerlink" title="3.1 Flex Layout"></a>3.1 Flex Layout</h3><h3 id="3-2-Grid-Layout"><a href="#3-2-Grid-Layout" class="headerlink" title="3.2 Grid Layout"></a>3.2 Grid Layout</h3><h2 id="0x04-SCSS"><a href="#0x04-SCSS" class="headerlink" title="0x04 SCSS"></a>0x04 SCSS</h2><h3 id="4-1-如何组织-SCSS-代码"><a href="#4-1-如何组织-SCSS-代码" class="headerlink" title="4.1 如何组织 SCSS 代码"></a>4.1 如何组织 SCSS 代码</h3><h2 id="0x05-常见的设计"><a href="#0x05-常见的设计" class="headerlink" title="0x05 常见的设计"></a>0x05 常见的设计</h2><h3 id="5-1-圣杯"><a href="#5-1-圣杯" class="headerlink" title="5.1 圣杯"></a>5.1 圣杯</h3><hr>
+<h2 id="0x03-CSS-新语法"><a href="#0x03-CSS-新语法" class="headerlink" title="0x03 CSS 新语法"></a>0x03 CSS 新语法</h2><h3 id="3-1-Flex-Layout"><a href="#3-1-Flex-Layout" class="headerlink" title="3.1 Flex Layout"></a>3.1 Flex Layout</h3><ul>
+<li><a href="https://github.com/philipwalton/solved-by-flexbox" target="_blank" rel="external">https://github.com/philipwalton/solved-by-flexbox</a></li>
+</ul>
+<h3 id="3-2-Grid-Layout"><a href="#3-2-Grid-Layout" class="headerlink" title="3.2 Grid Layout"></a>3.2 Grid Layout</h3><h2 id="0x04-SCSS"><a href="#0x04-SCSS" class="headerlink" title="0x04 SCSS"></a>0x04 SCSS</h2><p>这是一种兼容 CSS 语法的新语言。主要用于提升代码的可维护性。</p>
+<p>至于其他 less 之类大同小异。只选取了功能最强大的部分进行间接。</p>
+<h3 id="4-1-OOCSS-BEM-我的实践"><a href="#4-1-OOCSS-BEM-我的实践" class="headerlink" title="4.1 OOCSS / BEM / 我的实践"></a>4.1 OOCSS / BEM / 我的实践</h3><h3 id="4-1-如何组织-SCSS-代码-—-布局篇"><a href="#4-1-如何组织-SCSS-代码-—-布局篇" class="headerlink" title="4.1 如何组织 SCSS 代码 — 布局篇"></a>4.1 如何组织 SCSS 代码 — 布局篇</h3><h3 id="4-2-如何组织-SCSS-代码-—-组件篇"><a href="#4-2-如何组织-SCSS-代码-—-组件篇" class="headerlink" title="4.2 如何组织 SCSS 代码 — 组件篇"></a>4.2 如何组织 SCSS 代码 — 组件篇</h3><h4 id="4-2-BEM"><a href="#4-2-BEM" class="headerlink" title="4.2 BEM"></a>4.2 BEM</h4><h2 id="0x05-CSS-规范"><a href="#0x05-CSS-规范" class="headerlink" title="0x05 CSS 规范"></a>0x05 CSS 规范</h2><ul>
+<li><p><a href="https://github.com/airbnb/css" target="_blank" rel="external">https://github.com/airbnb/css</a></p>
+</li>
+<li><p>Use soft tabs (2 spaces) for indentation</p>
+</li>
+<li>Prefer dashes over camelCasing in class names.<ul>
+<li>Underscores and PascalCasing are okay if you are using BEM (see OOCSS and BEM below).</li>
+</ul>
+</li>
+<li>Do not use ID selectors</li>
+<li>When using multiple selectors in a rule declaration, give each selector its own line.</li>
+<li>Put a space before the opening brace { in rule declarations</li>
+<li>In properties, put a space after, but not before, the : character.</li>
+<li>Put closing braces } of rule declarations on a new line</li>
+<li>Put blank lines between rule declarations</li>
+</ul>
+<p>OOCSS 与 BEM 混用</p>
+<blockquote>
+<p>只要是可维护的好代码，并不需要拘泥于用什么风格</p>
+</blockquote>
+<h3 id="5-1-圣杯"><a href="#5-1-圣杯" class="headerlink" title="5.1 圣杯"></a>5.1 圣杯</h3><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<li><a href="https://github.com/picturepan2/spectre" target="_blank" rel="external">https://github.com/picturepan2/spectre</a></li>
+</ul>
+<hr>
 <p>ChangeLog:</p>
 <ul>
 <li><strong>2017-12-20</strong> 初始化本文</li>
@@ -480,9 +506,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/前端开发/" rel="tag"># 前端开发</a>
-          
             <a href="/tags/CSS/" rel="tag"># CSS</a>
+          
+            <a href="/tags/SASS/" rel="tag"># SASS</a>
           
         </div>
       
@@ -505,8 +531,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/23/macOSInDepth/" rel="prev" title="关于 Mac 的一些常识">
-                关于 Mac 的一些常识 <i class="fa fa-chevron-right"></i>
+              <a href="/2017/12/23/macOSInDepth/" rel="prev" title="macOS 的系统与软件">
+                macOS 的系统与软件 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -579,7 +605,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -590,7 +616,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -601,7 +627,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -672,7 +698,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-CSS-是如何工作的？"><span class="nav-number">2.</span> <span class="nav-text">0x01 CSS 是如何工作的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-CSS-基本语法"><span class="nav-number">3.</span> <span class="nav-text">0x02 CSS 基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-CSS-规则"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 CSS 规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-选择器"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-属性"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Position"><span class="nav-number">3.3.1.</span> <span class="nav-text">Position</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Display"><span class="nav-number">3.3.2.</span> <span class="nav-text">Display</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Box-Model"><span class="nav-number">3.3.3.</span> <span class="nav-text">Box Model</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-CSS-新语法"><span class="nav-number">4.</span> <span class="nav-text">0x03 CSS 新语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Flex-Layout"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Flex Layout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Grid-Layout"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 Grid Layout</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-SCSS"><span class="nav-number">5.</span> <span class="nav-text">0x04 SCSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-如何组织-SCSS-代码"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 如何组织 SCSS 代码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-常见的设计"><span class="nav-number">6.</span> <span class="nav-text">0x05 常见的设计</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-圣杯"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 圣杯</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-CSS-是如何工作的？"><span class="nav-number">2.</span> <span class="nav-text">0x01 CSS 是如何工作的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-CSS-基本语法"><span class="nav-number">3.</span> <span class="nav-text">0x02 CSS 基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-CSS-规则"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 CSS 规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-选择器"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-属性"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Position"><span class="nav-number">3.3.1.</span> <span class="nav-text">Position</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Display"><span class="nav-number">3.3.2.</span> <span class="nav-text">Display</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Box-Model"><span class="nav-number">3.3.3.</span> <span class="nav-text">Box Model</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-CSS-新语法"><span class="nav-number">4.</span> <span class="nav-text">0x03 CSS 新语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Flex-Layout"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Flex Layout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Grid-Layout"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 Grid Layout</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-SCSS"><span class="nav-number">5.</span> <span class="nav-text">0x04 SCSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-OOCSS-BEM-我的实践"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 OOCSS / BEM / 我的实践</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-如何组织-SCSS-代码-—-布局篇"><span class="nav-number">5.2.</span> <span class="nav-text">4.1 如何组织 SCSS 代码 — 布局篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-如何组织-SCSS-代码-—-组件篇"><span class="nav-number">5.3.</span> <span class="nav-text">4.2 如何组织 SCSS 代码 — 组件篇</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-BEM"><span class="nav-number">5.3.1.</span> <span class="nav-text">4.2 BEM</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-CSS-规范"><span class="nav-number">6.</span> <span class="nav-text">0x05 CSS 规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-圣杯"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 圣杯</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-参考链接"><span class="nav-number">7.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
             
 
           </div>

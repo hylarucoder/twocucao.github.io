@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2017/01/05/PostgreSQLCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。 PostGIS 相关的资料参考文章 Geo Processing With Python  安装与基本配置 PostgreSQL 配套工具 PostgreSQL SQL 常用代码片段 Python Driver : psycopg2 , 与两个 ORM ( Django OR">
-<meta property="og:updated_time" content="2018-01-28T01:20:55.953Z">
+<meta property="og:updated_time" content="2018-01-30T08:54:23.209Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PostgreSQL CheatSheet">
 <meta name="twitter:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。 PostGIS 相关的资料参考文章 Geo Processing With Python  安装与基本配置 PostgreSQL 配套工具 PostgreSQL SQL 常用代码片段 Python Driver : psycopg2 , 与两个 ORM ( Django OR">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,176
+                  1,192
                 </span>
               
 
@@ -440,7 +440,10 @@
 <h3 id="3-4-DML-Data-Manipulation-Languge"><a href="#3-4-DML-Data-Manipulation-Languge" class="headerlink" title="3.4 DML ( Data Manipulation Languge )"></a>3.4 DML ( Data Manipulation Languge )</h3><p>SELECT<br>INSERT<br>UPDATE<br>DELETE<br>MERGE<br>CALL<br>EXPLAIN PLAN<br>LOCK TABLE</p>
 <h3 id="3-5-TCL-Transaction-Control-Languge"><a href="#3-5-TCL-Transaction-Control-Languge" class="headerlink" title="3.5 TCL ( Transaction Control Languge )"></a>3.5 TCL ( Transaction Control Languge )</h3><h2 id="0x04-常用代码片段"><a href="#0x04-常用代码片段" class="headerlink" title="0x04. 常用代码片段"></a>0x04. 常用代码片段</h2><h3 id="4-1-Tips-And-Hacks"><a href="#4-1-Tips-And-Hacks" class="headerlink" title="4.1. Tips And Hacks"></a>4.1. Tips And Hacks</h3><h4 id="Recursive-Query"><a href="#Recursive-Query" class="headerlink" title="Recursive Query"></a>Recursive Query</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">WITH cte_name(</div><div class="line">    CTE_query_definition -- non-recursive term</div><div class="line">    UNION [ALL]</div><div class="line">    CTE_query_definition -- recursive term</div><div class="line">) SELECT * FROM cte_name;</div></pre></td></tr></table></figure>
 <h3 id="4-2-大数据量运算技巧"><a href="#4-2-大数据量运算技巧" class="headerlink" title="4.2. 大数据量运算技巧"></a>4.2. 大数据量运算技巧</h3><h3 id="4-3-备份还原技巧"><a href="#4-3-备份还原技巧" class="headerlink" title="4.3 备份还原技巧"></a>4.3 备份还原技巧</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># 需要备份的机器</div><div class="line">DB_NAME=&apos;xxxdb&apos;</div><div class="line">DUMP_DB_FILE=&apos;latest_dump.sql.gz&apos;</div><div class="line">sudo -u postgres pg_dump $DB_NAME | gzip -9 &gt; $DUMP_DB_FILE</div><div class="line">TARGET_HOSTNAME=&apos;xxx.org&apos;</div><div class="line">TARGET_PATH=&apos;/webapps/&apos;</div><div class="line">scp $DUMP_DB_FILE root@$TARGET_HOSTNAME:/webapps/</div><div class="line"></div><div class="line"># 需要还原的机器</div><div class="line">DB_NAME=&apos;xxxdb&apos;</div><div class="line">DUMP_DB_FILE=&apos;latest_dump.sql.gz&apos;</div><div class="line">sudo -u postgres dropdb $DB_NAME</div><div class="line">sudo -u postgres createdb $DB_NAME</div><div class="line">gunzip &lt; $DUMP_DB_FILE | sudo -u postgres psql $DB_NAME</div></pre></td></tr></table></figure>
-<h2 id="0x05-并发优化技巧"><a href="#0x05-并发优化技巧" class="headerlink" title="0x05. 并发优化技巧"></a>0x05. 并发优化技巧</h2><h3 id="5-1-ACID"><a href="#5-1-ACID" class="headerlink" title="5.1 ACID"></a>5.1 ACID</h3><ul>
+<h2 id="0x05-并发优化技巧"><a href="#0x05-并发优化技巧" class="headerlink" title="0x05. 并发优化技巧"></a>0x05. 并发优化技巧</h2><blockquote>
+<p>优化技巧请参考我关于 MySQL 的一片文章。</p>
+</blockquote>
+<h3 id="5-1-ACID"><a href="#5-1-ACID" class="headerlink" title="5.1 ACID"></a>5.1 ACID</h3><ul>
 <li>Atomicity     : 行不行，给个准话</li>
 <li>Consistency   : 完成时候，数据保持一致（多版本并发控制）</li>
 <li>Isolation     : 事务与事务之间是隔离的。即一事务无法查看另一个事务正在修改的数据（默认，如果不默认这玩意，则隔离程度是可以设置的）</li>
@@ -625,7 +628,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -636,7 +639,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -647,7 +650,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

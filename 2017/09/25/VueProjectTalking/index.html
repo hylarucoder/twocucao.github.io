@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="0x00 前言最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 本文仅限于 VueCli 下面的开发：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 package.json 也能代替这个功能。├── RE">
+<meta name="description" content="0x00 前言最近升级 Vue 项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 欢迎切磋。 项目使用的脚手架为 VueCli 提供的 webpack 脚手架：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 pac">
 <meta name="keywords" content="VueJS,全栈开发,项目经验">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue 项目漫谈">
 <meta property="og:url" content="http://twocucao.xyz/2017/09/25/VueProjectTalking/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="0x00 前言最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 本文仅限于 VueCli 下面的开发：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 package.json 也能代替这个功能。├── RE">
-<meta property="og:updated_time" content="2018-01-28T02:30:02.079Z">
+<meta property="og:description" content="0x00 前言最近升级 Vue 项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 欢迎切磋。 项目使用的脚手架为 VueCli 提供的 webpack 脚手架：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 pac">
+<meta property="og:updated_time" content="2018-01-30T11:48:07.632Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vue 项目漫谈">
-<meta name="twitter:description" content="0x00 前言最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 本文仅限于 VueCli 下面的开发：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 package.json 也能代替这个功能。├── RE">
+<meta name="twitter:description" content="0x00 前言最近升级 Vue 项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。 欢迎切磋。 项目使用的脚手架为 VueCli 提供的 webpack 脚手架：  VueJS 2.5.2  0x01 项目结构1234567891011121314# 根文件├── Makefile 恩，其实 pac">
 
 
 
@@ -352,8 +352,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端框架之-Vue-进阶/" itemprop="url" rel="index">
-                    <span itemprop="name">前端框架之 Vue 进阶</span>
+                  <a href="/categories/前端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">前端开发</span>
                   </a>
                 </span>
 
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,916
+                  2,937
                 </span>
               
 
@@ -417,8 +417,9 @@
       
 
       
-        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。</p>
-<p>本文仅限于 VueCli 下面的开发：</p>
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>最近升级 Vue 项目的脚手架，踩了一些关于 Webpack2 升级为 Webpack3 的版本的坑，解决了之后，顺手分享一下，我接近一年来对 Vue 项目的开发理解。</p>
+<p>欢迎切磋。</p>
+<p>项目使用的脚手架为 VueCli 提供的 webpack 脚手架：</p>
 <ul>
 <li>VueJS 2.5.2</li>
 </ul>
@@ -447,11 +448,11 @@
 <li>便于定制面包屑组件</li>
 <li>其他</li>
 </ol>
-<h2 id="0x03-构建技巧"><a href="#0x03-构建技巧" class="headerlink" title="0x03 构建技巧"></a>0x03 构建技巧</h2><h3 id="3-1-离线-IconFont"><a href="#3-1-离线-IconFont" class="headerlink" title="3.1 离线 IconFont"></a>3.1 离线 IconFont</h3><p>经常需要离线调试网页，顺手写了这个脚本，这并不是说 iconfont 不好，只是个人偏好而已。</p>
-<p>所以，我就查找了一些资料，正好之前研究过某个网站的反爬机制，研究了一下他们的 iconfont, 知道了 font-carrier, 然后调用 node 脚本打包字体文件，并在这个过程中自动生成对应的 iconfont.css</p>
-<p>最后的结果就是，当我放一个文件到 svg 文件夹下面的时候，比如 bank.svg , 我执行一下脚本，生成对应的字体文件，在 vue 组件中直接输入</p>
+<h2 id="0x03-构建技巧"><a href="#0x03-构建技巧" class="headerlink" title="0x03 构建技巧"></a>0x03 构建技巧</h2><h3 id="3-1-离线-IconFont"><a href="#3-1-离线-IconFont" class="headerlink" title="3.1 离线 IconFont"></a>3.1 离线 IconFont</h3><p>经常需要离线调试网页，顺手写了这个脚本。</p>
+<p>之前在研究某个网站的反爬机制的时候发现时动态生成 iconfont, 然后通过 unicode 码来实现数字的显示，从而让爬虫小白无法爬取。研究了一下他们的 iconfont, 知道了 font-carrier, 然后调用 node 脚本打包字体文件，并在这个过程中自动生成对应的 iconfont.css</p>
+<p>最后的结果就是，当我放一个文件到 svg 文件夹下面的时候，比如 bank.svg , 我执行一下脚本，生成对应的字体文件，在 html 里面编写脚本</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;span class=&quot;iconfont iconfont-bank&quot; &gt;&lt;/span&gt;</div></pre></td></tr></table></figure>
-<p>然后就呈现出来了。</p>
+<p>然后对应图标就呈现出来了。</p>
 <h3 id="3-2-Webpack-构建工具"><a href="#3-2-Webpack-构建工具" class="headerlink" title="3.2 Webpack 构建工具"></a>3.2 Webpack 构建工具</h3><p>日常开发用的是 VueCli, 配置还是非常人性化的。开箱即用。</p>
 <h4 id="开发环境与部署环境"><a href="#开发环境与部署环境" class="headerlink" title="开发环境与部署环境"></a>开发环境与部署环境</h4><p>VueCLI 内置了变量的管理，你可以定义 config/dev.js</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">module</span>.exports = merge(prodEnv, &#123;</div><div class="line">  <span class="attr">NODE_ENV</span>: <span class="string">'"development"'</span>,</div><div class="line">  <span class="attr">API_ROOT</span>: <span class="string">'"http://dev-data.twocucao.xyz"'</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -666,7 +667,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -677,7 +678,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -688,7 +689,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

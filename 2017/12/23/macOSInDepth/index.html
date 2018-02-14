@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="macOS,XCode," />
+  <meta name="keywords" content="macOS,XCode,App Store,Apple Store,iTunes Store," />
 
 
 
@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="0x00 前言折腾了 Windows 很多年，后来出于个人偏好转投 Mac，使用起来一直很顺手。现在也开始从顺手开始，研究更深一点的东西。 0x01 应用程序应用程序是一个 bundle 文件，一般为 xxx.app 文件夹， 0x02 前言0x03 前言 ChangeLog:  2017-12-20 初始化本文">
-<meta name="keywords" content="macOS,XCode">
+<meta name="description" content="0x00 前言折腾了 Windows 很多年，后来出于个人开发需求转投 Mac，使用起来一直很顺手。现在也开始从顺手开始到了解更深一点的东西。 0x01 系统安全架构1.1 系统架构概述非开发人员分层：  User Experience Aqua Dashboard Spotlight Dock 输入法 屏保 辅助功能 语音 位置与地图 搜索 etc   Application Framework">
+<meta name="keywords" content="macOS,XCode,App Store,Apple Store,iTunes Store">
 <meta property="og:type" content="article">
-<meta property="og:title" content="关于 Mac 的一些常识">
+<meta property="og:title" content="macOS 的系统与软件">
 <meta property="og:url" content="http://twocucao.xyz/2017/12/23/macOSInDepth/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="0x00 前言折腾了 Windows 很多年，后来出于个人偏好转投 Mac，使用起来一直很顺手。现在也开始从顺手开始，研究更深一点的东西。 0x01 应用程序应用程序是一个 bundle 文件，一般为 xxx.app 文件夹， 0x02 前言0x03 前言 ChangeLog:  2017-12-20 初始化本文">
-<meta property="og:updated_time" content="2018-01-28T01:37:09.335Z">
+<meta property="og:description" content="0x00 前言折腾了 Windows 很多年，后来出于个人开发需求转投 Mac，使用起来一直很顺手。现在也开始从顺手开始到了解更深一点的东西。 0x01 系统安全架构1.1 系统架构概述非开发人员分层：  User Experience Aqua Dashboard Spotlight Dock 输入法 屏保 辅助功能 语音 位置与地图 搜索 etc   Application Framework">
+<meta property="og:updated_time" content="2018-02-11T01:14:31.550Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于 Mac 的一些常识">
-<meta name="twitter:description" content="0x00 前言折腾了 Windows 很多年，后来出于个人偏好转投 Mac，使用起来一直很顺手。现在也开始从顺手开始，研究更深一点的东西。 0x01 应用程序应用程序是一个 bundle 文件，一般为 xxx.app 文件夹， 0x02 前言0x03 前言 ChangeLog:  2017-12-20 初始化本文">
+<meta name="twitter:title" content="macOS 的系统与软件">
+<meta name="twitter:description" content="0x00 前言折腾了 Windows 很多年，后来出于个人开发需求转投 Mac，使用起来一直很顺手。现在也开始从顺手开始到了解更深一点的东西。 0x01 系统安全架构1.1 系统架构概述非开发人员分层：  User Experience Aqua Dashboard Spotlight Dock 输入法 屏保 辅助功能 语音 位置与地图 搜索 etc   Application Framework">
 
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title>关于 Mac 的一些常识 | MG的编程小屋</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>macOS 的系统与软件 | MG的编程小屋</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -317,7 +317,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">关于 Mac 的一些常识</h2>
+          <h2 class="post-title" itemprop="name headline">macOS 的系统与软件</h2>
         
 
         <div class="post-meta">
@@ -352,8 +352,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/深入理解-macOS/" itemprop="url" rel="index">
-                    <span itemprop="name">深入理解 macOS</span>
+                  <a href="/categories/善用佳软/" itemprop="url" rel="index">
+                    <span itemprop="name">善用佳软</span>
                   </a>
                 </span>
 
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  87
+                  371
                 </span>
               
 
@@ -417,12 +417,57 @@
       
 
       
-        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>折腾了 Windows 很多年，后来出于个人偏好转投 Mac，使用起来一直很顺手。现在也开始从顺手开始，研究更深一点的东西。</p>
-<h2 id="0x01-应用程序"><a href="#0x01-应用程序" class="headerlink" title="0x01 应用程序"></a>0x01 应用程序</h2><p>应用程序是一个 bundle 文件，一般为 xxx.app 文件夹，</p>
-<h2 id="0x02-前言"><a href="#0x02-前言" class="headerlink" title="0x02 前言"></a>0x02 前言</h2><h2 id="0x03-前言"><a href="#0x03-前言" class="headerlink" title="0x03 前言"></a>0x03 前言</h2><hr>
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>折腾了 Windows 很多年，后来出于个人开发需求转投 Mac，使用起来一直很顺手。现在也开始从顺手开始到了解更深一点的东西。</p>
+<h2 id="0x01-系统安全架构"><a href="#0x01-系统安全架构" class="headerlink" title="0x01 系统安全架构"></a>0x01 系统安全架构</h2><h3 id="1-1-系统架构概述"><a href="#1-1-系统架构概述" class="headerlink" title="1.1 系统架构概述"></a>1.1 系统架构概述</h3><p>非开发人员分层：</p>
+<ul>
+<li>User Experience<ul>
+<li>Aqua</li>
+<li>Dashboard</li>
+<li>Spotlight</li>
+<li>Dock</li>
+<li>输入法</li>
+<li>屏保</li>
+<li>辅助功能</li>
+<li>语音</li>
+<li>位置与地图</li>
+<li>搜索</li>
+<li>etc</li>
+</ul>
+</li>
+<li>Application Framework<ul>
+<li>Cocoa</li>
+</ul>
+</li>
+<li>Graphics and Media<ul>
+<li>核心框架，OpenAL,Quartz,SceneKit,SpriteKit</li>
+</ul>
+</li>
+<li>Darwin<ul>
+<li>系统内核与 Shell 环境</li>
+</ul>
+</li>
+</ul>
+<p>开发人员分层：</p>
+<ul>
+<li>Cocoa Layer: Cocoa 框架层 包括了用于开发界面程序的框架集合。</li>
+<li>Foundation Layer: 提供了程序开发室使用到的基础数据类型、数值处理、网络、IO 和 日期等</li>
+<li>Media Layer: 提供了图像、声音、视频、动画及游戏开发需要的接口</li>
+<li>Core Service Layer: 系统安全、底层内部数据访问以及存储接口。比如 AddressBook,CoreData,QuickLook 用于快速浏览插件开发。CoreFoundation 框架也属于这一层。</li>
+<li>Core OS Layer: 加速器，蓝牙，异常处理，网络扩展，系统配置</li>
+<li>Kernel &amp; Driver Layer: 内核与驱动层。包括开发设备驱动程序与内核扩展所需的一些框架。</li>
+</ul>
+<p>应用程序是一个 bundle 文件，一般为 xxx.app 文件夹，</p>
+<h3 id="1-1-一些常用软件"><a href="#1-1-一些常用软件" class="headerlink" title="1.1 一些常用软件"></a>1.1 一些常用软件</h3><p>Clang<br>LLVM</p>
+<p>HT Editor</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install ht</div></pre></td></tr></table></figure>
+<h2 id="0x02-前言"><a href="#0x02-前言" class="headerlink" title="0x02 前言"></a>0x02 前言</h2><h2 id="0x03-前言"><a href="#0x03-前言" class="headerlink" title="0x03 前言"></a>0x03 前言</h2><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<li>macOS 软件安全和逆向分析</li>
+</ul>
+<hr>
 <p>ChangeLog:</p>
 <ul>
 <li><strong>2017-12-20</strong> 初始化本文</li>
+<li><strong>2018-02-10</strong> 添加笔记</li>
 </ul>
 
       
@@ -456,6 +501,12 @@
             <a href="/tags/macOS/" rel="tag"># macOS</a>
           
             <a href="/tags/XCode/" rel="tag"># XCode</a>
+          
+            <a href="/tags/App-Store/" rel="tag"># App Store</a>
+          
+            <a href="/tags/Apple-Store/" rel="tag"># Apple Store</a>
+          
+            <a href="/tags/iTunes-Store/" rel="tag"># iTunes Store</a>
           
         </div>
       
@@ -552,7 +603,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -563,7 +614,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -574,7 +625,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -645,7 +696,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-应用程序"><span class="nav-number">2.</span> <span class="nav-text">0x01 应用程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-前言"><span class="nav-number">3.</span> <span class="nav-text">0x02 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-前言"><span class="nav-number">4.</span> <span class="nav-text">0x03 前言</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-系统安全架构"><span class="nav-number">2.</span> <span class="nav-text">0x01 系统安全架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-系统架构概述"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 系统架构概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-一些常用软件"><span class="nav-number">2.2.</span> <span class="nav-text">1.1 一些常用软件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-前言"><span class="nav-number">3.</span> <span class="nav-text">0x02 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-前言"><span class="nav-number">4.</span> <span class="nav-text">0x03 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-参考链接"><span class="nav-number">5.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
             
 
           </div>

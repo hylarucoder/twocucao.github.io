@@ -96,19 +96,19 @@
 
 
 
-<meta name="description" content="0x00 前言这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Rep">
+<meta name="description" content="0x00 前言 备注：本文训练效果太差，所以直接太监了。  这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。本文的代码和文章内容主要源于">
 <meta name="keywords" content="数据分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一个基于 TensorFlow 的图片分类器">
 <meta property="og:url" content="http://twocucao.xyz/2017/05/29/一个基于TensorFlow的分类器/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="0x00 前言这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Rep">
+<meta property="og:description" content="0x00 前言 备注：本文训练效果太差，所以直接太监了。  这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。本文的代码和文章内容主要源于">
 <meta property="og:image" content="http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png">
 <meta property="og:image" content="http://oriw7hkjj.bkt.clouddn.com/WX20170529-162953@2x.png">
-<meta property="og:updated_time" content="2017-12-19T04:20:44.216Z">
+<meta property="og:updated_time" content="2018-01-30T09:18:28.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="一个基于 TensorFlow 的图片分类器">
-<meta name="twitter:description" content="0x00 前言这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Rep">
+<meta name="twitter:description" content="0x00 前言 备注：本文训练效果太差，所以直接太监了。  这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。本文的代码和文章内容主要源于">
 <meta name="twitter:image" content="http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png">
 
 
@@ -386,7 +386,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,709
+                  1,716
                 </span>
               
 
@@ -420,11 +420,13 @@
       
 
       
-        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。<br>所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。<br>本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。</p>
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><blockquote>
+<p>备注：本文训练效果太差，所以直接太监了。</p>
+</blockquote>
+<p>这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。<br>所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。<br>本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。</p>
 <p>本文的目的是：</p>
 <blockquote>
 <p>通过 TensorFlow 训练一个小型的分类器，用这个分类器通过照片识别出明星的姓名。</p>
-<p>备注：本文训练效果太差</p>
 </blockquote>
 <p>即我们要训练一个小 AI, 这个小 AI 能分辨欢乐颂里面的五美：</p>
 <ul>
@@ -620,7 +622,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-count">63</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -631,7 +633,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -642,7 +644,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">88</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
