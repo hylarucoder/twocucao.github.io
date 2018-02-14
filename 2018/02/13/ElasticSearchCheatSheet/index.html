@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2018/02/13/ElasticSearchCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。 不定期更新。 最早使用 ElasticSearch 是两年前了。最近准备用 Django 写一个全栈式的应用，借用强大的 ES 来做搜索。这是我在写程序之余写这篇文章的原因。 官网介绍 ElasticSearch 不仅仅是全文搜索，也可以结构化搜索（这里用结构化查询会更">
-<meta property="og:updated_time" content="2018-02-14T08:20:22.842Z">
+<meta property="og:updated_time" content="2018-02-14T10:05:20.815Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ElasticSearch CheatSheet">
 <meta name="twitter:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。 不定期更新。 最早使用 ElasticSearch 是两年前了。最近准备用 Django 写一个全栈式的应用，借用强大的 ES 来做搜索。这是我在写程序之余写这篇文章的原因。 官网介绍 ElasticSearch 不仅仅是全文搜索，也可以结构化搜索（这里用结构化查询会更">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,231
+                  2,023
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5
+                  8
                 </span>
               
             </div>
@@ -446,38 +446,83 @@
 <p>PS: 两年前我用的还是 2.3.3 版本。新版本有很多插件配置起来已经有所不同了。比如说 head 现在已经被独立出来作为一个单纯的网页，chrome 商店可以直接下载。</p>
 </blockquote>
 <h2 id="0x02-ElasticSearch-配套工具"><a href="#0x02-ElasticSearch-配套工具" class="headerlink" title="0x02 ElasticSearch 配套工具"></a>0x02 ElasticSearch 配套工具</h2><p>建议使用 Head 插件来进行简单的查询与调试。</p>
-<h2 id="0x03-ElasticSearch-常用代码"><a href="#0x03-ElasticSearch-常用代码" class="headerlink" title="0x03 ElasticSearch 常用代码"></a>0x03 ElasticSearch 常用代码</h2><h3 id="3-1-Elasticsearch-基本概念"><a href="#3-1-Elasticsearch-基本概念" class="headerlink" title="3.1 Elasticsearch 基本概念"></a>3.1 Elasticsearch 基本概念</h3><p>ES 使用的是 RESTFUL API 接口</p>
+<h2 id="0x03-ElasticSearch-基础概念"><a href="#0x03-ElasticSearch-基础概念" class="headerlink" title="0x03 ElasticSearch 基础概念"></a>0x03 ElasticSearch 基础概念</h2><h3 id="3-1-Elasticsearch-CRUDE-以及基本操作"><a href="#3-1-Elasticsearch-CRUDE-以及基本操作" class="headerlink" title="3.1 Elasticsearch CRUDE 以及基本操作"></a>3.1 Elasticsearch CRUDE 以及基本操作</h3><p>ES 使用的是 RESTFUL API 接口</p>
 <p>这也就意味着：</p>
 <ul>
+<li>PUT 创建记录</li>
 <li>GET 获取记录</li>
 <li>POST 更新记录</li>
-<li>PUT 创建记录</li>
 <li>DELETE 删除记录</li>
 <li>HEAD 是否存在</li>
 </ul>
-<h3 id="3-2-全文搜索的难点"><a href="#3-2-全文搜索的难点" class="headerlink" title="3.2 全文搜索的难点"></a>3.2 全文搜索的难点</h3><p>要想知道全文搜索难在哪，就要知道全文搜索蠢在哪？</p>
+<h2 id="0x04-全文搜索的基本概念"><a href="#0x04-全文搜索的基本概念" class="headerlink" title="0x04 全文搜索的基本概念"></a>0x04 全文搜索的基本概念</h2><h3 id="4-1-全文搜索遇到的挑战"><a href="#4-1-全文搜索遇到的挑战" class="headerlink" title="4.1 全文搜索遇到的挑战"></a>4.1 全文搜索遇到的挑战</h3><p>在最初开源搜索引擎技术还不是很成熟的时候，我们一般都会使用 RDBMS 进行简单搜索。</p>
+<p>简单搜索，也就是我们常常使用的 like 查询（当然，有的数据库可以使用正则表达式）</p>
+<p>这种方式是简单暴力的查询方式，优点是实现起来简单暴力。缺点是准确度很差。</p>
+<p>举例：</p>
 <ul>
-<li>一是传统的 RDBMS 的 LIKE 查询速度非常之慢</li>
-<li>二是传统的 RDBMS 的 LIKE 查询效果非常之蠢</li>
+<li>假如站点里文章数量比较大，并且文章内容比较长，则进行一次全表查询，效率可想而知。当然，做好分库分表读写分离也是能用的。</li>
+<li>如果我要对搜索到的词语进行高亮，则实现方式就只能是把查询到的文章放在应用层里面进行批量替换。</li>
+<li>RDBMS 似乎完全不懂各种语言之间的区别。<ul>
+<li>『停止词 / 常用词』有的字我是不需要的，比如南京的狗，其实我想搜的是南京狗，这里的『的』就不是我需要的。</li>
+<li>『同义词』有的字我需要的是他的同义词，比如日本黄狗，其实我想搜的是柴犬。</li>
+<li>『附加符号』假如说我们搜索一个声调 [nǐ], 总不能让用户打出 [nǐ] 进行搜索吧？总归要转为 ni 才能方便搜索</li>
+<li>『词根形式』对于一个单词，假如是动词可能有时态上的区分，如果是名词，可能有单复数的区分。假如我搜 mice, 其实同样的 mouse 也应该被搜索出来。但有事用这种方式也会矫枉过正，比如 organizations 的 原型其实并不是 organization 而是，organ. （当然，overstemming 和 understemming 也是两个不可忽视的问题）<ul>
+<li>Number: fox, foxes</li>
+<li>Tense: pay, paid, paying</li>
+<li>Gender: waiter, waitress</li>
+<li>Person: hear, hears</li>
+<li>Case: I, me, my</li>
+<li>Aspect: ate, eaten</li>
+<li>Mood: so be it, were it so</li>
+<li>PS: 万幸的是，中文处理中木词根这个概念。我也就不深入这块了。</li>
 </ul>
-<p>先说说慢，当我在图书馆里面查询书籍的时候，每一次输入书名进行查找，就会默认使用 LIKE 查询。而 LIKE 查询 几乎是走全表，走全表，然后通过通配符对几十万的长文的进行文本匹配，最后返回结果。这会导致性能很糟糕，这点其实也不能算是硬伤。如果做好分库分表，放几台 slave, 然后在应用层分别读数据库倒也能使得性能提上来。</p>
-<p>我们主要说说蠢。常规的 RDBMS 在解决下面的问题时候显得捉襟掣肘。</p>
+</li>
+<li>『拼写问题』 TODO: 补充案例</li>
+<li>『分词 / 识别词』中文不像英文，词和词之间是完全没有空格的，也就是说，中文天然要比英文多一个关于分词的步骤。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-2-全文搜索的字段是如何存到-ES-中的？"><a href="#4-2-全文搜索的字段是如何存到-ES-中的？" class="headerlink" title="4.2 全文搜索的字段是如何存到 ES 中的？"></a>4.2 全文搜索的字段是如何存到 ES 中的？</h3><p>首先，要有数据，然后才是搜索。</p>
+<p>我们先要把数据存在 ES 中，</p>
 <ol>
-<li>大小写匹配 （当然，现在有很多数据库支持了 ilike 和 regex 匹配了，这点其实可以忽略掉.)</li>
-<li>去除附加标点。（比如英文 / 法语）</li>
-<li>stemming each word to its root form 单复数。（主要针对英文）</li>
-<li>移除<strong>常用词</strong>和<strong>停止词</strong>从而提升性能和精准度</li>
-<li>包含同义词</li>
-<li>检查错误拼写</li>
+<li>新建并定义 index,type,document,field</li>
 </ol>
-<h4 id="1-流程"><a href="#1-流程" class="headerlink" title="1. 流程"></a>1. 流程</h4><p>一般会有如下的流程，这个流程可以交给 analyzer 进行处理。</p>
+<p>在定义 field 的时候指定 analyzer, 然后赋值大行文本，这个时候 analyzer 会对这个文本做什么呢？</p>
+<ul>
+<li>STEP 1: 令牌化文本为独立的词</li>
+<li>STEP 2: 词语转小写</li>
+<li>STEP 3: 去除常见的停止词</li>
+<li>STEP 4: 获取词的原型</li>
+</ul>
+<p>其他的大同小异，那我们常用的 <a href="https://github.com/medcl/elasticsearch-analysis-ik" target="_blank" rel="external">https://github.com/medcl/elasticsearch-analysis-ik</a> 的话，则也是类似的步骤（下面步骤是我拍的，没看源码）</p>
+<ol>
+<li>令牌化文本为独立的词语 - 分词</li>
+<li>出去常见的停止词</li>
+<li>匹配同义词</li>
+<li>….</li>
+</ol>
+<h4 id="停止词"><a href="#停止词" class="headerlink" title="停止词"></a>停止词</h4><p>使用停止词是减少索引大小的一种方式，那么，哪些词语可以呗当做停止词呢？</p>
+<p>低频词语：低频词语具备高权重<br>高频词语：高频词语具备低权重</p>
+<p>当然，是否是高频词语依据个人经验主要依据两点来判断：</p>
+<ul>
+<li>具体情况：比如在英文中，and/the 之类的会比较多，但是中文会比较少。同样的，中文里面其他语言的东西会少一些。正文八经的文章出现不正经的词汇的概率会低。在技术问里面，『数据库』属于高频词汇，但是在比如简书之类的，可能梦想 / 鸡汤 / 超级 / 震惊会多一些。掘金的『前端』两个字绝壁是高频词。</li>
+<li>抽样跑新词发现的程序。社区里多的是新词发现的脚本。通过机器发现，然后人工筛选，应该可以发现更多的高频和低频的词汇。</li>
+</ul>
+<p>是不是用上停止词就好了呢？并不是。</p>
+<p>比如</p>
+<ul>
+<li>假如停止词里面包含了 not , 那么 happy 和 not happy 搜索出来的结果则一致。</li>
+<li>假如停止词里面包含了或，那么，如果有个乐队名字叫做『或或』, 则搜索不出来。</li>
+<li>假如停止词里面包含了 to / be / not / or , 则莎士比亚的名言 『To be, or not to be』 则搜索不出来。</li>
+</ul>
+<h3 id="4-2-全文搜索"><a href="#4-2-全文搜索" class="headerlink" title="4.2 全文搜索"></a>4.2 全文搜索</h3><p>一般会有如下的流程，这个流程可以交给 analyzer 进行处理。</p>
 <ol>
 <li>文本令牌化为独立的词。</li>
 <li>小写</li>
 <li>移除停止词</li>
 <li>还原词源</li>
 </ol>
-<p>而每一个 analyzer 还针对具体情况做优化。比如说，我们看上述流程的<strong>第一步</strong>，Tokenize 文本为独立的词。 实际上，英文的文本分词特别容易，因为单词和单词之间存在空格，而中文则不然，中文的词和词之间无空格，总要分词。 <a href="https://github.com/medcl/elasticsearch-analysis-ik" target="_blank" rel="external">https://github.com/medcl/elasticsearch-analysis-ik</a> 就是为了解决这个问题。</p>
+<p>而每一个 analyzer 还针对具体情况做优化。比如说，我们看上述流程的<strong>第一步</strong>，Tokenize 文本为独立的词。<br>实际上，英文的文本分词特别容易，因为单词和单词之间存在空格，而中文则不然，中文的词和词之间无空格，总要分词。</p>
 <h3 id="3-3-全文搜索的-ES-解决方案"><a href="#3-3-全文搜索的-ES-解决方案" class="headerlink" title="3.3 全文搜索的 ES 解决方案"></a>3.3 全文搜索的 ES 解决方案</h3><blockquote>
 <p>TODO: 全文搜索 RDBMS like 的效率问题。</p>
 </blockquote>
@@ -498,16 +543,19 @@
 <p>内部过滤操作：</p>
 <p>1.</p>
 <h3 id="3-4-进阶搜索"><a href="#3-4-进阶搜索" class="headerlink" title="3.4 进阶搜索"></a>3.4 进阶搜索</h3><p>所谓搜索，其实就是</p>
-<h2 id="0x04-常用代码片段"><a href="#0x04-常用代码片段" class="headerlink" title="0x04 常用代码片段"></a>0x04 常用代码片段</h2><h3 id="4-1-Tips-And-Hacks"><a href="#4-1-Tips-And-Hacks" class="headerlink" title="4.1 Tips And Hacks"></a>4.1 Tips And Hacks</h3><h2 id="0x06-Python-SDK"><a href="#0x06-Python-SDK" class="headerlink" title="0x06 Python SDK"></a>0x06 Python SDK</h2><p>官方提供了两个 SDK 方便我们进行日常的开发：</p>
+<h3 id="4-1-Tips-And-Hacks"><a href="#4-1-Tips-And-Hacks" class="headerlink" title="4.1 Tips And Hacks"></a>4.1 Tips And Hacks</h3><h2 id="0x06-Python-SDK"><a href="#0x06-Python-SDK" class="headerlink" title="0x06 Python SDK"></a>0x06 Python SDK</h2><p>官方提供了两个 SDK 方便我们进行日常的开发：</p>
 <ul>
 <li>elasticsearch</li>
 <li>elasticsearch_dsl</li>
 </ul>
 <p>前者偏底层一些，后者偏高层一些，高低层的有点类似于 psycopg2 和 sqlalchemy 之间的关系。</p>
-<h2 id="0x07-踩坑集"><a href="#0x07-踩坑集" class="headerlink" title="0x07 踩坑集"></a>0x07 踩坑集</h2><ul>
+<h4 id="elasticsearch-analysis-ik-的配置"><a href="#elasticsearch-analysis-ik-的配置" class="headerlink" title="elasticsearch-analysis-ik 的配置"></a>elasticsearch-analysis-ik 的配置</h4><h2 id="0x07-踩坑集"><a href="#0x07-踩坑集" class="headerlink" title="0x07 踩坑集"></a>0x07 踩坑集</h2><ul>
 <li>序列问题</li>
 </ul>
-<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<li><a href="https://www.zhihu.com/question/19645541" target="_blank" rel="external">https://www.zhihu.com/question/19645541</a></li>
+</ul>
+
       
     </div>
 
@@ -728,7 +776,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安装，配置，基本-shell-命令"><span class="nav-number">2.</span> <span class="nav-text">0x01 安装，配置，基本 shell 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置"><span class="nav-number">2.2.</span> <span class="nav-text">2. 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-插件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-ElasticSearch-配套工具"><span class="nav-number">3.</span> <span class="nav-text">0x02 ElasticSearch 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-ElasticSearch-常用代码"><span class="nav-number">4.</span> <span class="nav-text">0x03 ElasticSearch 常用代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Elasticsearch-基本概念"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Elasticsearch 基本概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-全文搜索的难点"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 全文搜索的难点</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-流程"><span class="nav-number">4.2.1.</span> <span class="nav-text">1. 流程</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-全文搜索的-ES-解决方案"><span class="nav-number">4.3.</span> <span class="nav-text">3.3 全文搜索的 ES 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-进阶搜索"><span class="nav-number">4.4.</span> <span class="nav-text">3.4 进阶搜索</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-常用代码片段"><span class="nav-number">5.</span> <span class="nav-text">0x04 常用代码片段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Tips-And-Hacks"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 Tips And Hacks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-Python-SDK"><span class="nav-number">6.</span> <span class="nav-text">0x06 Python SDK</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-踩坑集"><span class="nav-number">7.</span> <span class="nav-text">0x07 踩坑集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-参考链接"><span class="nav-number">8.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安装，配置，基本-shell-命令"><span class="nav-number">2.</span> <span class="nav-text">0x01 安装，配置，基本 shell 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置"><span class="nav-number">2.2.</span> <span class="nav-text">2. 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-插件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-ElasticSearch-配套工具"><span class="nav-number">3.</span> <span class="nav-text">0x02 ElasticSearch 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-ElasticSearch-基础概念"><span class="nav-number">4.</span> <span class="nav-text">0x03 ElasticSearch 基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Elasticsearch-CRUDE-以及基本操作"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Elasticsearch CRUDE 以及基本操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-全文搜索的基本概念"><span class="nav-number">5.</span> <span class="nav-text">0x04 全文搜索的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-全文搜索遇到的挑战"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 全文搜索遇到的挑战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-全文搜索的字段是如何存到-ES-中的？"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 全文搜索的字段是如何存到 ES 中的？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#停止词"><span class="nav-number">5.2.1.</span> <span class="nav-text">停止词</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-全文搜索"><span class="nav-number">5.3.</span> <span class="nav-text">4.2 全文搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-全文搜索的-ES-解决方案"><span class="nav-number">5.4.</span> <span class="nav-text">3.3 全文搜索的 ES 解决方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-4-进阶搜索"><span class="nav-number">5.5.</span> <span class="nav-text">3.4 进阶搜索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-Tips-And-Hacks"><span class="nav-number">5.6.</span> <span class="nav-text">4.1 Tips And Hacks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-Python-SDK"><span class="nav-number">6.</span> <span class="nav-text">0x06 Python SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#elasticsearch-analysis-ik-的配置"><span class="nav-number">6.0.1.</span> <span class="nav-text">elasticsearch-analysis-ik 的配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-踩坑集"><span class="nav-number">7.</span> <span class="nav-text">0x07 踩坑集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-参考链接"><span class="nav-number">8.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
             
 
           </div>
