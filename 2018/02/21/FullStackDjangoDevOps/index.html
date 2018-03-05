@@ -1,0 +1,992 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Django,VueJS,全栈开发,RestAPI," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="0x00 前言 写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。  这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。 为什么写这系列的文章呢？目的总的来说有两个：  一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。 二是希望借由这个持续更新的过程让自己">
+<meta name="keywords" content="Django,VueJS,全栈开发,RestAPI">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2018 年不容错过的 Django 全栈项目">
+<meta property="og:url" content="http://twocucao.xyz/2018/02/21/FullStackDjangoDevOps/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言 写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。  这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。 为什么写这系列的文章呢？目的总的来说有两个：  一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。 二是希望借由这个持续更新的过程让自己">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&h=1822&f=png&s=1504757">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&h=1846&f=png&s=1021166">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&h=1804&f=png&s=1016132">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&h=1818&f=png&s=425859">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&h=1840&f=png&s=1582839">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&h=1768&f=png&s=365303">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&h=1840&f=png&s=486772">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&h=1838&f=png&s=735083">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&h=2054&f=png&s=539522">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&h=2054&f=png&s=2446065">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&h=2054&f=png&s=3296514">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&h=2054&f=png&s=2720324">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&h=2054&f=png&s=3932296">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&h=1430&f=png&s=640103">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&h=1126&f=png&s=532337">
+<meta property="og:updated_time" content="2018-02-21T05:39:00.392Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2018 年不容错过的 Django 全栈项目">
+<meta name="twitter:description" content="0x00 前言 写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。  这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。 为什么写这系列的文章呢？目的总的来说有两个：  一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。 二是希望借由这个持续更新的过程让自己">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&h=1822&f=png&s=1504757">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://twocucao.xyz/2018/02/21/FullStackDjangoDevOps/"/>
+
+
+
+
+
+  <title>2018 年不容错过的 Django 全栈项目 | MG的编程小屋</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?299254d95898cdfa110fc6d914eba9c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MG的编程小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/21/FullStackDjangoDevOps/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">2018 年不容错过的 Django 全栈项目</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-21T10:13:30+08:00">
+                2018-02-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,386
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><blockquote>
+<p>写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。</p>
+</blockquote>
+<p>这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。</p>
+<p>为什么写这系列的文章呢？目的总的来说有两个：</p>
+<ol>
+<li>一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。</li>
+<li>二是希望借由这个持续更新的过程让自己更加深入理解 Django 技术栈 Django / DjangoRestFramework / Docker / Vue.JS / Celery / PostgreSQL / Redis / RabbitMQ</li>
+</ol>
+<p>为什么说这个项目你不容错过？</p>
+<ul>
+<li>新！新！新！保持最新的软件开发版本，E.G: Django 2.0 + Vue.JS 2.5 + PostgreSQL 10 + Celery 4.1.0</li>
+<li>Django 框架：Django 及其 强大的生态圈</li>
+<li>后端组件：PostgreSQL RabbitMQ Redis Ngnix</li>
+<li>前端技术：单页应用 前后端分离 (VueJS+Webpack+DjangoRestFramework), 自动化部署</li>
+<li>Django 社区最佳实践：从配置 / 开发 / 测试 / 部署 <strong>全干</strong>工程师 (Full Stuff Engineer) 的最新的 DevOps 思考成果。</li>
+<li>基本覆盖了进阶 Django 开发所需要的各种组件与操作。</li>
+<li>只需要适当的调整，本项目就可以成为你新开项目的最佳脚手架。</li>
+</ul>
+<p>本系列文章的面向读者：</p>
+<ul>
+<li>目标是 DevOps 的 Pythonist</li>
+<li>爱瞎几把折腾的 Pythonist</li>
+<li>前后端分离的实践者</li>
+</ul>
+<blockquote>
+<p>生命苦短，赶快上车</p>
+<p>Life is Short , I Use Python</p>
+</blockquote>
+<h2 id="0x01-项目介绍"><a href="#0x01-项目介绍" class="headerlink" title="0x01 项目介绍"></a>0x01 项目介绍</h2><p>YaDjangoBlog 是另一个关于博客的轮子，但是其野心并不在于仅仅多造一个博客系统，还有通过本项目做 Django 全栈开发的最佳实践。</p>
+<h3 id="1-1-项目地址"><a href="#1-1-项目地址" class="headerlink" title="1.1 项目地址"></a>1.1 项目地址</h3><ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<h3 id="1-2-项目技术栈"><a href="#1-2-项目技术栈" class="headerlink" title="1.2 项目技术栈"></a>1.2 项目技术栈</h3><ul>
+<li>开发与部署环境为 Docker</li>
+<li>Python 3.5.2</li>
+<li>前端 Vue + Webpack + ES2015 + axios</li>
+<li>后端 <a href="https://github.com/django/django" target="_blank" rel="external">Django 2.0</a> + <a href="https://github.com/tomchristie/django-rest-framework/" target="_blank" rel="external">DjangoRestFramework</a> + Celery</li>
+<li>自动化部署选用工具 Ansible 以及 Docker</li>
+<li>后端组件<ul>
+<li>ElasticSearch 用于搜索和推荐</li>
+<li>PostgreSQL 用于数据持久化</li>
+<li>Redis 用于 Session / 和缓存</li>
+<li>RabbitMQ 分布式队列 / 定时任务</li>
+<li>Nginx 用于反向代理</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-特别感谢"><a href="#1-3-特别感谢" class="headerlink" title="1.3 特别感谢"></a>1.3 特别感谢</h3><ul>
+<li>ansible django stack: <a href="https://github.com/jcalazan/ansible-django-stack" target="_blank" rel="external">https://github.com/jcalazan/ansible-django-stack</a></li>
+<li>cookiecutter-django: <a href="https://github.com/pydanny/cookiecutter-django" target="_blank" rel="external">https://github.com/pydanny/cookiecutter-django</a></li>
+<li>djangopackages: <a href="https://github.com/djangopackages/djangopackages" target="_blank" rel="external">https://github.com/djangopackages/djangopackages</a></li>
+<li>董伟明 关于 ElasticSearch 的几篇文章 <a href="http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/" target="_blank" rel="external">http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/</a></li>
+<li>各个组件的开发者们<ul>
+<li>ElasticSearch</li>
+<li>PostgreSQL</li>
+<li>Redis</li>
+<li>RabbitMQ</li>
+<li>Nginx</li>
+<li>Docker</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-项目截图"><a href="#1-4-项目截图" class="headerlink" title="1.4 项目截图"></a>1.4 项目截图</h3><p>好，讲了半天有的没的，还是贴点图吧，毕竟我不是 Markdown 程序员</p>
+<blockquote>
+<p>我们先看看能看得见的前端页面</p>
+</blockquote>
+<p>主页</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&amp;h=1822&amp;f=png&amp;s=1504757" alt=""></p>
+<p>博客详情</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&amp;h=1846&amp;f=png&amp;s=1021166" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&amp;h=1804&amp;f=png&amp;s=1016132" alt=""></p>
+<p>这是一个很普通的 Archive 页面</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&amp;h=1818&amp;f=png&amp;s=425859" alt=""></p>
+<p>这是以 Elasticsearch 为支持的 搜索功能</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&amp;h=1840&amp;f=png&amp;s=1582839" alt=""></p>
+<p>Django 自带后台</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&amp;h=1768&amp;f=png&amp;s=365303" alt=""></p>
+<p>前后端分离怎么能少的了 rest api 的实现与便捷的前端调试？</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&amp;h=1840&amp;f=png&amp;s=486772" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a" alt=""></p>
+<p>Django Debug Tools 帮你迅速调优接口</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&amp;h=1838&amp;f=png&amp;s=735083" alt=""></p>
+<blockquote>
+<p>我们再先看看能看得见的开发界面</p>
+</blockquote>
+<p>在终端执行 tmuxinator start yavueblog 就可以自动运行所有任务</p>
+<p>前端运行状态</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&amp;h=2054&amp;f=png&amp;s=539522" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&amp;h=2054&amp;f=png&amp;s=2446065" alt=""></p>
+<p>后端运行状态<br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&amp;h=2054&amp;f=png&amp;s=3296514" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&amp;h=2054&amp;f=png&amp;s=2720324" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&amp;h=2054&amp;f=png&amp;s=3932296" alt=""></p>
+<p>当然，你可以直接用客户端连接到对应的服务商检查组件的运行状态</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&amp;h=1430&amp;f=png&amp;s=640103" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&amp;h=1126&amp;f=png&amp;s=532337" alt=""></p>
+<h2 id="0x02-系列教程目录"><a href="#0x02-系列教程目录" class="headerlink" title="0x02 系列教程目录"></a>0x02 系列教程目录</h2><h3 id="2-1-教程注意项"><a href="#2-1-教程注意项" class="headerlink" title="2.1 教程注意项"></a>2.1 教程注意项</h3><ol>
+<li>本文的开发环境配置仅仅限于 macOS 上，如果读者使用的是 Windows / 可能需要自己搞定环境的配置。不过笔者使用了 Docker 进行环境配置，应该配置环境会省事很多。</li>
+<li>在阅读本教程，请读者至少跟着 Django 官方的教程跟着走一遍。不要零基础一通瞎搞。</li>
+<li>如果在使用过程中出现问题，请在 ISSUE 提供尽可能多的信息，将问题描述清楚。</li>
+</ol>
+<p>本系列教程并不按照一步一步增加代码的方式写教程。</p>
+<p>我先带着大家搭建好整个项目框架，然后从不同的视角开介绍这个项目，比如：</p>
+<ol>
+<li>某个模块的 models 是如何设计的？有哪些卧槽居然可以这么用的写代码方式。</li>
+<li>Django User 如何做扩展？同样在 Django 的生态圈里面，哪些场景有哪些值得围观的包，比如 guardian</li>
+<li>Restful API 应该如何写，Django 里面的 Rest API 应该如何写？会有哪些生产效率 guangguangguang 提升上去的使用方法？权限怎么做？限流怎么搞？</li>
+<li>Py.test TDD 测试驱动开发了解一下？</li>
+<li>使用 Tmux 等合理工具的优雅的单终端多开。</li>
+</ol>
+<h3 id="2-2-教程目录"><a href="#2-2-教程目录" class="headerlink" title="2.2 教程目录"></a>2.2 教程目录</h3><ul>
+<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件配置</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的前后端初步设计</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端初步实现</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的前端实现 YaVueBlog</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Redis</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 PostgreSQL</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Elasticsearch</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 RabbitMQ</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的生产环境部署</li>
+</ul>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，快上车吧</p>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-21</strong> 重修文字</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Django/" rel="tag"># Django</a>
+          
+            <a href="/tags/VueJS/" rel="tag"># VueJS</a>
+          
+            <a href="/tags/全栈开发/" rel="tag"># 全栈开发</a>
+          
+            <a href="/tags/RestAPI/" rel="tag"># RestAPI</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/22/YaDjangoBlog开发环境配置/" rel="next" title="YaDjangoBlog 开发环境配置">
+                <i class="fa fa-chevron-left"></i> YaDjangoBlog 开发环境配置
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/20/CeleryCheatSheet/" rel="prev" title="Celery CheatSheet">
+                Celery CheatSheet <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oh1n2bfoj.bkt.clouddn.com/avatar.png"
+               alt="Micheal Gardner" />
+          <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">68</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">90</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/twocucao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/twocucao" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/twocucao" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-项目介绍"><span class="nav-number">2.</span> <span class="nav-text">0x01 项目介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-项目地址"><span class="nav-number">2.1.</span> <span class="nav-text">1.1 项目地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-项目技术栈"><span class="nav-number">2.2.</span> <span class="nav-text">1.2 项目技术栈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-特别感谢"><span class="nav-number">2.3.</span> <span class="nav-text">1.3 特别感谢</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-项目截图"><span class="nav-number">2.4.</span> <span class="nav-text">1.4 项目截图</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-系列教程目录"><span class="nav-number">3.</span> <span class="nav-text">0x02 系列教程目录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-教程注意项"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 教程注意项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-教程目录"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 教程目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-参考链接"><span class="nav-number">4.</span> <span class="nav-text">0xEE. 参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+</body>
+</html>

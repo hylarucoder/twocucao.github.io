@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2018-02-15T02:51:44.248Z</updated>
+  <updated>2018-03-04T14:57:22.459Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -16,11 +16,863 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>YaDjangoBlog 之前后端分离篇</title>
+    <link href="http://twocucao.xyz/2018/03/04/YaDjangoBlog%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%AF%87/"/>
+    <id>http://twocucao.xyz/2018/03/04/YaDjangoBlog前后端分离篇/</id>
+    <published>2018-03-04T00:38:47.000Z</published>
+    <updated>2018-03-04T14:57:22.459Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文是 Django 全栈开发教程的第三篇 YaDjangoBlog 之前后端分离</p>
+<p>目录在这里，已经更新的文章如下</p>
+<ul>
+<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的前后端设计</li>
+</ul>
+<p><strong>本文需要成四件事情：</strong></p>
+<ul>
+<li>第一件事情，解读 DjangoRestFramework, 通过简单的例子来引入用 DRF 的必要性，并且简单介绍 DRF 的 CBV 实现。</li>
+<li>第二件事情，简单介绍 DRF 在本项目 YaDjangoBlog 中的使用</li>
+<li>第三件事情，简单聊聊 RESTFULAPI 规范，并给出最佳实践参考。</li>
+<li>第四件事情，简单解读一下 Django 处理请求流程代码。</li>
+</ul>
+<p>PS: 为了打字方便，下面的：</p>
+<ul>
+<li>DRF 指的是 DjangoRestFramework</li>
+<li>CBV 指的是 Class Based View</li>
+<li>FBV 指的是 Function Based View</li>
+</ul>
+<blockquote>
+<p>坐稳了，开车了。</p>
+</blockquote>
+<h2 id="0x01-DjangorestFramework-解读"><a href="#0x01-DjangorestFramework-解读" class="headerlink" title="0x01 DjangorestFramework 解读"></a>0x01 DjangorestFramework 解读</h2><h3 id="为什么要用-DRF-呢？"><a href="#为什么要用-DRF-呢？" class="headerlink" title="为什么要用 DRF 呢？"></a>为什么要用 DRF 呢？</h3><p>使用一个库的原因，无非就是为了：</p>
+<ol>
+<li>节省开发者自己造轮子的时间。</li>
+<li>有利于代码的可维护性 / 或者程序的健壮性。</li>
+</ol>
+<p>具体落实到 DRF, 有哪些具体的优点呢？</p>
+<ol>
+<li>可直接浏览调试的界面。让前端调试起来欲罢不能的功能。</li>
+<li>用 DRF 的方式快速批量开接口</li>
+<li>分页、序列化、校验、登录、权限、Web 附加文档、限流，高度的可扩展性。哪里不爽扩展哪里，so easy</li>
+<li>算的上是 Django 社区最好的 RESTFUL 框架的轮子了。</li>
+<li>完善的社区支持，比如 guardian/django-filter 等等结合。</li>
+</ol>
+<h3 id="不使用-DRF-应该如何写-WebAPI-做呢？"><a href="#不使用-DRF-应该如何写-WebAPI-做呢？" class="headerlink" title="不使用 DRF 应该如何写 WebAPI 做呢？"></a>不使用 DRF 应该如何写 WebAPI 做呢？</h3><p>我们先看看，不使用 DRF 的时代，API 是如何编写的。</p>
+<p>这里我们用 function based view 来简单说明。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 最简单版本</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">simple_hello</span><span class="params">(request)</span>:</span></div><div class="line">    <span class="keyword">return</span> JsonResponse(&#123;</div><div class="line">        <span class="string">"这就是 key"</span>: <span class="string">"这就是 value"</span>,</div><div class="line">        <span class="string">"时间"</span>: time.time()</div><div class="line">    &#125;)</div></pre></td></tr></table></figure>
+<p>刚开始学 DRF 的时候，我也有这种疑惑，这有必要需要一个 RESTFULAPI 的框架嘛？捋起袖子，JSON API 甩起来开咯。</p>
+<p>之所以得出这个结论，是因为这个例子实在是过于简单。</p>
+<p>当涉及到一定复杂程度的 API 的时候，问题就来了：</p>
+<ol>
+<li>权限是否需要区分？</li>
+<li>分页需不需要做？</li>
+<li>前端人员提交 Form 表单时，只能通过命令行或者是 POSTMAN 之类的工具提交参数，这会不会带来不便？后端人员写这些表单的各个字段，也是很手酸的事情。</li>
+<li>拼接字典或者是字符串倒也还好，能不能有个序列器帮我直接序列化这模型，并且如果模型和模型之间有联系，最好也可以帮我完成模型和模型之间的关联。</li>
+<li>Profile API 应该如何做？</li>
+</ol>
+<p>这都是我们需要考虑的。</p>
+<p>如果不用 DRF, 而是由后端程序员直接写这些代码的话，也不是不行。</p>
+<ol>
+<li>对于第一点，可以直接在 fbv 上面加装饰器。</li>
+<li>对于第二点，分页的时候可以直接将逻辑写在 fbv 里面。</li>
+<li>前端 er 直接使用 PostMan 之类的工具就好了。</li>
+<li>序列化，可以借助内置的序列化方法。</li>
+<li>Profile 可以在提交参数的时候，附加一个参数比如 debug, 渲染的时候，将使用 HTML 里面内置一个 JSON 字符串的方式渲染出来。这样的话，就可以使用 Django Debug Tools 进行 Profile 了。</li>
+</ol>
+<p>很显然，这是个系统性的活。 假如接下来还要考虑限流、RESTFULAPI 的设计，这就相当蛋疼了。</p>
+<p>显然，我们的 FBV 就会是这样：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@a_authority</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">complex_hello</span><span class="params">(request)</span>:</span></div><div class="line">    params = getParams(request)</div><div class="line">    .....</div><div class="line">    query_results = SomeModels.some_query()</div><div class="line">    .....</div><div class="line">    results = SomeModelsSerial(query_results)</div><div class="line">    .....</div><div class="line">    <span class="keyword">return</span> JsonResponse(results)</div></pre></td></tr></table></figure>
+<p>看起来似乎是有规律可循的，既然有规律可循，就能封装一下，减轻负担。FBV 已经这样了，显然只能每次都要硬编码这些取参数，查询，序列化。当然，如果用生成器也能简化一部分函数代码。yield 实现方法太丑还是弃用吧。</p>
+<p>我们试试 CBV 看看如何。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 继承并重写方法</span></div><div class="line"><span class="keyword">from</span> django.views.generic <span class="keyword">import</span> View</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">APIView</span><span class="params">(View)</span>:</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get</span><span class="params">(self,request)</span>:</span></div><div class="line">        query_results = SomeModels.some_query()</div><div class="line">        .....</div><div class="line">        results = SomeModelsSerial(query_results)</div><div class="line">        .....</div><div class="line">        <span class="keyword">return</span> results</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">post</span><span class="params">(self,request)</span>:</span></div><div class="line">        query_results = SomeModels.some_query()</div><div class="line">        .....</div><div class="line">        results = SomeModelsSerial(query_results)</div><div class="line">        .....</div><div class="line">        <span class="keyword">return</span> results</div><div class="line"></div><div class="line">    .....</div><div class="line"></div><div class="line">    <span class="comment"># 这里相当于 view 函数</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch</span><span class="params">(request, *args, **kwargs)</span>:</span></div><div class="line">        <span class="comment"># 这里处理正式处理之前的逻辑，比如权限判断。</span></div><div class="line">        <span class="comment"># 如果是 GET 方法，则调用</span></div><div class="line">        results = self.get(request, *args, **kwargs):</div><div class="line">        <span class="comment"># 这里处理正式处理之后的逻辑，比如统计 list 的 total 值，加上时间戳</span></div><div class="line">        <span class="keyword">return</span> JsonResponse(results)</div></pre></td></tr></table></figure>
+<p>于是，除了使用 FBV 进行硬编码之外，还可以使用 CBV 的基类 进行扩展定制。</p>
+<p>我们思考一下：</p>
+<ol>
+<li>假如我想渲染某个模型的 JSON 列表，就可以定制一个 ListViewAPI 出来。如果需要一个 DetailViewAPI, 就定制一个 DetailViewAPI 出来。</li>
+<li>我们再声明一些 Permission 类，序列化类，模型，然后在 dispatch 中直接使用这些东西的话，就只需要在 get 和 post 里面编写一些最核心的逻辑了。</li>
+<li>甚至，指定了分页器和查询，都完全不需要再 get 和 post 里面写代码。</li>
+</ol>
+<p>恭喜你，读到这里，你已经可以写一个极简的 DRF 出来了。</p>
+<p>但写成 DRF 这种量级的程序，还需要做很多很多事情。</p>
+<h3 id="DRF-处理请求的流程"><a href="#DRF-处理请求的流程" class="headerlink" title="DRF 处理请求的流程"></a>DRF 处理请求的流程</h3><p>要知道 DRF 的处理请求的流程，就要先知道 Django 的处理请求流程。</p>
+<p>宏观来看</p>
+<ol>
+<li>请求先经过 MiddleWare , 接着判断 urlconf （默认为 ROOT_URLCONF),</li>
+<li>匹配 URL, 将请求上下文 dispatch 到具体的 view.</li>
+<li>处理完毕，经过 MiddleWare</li>
+</ol>
+<p><a href="https://docs.djangoproject.com/en/2.0/topics/http/urls/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/http/urls/</a></p>
+<p>在本文的结尾的时候，我也将带大家从源码角度过一下，涉及到这个流程的相关的源码。这里先跳过。</p>
+<p>那么，DRF 是如何处理一个请求的呢？我们忽略路由之类的东西，直接看对应的 CBV 的源码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">APIView</span><span class="params">(View)</span>:</span></div><div class="line"></div><div class="line">    renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES</div><div class="line">    parser_classes = api_settings.DEFAULT_PARSER_CLASSES</div><div class="line">    authentication_classes = api_settings.DEFAULT_AUTHENTICATION_CLASSES</div><div class="line">    throttle_classes = api_settings.DEFAULT_THROTTLE_CLASSES</div><div class="line">    permission_classes = api_settings.DEFAULT_PERMISSION_CLASSES</div><div class="line">    content_negotiation_class = api_settings.DEFAULT_CONTENT_NEGOTIATION_CLASS</div><div class="line">    metadata_class = api_settings.DEFAULT_METADATA_CLASS</div><div class="line">    versioning_class = api_settings.DEFAULT_VERSIONING_CLASS</div><div class="line"></div><div class="line">    <span class="comment"># ...... 其他方法</span></div><div class="line"></div><div class="line">    <span class="comment"># Dispatch methods</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initialize_request</span><span class="params">(self, request, *args, **kwargs)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Returns the initial request object.</div><div class="line">        """</div><div class="line">        parser_context = self.get_parser_context(request)</div><div class="line"></div><div class="line">        <span class="keyword">return</span> Request(</div><div class="line">            request,</div><div class="line">            parsers=self.get_parsers(),</div><div class="line">            authenticators=self.get_authenticators(),</div><div class="line">            negotiator=self.get_content_negotiator(),</div><div class="line">            parser_context=parser_context</div><div class="line">        )</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">initial</span><span class="params">(self, request, *args, **kwargs)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Runs anything that needs to occur prior to calling the method handler.</div><div class="line">        """</div><div class="line">        self.format_kwarg = self.get_format_suffix(**kwargs)</div><div class="line"></div><div class="line">        <span class="comment"># Perform content negotiation and store the accepted info on the request</span></div><div class="line">        neg = self.perform_content_negotiation(request)</div><div class="line">        request.accepted_renderer, request.accepted_media_type = neg</div><div class="line"></div><div class="line">        <span class="comment"># Determine the API version, if versioning is in use.</span></div><div class="line">        version, scheme = self.determine_version(request, *args, **kwargs)</div><div class="line">        request.version, request.versioning_scheme = version, scheme</div><div class="line"></div><div class="line">        <span class="comment"># Ensure that the incoming request is permitted</span></div><div class="line">        self.perform_authentication(request)</div><div class="line">        self.check_permissions(request)</div><div class="line">        self.check_throttles(request)</div><div class="line"></div><div class="line">    <span class="comment"># Note: Views are made CSRF exempt from within `as_view` as to prevent</span></div><div class="line">    <span class="comment"># accidental removal of this exemption in cases where `dispatch` needs to</span></div><div class="line">    <span class="comment"># be overridden.</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">dispatch</span><span class="params">(self, request, *args, **kwargs)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        `.dispatch()` is pretty much the same as Django's regular dispatch,</div><div class="line">        but with extra hooks for startup, finalize, and exception handling.</div><div class="line">        """</div><div class="line">        self.args = args</div><div class="line">        self.kwargs = kwargs</div><div class="line">        <span class="comment"># 这里需要注意</span></div><div class="line">        request = self.initialize_request(request, *args, **kwargs)</div><div class="line">        self.request = request</div><div class="line">        self.headers = self.default_response_headers  <span class="comment"># deprecate?</span></div><div class="line"></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            <span class="comment"># 这里需要注意</span></div><div class="line">            self.initial(request, *args, **kwargs)</div><div class="line"></div><div class="line">            <span class="comment"># Get the appropriate handler method</span></div><div class="line">            <span class="keyword">if</span> request.method.lower() <span class="keyword">in</span> self.http_method_names:</div><div class="line">                handler = getattr(self, request.method.lower(),</div><div class="line">                                  self.http_method_not_allowed)</div><div class="line">            <span class="keyword">else</span>:</div><div class="line">                handler = self.http_method_not_allowed</div><div class="line"></div><div class="line">            response = handler(request, *args, **kwargs)</div><div class="line"></div><div class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> exc:</div><div class="line">            response = self.handle_exception(exc)</div><div class="line"></div><div class="line">        self.response = self.finalize_response(request, response, *args, **kwargs)</div><div class="line">        <span class="keyword">return</span> self.response</div></pre></td></tr></table></figure>
+<p>可以看出，当请求到达 dispatch 的时候，DRF 添加了一些钩子函数，用于开始 / 结束 / 错误控制。</p>
+<ol>
+<li>在 initialize_request 的时候，对 request 进行封装，添加上 parser / auth / negoriator / parser context</li>
+<li>接着在 initial 方法里面校验了版本，进行了认证和鉴权，检查了限流</li>
+</ol>
+<p>一看，其实与我们之前想封装 APIView 的想法不谋而合，而我们只是想想，DRF 是详细实现。</p>
+<h2 id="0x02-DjangorestFramework-的使用案例"><a href="#0x02-DjangorestFramework-的使用案例" class="headerlink" title="0x02 DjangorestFramework 的使用案例"></a>0x02 DjangorestFramework 的使用案例</h2><h3 id="如何开-WebAPI-接口"><a href="#如何开-WebAPI-接口" class="headerlink" title="如何开 WebAPI 接口"></a>如何开 WebAPI 接口</h3><p>回到我们的 yadjangoblog 上面来。这个时候我们想开一个博文列表 API:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 1. 定义序列器，用于序列化查询的每一条。</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlogPostListSerializer</span><span class="params">(serializers.ModelSerializer)</span>:</span></div><div class="line">    category = BlogCategorySerializer(read_only=<span class="keyword">True</span>)</div><div class="line">    tags = BlogTagSerializer(many=<span class="keyword">True</span>, read_only=<span class="keyword">True</span>)</div><div class="line">    title = serializers.CharField()</div><div class="line">    id = serializers.IntegerField()</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></div><div class="line">        model = BlogPost</div><div class="line">        fields = (<span class="string">'id'</span>, <span class="string">'title'</span>, <span class="string">'char_num'</span>, <span class="string">'vote_num'</span>, <span class="string">'category'</span>, <span class="string">'tags'</span>, <span class="string">'publish_date'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 2. 定义过滤器，可以通过过滤器进行查询</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlogPostFilter</span><span class="params">(filters.FilterSet)</span>:</span></div><div class="line">    title = filters.CharFilter(lookup_expr=<span class="string">'contains'</span>)</div><div class="line">    having_tags = filters.Filter(name=<span class="string">"tags"</span>, lookup_expr=<span class="string">'in'</span>)</div><div class="line"></div><div class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Meta</span>:</span></div><div class="line">        model = BlogPost</div><div class="line">        fields = (<span class="string">'title'</span>, <span class="string">'char_num'</span>, <span class="string">'category'</span>, <span class="string">'tags'</span>)</div><div class="line"></div><div class="line"><span class="comment"># 3. 指定其他设置，具体大家看源码就好了。</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BlogPostListAPIView</span><span class="params">(generics.ListAPIView)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    依照 category , tags , 时间 （年 / 月 / 日  年 / 月 年）</div><div class="line">    """</div><div class="line">    queryset = BlogPost.objects.all()</div><div class="line">    serializer_class = BlogPostListSerializer</div><div class="line">    filter_backends = (filters.DjangoFilterBackend, OrderingFilter,)</div><div class="line">    filter_class = BlogPostFilter</div><div class="line">    ordering_fields = (<span class="string">'publish_date'</span>,)</div><div class="line">    ordering = (<span class="string">'publish_date'</span>,)</div><div class="line">    permission_classes = (permissions.AllowAny,)</div><div class="line">    pagination_class = SmallResultsSetPagination</div></pre></td></tr></table></figure>
+<p>在指定上面的操作之后，一个接口就快速的开出来了。</p>
+<p>: TODO 插入一张图</p>
+<p>当然，DRF 认认真真通读一遍的话，还是可以给自己节省不少时间的。</p>
+<p>这是开接口，似乎，还少了什么，比如 Restful API.</p>
+<h3 id="前端如何使用-WebAPI-接口"><a href="#前端如何使用-WebAPI-接口" class="headerlink" title="前端如何使用 WebAPI 接口"></a>前端如何使用 WebAPI 接口</h3><p>什么是 CORS 可以参考阮一峰的文章 <a href="http://www.ruanyifeng.com/blog/2016/04/cors.html" target="_blank" rel="external">http://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
+<p>在调试的时候，我们肯定是使用 ajax / fetch 方式请求。这就会遇到一个问题：</p>
+<ul>
+<li>跨域</li>
+</ul>
+<p>解决方式也很简单，服务端只要服务器实现了 CORS 接口，就可以跨源通信。</p>
+<p>安装 django-cors-headers, 并在 settings 中开启 CORS_ORIGIN_ALLOW_ALL = True 即可。</p>
+<p>这里参考了临书的解决方案，要感谢 @临书 , 附上参考地址 <a href="https://zhuanlan.zhihu.com/p/24893786" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/24893786</a></p>
+<p>对于本项目而言，使用了 axios 请求库，直接 get 即可。详细看前端代码即可。</p>
+<h2 id="0x03-RESTFUL-API-设计"><a href="#0x03-RESTFUL-API-设计" class="headerlink" title="0x03 RESTFUL API 设计"></a>0x03 RESTFUL API 设计</h2><p>开发过程中，尽量靠近 RESTFUL API 的设计，而不是照搬。</p>
+<p>举个其他领域的例子，有的人表述美就只有：</p>
+<ul>
+<li>已撸</li>
+</ul>
+<p>但是不同的美各有各的模样：</p>
+<ul>
+<li>手如柔荑，肤如凝脂，领如蝤蛴，齿如瓠犀，螓首蛾眉，巧笑倩兮，美目盼兮。</li>
+</ul>
+<p>同样，放在 RESFUL 的时候确实也出现了这种情况：</p>
+<p>几乎所有的业务逻辑最后会落实到数据表的 CURDE, 但是所有业务逻辑并不能完全使用 CRUDE 描述。</p>
+<p>我们看下面的例子</p>
+<h3 id="关于请求"><a href="#关于请求" class="headerlink" title="关于请求"></a>关于请求</h3><p>举个例子，RESTFUL 适合纯粹 CURDE 的设计风格。</p>
+<p>比如，新增博客，更新博客，查询博客，删除博客，查看是否含有博客</p>
+<p>但语义在某些场景下表述不足， 比如，设计订单的时候，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">URL: /api/v1/user/some_user/orders</div><div class="line">你查看订单集合，这个好理解。get 方法</div><div class="line">你新增订单，这个好理解。put 方法</div><div class="line">URL: /api/v1/user/some_user/order/xxxxxxx</div><div class="line">你删除订单，这个好理解。delete 方法</div><div class="line">你获取订单，这个好理解。get 方法</div><div class="line">你修改订单，这个好理解。post 方法</div><div class="line"></div><div class="line">但修改订单，有的时候可能会比较复杂，有可能是取消订单，有可能是评价订单，有可能是其他。而 RESTFUL 表达这种情况就有些语义不足了。</div></pre></td></tr></table></figure>
+<p>当然，个人经验是，字段越多，越难靠近 RESTFUL 规范</p>
+<p>这个时候，就需要设计者做好 RESTFULAPI 的设计与语义化的平衡了。</p>
+<h3 id="关于响应"><a href="#关于响应" class="headerlink" title="关于响应"></a>关于响应</h3><p>关于响应设计，主要有两点需要注意：</p>
+<ul>
+<li>状态码 (HTTP 状态码，也业务逻辑通用状态码）</li>
+<li>响应内容 包含 业务逻辑通用状态码，剩下的视具体情况而定。</li>
+</ul>
+<p>HTTP 状态码用于标记资源情况，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">200 表示获取资源</div><div class="line">404 表示 NOT FOUND</div></pre></td></tr></table></figure>
+<p>但有时候也存在语义表达不足问题，一般前后端也会约定一个通用的状态码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">通用状态码 错误信息 含义 HTTP 状态码</div><div class="line">999	    unknow_v2_error	未知错误	400</div><div class="line">1000	need_permission	需要权限	403</div><div class="line">1001	uri_not_found	资源不存在	404</div><div class="line">1002	missing_args	参数不全	400</div><div class="line">1003	image_too_large	上传的图片太大	400</div><div class="line">....</div></pre></td></tr></table></figure>
+<p>至于响应内容，一般都是见招拆招的。建议查看文章末尾的 Douban 的相关 API 规范来提升姿势。</p>
+<h2 id="0x04-Django-的处理请求流程代码解读"><a href="#0x04-Django-的处理请求流程代码解读" class="headerlink" title="0x04 Django 的处理请求流程代码解读"></a>0x04 Django 的处理请求流程代码解读</h2><p>这小节属于一时兴起写的番外篇。和本文主体内容没啥必要的关联。不感兴趣的可以直接跳转到文章末尾点赞哈。</p>
+<p>WSGI 全称叫做 web 服务器网关接口，通常情况下，gunicorn 或者 uwsgi 接收来自 nginx 转发来的请求之后，向 web app 提供了环境信息（叫请求上下文会不会好些）以及一个 callback. 这样的话，web app 就可以接收这个环境信息，处理完毕，通过回调函数处理请求，并返回响应。一个极简的 webapp 如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">app</span><span class="params">(environ, start_response)</span>:</span></div><div class="line">    <span class="string">"""Simplest possible application object"""</span></div><div class="line">    data = <span class="string">'Hello, World!\n'</span></div><div class="line">    status = <span class="string">'200 OK'</span></div><div class="line">    response_headers = [</div><div class="line">        (<span class="string">'Content-type'</span>,<span class="string">'text/plain'</span>),</div><div class="line">        (<span class="string">'Content-Length'</span>, str(len(data)))</div><div class="line">    ]</div><div class="line">    start_response(status, response_headers)</div><div class="line">    <span class="keyword">return</span> iter([data])</div></pre></td></tr></table></figure>
+<p>现在我们看看 django 中是如何处理请求的。首先查看相关的 wsgi.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># wsgi.py</span></div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">from</span> django.core.wsgi <span class="keyword">import</span> get_wsgi_application</div><div class="line">os.environ.setdefault(<span class="string">"DJANGO_SETTINGS_MODULE"</span>, <span class="string">"config.settings"</span>)</div><div class="line">application = get_wsgi_application()</div><div class="line"></div><div class="line"><span class="comment"># 接着查看 get_wsgi_application</span></div><div class="line"><span class="keyword">import</span> django</div><div class="line"><span class="keyword">from</span> django.core.handlers.wsgi <span class="keyword">import</span> WSGIHandler</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_wsgi_application</span><span class="params">()</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    The public interface to Django's WSGI support. Return a WSGI callable.</div><div class="line"></div><div class="line">    Avoids making django.core.handlers.WSGIHandler a public API, in case the</div><div class="line">    internal WSGI implementation changes or moves in the future.</div><div class="line">    """</div><div class="line">    django.setup(set_prefix=<span class="keyword">False</span>)</div><div class="line">    <span class="keyword">return</span> WSGIHandler()</div><div class="line"></div><div class="line"><span class="comment"># 于是自然而言的看到了 WSGIHandler</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">WSGIHandler</span><span class="params">(base.BaseHandler)</span>:</span></div><div class="line">    request_class = WSGIRequest</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, *args, **kwargs)</span>:</span></div><div class="line">        super().__init__(*args, **kwargs)</div><div class="line">        self.load_middleware()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__call__</span><span class="params">(self, environ, start_response)</span>:</span></div><div class="line">        <span class="comment"># 有木有看到 environ 和 start_response ?? 这就是极简 web app 中的 webapp 核心方法。</span></div><div class="line">        set_script_prefix(get_script_name(environ))</div><div class="line">        signals.request_started.send(sender=self.__class__, environ=environ)</div><div class="line">        request = self.request_class(environ)</div><div class="line">        <span class="comment"># 注意这一行，有请求处理逻辑 具体要见下面代码</span></div><div class="line">        response = self.get_response(request)</div><div class="line">        <span class="comment"># ......</span></div><div class="line">        <span class="keyword">return</span> response</div></pre></td></tr></table></figure>
+<p>嗯，看到了子类，就要看看基类</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">BaseHandler</span>:</span></div><div class="line">    _request_middleware = <span class="keyword">None</span></div><div class="line">    _view_middleware = <span class="keyword">None</span></div><div class="line">    _template_response_middleware = <span class="keyword">None</span></div><div class="line">    _response_middleware = <span class="keyword">None</span></div><div class="line">    _exception_middleware = <span class="keyword">None</span></div><div class="line">    _middleware_chain = <span class="keyword">None</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">load_middleware</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        注册 MiddleWare, 并赋值 _middleware_chain 方法，使之调用的时候可以先按照顺序从 setting 的 middleware 里面处理 requests</div><div class="line">        并在处理 request 的最后调用 私有方法 _get_response</div><div class="line">        """</div><div class="line">        self._request_middleware = []</div><div class="line">        self._view_middleware = []</div><div class="line">        self._template_response_middleware = []</div><div class="line">        self._response_middleware = []</div><div class="line">        self._exception_middleware = []</div><div class="line"></div><div class="line">        handler = convert_exception_to_response(self._get_response)</div><div class="line">        <span class="comment"># 注意，这里面是倒着来的 代码中越在前面，实际运行的时候处理就越在后面</span></div><div class="line">        <span class="keyword">for</span> middleware_path <span class="keyword">in</span> reversed(settings.MIDDLEWARE):</div><div class="line">            <span class="comment"># 依次添加 view middleware / template middleware / exception middleware</span></div><div class="line">            middleware = import_string(middleware_path)</div><div class="line">            mw_instance = middleware(handler)</div><div class="line">            handler = convert_exception_to_response(mw_instance)</div><div class="line"></div><div class="line">        <span class="comment"># We only assign to this when initialization is complete as it is used</span></div><div class="line">        <span class="comment"># as a flag for initialization being complete.</span></div><div class="line">        self._middleware_chain = handler</div><div class="line"></div><div class="line">    .....</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_response</span><span class="params">(self, request)</span>:</span></div><div class="line">        <span class="string">"""Return an HttpResponse object for the given HttpRequest."""</span></div><div class="line">        <span class="comment"># Setup default url resolver for this thread</span></div><div class="line">        set_urlconf(settings.ROOT_URLCONF)</div><div class="line"></div><div class="line">        response = self._middleware_chain(request)</div><div class="line">        <span class="comment"># ......</span></div><div class="line">        <span class="keyword">return</span> response</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">_get_response</span><span class="params">(self, request)</span>:</span></div><div class="line">        <span class="string">"""</span></div><div class="line">        Resolve and call the view, then apply view, exception, and</div><div class="line">        template_response middleware. This method is everything that happens</div><div class="line">        inside the request/response middleware.</div><div class="line">        """</div><div class="line">        response = <span class="keyword">None</span></div><div class="line"></div><div class="line">        <span class="comment"># 1. 接着判断 urlconf （默认为 ROOT_URLCONF), 可以通过 middleware 进行设置</span></div><div class="line">        <span class="keyword">if</span> hasattr(request, <span class="string">'urlconf'</span>):</div><div class="line">            urlconf = request.urlconf</div><div class="line">            set_urlconf(urlconf)</div><div class="line">            resolver = get_resolver(urlconf)</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            resolver = get_resolver()</div><div class="line"></div><div class="line">        resolver_match = resolver.resolve(request.path_info)</div><div class="line">        callback, callback_args, callback_kwargs = resolver_match</div><div class="line">        request.resolver_match = resolver_match</div><div class="line"></div><div class="line">        <span class="comment"># Apply view middleware....</span></div><div class="line">        <span class="comment"># 注意，这个就是 view 函数</span></div><div class="line">        wrapped_callback = self.make_view_atomic(callback)</div><div class="line">        response = wrapped_callback(request, *callback_args, **callback_kwargs)</div><div class="line">        <span class="comment"># Complain if the view returned None (a common error).</span></div><div class="line">        <span class="keyword">return</span> response</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">process_exception_by_middleware</span><span class="params">(self, exception, request)</span>:</span></div><div class="line">        <span class="comment"># ......</span></div></pre></td></tr></table></figure>
+<p>上面代码比较表达的意思比较简单，值得注意的地方我都加了注释。</p>
+<p>需要特别注意的就是 middleware_chain 这个属性（实际上是一个方法）, 正是这个方法使得注册的 middleware （在 load_middleware 方法里）可以在 fbv 或者 cbv 处理 request 之前，通过对 request 进行处理。</p>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，Django 前后端分离最佳实践，点赞后，快上车吧</p>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
+<li>扩展阅读之 douban restful api 设计  <a href="https://developers.douban.com/wiki/?title=api_v2" target="_blank" rel="external">https://developers.douban.com/wiki/?title=api_v2</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-22</strong> 开启本文</li>
+<li><strong>2018-03-04</strong> 重修文字</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文是 Django 全栈开发教程的第三篇 YaDjangoBlog 之前后端分离&lt;/p&gt;
+&lt;p&gt;目
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
+    
+      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
+    
+      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>YaDjangoBlog 的前后端设计</title>
+    <link href="http://twocucao.xyz/2018/02/23/YaDjangoBlog%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%9D%E6%AD%A5%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://twocucao.xyz/2018/02/23/YaDjangoBlog的前后端初步设计/</id>
+    <published>2018-02-23T02:13:30.000Z</published>
+    <updated>2018-02-27T11:02:37.880Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文是 Django 全栈开发教程的第二篇</p>
+<p>目录在这里，已经更新的文章如下</p>
+<ul>
+<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
+</ul>
+<p>本文需要完成两件事情：</p>
+<ul>
+<li>第一件事情，回答一个问题：为什么要选择博客系统作为教程而不是别的？</li>
+<li>第二件事情，简单说说 YaDjangoBlog 的前后端设计。</li>
+</ul>
+<h2 id="0x01-为什么是博客系统"><a href="#0x01-为什么是博客系统" class="headerlink" title="0x01 为什么是博客系统"></a>0x01 为什么是博客系统</h2><p>在目录评论区，有个读者问：</p>
+<p>为什么选择博客系统？而不是别的系统？</p>
+<p>一言以蔽之：因为合适。</p>
+<p>为什么说合适？</p>
+<ol>
+<li>第一点：代码量相对合适，业务逻辑大家都很清楚，博客系统说简单也简单，说复杂也复杂，待会我们就可以谈到。简单的例子反而是入门和深入了解 Django 技术栈（而不是设计一个优秀的程序）的最佳案例。</li>
+<li>第二点：言简意赅，知识点覆盖全面，注意，我们要学习的 Django 技术栈，Django 技术栈，Django 技术栈。不是学高可用架构设计，不是超级复杂系统的设计，不是业务逻辑设计。</li>
+<li>第三点：日常开发都是见招拆招，依据业务逻辑来，作为开发者，总不能直接把公司的业务代码上传的 Github 上吧？</li>
+</ol>
+<p>不妨想想，其实写个博客系统压根就不需要这么麻烦的使用各种组件来给自己的博客系统贴金。那么，我为何还是要『为赋新词强说愁』呢？</p>
+<p>答案是『醉翁之意不在酒，在乎山水之间』。通过这个简单的博客，来带大家过一遍 Django 技术栈，具体能学的多好，看个人努力。</p>
+<p>当然，借此也吐槽一下，有的人认为，博客系统简单，不就是 Blog / Category / Tag / Comment，有啥可练手的？</p>
+<p>其实不然，设计一个博客系统完全可以按照复杂系统的高标准来设计，举例来说：</p>
+<ol>
+<li>ORM 设计：如果我想把 Category/Tags/Comment 变成通用的，即可以对 Blog 进行分类 / 标签 / 评论，对新建的 Product 模型 也可以进行分类 / 标签 / 评论。</li>
+<li>数据库设计：Category 可能有三到四级子分类怎么办？ Comment 支持评论区互相回复评论。这里的不但要通用，还要用树形结构实现放在一张表里面。</li>
+<li>全文搜索：Blog 的 content 字段是长文对吧？这个总不能每次搜索都是 like 查询吧？Elasticsearch 怎么搞。</li>
+<li>缓存和定时任务：PV 和 UV 量总不能每次访问都更新一次数据库吧？为什么不用 Redis 呢？用上了 Redis, 为什么不加上定时任务呢帮忙把 PV/UV 以及点赞数量啥的定期更新到数据库中？</li>
+<li>Celery ：定时任务为啥不用神器 Celery 呢？</li>
+<li>其他问题：如何对某个接口进行 profile? 如果逻辑比较复杂，是不是要补上单元测试。Django 单实例如何使用多域名？</li>
+</ol>
+<p>那一套太祖长拳从宋兵甲手里使出来，不过是威力平平；</p>
+<blockquote>
+<p>如果是从那乔峰手里使出来，那威力如何？</p>
+</blockquote>
+<h2 id="0x02-前后端分离"><a href="#0x02-前后端分离" class="headerlink" title="0x02 前后端分离"></a>0x02 前后端分离</h2><h3 id="前后端分离的必要性"><a href="#前后端分离的必要性" class="headerlink" title="前后端分离的必要性"></a>前后端分离的必要性</h3><p>为什么前后端分离？</p>
+<ul>
+<li>一是需求：简简单单的套模板已经不够了，还要富交互，代码量上去了。</li>
+<li>二是技术条件成熟：NodeJS 横空出世，使得 JS 成了不仅仅可以在浏览器中运行的语言，成了一门和 Java,Python,Ruby 一样的客户端语言。</li>
+<li>三是生态：轮子多，这车轱辘如你所愿。</li>
+</ul>
+<p>前端的职责变重，代码量则上来了，相应的，模块化工具就自然出来了。</p>
+<blockquote>
+<p>PS: 前后端分离也不是啥新概念，当年开发客户端的不也是前后端分离？ 当然，这里的前后端分离指的是浏览器与服务器的前后端分离。</p>
+</blockquote>
+<p>前后端分离之后，依旧是前端发送请求，后端返回对应的数据。</p>
+<p>那么，哪里变了？我认为，主要有两点：</p>
+<ol>
+<li>前后端流程可以并行开发，即前后端可以同时干活。并且责任明确。</li>
+<li>JS 可以干客户端语言干的事情。</li>
+</ol>
+<p>以前，我们都是由美工设计页面，前端开发模板，后端开发 API, 前端再套 API, 再交给后端，后端接过前端的页面套模板。一切看起来是那么的和谐。</p>
+<p>但是，就是这么一个看起来一个简单的套模板 / 开发 API，就是一个时间黑洞。</p>
+<p>比如说：</p>
+<ul>
+<li>小美（美工）设计好设计稿，交给小钱（前端）</li>
+<li>小钱完成前端页面的设计，</li>
+<li>小侯（后端）开发 API,</li>
+<li>小钱套 API 后，完成页面设计，并将这个页面交给小侯</li>
+<li>小侯要做的事情，把小钱的前端页面切分成模板引擎里面的语法，从数据库里面取数据，交给模板引擎渲染，完成套前端页面流程。</li>
+</ul>
+<p>接着，产品经理跳出来，指出页面设计中有两个地方需要优化，于是：</p>
+<p>大家面临的选择就只有两个：</p>
+<ol>
+<li>合起伙来，解决掉产品经理</li>
+<li>大家在反反复复，迂迂回回的需求变更、BUG 解决、调试中，浪费了一些不应该浪费的时间。</li>
+</ol>
+<p>那么前后端分离了，前后端的开发就如同客户端开发和服务端开发一样：</p>
+<ul>
+<li>前端 / 客户端 负责路由，负责什么时候请求什么 API, 该去优化性能就去优化性能。</li>
+<li><p>后端 / 服务端 负责折腾后端组件，优化性能。</p>
+</li>
+<li><p>如果调页面，直接找前端去就好了。</p>
+</li>
+<li>如果是数据或者 API 有问题，直接找后端就好了。</li>
+</ul>
+<p>这么一分，其实职责就好界定了很多，由于修改与优化不会引发两个工种的交叉合作（前端改完，后端套模板）,BUG 率就减少了很多。</p>
+<blockquote>
+<p>PS: 其实职责好界定很多，但不能避免推锅。</p>
+</blockquote>
+<p>由于本博客只关注 Django 技术栈，而所谓使用 JavaScript 前后端通吃的『大前端』, 则不在我们的讨论范围之内。</p>
+<blockquote>
+<p>比起使用一门语言前后端通吃，笔者还是比较倾向于『见人说人话，见鬼说鬼话』, 即使用多种语言，去处理合适的问题的。</p>
+</blockquote>
+<h3 id="前后端分离的成本"><a href="#前后端分离的成本" class="headerlink" title="前后端分离的成本"></a>前后端分离的成本</h3><p>前后端分离并不是没有代价的。</p>
+<p>对于前端：</p>
+<ul>
+<li>首次页面 Loading 速度</li>
+<li>JWT 认证请求</li>
+<li>在特定场景下，有些看起来在多页面开发过程中比较简单的事情，反而比较复杂。</li>
+<li>需要注意内存的使用率。</li>
+</ul>
+<p>对于后端：</p>
+<ul>
+<li>JWT 认证响应，以前是 session 认证，而且 Django 都给你实现好了。现在变了，往往大家使用的都是 JWT 作为认证。</li>
+</ul>
+<p>但这些成本相比与节省的开发时间相比都是微不足道的。</p>
+<p>当然，我会在本系列的后面抽出一篇教程来专门讲解 Django 内置用户的扩展和前后端分离的登录认证。</p>
+<h2 id="0x03-博客系统设计"><a href="#0x03-博客系统设计" class="headerlink" title="0x03 博客系统设计"></a>0x03 博客系统设计</h2><p>这个博客最初要解决的问题是：</p>
+<ol>
+<li>hexo 用腻了，想自己写一个简单的博客系统。</li>
+<li>这个博客要可以导入文章，我不需要编辑器功能，在本地编辑完毕之后，导入数据库就好。</li>
+</ol>
+<h3 id="页面构成"><a href="#页面构成" class="headerlink" title="页面构成"></a>页面构成</h3><ol>
+<li>首页</li>
+<li>博客列表页</li>
+<li>博客存档页</li>
+<li>博客历史页</li>
+<li>博客详情页</li>
+<li>关于我页面</li>
+</ol>
+<h3 id="模型构成"><a href="#模型构成" class="headerlink" title="模型构成"></a>模型构成</h3><p>首先 M 模型层</p>
+<ol>
+<li>PostgreSQL : 博文 / 博文类型 / 博文标签</li>
+<li>Elasticsearch : 博文</li>
+<li>Redis : 每篇博文的阅读量，点赞量</li>
+</ol>
+<p>这里需要注意的是：</p>
+<ul>
+<li>第一：博文类型-博文：1 对多，博文标签-博文：多对多</li>
+<li>第二：博文中的 content 为文章内容，即可以在 Elasticsearch 中作为全文搜索的字段。具体降到 Elasticsearch 的时候我们会详细说明。</li>
+<li>第三：博文中的 阅读量和点赞量放在 Redis 里面，由 Celery 的定时任务定期刷到内存中。</li>
+</ul>
+<p>再考虑 VT 视图模板层，VT 层，会根据情况 DjangorestFramework 来进行序列化和反序列化。</p>
+<p>在设计模型的时候，尽量将涉及到模型的操作放在模型内。</p>
+<p>关于如何设计更好的模型，在以后的文章将会讲解，先挖个坑。</p>
+<h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p>理想环境中，我们的架构图如下：</p>
+<p>哦，不好意思，放错图了，是这样的。</p>
+<p>但这样的架构应该有专门的人来维护。</p>
+<p>于是在人力有限的情况下，本项目的架构图是这样的。</p>
+<p>哦，不好意思，放错图了，是这样的。</p>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，Django 前后端分离最佳实践，点赞后，快上车吧</p>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-22</strong> 开启本文</li>
+<li><strong>2018-02-27</strong> 重修文字</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文是 Django 全栈开发教程的第二篇&lt;/p&gt;
+&lt;p&gt;目录在这里，已经更新的文章如下&lt;/p&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
+    
+      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
+    
+      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>YaDjangoBlog 开发环境配置</title>
+    <link href="http://twocucao.xyz/2018/02/22/YaDjangoBlog%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
+    <id>http://twocucao.xyz/2018/02/22/YaDjangoBlog开发环境配置/</id>
+    <published>2018-02-22T02:13:30.000Z</published>
+    <updated>2018-02-22T04:49:04.003Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文是 Django 全栈开发教程的第一篇，上一篇是第零篇，目录会随时更新，地址在这里 2018 年不容错过的 Django 全栈项目 <a href="https://zhuanlan.zhihu.com/p/33903527" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33903527</a></p>
+<blockquote>
+<p>为什么是第零篇，因为程序员从零计数呀。笑~~</p>
+</blockquote>
+<p>本文需要完成两件事情：</p>
+<ul>
+<li>配置基本的开发环境</li>
+<li>让代码先运行一下</li>
+</ul>
+<p>如果你使用的 macOS, 那么可以跟着下文一步一步走。如果是 linux/window 用户，可能稍微需要在配置环境上多花点时间。</p>
+<blockquote>
+<p>本文默认你至少会在 iTerm2 下面使用基本的 bash 命令与 git , 如果使用的 ohmyzsh 就更好了。 建议先参考请查看我之前的文章里面的配置环境 如何优雅地使用 macOS <a href="https://zhuanlan.zhihu.com/p/29892969" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/29892969</a></p>
+</blockquote>
+<h2 id="0x01-Python-开发环境配置"><a href="#0x01-Python-开发环境配置" class="headerlink" title="0x01 Python 开发环境配置"></a>0x01 Python 开发环境配置</h2><p>本小节的目的就是配置好基本的 python 开发环境</p>
+<p>使用了神器 pyenv</p>
+<blockquote>
+<p>BTW: 为什么不直接用 pipenv ? 因为网络不通畅，如若不然，pipenv 比 pyenv 更适合用来做 python 依赖包管理。</p>
+</blockquote>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 新开终端</span></div><div class="line">git clone https://github.com/yyuu/pyenv.git ~/.pyenv</div><div class="line">git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv</div><div class="line">echo <span class="string">'export PYENV_ROOT="$HOME/.pyenv"'</span> &gt;&gt; ~/.zshrc</div><div class="line">echo <span class="string">'export PATH="$PYENV_ROOT/bin:$PATH"'</span> &gt;&gt; ~/.zshrc</div><div class="line">echo <span class="string">'eval "$(pyenv init -)"'</span> &gt;&gt; ~/.zshrc</div><div class="line">echo <span class="string">'eval "$(pyenv virtualenv-init -)"'</span> &gt;&gt; ~/.zshrc</div><div class="line"></div><div class="line"><span class="comment"># 接着另开终端</span></div><div class="line"><span class="comment"># 不喜写兼容代码，所有代码均向 3.5+ 靠拢</span></div><div class="line">v=<span class="number">3.5</span><span class="number">.2</span>|wget http://mirrors.sohu.com/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/;pyenv install $v</div><div class="line">v=<span class="number">3.6</span><span class="number">.0</span>|wget http://mirrors.sohu.com/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/;pyenv install $v</div><div class="line">v=<span class="number">2.7</span><span class="number">.11</span>|wget http://mirrors.sohu.com/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/;pyenv install $v</div><div class="line"></div><div class="line"><span class="comment"># 设置 Global Python 为 2.7.11, 备注：尽量不要把 Py3 设置为全局，否则由于 Homebrew 本身有一些依赖是依赖于 Py2 的，这样容易出现一些奇怪的问题。</span></div><div class="line">pyenv <span class="keyword">global</span> <span class="number">2.7</span><span class="number">.11</span></div><div class="line">pip install -i https://pypi.doubanio.com/simple requests</div><div class="line"><span class="comment"># 下面这个是用于安装基本的代码补全功能</span></div><div class="line">pip install -i https://pypi.doubanio.com/simple --upgrade <span class="string">"jedi&gt;=0.9.0"</span> <span class="string">"json-rpc&gt;=1.8.1"</span> <span class="string">"service_factory&gt;=0.1.5"</span> flake8 pytest autoflake hy</div><div class="line"></div><div class="line"><span class="comment"># 创建最常用 Py3 虚拟环境</span></div><div class="line">pyenv virtualenv <span class="number">3.5</span><span class="number">.2</span> py3-daily</div><div class="line">pyenv activate py3-daily</div><div class="line">pip install -i https://pypi.doubanio.com/simple requests</div><div class="line">pip install -i https://pypi.doubanio.com/simple beatutifulsoup4</div><div class="line">pip install -i https://pypi.doubanio.com/simple ipython[notebook]</div><div class="line">pip install -i https://pypi.doubanio.com/simple jupyter</div><div class="line"><span class="comment"># 下面这个是用于安装基本的代码补全功能</span></div><div class="line">pip install -i https://pypi.doubanio.com/simple --upgrade <span class="string">"jedi&gt;=0.9.0"</span> <span class="string">"json-rpc&gt;=1.8.1"</span> <span class="string">"service_factory&gt;=0.1.5"</span> flake8 pytest autoflake hy</div></pre></td></tr></table></figure>
+<p>好，Python 环境就安装完毕了。</p>
+<h2 id="0x02-JavaScript-开发环境配置"><a href="#0x02-JavaScript-开发环境配置" class="headerlink" title="0x02 JavaScript 开发环境配置"></a>0x02 JavaScript 开发环境配置</h2><blockquote>
+<p>本小节的目的就是配置好基本的 JS 开发环境，但估计 JSer 看了本小节依旧可以在配置上少一些麻烦。</p>
+</blockquote>
+<p>JS 可以前后端通吃，社区生态很丰富。ES6 之后从 python 和 ruby 里面借鉴了不少语法糖。现在写起来还是比较愉悦的。</p>
+<p>JavaScript 不管开发前端应用还是后端应用，都需要安装 node 环境。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 先安装 nvm</span></div><div class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash</div><div class="line"><span class="comment"># 新开终端</span></div><div class="line">nvm install 8</div><div class="line">nvm use 8</div><div class="line">nvm <span class="built_in">alias</span> default 8</div><div class="line"></div><div class="line">npm install cnpm</div><div class="line">cnpm install yarn -g</div><div class="line"><span class="comment"># 设置镜像</span></div><div class="line">yarn config <span class="built_in">set</span> registry https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
+<p>编辑 ~/.npmrc 配置文件，输入下文再配置各种奇奇怪怪的镜像地址。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">registry=https://registry.npm.taobao.org/</div><div class="line">chromedriver_cdnurl=http://cdn.npm.taobao.org/dist/chromedriver</div><div class="line">disturl=https://npm.taobao.org/dist</div><div class="line">operadriver_cdnurl=http://cdn.npm.taobao.org/dist/operadriver</div><div class="line">phantomjs_cdnurl=http://cdn.npm.taobao.org/dist/phantomjs</div><div class="line">fse_binary_host_mirror=https://npm.taobao.org/mirrors/fsevents</div><div class="line">sass_binary_site=http://cdn.npm.taobao.org/dist/node-sass</div><div class="line">electron_mirror=http://cdn.npm.taobao.org/dist/electron/</div></pre></td></tr></table></figure>
+<p>配置完毕</p>
+<h2 id="0x03-Docker-安装与配置"><a href="#0x03-Docker-安装与配置" class="headerlink" title="0x03 Docker 安装与配置"></a>0x03 Docker 安装与配置</h2><blockquote>
+<p>本小节主要解决一个最蛋疼的问题，就是网络问题</p>
+</blockquote>
+<p>下载并安装 docker for mac 地址如下 <a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="external">https://docs.docker.com/docker-for-mac/install/</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 安装成功后运行命令</span></div><div class="line">docker run hello-world</div></pre></td></tr></table></figure>
+<p>如果一切正常，则会显示如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">$ docker run hello-world</div><div class="line">Unable to find image <span class="string">'hello-world:latest'</span> locally</div><div class="line">latest: Pulling from library/hello-world</div><div class="line">ca4f61b1923c: Pull complete</div><div class="line">Digest: sha256:083de497cff944f969d8499ab94f07134c50bcf5e6b9559b27182d3fa80ce3f7</div><div class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</div><div class="line"></div><div class="line">Hello from Docker!</div><div class="line">This message shows that your installation appears to be working correctly.</div><div class="line"></div><div class="line">To generate this message, Docker took the following steps:</div><div class="line"> 1. The Docker client contacted the Docker daemon.</div><div class="line"> 2. The Docker daemon pulled the <span class="string">"hello-world"</span> image from the Docker Hub.</div><div class="line">    (amd64)</div><div class="line"> 3. The Docker daemon created a new container from that image <span class="built_in">which</span> runs the</div><div class="line">    executable that produces the output you are currently reading.</div><div class="line"> 4. The Docker daemon streamed that output to the Docker client, <span class="built_in">which</span> sent it</div><div class="line">    to your terminal.</div><div class="line"></div><div class="line">To try something more ambitious, you can run an Ubuntu container with:</div><div class="line"> $ docker run -it ubuntu bash</div><div class="line"></div><div class="line">Share images, automate workflows, and more with a free Docker ID:</div><div class="line"> https://cloud.docker.com/</div><div class="line"></div><div class="line">For more examples and ideas, visit:</div><div class="line"> https://docs.docker.com/engine/userguide/</div></pre></td></tr></table></figure>
+<p>好，配置到这里。</p>
+<p>你以为你已经配置好了，还先别激动，网络问题还没解决呢。小的镜像可以直接从 Docker 上直接拖下来，几百兆的镜像可就没这么容易了。</p>
+<p>这里我们使用了阿里云的 Docker 容器镜像。</p>
+<p>登录阿里云，到控制台，找到容器镜像服务，镜像加速器，</p>
+<p>如下图：</p>
+<p>右键点击桌面顶栏的 docker 图标，选择 Preferences ，在 Daemon 标签（Docker 17.03 之前版本为 Advanced 标签）下的 Registry mirrors 列表中将 <a href="https://your-url.mirror.aliyuncs.com" target="_blank" rel="external">https://your-url.mirror.aliyuncs.com</a> 加到”registry-mirrors”的数组里，点击 Apply &amp; Restart 按钮，等待 Docker 重启并应用配置的镜像加速器。</p>
+<p>Docker 配置完毕。</p>
+<h2 id="0x04-项目试运行"><a href="#0x04-项目试运行" class="headerlink" title="0x04 项目试运行"></a>0x04 项目试运行</h2><p>运行项目之前，保持你我的工作环境基本一致</p>
+<ul>
+<li>创建一些必须的目录</li>
+<li>clone 项目</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mkdir -p ~/Codes/YaB<span class="built_in">log</span>/DockerVolume/YaDjangoB<span class="built_in">log</span>/PostgreSQL/data</div><div class="line">mkdir -p ~/Codes/YaB<span class="built_in">log</span>/DockerVolume/YaDjangoB<span class="built_in">log</span>/Redis/data</div><div class="line">mkdir -p ~/Codes/YaB<span class="built_in">log</span>/DockerVolume/YaDjangoB<span class="built_in">log</span>/Backups</div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/</div><div class="line">git <span class="built_in">clone</span> git@github.com:twocucao/YaVueBlog.git</div><div class="line">git <span class="built_in">clone</span> git@github.com:twocucao/YaDjangoBlog.git</div></pre></td></tr></table></figure>
+<p>克隆下来项目之后还需要稍微折腾一下（没办法，CURD 开发 = 折腾折腾折腾 + 搬砖搬砖搬砖）</p>
+<ul>
+<li>运行 Vue 开发环境</li>
+<li>运行 Docker 化的 django 环境</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 新开一个终端 用于运行 Vue 应用</span></div><div class="line"><span class="comment"># 前端环境不放在 Docker 环境中。（因为开发环境没必要，生产环境才需要）</span></div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaVueB<span class="built_in">log</span>/ &amp;&amp; yarn &amp;&amp; <span class="built_in">cd</span> -</div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaVueB<span class="built_in">log</span>/packages/theme-future/ &amp;&amp; yarn &amp;&amp; <span class="built_in">cd</span> -</div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaVueB<span class="built_in">log</span>/</div><div class="line">npm run build:theme</div><div class="line">npm run dev</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 新开一个终端</span></div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make</div></pre></td></tr></table></figure>
+<p>看到下图，包含所有的命令。</p>
+<p>这是我用 Makefile 编写的一系列命令，方便我在开发过程将主要的精力花在业务逻辑上而不是花时间在强记大量的琐碎的命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make build-all</div><div class="line"><span class="comment"># 等待运行后端所有组件</span></div></pre></td></tr></table></figure>
+<p>然后，读者可以先去泡杯咖啡点个外卖吃个饭之类的。等待构建完毕。</p>
+<p>需要注意的是，务必配置好 docker 镜像加速地址，否则根据国内情况，你可能需要多去泡几杯咖啡，多吃几顿饭。</p>
+<p>好，接下来我们运行后端程序，首次运行需要花费不少时间</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make django-just-up</div></pre></td></tr></table></figure>
+<p>运行之后，终端结果如下：</p>
+<p>可以发现，服务已经都开始启动了。</p>
+<p>但不要冲动，先等等，因为一次开了如下的服务：</p>
+<ul>
+<li>postgres</li>
+<li>redis</li>
+<li>elasticsearch</li>
+<li>mailhog</li>
+<li>django</li>
+<li>celerybeat</li>
+<li>celeryworker</li>
+<li>celeryflower</li>
+</ul>
+<p>需要多等会儿时间到各个服务运行正常。直到出现下图：</p>
+<p>这意味着基本上所有的程序都运行正常了。如果有服务挂掉，欢迎到 github 的 issue 上提一下。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 接着再新开一个终端 用于导入基础数据</span></div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make django-import-articles</div></pre></td></tr></table></figure>
+<p>好，那么，我们来验证一下如下几个地址：</p>
+<ul>
+<li>接口地址 <a href="http://localhost:8000/api/v1/archive" target="_blank" rel="external">http://localhost:8000/api/v1/archive</a></li>
+<li>Vue 地址 <a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a></li>
+<li>在搜索框内输入 elasticsearch 查看接口是否正常返回数据</li>
+<li>查看 celery 的 task 是否正确</li>
+</ul>
+<p>如果一切正常，则所有的截图应该如下</p>
+<h2 id="0x05-Tmux-和-Tmuxinator"><a href="#0x05-Tmux-和-Tmuxinator" class="headerlink" title="0x05 Tmux 和 Tmuxinator"></a>0x05 Tmux 和 Tmuxinator</h2><p>我们在上文中可以发现有个极其蛋疼菊紧的问题。</p>
+<p>当我们运行 make django-just-up 这个命令的时候，所有服务运行的同时，所有的标准输入都打印到一个终端。</p>
+<p>这个和我们日常开发不太相同</p>
+<ol>
+<li>在 django 开发的时候，我们运行 runserver, 肯定是只想在那个终端里看到 runserver 的运行情况。而不是 Redis,Elasticsearch,PGsql 之类的 log。</li>
+<li>并且，django 的热加载会有些小问题，有些错误只能 ctrl+c 关掉 runserver, 然后重启。但当我们想 ctrl+c 关掉 runserver 的时候，却把所有的的服务都关掉了。</li>
+</ol>
+<p>解决方式也简单：</p>
+<p>对于暂时不想在开发时看到日志的服务，干脆直接放后台运行，执行我封装的命令 make django-before-up 把部分服务直接放在后台里，然后再开四个终端，运行下面的命令。</p>
+<ul>
+<li>make django-runserver # 运行 runserver , 并只把该容器的 log 打印出来。下面三者同上。</li>
+<li>make django-celerybeat</li>
+<li>make django-celeryworker</li>
+<li>make django-celeryflower</li>
+</ul>
+<p>显然还是很麻烦，我这种懒人可是能少写几行代码就少些几行代码的。</p>
+<p>那么我们还可以更省事（懒一些）么？</p>
+<p>我之前写了一篇简单的 tmux 与 Tmuxinator 教程 <a href="https://zhuanlan.zhihu.com/p/33369297" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33369297</a> , 具体配置步骤参考文中即可。</p>
+<p>配置好 Tmuxinator 之后</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 先软连接一下</span></div><div class="line">ln -svf ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/yadjangoblog.yml ~/.tmuxinator/yadjangoblog.yml</div></pre></td></tr></table></figure>
+<p>当我需要运行的所有服务的时候，我只需要</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmuxinator start yadjangoblog</div></pre></td></tr></table></figure>
+<p>就可以开启所有命令。</p>
+<p>yadjangoblog.yml 的内容如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">windows:</div><div class="line">  - &quot;前端-页面开发&quot;:</div><div class="line">      root: ~/Codes/YaBlog/YaVueBlog/</div><div class="line">      layout: main-vertical</div><div class="line">      panes:</div><div class="line">        - &quot;前端页面 DEV&quot;:</div><div class="line">          - &quot;npm run dev&quot;</div><div class="line">  - &quot;前端-CSS 与字体文件&quot;:</div><div class="line">      root: ~/Codes/YaBlog/YaVueBlog/</div><div class="line">      layout: main-vertical</div><div class="line">      panes:</div><div class="line">        - &quot;npm run dev:theme&quot;</div><div class="line">        - &quot;npm run dev:iconfont&quot;</div><div class="line">  - &quot;后端-Django 及其服务&quot;:</div><div class="line">      root: ~/Codes/YaBlog/YaDjangoBlog/</div><div class="line">      layout: main-vertical</div><div class="line">      panes:</div><div class="line">        - &quot;make django-before-up &amp;&amp; make django-runserver&quot;</div><div class="line">  - &quot;后端-数据库相关&quot;:</div><div class="line">      layout: main-vertical</div><div class="line">      root: ~/Codes/YaBlog/YaDjangoBlog/</div><div class="line">      panes:</div><div class="line">        - &quot;sleep 20 &amp;&amp; make dbshell&quot;</div><div class="line">        - &quot;sleep 20 &amp;&amp; make shell&quot;</div><div class="line">  - &quot;后端-Celery&quot;:</div><div class="line">      layout: main-vertical</div><div class="line">      root: ~/Codes/YaBlog/YaDjangoBlog/</div><div class="line">      panes:</div><div class="line">        - &quot;sleep 20 &amp;&amp; make django-celerybeat&quot;</div><div class="line">        - &quot;sleep 20 &amp;&amp; make django-celeryworker&quot;</div></pre></td></tr></table></figure>
+<h2 id="0x06-PyCharm-基本设置"><a href="#0x06-PyCharm-基本设置" class="headerlink" title="0x06 PyCharm 基本设置"></a>0x06 PyCharm 基本设置</h2><blockquote>
+<p>大家应该都用 PyCharm 进行开发了吧。 如果是的话，不看本小节可能会让你栽个跟头</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 这步是给 pycharm 打开代码做准备</span></div><div class="line">pyenv activate py3-daily</div><div class="line">pip install -i https://pypi.doubanio.com/simple -r requirements/local.txt</div></pre></td></tr></table></figure>
+<p>务必完成下面两个步骤</p>
+<ol>
+<li>在 Preferences -&gt; project -&gt; interpreter 选择对应的 py3-daily 虚拟环境。</li>
+<li>在侧边栏把 yadjangoblog , 注意小写的。右键标记为 sources root</li>
+</ol>
+<p>这样的标记相当于告诉 PyCharm , 这个项目的 PYTHONPATH 是 yadjangoblog/ , 否则使用 PyCharm 导入 AModel 会自动导入 from yadjangoblog.yaadmin.models from AModel 而不是 from yaadmin.models import AModel , 这会导致程序运行错误。</p>
+<blockquote>
+<p>PS: 包括后面跑单元测试的时候，均手动设置了 PYTHONPATH 变量。</p>
+</blockquote>
+<h2 id="0x07-开发流程"><a href="#0x07-开发流程" class="headerlink" title="0x07 开发流程"></a>0x07 开发流程</h2><p>本小节，从笔者开机开始，回顾一下环境配置好之后，笔者是如何进入开发状态的：</p>
+<ol>
+<li>开机。输入密码进入桌面。</li>
+<li>打开 Iterm, 运行 tmuxinator start yadjangoblog 开启项目。打开 PyCharm 和 WebStorm</li>
+<li>开发<ul>
+<li>在 WebStorm 中写写前端代码，在 <a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 和 tmux 里的第一个 window 查看状态</li>
+<li>在 PyCharm 中写写后端代码，在第三个 window 查看 runserver 状态，在第四个 window 的两个 Panel 运行 python manage.py 相关命令。</li>
+<li>在 Chrome Elasticsearch Head 扩展里调试 Elasticsearch 语法</li>
+<li>在 <a href="http://localhost:8000/api/your-api-path" target="_blank" rel="external">http://localhost:8000/api/your-api-path</a> 里调试前后端 API</li>
+<li>在 <a href="http://localhost:5555" target="_blank" rel="external">http://localhost:5555</a> 通过 flower 查看相关</li>
+<li>…..</li>
+<li>当然，你也可以新开一个终端里面，执行 make 查看相关还可以执行哪些命令。</li>
+</ul>
+</li>
+</ol>
+<p>那么，具体执行这些命令背后究竟发生了什么？</p>
+<ul>
+<li>数十服务为何突然启动</li>
+<li>数百个任务为何半夜消失</li>
+<li>正常运行的服务为何屡屡崩溃</li>
+<li>这一切的背后！是工程师的人性扭曲还是码畜的道德沦丧？是内存的爆发还是处理器的无奈？</li>
+<li>敬请关注本专栏 『MG 的编程小屋』或者 Github 频道，让我们跟随教程走进全干工程师的代码世界。</li>
+</ul>
+<blockquote>
+<p>不好意思，顺手打了个硬广，防止别人把我的文章砍头去尾直接扒过去。</p>
+</blockquote>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，点赞后，快上车吧</p>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-22</strong> 重修文字</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文是 Django 全栈开发教程的第一篇，上一篇是第零篇，目录会随时更新，地址在这里 2018 年
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
+    
+      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
+    
+      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>2018 年不容错过的 Django 全栈项目</title>
+    <link href="http://twocucao.xyz/2018/02/21/FullStackDjangoDevOps/"/>
+    <id>http://twocucao.xyz/2018/02/21/FullStackDjangoDevOps/</id>
+    <published>2018-02-21T02:13:30.000Z</published>
+    <updated>2018-02-21T05:39:00.392Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><blockquote>
+<p>写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。</p>
+</blockquote>
+<p>这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。</p>
+<p>为什么写这系列的文章呢？目的总的来说有两个：</p>
+<ol>
+<li>一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。</li>
+<li>二是希望借由这个持续更新的过程让自己更加深入理解 Django 技术栈 Django / DjangoRestFramework / Docker / Vue.JS / Celery / PostgreSQL / Redis / RabbitMQ</li>
+</ol>
+<p>为什么说这个项目你不容错过？</p>
+<ul>
+<li>新！新！新！保持最新的软件开发版本，E.G: Django 2.0 + Vue.JS 2.5 + PostgreSQL 10 + Celery 4.1.0</li>
+<li>Django 框架：Django 及其 强大的生态圈</li>
+<li>后端组件：PostgreSQL RabbitMQ Redis Ngnix</li>
+<li>前端技术：单页应用 前后端分离 (VueJS+Webpack+DjangoRestFramework), 自动化部署</li>
+<li>Django 社区最佳实践：从配置 / 开发 / 测试 / 部署 <strong>全干</strong>工程师 (Full Stuff Engineer) 的最新的 DevOps 思考成果。</li>
+<li>基本覆盖了进阶 Django 开发所需要的各种组件与操作。</li>
+<li>只需要适当的调整，本项目就可以成为你新开项目的最佳脚手架。</li>
+</ul>
+<p>本系列文章的面向读者：</p>
+<ul>
+<li>目标是 DevOps 的 Pythonist</li>
+<li>爱瞎几把折腾的 Pythonist</li>
+<li>前后端分离的实践者</li>
+</ul>
+<blockquote>
+<p>生命苦短，赶快上车</p>
+<p>Life is Short , I Use Python</p>
+</blockquote>
+<h2 id="0x01-项目介绍"><a href="#0x01-项目介绍" class="headerlink" title="0x01 项目介绍"></a>0x01 项目介绍</h2><p>YaDjangoBlog 是另一个关于博客的轮子，但是其野心并不在于仅仅多造一个博客系统，还有通过本项目做 Django 全栈开发的最佳实践。</p>
+<h3 id="1-1-项目地址"><a href="#1-1-项目地址" class="headerlink" title="1.1 项目地址"></a>1.1 项目地址</h3><ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<h3 id="1-2-项目技术栈"><a href="#1-2-项目技术栈" class="headerlink" title="1.2 项目技术栈"></a>1.2 项目技术栈</h3><ul>
+<li>开发与部署环境为 Docker</li>
+<li>Python 3.5.2</li>
+<li>前端 Vue + Webpack + ES2015 + axios</li>
+<li>后端 <a href="https://github.com/django/django" target="_blank" rel="external">Django 2.0</a> + <a href="https://github.com/tomchristie/django-rest-framework/" target="_blank" rel="external">DjangoRestFramework</a> + Celery</li>
+<li>自动化部署选用工具 Ansible 以及 Docker</li>
+<li>后端组件<ul>
+<li>ElasticSearch 用于搜索和推荐</li>
+<li>PostgreSQL 用于数据持久化</li>
+<li>Redis 用于 Session / 和缓存</li>
+<li>RabbitMQ 分布式队列 / 定时任务</li>
+<li>Nginx 用于反向代理</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-特别感谢"><a href="#1-3-特别感谢" class="headerlink" title="1.3 特别感谢"></a>1.3 特别感谢</h3><ul>
+<li>ansible django stack: <a href="https://github.com/jcalazan/ansible-django-stack" target="_blank" rel="external">https://github.com/jcalazan/ansible-django-stack</a></li>
+<li>cookiecutter-django: <a href="https://github.com/pydanny/cookiecutter-django" target="_blank" rel="external">https://github.com/pydanny/cookiecutter-django</a></li>
+<li>djangopackages: <a href="https://github.com/djangopackages/djangopackages" target="_blank" rel="external">https://github.com/djangopackages/djangopackages</a></li>
+<li>董伟明 关于 ElasticSearch 的几篇文章 <a href="http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/" target="_blank" rel="external">http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/</a></li>
+<li>各个组件的开发者们<ul>
+<li>ElasticSearch</li>
+<li>PostgreSQL</li>
+<li>Redis</li>
+<li>RabbitMQ</li>
+<li>Nginx</li>
+<li>Docker</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-4-项目截图"><a href="#1-4-项目截图" class="headerlink" title="1.4 项目截图"></a>1.4 项目截图</h3><p>好，讲了半天有的没的，还是贴点图吧，毕竟我不是 Markdown 程序员</p>
+<blockquote>
+<p>我们先看看能看得见的前端页面</p>
+</blockquote>
+<p>主页</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&amp;h=1822&amp;f=png&amp;s=1504757" alt=""></p>
+<p>博客详情</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&amp;h=1846&amp;f=png&amp;s=1021166" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&amp;h=1804&amp;f=png&amp;s=1016132" alt=""></p>
+<p>这是一个很普通的 Archive 页面</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&amp;h=1818&amp;f=png&amp;s=425859" alt=""></p>
+<p>这是以 Elasticsearch 为支持的 搜索功能</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&amp;h=1840&amp;f=png&amp;s=1582839" alt=""></p>
+<p>Django 自带后台</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&amp;h=1768&amp;f=png&amp;s=365303" alt=""></p>
+<p>前后端分离怎么能少的了 rest api 的实现与便捷的前端调试？</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&amp;h=1840&amp;f=png&amp;s=486772" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a" alt=""></p>
+<p>Django Debug Tools 帮你迅速调优接口</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&amp;h=1838&amp;f=png&amp;s=735083" alt=""></p>
+<blockquote>
+<p>我们再先看看能看得见的开发界面</p>
+</blockquote>
+<p>在终端执行 tmuxinator start yavueblog 就可以自动运行所有任务</p>
+<p>前端运行状态</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&amp;h=2054&amp;f=png&amp;s=539522" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&amp;h=2054&amp;f=png&amp;s=2446065" alt=""></p>
+<p>后端运行状态<br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&amp;h=2054&amp;f=png&amp;s=3296514" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&amp;h=2054&amp;f=png&amp;s=2720324" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&amp;h=2054&amp;f=png&amp;s=3932296" alt=""></p>
+<p>当然，你可以直接用客户端连接到对应的服务商检查组件的运行状态</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&amp;h=1430&amp;f=png&amp;s=640103" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&amp;h=1126&amp;f=png&amp;s=532337" alt=""></p>
+<h2 id="0x02-系列教程目录"><a href="#0x02-系列教程目录" class="headerlink" title="0x02 系列教程目录"></a>0x02 系列教程目录</h2><h3 id="2-1-教程注意项"><a href="#2-1-教程注意项" class="headerlink" title="2.1 教程注意项"></a>2.1 教程注意项</h3><ol>
+<li>本文的开发环境配置仅仅限于 macOS 上，如果读者使用的是 Windows / 可能需要自己搞定环境的配置。不过笔者使用了 Docker 进行环境配置，应该配置环境会省事很多。</li>
+<li>在阅读本教程，请读者至少跟着 Django 官方的教程跟着走一遍。不要零基础一通瞎搞。</li>
+<li>如果在使用过程中出现问题，请在 ISSUE 提供尽可能多的信息，将问题描述清楚。</li>
+</ol>
+<p>本系列教程并不按照一步一步增加代码的方式写教程。</p>
+<p>我先带着大家搭建好整个项目框架，然后从不同的视角开介绍这个项目，比如：</p>
+<ol>
+<li>某个模块的 models 是如何设计的？有哪些卧槽居然可以这么用的写代码方式。</li>
+<li>Django User 如何做扩展？同样在 Django 的生态圈里面，哪些场景有哪些值得围观的包，比如 guardian</li>
+<li>Restful API 应该如何写，Django 里面的 Rest API 应该如何写？会有哪些生产效率 guangguangguang 提升上去的使用方法？权限怎么做？限流怎么搞？</li>
+<li>Py.test TDD 测试驱动开发了解一下？</li>
+<li>使用 Tmux 等合理工具的优雅的单终端多开。</li>
+</ol>
+<h3 id="2-2-教程目录"><a href="#2-2-教程目录" class="headerlink" title="2.2 教程目录"></a>2.2 教程目录</h3><ul>
+<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件配置</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的前后端初步设计</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端初步实现</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的前端实现 YaVueBlog</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Redis</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 PostgreSQL</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Elasticsearch</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 RabbitMQ</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的生产环境部署</li>
+</ul>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，快上车吧</p>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-21</strong> 重修文字</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。&lt;/p&gt;
+&lt;/b
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
+    
+      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
+    
+      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Celery CheatSheet</title>
+    <link href="http://twocucao.xyz/2018/02/20/CeleryCheatSheet/"/>
+    <id>http://twocucao.xyz/2018/02/20/CeleryCheatSheet/</id>
+    <published>2018-02-20T02:25:39.000Z</published>
+    <updated>2018-02-20T12:12:13.170Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Celery 相关和命令。</p>
+<p>不定期更新。</p>
+<p>本文编写于 2018 年初，仅仅聚焦于 Django2.0 与 Celery 4.1.0</p>
+<p>本文需要结合我的开源项目 YaDjangoBlog 来看 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></p>
+<p>Celery 主要用于分布式队列。</p>
+<p>分布式队列可以用来做什么呢？</p>
+<p>试想一下这么个场景：</p>
+<ul>
+<li>假如用户提交一个耗时任务，Django 一般会在 Function Based View 里进行处理这个任务（假设这个任务耗时 30s)，我可以先把这个任务放在分布式队列里面，将耗时任务甩锅给 Celery 的 Worker 。这样的话，就可以极大的减少 Function Based View 处理耗时任务的时间。</li>
+</ul>
+<p>当然，除此之外，Celery 还可以用于其他的分布式队列场景：</p>
+<ul>
+<li>批量发送邮件</li>
+<li>定时任务 CronJob</li>
+<li>分配爬虫抓取任务</li>
+</ul>
+<p>当然，如果不用 Celery 的话也能搞定上面的场景，比如，借用数据库本身就可以直接做分布式任务派发。</p>
+<blockquote>
+<p>只是这样的实现本身代码可维护性，扩展性，性能等等都不是很好罢了。</p>
+</blockquote>
+<p>Celery 的特点如下：</p>
+<ul>
+<li>简单易维护</li>
+<li>高可用</li>
+<li>快：依据官网的资料，单进程可以在若干分钟内处理上百万级数据，亚毫秒级往返延迟 (using RabbitMQ, librabbitmq, and optimized settings)</li>
+<li>扩展性好：Almost every part of Celery can be extended or used on its own, Custom pool implementations, serializers, compression schemes, logging, schedulers, consumers, producers, broker transports, and much more.</li>
+</ul>
+<p>除此之外，还有什么特性呢？</p>
+<ul>
+<li>监控</li>
+<li>Work-Flows</li>
+<li>时间 / 速度 限制</li>
+<li>日程安排 (CronJob)</li>
+<li>资源泄露保护</li>
+<li>用户组件</li>
+</ul>
+<a id="more"></a>
+<h2 id="0x01-安装，配置，基本-shell-命令"><a href="#0x01-安装，配置，基本-shell-命令" class="headerlink" title="0x01 安装，配置，基本 shell 命令"></a>0x01 安装，配置，基本 shell 命令</h2><h3 id="1-安装"><a href="#1-安装" class="headerlink" title="1. 安装"></a>1. 安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install <span class="string">"celery[librabbitmq]"</span></div></pre></td></tr></table></figure>
+<h3 id="2-配置"><a href="#2-配置" class="headerlink" title="2. 配置"></a>2. 配置</h3><p>指定 Broker URL 即可</p>
+<h3 id="3-插件"><a href="#3-插件" class="headerlink" title="3. 插件"></a>3. 插件</h3><p>Flower 插件</p>
+<h2 id="0x02-Celery-配套工具"><a href="#0x02-Celery-配套工具" class="headerlink" title="0x02 Celery 配套工具"></a>0x02 Celery 配套工具</h2><h2 id="0x03-Celery-基础概念"><a href="#0x03-Celery-基础概念" class="headerlink" title="0x03 Celery 基础概念"></a>0x03 Celery 基础概念</h2><ul>
+<li>Application</li>
+<li>Tasks</li>
+<li>Calling Tasks</li>
+<li>Canvas: Designing Work-flows</li>
+<li>Workers Guide</li>
+<li>Daemonization</li>
+<li>Periodic Tasks</li>
+<li>Routing Tasks</li>
+<li>Monitoring and Management Guide</li>
+<li>Security</li>
+<li>Optimizing</li>
+<li>Debugging</li>
+<li>Concurrency</li>
+<li>Signals</li>
+<li>Testing with Celery</li>
+<li>Extensions and Bootsteps</li>
+<li>Configuration and defaults</li>
+</ul>
+<h3 id="3-1-Application"><a href="#3-1-Application" class="headerlink" title="3.1 Application"></a>3.1 Application</h3><h3 id="3-1-Tasks"><a href="#3-1-Tasks" class="headerlink" title="3.1 Tasks"></a>3.1 Tasks</h3><h3 id="3-1-Calling-Tasks"><a href="#3-1-Calling-Tasks" class="headerlink" title="3.1 Calling Tasks"></a>3.1 Calling Tasks</h3><h3 id="3-1-Canvas-Designing-Work-flows"><a href="#3-1-Canvas-Designing-Work-flows" class="headerlink" title="3.1 Canvas: Designing Work-flows"></a>3.1 Canvas: Designing Work-flows</h3><h3 id="3-1-Workers-Guide"><a href="#3-1-Workers-Guide" class="headerlink" title="3.1 Workers Guide"></a>3.1 Workers Guide</h3><h3 id="3-1-Daemonization"><a href="#3-1-Daemonization" class="headerlink" title="3.1 Daemonization"></a>3.1 Daemonization</h3><h3 id="3-1-Periodic-Tasks"><a href="#3-1-Periodic-Tasks" class="headerlink" title="3.1 Periodic Tasks"></a>3.1 Periodic Tasks</h3><h3 id="3-1-Routing-Tasks"><a href="#3-1-Routing-Tasks" class="headerlink" title="3.1 Routing Tasks"></a>3.1 Routing Tasks</h3><h3 id="3-1-Monitoring-and-Management-Guide"><a href="#3-1-Monitoring-and-Management-Guide" class="headerlink" title="3.1 Monitoring and Management Guide"></a>3.1 Monitoring and Management Guide</h3><h3 id="3-1-Security"><a href="#3-1-Security" class="headerlink" title="3.1 Security"></a>3.1 Security</h3><h3 id="3-1-Optimizing"><a href="#3-1-Optimizing" class="headerlink" title="3.1 Optimizing"></a>3.1 Optimizing</h3><h3 id="3-1-Debugging"><a href="#3-1-Debugging" class="headerlink" title="3.1 Debugging"></a>3.1 Debugging</h3><h3 id="3-1-Concurrency"><a href="#3-1-Concurrency" class="headerlink" title="3.1 Concurrency"></a>3.1 Concurrency</h3><h3 id="3-1-Signals"><a href="#3-1-Signals" class="headerlink" title="3.1 Signals"></a>3.1 Signals</h3><h3 id="3-1-Testing-with-Celery"><a href="#3-1-Testing-with-Celery" class="headerlink" title="3.1 Testing with Celery"></a>3.1 Testing with Celery</h3><h3 id="3-1-Extensions-and-Bootsteps"><a href="#3-1-Extensions-and-Bootsteps" class="headerlink" title="3.1 Extensions and Bootsteps"></a>3.1 Extensions and Bootsteps</h3><h3 id="3-1-Configuration-and-defaults"><a href="#3-1-Configuration-and-defaults" class="headerlink" title="3.1 Configuration and defaults"></a>3.1 Configuration and defaults</h3><h3 id="3-1-BROKER-掮客"><a href="#3-1-BROKER-掮客" class="headerlink" title="3.1 BROKER 掮客"></a>3.1 BROKER 掮客</h3><p>本文基于 RabbitMQ 做消息队列，并非 Redis 所以 Broker 默认使用 RabbitMQ</p>
+<p>支持下面两个：</p>
+<ul>
+<li>Monitoring : 比如 Flower</li>
+<li>Remote Control: 可以通过 celery inspect 和 control 命令进行检查和控制。</li>
+</ul>
+<h3 id="简单步骤"><a href="#简单步骤" class="headerlink" title="简单步骤"></a>简单步骤</h3><ol>
+<li>定义 app, 指定 broker 和 backend</li>
+<li>定义 tasks</li>
+<li>指定 worker</li>
+<li>调用 Task , 调用后返回 AsyncResult 实例，</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">add.delay(<span class="number">2</span>, <span class="number">2</span>)</div><div class="line">add.apply_async((<span class="number">2</span>, <span class="number">2</span>))</div><div class="line">add.apply_async((<span class="number">2</span>, <span class="number">2</span>), queue=<span class="string">'lopri'</span>, countdown=<span class="number">10</span>)</div><div class="line">add.signature((<span class="number">2</span>, <span class="number">2</span>), countdown=<span class="number">10</span>)</div><div class="line"></div><div class="line">res = add.delay(<span class="number">2</span>, <span class="number">2</span>)</div><div class="line">res.get(timeout=<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<h4 id="Groups"><a href="#Groups" class="headerlink" title="Groups"></a>Groups</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 并行</div><div class="line">group(add.s(i, i) for i in xrange(10))().get()</div><div class="line"># [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]</div><div class="line"># partial group</div><div class="line">g = group(add.s(i) for i in xrange(10))</div><div class="line">g(10).get()</div></pre></td></tr></table></figure>
+<h4 id="Chains"><a href="#Chains" class="headerlink" title="Chains"></a>Chains</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">chain(add.s(4, 4) | mul.s(8))().get()</div><div class="line">(add.s(4, 4) | mul.s(8))().get()</div><div class="line"># partial chain</div><div class="line">g = chain(add.s(4) | mul.s(8))</div><div class="line">g(4).get()</div></pre></td></tr></table></figure>
+<h4 id="chords"><a href="#chords" class="headerlink" title="chords"></a>chords</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">chord((add.s(i, i) <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">10</span>)), xsum.s())().get()</div><div class="line">(group(add.s(i, i) <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">10</span>)) | xsum.s())().get()</div><div class="line"><span class="comment"># eg : upload_document.s(file) | group(apply_filter.s() for filter in filters)</span></div></pre></td></tr></table></figure>
+<p>####</p>
+<h3 id="3-1-Elasticsearch-CRUDE-以及基本操作"><a href="#3-1-Elasticsearch-CRUDE-以及基本操作" class="headerlink" title="3.1 Elasticsearch CRUDE 以及基本操作"></a>3.1 Elasticsearch CRUDE 以及基本操作</h3><h2 id="0x04-全文搜索的基本概念"><a href="#0x04-全文搜索的基本概念" class="headerlink" title="0x04 全文搜索的基本概念"></a>0x04 全文搜索的基本概念</h2><h2 id="0x05-调试"><a href="#0x05-调试" class="headerlink" title="0x05 调试"></a>0x05 调试</h2><h2 id="0x06-Python-SDK"><a href="#0x06-Python-SDK" class="headerlink" title="0x06 Python SDK"></a>0x06 Python SDK</h2><p>官方提供了两个 SDK 方便我们进行日常的开发：</p>
+<h3 id="6-1-与-Python-集成"><a href="#6-1-与-Python-集成" class="headerlink" title="6.1 与 Python 集成"></a>6.1 与 Python 集成</h3><p>前者偏底层一些，后者偏高层一些，高底层关系的有点类似于 sqlalchemy core 和 sqlalchemy orm 之间的关系。</p>
+<h3 id="6-2-与-Django-集成"><a href="#6-2-与-Django-集成" class="headerlink" title="6.2 与 Django 集成"></a>6.2 与 Django 集成</h3><h4 id="elasticsearch-analysis-ik-的配置"><a href="#elasticsearch-analysis-ik-的配置" class="headerlink" title="elasticsearch-analysis-ik 的配置"></a>elasticsearch-analysis-ik 的配置</h4><h2 id="0x07-踩坑集"><a href="#0x07-踩坑集" class="headerlink" title="0x07 踩坑集"></a>0x07 踩坑集</h2><ul>
+<li>序列问题</li>
+</ul>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-20</strong> 重修文字</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Celery 相关和命令。&lt;/p&gt;
+&lt;p&gt;不定期更新。&lt;/p&gt;
+&lt;p&gt;本文编写于 2018 年初，仅仅聚焦于 Django2.0 与 Celery 4.1.0&lt;/p&gt;
+&lt;p&gt;本文需要结合我的开源项目 YaDjangoBlog 来看 &lt;a href=&quot;https://github.com/twocucao/YaDjangoBlog&quot;&gt;https://github.com/twocucao/YaDjangoBlog&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Celery 主要用于分布式队列。&lt;/p&gt;
+&lt;p&gt;分布式队列可以用来做什么呢？&lt;/p&gt;
+&lt;p&gt;试想一下这么个场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;假如用户提交一个耗时任务，Django 一般会在 Function Based View 里进行处理这个任务（假设这个任务耗时 30s)，我可以先把这个任务放在分布式队列里面，将耗时任务甩锅给 Celery 的 Worker 。这样的话，就可以极大的减少 Function Based View 处理耗时任务的时间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当然，除此之外，Celery 还可以用于其他的分布式队列场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;批量发送邮件&lt;/li&gt;
+&lt;li&gt;定时任务 CronJob&lt;/li&gt;
+&lt;li&gt;分配爬虫抓取任务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当然，如果不用 Celery 的话也能搞定上面的场景，比如，借用数据库本身就可以直接做分布式任务派发。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;只是这样的实现本身代码可维护性，扩展性，性能等等都不是很好罢了。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Celery 的特点如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;简单易维护&lt;/li&gt;
+&lt;li&gt;高可用&lt;/li&gt;
+&lt;li&gt;快：依据官网的资料，单进程可以在若干分钟内处理上百万级数据，亚毫秒级往返延迟 (using RabbitMQ, librabbitmq, and optimized settings)&lt;/li&gt;
+&lt;li&gt;扩展性好：Almost every part of Celery can be extended or used on its own, Custom pool implementations, serializers, compression schemes, logging, schedulers, consumers, producers, broker transports, and much more.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;除此之外，还有什么特性呢？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;监控&lt;/li&gt;
+&lt;li&gt;Work-Flows&lt;/li&gt;
+&lt;li&gt;时间 / 速度 限制&lt;/li&gt;
+&lt;li&gt;日程安排 (CronJob)&lt;/li&gt;
+&lt;li&gt;资源泄露保护&lt;/li&gt;
+&lt;li&gt;用户组件&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+      <category term="后台组件" scheme="http://twocucao.xyz/categories/%E5%90%8E%E5%8F%B0%E7%BB%84%E4%BB%B6/"/>
+    
+    
+      <category term="CheatSheet" scheme="http://twocucao.xyz/tags/CheatSheet/"/>
+    
+      <category term="Redis" scheme="http://twocucao.xyz/tags/Redis/"/>
+    
+      <category term="RabbitMQ" scheme="http://twocucao.xyz/tags/RabbitMQ/"/>
+    
+      <category term="消息队列" scheme="http://twocucao.xyz/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/"/>
+    
+  </entry>
+  
+  <entry>
     <title>ElasticSearch CheatSheet</title>
     <link href="http://twocucao.xyz/2018/02/10/ElasticSearchCheatSheet/"/>
     <id>http://twocucao.xyz/2018/02/10/ElasticSearchCheatSheet/</id>
     <published>2018-02-10T02:25:39.000Z</published>
-    <updated>2018-02-15T02:51:44.248Z</updated>
+    <updated>2018-02-15T08:48:36.804Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。</p>
 <p>不定期更新。</p>
@@ -114,6 +966,7 @@
 <li>匹配同义词</li>
 <li>….</li>
 </ol>
+<p>可以定义字段的时候可以指定 analyzer（索引时） 与 search_analyzer（查询时）</p>
 <p>先看经过第一步之后，就可以进入第二步形成倒排索引了，此时，倒排索引之于 ElasticSearch 可以类比于 btree 之于 MySQL 或者 Gist 之于 PostgreSQL.</p>
 <p>那么，倒排索引包含哪些东西呢？</p>
 <ul>
@@ -148,7 +1001,11 @@
 <li>第一步：<strong>文本经过 analyzer 处理</strong></li>
 <li>第二步：<strong>查询倒排索引</strong></li>
 </ul>
-<h4 id="停止词"><a href="#停止词" class="headerlink" title="停止词"></a>停止词</h4><p>使用停止词是减少索引大小的一种方式，那么，哪些词语可以呗当做停止词呢？</p>
+<h4 id="3-全文搜索调优之中文分词"><a href="#3-全文搜索调优之中文分词" class="headerlink" title="3. 全文搜索调优之中文分词"></a>3. 全文搜索调优之中文分词</h4><p>如何扩展分词词典呢？</p>
+<blockquote>
+<p>TODO: 这个话题可能比较大，先挖坑，以后填</p>
+</blockquote>
+<h4 id="4-全文搜索调优之停止词"><a href="#4-全文搜索调优之停止词" class="headerlink" title="4. 全文搜索调优之停止词"></a>4. 全文搜索调优之停止词</h4><p>使用停止词是减少索引大小的一种方式（减小索引效果不明显），那么，哪些词语可以呗当做停止词呢？</p>
 <p>低频词语：低频词语具备高权重<br>高频词语：高频词语具备低权重</p>
 <p>当然，是否是高频词语依据个人经验主要依据两点来判断：</p>
 <ul>
@@ -162,7 +1019,7 @@
 <li>假如停止词里面包含了或，那么，如果有个乐队名字叫做『或或』, 则搜索不出来。</li>
 <li>假如停止词里面包含了 to / be / not / or , 则莎士比亚的名言 『To be, or not to be』 则搜索不出来。</li>
 </ul>
-<h4 id="同义词"><a href="#同义词" class="headerlink" title="同义词"></a>同义词</h4><p>同义词也有很多种：</p>
+<h4 id="5-全文搜索调优之同义词"><a href="#5-全文搜索调优之同义词" class="headerlink" title="5. 全文搜索调优之同义词"></a>5. 全文搜索调优之同义词</h4><p>同义词也有很多种：</p>
 <ol>
 <li>平级关系：插、戳、刺、扎</li>
 <li>包含关系：成人包含男人和女人</li>
@@ -207,7 +1064,7 @@
 </tbody>
 </table>
 <p>由此可见，大部分场景下的索引时如果没有特别的需求，慎用同义词。</p>
-<h4 id="typoes-和拼写错误"><a href="#typoes-和拼写错误" class="headerlink" title="typoes 和拼写错误"></a>typoes 和拼写错误</h4><p>有的时候，用户也会输入错误：</p>
+<h4 id="6-全文搜索调优之拼写错误"><a href="#6-全文搜索调优之拼写错误" class="headerlink" title="6. 全文搜索调优之拼写错误"></a>6. 全文搜索调优之拼写错误</h4><p>有的时候，用户也会输入错误：</p>
 <ul>
 <li>口误，把『周杰伦』拼成『周杰棍』</li>
 </ul>
@@ -235,18 +1092,53 @@
 <blockquote>
 <p>依据 TF/IDF 的高频低权重，低频高权重的计算方式，<strong>周杰棍由于出现次数极少，反而获得了极高的权重。</strong></p>
 </blockquote>
-<p>所以，一般情况下还是建议作为：</p>
+<p>所以，一般情况下还是建议做为下面两个问题的解决方案：</p>
 <ul>
-<li>search as you type : completion suggester</li>
-<li>did you mean : phrase suggester</li>
+<li>Search as you type : completion suggester</li>
+<li>Did you mean : phrase suggester</li>
 </ul>
-<h3 id="3-3-全文搜索的-ES-解决方案"><a href="#3-3-全文搜索的-ES-解决方案" class="headerlink" title="3.3 全文搜索的 ES 解决方案"></a>3.3 全文搜索的 ES 解决方案</h3><blockquote>
+<h4 id="7-全文搜索调优之相关性"><a href="#7-全文搜索调优之相关性" class="headerlink" title="7. 全文搜索调优之相关性"></a>7. 全文搜索调优之相关性</h4><p>我们在接触 RDBMS 的时候系统是没有相关性的说法的，比如说，2017 年 12 月份 xxx 用户的订单，就是直接 select 出来这些订单。因为 where 语句后面包含了界限明确的条件，而全文搜索则不然。</p>
+<p>全文搜索不仅仅找到匹配的 documents, 并且按照相关性进行排序（其实就是打分 score)。</p>
+<p>为什么需要打分呢？从相亲角度来说，上海内环有房肯定是个超级大加分项。同样是录入信息，在上海内环有房的权重值可是设置的高一些。</p>
+<p>Elasticsearch 中使用的计算 score 的公式叫做 practical scoring function, 这个公式借鉴于 TF/TDF 以及 矢量空间模型，但有更多的特征比如，条件罂粟，字段长度正态化，term / query clause boosting</p>
+<h5 id="索引时三因素"><a href="#索引时三因素" class="headerlink" title="索引时三因素"></a>索引时三因素</h5><p>先看前两个因素 TF/IDF</p>
+<ul>
+<li>tf(t in d) = sqrt(frequency)</li>
+<li>idf(t) = 1 + log (numDocs / (docFreq + 1))</li>
+</ul>
+<p>再看后一个因素 Field-Length norm</p>
+<p>标题越短，这个词对这个 field 的代表性越强</p>
+<ul>
+<li>norm(d) = 1 / sqrt(numTerms)</li>
+</ul>
+<h5 id="查询时"><a href="#查询时" class="headerlink" title="查询时"></a>查询时</h5><p>几个词 -&gt; 几维度 -&gt; 寻求最佳匹配以及近似匹配</p>
+<ul>
+<li>最佳匹配应该是通过计算长度（应该是，但不确定）</li>
+<li>近似匹配，计算距离最近的 cos 值。</li>
+</ul>
+<h5 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h5><p>这个公式调优的时候需要用到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">score(q,d)  = queryNorm(q)</div><div class="line">                ·coord(q,d)</div><div class="line">                ·∑(tf(t <span class="keyword">in</span> d)·idf(t)²·t.getBoost()·norm(t,d)) (t <span class="keyword">in</span> q)</div></pre></td></tr></table></figure>
+<h2 id="0x05-搜索语法"><a href="#0x05-搜索语法" class="headerlink" title="0x05 搜索语法"></a>0x05 搜索语法</h2><p>Single document APIs</p>
+<ul>
+<li>Index API</li>
+<li>Get API</li>
+<li>Delete API</li>
+<li>Update API</li>
+<li>Multi-document APIs</li>
+</ul>
+<p>Multi Get API</p>
+<ul>
+<li>Bulk API</li>
+<li>Delete By Query API</li>
+<li>Update By Query API</li>
+<li>Reindex API</li>
+</ul>
+<blockquote>
 <p>TODO: 全文搜索 RDBMS like 的效率问题。</p>
 </blockquote>
 <p>全文搜索包含两个重要方面：</p>
 <ul>
-<li>相关性：通过 TF/IDF , 距离 , 模糊相似度，以及其他算法</li>
-<li><p>分析：将大片文字转为 distinct, normalized tokens</p>
+<li><p>相关性：通过 TF/IDF , 距离 , 模糊相似度，以及其他算法</p>
 </li>
 <li><p>Term-Based : term or fuzzy</p>
 </li>
@@ -257,8 +1149,6 @@
 <p>加上 constant_score 和 filter 的话，就成了常亮？麻痹的，这两个又是啥</p>
 </blockquote>
 <p> inverted index</p>
-<p>内部过滤操作：</p>
-<p>1.</p>
 <h2 id="0x05-调试"><a href="#0x05-调试" class="headerlink" title="0x05 调试"></a>0x05 调试</h2><p>查看 analyzer 的效果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">GET /my_index/_analyze</div><div class="line">&#123;</div><div class="line">  <span class="string">"analyzer"</span> : <span class="string">"my_synonyms"</span>,</div><div class="line">  <span class="string">"text"</span> : <span class="string">"Elizabeth is the English queen"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="0x06-Python-SDK"><a href="#0x06-Python-SDK" class="headerlink" title="0x06 Python SDK"></a>0x06 Python SDK</h2><p>官方提供了两个 SDK 方便我们进行日常的开发：</p>
 <ul>
@@ -2221,709 +3111,6 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].
       <category term="深度学习" scheme="http://twocucao.xyz/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
       <category term="自然语言" scheme="http://twocucao.xyz/tags/%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Geoprocessing With Python</title>
-    <link href="http://twocucao.xyz/2017/07/11/GeoProcessingWithPython/"/>
-    <id>http://twocucao.xyz/2017/07/11/GeoProcessingWithPython/</id>
-    <published>2017-07-11T04:13:20.000Z</published>
-    <updated>2018-02-11T01:14:31.548Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>16 年 12 月研究 GIS 相关资料用于处理 GIS 相关问题，完成基本 GIS 功能。<br>最新需要进阶相关内容用于更好的处理相关数据。</p>
-<ul>
-<li>书籍：<ul>
-<li>Geoprocessing With Python</li>
-<li>PostGIS In Action 2rd</li>
-</ul>
-</li>
-<li>框架：<ul>
-<li>前端 Leaflets D3</li>
-<li>后端 GeoDjango</li>
-</ul>
-</li>
-<li>其他零零碎碎的资料</li>
-</ul>
-<p>特此记录。</p>
-<a id="more"></a>
-<p>本文目录</p>
-<ul>
-<li>基本概念<ul>
-<li>Vertor VS Raster</li>
-<li>Vertor 相关类型与坐标系</li>
-<li>Raster 相关类型</li>
-<li>其他类型</li>
-<li>GIS 开发的生态圈以及常用技术栈</li>
-</ul>
-</li>
-<li>Vertor 分析</li>
-<li>Raster 分析</li>
-<li>Vertor 与 Raster</li>
-</ul>
-<h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-1-Vertor-VS-Raster"><a href="#1-1-Vertor-VS-Raster" class="headerlink" title="1.1. Vertor VS Raster"></a>1.1. Vertor VS Raster</h3><ul>
-<li>Vector : 基本单元为 Point : points, lines, and polygons 以及其组合，适用于矢量图，地形边界，路线等。</li>
-<li>Raster : 基本单元为 Pixel : 2d/3d 包含数值的数组，适用于连续性数据，不仅仅适用于图片。</li>
-</ul>
-<h3 id="1-2-Vertor-相关类型与坐标系"><a href="#1-2-Vertor-相关类型与坐标系" class="headerlink" title="1.2. Vertor 相关类型与坐标系"></a>1.2. Vertor 相关类型与坐标系</h3><h4 id="1-2-1-国内常见的几种坐标系"><a href="#1-2-1-国内常见的几种坐标系" class="headerlink" title="1.2.1. 国内常见的几种坐标系"></a>1.2.1. 国内常见的几种坐标系</h4><p>国内由于特殊的国情，国际标准也要向国家标准靠齐。比如各个不同的坐标系上坐标的换算。</p>
-<p>我们都知道一个坐标 (x,y) 可以表示为经纬度，甚至放在坐标系上，我们可以这么运算两点 (x1,y1) , (x2,y2) 之间的距离</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># z 表示比例系数</span></div><div class="line">distance = math.sqrt((x1-x2) ** <span class="number">2</span> + (y1-y2) ** <span class="number">2</span>) * z</div></pre></td></tr></table></figure>
-<p>在近距离的时候的确是可以这么做的比如计算村里小芳和隔壁老王家的距离。当距离过大的时候，比如计算上海 A 区和 B 区的两个写字楼的距离的时候，则有相当大的误差。</p>
-<p>那么问题来了：</p>
-<p><del>挖掘技术哪家强</del></p>
-<p>啊不是，是<strong>国内有哪些常用坐标标准呢？又是如何计算的呢？</strong></p>
-<ul>
-<li><ol>
-<li>GPS WGS-84 国际标准（原始）</li>
-</ol>
-</li>
-<li><ol>
-<li>GCJ-02 国内标准（原始数据混淆）</li>
-</ol>
-</li>
-<li><ol>
-<li>其他坐标比如 BD-09（原始数据混淆再混淆）</li>
-</ol>
-</li>
-</ul>
-<p>对于小公司而言，我们是没有任何方法来通过 BD-09 以及 GCJ-02 这种坐标系进行运算的：</p>
-<p>因为坐标点非线性偏移核心计算方法掌握在 GCJ-02 / BD-09 的公司里面，比如 Google 中国，高德地图，百度地图，腾讯地图。所以，为了研究，则必须要有<strong>能够对坐标进行运算的算法</strong>, 那这个东西有没有呢？答案是肯定的，因为国外使用的 WGS-84 标准，并且，计算坐标的算法早就开源。</p>
-<p>那么，我们的思路就确定下来了。</p>
-<ol>
-<li>各种地图的经纬度坐标比如 BD-09 或 GCJ-02 标转换成 WGS-84 坐标。</li>
-<li>使用开源 GIS 软件进行对 WGS-84 进行运算。</li>
-</ol>
-<p>感谢诸多在 GIS 运算上开源的中国先辈，我们轻而易举的获取到了坐标之间相互转化的方法：</p>
-<p><a href="https://github.com/wandergis/coordTransform_py" target="_blank" rel="external">https://github.com/wandergis/coordTransform_py</a></p>
-<h4 id="1-2-2-形状"><a href="#1-2-2-形状" class="headerlink" title="1.2.2. 形状"></a>1.2.2. 形状</h4><p>坐标系，我们可以简单的理解为一个笛卡尔坐标系（虽然这么说很不准确，但已经足够形象了）</p>
-<p>于是对于二维的数据，GIS 的分析就可以理解为对于点，线段，多边形自身以及他们之间的关系的分析。</p>
-<h3 id="1-3-Raster-相关类型"><a href="#1-3-Raster-相关类型" class="headerlink" title="1.3. Raster 相关类型"></a>1.3. Raster 相关类型</h3><p>raster 的 digital elevation model(DEM), 即每一个像素值包含一个 elevation value</p>
-<p>GDAL/OGR</p>
-<!-- more -->
-<h2 id="0x02-Vertor-分析"><a href="#0x02-Vertor-分析" class="headerlink" title="0x02. Vertor 分析"></a>0x02. Vertor 分析</h2><h2 id="0x03-Raster-分析"><a href="#0x03-Raster-分析" class="headerlink" title="0x03. Raster 分析"></a>0x03. Raster 分析</h2><h3 id="3-1-教程"><a href="#3-1-教程" class="headerlink" title="3.1. 教程"></a>3.1. 教程</h3><h3 id="3-2-教程"><a href="#3-2-教程" class="headerlink" title="3.2. 教程"></a>3.2. 教程</h3><h3 id="3-3-教程笔记"><a href="#3-3-教程笔记" class="headerlink" title="3.3. 教程笔记"></a>3.3. 教程笔记</h3><h2 id="0x04-Vertor-与-Raster"><a href="#0x04-Vertor-与-Raster" class="headerlink" title="0x04. Vertor 与 Raster"></a>0x04. Vertor 与 Raster</h2><h3 id="基础版本"><a href="#基础版本" class="headerlink" title="基础版本"></a>基础版本</h3><ul>
-<li>Point</li>
-<li>LineString</li>
-<li><p>Polygon</p>
-</li>
-<li><p>MultiPoint</p>
-</li>
-<li>MultiLineString</li>
-<li>MultiPolygon</li>
-</ul>
-<h3 id="中级概念"><a href="#中级概念" class="headerlink" title="中级概念"></a>中级概念</h3><ul>
-<li>Raster / Tile (Bands 是什么鬼）</li>
-</ul>
-<h3 id="PostGIS-MetaTable"><a href="#PostGIS-MetaTable" class="headerlink" title="PostGIS MetaTable"></a>PostGIS MetaTable</h3><ul>
-<li>spatial_ref_sys</li>
-<li>geography_columns</li>
-<li>geometry_columns</li>
-<li>raster_columns</li>
-<li>raster_overviews</li>
-</ul>
-<h3 id="PostGIS-常用函数"><a href="#PostGIS-常用函数" class="headerlink" title="PostGIS 常用函数"></a>PostGIS 常用函数</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">ST_AsText(geom) 用于查看 WKT</div><div class="line">ST_GeometryType(geometry) returns the type of the geometry</div><div class="line">ST_NDims(geometry) returns the number of dimensions of the geometry</div><div class="line">ST_SRID(geometry) returns the spatial reference identifier number of the geometry</div><div class="line">ST_X(geometry) returns the X ordinate , 如果作用在 Point 上，则返回经度</div><div class="line">ST_Y(geometry) returns the Y ordinate , 如果作用在 Point 上，则返回纬度</div><div class="line"></div><div class="line">ST_Length(geometry) returns the length of the linestring</div><div class="line">ST_StartPoint(geometry) returns the first coordinate as a point</div><div class="line">ST_EndPoint(geometry) returns the last coordinate as a point</div><div class="line">ST_NPoints(geometry) returns the number of coordinates in the linestring</div><div class="line"></div><div class="line">ST_Area(geometry) returns the area of the polygons</div><div class="line">ST_NRings(geometry) returns the number of rings (usually 1, more of there are holes)</div><div class="line">ST_ExteriorRing(geometry) returns the outer ring as a linestring</div><div class="line">ST_InteriorRingN(geometry,n) returns a specified interior ring as a linestring</div><div class="line">ST_Perimeter(geometry) returns the length of all the rings</div><div class="line"></div><div class="line">ST_NumGeometries(geometry) returns the number of parts in the collection</div><div class="line">ST_GeometryN(geometry,n) returns the specified part</div><div class="line">ST_Area(geometry) returns the total area of all polygonal parts</div><div class="line">ST_Length(geometry) returns the total length of all linear parts</div></pre></td></tr></table></figure>
-<h3 id="Snippets"><a href="#Snippets" class="headerlink" title="Snippets"></a>Snippets</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">-- 合并多个区域并返回 multipoly</div><div class="line">UPDATE areas as A</div><div class="line">SET &quot;Boundary&quot; = ST_Multi(st_union(ARRAY(SELECT geom FROM county_boundary_region WHERE gid in ( &apos;foo_id&apos;,&apos;bar_id)&apos;)</div><div class="line">)))</div><div class="line">WHERE A.&quot;ID&quot; = &apos;xxxxxx&apos;</div></pre></td></tr></table></figure>
-<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ol>
-<li><a href="http://gis.stackexchange.com/questions/6681/what-are-the-pros-and-cons-of-postgis-geography-and-geometry-types" target="_blank" rel="external">http://gis.stackexchange.com/questions/6681/what-are-the-pros-and-cons-of-postgis-geography-and-geometry-types</a></li>
-<li>Geo Processing with Python</li>
-</ol>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2017-07-11</strong> 重修文字</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;16 年 12 月研究 GIS 相关资料用于处理 GIS 相关问题，完成基本 GIS 功能。&lt;br&gt;最新需要进阶相关内容用于更好的处理相关数据。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;书籍：&lt;ul&gt;
-&lt;li&gt;Geoprocessing With Python&lt;/li&gt;
-&lt;li&gt;PostGIS In Action 2rd&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;框架：&lt;ul&gt;
-&lt;li&gt;前端 Leaflets D3&lt;/li&gt;
-&lt;li&gt;后端 GeoDjango&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;其他零零碎碎的资料&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;特此记录。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Python 黑魔法" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/"/>
-    
-    
-      <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
-    
-      <category term="数据可视化" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/"/>
-    
-      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
-    
-      <category term="GIS" scheme="http://twocucao.xyz/tags/GIS/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ReThinking In Python</title>
-    <link href="http://twocucao.xyz/2017/07/04/RethinkingInPython/"/>
-    <id>http://twocucao.xyz/2017/07/04/RethinkingInPython/</id>
-    <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2018-01-28T01:31:11.540Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。</p>
-<h2 id="0x01-Python-胡论"><a href="#0x01-Python-胡论" class="headerlink" title="0x01 Python 胡论"></a>0x01 Python 胡论</h2><h3 id="1-1-Python-的独一无二性"><a href="#1-1-Python-的独一无二性" class="headerlink" title="1.1 Python 的独一无二性"></a>1.1 Python 的独一无二性</h3><p>是要用一门编程语言无非是两种原因：</p>
-<ul>
-<li>这门技术很火，能挣钱</li>
-<li>写起来很舒服，开发效率高</li>
-</ul>
-<p>这也是我在涉猎了很多编程语言为什么选择了 Python 和 TypeScript 作为自己的主要技能树。</p>
-<p>Python 具备这两点，TS （更加准确的说是 JavaScript）具备前一点。</p>
-<p>Python 写起来真的特别舒服，语法简洁，第三方库丰富，而且也比较火。</p>
-<p>有什么东西比，写代码效率高、生态圈好还重要了。</p>
-<p>生态圈好，比如</p>
-<ul>
-<li>Web 开发用 Django/Flask</li>
-<li>数据抓取用 Requests</li>
-<li>数据分析清洗用 Pandas</li>
-<li>机器学习 Tensorflow SCIPY</li>
-</ul>
-<a id="more"></a>
-<h3 id="1-2-工具链"><a href="#1-2-工具链" class="headerlink" title="1.2 工具链"></a>1.2 工具链</h3><p><a href="./ch04/s03_Pythonista_的工具集.md">Pythonista 的工具集</a></p>
-<h3 id="1-3-文档"><a href="#1-3-文档" class="headerlink" title="1.3 文档"></a>1.3 文档</h3><h3 id="1-4-社区"><a href="#1-4-社区" class="headerlink" title="1.4 社区"></a>1.4 社区</h3><h3 id="1-5-书籍"><a href="#1-5-书籍" class="headerlink" title="1.5 书籍"></a>1.5 书籍</h3><h2 id="0x02-基础概念"><a href="#0x02-基础概念" class="headerlink" title="0x02 基础概念"></a>0x02 基础概念</h2><h3 id="2-1-数据类型"><a href="#2-1-数据类型" class="headerlink" title="2.1 数据类型"></a>2.1 数据类型</h3><h4 id="2-1-1-常量"><a href="#2-1-1-常量" class="headerlink" title="2.1.1 常量"></a>2.1.1 常量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">False</div><div class="line">True</div><div class="line">None</div><div class="line">NotImplemented</div><div class="line">Elilipsis ...</div></pre></td></tr></table></figure>
-<h5 id="布尔常量"><a href="#布尔常量" class="headerlink" title="布尔常量"></a>布尔常量</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">None</div><div class="line">False</div><div class="line">0 0.0 0j</div><div class="line">&apos;&apos; () []</div><div class="line">&#123;&#125;</div><div class="line">一个对象 __bool__() = False , 如果上一个为 True 则__len__()</div></pre></td></tr></table></figure>
-<h5 id="布尔运算符"><a href="#布尔运算符" class="headerlink" title="布尔运算符"></a>布尔运算符</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">x or y</div><div class="line">x and y</div><div class="line">not x</div></pre></td></tr></table></figure>
-<h5 id="布尔比较值"><a href="#布尔比较值" class="headerlink" title="布尔比较值"></a>布尔比较值</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 可以定制</div><div class="line">&lt; &lt;= &gt;= &gt; == !=</div><div class="line"># 无法定制</div><div class="line">is / is not</div></pre></td></tr></table></figure>
-<h4 id="2-1-2-数字类型"><a href="#2-1-2-数字类型" class="headerlink" title="2.1.2 数字类型"></a>2.1.2 数字类型</h4><ul>
-<li>int</li>
-<li>float</li>
-<li>complex</li>
-</ul>
-<h5 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">+ - * / // % -n +n abs() int() float()</div><div class="line">complex(re,im)</div><div class="line">c.conjugate()</div><div class="line">divmod(x,y)</div><div class="line">pow(x,y) x ** y</div><div class="line">math.trunc(x)</div><div class="line">math.round(x[,n])</div><div class="line">math.floor(x) &lt;=x</div><div class="line">math.ceil(x)  &gt;=x</div><div class="line">| ^ &amp; &lt;&lt; &gt;&gt; ~x</div></pre></td></tr></table></figure>
-<p>注意</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(-1) / 2 # -1</div><div class="line">1 / (-2) # -1</div></pre></td></tr></table></figure>
-<h5 id="数值类型的哈希"><a href="#数值类型的哈希" class="headerlink" title="数值类型的哈希"></a>数值类型的哈希</h5><p>// TODO : 麻蛋居然没看懂 4.4.4. Hashing of numeric types</p>
-<h4 id="2-1-3-迭代器类型"><a href="#2-1-3-迭代器类型" class="headerlink" title="2.1.3 迭代器类型"></a>2.1.3 迭代器类型</h4><p>生成器</p>
-<h4 id="2-1-4-序列类型"><a href="#2-1-4-序列类型" class="headerlink" title="2.1.4 序列类型"></a>2.1.4 序列类型</h4><p>C 实现的按照 item 是否为同一类型分为：</p>
-<ul>
-<li><strong>Container sequences</strong>:  list, tuple, and collections.deque can hold items of different types.</li>
-<li><strong>Flat sequences</strong>: str, bytes, bytearray, memoryview, and array.array hold items of one type.</li>
-</ul>
-<p>C 实现按照 item 是否可修改分为：</p>
-<ul>
-<li><strong>Mutable sequences</strong>: list, bytearray, array.array, collections.deque, and memoryview</li>
-<li><strong>Immutable sequences</strong>: tuple, str, and bytes</li>
-</ul>
-<h5 id="通用序列操作"><a href="#通用序列操作" class="headerlink" title="通用序列操作"></a>通用序列操作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">x in s</div><div class="line">x not in s</div><div class="line">s + t</div><div class="line">s * n 或者 n * s</div><div class="line">s[i]</div><div class="line">s[i:j]</div><div class="line">s[i:j:s]</div><div class="line">len(s)</div><div class="line">min(s)</div><div class="line">max(s)</div><div class="line">s.index(x,i,j)</div><div class="line">s.count(x)</div><div class="line">// TODO 封装 deepEqual</div></pre></td></tr></table></figure>
-<p>切片</p>
-<p>为何 Slice 和 Range 会排除 最后一个 Item?</p>
-<p>书中讲的太复杂，其实这个和尺子是一个作用，尺子从 0 刻度开始，这样方便丈量。</p>
-<p>比如说：</p>
-<ul>
-<li>items[0:10] 为 10 厘米</li>
-<li>items[10] 为 10 刻度后一个单位，即 items[10:11]</li>
-<li>items[2:] 为 2 刻度后面若干个单位</li>
-<li>items[::3] 以三为单位，从 0 刻度开始，最后为结尾，每三个</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a[i, j] <span class="comment"># 调用 a.__getitem__((i, j))</span></div></pre></td></tr></table></figure>
-<h5 id="不可变序列类型"><a href="#不可变序列类型" class="headerlink" title="不可变序列类型"></a>不可变序列类型</h5><ul>
-<li>解包赋值</li>
-<li>不要手贱加逗号</li>
-<li><p>下划线可以用作临时变量 （但是 django 中下划线用于中英文）</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">a, b, *rest = range(<span class="number">5</span>) <span class="comment"># (0, 1, [2, 3, 4])</span></div><div class="line">a, b, *rest = range(<span class="number">3</span>) <span class="comment"># (0, 1, [2])</span></div><div class="line">a, b, *rest = range(<span class="number">2</span>) <span class="comment"># (0, 1, [])</span></div><div class="line"></div><div class="line">a, *body, c, d = range(<span class="number">5</span>) <span class="comment"># (0, [1, 2], 3, 4)</span></div><div class="line">*head, b, c, d = range(<span class="number">5</span>) <span class="comment"># ([0, 1], 2, 3, 4)</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>namedtuple</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">City = namedtuple(<span class="string">'City'</span>, <span class="string">'name country population coordinates'</span>)</div><div class="line">tokyo = City(<span class="string">'Tokyo'</span>, <span class="string">'JP'</span>, <span class="number">36.933</span>, (<span class="number">35.689722</span>, <span class="number">139.691667</span>))</div><div class="line">tokyo.population</div><div class="line">tokyo.coordinates</div><div class="line">tokyo[<span class="number">1</span>]</div><div class="line">City._fields <span class="comment"># tuple</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h5 id="可变序列类型"><a href="#可变序列类型" class="headerlink" title="可变序列类型"></a>可变序列类型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">s[i] = x</div><div class="line">s[i:j] = t</div><div class="line">del s[i:j]</div><div class="line">s[i:j:k] = t</div><div class="line">del s[i:j:k]</div><div class="line">s.append(x)</div><div class="line">s.clear()</div><div class="line">s.copy()</div><div class="line">s.extend(t) 或者 s += t</div></pre></td></tr></table></figure>
-<h5 id="List-Comprehensions-and-Generator-Expressions"><a href="#List-Comprehensions-and-Generator-Expressions" class="headerlink" title="List Comprehensions and Generator Expressions"></a>List Comprehensions and Generator Expressions</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">new_items = [func(a) <span class="keyword">for</span> item <span class="keyword">in</span> items]</div><div class="line">new_items = [ str(x) <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">100</span>) <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</div><div class="line">new_items = list(map(str,list(filter(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span> , list(range(<span class="number">100</span>))))))</div><div class="line"><span class="comment"># 可写成</span></div><div class="line">new_items = list(map(str,filter(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span> , range(<span class="number">100</span>))))</div></pre></td></tr></table></figure>
-<p>list 往往和 map filter 以及 listcomp 用于创建简单的序列</p>
-<h5 id="Augmented-Assignment-with-Sequences"><a href="#Augmented-Assignment-with-Sequences" class="headerlink" title="Augmented Assignment with Sequences"></a>Augmented Assignment with Sequences</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">对于不可变类型 赋值 l *= <span class="number">2</span> 在内存中则是创建了新的两个长度的元祖，然后赋值</div><div class="line">而由于字符串则需要注意，str_a += <span class="string">"str b"</span> , 虽然为不可变变量，但并不需要拷贝整个字符串（特殊情况）, 但字符串的拼接建议还是<span class="string">""</span>.join()</div><div class="line"></div><div class="line">t = (<span class="number">1</span>, <span class="number">2</span>, [<span class="number">30</span>, <span class="number">40</span>])</div><div class="line">t[<span class="number">2</span>] += [<span class="number">50</span>, <span class="number">60</span>]</div><div class="line"><span class="comment"># 结果为既赋值成功，又报错</span></div><div class="line"><span class="comment"># 但 t[2].extend([50, 60]) 可以赋值成功</span></div><div class="line"><span class="keyword">import</span> dis</div><div class="line">dis.dis(<span class="string">'s[a] += b'</span>) <span class="comment"># 可以查看字节码</span></div></pre></td></tr></table></figure>
-<ol>
-<li>尽量不要在不可变变量内保存可变变量</li>
-<li>t[2] += [50,60] 并不是原子操作，因为，当做了一半的时候，抛出的错误。</li>
-</ol>
-<h5 id="list-sort-and-the-sorted-Built-In-Function"><a href="#list-sort-and-the-sorted-Built-In-Function" class="headerlink" title="list.sort and the sorted Built-In Function"></a>list.sort and the sorted Built-In Function</h5><p>对于 sort 和 sorted 来说，reverse 代表 desc,key 为单参数用于计算每一个值的结果的函数。<br>list.sort 直接针对列表排序，并且返回 None（出于编程习惯的问题，直接返回 None 的函数大多是对程序有一定的修改）</p>
-<h5 id="Managing-Ordered-Sequences-with-bisect"><a href="#Managing-Ordered-Sequences-with-bisect" class="headerlink" title="Managing Ordered Sequences with bisect"></a>Managing Ordered Sequences with bisect</h5><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">import bisect</div><div class="line">bisect -&gt; bisect_right</div><div class="line">bisect_left</div><div class="line">insort -&gt; insort_left</div><div class="line">insort_right</div><div class="line"># 搜索可以用来划分档次</div><div class="line">def grade(score, breakpoints=[60, 70, 80, 90], grades='FDCBA'):</div><div class="line">    i = bisect.bisect(breakpoints, score)</div><div class="line">    return grades[i]</div><div class="line"></div><div class="line">[grade(score) for score in [33, 99, 77, 70, 89, 90, 100]] # ['F', 'A', 'C', 'C', 'B', 'A', 'A']</div></pre></td></tr></table></figure>
-<h5 id="When-a-List-Is-Not-the-Answer"><a href="#When-a-List-Is-Not-the-Answer" class="headerlink" title="When a List Is Not the Answer"></a>When a List Is Not the Answer</h5><p>list 是一种 mix-typed 的数据结构，即可以存放不同种类型的数据结构，由此带来的问题自然是性能问题：</p>
-<ul>
-<li>list 第一是 mix-typed 的数据结构</li>
-<li>动态数组，并非数组</li>
-</ul>
-<p>当考虑性能的时候，则需要考虑是不是要换一个更好的数据结构：</p>
-<ul>
-<li>适用于类型单一的 array</li>
-<li>增删比较多，或者需要使用 FIFO,LIFO, 则使用 deque (double-ended queue)</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Arrays</span></div><div class="line">floats = array(<span class="string">'d'</span>, (random() <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>**<span class="number">7</span>)))</div><div class="line"><span class="comment"># NumPy and SciPy</span></div><div class="line"></div><div class="line"><span class="comment"># Deques and Other Queue</span></div></pre></td></tr></table></figure>
-<h5 id="Deques-and-Other-Queue"><a href="#Deques-and-Other-Queue" class="headerlink" title="Deques and Other Queue"></a>Deques and Other Queue</h5><ul>
-<li>Deque</li>
-<li>queue 线程安全 Queue, LifoQueue, and PriorityQueue</li>
-<li>multiprocessing Queue 和 JoinableQueue</li>
-<li>asyncio Queue, LifoQueue, PriorityQueue, and JoinableQueue</li>
-</ul>
-<h3 id="2-2-语句"><a href="#2-2-语句" class="headerlink" title="2.2 语句"></a>2.2 语句</h3><p>语句</p>
-<h3 id="2-3-函数"><a href="#2-3-函数" class="headerlink" title="2.3 函数"></a>2.3 函数</h3><h4 id="2-3-0-参数"><a href="#2-3-0-参数" class="headerlink" title="2.3.0 参数"></a>2.3.0 参数</h4><h4 id="2-3-1-闭包与作用域"><a href="#2-3-1-闭包与作用域" class="headerlink" title="2.3.1 闭包与作用域"></a>2.3.1 闭包与作用域</h4><p>本部分具备一定文字量，故单独抽取出来到文章，请参考 Python 中的闭包和作用域。</p>
-<h4 id="2-3-2-高阶函数"><a href="#2-3-2-高阶函数" class="headerlink" title="2.3.2 高阶函数"></a>2.3.2 高阶函数</h4><ul>
-<li>map</li>
-<li>reduce</li>
-<li>filter</li>
-</ul>
-<h4 id="2-3-3-特殊方法"><a href="#2-3-3-特殊方法" class="headerlink" title="2.3.3 特殊方法"></a>2.3.3 特殊方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">obj.__len__()</div><div class="line">len()</div><div class="line"></div><div class="line">obj.__</div></pre></td></tr></table></figure>
-<p>对于内置类型 (list, str , bytearray) 解释器在调用特殊方法的时候调用 C 库，比如 CPython 实现的 len 方法一般直接会调用 PyVarObject C Struct ob_size</p>
-<p>特殊方法往往并不是显示调用，而是被隐式调用。比如 init 在 new 中的作用，比如 for item in items 世界上会调用 iter(items), 这也会隐式调用 items.<strong>iter</strong>() .</p>
-<p>一般当大量使用特殊方法的时候，都是在进行元编程。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">bool(x) 先调用 x.__bool__() , 如果 x.__bool__() 没有实现，则调用 x.__len__(), 如果为 <span class="number">0</span> 则返回 <span class="keyword">False</span></div><div class="line">sorted(arr) 可以直接返回 arr，arr.sort() 是排序内部。</div></pre></td></tr></table></figure>
-<p>特殊方法名 （有操作符）</p>
-<table>
-<thead>
-<tr>
-<th>种类</th>
-<th>方法名</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>String/Bytes</td>
-<td>repr , str , format , bytes</td>
-</tr>
-<tr>
-<td>Conversion to number</td>
-<td>abs , bool , complex , init , float , hash , index</td>
-</tr>
-<tr>
-<td>Emulating collections</td>
-<td>len , getitem , setitem , delitem , contains</td>
-</tr>
-<tr>
-<td>Iteration</td>
-<td>iter, reversed , next</td>
-</tr>
-<tr>
-<td>Emulating callables</td>
-<td>call</td>
-</tr>
-<tr>
-<td>Context management</td>
-<td>enter, exit</td>
-</tr>
-<tr>
-<td>Instance creation &amp; destruction</td>
-<td>new , init , del</td>
-</tr>
-<tr>
-<td>Attribute management</td>
-<td>getattr , getattribute , setattr , delattr, dir</td>
-</tr>
-<tr>
-<td>Attribute descriptors</td>
-<td>get , set ,delete</td>
-</tr>
-<tr>
-<td>Class service</td>
-<td>prepare , instancecheck , subclasscheck</td>
-</tr>
-</tbody>
-</table>
-<p>特殊方法名 （无操作符）</p>
-<table>
-<thead>
-<tr>
-<th>种类</th>
-<th>方法名</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Unary numeric operators</td>
-<td>neg  , pos  , abs</td>
-</tr>
-<tr>
-<td>Rich comparison operators</td>
-<td>lt  , le  , eq  , ne  , gt  , ge</td>
-</tr>
-<tr>
-<td>Arithmetic operators</td>
-<td>add  ,sub  , mul  ,truediv  ,floordiv  ,mod , divmod , pow , round round</td>
-</tr>
-<tr>
-<td>Reversed arithmetic operators</td>
-<td>radd , rsub , rmul , rtruediv, rfloordiv , rmod , rdivmod, rpow</td>
-</tr>
-<tr>
-<td>Augmented assignment mathmatic</td>
-<td>iadd , isub , imul , itruediv, ifloordiv</td>
-</tr>
-<tr>
-<td>Bitwise operators</td>
-<td>invert  , lshift  , rshift  , and  , or</td>
-</tr>
-<tr>
-<td>Reversed bitwise operators</td>
-<td>rlshift , rrshift , rand , rxor , ror</td>
-</tr>
-<tr>
-<td>Augmented assignment bitwise</td>
-<td>ilshift , irshift , iand , ixor , ior</td>
-</tr>
-</tbody>
-</table>
-<p>Why len Is Not a Method</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">因为对 不同类型并不是一定调用 __len__ , 对于基本类型查看 c struct 中长度，对于其他类型直接调用 __len__ , 这种区分对待</div><div class="line"></div><div class="line"><span class="comment">### 2.4 生成器</span></div><div class="line"></div><div class="line">```python</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">yield</span> <span class="number">1</span></div><div class="line">    <span class="keyword">yield</span> <span class="number">2</span></div><div class="line">    <span class="keyword">yield</span> <span class="number">3</span></div><div class="line">    <span class="comment"># 这里为了省事，标记 123, 但是一般会有个循环，或者多个循环</span></div><div class="line"></div><div class="line">gen <span class="comment"># &lt;function __main__.gen&gt;</span></div><div class="line"><span class="comment"># 显式调用，返回方法对象</span></div><div class="line">g = gen() <span class="comment"># &lt;generator object gen at 0x10ec23dc0&gt;</span></div><div class="line">next(g)</div><div class="line">next(g)</div><div class="line">next(g)</div><div class="line">next(g) <span class="comment"># 执行到结尾部分或者其他报错 StopIteration</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> gen():</div><div class="line">    print(i)</div></pre></td></tr></table></figure>
-<p>生成器的作用就在于将遍历 lazy 化。嗯？其实编写代码的时候完全不中写生成器也可以 lazy 化很多操作。</p>
-<p>需要注意的是，generator 后面支持了一个方法叫做 send(), 是 next() 的升级版本。将原来的数据的单向流通变成了双向流通。</p>
-<p>见 <a href="#423-协程">协程</a></p>
-<h2 id="0x03-中级概念"><a href="#0x03-中级概念" class="headerlink" title="0x03 中级概念"></a>0x03 中级概念</h2><h3 id="3-1-类和对象"><a href="#3-1-类和对象" class="headerlink" title="3.1 类和对象"></a>3.1 类和对象</h3><p>包含元编程</p>
-<h3 id="3-2-模块与包"><a href="#3-2-模块与包" class="headerlink" title="3.2 模块与包"></a>3.2 模块与包</h3><h3 id="3-3-错误-调试测试"><a href="#3-3-错误-调试测试" class="headerlink" title="3.3 错误 / 调试测试"></a>3.3 错误 / 调试测试</h3><h3 id="3-4-IO-编程"><a href="#3-4-IO-编程" class="headerlink" title="3.4 IO 编程"></a>3.4 IO 编程</h3><h3 id="3-5-正则表达式"><a href="#3-5-正则表达式" class="headerlink" title="3.5 正则表达式"></a>3.5 正则表达式</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">. ^ $ * + ? &#123; &#125; [ ] \ | ( )</div><div class="line"></div><div class="line">Regular String</div><div class="line"></div><div class="line">"ab*"</div><div class="line">"\\\\section"</div><div class="line">"\\w+\\s+\\1"</div><div class="line"></div><div class="line">Raw string</div><div class="line"></div><div class="line">r"ab*"</div><div class="line">r"\\section"</div><div class="line">r"\w+\s+\1"</div></pre></td></tr></table></figure>
-<h2 id="0x04-高级概念"><a href="#0x04-高级概念" class="headerlink" title="0x04 高级概念"></a>0x04 高级概念</h2><h3 id="4-1-元编程"><a href="#4-1-元编程" class="headerlink" title="4.1 元编程"></a>4.1 元编程</h3><h4 id="4-1-1-Dynamic-Attributes-and-Properties"><a href="#4-1-1-Dynamic-Attributes-and-Properties" class="headerlink" title="4.1.1 Dynamic Attributes and Properties"></a>4.1.1 Dynamic Attributes and Properties</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">obj.attr</div><div class="line"></div><div class="line">重写__getattr__</div><div class="line"></div><div class="line">// TODO: 什么时候完成 python 的 DICT 以及 JSON 的相等？</div><div class="line"></div><div class="line">accessor?</div><div class="line">__new__ 是一个 class method, 但是并没有 xxx</div><div class="line"></div><div class="line">x = Foo('a')</div><div class="line"></div><div class="line">def object_maker(the_class, some_arg):</div><div class="line">    new_object = the_class.__new__(some_arg)</div><div class="line">    if isinstance(new_object, the_class):</div><div class="line">        the_class.__init__(new_object, some_arg)</div><div class="line">    return new_object</div><div class="line"></div><div class="line">x = object_maker(Foo,'a')</div></pre></td></tr></table></figure>
-<h4 id="4-1-2-Attributes-Descriptors"><a href="#4-1-2-Attributes-Descriptors" class="headerlink" title="4.1.2 Attributes Descriptors"></a>4.1.2 Attributes Descriptors</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@property</span></div><div class="line"></div><div class="line">__class__ <span class="comment"># 接近 type()</span></div><div class="line">__dict__</div><div class="line">__slot__</div><div class="line"></div><div class="line">dir(obj) <span class="comment"># 与__dict__接近</span></div><div class="line">getattr</div><div class="line">setattr</div><div class="line">hasattr</div></pre></td></tr></table></figure>
-<h4 id="4-1-3-Class-MetaProgramming"><a href="#4-1-3-Class-MetaProgramming" class="headerlink" title="4.1.3 Class MetaProgramming"></a>4.1.3 Class MetaProgramming</h4><h3 id="4-2-并发编程"><a href="#4-2-并发编程" class="headerlink" title="4.2 并发编程"></a>4.2 并发编程</h3><h4 id="4-2-0-GIL-Global-Interpreter-Lock"><a href="#4-2-0-GIL-Global-Interpreter-Lock" class="headerlink" title="4.2.0 GIL - Global Interpreter Lock"></a>4.2.0 GIL - Global Interpreter Lock</h4><p>并不是所有的解释器语言都有 GIL （尽管 Python 和 Ruby 里面都有）, 也并不是没有尝试过去除 GIL, 但是每次去除都会导致单线程性能的下降。所以暂时保留。</p>
-<p>GIL 对程序中的影响：</p>
-<blockquote>
-<p>一个线程运行 Python , 而其他 N 个睡眠或者等待 I/O - <strong>同一时刻只有一个线程对共享资源进行存取</strong> , Python 线程也可以等待 threading.Lock 或者线程模块中的其他同步对象；</p>
-</blockquote>
-<h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><p>如果有两个线程，同时进行 IO 请求，当其中一个线程连接之后，立即会<strong>主动让出 GIL</strong>, 其他线程就可以运行。</p>
-<blockquote>
-<p>当 N 个线程在网络 I/O 堵塞，或等待重新获取 GIL，而一个线程运行 Python。</p>
-</blockquote>
-<p>让出之后还要执行代码呀，所以要有个收回 GIL 的动作。</p>
-<h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><p>Python 2 GIL , 尝试收回 GIL 为 执行 1000 字节码。<br>Python 3 GIL , 尝试收回 GIL 检测间隔为 15ms</p>
-<h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><p>原子操作：sort 之类不需要<br>非原子操作：n=n+2 的字节码分为 加载 n , 加载 2 , 相加，存储 n, 四个步骤，由于不是原子性，很可能被由于 15 ms 而被打断。</p>
-<p>当然，懒人一向是 : <strong>优先级不决加括号，线程不决加 lock</strong></p>
-<p>对于 Java, 程序员努力在尽可能短的时间内加锁存取共享数据，减轻线程的争夺，实现最大并行。但 Python 中，线程无法并行运行，细粒度的锁就没有了优势。</p>
-<h4 id="4-2-1-多线程"><a href="#4-2-1-多线程" class="headerlink" title="4.2.1 多线程"></a>4.2.1 多线程</h4><blockquote>
-<p>Python 多线程约等于并发。</p>
-</blockquote>
-<h4 id="4-2-2-多进程"><a href="#4-2-2-多进程" class="headerlink" title="4.2.2 多进程"></a>4.2.2 多进程</h4><h4 id="4-2-3-协程"><a href="#4-2-3-协程" class="headerlink" title="4.2.3 协程"></a>4.2.3 协程</h4><p>Python 中，协程在语法上接近于生成器（函数内包含 yield 关键字）.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 生成器</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">g</span><span class="params">()</span>:</span></div><div class="line">    <span class="keyword">yield</span> a</div><div class="line">    <span class="keyword">pass</span></div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 协程</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">c</span><span class="params">()</span>:</span></div><div class="line">    <span class="comment"># b = yield a</span></div><div class="line">    b = <span class="keyword">yield</span></div><div class="line">    <span class="keyword">pass</span></div></pre></td></tr></table></figure>
-<p>协程在</p>
-<h2 id="0x05-标准库与第三方库"><a href="#0x05-标准库与第三方库" class="headerlink" title="0x05 标准库与第三方库"></a>0x05 标准库与第三方库</h2><h3 id="5-1-数据结构与算法"><a href="#5-1-数据结构与算法" class="headerlink" title="5.1 数据结构与算法"></a>5.1 数据结构与算法</h3><h3 id="5-2-字符串与文本"><a href="#5-2-字符串与文本" class="headerlink" title="5.2 字符串与文本"></a>5.2 字符串与文本</h3><h3 id="5-3-数字日期与时间"><a href="#5-3-数字日期与时间" class="headerlink" title="5.3 数字日期与时间"></a>5.3 数字日期与时间</h3><h3 id="5-4-迭代器与生成器"><a href="#5-4-迭代器与生成器" class="headerlink" title="5.4 迭代器与生成器"></a>5.4 迭代器与生成器</h3><ol>
-<li>Introduction</li>
-<li>Built-in Functions</li>
-<li>Built-in Constants</li>
-<li>Built-in Types</li>
-<li>Built-in Exceptions</li>
-<li>Text Processing Services</li>
-<li>Binary Data Services</li>
-<li>Data Types</li>
-<li>Numeric and Mathematical Modules</li>
-<li>Functional Programming Modules</li>
-<li>File and Directory Access</li>
-<li>Data Persistence</li>
-<li>Data Compression and Archiving</li>
-<li>File Formats</li>
-<li>Cryptographic Services</li>
-<li>Generic Operating System Services</li>
-<li>Concurrent Execution</li>
-<li>Interprocess Communication and Networking</li>
-<li>Internet Data Handling</li>
-<li>Structured Markup Processing Tools</li>
-<li>Internet Protocols and Support</li>
-<li>Multimedia Services</li>
-<li>Internationalization</li>
-<li>Program Frameworks</li>
-<li>Graphical User Interfaces with Tk</li>
-<li>Development Tools</li>
-<li>Debugging and Profiling</li>
-<li>Software Packaging and Distribution</li>
-<li>Python Runtime Services</li>
-<li>Custom Python Interpreters</li>
-<li>Importing Modules</li>
-<li>Python Language Services</li>
-<li>Miscellaneous Services</li>
-<li>MS Windows Specific Services</li>
-<li>Unix Specific Services</li>
-<li>Superseded Modules</li>
-<li>Undocumented Modules</li>
-</ol>
-<h2 id="0x06-可维护性代码"><a href="#0x06-可维护性代码" class="headerlink" title="0x06 可维护性代码"></a>0x06 可维护性代码</h2><h3 id="社区推崇的代码风格-Pythonic"><a href="#社区推崇的代码风格-Pythonic" class="headerlink" title="社区推崇的代码风格 Pythonic"></a>社区推崇的代码风格 Pythonic</h3><pre><code>The Zen of Python, by Tim Peters
-
-Beautiful is better than ugly.
-Explicit is better than implicit.
-Simple is better than complex.
-Complex is better than complicated.
-Flat is better than nested.
-Sparse is better than dense.
-Readability counts.
-Special cases aren&apos;t special enough to break the rules.
-Although practicality beats purity.
-Errors should never pass silently.
-Unless explicitly silenced.
-In the face of ambiguity, refuse the temptation to guess.
-There should be one-- and preferably only one --obvious way to do it.
-Although that way may not be obvious at first unless you&apos;re Dutch.
-Now is better than never.
-Although never is often better than *right* now.
-If the implementation is hard to explain, it&apos;s a bad idea.
-If the implementation is easy to explain, it may be a good idea.
-Namespaces are one honking great idea -- let&apos;s do more of those!
-</code></pre><h4 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h4><ul>
-<li>外部<strong>不该</strong>引用 protected member （单下划线）</li>
-<li>lambda 为一次使用，最好不要赋值。</li>
-<li>不要给 buildin 函数赋值</li>
-<li>py3 直接 super()</li>
-<li>for in else 如果不内置 break 则出会在最后 for in 为 empty 的时候再执行 else 中的语句</li>
-<li>context exit 如果不 catch 掉异常让其自然向上一级抛出错误的话，必须为 (self, exception_type, exception_value, traceback):</li>
-<li>不要在 init 里面 return 数据</li>
-<li>不要混用 tab 和 space</li>
-<li>4 个 space 缩进</li>
-<li>staticmethod 直接是 参数，classmethod 第一个参数为 cls</li>
-<li>可变的 default value 是不能作为 参数的。（可能是解释器在确定函数的定义的时候完成赋值？)</li>
-<li>遵循 exception hierachy <a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy" target="_blank" rel="external">https://docs.python.org/3/library/exceptions.html#exception-hierarchy</a></li>
-<li>defaultdict defaultdict(lambda : 6) , 必须 callable</li>
-<li>尽量 unpack 赋值</li>
-<li>字典用获取用 get(“myk”,None) , 赋值用 dictionary.setdefault(“list”, []).append(“list_item”)</li>
-</ul>
-<h4 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h4><ul>
-<li>避免使用 import * , 我觉得这点值得商榷 , 如果是某个模块下，完全可以先把模块拆分成多个，最后 import 进来，接着使用 all.</li>
-<li>getxxx 获取实际值，如果不为实际值，返回 None 显然不如 try catch 来的实在。</li>
-<li>避免使用 global</li>
-<li>命名要注意</li>
-<li>动态创建方法 , 我觉得这点值得商榷。</li>
-</ul>
-<h4 id="可读性"><a href="#可读性" class="headerlink" title="可读性"></a>可读性</h4><ul>
-<li>不要检查，如果可能有异常，尽量抛出异常来 trycatch 解决。</li>
-<li>a is None , if flag</li>
-<li>isinstance , not type(r) is types.ListType</li>
-<li>“{name}{city}”.format(**info_dict)</li>
-<li>for k , v in infodict.items()</li>
-<li>使用 poiinfo = namedtuple(“poiinfo”,[“name”,”lng”,”lat”]) 返回 poiinfo[‘上海’,121.00,23] 最后返回值打印 poi.name , poi.lng , poi lat</li>
-<li>for numbers_value, letters_value in zip(numbers, letters):</li>
-<li>enumerate</li>
-<li>如果能用 listcomp 则不使用 map 和 filter</li>
-</ul>
-<h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><ul>
-<li>用 set</li>
-<li>d.iteritems() 比 items() 省内存</li>
-</ul>
-<h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
-<li><strong>2017-05-11 19:43:00</strong> : 增加代码质量模块</li>
-<li><strong>2017-08-04 19:43:00</strong> : 增加部分 Fluent Python 的笔记</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。&lt;/p&gt;
-&lt;h2 id=&quot;0x01-Python-胡论&quot;&gt;&lt;a href=&quot;#0x01-Python-胡论&quot; class=&quot;headerlink&quot; title=&quot;0x01 Python 胡论&quot;&gt;&lt;/a&gt;0x01 Python 胡论&lt;/h2&gt;&lt;h3 id=&quot;1-1-Python-的独一无二性&quot;&gt;&lt;a href=&quot;#1-1-Python-的独一无二性&quot; class=&quot;headerlink&quot; title=&quot;1.1 Python 的独一无二性&quot;&gt;&lt;/a&gt;1.1 Python 的独一无二性&lt;/h3&gt;&lt;p&gt;是要用一门编程语言无非是两种原因：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;这门技术很火，能挣钱&lt;/li&gt;
-&lt;li&gt;写起来很舒服，开发效率高&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这也是我在涉猎了很多编程语言为什么选择了 Python 和 TypeScript 作为自己的主要技能树。&lt;/p&gt;
-&lt;p&gt;Python 具备这两点，TS （更加准确的说是 JavaScript）具备前一点。&lt;/p&gt;
-&lt;p&gt;Python 写起来真的特别舒服，语法简洁，第三方库丰富，而且也比较火。&lt;/p&gt;
-&lt;p&gt;有什么东西比，写代码效率高、生态圈好还重要了。&lt;/p&gt;
-&lt;p&gt;生态圈好，比如&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Web 开发用 Django/Flask&lt;/li&gt;
-&lt;li&gt;数据抓取用 Requests&lt;/li&gt;
-&lt;li&gt;数据分析清洗用 Pandas&lt;/li&gt;
-&lt;li&gt;机器学习 Tensorflow SCIPY&lt;/li&gt;
-&lt;/ul&gt;
-    
-    </summary>
-    
-      <category term="Python 黑魔法" scheme="http://twocucao.xyz/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/"/>
-    
-    
-      <category term="随笔" scheme="http://twocucao.xyz/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-      <category term="重构技巧" scheme="http://twocucao.xyz/tags/%E9%87%8D%E6%9E%84%E6%8A%80%E5%B7%A7/"/>
-    
-      <category term="编程语言" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ReThinking In JavaScript</title>
-    <link href="http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/"/>
-    <id>http://twocucao.xyz/2017/07/04/RethinkingInJavaScript/</id>
-    <published>2017-07-04T12:08:21.000Z</published>
-    <updated>2018-01-28T01:28:57.401Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。</p>
-<a id="more"></a>
-<h3 id="1-为什么是-JavaScript"><a href="#1-为什么是-JavaScript" class="headerlink" title="1. 为什么是 JavaScript"></a>1. 为什么是 JavaScript</h3><p>为什么是 JavaScript 呢？</p>
-<p>因为太火，不得不认真学习一下。</p>
-<p>我本人对 JavaScript 这种语言是有偏见的，这点我不会掩饰，我始终记得在正常的语言 Python / Java / C# 中实现一个休眠的简单功能和在 JS 中实现一个休眠功能的差别。</p>
-<p>在 Python 中有很多语法糖，内置数据结构丰富，而 JS 则并不是如此，数据类型相对少，Bool 判断混乱，而今天，这门混乱的语言在流行程度上几乎接近于 Java 这门语言，即便是存在这样或者那样的问题，JavaScript 依然是一种奇葩的王者。</p>
-<p>在服务端，有多少功能是 Python 完不成而 JavaScript（即 NodeJS) 可以胜任的呢？而且，NodeJS 写起来的感觉比起 Python 来说，还是差了很多，所以，我比较倾向于把计算类和 IO 类的操作用 Python 来写，至于浏览器端就交给 JavaScript 好了。</p>
-<p>那么，对 JS 的这种定位，也使得我对 JS 生态圈的掌握程度不会超过 Vue/React 系。</p>
-<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><h4 id="2-1-浏览器端"><a href="#2-1-浏览器端" class="headerlink" title="2.1. 浏览器端"></a>2.1. 浏览器端</h4><h4 id="2-2-桌面端"><a href="#2-2-桌面端" class="headerlink" title="2.2. 桌面端"></a>2.2. 桌面端</h4><h4 id="2-3-客户端"><a href="#2-3-客户端" class="headerlink" title="2.3. 客户端"></a>2.3. 客户端</h4><h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><ul>
-<li>Number （没有 INT 值，只有 double-precision 64-bit format IEEE 754 ）</li>
-<li>String</li>
-<li>Boolean</li>
-<li>Symbol (new in ES2015)</li>
-<li>Object<ul>
-<li>Function</li>
-<li>Array</li>
-<li>Date</li>
-<li>RegExp</li>
-</ul>
-</li>
-<li>null</li>
-<li>undefined</li>
-</ul>
-<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
-<li><strong>2017-07-05 19:43:00</strong> : 初始化本文</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00. 前言&quot;&gt;&lt;/a&gt;0x00. 前言&lt;/h2&gt;&lt;p&gt;JavaScript 这门语言已经不容小觑了，在项目中的前端部分基于 VueJS 和 ElementUI 之后，我也就顺应历史潮流深入了解了一下这门不容小觑的语言。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="进击的 JavaScript" scheme="http://twocucao.xyz/categories/%E8%BF%9B%E5%87%BB%E7%9A%84-JavaScript/"/>
-    
-    
-      <category term="随笔" scheme="http://twocucao.xyz/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-      <category term="重构技巧" scheme="http://twocucao.xyz/tags/%E9%87%8D%E6%9E%84%E6%8A%80%E5%B7%A7/"/>
-    
-      <category term="编程语言" scheme="http://twocucao.xyz/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Vim Cheatsheet</title>
-    <link href="http://twocucao.xyz/2017/06/23/VimCheatSheet/"/>
-    <id>http://twocucao.xyz/2017/06/23/VimCheatSheet/</id>
-    <published>2017-06-23T11:48:00.000Z</published>
-    <updated>2018-01-30T09:27:08.132Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中 Vim 使用场景。</p>
-<p>不定期更新。</p>
-<a id="more"></a>
-<ul>
-<li>配置</li>
-<li>基本使用技巧</li>
-<li>原生 Tips &amp; Hacks</li>
-<li>Vim 必备插件</li>
-</ul>
-<h2 id="0x01-配置"><a href="#0x01-配置" class="headerlink" title="0x01 配置"></a>0x01 配置</h2><p>原先使用 k-vim 进行日常的编辑，然后依据自己的一些需求进行微调为 c-vim 。</p>
-<p><a href="https://github.com/twocucao/c-vim" target="_blank" rel="external">https://github.com/twocucao/c-vim</a></p>
-<h2 id="0x02-基本使用技巧"><a href="#0x02-基本使用技巧" class="headerlink" title="0x02 基本使用技巧"></a>0x02 基本使用技巧</h2><h3 id="2-1-Insert-Mode"><a href="#2-1-Insert-Mode" class="headerlink" title="2.1 Insert Mode"></a>2.1 Insert Mode</h3><ul>
-<li>c-w 向后删除一个 word</li>
-<li>c-h 向后删除一个 char</li>
-</ul>
-<h3 id="2-2-Normal-Mode"><a href="#2-2-Normal-Mode" class="headerlink" title="2.2 Normal Mode"></a>2.2 Normal Mode</h3><ul>
-<li>gi 返回上次修改地点</li>
-<li>d% 剪切包含括号的括号内部内容</li>
-<li>U 恢复单个句子</li>
-<li>在命令状态下按 c-d 可以查看所有命令，相当于 bash 下面的 tabtab</li>
-<li>hjkl 左下上右</li>
-<li>EasyMotion 使用这个就可以代替乱七八糟的快速移动了。这是一个可以给当前的文字立即用打上 tag, 这样的话在 normal 情况下输入，,w  然后就可以看到很多 tag, 输入其中的 tag 就可以立即跳转到相应的 tag.</li>
-<li>insert 状态进行编辑 c-h c-w 删除一个字，删除一个词。</li>
-<li>normal 状态下进行删除 x dd  —— 删除一个字，剪切一行。</li>
-<li>. ..  —— 重复操作</li>
-<li><blockquote>
-<p>&lt;   —— 缩进 &gt;G <g <g="">g</g></p>
-</blockquote>
-</li>
-<li>c-b c-f back forth</li>
-<li>c-n c-p 代码补全，tips, 建议标点符号全部半角花，这样就会吧每段连起来的汉字当成一个单词，这样就可以减少输入代码。</li>
-<li><blockquote>
-<p>indent</p>
-</blockquote>
-</li>
-<li>&lt; outdent</li>
-<li>do it (&gt;)</li>
-<li>repeat (.)</li>
-<li>reverse (u)</li>
-<li>f{char}</li>
-<li>repeat ;</li>
-<li>reverse ,</li>
-</ul>
-<h3 id="2-3-Command-Mode"><a href="#2-3-Command-Mode" class="headerlink" title="2.3 Command Mode"></a>2.3 Command Mode</h3><p>:%s/old/new/gc 可以一行一行查看</p>
-<h3 id="2-4-Visual-Mode"><a href="#2-4-Visual-Mode" class="headerlink" title="2.4 Visual Mode"></a>2.4 Visual Mode</h3><p>vib - 选框内<br>vi” - “” 内部<br>vi’ - ‘’ 内部<br>ggVG</p>
-<h3 id="2-5-窗口管理"><a href="#2-5-窗口管理" class="headerlink" title="2.5 窗口管理"></a>2.5 窗口管理</h3><p>切换窗口：Ctrl+w+hjkl<br>分割窗口：Ctrl+w+vs<br>关闭窗口：Ctrl+w+q</p>
-<h2 id="0x03-原生-Tips-amp-Hacks"><a href="#0x03-原生-Tips-amp-Hacks" class="headerlink" title="0x03 原生 Tips &amp; Hacks"></a>0x03 原生 Tips &amp; Hacks</h2><h3 id="行处理"><a href="#行处理" class="headerlink" title="行处理"></a>行处理</h3><h4 id="行排序"><a href="#行排序" class="headerlink" title="行排序"></a>行排序</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">行排序</div><div class="line">sort r /【.\+】/</div><div class="line">sort u</div><div class="line">sort n</div><div class="line">sort</div><div class="line">sort!</div><div class="line">g/start/+1,/end/-1 sort n</div><div class="line"></div><div class="line">:%!column -t</div><div class="line">:%!sort -k2nr</div></pre></td></tr></table></figure>
-<h4 id="行删除"><a href="#行删除" class="headerlink" title="行删除"></a>行删除</h4><p>删除 html 标签</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">:%s/&lt;\_.\&#123;-1,\&#125;&gt;//g</div></pre></td></tr></table></figure>
-<h4 id="删除空行"><a href="#删除空行" class="headerlink" title="删除空行"></a>删除空行</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">:g/^$/d</div><div class="line">:g/^\s*$/d</div><div class="line">:%s/\n\&#123;3,&#125;/\r\r/e</div><div class="line">:g/^[ \t\u3000]*$/d</div><div class="line"></div><div class="line">:g/pattern/d</div><div class="line">:g!/pattern/d</div><div class="line"></div><div class="line">:g/pattern/t$</div><div class="line">:g/pattern/m$</div><div class="line">:s/ \&#123;2,&#125;/ /g</div></pre></td></tr></table></figure>
-<p>Use \r instead of \n</p>
-<h2 id="0x04-Vim-必备插件"><a href="#0x04-Vim-必备插件" class="headerlink" title="0x04 Vim 必备插件"></a>0x04 Vim 必备插件</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中 Vim 使用场景。&lt;/p&gt;
-&lt;p&gt;不定期更新。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="编程利器" scheme="http://twocucao.xyz/categories/%E7%BC%96%E7%A8%8B%E5%88%A9%E5%99%A8/"/>
-    
-    
-      <category term="效率" scheme="http://twocucao.xyz/tags/%E6%95%88%E7%8E%87/"/>
-    
-      <category term="工作自动化" scheme="http://twocucao.xyz/tags/%E5%B7%A5%E4%BD%9C%E8%87%AA%E5%8A%A8%E5%8C%96/"/>
-    
-      <category term="Cheatsheet" scheme="http://twocucao.xyz/tags/Cheatsheet/"/>
-    
-      <category term="Vim" scheme="http://twocucao.xyz/tags/Vim/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git CheatSheet</title>
-    <link href="http://twocucao.xyz/2017/06/15/GitCheatSheet/"/>
-    <id>http://twocucao.xyz/2017/06/15/GitCheatSheet/</id>
-    <published>2017-06-15T12:46:00.000Z</published>
-    <updated>2017-12-19T03:42:02.104Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="如何优雅地使用-Git"><a href="#如何优雅地使用-Git" class="headerlink" title="如何优雅地使用 Git"></a>如何优雅地使用 Git</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>Git 是一种分布式版本管理工具。</p>
-<h2 id="0x01-Git-命令范论"><a href="#0x01-Git-命令范论" class="headerlink" title="0x01 Git 命令范论"></a>0x01 Git 命令范论</h2><ol>
-<li>基础命令 （本地修改类）</li>
-<li>合作命令 （本地与仓库类）</li>
-<li>综合命令</li>
-<li>管理命令</li>
-</ol>
-<p>前两种命令是入门 Git 的程序员都必须要会的。</p>
-<p>而队伍里的技术管理人员必须要会前三。</p>
-<h3 id="1-1-基础命令"><a href="#1-1-基础命令" class="headerlink" title="1.1 基础命令"></a>1.1 基础命令</h3><ul>
-<li>git-init(1) to create a new repository.</li>
-<li>git-log(1) to see what happened.</li>
-<li>git-checkout(1) and git-branch(1) to switch branches.</li>
-<li>git-add(1) to manage the index file.</li>
-<li>git-diff(1) and git-status(1) to see what you are in the middle of doing.</li>
-<li>git-commit(1) to advance the current branch.</li>
-<li>git-reset(1) and git-checkout(1) (with pathname parameters) to undo changes.</li>
-<li>git-merge(1) to merge between local branches.</li>
-<li>git-rebase(1) to maintain topic branches.</li>
-<li>git-tag(1) to mark a known point.</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">$ tar zxf frotz.tar.gz</div><div class="line">$ <span class="built_in">cd</span> frotz</div><div class="line">$ git init</div><div class="line">$ git add . (1)</div><div class="line">$ git commit -m <span class="string">"import of frotz source tree."</span></div><div class="line">$ git tag v2.43 (2)</div><div class="line"></div><div class="line">$ git checkout -b alsa-audio (1)</div><div class="line">$ edit/compile/<span class="built_in">test</span></div><div class="line">$ git checkout -- curses/ux_audio_oss.c (2) <span class="comment"># 恢复文件</span></div><div class="line">$ git add curses/ux_audio_alsa.c (3)</div><div class="line">$ edit/compile/<span class="built_in">test</span></div><div class="line">$ git diff HEAD (4) <span class="comment"># 查看提交了哪些修改</span></div><div class="line">$ git commit <span class="_">-a</span> <span class="_">-s</span> (5) <span class="comment"># 提交所有</span></div><div class="line">$ edit/compile/<span class="built_in">test</span></div><div class="line">$ git diff HEAD^ (6) <span class="comment"># 查看所有变化，包含之前的 commit</span></div><div class="line">$ git commit <span class="_">-a</span> --amend (7) <span class="comment"># 修订前一个 commit, 把所有的新变化提交到</span></div><div class="line">$ git checkout master (8)</div><div class="line">$ git merge alsa-audio (9)</div><div class="line">$ git <span class="built_in">log</span> --since=<span class="string">'3 days ago'</span> (10)</div><div class="line">$ git <span class="built_in">log</span> v2.43.. curses/ (11)</div></pre></td></tr></table></figure>
-<h3 id="1-2-合作命令"><a href="#1-2-合作命令" class="headerlink" title="1.2 合作命令"></a>1.2 合作命令</h3><ul>
-<li>git-clone(1) from the upstream to prime your local repository.</li>
-<li>git-pull(1) and git-fetch(1) from “origin” to keep up-to-date with the upstream.</li>
-<li>git-push(1) to shared repository, if you adopt CVS style shared repository workflow.</li>
-<li>git-format-patch(1) to prepare e-mail submission, if you adopt Linux kernel-style public forum workflow.</li>
-<li>git-send-email(1) to send your e-mail submission without corruption by your MUA.</li>
-<li>git-request-pull(1) to create a summary of changes for your upstream to pull.</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="comment">## clone 修改 提交</span></div><div class="line">$ git <span class="built_in">clone</span> git://git.kernel.org/pub/scm/.../torvalds/linux-2.6 my2.6</div><div class="line">$ <span class="built_in">cd</span> my2.6</div><div class="line">$ git checkout -b mine master (1)</div><div class="line">$ edit/compile/<span class="built_in">test</span>; git commit <span class="_">-a</span> <span class="_">-s</span> (2)</div><div class="line">$ git format-patch master (3)</div><div class="line">$ git send-email --to=<span class="string">"person &lt;email@example.com&gt;"</span> 00*.patch (4)</div><div class="line">$ git checkout master (5)</div><div class="line">$ git pull (6)</div><div class="line">$ git <span class="built_in">log</span> -p ORIG_HEAD.. arch/i386 include/asm-i386 (7) <span class="comment"># 查看感兴趣的部分</span></div><div class="line">$ git ls-remote --heads http://git.kernel.org/.../jgarzik/libata-dev.git (8) <span class="comment"># 查看分支</span></div><div class="line">$ git pull git://git.kernel.org/pub/.../jgarzik/libata-dev.git ALL (9) <span class="comment"># 从一个特地</span></div><div class="line">$ git reset --hard ORIG_HEAD (10) <span class="comment"># 撤销 pull</span></div><div class="line">$ git gc (11) <span class="comment"># garbage collect leftover objects from reverted pull</span></div><div class="line"><span class="comment"># 推送到其他 repo</span></div><div class="line"></div><div class="line">satellite$ git <span class="built_in">clone</span> mothership:frotz frotz (1)</div><div class="line">satellite$ <span class="built_in">cd</span> frotz</div><div class="line">satellite$ git config --get-regexp <span class="string">'^(remote|branch)\.'</span> (2)</div><div class="line">remote.origin.url mothership:frotz</div><div class="line">remote.origin.fetch refs/heads/*:refs/remotes/origin/*</div><div class="line">branch.master.remote origin</div><div class="line">branch.master.merge refs/heads/master</div><div class="line">satellite$ git config remote.origin.push \</div><div class="line">            +refs/heads/*:refs/remotes/satellite/* (3)</div><div class="line">satellite$ edit/compile/<span class="built_in">test</span>/commit</div><div class="line">satellite$ git push origin (4)</div><div class="line"></div><div class="line">mothership$ <span class="built_in">cd</span> frotz</div><div class="line">mothership$ git checkout master</div><div class="line">mothership$ git merge satellite/master (5)</div><div class="line"></div><div class="line">           1. mothership machine has a frotz repository under your home directory; <span class="built_in">clone</span> from it to start a repository on the satellite machine.</div><div class="line">           2. <span class="built_in">clone</span> sets these configuration variables by default. It arranges git pull to fetch and store the branches of mothership machine to <span class="built_in">local</span> remotes/origin/* remote-tracking</div><div class="line">           branches.</div><div class="line">           3. arrange git push to push all <span class="built_in">local</span> branches to their corresponding branch of the mothership machine.</div><div class="line">           4. push will stash all our work away on remotes/satellite/* remote-tracking branches on the mothership machine. You could use this as a back-up method. Likewise, you can</div><div class="line">           pretend that mothership <span class="string">"fetched"</span> from you (useful when access is one sided).</div><div class="line">           5. on mothership machine, merge the work <span class="keyword">done</span> on the satellite machine into the master branch.</div><div class="line"></div><div class="line">       Branch off of a specific tag.</div><div class="line"></div><div class="line">               $ git checkout -b private2.6.14 v2.6.14 (1)</div><div class="line">               $ edit/compile/<span class="built_in">test</span>; git commit <span class="_">-a</span></div><div class="line">               $ git checkout master</div><div class="line">               $ git cherry-pick v2.6.14..private2.6.14 (2)</div><div class="line"></div><div class="line">           1. create a private branch based on a well known (but somewhat behind) tag.</div><div class="line">           2. forward port all changes <span class="keyword">in</span> private2.6.14 branch to master branch without a formal <span class="string">"merging"</span>. Or longhand git format-patch -k -m --stdout v2.6.14..private2.6.14 | git am -3</div><div class="line">           -k</div></pre></td></tr></table></figure>
-<h3 id="1-3-综合个体"><a href="#1-3-综合个体" class="headerlink" title="1.3 综合个体"></a>1.3 综合个体</h3><h3 id="1-4-仓库管理"><a href="#1-4-仓库管理" class="headerlink" title="1.4 仓库管理"></a>1.4 仓库管理</h3><p>安装完毕之后，cmd-s-p shell command install</p>
-<h2 id="0x02-Git-Hacks"><a href="#0x02-Git-Hacks" class="headerlink" title="0x02 Git Hacks"></a>0x02 Git Hacks</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 搜索代码的变化</span></div><div class="line">git <span class="built_in">log</span> -S<span class="string">'&lt;a term in the source&gt;'</span></div><div class="line"><span class="comment"># 放弃本地修改，与远程同步</span></div><div class="line">git fetch origin &amp;&amp; git reset --hard origin/master &amp;&amp; git clean <span class="_">-f</span> <span class="_">-d</span></div><div class="line"><span class="comment"># 列出所有冲突文件</span></div><div class="line">git diff --name-only --diff-filter=U</div><div class="line"></div><div class="line"><span class="comment"># 手贱错误提交，但是没有 push</span></div><div class="line">git commit -m <span class="string">"Something terribly misguided"</span>              (1)</div><div class="line">git reset HEAD~                                           (2)</div><div class="line"><span class="comment"># edit needing changed files</span></div><div class="line">git add needing changed files                             (4)</div><div class="line">git commit -c ORIG_HEAD                                   (5)</div><div class="line"></div><div class="line"><span class="comment"># Delete all changes in the Git repository, but leave unstaged things</span></div><div class="line">git checkout .</div><div class="line"><span class="comment"># Delete all changes in the Git repository, including untracked files</span></div><div class="line">git clean <span class="_">-f</span></div></pre></td></tr></table></figure>
-<h2 id="0x03-Git-和-我的-Workflow"><a href="#0x03-Git-和-我的-Workflow" class="headerlink" title="0x03 Git 和 我的 Workflow"></a>0x03 Git 和 我的 Workflow</h2><p>一切工具都是为思路服务。</p>
-<h2 id="0xEE-扩展阅读"><a href="#0xEE-扩展阅读" class="headerlink" title="0xEE 扩展阅读"></a>0xEE 扩展阅读</h2>]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;如何优雅地使用-Git&quot;&gt;&lt;a href=&quot;#如何优雅地使用-Git&quot; class=&quot;headerlink&quot; title=&quot;如何优雅地使用 Git&quot;&gt;&lt;/a&gt;如何优雅地使用 Git&lt;/h1&gt;&lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; c
-    
-    </summary>
-    
-      <category term="编程利器" scheme="http://twocucao.xyz/categories/%E7%BC%96%E7%A8%8B%E5%88%A9%E5%99%A8/"/>
-    
-    
-      <category term="数据分析" scheme="http://twocucao.xyz/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"/>
     
   </entry>
   

@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2018/02/10/ElasticSearchCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。 不定期更新。 最早使用 ElasticSearch 是两年前了。最近准备用 Django 写一个全栈式的应用，借用强大的 ES 来做搜索。这是我在写程序之余写这篇文章的原因。 官网介绍 ElasticSearch 不仅仅是全文搜索，也可以结构化搜索（这里用结构化查询会更">
-<meta property="og:updated_time" content="2018-02-15T02:51:44.248Z">
+<meta property="og:updated_time" content="2018-02-15T08:48:36.804Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ElasticSearch CheatSheet">
 <meta name="twitter:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。 不定期更新。 最早使用 ElasticSearch 是两年前了。最近准备用 Django 写一个全栈式的应用，借用强大的 ES 来做搜索。这是我在写程序之余写这篇文章的原因。 官网介绍 ElasticSearch 不仅仅是全文搜索，也可以结构化搜索（这里用结构化查询会更">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,025
+                  3,510
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  11
+                  13
                 </span>
               
             </div>
@@ -509,6 +509,7 @@
 <li>匹配同义词</li>
 <li>….</li>
 </ol>
+<p>可以定义字段的时候可以指定 analyzer（索引时） 与 search_analyzer（查询时）</p>
 <p>先看经过第一步之后，就可以进入第二步形成倒排索引了，此时，倒排索引之于 ElasticSearch 可以类比于 btree 之于 MySQL 或者 Gist 之于 PostgreSQL.</p>
 <p>那么，倒排索引包含哪些东西呢？</p>
 <ul>
@@ -543,7 +544,11 @@
 <li>第一步：<strong>文本经过 analyzer 处理</strong></li>
 <li>第二步：<strong>查询倒排索引</strong></li>
 </ul>
-<h4 id="停止词"><a href="#停止词" class="headerlink" title="停止词"></a>停止词</h4><p>使用停止词是减少索引大小的一种方式，那么，哪些词语可以呗当做停止词呢？</p>
+<h4 id="3-全文搜索调优之中文分词"><a href="#3-全文搜索调优之中文分词" class="headerlink" title="3. 全文搜索调优之中文分词"></a>3. 全文搜索调优之中文分词</h4><p>如何扩展分词词典呢？</p>
+<blockquote>
+<p>TODO: 这个话题可能比较大，先挖坑，以后填</p>
+</blockquote>
+<h4 id="4-全文搜索调优之停止词"><a href="#4-全文搜索调优之停止词" class="headerlink" title="4. 全文搜索调优之停止词"></a>4. 全文搜索调优之停止词</h4><p>使用停止词是减少索引大小的一种方式（减小索引效果不明显），那么，哪些词语可以呗当做停止词呢？</p>
 <p>低频词语：低频词语具备高权重<br>高频词语：高频词语具备低权重</p>
 <p>当然，是否是高频词语依据个人经验主要依据两点来判断：</p>
 <ul>
@@ -557,7 +562,7 @@
 <li>假如停止词里面包含了或，那么，如果有个乐队名字叫做『或或』, 则搜索不出来。</li>
 <li>假如停止词里面包含了 to / be / not / or , 则莎士比亚的名言 『To be, or not to be』 则搜索不出来。</li>
 </ul>
-<h4 id="同义词"><a href="#同义词" class="headerlink" title="同义词"></a>同义词</h4><p>同义词也有很多种：</p>
+<h4 id="5-全文搜索调优之同义词"><a href="#5-全文搜索调优之同义词" class="headerlink" title="5. 全文搜索调优之同义词"></a>5. 全文搜索调优之同义词</h4><p>同义词也有很多种：</p>
 <ol>
 <li>平级关系：插、戳、刺、扎</li>
 <li>包含关系：成人包含男人和女人</li>
@@ -602,7 +607,7 @@
 </tbody>
 </table>
 <p>由此可见，大部分场景下的索引时如果没有特别的需求，慎用同义词。</p>
-<h4 id="typoes-和拼写错误"><a href="#typoes-和拼写错误" class="headerlink" title="typoes 和拼写错误"></a>typoes 和拼写错误</h4><p>有的时候，用户也会输入错误：</p>
+<h4 id="6-全文搜索调优之拼写错误"><a href="#6-全文搜索调优之拼写错误" class="headerlink" title="6. 全文搜索调优之拼写错误"></a>6. 全文搜索调优之拼写错误</h4><p>有的时候，用户也会输入错误：</p>
 <ul>
 <li>口误，把『周杰伦』拼成『周杰棍』</li>
 </ul>
@@ -630,18 +635,53 @@
 <blockquote>
 <p>依据 TF/IDF 的高频低权重，低频高权重的计算方式，<strong>周杰棍由于出现次数极少，反而获得了极高的权重。</strong></p>
 </blockquote>
-<p>所以，一般情况下还是建议作为：</p>
+<p>所以，一般情况下还是建议做为下面两个问题的解决方案：</p>
 <ul>
-<li>search as you type : completion suggester</li>
-<li>did you mean : phrase suggester</li>
+<li>Search as you type : completion suggester</li>
+<li>Did you mean : phrase suggester</li>
 </ul>
-<h3 id="3-3-全文搜索的-ES-解决方案"><a href="#3-3-全文搜索的-ES-解决方案" class="headerlink" title="3.3 全文搜索的 ES 解决方案"></a>3.3 全文搜索的 ES 解决方案</h3><blockquote>
+<h4 id="7-全文搜索调优之相关性"><a href="#7-全文搜索调优之相关性" class="headerlink" title="7. 全文搜索调优之相关性"></a>7. 全文搜索调优之相关性</h4><p>我们在接触 RDBMS 的时候系统是没有相关性的说法的，比如说，2017 年 12 月份 xxx 用户的订单，就是直接 select 出来这些订单。因为 where 语句后面包含了界限明确的条件，而全文搜索则不然。</p>
+<p>全文搜索不仅仅找到匹配的 documents, 并且按照相关性进行排序（其实就是打分 score)。</p>
+<p>为什么需要打分呢？从相亲角度来说，上海内环有房肯定是个超级大加分项。同样是录入信息，在上海内环有房的权重值可是设置的高一些。</p>
+<p>Elasticsearch 中使用的计算 score 的公式叫做 practical scoring function, 这个公式借鉴于 TF/TDF 以及 矢量空间模型，但有更多的特征比如，条件罂粟，字段长度正态化，term / query clause boosting</p>
+<h5 id="索引时三因素"><a href="#索引时三因素" class="headerlink" title="索引时三因素"></a>索引时三因素</h5><p>先看前两个因素 TF/IDF</p>
+<ul>
+<li>tf(t in d) = sqrt(frequency)</li>
+<li>idf(t) = 1 + log (numDocs / (docFreq + 1))</li>
+</ul>
+<p>再看后一个因素 Field-Length norm</p>
+<p>标题越短，这个词对这个 field 的代表性越强</p>
+<ul>
+<li>norm(d) = 1 / sqrt(numTerms)</li>
+</ul>
+<h5 id="查询时"><a href="#查询时" class="headerlink" title="查询时"></a>查询时</h5><p>几个词 -&gt; 几维度 -&gt; 寻求最佳匹配以及近似匹配</p>
+<ul>
+<li>最佳匹配应该是通过计算长度（应该是，但不确定）</li>
+<li>近似匹配，计算距离最近的 cos 值。</li>
+</ul>
+<h5 id="计算公式"><a href="#计算公式" class="headerlink" title="计算公式"></a>计算公式</h5><p>这个公式调优的时候需要用到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">score(q,d)  = queryNorm(q)</div><div class="line">                ·coord(q,d)</div><div class="line">                ·∑(tf(t <span class="keyword">in</span> d)·idf(t)²·t.getBoost()·norm(t,d)) (t <span class="keyword">in</span> q)</div></pre></td></tr></table></figure>
+<h2 id="0x05-搜索语法"><a href="#0x05-搜索语法" class="headerlink" title="0x05 搜索语法"></a>0x05 搜索语法</h2><p>Single document APIs</p>
+<ul>
+<li>Index API</li>
+<li>Get API</li>
+<li>Delete API</li>
+<li>Update API</li>
+<li>Multi-document APIs</li>
+</ul>
+<p>Multi Get API</p>
+<ul>
+<li>Bulk API</li>
+<li>Delete By Query API</li>
+<li>Update By Query API</li>
+<li>Reindex API</li>
+</ul>
+<blockquote>
 <p>TODO: 全文搜索 RDBMS like 的效率问题。</p>
 </blockquote>
 <p>全文搜索包含两个重要方面：</p>
 <ul>
-<li>相关性：通过 TF/IDF , 距离 , 模糊相似度，以及其他算法</li>
-<li><p>分析：将大片文字转为 distinct, normalized tokens</p>
+<li><p>相关性：通过 TF/IDF , 距离 , 模糊相似度，以及其他算法</p>
 </li>
 <li><p>Term-Based : term or fuzzy</p>
 </li>
@@ -652,8 +692,6 @@
 <p>加上 constant_score 和 filter 的话，就成了常亮？麻痹的，这两个又是啥</p>
 </blockquote>
 <p> inverted index</p>
-<p>内部过滤操作：</p>
-<p>1.</p>
 <h2 id="0x05-调试"><a href="#0x05-调试" class="headerlink" title="0x05 调试"></a>0x05 调试</h2><p>查看 analyzer 的效果<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">GET /my_index/_analyze</div><div class="line">&#123;</div><div class="line">  <span class="string">"analyzer"</span> : <span class="string">"my_synonyms"</span>,</div><div class="line">  <span class="string">"text"</span> : <span class="string">"Elizabeth is the English queen"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="0x06-Python-SDK"><a href="#0x06-Python-SDK" class="headerlink" title="0x06 Python SDK"></a>0x06 Python SDK</h2><p>官方提供了两个 SDK 方便我们进行日常的开发：</p>
 <ul>
@@ -719,6 +757,10 @@
       
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/20/CeleryCheatSheet/" rel="next" title="Celery CheatSheet">
+                <i class="fa fa-chevron-left"></i> Celery CheatSheet
+              </a>
             
           </div>
 
@@ -800,7 +842,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">63</span>
+                <span class="site-state-item-count">68</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -822,7 +864,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">88</span>
+                <span class="site-state-item-count">90</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -893,7 +935,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安装，配置，基本-shell-命令"><span class="nav-number">2.</span> <span class="nav-text">0x01 安装，配置，基本 shell 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置"><span class="nav-number">2.2.</span> <span class="nav-text">2. 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-插件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-ElasticSearch-配套工具"><span class="nav-number">3.</span> <span class="nav-text">0x02 ElasticSearch 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-ElasticSearch-基础概念"><span class="nav-number">4.</span> <span class="nav-text">0x03 ElasticSearch 基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Elasticsearch-CRUDE-以及基本操作"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Elasticsearch CRUDE 以及基本操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-全文搜索的基本概念"><span class="nav-number">5.</span> <span class="nav-text">0x04 全文搜索的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-全文搜索遇到的挑战"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 全文搜索遇到的挑战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-全文搜索的索引时与查询时"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 全文搜索的索引时与查询时</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-索引时-ES-做了什么？"><span class="nav-number">5.2.1.</span> <span class="nav-text">1. 索引时 ES 做了什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-查询时-ES-做了什么？"><span class="nav-number">5.2.2.</span> <span class="nav-text">2. 查询时 ES 做了什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#停止词"><span class="nav-number">5.2.3.</span> <span class="nav-text">停止词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#同义词"><span class="nav-number">5.2.4.</span> <span class="nav-text">同义词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#typoes-和拼写错误"><span class="nav-number">5.2.5.</span> <span class="nav-text">typoes 和拼写错误</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-3-全文搜索的-ES-解决方案"><span class="nav-number">5.3.</span> <span class="nav-text">3.3 全文搜索的 ES 解决方案</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-调试"><span class="nav-number">6.</span> <span class="nav-text">0x05 调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-Python-SDK"><span class="nav-number">7.</span> <span class="nav-text">0x06 Python SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-与-Python-集成"><span class="nav-number">7.1.</span> <span class="nav-text">6.1 与 Python 集成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-与-Django-集成"><span class="nav-number">7.2.</span> <span class="nav-text">6.2 与 Django 集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#elasticsearch-analysis-ik-的配置"><span class="nav-number">7.2.1.</span> <span class="nav-text">elasticsearch-analysis-ik 的配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-踩坑集"><span class="nav-number">8.</span> <span class="nav-text">0x07 踩坑集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-参考链接"><span class="nav-number">9.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-安装，配置，基本-shell-命令"><span class="nav-number">2.</span> <span class="nav-text">0x01 安装，配置，基本 shell 命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装"><span class="nav-number">2.1.</span> <span class="nav-text">1. 安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置"><span class="nav-number">2.2.</span> <span class="nav-text">2. 配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-插件"><span class="nav-number">2.3.</span> <span class="nav-text">3. 插件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-ElasticSearch-配套工具"><span class="nav-number">3.</span> <span class="nav-text">0x02 ElasticSearch 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-ElasticSearch-基础概念"><span class="nav-number">4.</span> <span class="nav-text">0x03 ElasticSearch 基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Elasticsearch-CRUDE-以及基本操作"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Elasticsearch CRUDE 以及基本操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-全文搜索的基本概念"><span class="nav-number">5.</span> <span class="nav-text">0x04 全文搜索的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-全文搜索遇到的挑战"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 全文搜索遇到的挑战</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-全文搜索的索引时与查询时"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 全文搜索的索引时与查询时</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-索引时-ES-做了什么？"><span class="nav-number">5.2.1.</span> <span class="nav-text">1. 索引时 ES 做了什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-查询时-ES-做了什么？"><span class="nav-number">5.2.2.</span> <span class="nav-text">2. 查询时 ES 做了什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-全文搜索调优之中文分词"><span class="nav-number">5.2.3.</span> <span class="nav-text">3. 全文搜索调优之中文分词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-全文搜索调优之停止词"><span class="nav-number">5.2.4.</span> <span class="nav-text">4. 全文搜索调优之停止词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-全文搜索调优之同义词"><span class="nav-number">5.2.5.</span> <span class="nav-text">5. 全文搜索调优之同义词</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-全文搜索调优之拼写错误"><span class="nav-number">5.2.6.</span> <span class="nav-text">6. 全文搜索调优之拼写错误</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-全文搜索调优之相关性"><span class="nav-number">5.2.7.</span> <span class="nav-text">7. 全文搜索调优之相关性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#索引时三因素"><span class="nav-number">5.2.7.1.</span> <span class="nav-text">索引时三因素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查询时"><span class="nav-number">5.2.7.2.</span> <span class="nav-text">查询时</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#计算公式"><span class="nav-number">5.2.7.3.</span> <span class="nav-text">计算公式</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-搜索语法"><span class="nav-number">6.</span> <span class="nav-text">0x05 搜索语法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-调试"><span class="nav-number">7.</span> <span class="nav-text">0x05 调试</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-Python-SDK"><span class="nav-number">8.</span> <span class="nav-text">0x06 Python SDK</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-与-Python-集成"><span class="nav-number">8.1.</span> <span class="nav-text">6.1 与 Python 集成</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-2-与-Django-集成"><span class="nav-number">8.2.</span> <span class="nav-text">6.2 与 Django 集成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#elasticsearch-analysis-ik-的配置"><span class="nav-number">8.2.1.</span> <span class="nav-text">elasticsearch-analysis-ik 的配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-踩坑集"><span class="nav-number">9.</span> <span class="nav-text">0x07 踩坑集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-参考链接"><span class="nav-number">10.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
             
 
           </div>
