@@ -1,0 +1,950 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+  <link href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+  
+
+<link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="VueJS,全栈开发,RestAPI,Flask," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="0x00 前言新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。 本笔记于 2018-03-31 开启，SQLAlchemy 版本为 1.2.0。 Python 圈内三大 ORM SQLAlchemy VS Django ORM VS Peewee  SQLAlchemy 复杂程度最高，同时，这也意味着 SQLAlchemy">
+<meta name="keywords" content="VueJS,全栈开发,RestAPI,Flask">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQLAlchemyCheatSheet">
+<meta property="og:url" content="http://twocucao.xyz/2018/03/31/SQLAlchemyCheatSheet/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。 本笔记于 2018-03-31 开启，SQLAlchemy 版本为 1.2.0。 Python 圈内三大 ORM SQLAlchemy VS Django ORM VS Peewee  SQLAlchemy 复杂程度最高，同时，这也意味着 SQLAlchemy">
+<meta property="og:updated_time" content="2018-04-17T01:48:33.544Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="SQLAlchemyCheatSheet">
+<meta name="twitter:description" content="0x00 前言新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。 本笔记于 2018-03-31 开启，SQLAlchemy 版本为 1.2.0。 Python 圈内三大 ORM SQLAlchemy VS Django ORM VS Peewee  SQLAlchemy 复杂程度最高，同时，这也意味着 SQLAlchemy">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://twocucao.xyz/2018/03/31/SQLAlchemyCheatSheet/"/>
+
+
+
+
+
+  <title>SQLAlchemyCheatSheet | MG的编程小屋</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?299254d95898cdfa110fc6d914eba9c4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">MG的编程小屋</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/03/31/SQLAlchemyCheatSheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">SQLAlchemyCheatSheet</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-31T17:16:35+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,470
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。</p>
+<p>本笔记于 2018-03-31 开启，SQLAlchemy 版本为 1.2.0。</p>
+<p>Python 圈内三大 ORM SQLAlchemy VS Django ORM VS Peewee</p>
+<ol>
+<li>SQLAlchemy 复杂程度最高，同时，这也意味着 SQLAlchemy 可以做更多的事情。使用 DataMapper 方式实现</li>
+<li>Django ORM 个人最喜欢，使用 ActiveRecord 实现 如果不是因为现在 Flask 项目已经是用了 SQLAlchemy , 否则的话我甚至会考虑将 Django ORM 配置到 Flask 项目中。当然，也有蛋疼的 SqlAlchemy 使用者已经移植给 django 配置了 SQLAlchemy 的库。</li>
+<li>Peewee 没用过，不好评论。以后有机会试试。</li>
+</ol>
+<h2 id="0x01-如何快速上手"><a href="#0x01-如何快速上手" class="headerlink" title="0x01 如何快速上手"></a>0x01 如何快速上手</h2><p>了解一个框架，最好是从下面几处入手：</p>
+<ul>
+<li>官方 Tuorial</li>
+<li>官方 Example</li>
+<li>官方 Guide</li>
+<li>官方 APIDocument</li>
+<li>源码</li>
+</ul>
+<p>对框架掌握越深，就越需要使用者多多从上开始逐渐向下了解。</p>
+<p>其实还有一些途径：</p>
+<ul>
+<li>Github 上面的 issue</li>
+<li>Stack Overflow 的高 vote 常见问题</li>
+<li><strong>如果作者有一些活跃的社区的话，可以火速前往</strong></li>
+</ul>
+<p>鉴于我们的目标在于入手，所以可以火速过一下：</p>
+<ul>
+<li>官方 Tuorial</li>
+<li>官方 Example</li>
+<li>官方 Guide</li>
+<li>Github 上面的 issue</li>
+<li>Stack Overflow 的高 vote 常见问题</li>
+<li><strong>如果作者有一些活跃的社区的话，可以火速前往</strong></li>
+</ul>
+<h3 id="如何快速上手-ORM"><a href="#如何快速上手-ORM" class="headerlink" title="如何快速上手 ORM"></a>如何快速上手 ORM</h3><p>那么，对于这个 ORM 库还有那些通用性的知识需要了解？</p>
+<p>嗯，是时候了解本质了。</p>
+<p><a href="http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/" target="_blank" rel="external">http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/</a></p>
+<h2 id="0x02-SQLAlchemy-及其生态"><a href="#0x02-SQLAlchemy-及其生态" class="headerlink" title="0x02 SQLAlchemy 及其生态"></a>0x02 SQLAlchemy 及其生态</h2><p>如果用上 Flask+SQLAlchemy 一般也要带上，Flask-Migration 与 Flask-SQLAlchemy, 这两个库也是对 Alembic 和 SQLAlchemy 的浅封装。</p>
+<h2 id="0x02-SQLAlchemy-的基础特性"><a href="#0x02-SQLAlchemy-的基础特性" class="headerlink" title="0x02 SQLAlchemy 的基础特性"></a>0x02 SQLAlchemy 的基础特性</h2><h3 id="2-0-定义"><a href="#2-0-定义" class="headerlink" title="2.0 定义"></a>2.0 定义</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</div><div class="line">engine = create_engine(<span class="string">'sqlite:///:memory:'</span>, echo=<span class="keyword">True</span>)</div><div class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</div><div class="line">Base = declarative_base()</div><div class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, Integer, String</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(Base)</span>:</span></div><div class="line">    __tablename__ = <span class="string">'users'</span></div><div class="line"></div><div class="line">    id = Column(Integer, primary_key=<span class="keyword">True</span>)</div><div class="line">    name = Column(String)</div><div class="line">    fullname = Column(String)</div><div class="line">    password = Column(String)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></div><div class="line">       <span class="keyword">return</span> <span class="string">"&lt;User(name='%s', fullname='%s', password='%s')&gt;"</span> % (</div><div class="line">                            self.name, self.fullname, self.password)</div><div class="line">Base.metadata.create_all(engine)</div></pre></td></tr></table></figure>
+<p>到后面挖坑</p>
+<p><a href="https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685" target="_blank" rel="external">https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685</a></p>
+<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><h3 id="2-1-查询"><a href="#2-1-查询" class="headerlink" title="2.1 查询"></a>2.1 查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">query = session.query(SomeModel)</div><div class="line"># 创建一个查询对象</div><div class="line"># 查询的是 SomeModel 里面所有的字段 即 select *</div><div class="line">query = session.query(SomeModel.acol,SomeModel.bcol)</div><div class="line"># 即 select acol , bcol</div><div class="line"># alias</div><div class="line">user_alias = aliased(User, name=&apos;user_alias&apos;)</div><div class="line">for row in session.query(user_alias, user_alias.name).all():</div><div class="line">    # 即相当于 select name as name_label</div><div class="line">    print(row.user_alias)</div><div class="line"></div><div class="line"># limit 和 offset</div><div class="line">for u in session.query(User).order_by(User.id)[1:3]:</div><div class="line">    print(u)</div><div class="line"></div><div class="line"># distinct</div><div class="line">session.query(model.Name).distinct(model.Name.value).order_by(model.Name.value)</div><div class="line"># order_by</div><div class="line">User.query.order_by(User.popularity.desc(),User.date_created.desc()).limit(10).all()</div></pre></td></tr></table></figure>
+<p>Query 对象，下文中，我会聊到这个 Query 对象。这里先跳过。</p>
+<h4 id="filter-操作符号"><a href="#filter-操作符号" class="headerlink" title="filter 操作符号"></a>filter 操作符号</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 等于</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>)</div><div class="line"><span class="comment"># 不等于</span></div><div class="line">query.filter(User.name != <span class="string">'ed'</span>)</div><div class="line"><span class="comment"># Like（有的数据库不区分大小写）</span></div><div class="line">query.filter(User.name.like(<span class="string">'%ed%'</span>))</div><div class="line"><span class="comment"># ILIKE (case-insensitive LIKE)</span></div><div class="line">query.filter(User.name.ilike(<span class="string">'%ed%'</span>))</div><div class="line"><span class="comment"># IN</span></div><div class="line">query.filter(User.name.in_([<span class="string">'ed'</span>, <span class="string">'wendy'</span>, <span class="string">'jack'</span>]))</div><div class="line"><span class="comment"># Not in</span></div><div class="line">query.filter(~User.name.in_([<span class="string">'ed'</span>, <span class="string">'wendy'</span>, <span class="string">'jack'</span>]))</div><div class="line"><span class="comment"># IS NULL</span></div><div class="line">query.filter(User.name == <span class="keyword">None</span>)</div><div class="line"><span class="comment">## 如果你用了 pep8/linter 的话</span></div><div class="line">query.filter(User.name.is_(<span class="keyword">None</span>))</div><div class="line"><span class="comment"># IS NOT NULL:</span></div><div class="line">query.filter(User.name != <span class="keyword">None</span>)</div><div class="line"><span class="comment">## 如果你用了 pep8/linter 的话</span></div><div class="line">query.filter(User.name.isnot(<span class="keyword">None</span>))</div><div class="line"><span class="comment"># AND</span></div><div class="line"><span class="comment">## use and_()</span></div><div class="line">query.filter(and_(User.name == <span class="string">'ed'</span>, User.fullname == <span class="string">'Ed Jones'</span>))</div><div class="line"><span class="comment">## or send multiple expressions to .filter()</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>, User.fullname == <span class="string">'Ed Jones'</span>)</div><div class="line"><span class="comment">## or chain multiple filter()/filter_by() calls</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>).filter(User.fullname == <span class="string">'Ed Jones'</span>)</div><div class="line"><span class="comment"># OR</span></div><div class="line">query.filter(or_(User.name == <span class="string">'ed'</span>, User.name == <span class="string">'wendy'</span>))</div><div class="line"><span class="comment"># MATCH</span></div><div class="line">query.filter(User.name.match(<span class="string">'wendy'</span>))</div></pre></td></tr></table></figure>
+<p>我们先 type 一下，找到类型，然后找一下文档</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">type(model.column_name == <span class="string">'asdf'</span>) → sqlalchemy.sql.elements.BinaryExpression</div></pre></td></tr></table></figure>
+<h4 id="返回数量"><a href="#返回数量" class="headerlink" title="返回数量"></a>返回数量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">all()</div><div class="line">first()</div><div class="line">one()</div><div class="line">one_or_none()</div><div class="line">scalar()</div></pre></td></tr></table></figure>
+<p>YourModel.query.get((pk1, pk2))</p>
+<h4 id="join-gt-JOIN-语句"><a href="#join-gt-JOIN-语句" class="headerlink" title="join -&gt; JOIN 语句"></a>join -&gt; JOIN 语句</h4><p><a href="https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query" target="_blank" rel="external">https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query</a></p>
+<h5 id="两表-InnerJoin"><a href="#两表-InnerJoin" class="headerlink" title="两表 InnerJoin"></a>两表 InnerJoin</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> u, a <span class="keyword">in</span> session.query(User, Address).\</div><div class="line">                    filter(User.id==Address.user_id).\</div><div class="line">                    filter(Address.email_address==<span class="string">'jack@google.com'</span>).\</div><div class="line">                    all():</div><div class="line">    print(u)</div><div class="line">    print(a)</div><div class="line"><span class="comment"># &lt;User(name='jack', fullname='Jack Bean', password='gjffdd')&gt;</span></div><div class="line"><span class="comment"># &lt;Address(email_address='jack@google.com')&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="多表-InnerJoin-LeftJoin"><a href="#多表-InnerJoin-LeftJoin" class="headerlink" title="多表 InnerJoin + LeftJoin"></a>多表 InnerJoin + LeftJoin</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">query.outerjoin(User.addresses)   # LEFT OUTER JOIN</div></pre></td></tr></table></figure>
+<h4 id="聚集查询"><a href="#聚集查询" class="headerlink" title="聚集查询"></a>聚集查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">session.query(User).filter(User.name.like(&apos;%ed&apos;)).count()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">from sqlalchemy import func</div><div class="line">session.query(Table.column, func.count(Table.column)).group_by(Table.column).all()</div><div class="line"></div><div class="line">self.session.query(func.count(Table.column1),Table.column1, Table.column2).group_by(Table.column1, Table.column2).all()</div><div class="line"></div><div class="line">from sqlalchemy.sql import func</div><div class="line">session.query(func.avg(Rating.field2).label(&apos;average&apos;)).filter(Rating.url==url_string.netloc)</div></pre></td></tr></table></figure>
+<h3 id="2-2-原生查询"><a href="#2-2-原生查询" class="headerlink" title="2.2 原生查询"></a>2.2 原生查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">from sqlalchemy import text</div><div class="line"></div><div class="line">sql = text(&apos;select name from penguins&apos;)</div><div class="line">result = db.engine.execute(sql)</div><div class="line">names = []</div><div class="line">for row in result:</div><div class="line">    names.append(row[0])</div><div class="line"></div><div class="line">print names</div><div class="line"></div><div class="line">from collections import namedtuple</div><div class="line"></div><div class="line">Record = namedtuple(&apos;Record&apos;, result.keys())</div><div class="line">records = [Record(*r) for r in result.fetchall()]</div><div class="line">for r in records:</div><div class="line">    print(r)</div><div class="line"></div><div class="line">from sqlalchemy.sql import text</div><div class="line"></div><div class="line">connection = engine.connect()</div><div class="line"></div><div class="line"># recommended</div><div class="line">cmd = &apos;select * from Employees where EmployeeGroup == :group&apos;</div><div class="line">employeeGroup = &apos;Staff&apos;</div><div class="line">employees = connection.execute(text(cmd), group = employeeGroup)</div></pre></td></tr></table></figure>
+<p>get_or_create</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">def get_or_create(session, model, defaults=None, **kwargs):</div><div class="line">    instance = session.query(model).filter_by(**kwargs).first()</div><div class="line">    if instance:</div><div class="line">        return instance, False</div><div class="line">    else:</div><div class="line">        params = dict((k, v) for k, v in kwargs.iteritems() if not isinstance(v, ClauseElement))</div><div class="line">        params.update(defaults or &#123;&#125;)</div><div class="line">        instance = model(**params)</div><div class="line">        session.add(instance)</div><div class="line">        return instance, True</div></pre></td></tr></table></figure>
+<h3 id="2-3-更新查询"><a href="#2-3-更新查询" class="headerlink" title="2.3 更新查询"></a>2.3 更新查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">session.query(Stuff).update(&#123;Stuff.foo: Stuff.foo + 1&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">1) for c in session.query(Stuff).all():</div><div class="line">       c.foo += 1</div><div class="line">   session.commit()</div><div class="line"></div><div class="line">2) session.query().\</div><div class="line">       update(&#123;&quot;foo&quot;: (Stuff.foo + 1)&#125;)</div><div class="line">   session.commit()</div><div class="line"></div><div class="line">3) conn = engine.connect()</div><div class="line">   stmt = Stuff.update().\</div><div class="line">       values(Stuff.foo = (Stuff.foo + 1))</div><div class="line">   conn.execute(stmt)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">1) user.no_of_logins += 1</div><div class="line">   session.commit()</div><div class="line"></div><div class="line">2) session.query().\</div><div class="line">       filter(User.username == form.username.data).\</div><div class="line">       update(&#123;&quot;no_of_logins&quot;: (User.no_of_logins +1)&#125;)</div><div class="line">   session.commit()</div><div class="line"></div><div class="line">3) conn = engine.connect()</div><div class="line">   stmt = User.update().\</div><div class="line">       values(no_of_logins=(User.no_of_logins + 1)).\</div><div class="line">       where(User.username == form.username.data)</div><div class="line">   conn.execute(stmt)</div><div class="line"></div><div class="line">4) setattr(user, &apos;no_of_logins&apos;, user.no_of_logins+1)</div><div class="line">   session.commit()</div></pre></td></tr></table></figure>
+<h3 id="2-4-删除"><a href="#2-4-删除" class="headerlink" title="2.4 删除"></a>2.4 删除</h3><p><a href="https://stackoverflow.com/questions/5033547/sqlalchemy-cascade-delete" target="_blank" rel="external">https://stackoverflow.com/questions/5033547/sqlalchemy-cascade-delete</a></p>
+<h4 id="OnDelete"><a href="#OnDelete" class="headerlink" title="OnDelete"></a>OnDelete</h4><p>ondelete=’CASCADE’))</p>
+<h4 id="批量操作"><a href="#批量操作" class="headerlink" title="批量操作"></a>批量操作</h4><p>models.User.query.delete()</p>
+<h3 id="如何从-Object-到一个-ORM"><a href="#如何从-Object-到一个-ORM" class="headerlink" title="如何从 Object 到一个 ORM"></a>如何从 Object 到一个 ORM</h3><p>如何追踪 Object 的变化？</p>
+<h2 id="0x03-SQLAlchemy-的高级特性"><a href="#0x03-SQLAlchemy-的高级特性" class="headerlink" title="0x03 SQLAlchemy 的高级特性"></a>0x03 SQLAlchemy 的高级特性</h2><h3 id="表继承"><a href="#表继承" class="headerlink" title="表继承"></a>表继承</h3><p><a href="https://stackoverflow.com/questions/1337095/sqlalchemy-inheritance" target="_blank" rel="external">https://stackoverflow.com/questions/1337095/sqlalchemy-inheritance</a></p>
+<h3 id="啥玩意"><a href="#啥玩意" class="headerlink" title="啥玩意"></a>啥玩意</h3><p>Flush 和 commit</p>
+<p><a href="https://stackoverflow.com/questions/4201455/sqlalchemy-whats-the-difference-between-flush-and-commit" target="_blank" rel="external">https://stackoverflow.com/questions/4201455/sqlalchemy-whats-the-difference-between-flush-and-commit</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">x = Foo(bar=1)</div><div class="line">print x.id</div><div class="line"># None</div><div class="line">session.add(x)</div><div class="line">session.flush()</div><div class="line"># BEGIN</div><div class="line"># INSERT INTO foo (bar) VALUES(1)</div><div class="line"># COMMIT</div><div class="line">print x.id</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">qry = DBSession.query(User).filter(</div><div class="line">        and_(User.birthday &lt;= &apos;1988-01-17&apos;, User.birthday &gt;= &apos;1985-01-17&apos;))</div></pre></td></tr></table></figure>
+<h2 id="0x04-SQLAlchemy-的基础特性-Under-The-Hood"><a href="#0x04-SQLAlchemy-的基础特性-Under-The-Hood" class="headerlink" title="0x04 SQLAlchemy 的基础特性 Under The Hood"></a>0x04 SQLAlchemy 的基础特性 Under The Hood</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; from sqlalchemy.dialects import postgresql</div><div class="line">&gt;&gt;&gt; print str(q.statement.compile(dialect=postgresql.dialect()))</div><div class="line">Where q is defined as:</div></pre></td></tr></table></figure>
+<h2 id="0x05-SQLAlchemy-的高级特性-Under-The-Hood"><a href="#0x05-SQLAlchemy-的高级特性-Under-The-Hood" class="headerlink" title="0x05 SQLAlchemy 的高级特性 Under The Hood"></a>0x05 SQLAlchemy 的高级特性 Under The Hood</h2><h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p><a href="https://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy" target="_blank" rel="external">https://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy</a><br><a href="https://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications" target="_blank" rel="external">https://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">https://stackoverflow.com/questions/34322471/sqlalchemy-engine-connection-and-session-difference</div><div class="line">https://stackoverflow.com/questions/11769366/why-is-sqlalchemy-insert-with-sqlite-25-times-slower-than-using-sqlite3-directly</div><div class="line">https://stackoverflow.com/questions/12223335/sqlalchemy-creating-vs-reusing-a-session</div><div class="line">session 是个容器</div><div class="line"></div><div class="line">https://stackoverflow.com/questions/18199053/example-of-what-sqlalchemy-can-do-and-django-orm-cannot</div><div class="line">https://stackoverflow.com/questions/7389759/memory-efficient-built-in-sqlalchemy-iterator-generator</div><div class="line"></div><div class="line"># 日志</div><div class="line">import logging</div><div class="line">logging.basicConfig()</div><div class="line">logging.getLogger(&apos;sqlalchemy.engine&apos;).setLevel(logging.INFO)</div></pre></td></tr></table></figure>
+<h2 id="配置篇"><a href="#配置篇" class="headerlink" title="配置篇"></a>配置篇</h2><p>SQLALCHEMY_TRACK_MODIFICATIONS = False</p>
+<h2 id="0x06-DEBUG-和-Profile-技巧"><a href="#0x06-DEBUG-和-Profile-技巧" class="headerlink" title="0x06 DEBUG 和 Profile 技巧"></a>0x06 DEBUG 和 Profile 技巧</h2><h3 id="6-1-查看技巧"><a href="#6-1-查看技巧" class="headerlink" title="6.1 查看技巧"></a>6.1 查看技巧</h3><p>dict(u)<br>u.<strong>dict</strong></p>
+<p><a href="https://stackoverflow.com/questions/1171166/how-can-i-profile-a-sqlalchemy-powered-application" target="_blank" rel="external">https://stackoverflow.com/questions/1171166/how-can-i-profile-a-sqlalchemy-powered-application</a></p>
+<h2 id="0x07-ORM-的本质"><a href="#0x07-ORM-的本质" class="headerlink" title="0x07 ORM 的本质"></a>0x07 ORM 的本质</h2><p>ORM 的本质是 Data Access Layer 上的一层封装。如果你写原生 SQL, 即手写 DAL 的话，开发效率可能会大打折扣。</p>
+<h3 id="ORM-的两种类型-Active-Record-与-Data-Mappers"><a href="#ORM-的两种类型-Active-Record-与-Data-Mappers" class="headerlink" title="ORM 的两种类型 Active Record 与 Data Mappers"></a>ORM 的两种类型 Active Record 与 Data Mappers</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"># ActiveRecord 风格写起来类似于 Django ORM, 大致是这样的</div><div class="line"></div><div class="line">## AR 的模型定义</div><div class="line"></div><div class="line">class User(db.models):</div><div class="line">    name = db.StringField(verbose=&quot;xyz&quot;)</div><div class="line"></div><div class="line">## AR 的新增</div><div class="line">user = User()</div><div class="line">user.name = &quot;123456&quot;</div><div class="line">user.save() ## 正好对应数据库中的一行</div><div class="line"></div><div class="line">## AR 的查询</div><div class="line"></div><div class="line">users = User.objects.filter(Q(name=&quot;黄老板的小姨子&quot;)).all()</div><div class="line"></div><div class="line"># Data Mappers 风格写起来类似于 SQLAlchemy ORM, 大致是这样的</div><div class="line"></div><div class="line">## SA 的定义</div><div class="line"></div><div class="line">from sqlalchemy.ext.declarative import declarative_base</div><div class="line"></div><div class="line">Base = declarative_base()</div><div class="line"></div><div class="line">from sqlalchemy import Column, Integer, String</div><div class="line">class User(Base):</div><div class="line">    __tablename__ = &apos;users&apos;</div><div class="line"></div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    name = Column(String)</div><div class="line"></div><div class="line">Base.metadata.create_all(engine)</div><div class="line"></div><div class="line">## SA 的新增</div><div class="line"></div><div class="line">user = User()</div><div class="line">user.name = &quot;123456&quot;</div><div class="line">session.add(user)</div><div class="line">sessoon.commit() ## 嗯？其实也是对应数据库中的一行。</div><div class="line"></div><div class="line">## SA 的查询</div><div class="line"></div><div class="line">session.query(User).filter(User.name)</div></pre></td></tr></table></figure>
+<p>问题来了，这两者到底是什么，看起来似乎相差不大。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class Person:</div><div class="line"></div><div class="line">    lastname</div><div class="line">    firstname</div><div class="line">    children</div><div class="line"></div><div class="line">    # 数据操作</div><div class="line">    def findone(self):</div><div class="line">        pass</div><div class="line"></div><div class="line">    def insert(self):</div><div class="line">        pass</div><div class="line"></div><div class="line">    def update(self):</div><div class="line">        pass</div><div class="line"></div><div class="line">    def delete(self):</div><div class="line">        pass</div><div class="line"></div><div class="line">    # 业务逻辑</div><div class="line">    def getChildrenTax(self):</div><div class="line">        pass</div></pre></td></tr></table></figure>
+<p>lastName firstName numberOfDependents</p>
+<p>insert update delete</p>
+<p>getExemption isFlaggedForAudit getTaxableEarnings</p>
+<p>An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data.</p>
+<p>The essence of an Active Record is a Domain Model (116) in which the classes match very closely the record structure of an underlying database. Each Active Record is responsible for saving and loading to the database and also for any domain logic that acts on the data. This may be all the domain logic in the application, or you may ﬁnd that some domain logic is held in Transaction Scripts (110) with common and data-oriented code in the Active Record.</p>
+<p>The data structure of the Active Record should exactly match that of the database: one ﬁeld in the class for each column in the table. Type the ﬁelds the way the SQL interface gives you the data—don’t do any conversion at this stage. You may consider Foreign Key Mapping (236), but you may also leave the foreign keys as they are. You can use views or tables with Active Record, although updates through views are obviously harder. Views are particularly useful for reporting purposes.</p>
+<p>objects correspond directly to the database tables: an isomorphic schema. If your business logic is complex, you’ll soon want to use your object’s direct relationships, collections, inheritance, and so forth. These don’t map easily onto Active Record, and adding them piecemeal gets very messy. That’s what will lead you to use Data Mapper (165) instead.</p>
+<p>Another argument against Active Record is the fact that it couples the object design to the database design. This makes it more difﬁcult to refactor either design as a project goes forward.</p>
+<p>Active Record is a good pattern to consider if you’re using Transaction Script (110) and are beginning to feel the pain of code duplication and the difﬁculty in updating scripts and tables that Transaction Script (110) often brings. In this case you can gradually start creating Active Records and then slowly refactor behavior into them. It often helps to wrap the tables as a Gateway (466) ﬁrst, and then start moving behavior so that the tables evolve to a Active Record.</p>
+<p>其实为什么不选择设计成 ActiveRecord , 而是选择设计成 Data Mapper, 其实就可以回答这个问题：</p>
+<blockquote>
+<p>虽然要设计成 ORM, 考虑到数量和性能因素，SQL 数据库（多个表）并不应该是表现像 Object 集合那样（换言之，也就是 AR 表现的像 Object 的集合一样）。<br>同时，出于更好的抽象，object 集合也应该表现的像表以及行</p>
+</blockquote>
+<p>于是我们可以得出结论，可以在 SQLAlchemy 上面进行一定的封装，使得最后用起来非常的 Django ORM like，其实 SQLAlchemy 稍加定制还是可以很 Django ORM-like 的。</p>
+<p>:TODO: 有机会看看那本书再修改一下本小节</p>
+<p>这不，果然有人就这么搞了 <a href="https://github.com/absent1706/sqlalchemy-mixins" target="_blank" rel="external">https://github.com/absent1706/sqlalchemy-mixins</a></p>
+<h2 id="0x07-其他"><a href="#0x07-其他" class="headerlink" title="0x07 其他"></a>0x07 其他</h2><h3 id="SQL-注入"><a href="#SQL-注入" class="headerlink" title="SQL 注入"></a>SQL 注入</h3><p>session.query(MyClass).filter(“foo={}”.format(getArgs[‘val’]))</p>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<li><a href="https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/" target="_blank" rel="external">https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/</a></li>
+<li><a href="https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create" target="_blank" rel="external">https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create</a></li>
+<li>除了文档本身，作者在 Stack Overflow 上的回答都是非常值得阅读的。<a href="https://stackoverflow.com/users/34549/zzzeek" target="_blank" rel="external">https://stackoverflow.com/users/34549/zzzeek</a></li>
+<li>Patterns of Enterprise Application Architecture - Martin Fowler</li>
+<li><p><a href="http://aosabook.org/en/sqlalchemy.html" target="_blank" rel="external">http://aosabook.org/en/sqlalchemy.html</a></p>
+<p>  <a href="http://techspot.zzzeek.org/" target="_blank" rel="external">http://techspot.zzzeek.org/</a></p>
+</li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-03-09</strong> 重修文字</li>
+</ul>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/VueJS/" rel="tag"># VueJS</a>
+          
+            <a href="/tags/全栈开发/" rel="tag"># 全栈开发</a>
+          
+            <a href="/tags/RestAPI/" rel="tag"># RestAPI</a>
+          
+            <a href="/tags/Flask/" rel="tag"># Flask</a>
+          
+        </div>
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/09/Flask文档阅读笔记/" rel="prev" title="Flask 文档阅读笔记">
+                Flask 文档阅读笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="http://oh1n2bfoj.bkt.clouddn.com/avatar.png"
+               alt="Micheal Gardner" />
+          <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+           
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/twocucao" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/twocucao" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/twocucao" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-如何快速上手"><span class="nav-number">2.</span> <span class="nav-text">0x01 如何快速上手</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何快速上手-ORM"><span class="nav-number">2.1.</span> <span class="nav-text">如何快速上手 ORM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-SQLAlchemy-及其生态"><span class="nav-number">3.</span> <span class="nav-text">0x02 SQLAlchemy 及其生态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-SQLAlchemy-的基础特性"><span class="nav-number">4.</span> <span class="nav-text">0x02 SQLAlchemy 的基础特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-0-定义"><span class="nav-number">4.1.</span> <span class="nav-text">2.0 定义</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关系"><span class="nav-number">4.1.1.</span> <span class="nav-text">关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-查询"><span class="nav-number">4.2.</span> <span class="nav-text">2.1 查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#filter-操作符号"><span class="nav-number">4.2.1.</span> <span class="nav-text">filter 操作符号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#返回数量"><span class="nav-number">4.2.2.</span> <span class="nav-text">返回数量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#join-gt-JOIN-语句"><span class="nav-number">4.2.3.</span> <span class="nav-text">join -> JOIN 语句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#两表-InnerJoin"><span class="nav-number">4.2.3.1.</span> <span class="nav-text">两表 InnerJoin</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多表-InnerJoin-LeftJoin"><span class="nav-number">4.2.3.2.</span> <span class="nav-text">多表 InnerJoin + LeftJoin</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#聚集查询"><span class="nav-number">4.2.4.</span> <span class="nav-text">聚集查询</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-原生查询"><span class="nav-number">4.3.</span> <span class="nav-text">2.2 原生查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-更新查询"><span class="nav-number">4.4.</span> <span class="nav-text">2.3 更新查询</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-删除"><span class="nav-number">4.5.</span> <span class="nav-text">2.4 删除</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#OnDelete"><span class="nav-number">4.5.1.</span> <span class="nav-text">OnDelete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#批量操作"><span class="nav-number">4.5.2.</span> <span class="nav-text">批量操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何从-Object-到一个-ORM"><span class="nav-number">4.6.</span> <span class="nav-text">如何从 Object 到一个 ORM</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-SQLAlchemy-的高级特性"><span class="nav-number">5.</span> <span class="nav-text">0x03 SQLAlchemy 的高级特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#表继承"><span class="nav-number">5.1.</span> <span class="nav-text">表继承</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#啥玩意"><span class="nav-number">5.2.</span> <span class="nav-text">啥玩意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-SQLAlchemy-的基础特性-Under-The-Hood"><span class="nav-number">6.</span> <span class="nav-text">0x04 SQLAlchemy 的基础特性 Under The Hood</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-SQLAlchemy-的高级特性-Under-The-Hood"><span class="nav-number">7.</span> <span class="nav-text">0x05 SQLAlchemy 的高级特性 Under The Hood</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程"><span class="nav-number">7.1.</span> <span class="nav-text">多线程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#配置篇"><span class="nav-number">8.</span> <span class="nav-text">配置篇</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-DEBUG-和-Profile-技巧"><span class="nav-number">9.</span> <span class="nav-text">0x06 DEBUG 和 Profile 技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#6-1-查看技巧"><span class="nav-number">9.1.</span> <span class="nav-text">6.1 查看技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-ORM-的本质"><span class="nav-number">10.</span> <span class="nav-text">0x07 ORM 的本质</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ORM-的两种类型-Active-Record-与-Data-Mappers"><span class="nav-number">10.1.</span> <span class="nav-text">ORM 的两种类型 Active Record 与 Data Mappers</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-其他"><span class="nav-number">11.</span> <span class="nav-text">0x07 其他</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-注入"><span class="nav-number">11.1.</span> <span class="nav-text">SQL 注入</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-参考链接"><span class="nav-number">12.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script type="text/javascript" src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+  <script type="text/javascript" src="/js/src/js.cookie.js?v=5.1.1"></script>
+  <script type="text/javascript" src="/js/src/scroll-cookie.js?v=5.1.1"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+  
+
+</body>
+</html>
