@@ -300,6 +300,312 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/04/28/DjangoORMCheatSheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/28/DjangoORMCheatSheet/" itemprop="url">DjangoORMCheatSheet</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-28T18:29:58+08:00">
+                2018-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,088
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。</p>
+<p>所以，本文记录的是 Django ORM</p>
+<p>逃。</p>
+<p>这篇文章也是我对比 SqlAlchemy 以及 DjangoORM 的产物</p>
+<h2 id="0x01-如何快速上手"><a href="#0x01-如何快速上手" class="headerlink" title="0x01 如何快速上手"></a>0x01 如何快速上手</h2><p>Django 世界里面，Django 的文档每次刷都会有新的发现。</p>
+<h2 id="0x02-DjangoORM-的基本功能"><a href="#0x02-DjangoORM-的基本功能" class="headerlink" title="0x02 DjangoORM 的基本功能"></a>0x02 DjangoORM 的基本功能</h2><h3 id="2-1-模型定义-Model"><a href="#2-1-模型定义-Model" class="headerlink" title="2.1 模型定义 Model"></a>2.1 模型定义 Model</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">from django.db import models</div><div class="line"></div><div class="line">class Musician(models.Model):</div><div class="line">    first_name = models.CharField(max_length=50) # Field</div><div class="line">    last_name = models.CharField(max_length=50)</div><div class="line">    instrument = models.CharField(max_length=100)</div><div class="line"></div><div class="line">class Album(models.Model):</div><div class="line">    artist = models.ForeignKey(Musician, on_delete=models.CASCADE)</div><div class="line">    name = models.CharField(max_length=100)</div><div class="line">    release_date = models.DateField()</div><div class="line">    num_stars = models.IntegerField()</div><div class="line"></div><div class="line">    class Meta: # Model Meta</div><div class="line">        order_with_respect_to = &apos;question&apos;</div></pre></td></tr></table></figure>
+<p>可以看出，包含如下的部分：</p>
+<ol>
+<li>Model 与 Model 内部的 Meta</li>
+<li>Field 与 Field 内部的 Options</li>
+<li>Model 与 Model 之间的关系</li>
+<li>其他，比如索引</li>
+</ol>
+<h4 id="Models-与-Meta"><a href="#Models-与-Meta" class="headerlink" title="Models 与 Meta"></a>Models 与 Meta</h4><blockquote>
+<p>DjangoORM 是 ActivityRecord 模式的一种实现，在该模式下，Model 与 session 耦合。</p>
+</blockquote>
+<h4 id="Field-与-Field-Options"><a href="#Field-与-Field-Options" class="headerlink" title="Field 与 Field Options"></a>Field 与 Field Options</h4><h5 id="Field"><a href="#Field" class="headerlink" title="Field"></a>Field</h5><ul>
+<li>AutoField</li>
+<li>BigAutoField</li>
+<li>BigIntegerField</li>
+<li>BinaryField</li>
+<li>BooleanField</li>
+<li>CharField</li>
+<li>DateField</li>
+<li>DateTimeField</li>
+<li>DecimalField</li>
+<li>DurationField</li>
+<li>EmailField</li>
+<li>FileField</li>
+<li>FileField and FieldFile</li>
+<li>FilePathField</li>
+<li>FloatField</li>
+<li>ImageField</li>
+<li>IntegerField</li>
+<li>GenericIPAddressField</li>
+<li>NullBooleanField</li>
+<li>PositiveIntegerField</li>
+<li>PositiveSmallIntegerField</li>
+<li>SlugField</li>
+<li>SmallIntegerField</li>
+<li>TextField</li>
+<li>TimeField</li>
+<li>URLField</li>
+<li>UUIDField</li>
+</ul>
+<p>虽然有这么多东东，但是还是建议直接</p>
+<h5 id="Field-Options"><a href="#Field-Options" class="headerlink" title="Field Options"></a>Field Options</h5><ul>
+<li>null</li>
+<li>blank</li>
+<li>choices<ul>
+<li>p.shirt_size</li>
+<li>p.get_shirt_size_display()</li>
+</ul>
+</li>
+<li>db_column</li>
+<li>db_index</li>
+<li>db_tablespace</li>
+<li>default</li>
+<li>editable</li>
+<li>error_messages</li>
+<li>help_text</li>
+<li>primary_key</li>
+<li>unique</li>
+<li>unique_for_date</li>
+<li>unique_for_month</li>
+<li>unique_for_year</li>
+<li>verbose_name</li>
+<li>validators</li>
+</ul>
+<h5 id="ForeignKey-的-Models"><a href="#ForeignKey-的-Models" class="headerlink" title="ForeignKey 的 Models"></a>ForeignKey 的 Models</h5><p>on_delete=models.CASCADE</p>
+<h4 id="Relationship"><a href="#Relationship" class="headerlink" title="Relationship"></a>Relationship</h4><p>表和表之间的关系</p>
+<ol>
+<li>A 表和 B 表 一对多 / 多对一</li>
+<li>A 表和 B 表 一对一 （特殊的一对多）</li>
+<li>A 表和 B 表 简单多对多 （借助中间的 Mapping 表进行映射）</li>
+<li>A 表和 B 表 复杂多对多</li>
+<li>A 表和 B 表 一对多</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">from django.db import models</div><div class="line"></div><div class="line">class Manufacturer(models.Model):</div><div class="line">    # ...</div><div class="line">    pass</div><div class="line"></div><div class="line">class Car(models.Model):</div><div class="line">    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)</div><div class="line">    # ...</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">from django.db import models</div><div class="line"></div><div class="line">class Topping(models.Model):</div><div class="line">    # ...</div><div class="line">    pass</div><div class="line"></div><div class="line">class Pizza(models.Model):</div><div class="line">    # ...</div><div class="line">    toppings = models.ManyToManyField(Topping)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">from django.db import models</div><div class="line"></div><div class="line">class Person(models.Model):</div><div class="line">    name = models.CharField(max_length=128)</div><div class="line"></div><div class="line">    def __str__(self):</div><div class="line">        return self.name</div><div class="line"></div><div class="line">class Group(models.Model):</div><div class="line">    name = models.CharField(max_length=128)</div><div class="line">    members = models.ManyToManyField(Person, through=&apos;Membership&apos;)</div><div class="line"></div><div class="line">    def __str__(self):</div><div class="line">        return self.name</div><div class="line"></div><div class="line">class Membership(models.Model):</div><div class="line">    person = models.ForeignKey(Person, on_delete=models.CASCADE)</div><div class="line">    group = models.ForeignKey(Group, on_delete=models.CASCADE)</div><div class="line">    date_joined = models.DateField()</div><div class="line">    invite_reason = models.CharField(max_length=64)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Models across files</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objects</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Models 重写方法</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Models 继承</div><div class="line">https://docs.djangoproject.com/en/2.0/topics/db/models/#model-inheritance</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">组织代码 - 以及应对循环引用</div></pre></td></tr></table></figure>
+<h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><h3 id="2-2-QuerySet"><a href="#2-2-QuerySet" class="headerlink" title="2.2 QuerySet"></a>2.2 QuerySet</h3><h4 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">c = Child(name=&quot;苏轼&quot;)</div><div class="line">c.save()</div><div class="line">p = Parent(name=&quot;苏辙&quot;)</div><div class="line">p.best_child = c</div><div class="line">p.children.add([c,c2,c3,c4])</div><div class="line">p.save()</div></pre></td></tr></table></figure>
+<h4 id="Retrieve"><a href="#Retrieve" class="headerlink" title="Retrieve"></a>Retrieve</h4><p>过滤</p>
+<p>filter(<strong>kwargs)<br>exclude(</strong>kwargs)<br>.all()</p>
+<h5 id="跨关系（跨表）查询"><a href="#跨关系（跨表）查询" class="headerlink" title="跨关系（跨表）查询"></a>跨关系（跨表）查询</h5><p>Blog.objects.filter(entry<strong>headline</strong>contains=’Lennon’)</p>
+<p><a href="https://docs.djangoproject.com/en/2.0/topics/db/queries/#lookups-that-span-relationships" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/queries/#lookups-that-span-relationships</a></p>
+<p><a href="https://docs.djangoproject.com/en/2.0/topics/db/queries/#spanning-multi-valued-relationships" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/queries/#spanning-multi-valued-relationships</a></p>
+<h5 id="Limit-Offset-分页"><a href="#Limit-Offset-分页" class="headerlink" title="Limit / Offset / 分页"></a>Limit / Offset / 分页</h5><p>Blog.objects.filter(entry<strong>headline</strong>contains=’Lennon’)[30:20]</p>
+<h5 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h5><p>query = query.filter(<strong>kwargs)<br>query = query.exclude(</strong>kwargs)</p>
+<h5 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h5><p>Django 里面最强大的就是其 Q 表达式了</p>
+<p>Q(question<strong>startswith=’Who’) | Q(question</strong>startswith=’What’)</p>
+<p>Poll.objects.get(<br>    Q(question__startswith=’Who’),<br>    Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6))<br>)</p>
+<p>这个表达式甚至可以嵌套超级深从而完成一个比较深的跨表查询。</p>
+<blockquote>
+<p>并且，这种 API 查询反而在写前端 API 的时候，可以传入 question__startswith 这类参数，从而直接完成一组搜索。</p>
+</blockquote>
+<p>Q / F</p>
+<h5 id="执行查询"><a href="#执行查询" class="headerlink" title="执行查询"></a>执行查询</h5><p>需要注意的的是，SQLAlchemy 必须显式执行查询，而 Django 不一定。</p>
+<p><a href="https://docs.djangoproject.com/en/2.0/ref/models/querysets/#when-querysets-are-evaluated" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/ref/models/querysets/#when-querysets-are-evaluated</a></p>
+<p>在 Django 内部实现的时候，一个 queryset 创建 / 过滤 / 切片 / 传送，<strong>除非这个 queryset 被 evaluated 了</strong>, 否则不会做数据库的操作。</p>
+<ul>
+<li>iteration</li>
+<li>Slicing</li>
+<li>Pickling/Caching</li>
+<li>repr</li>
+<li>len</li>
+<li>list</li>
+<li>bool</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">all()</div><div class="line">first()</div><div class="line">last()</div><div class="line">exist()</div></pre></td></tr></table></figure>
+<h5 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h5><ul>
+<li>pk</li>
+<li>model</li>
+</ul>
+<h5 id="复制-实例"><a href="#复制-实例" class="headerlink" title="复制 实例"></a>复制 实例</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">blog = Blog(name=&apos;My blog&apos;, tagline=&apos;Blogging is easy&apos;)</div><div class="line">blog.save() # blog.pk == 1</div><div class="line"></div><div class="line">blog.pk = None</div><div class="line">blog.save() # blog.pk == 2</div><div class="line"></div><div class="line"># 但这个并不拷贝外键？???</div><div class="line">https://docs.djangoproject.com/en/2.0/topics/db/queries/#copying-model-instances</div></pre></td></tr></table></figure>
+<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 默认查询的是所有字段，但我希望查询部分字段</div><div class="line"># TODO: 阿萨德</div><div class="line"># Distinct</div><div class="line"># OrderBy</div></pre></td></tr></table></figure>
+<h5 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h5><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/queries/#caching-and-querysets" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/queries/#caching-and-querysets</a></p>
+<h4 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h4><p>单个 object 更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">blog.title = &quot;大宝天天见&quot;</div><div class="line">blog.save()</div></pre></td></tr></table></figure>
+<p>批量更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">query.update(headline=F(&apos;blog__name&apos;))</div></pre></td></tr></table></figure>
+<p>一对多的更新（类似于 Set 操作）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">add(obj1, obj2, ...)</div><div class="line">create(**kwargs)</div><div class="line">remove(obj1, obj2, ...)</div><div class="line">clear()</div><div class="line">set(objs)</div></pre></td></tr></table></figure>
+<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><h4 id="聚集查询"><a href="#聚集查询" class="headerlink" title="聚集查询"></a>聚集查询</h4><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/aggregation/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/aggregation/</a></p>
+<h4 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h4><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/search/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/search/</a></p>
+<h3 id="2-2-Model-Instances"><a href="#2-2-Model-Instances" class="headerlink" title="2.2 Model Instances"></a>2.2 Model Instances</h3><p><a href="https://docs.djangoproject.com/en/2.0/ref/models/instances/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/ref/models/instances/</a></p>
+<h3 id="2-3-模型实例"><a href="#2-3-模型实例" class="headerlink" title="2.3 模型实例"></a>2.3 模型实例</h3><h3 id="2-4-迁移机制"><a href="#2-4-迁移机制" class="headerlink" title="2.4 迁移机制"></a>2.4 迁移机制</h3><ol>
+<li>加 INSTALLED_APPS</li>
+</ol>
+<h2 id="0x03-Django-ORM-的高级功能"><a href="#0x03-Django-ORM-的高级功能" class="headerlink" title="0x03 Django ORM 的高级功能"></a>0x03 Django ORM 的高级功能</h2><h3 id="maneger"><a href="#maneger" class="headerlink" title="maneger"></a>maneger</h3><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/managers/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/managers/</a></p>
+<h3 id="raw-sql"><a href="#raw-sql" class="headerlink" title="raw sql"></a>raw sql</h3><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/sql/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/sql/</a></p>
+<h4 id="database-fuction"><a href="#database-fuction" class="headerlink" title="database-fuction"></a>database-fuction</h4><p><a href="https://docs.djangoproject.com/en/2.0/ref/models/database-functions/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/ref/models/database-functions/</a></p>
+<h2 id="0x04-Django-ORM-Under-The-Hood"><a href="#0x04-Django-ORM-Under-The-Hood" class="headerlink" title="0x04 Django ORM Under The Hood"></a>0x04 Django ORM Under The Hood</h2><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-03-09</strong> 重修文字</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/03/31/SQLAlchemyCheatSheet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -385,7 +691,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,470
+                  3,313
                 </span>
               
 
@@ -401,7 +707,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  13
+                  16
                 </span>
               
             </div>
@@ -453,20 +759,100 @@
 <li>Stack Overflow 的高 vote 常见问题</li>
 <li><strong>如果作者有一些活跃的社区的话，可以火速前往</strong></li>
 </ul>
-<h3 id="如何快速上手-ORM"><a href="#如何快速上手-ORM" class="headerlink" title="如何快速上手 ORM"></a>如何快速上手 ORM</h3><p>那么，对于这个 ORM 库还有那些通用性的知识需要了解？</p>
-<p>嗯，是时候了解本质了。</p>
-<p><a href="http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/" target="_blank" rel="external">http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/</a></p>
-<h2 id="0x02-SQLAlchemy-及其生态"><a href="#0x02-SQLAlchemy-及其生态" class="headerlink" title="0x02 SQLAlchemy 及其生态"></a>0x02 SQLAlchemy 及其生态</h2><p>如果用上 Flask+SQLAlchemy 一般也要带上，Flask-Migration 与 Flask-SQLAlchemy, 这两个库也是对 Alembic 和 SQLAlchemy 的浅封装。</p>
-<h2 id="0x02-SQLAlchemy-的基础特性"><a href="#0x02-SQLAlchemy-的基础特性" class="headerlink" title="0x02 SQLAlchemy 的基础特性"></a>0x02 SQLAlchemy 的基础特性</h2><h3 id="2-0-定义"><a href="#2-0-定义" class="headerlink" title="2.0 定义"></a>2.0 定义</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</div><div class="line">engine = create_engine(<span class="string">'sqlite:///:memory:'</span>, echo=<span class="keyword">True</span>)</div><div class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</div><div class="line">Base = declarative_base()</div><div class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, Integer, String</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(Base)</span>:</span></div><div class="line">    __tablename__ = <span class="string">'users'</span></div><div class="line"></div><div class="line">    id = Column(Integer, primary_key=<span class="keyword">True</span>)</div><div class="line">    name = Column(String)</div><div class="line">    fullname = Column(String)</div><div class="line">    password = Column(String)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></div><div class="line">       <span class="keyword">return</span> <span class="string">"&lt;User(name='%s', fullname='%s', password='%s')&gt;"</span> % (</div><div class="line">                            self.name, self.fullname, self.password)</div><div class="line">Base.metadata.create_all(engine)</div></pre></td></tr></table></figure>
-<p>到后面挖坑</p>
-<p><a href="https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685" target="_blank" rel="external">https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685</a></p>
-<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><h3 id="2-1-查询"><a href="#2-1-查询" class="headerlink" title="2.1 查询"></a>2.1 查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">query = session.query(SomeModel)</div><div class="line"># 创建一个查询对象</div><div class="line"># 查询的是 SomeModel 里面所有的字段 即 select *</div><div class="line">query = session.query(SomeModel.acol,SomeModel.bcol)</div><div class="line"># 即 select acol , bcol</div><div class="line"># alias</div><div class="line">user_alias = aliased(User, name=&apos;user_alias&apos;)</div><div class="line">for row in session.query(user_alias, user_alias.name).all():</div><div class="line">    # 即相当于 select name as name_label</div><div class="line">    print(row.user_alias)</div><div class="line"></div><div class="line"># limit 和 offset</div><div class="line">for u in session.query(User).order_by(User.id)[1:3]:</div><div class="line">    print(u)</div><div class="line"></div><div class="line"># distinct</div><div class="line">session.query(model.Name).distinct(model.Name.value).order_by(model.Name.value)</div><div class="line"># order_by</div><div class="line">User.query.order_by(User.popularity.desc(),User.date_created.desc()).limit(10).all()</div></pre></td></tr></table></figure>
-<p>Query 对象，下文中，我会聊到这个 Query 对象。这里先跳过。</p>
-<h4 id="filter-操作符号"><a href="#filter-操作符号" class="headerlink" title="filter 操作符号"></a>filter 操作符号</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 等于</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>)</div><div class="line"><span class="comment"># 不等于</span></div><div class="line">query.filter(User.name != <span class="string">'ed'</span>)</div><div class="line"><span class="comment"># Like（有的数据库不区分大小写）</span></div><div class="line">query.filter(User.name.like(<span class="string">'%ed%'</span>))</div><div class="line"><span class="comment"># ILIKE (case-insensitive LIKE)</span></div><div class="line">query.filter(User.name.ilike(<span class="string">'%ed%'</span>))</div><div class="line"><span class="comment"># IN</span></div><div class="line">query.filter(User.name.in_([<span class="string">'ed'</span>, <span class="string">'wendy'</span>, <span class="string">'jack'</span>]))</div><div class="line"><span class="comment"># Not in</span></div><div class="line">query.filter(~User.name.in_([<span class="string">'ed'</span>, <span class="string">'wendy'</span>, <span class="string">'jack'</span>]))</div><div class="line"><span class="comment"># IS NULL</span></div><div class="line">query.filter(User.name == <span class="keyword">None</span>)</div><div class="line"><span class="comment">## 如果你用了 pep8/linter 的话</span></div><div class="line">query.filter(User.name.is_(<span class="keyword">None</span>))</div><div class="line"><span class="comment"># IS NOT NULL:</span></div><div class="line">query.filter(User.name != <span class="keyword">None</span>)</div><div class="line"><span class="comment">## 如果你用了 pep8/linter 的话</span></div><div class="line">query.filter(User.name.isnot(<span class="keyword">None</span>))</div><div class="line"><span class="comment"># AND</span></div><div class="line"><span class="comment">## use and_()</span></div><div class="line">query.filter(and_(User.name == <span class="string">'ed'</span>, User.fullname == <span class="string">'Ed Jones'</span>))</div><div class="line"><span class="comment">## or send multiple expressions to .filter()</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>, User.fullname == <span class="string">'Ed Jones'</span>)</div><div class="line"><span class="comment">## or chain multiple filter()/filter_by() calls</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>).filter(User.fullname == <span class="string">'Ed Jones'</span>)</div><div class="line"><span class="comment"># OR</span></div><div class="line">query.filter(or_(User.name == <span class="string">'ed'</span>, User.name == <span class="string">'wendy'</span>))</div><div class="line"><span class="comment"># MATCH</span></div><div class="line">query.filter(User.name.match(<span class="string">'wendy'</span>))</div></pre></td></tr></table></figure>
-<p>我们先 type 一下，找到类型，然后找一下文档</p>
+<h2 id="0x02-SQLAlchemy-的基本功能"><a href="#0x02-SQLAlchemy-的基本功能" class="headerlink" title="0x02 SQLAlchemy 的基本功能"></a>0x02 SQLAlchemy 的基本功能</h2><h3 id="2-0-SQLAlchemy-VS-DjangoORM"><a href="#2-0-SQLAlchemy-VS-DjangoORM" class="headerlink" title="2.0 SQLAlchemy VS DjangoORM"></a>2.0 SQLAlchemy VS DjangoORM</h3><p>ORM 通常有 DataMapper 实现和 ActiveRecord 实现两种。</p>
+<p>依照我的经验，ActiveRecord 使用起来的更接近对象 (Object) 的操作，DataMapper 使用起来更接近 (Table) 的操作。</p>
+<blockquote>
+<p>SQLAlchemy 是 DataMapper 模式的实现，在该模式下，session 会暴露出来，即 Model 与 session 并不耦合。</p>
+<p>DjangoORM 是 ActivityRecord 模式的一种实现，在该模式下，session 并不暴露出来，即 Model 与 session 耦合。</p>
+</blockquote>
+<p>使用 Django ORM 的时候，往往是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">b = Blog(**data)</div><div class="line">b.save()</div></pre></td></tr></table></figure>
+<p>使用 SQLAlchemy 的时候，往往是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">b = Blog(**data)</div><div class="line">session.add(b)</div><div class="line">session.session(b)</div></pre></td></tr></table></figure>
+<p>由于 Django 帮你屏蔽了 session 的操作。</p>
+<p>在通常情况下，</p>
+<ol>
+<li>DjangoORM 使用起来更加接近 Object 的操作。</li>
+<li>SQLAlchemy 使用起来更加接近 Table 的操作。</li>
+</ol>
+<p>举个例子，</p>
+<p>一对多，Father 添加两个小孩（其中一个小孩是已经存在的）</p>
+<p>在 DjangoORM 里面， 这里更像是一个 Set 的 add 操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">father.children.add(new_child,exsit_child)</div></pre></td></tr></table></figure>
+<p>在 SQLAlchemy 里面，这里更像是一个 table 的 insert 操作。（麻蛋，你要说是一个 list 的 append 操作也行）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for child in (new_child,exsit_child):</div><div class="line">    if child in father.children:</div><div class="line">        father.children.append(child)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>写 SQLAlchemy 更接近操作放在数据库里面的数据记录，而 DjangoORM 更接近操作一批放在数据库里面的对象。</p>
+</blockquote>
+<p>由于 session 的使用姿势不同，所以往往会有很多使用上面的区别。</p>
+<p>至于孰优孰劣，难以评判。</p>
+<ul>
+<li><p>技术老大 (Flask 和 React 大神）倾向于使用 SQLAlchemy, 他认为</p>
+<ul>
+<li>对于一个技术『知其然，知其所以然』</li>
+<li>对于 ORM<ul>
+<li>操作数据库，操作最好要落实在成 SQL</li>
+<li>如果有可能的话，每一个 SQL 语句都要经过推敲，而且写这个 SQL 和 ORM 过程要反复练习</li>
+</ul>
+</li>
+<li>对于 Migration 机制<ul>
+<li>Alembic 这个迁移工具是为了省事用的，甚至在某些情况下没必要用。完全可以写 SQL 代替</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>我 (Django 和 Vue 弱鸡）倾向于使用 DjangoORM, 我认为</p>
+<ul>
+<li>对于一个技术『先知其大致然，需要深入的时候知其所以然』</li>
+<li>对于 ORM<ul>
+<li>操作数据，最好抽象为对对象的操作。</li>
+<li>测试到位的情况下，快糙狠先出东西。到需要优化的时候该怎么 Profile 怎么 Profile</li>
+</ul>
+</li>
+<li>对于 Migration 机制<ul>
+<li>用起来啊，能操作对象为什么还要强行到数据库操作？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-1-模型定义"><a href="#2-1-模型定义" class="headerlink" title="2.1 模型定义"></a>2.1 模型定义</h3><p>先看一组模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</div><div class="line">Base = declarative_base() <span class="comment"># 模型基类</span></div><div class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, Integer, String</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(Base)</span>:</span></div><div class="line">    __tablename__ = <span class="string">'users'</span></div><div class="line"></div><div class="line">    id = Column(Integer, primary_key=<span class="keyword">True</span>) <span class="comment"># 主键</span></div><div class="line">    name = Column(String)</div><div class="line">    fullname = Column(String)</div><div class="line">    password = Column(String)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></div><div class="line">       <span class="keyword">return</span> <span class="string">"&lt;User(name='%s', fullname='%s', password='%s')&gt;"</span> % (</div><div class="line">                            self.name, self.fullname, self.password)</div><div class="line">Base.metadata.create_all(engine)</div></pre></td></tr></table></figure>
+<p>可以看出，包含如下的部分：</p>
+<ol>
+<li>Model 与 Model 内部的 Meta</li>
+<li>Field 与 Field 内部的 Options</li>
+<li>Model 与 Model 之间的关系</li>
+<li>其他，比如索引</li>
+</ol>
+<h4 id="Models-与-Meta"><a href="#Models-与-Meta" class="headerlink" title="Models 与 Meta"></a>Models 与 Meta</h4><p><a href="https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685" target="_blank" rel="external">https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685</a></p>
+<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><h3 id="2-1-Query"><a href="#2-1-Query" class="headerlink" title="2.1 Query"></a>2.1 Query</h3><h4 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">c1 = Child(name=&quot;苏轼&quot;)</div><div class="line">session.add(c1)</div><div class="line">session.flush()</div><div class="line">p = Parent(name=&quot;苏辙&quot;)</div><div class="line">p.best_child = c1</div><div class="line">for c in [c1,c2,c3,c4]:</div><div class="line">    p.children.append(c)</div><div class="line">session.add(c1)</div><div class="line">session.commit()</div></pre></td></tr></table></figure>
+<h4 id="Retrieve"><a href="#Retrieve" class="headerlink" title="Retrieve"></a>Retrieve</h4><p>过滤</p>
+<p>filter(**kwargs)<br>filter(Singer.name == “周杰伦”)<br>filter(Singer.name =! “周杰棍”)</p>
+<h5 id="跨关系（跨表）查询"><a href="#跨关系（跨表）查询" class="headerlink" title="跨关系（跨表）查询"></a>跨关系（跨表）查询</h5><p>session.query(Entry).join(Blog,Blog.entry_id == Entry.id).filter(Blog.name = “SqlAlchemy CheatSheet”)</p>
+<h5 id="Limit-Offset-分页"><a href="#Limit-Offset-分页" class="headerlink" title="Limit / Offset / 分页"></a>Limit / Offset / 分页</h5><ul>
+<li>limit()</li>
+<li>offset()</li>
+</ul>
+<h5 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">query = session.query(Order) # query = session.query(Order)</div><div class="line">query = query.filter(Order.name.like(f&quot;%name%&quot;))</div></pre></td></tr></table></figure>
+<h5 id="二进制表达式"><a href="#二进制表达式" class="headerlink" title="二进制表达式"></a>二进制表达式</h5><p>我们先 type 一下表达式，找到 eq 的类型</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">type(model.column_name == <span class="string">'asdf'</span>) → sqlalchemy.sql.elements.BinaryExpression</div></pre></td></tr></table></figure>
-<h4 id="返回数量"><a href="#返回数量" class="headerlink" title="返回数量"></a>返回数量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">all()</div><div class="line">first()</div><div class="line">one()</div><div class="line">one_or_none()</div><div class="line">scalar()</div></pre></td></tr></table></figure>
+<p>是一个二进制表达式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 等于</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>)</div><div class="line"><span class="comment"># 不等于</span></div><div class="line">query.filter(User.name != <span class="string">'ed'</span>)</div><div class="line"><span class="comment"># Like（有的数据库不区分大小写）</span></div><div class="line">query.filter(User.name.like(<span class="string">'%ed%'</span>))</div><div class="line"><span class="comment"># ILIKE (case-insensitive LIKE)</span></div><div class="line">query.filter(User.name.ilike(<span class="string">'%ed%'</span>))</div><div class="line"><span class="comment"># IN</span></div><div class="line">query.filter(User.name.in_([<span class="string">'ed'</span>, <span class="string">'wendy'</span>, <span class="string">'jack'</span>]))</div><div class="line"><span class="comment"># Not in</span></div><div class="line">query.filter(~User.name.in_([<span class="string">'ed'</span>, <span class="string">'wendy'</span>, <span class="string">'jack'</span>]))</div><div class="line"><span class="comment"># IS NULL</span></div><div class="line">query.filter(User.name == <span class="keyword">None</span>)</div><div class="line"><span class="comment">## 如果你用了 pep8/linter 的话</span></div><div class="line">query.filter(User.name.is_(<span class="keyword">None</span>))</div><div class="line"><span class="comment"># IS NOT NULL:</span></div><div class="line">query.filter(User.name != <span class="keyword">None</span>)</div><div class="line"><span class="comment">## 如果你用了 pep8/linter 的话</span></div><div class="line">query.filter(User.name.isnot(<span class="keyword">None</span>))</div><div class="line"><span class="comment"># AND</span></div><div class="line"><span class="comment">## use and_()</span></div><div class="line">query.filter(and_(User.name == <span class="string">'ed'</span>, User.fullname == <span class="string">'Ed Jones'</span>))</div><div class="line"><span class="comment">## or send multiple expressions to .filter()</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>, User.fullname == <span class="string">'Ed Jones'</span>)</div><div class="line"><span class="comment">## or chain multiple filter()/filter_by() calls</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>).filter(User.fullname == <span class="string">'Ed Jones'</span>)</div><div class="line"><span class="comment"># OR</span></div><div class="line">query.filter(or_(User.name == <span class="string">'ed'</span>, User.name == <span class="string">'wendy'</span>))</div><div class="line"><span class="comment"># MATCH</span></div><div class="line">query.filter(User.name.match(<span class="string">'wendy'</span>))</div></pre></td></tr></table></figure>
+<h5 id="执行查询"><a href="#执行查询" class="headerlink" title="执行查询"></a>执行查询</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">all()</div><div class="line">first()</div><div class="line">one()</div><div class="line">one_or_none()</div><div class="line">scalar()</div></pre></td></tr></table></figure>
 <p>YourModel.query.get((pk1, pk2))</p>
+<h5 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h5><blockquote>
+<p>同一个 Session 下面，取到的某一条数据对应的 objects 应该是一样的？</p>
+</blockquote>
+<h5 id="复制-实例"><a href="#复制-实例" class="headerlink" title="复制 实例"></a>复制 实例</h5><h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># 查询的是 SomeModel 里面所有的字段 即 select *</div><div class="line">query = session.query(SomeModel)</div><div class="line"># 查询的是 SomeModel 里面部分的字段 即 select acol, bcol</div><div class="line">query = session.query(SomeModel.acol,SomeModel.bcol)</div><div class="line"># 即 select acol , bcol</div><div class="line"># alias</div><div class="line">user_alias = aliased(User, name=&apos;user_alias&apos;)</div><div class="line">for row in session.query(user_alias, user_alias.name).all():</div><div class="line">    # 即相当于 select name as name_label</div><div class="line">    print(row.user_alias)</div><div class="line"></div><div class="line"># limit 和 offset</div><div class="line">for u in session.query(User).order_by(User.id)[1:3]:</div><div class="line">    print(u)</div><div class="line"></div><div class="line"># distinct</div><div class="line">session.query(model.Name).distinct(model.Name.value).order_by(model.Name.value)</div><div class="line"># order_by</div><div class="line">User.query.order_by(User.popularity.desc(),User.date_created.desc()).limit(10).all()</div></pre></td></tr></table></figure>
+<h4 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h4><p>单个 object 更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">blog.title = &quot;大宝天天见&quot;</div><div class="line">session.add(blog)</div><div class="line">session.commit()</div></pre></td></tr></table></figure>
+<p>批量更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">session.query.filter(Blog.content.like(&quot;% 敏感词 %&quot;)).update(&#123;</div><div class="line">    Blog.content: &quot;依照相关 XX 无法查看&quot;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>一对多的更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">append</div></pre></td></tr></table></figure>
+<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><p>query.delete()</p>
+<h5 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h5><p>Query 对象，下文中，我会聊到这个 Query 对象。这里先跳过。</p>
 <h4 id="join-gt-JOIN-语句"><a href="#join-gt-JOIN-语句" class="headerlink" title="join -&gt; JOIN 语句"></a>join -&gt; JOIN 语句</h4><p><a href="https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query" target="_blank" rel="external">https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query</a></p>
 <h5 id="两表-InnerJoin"><a href="#两表-InnerJoin" class="headerlink" title="两表 InnerJoin"></a>两表 InnerJoin</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> u, a <span class="keyword">in</span> session.query(User, Address).\</div><div class="line">                    filter(User.id==Address.user_id).\</div><div class="line">                    filter(Address.email_address==<span class="string">'jack@google.com'</span>).\</div><div class="line">                    all():</div><div class="line">    print(u)</div><div class="line">    print(a)</div><div class="line"><span class="comment"># &lt;User(name='jack', fullname='Jack Bean', password='gjffdd')&gt;</span></div><div class="line"><span class="comment"># &lt;Address(email_address='jack@google.com')&gt;</span></div></pre></td></tr></table></figure>
 <h5 id="多表-InnerJoin-LeftJoin"><a href="#多表-InnerJoin-LeftJoin" class="headerlink" title="多表 InnerJoin + LeftJoin"></a>多表 InnerJoin + LeftJoin</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">query.outerjoin(User.addresses)   # LEFT OUTER JOIN</div></pre></td></tr></table></figure>
@@ -514,6 +900,10 @@
 <p>:TODO: 有机会看看那本书再修改一下本小节</p>
 <p>这不，果然有人就这么搞了 <a href="https://github.com/absent1706/sqlalchemy-mixins" target="_blank" rel="external">https://github.com/absent1706/sqlalchemy-mixins</a></p>
 <h2 id="0x07-其他"><a href="#0x07-其他" class="headerlink" title="0x07 其他"></a>0x07 其他</h2><h3 id="SQL-注入"><a href="#SQL-注入" class="headerlink" title="SQL 注入"></a>SQL 注入</h3><p>session.query(MyClass).filter(“foo={}”.format(getArgs[‘val’]))</p>
+<h2 id="0x02-SQLAlchemy-及其生态"><a href="#0x02-SQLAlchemy-及其生态" class="headerlink" title="0x02 SQLAlchemy 及其生态"></a>0x02 SQLAlchemy 及其生态</h2><p>如果用上 Flask+SQLAlchemy 一般也要带上，Flask-Migration 与 Flask-SQLAlchemy, 这两个库也是对 Alembic 和 SQLAlchemy 的浅封装。</p>
+<h3 id="如何快速上手-ORM"><a href="#如何快速上手-ORM" class="headerlink" title="如何快速上手 ORM"></a>如何快速上手 ORM</h3><p>那么，对于这个 ORM 库还有那些通用性的知识需要了解？</p>
+<p>嗯，是时候了解本质了。</p>
+<p><a href="http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/" target="_blank" rel="external">http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/</a></p>
 <h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
 <li><a href="https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/" target="_blank" rel="external">https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/</a></li>
 <li><a href="https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create" target="_blank" rel="external">https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create</a></li>
@@ -2798,205 +3188,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/10/ElasticSearchCheatSheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/10/ElasticSearchCheatSheet/" itemprop="url">ElasticSearch CheatSheet</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T10:25:39+08:00">
-                2018-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后台组件/" itemprop="url" rel="index">
-                    <span itemprop="name">后台组件</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  4,346
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  16
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。</p>
-<blockquote>
-<p>最早使用 ElasticSearch 是两年前了。最近准备用 Django 写一个全栈式的应用，借用强大的 ES 来做搜索。</p>
-</blockquote>
-<p>这是我在写程序之余写这篇笔记的原因。最近因为换工作的事情耽误了教程更新，就把这篇笔记放出来吧。不定期更新。</p>
-<p>官网介绍 ElasticSearch 不仅仅是全文搜索，也可以结构化搜索（这里用结构化查询会更准确一些），处理人类语言，地理位置，以及关系。</p>
-<p>然而，我在项目使用过程中还是主要用到了全文搜索以及推荐。</p>
-<p>不用其他的主要原因是因为 ES 尺有所短寸有所长：</p>
-<ol>
-<li>geo 处理方面 postgis 完全就是神一般的存在。为什么还要用 ES 呢？</li>
-<li>关系型数据库的核心不就是处理关系？复杂的关系肯定还是放在关系数据库里面。</li>
-</ol>
-<ul>
-<li>highlighted search</li>
-<li>search-as-you-type</li>
-<li>did-you-mean suggestions</li>
-</ul>
-<p>我对 ElasticSearch 在后台组件里的作用在于搜索与推荐：</p>
-<ol>
-<li>整站的搜索功能<ul>
-<li>全文搜索</li>
-</ul>
-</li>
-<li>推荐<ul>
-<li>依据某几个维度的数据进行排序</li>
-</ul>
-</li>
-</ol>
-<p>知乎的文章居然不支持 toc, 实在是太蛋疼了。</p>
-<p>文章目录如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">▼ 0x00 前言 : section</div><div class="line">▼ 0x01 安装，配置，基本 shell 命令 : section</div><div class="line">    1. 安装 : section</div><div class="line">    2. 配置 : section</div><div class="line">    3. 插件 : section</div><div class="line">  0x02 ElasticSearch 配套工具 : section</div><div class="line">▼ 0x03 ElasticSearch 基础概念 : section</div><div class="line">  ▼ 3.1 Elasticsearch CRUDE 以及基本操作 : section</div><div class="line">      CURDE : section</div><div class="line">      普通搜索 : section</div><div class="line">      聚集搜索 : section</div><div class="line">▼ 0x04 全文搜索的基本概念 : section</div><div class="line">    4.1 全文搜索遇到的挑战 : section</div><div class="line">  ▼ 4.2 全文搜索的索引时与查询时 : section</div><div class="line">      1. 索引时 ES 做了什么？ : section</div><div class="line">      2. 查询时 ES 做了什么？ : section</div><div class="line">      3. 全文搜索调优之中文分词 : section</div><div class="line">      4. 全文搜索调优之停止词 : section</div><div class="line">      5. 全文搜索调优之同义词 : section</div><div class="line">      6. 全文搜索调优之拼写错误 : section</div><div class="line">    ▼ 7. 全文搜索调优之相关性 : section</div><div class="line">        索引时三因素 : section</div><div class="line">        查询时 : section</div><div class="line">        计算公式 : section</div><div class="line">  0x05 搜索语法 : section</div><div class="line">  0x06 Python SDK : section</div><div class="line">  0x07 踩坑集 : section</div><div class="line">  0xEE 参考链接 : section</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/ElasticSearchCheatSheet/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -3046,7 +3237,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-count">73</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
