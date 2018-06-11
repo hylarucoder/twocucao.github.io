@@ -300,6 +300,1144 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/06/10/SynologyNas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/10/SynologyNas/" itemprop="url">Synology 群晖 NAS 入门指北</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-10T11:52:36+08:00">
+                2018-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,471
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>百度云的人工智障总是误删我的文件，于是开始寻找其他存储方案。决定入手一台 NAS.</p>
+<h3 id="组装机-品牌机"><a href="#组装机-品牌机" class="headerlink" title="组装机 / 品牌机"></a>组装机 / 品牌机</h3><p>视具体情况，笔者缺乏足够的精力去折腾，如果精力足够，我还是很倾向于自己组装一台 nas 的。不过，现在年纪大了，还是老老实实买个品牌的 NAS 好了，折腾大抵是年轻人的事情。</p>
+<p>为啥买群晖？因为看到很多喜欢折腾的人都安装黑群晖，所以直接买了个白群晖。</p>
+<h3 id="本文目录"><a href="#本文目录" class="headerlink" title="本文目录"></a>本文目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">▼ 0x00 前言 : section</div><div class="line">    组装机 / 品牌机 : section</div><div class="line">  ▼ 0x01 安装 / 配置 : section</div><div class="line">      STEP-0 设备 : section</div><div class="line">      STEP-1 组装 : section</div><div class="line">      STEP-2 组网 : section</div><div class="line">      STEP-3 安装系统 : section</div><div class="line">  ▼ 0x02 一些私人化的需求 : section</div><div class="line">      2.1 内网 NAS 使用 : section</div><div class="line">      2.2 外网 NAS 使用 : section</div><div class="line">    ▼ 2.3 与百度云结合 : section</div><div class="line">        如何同步数据 : section</div><div class="line">      2.3 Time Machine : section</div><div class="line">    0xEE 结论 : section</div></pre></td></tr></table></figure>
+<h2 id="0x01-安装-配置"><a href="#0x01-安装-配置" class="headerlink" title="0x01 安装 / 配置"></a>0x01 安装 / 配置</h2><h3 id="STEP-0-设备"><a href="#STEP-0-设备" class="headerlink" title="STEP-0 设备"></a>STEP-0 设备</h3><ul>
+<li>路由器一台</li>
+<li>网线一根</li>
+<li>Synology 一台，笔者使用的是 DS218j 2 盘位 NAS （这款家用基本上够用了）</li>
+<li>硬盘两个，推荐 WD 的红盘或者希捷的狼盘。</li>
+</ul>
+<h3 id="STEP-1-组装"><a href="#STEP-1-组装" class="headerlink" title="STEP-1 组装"></a>STEP-1 组装</h3><p>把硬盘安装在 nas 里需要三个步骤</p>
+<ol>
+<li>打开 nas 外壳</li>
+<li>把硬盘塞进去</li>
+<li>把盒子盖上</li>
+</ol>
+<h3 id="STEP-2-组网"><a href="#STEP-2-组网" class="headerlink" title="STEP-2 组网"></a>STEP-2 组网</h3><ol>
+<li>如果你的路由器可以直连宽带接口的话，则直接连接。</li>
+<li>如果你的路由器上一级有个路由器的话，可以使用桥接模式，把这台路由器连到上一台路由器上。</li>
+</ol>
+<p>nas 建议直接用网线连接到路由器上。</p>
+<p>那么，现在你的手机 / 笔记本 / 平板等等放到该局域网中。</p>
+<blockquote>
+<p>PS: 为什么需要这么做？因为所有环境放在一个局域网内的话，安全性和速度较好。</p>
+</blockquote>
+<h3 id="STEP-3-安装系统"><a href="#STEP-3-安装系统" class="headerlink" title="STEP-3 安装系统"></a>STEP-3 安装系统</h3><p>打开群晖机器开关，在同一局域网内的访问</p>
+<p><a href="http://find.synology.com/" target="_blank" rel="external">http://find.synology.com/</a></p>
+<p>然后按照要求进行注册登陆</p>
+<p>期间需要注册群晖的账号，以及本台机器的用户名和密码。</p>
+<h2 id="0x02-一些私人化的需求"><a href="#0x02-一些私人化的需求" class="headerlink" title="0x02 一些私人化的需求"></a>0x02 一些私人化的需求</h2><h3 id="2-1-内网-NAS-使用"><a href="#2-1-内网-NAS-使用" class="headerlink" title="2.1 内网 NAS 使用"></a>2.1 内网 NAS 使用</h3><p>笔者使用的是 Mac 电脑，在 Finder 中直接链接服务器，输入 smb://mynas 即可访问。剩下的操作基本上和本地磁盘使用起来没有什么大的差别。</p>
+<p>对于手机和平板，安装群晖对应的 Drive 即可。</p>
+<h3 id="2-2-外网-NAS-使用"><a href="#2-2-外网-NAS-使用" class="headerlink" title="2.2 外网 NAS 使用"></a>2.2 外网 NAS 使用</h3><p>外网可以直接使用群晖的账号登录群晖的官网，接着控制这台群晖的机器进行下载。但速度不够。</p>
+<p>使用下来感觉效果并不好。建议阅读下一章和百度云配合使用。</p>
+<h3 id="2-3-与百度云结合"><a href="#2-3-与百度云结合" class="headerlink" title="2.3 与百度云结合"></a>2.3 与百度云结合</h3><p>百度云这个东西让人又爱又恨。</p>
+<ul>
+<li>爱的是，容量不错，部分热门资源的下载速度也可。</li>
+<li>恨的是，老是莫名其妙删掉我的文件。冷门资源那下载速度真的是….</li>
+</ul>
+<p>而现在，现在我的文件就分为两种：</p>
+<ul>
+<li>一种是合规的不可丢失的文件</li>
+<li>一种是合规的可丢失的文件</li>
+</ul>
+<p>像我这样贯彻社会主义核心价值观的人，所有文件都是合法合规的。接受文件的审查倒也能接受，但人工智障老是误删我的合法文件这尼玛给我工作生活带来困扰啊。</p>
+<p>所以，</p>
+<ul>
+<li>对于丢失零容忍的文件可以考虑放在 Nas 中。</li>
+<li>对于丢失可容忍的文件可以考虑放在百度云中。</li>
+<li>对于日常使用的文档可以放在百度云中。</li>
+</ul>
+<h4 id="如何同步数据"><a href="#如何同步数据" class="headerlink" title="如何同步数据"></a>如何同步数据</h4><p>鉴于百度云开放了应用接口，群晖的 Nas 也可以实现百度云同步数据到 Nas 上。</p>
+<p>安装 CloudSync 选择第三方供应商。百度云，完成授权。</p>
+<p>设置双向同步到 DMS 的某个文件夹下。比如，笔者同步百度云的文件到本地 DSM /CloudDrive/BaiduPan/ 即完成最基本的设置了。</p>
+<p><strong>如何同步本地数据到云端呢？</strong></p>
+<p>然后随便复制一个文件到该文件夹下，然后在百度云的 Web 端的『我的应用数据 /Cloud Sync 』 文件夹下就可以看到资源了。</p>
+<p><strong>那么，如何同步云端的数据到本地呢？</strong></p>
+<p>把云端的数据（文件 / 文件夹）拖动到 『我的应用数据 /Cloud Sync 』里即可。</p>
+<p>像一些非私密性的文件，扔百度云就好了。</p>
+<p>这个 Nas 就相当于一个远程的拥有高容量的弱鸡服务器，可以用来跑跑一些下载任务之类。</p>
+<h3 id="2-3-Time-Machine"><a href="#2-3-Time-Machine" class="headerlink" title="2.3 Time Machine"></a>2.3 Time Machine</h3><p>Nas 另一个吸引我的地方就是可以 Time Machine 进行备份了。步骤大致如下。</p>
+<ol>
+<li>『共享文件夹』里面新建文件夹 Time Machine</li>
+<li>『文件服务』中开启 SMB/AFP 服务，在高级设置中启用 Bonjour , 启用 SMB/AFP 的 TimeMachine 播送，指定为 Time Machine 文件夹</li>
+<li>『用户管理』里新建用户 TimeMachine, 容量限制一下，建议 1TB 即可。</li>
+<li>打开 Mac 电脑，选择磁盘，然后开始备份。</li>
+</ol>
+<p>PS: 但我这边初次备份 TM 的时候，需要备份 300+GB 的文件，速度确实堪忧。和直接外接接口连接硬盘完全没法比。但慢慢备份下来，其实速度也能接受。</p>
+<h2 id="0xEE-结论"><a href="#0xEE-结论" class="headerlink" title="0xEE 结论"></a>0xEE 结论</h2><p>NAS 解决了我的几个痛点。</p>
+<ul>
+<li>跨平台共享文件</li>
+<li>文件集中化管理</li>
+<li>硬盘容量大</li>
+<li>私密性较好</li>
+<li>不会有人工智障来删我东西</li>
+<li>速度在可接受范围内。我在用 LR 修图的时候只是稍微比本地的慢一点。</li>
+</ul>
+<p>不过似乎还有一些其他的功能可以继续发掘一下。以后有机会再分享一下。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/06/06/CPython/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/06/06/CPython/" itemprop="url">CPython 源码初步阅读笔记</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T10:08:12+08:00">
+                2018-06-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  222
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>先挖坑，以后有机会填</p>
+<p>├── Grammar # 语法<br>├── Include # C 语言头文件，如果需要自定义模块扩展 Python, 也需要这块。<br>├── Modules # C 语言编写的模块，对速度要求高，比如 random<br>├── Objects # 内建对象 包含整数，list,dict 等。<br>├── Parser # Scanner 和 parser<br>├── Python # 各种 Python 共享库<br>├── Lib # Python 自带的所有标准库<br>├── Doc # 文档<br>├── Tools # 一些 Python 程序，方便扩展 Python<br>├── Misc # 不清楚放哪，就放这里好了<br>├── PC # Windows 编译姿势<br>├── PCbuild # Windows 编译姿势<br>├── Mac # Mac 上编译姿势<br>├── Programs<br>├── README.rst<br>├── aclocal.m4<br>├── config.guess<br>├── config.sub<br>├── configure<br>├── configure.ac<br>├── install-sh<br>├── m4<br>├── pyconfig.h.in<br>├── setup.py<br>├── LICENSE<br>├── Makefile.pre.in</p>
+<h2 id="Ch01-Python-对象初探"><a href="#Ch01-Python-对象初探" class="headerlink" title="Ch01 Python 对象初探"></a>Ch01 Python 对象初探</h2><p>一切都是对象</p>
+<p>类型对象</p>
+<ul>
+<li>内置对象：int / string / dict</li>
+<li>自定义对象：class A</li>
+</ul>
+<p>实例对象</p>
+<h3 id="1-1-Python-内的对象"><a href="#1-1-Python-内的对象" class="headerlink" title="1.1 Python 内的对象"></a>1.1 Python 内的对象</h3><p>Python 里的对象就是 C 中结构体在堆上申请的一块内存。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/05/22/fabric2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/fabric2/" itemprop="url">PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T21:11:03+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,094
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的包管理工具 pipenv』</p>
+<p>Kenneth Reitz 出品，必属精品。</p>
+<h3 id="Python-打包历史"><a href="#Python-打包历史" class="headerlink" title="Python 打包历史"></a>Python 打包历史</h3><p>刚开始的时候，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl http://pypi.python.org/packages/alsdasdl/requests.tar.gz | tar zxf</div><div class="line">cd requests/</div><div class="line">python setup.py install</div></pre></td></tr></table></figure>
+<p>这个问题初看起来不是问题，但是随着你安装程序的增多就知道有多么痛苦了。</p>
+<ol>
+<li>有的依赖库依赖别的库你怎么解决？比如 pandas 需要安装 numpy</li>
+<li>有的依赖库依赖 c 库怎么办？比如 LXML</li>
+<li>在 python2.6.5 下，如果我需要安装两个不同版本的 Django 开发不同的软件怎么办？难道只能动态复制文件到 site-packages 里面？</li>
+</ol>
+<p>后来，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">easy_install requests</div></pre></td></tr></table></figure>
+<p>我们可以直接从 pypi 进行安装了。但尼玛，为什么 easy_install 安装很 easy, 但是没有 easy_uninstall?</p>
+<p>好，2010 年后，我们继续前进：</p>
+<ul>
+<li>可以通过 pip 替代 easy_install 了。</li>
+<li>可以通过 virtualenv 管理项目的依赖库了。虽然说，还是不能像 ruby gem 一样同时把多个版本的的软件装在同一个系统里。</li>
+<li>可以通过 requirements 锁依赖了。</li>
+</ul>
+<p>但，同期的其他编程语言社区分别出现了如下的包管理工具：</p>
+<ul>
+<li>node -&gt; yarn &amp;&amp; npm , 有 lockfile</li>
+<li>php -&gt; composer , 有 lockfile</li>
+<li>rust -&gt; cargo , 有 lockfile</li>
+<li>ruby -&gt; bundler , 有 lockfile</li>
+</ul>
+<p>而我大 Python 居然没跟上潮流</p>
+<ul>
+<li>python -&gt; pip &amp;&amp; virtualenv/venv , 无 lockfile</li>
+</ul>
+<blockquote>
+<p>PS: Python3.3 之后，默认可以直接使用 venv 模块，不需要再安装 virtualenv 了。但还是需要手动，并且用起来比较反直觉。</p>
+</blockquote>
+<p>关于 requirements.txt</p>
+<ul>
+<li>如果你使用 pip freeze 来形成这个文件，则不直观，完全看不出来哪个依赖库依赖哪个依赖。</li>
+<li>如果你直接手动指定你所需要的库，比如 flask 的话，似乎又有些太直观了。</li>
+</ul>
+<p>如果能有一个东西，既可以表示 freeze 的结果 (what you want)，又可以表示你需要的库 (what you need). 就好了。</p>
+<blockquote>
+<p>这当然可以考虑用两份 requirements 来解决。先安装 what you need 用来开发，然后 freeze 为 what you want 去部署。</p>
+</blockquote>
+<p>当然，铺垫了这么多 K 神肯定是来介绍他的 pipenv 的。</p>
+<p>比如说，我想查看，本项目的依赖库，直接 pipenv graph</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">coverage==4.5.1</div><div class="line">fabric==2.0.1</div><div class="line">  - cryptography [required: &gt;=1.1, installed: 2.2.2]</div><div class="line">    - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]</div><div class="line">    - cffi [required: &gt;=1.7, installed: 1.11.5]</div><div class="line">      - pycparser [required: Any, installed: 2.18]</div><div class="line">    - idna [required: &gt;=2.1, installed: 2.6]</div><div class="line">    - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">  - invoke [required: &lt;2.0,&gt;=1.0, installed: 1.0.0]</div><div class="line">  - paramiko [required: &gt;=2.4, installed: 2.4.1]</div><div class="line">    - bcrypt [required: &gt;=3.1.3, installed: 3.1.4]</div><div class="line">      - cffi [required: &gt;=1.1, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">    - cryptography [required: &gt;=1.5, installed: 2.2.2]</div><div class="line">      - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]</div><div class="line">      - cffi [required: &gt;=1.7, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - idna [required: &gt;=2.1, installed: 2.6]</div><div class="line">      - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">    - pyasn1 [required: &gt;=0.1.7, installed: 0.4.2]</div><div class="line">    - pynacl [required: &gt;=1.0.1, installed: 1.2.1]</div><div class="line">      - cffi [required: &gt;=1.4.1, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - six [required: Any, installed: 1.11.0]</div><div class="line">flake8==3.5.0</div><div class="line">  - mccabe [required: &gt;=0.6.0,&lt;0.7.0, installed: 0.6.1]</div><div class="line">  - pycodestyle [required: &lt;2.4.0,&gt;=2.0.0, installed: 2.3.1]</div><div class="line">  - pyflakes [required: &gt;=1.5.0,&lt;1.7.0, installed: 1.6.0]</div><div class="line"># 其他省略</div></pre></td></tr></table></figure>
+<p>如何尝鲜？我最近更新到了之前写的一个库（代码写的惨不忍赌，最近准备重构，勿喷）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:twocucao/YaPyLib.git</div><div class="line">cd YaPyLib/</div><div class="line">brew install pipenv</div><div class="line">pipenv --three</div><div class="line">pipenv install --dev</div><div class="line">pipenv shell</div></pre></td></tr></table></figure>
+<p>记住几个命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pipenv --venv # 查看 venv 位置</div><div class="line">pipenv --python 3.6.5</div><div class="line">exit 退出 pipenv shell</div></pre></td></tr></table></figure>
+<p>至于其他的功能，参考官网自己摸索吧。</p>
+<h3 id="FAQ-环节"><a href="#FAQ-环节" class="headerlink" title="FAQ 环节"></a>FAQ 环节</h3><p>FAQ 环节有一个问题非常有趣，应该把 lockfile 放在 git 仓库里面吗？</p>
+<p>k 神是这么回答的 yes。 这个问题很久之前就在 issue 上回答过了</p>
+<p><a href="https://github.com/pypa/pipenv/issues/598" target="_blank" rel="external">https://github.com/pypa/pipenv/issues/598</a></p>
+<p>我刚开始觉得不提交会好一些，后来觉得 track 一下也无妨。</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><blockquote>
+<p>在用 npm 和 yarn 的时候，我有这么一个想法，希望 python 圈子里面能出一个类似于包管理工具。今年 2 月份的时候把自己的项目迁移过来，发现 pipenv 用起来很挺舒服的。</p>
+<p>pipenv 是未来。火速用上吧。</p>
+<p>觉得有趣就点个赞或者关注下呗。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/05/22/pipenv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/pipenv/" itemprop="url">Python 自动化工具 Fabric 支持 Python3 了</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T21:11:03+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  610
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。</p>
+<p>后来</p>
+<ul>
+<li><del>我总算学会了如何去爱。<del></del></del></li>
+<li>我喜欢的工具陆陆续续支持了 Python3</li>
+<li>Scrapy 支持了 Python3</li>
+<li>Ansible 支持了 Python3</li>
+</ul>
+<p>只有 Fabric 这个工具，死撑着没有支持 Python3 的的迹象。</p>
+<p>2018-05-08 的时候，Fabric 悄悄升级了 2.0 版本。</p>
+<p>而就在前两天，我升级网站的时候，突然发现 fabric (1.14 版本） 不能用了。</p>
+<p>查了一下版本，发现 fabric 更新到了 2.0 版本，支持了 python3.4</p>
+<p>在发现这个问题之后，火速刷了一波官方文档，把手头 Fabric 1.14 版本的脚本做了一些升级。</p>
+<h3 id="从-V1-到-V2"><a href="#从-V1-到-V2" class="headerlink" title="从 V1 到 V2"></a>从 V1 到 V2</h3><p>Fabric v2 基于 invoke 和 paramiko 两个库构建而成。</p>
+<ul>
+<li>invoke 库提供了 subprocess command execution 和 command-line</li>
+<li>paramiko 提供了 ssh 协议实现</li>
+</ul>
+<p>在这两者的基础上，做了一些扩展。</p>
+<p>甚至，如果你只用其中的本地功能，你都完全不需要使用 fabric, 直接用 invoke 即可。没错，我已经打算把我的本地脚本全部使用 invoke Python3 化了。</p>
+<p>v1 版本和 v2 版本初步用起来，个人觉得 v1 用起来 API 更加符合直觉一些。</p>
+<p>这东西怎么用呢？</p>
+<p>我们先定义 fabfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># fabfile.py</div><div class="line">from invoke import task</div><div class="line"></div><div class="line">def expand_path(c, path):</div><div class="line">    return &apos;&quot;$(echo %s)&quot;&apos; % path</div><div class="line"></div><div class="line">def exists(c, path):</div><div class="line">    cmd = &apos;stat %s&apos; % expand_path(c, path)</div><div class="line">    return c.run(cmd, warn=True, hide=True).ok</div><div class="line"></div><div class="line">@task</div><div class="line">def deploy(c):</div><div class="line">    c.local(&quot;youcmd&quot;)</div><div class="line">    c.put()</div><div class="line">    c.get()</div><div class="line">    c.run()</div><div class="line">    c.run(&quot;sudo youcmd&quot;)</div><div class="line">    ......</div><div class="line"></div><div class="line">@task</div><div class="line">def other_stuff(c):</div><div class="line">    ......</div></pre></td></tr></table></figure>
+<p>需要注意的是，invoke 里面默认的 replace_env 设置为了 False ,fabric 里面给 runner 设置了 replace_env 为 True , 这也就意味着默认情况下，执行 c.local 的时候会找不到自定义的环境变量，这意味着：</p>
+<ol>
+<li>你的 PATH 被重置了，这意味着你用 brew 安装的软件可能已经完全找不到了。</li>
+<li>你的环境变量 LANG 并不一定是 en_US.UTF-8 了</li>
+</ol>
+<p>于是设置一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ~/.fabric.py</div><div class="line">#!/usr/bin/env python</div><div class="line"># encoding: utf-8</div><div class="line"></div><div class="line">run = &#123;</div><div class="line">    &quot;replace_env&quot;: False</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当我要部署的时候直接执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fab -H webserver01,webserver02,webserver03,webserver04 deploy</div></pre></td></tr></table></figure>
+<p>到这里大家基本上看出来了，我并没有在文件中 import fabric 只是简单了配置了一个配置文件和执行一下 fab 命令。</p>
+<p>这个 v2 版本的 fabric 相当于 invoke 的包装。但我们也可以显式的 import fabric 里面的东西进行更加进阶的操作。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/05/16/PyConDjango/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/16/PyConDjango/" itemprop="url">PyCon 2018 之 Django 专题与 未来的包管理工具 pipenv</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T19:18:35+08:00">
+                2018-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,147
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>PyCon 2018 有很多精彩的演讲，今天的文章里，挑出 Django 的几篇演讲大致讲讲。</p>
+<blockquote>
+<p>注意：为什么是大致讲讲呢？因为即便是你看了我的这篇文章，依然需要多下点功夫自己去看演讲，自己去查资料，自己去消化。我的这篇文章只不过是我看演讲查资料慢慢消化过程中的产物而已。</p>
+</blockquote>
+<h2 id="0x01-演讲-1-Taking-Django-Async"><a href="#0x01-演讲-1-Taking-Django-Async" class="headerlink" title="0x01 演讲 1 - Taking Django Async"></a>0x01 演讲 1 - Taking Django Async</h2><p>本演讲其实就是为了推广 Django 的新库。django-channels</p>
+<p>这个库从 2015 年首发，现在已经经过了三年的进程。应该算是相对成熟了。</p>
+<p>这个库有什么不走寻常路的地方吗？答案是有的：</p>
+<ol>
+<li>使得 Django 增加了异步协议，比如说 WebSocket 协议</li>
+<li>使得 Django 可运行后台任务。</li>
+</ol>
+<p>作为 v2 版本的核心开发，作者必然是要吐槽一下 v1 版本，然后推荐一下 v2 版本。</p>
+<p>v1 版本的架构设计是这样的。</p>
+<p>核心开发给出了这样的评价：</p>
+<ol>
+<li>在 Python2.7 的时候，就只能这么搞了。</li>
+<li>需要维护的东西太多</li>
+<li>没有 asyncio support</li>
+<li>搬砖时候一不小心容易砸到脚</li>
+</ol>
+<blockquote>
+<p>TODO : 补充一些其他的缺点</p>
+</blockquote>
+<p>异步与同步接口耦合</p>
+<p>作者认为此并非长久之计。</p>
+<p>v2 时候，</p>
+<p>重写 75% 的代码</p>
+<p>异步与同步接口分离</p>
+<p>这么设计的话，需要解决接下来的一个问题，同步转异步，异步转同步。</p>
+<p>比如，我访问 view, 实际上是 async 转 sync, 然后才能调用 django 相关的方法，接着返回响应内容的时候，我还需要 sync 转 async.<br>再比如，我使用 websocket, 访问一条数据，但 ORM 是 sync 的方法，我还是要 async 转 sync 再转 async</p>
+<p>这个 async 和 sync 的相互转换应该怎么做呢？</p>
+<p>于是，两个适配方法就诞生了：</p>
+<ul>
+<li>sync_to_async : 接收一个 async 的 function, 使之 awaitable, 然后使之在后台线程里运行。</li>
+<li>async_to_sync : 接收一个 awaitable 的 coroutine , 使之转化成一个同步的 function, 该 function 暂停你调用的当前的线程，跳转到包含 eventloop 的主线程执行完毕，然后跳转回来。</li>
+</ul>
+<p><a href="https://www.aeracode.org/2018/02/19/python-async-simplified/" target="_blank" rel="external">https://www.aeracode.org/2018/02/19/python-async-simplified/</a></p>
+<h3 id="WSGI-如何运行-async"><a href="#WSGI-如何运行-async" class="headerlink" title="WSGI 如何运行 async"></a>WSGI 如何运行 async</h3><h3 id="ASGI-如何运行-A"><a href="#ASGI-如何运行-A" class="headerlink" title="ASGI 如何运行 A"></a>ASGI 如何运行 A</h3><h3 id="这对-Django-意味着什么？"><a href="#这对-Django-意味着什么？" class="headerlink" title="这对 Django 意味着什么？"></a>这对 Django 意味着什么？</h3><h3 id="如何保持兼容性"><a href="#如何保持兼容性" class="headerlink" title="如何保持兼容性"></a>如何保持兼容性</h3><h2 id="0x02-演讲-2-Beyond-Django-Basic"><a href="#0x02-演讲-2-Beyond-Django-Basic" class="headerlink" title="0x02 演讲 2 - Beyond Django Basic"></a>0x02 演讲 2 - Beyond Django Basic</h2><p>作为一名有一定经验的 Django 开发者，用快进的方式看完了这个演讲。毕竟，我已经不是 Django 新手了。</p>
+<blockquote>
+<p>毕竟这篇演讲只是给那些学完 tutorial 的人</p>
+</blockquote>
+<p>想深入了解 Django, 多刷几遍文档比什么都好。</p>
+<p>嗯，就不介绍了。</p>
+<h2 id="0x03-演讲-3-Introduction-to-TDD-with-Django-amp-amp-Intermediate-testing-with-Django"><a href="#0x03-演讲-3-Introduction-to-TDD-with-Django-amp-amp-Intermediate-testing-with-Django" class="headerlink" title="0x03 演讲 3 - Introduction to TDD with Django &amp;&amp; Intermediate testing with Django"></a>0x03 演讲 3 - Introduction to TDD with Django &amp;&amp; Intermediate testing with Django</h2><p>本演讲主要内容是 TDD 测试和 Mock 的技巧。</p>
+<p>建议熟手直接看演讲者的书吧，本视频本人仅仅匆匆倍速看了一遍，估计并没有超出他的书的范围。</p>
+<p>简单介绍了以下内容</p>
+<ul>
+<li>单元测试和功能性测试</li>
+<li>通过 Selenium browser 进行自动化测试</li>
+<li>unittest 标准库</li>
+<li>Django models, views and templates</li>
+<li>测试前后端代码</li>
+<li>基于测试的重构</li>
+<li>TDD workflow</li>
+</ul>
+<p>地址如下</p>
+<p><a href="https://www.obeythetestinggoat.com/book/praise.harry.html" target="_blank" rel="external">https://www.obeythetestinggoat.com/book/praise.harry.html</a></p>
+<p>说说个人对测试和 TDD 测试的基本态度，我觉得测试是好事，适当的测试是可以提升代码质量和程序稳定性的。</p>
+<p>说测试会降低开发速度的，八成是没有善用测试。如果测试拖慢了你的开发速度，只能说明没有进行合适的测试，比如对一些无关紧要的功能进行测试。</p>
+<p>但，这篇演讲和配套资料很好，不过有些美中不足。 这里基本上都还在用 Django 的 MTV 这一套。</p>
+<blockquote>
+<p>我反正是不用这一套了。这个年头流行 SPA 呀。</p>
+</blockquote>
+<p>所以，我们这篇演讲指的关注的内容就变成如下内容了。</p>
+<ul>
+<li>单元测试和功能性测试</li>
+<li>unittest 标准库</li>
+<li>Django models</li>
+<li>基于测试的重构</li>
+<li>TDD workflow</li>
+</ul>
+<p>而且，对于 API 的测试，现在基本上流行 POSTMAN</p>
+<p>用 POSTMAN 的优点就在于可以把参数缓存下来下次接着用。有个小技巧就是从 chrome 拷贝一下 curl 到 postman 中。非常好用。</p>
+<p>既然流行 SPA, 那么本次有没有介绍开 API 的利器呢？</p>
+<h2 id="0x04-演讲-4-API-Driven-Django"><a href="#0x04-演讲-4-API-Driven-Django" class="headerlink" title="0x04 演讲 4 - API-Driven Django"></a>0x04 演讲 4 - API-Driven Django</h2><p>嗯，Django + django-rest-framework 实在是开 WebAPI 的神器。</p>
+<p>这篇演讲，算是普及了一下常识。并没有想象当中的深入。</p>
+<p>想用 Django 和 DjangoRestFramework 搞事情的，可以过来看我这篇文章。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/33903527" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33903527</a></p>
+<blockquote>
+<p>需要注意的是，本次 PyCon 中有很多人已经用上了 pipenv 了。</p>
+</blockquote>
+<h2 id="0x05-演讲-5-pipenv-未来的-Python-包管理工具"><a href="#0x05-演讲-5-pipenv-未来的-Python-包管理工具" class="headerlink" title="0x05 演讲 5 - pipenv 未来的 Python 包管理工具"></a>0x05 演讲 5 - pipenv 未来的 Python 包管理工具</h2><p>Kenneth Reitz 出品，必属精品。</p>
+<h3 id="Python-打包历史"><a href="#Python-打包历史" class="headerlink" title="Python 打包历史"></a>Python 打包历史</h3><p>刚开始，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl http://pypi.python.org/packages/alsdasdl/requests.tar.gz | tar zxf</div><div class="line">cd requests/</div><div class="line">python setup.py install</div></pre></td></tr></table></figure>
+<p>这个问题初看起来不是问题，但是随着你安装程序的增多就知道有多么痛苦了。</p>
+<ol>
+<li>有的依赖库依赖别的库你怎么解决？比如 pandas 需要安装 numpy</li>
+<li>有的依赖库依赖 c 库怎么办？比如 LXML</li>
+<li>在 python2.6.5 下，如果我需要安装两个不同版本的 Django 开发不同的软件怎么办？难道只能动态复制文件到 site-packages 里面？</li>
+</ol>
+<p>后来，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">easy_install requests</div></pre></td></tr></table></figure>
+<p>我们可以直接从 pypi 进行安装了。但尼玛，为什么 easy_install 安装很 easy, 但是没有 easy_uninstall?</p>
+<p>好，2010 年后，我们继续前进：</p>
+<ul>
+<li>可以通过 pip 替代 easy_install 了。</li>
+<li>可以通过 virtualenv 管理项目的依赖库了。虽然说，还是不能像 ruby gem 一样同时把多个版本的的软件装在同一个系统里。</li>
+<li>可以通过 requirements 锁依赖了。</li>
+</ul>
+<p>但，其他编程语言社区分别出现了如下的包管理工具：</p>
+<ul>
+<li>node -&gt; yarn &amp;&amp; npm , 有 lockfile</li>
+<li>php -&gt; composer , 有 lockfile</li>
+<li>rust -&gt; cargo , 有 lockfile</li>
+<li>ruby -&gt; bundler , 有 lockfile</li>
+</ul>
+<p>而生命苦短一方居然</p>
+<ul>
+<li>python -&gt; pip &amp;&amp; virtualenv/venv , 无 lockfile</li>
+</ul>
+<blockquote>
+<p>PS: Python3.3 之后，默认可以直接使用 venv 模块，不需要再安装 virtualenv 了。但还是需要手动，并且用起来比较反直觉。</p>
+</blockquote>
+<p>关于 requirements.txt</p>
+<ul>
+<li>如果你使用 pip freeze 来形成这个文件，则不直观，完全看不出来哪个依赖库依赖哪个依赖。</li>
+<li>如果你直接手动指定你所需要的库，比如 flask 的话，似乎又有些太直观了。</li>
+</ul>
+<p>如果能有一个东西，既可以表示 freeze 的结果 (what you want)，又可以表示你需要的库 (what you need). 就好了。</p>
+<blockquote>
+<p>这当然可以考虑用两份 requirements 来解决。先安装 what you need 用来开发，然后 freeze 为 what you want 去部署。</p>
+</blockquote>
+<p>当然，铺垫了这么多 K 神肯定是来介绍他的 pipenv 的。</p>
+<p>比如说，我想查看，本项目的依赖库，直接 pipenv graph</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">coverage==4.5.1</div><div class="line">fabric==2.0.1</div><div class="line">  - cryptography [required: &gt;=1.1, installed: 2.2.2]</div><div class="line">    - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]</div><div class="line">    - cffi [required: &gt;=1.7, installed: 1.11.5]</div><div class="line">      - pycparser [required: Any, installed: 2.18]</div><div class="line">    - idna [required: &gt;=2.1, installed: 2.6]</div><div class="line">    - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">  - invoke [required: &lt;2.0,&gt;=1.0, installed: 1.0.0]</div><div class="line">  - paramiko [required: &gt;=2.4, installed: 2.4.1]</div><div class="line">    - bcrypt [required: &gt;=3.1.3, installed: 3.1.4]</div><div class="line">      - cffi [required: &gt;=1.1, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">    - cryptography [required: &gt;=1.5, installed: 2.2.2]</div><div class="line">      - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]</div><div class="line">      - cffi [required: &gt;=1.7, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - idna [required: &gt;=2.1, installed: 2.6]</div><div class="line">      - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">    - pyasn1 [required: &gt;=0.1.7, installed: 0.4.2]</div><div class="line">    - pynacl [required: &gt;=1.0.1, installed: 1.2.1]</div><div class="line">      - cffi [required: &gt;=1.4.1, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - six [required: Any, installed: 1.11.0]</div><div class="line">flake8==3.5.0</div><div class="line">  - mccabe [required: &gt;=0.6.0,&lt;0.7.0, installed: 0.6.1]</div><div class="line">  - pycodestyle [required: &lt;2.4.0,&gt;=2.0.0, installed: 2.3.1]</div><div class="line">  - pyflakes [required: &gt;=1.5.0,&lt;1.7.0, installed: 1.6.0]</div><div class="line"># 其他省略</div></pre></td></tr></table></figure>
+<p>如何尝鲜？我最近更新到了之前写的一个库（代码写的惨不忍赌，最近准备重构）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:twocucao/YaPyLib.git</div><div class="line">cd YaPyLib/</div><div class="line">brew install pipenv</div><div class="line">pipenv --three</div><div class="line">pipenv install --dev</div><div class="line">pipenv shell</div></pre></td></tr></table></figure>
+<p>至于其他的功能，参考官网自己摸索吧。</p>
+<blockquote>
+<p>在用 npm 和 yarn 的时候，我有这么一个想法，希望 python 圈子里面能出一个类似于包管理工具。今年 2 月份的时候把自己的项目迁移过来，发现 pipenv 用起来很挺舒服的。</p>
+<p>pipenv 是未来。火速用上吧。</p>
+</blockquote>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-03-09</strong> 重修文字</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/04/28/DjangoORMCheatSheet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -691,7 +1829,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  3,313
+                  3,607
                 </span>
               
 
@@ -707,7 +1845,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  16
+                  18
                 </span>
               
             </div>
@@ -826,7 +1964,25 @@
 <li>其他，比如索引</li>
 </ol>
 <h4 id="Models-与-Meta"><a href="#Models-与-Meta" class="headerlink" title="Models 与 Meta"></a>Models 与 Meta</h4><p><a href="https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685" target="_blank" rel="external">https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685</a></p>
-<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><h3 id="2-1-Query"><a href="#2-1-Query" class="headerlink" title="2.1 Query"></a>2.1 Query</h3><h4 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">c1 = Child(name=&quot;苏轼&quot;)</div><div class="line">session.add(c1)</div><div class="line">session.flush()</div><div class="line">p = Parent(name=&quot;苏辙&quot;)</div><div class="line">p.best_child = c1</div><div class="line">for c in [c1,c2,c3,c4]:</div><div class="line">    p.children.append(c)</div><div class="line">session.add(c1)</div><div class="line">session.commit()</div></pre></td></tr></table></figure>
+<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><h5 id="One-To-Many"><a href="#One-To-Many" class="headerlink" title="One To Many"></a>One To Many</h5><p>母亲有若干个孩子，外键在孩子上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class Parent(Base):</div><div class="line">    #...</div><div class="line">    children = relationship(&quot;Child&quot;, backref=&quot;parent&quot;)</div><div class="line"></div><div class="line">class Child(Base):</div><div class="line">    #...</div><div class="line">    parent_id = Column(Integer, ForeignKey(&apos;parent.id&apos;))</div></pre></td></tr></table></figure>
+<h5 id="Many-To-One"><a href="#Many-To-One" class="headerlink" title="Many To One"></a>Many To One</h5><p>多个母亲共享一个孩子，外键在母亲上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class Parent(Base):</div><div class="line">    child_id = Column(Integer, ForeignKey(&apos;child.id&apos;))</div><div class="line">    child = relationship(&quot;Child&quot;)</div><div class="line"></div><div class="line">class Child(Base):</div><div class="line">    # ...</div></pre></td></tr></table></figure>
+<h5 id="One-To-One"><a href="#One-To-One" class="headerlink" title="One To One"></a>One To One</h5><p>One to One 是 One to Many 或者是 Many to One 的简化版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># Many To One</div><div class="line">class Parent(Base):</div><div class="line">    # ...</div><div class="line">    child_id = Column(Integer, ForeignKey(&apos;child.id&apos;))</div><div class="line">    child = relationship(&quot;Child&quot;, backref=backref(&quot;parent&quot;, uselist=False))</div><div class="line"></div><div class="line">class Child(Base):</div><div class="line">    # ...</div><div class="line"></div><div class="line"># One To Many 改 One To One</div><div class="line">class Parent(Base):</div><div class="line">    # ...</div><div class="line"></div><div class="line">class Child(Base):</div><div class="line">    # ...</div><div class="line">    parent_id = Column(Integer, ForeignKey(&apos;parent.id&apos;))</div><div class="line">    parent = relationship(&quot;Parent&quot;, backref=backref(&quot;child&quot;, uselist=False))</div></pre></td></tr></table></figure>
+<h5 id="Many-To-Many"><a href="#Many-To-Many" class="headerlink" title="Many To Many"></a>Many To Many</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">association_table = Table(&apos;association&apos;, Base.metadata,</div><div class="line">    Column(&apos;left_id&apos;, Integer, ForeignKey(&apos;left.id&apos;)),</div><div class="line">    Column(&apos;right_id&apos;, Integer, ForeignKey(&apos;right.id&apos;))</div><div class="line">)</div><div class="line"></div><div class="line">class Parent(Base):</div><div class="line">    # ...</div><div class="line">    children = relationship(&quot;Child&quot;,</div><div class="line">                    secondary=association_table,</div><div class="line">                    backref=&quot;parents&quot;)</div><div class="line"></div><div class="line">class Child(Base):</div><div class="line">    # ...</div></pre></td></tr></table></figure>
+<p>注意事项</p>
+<p>执行删除 mapping 表的时候尽量这样。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">myparent.children.remove(somechild)</div></pre></td></tr></table></figure>
+<p>当你想干掉 somechild 的时候，会执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">session.delete(somechild)</div></pre></td></tr></table></figure>
+<ol>
+<li>假如 Child 没有 ref Parent 的话，Secondary Table 无删除，则无法删除。</li>
+<li>假如 ref 了的话，则删除 secondary 里面的记录。</li>
+<li>TODO</li>
+</ol>
+<h5 id="邻接列表关系"><a href="#邻接列表关系" class="headerlink" title="邻接列表关系"></a>邻接列表关系</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Node(Base):</div><div class="line">    __tablename__ = &apos;node&apos;</div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    parent_id = Column(Integer, ForeignKey(&apos;node.id&apos;))</div><div class="line">    data = Column(String(50))</div><div class="line">    children = relationship(&quot;Node&quot;,</div><div class="line">                backref=backref(&apos;parent&apos;, remote_side=[id])</div><div class="line">            )</div></pre></td></tr></table></figure>
+<h5 id="relationship-详解"><a href="#relationship-详解" class="headerlink" title="relationship 详解"></a>relationship 详解</h5><h3 id="2-1-Query"><a href="#2-1-Query" class="headerlink" title="2.1 Query"></a>2.1 Query</h3><h4 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">c1 = Child(name=&quot;苏轼&quot;)</div><div class="line">session.add(c1)</div><div class="line">session.flush()</div><div class="line">p = Parent(name=&quot;苏辙&quot;)</div><div class="line">p.best_child = c1</div><div class="line">for c in [c1,c2,c3,c4]:</div><div class="line">    p.children.append(c)</div><div class="line">session.add(c1)</div><div class="line">session.commit()</div></pre></td></tr></table></figure>
 <h4 id="Retrieve"><a href="#Retrieve" class="headerlink" title="Retrieve"></a>Retrieve</h4><p>过滤</p>
 <p>filter(**kwargs)<br>filter(Singer.name == “周杰伦”)<br>filter(Singer.name =! “周杰棍”)</p>
 <h5 id="跨关系（跨表）查询"><a href="#跨关系（跨表）查询" class="headerlink" title="跨关系（跨表）查询"></a>跨关系（跨表）查询</h5><p>session.query(Entry).join(Blog,Blog.entry_id == Entry.id).filter(Blog.name = “SqlAlchemy CheatSheet”)</p>
@@ -852,12 +2008,12 @@
 <p>一对多的更新</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">append</div></pre></td></tr></table></figure>
 <h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><p>query.delete()</p>
-<h5 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h5><p>Query 对象，下文中，我会聊到这个 Query 对象。这里先跳过。</p>
-<h4 id="join-gt-JOIN-语句"><a href="#join-gt-JOIN-语句" class="headerlink" title="join -&gt; JOIN 语句"></a>join -&gt; JOIN 语句</h4><p><a href="https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query" target="_blank" rel="external">https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query</a></p>
+<h4 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h4><p><a href="https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query" target="_blank" rel="external">https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query</a></p>
 <h5 id="两表-InnerJoin"><a href="#两表-InnerJoin" class="headerlink" title="两表 InnerJoin"></a>两表 InnerJoin</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> u, a <span class="keyword">in</span> session.query(User, Address).\</div><div class="line">                    filter(User.id==Address.user_id).\</div><div class="line">                    filter(Address.email_address==<span class="string">'jack@google.com'</span>).\</div><div class="line">                    all():</div><div class="line">    print(u)</div><div class="line">    print(a)</div><div class="line"><span class="comment"># &lt;User(name='jack', fullname='Jack Bean', password='gjffdd')&gt;</span></div><div class="line"><span class="comment"># &lt;Address(email_address='jack@google.com')&gt;</span></div></pre></td></tr></table></figure>
 <h5 id="多表-InnerJoin-LeftJoin"><a href="#多表-InnerJoin-LeftJoin" class="headerlink" title="多表 InnerJoin + LeftJoin"></a>多表 InnerJoin + LeftJoin</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">query.outerjoin(User.addresses)   # LEFT OUTER JOIN</div></pre></td></tr></table></figure>
 <h4 id="聚集查询"><a href="#聚集查询" class="headerlink" title="聚集查询"></a>聚集查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">session.query(User).filter(User.name.like(&apos;%ed&apos;)).count()</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">from sqlalchemy import func</div><div class="line">session.query(Table.column, func.count(Table.column)).group_by(Table.column).all()</div><div class="line"></div><div class="line">self.session.query(func.count(Table.column1),Table.column1, Table.column2).group_by(Table.column1, Table.column2).all()</div><div class="line"></div><div class="line">from sqlalchemy.sql import func</div><div class="line">session.query(func.avg(Rating.field2).label(&apos;average&apos;)).filter(Rating.url==url_string.netloc)</div></pre></td></tr></table></figure>
+<h4 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h4><p>Query 对象，下文中，我会聊到这个 Query 对象。这里先跳过。</p>
 <h3 id="2-2-原生查询"><a href="#2-2-原生查询" class="headerlink" title="2.2 原生查询"></a>2.2 原生查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">from sqlalchemy import text</div><div class="line"></div><div class="line">sql = text(&apos;select name from penguins&apos;)</div><div class="line">result = db.engine.execute(sql)</div><div class="line">names = []</div><div class="line">for row in result:</div><div class="line">    names.append(row[0])</div><div class="line"></div><div class="line">print names</div><div class="line"></div><div class="line">from collections import namedtuple</div><div class="line"></div><div class="line">Record = namedtuple(&apos;Record&apos;, result.keys())</div><div class="line">records = [Record(*r) for r in result.fetchall()]</div><div class="line">for r in records:</div><div class="line">    print(r)</div><div class="line"></div><div class="line">from sqlalchemy.sql import text</div><div class="line"></div><div class="line">connection = engine.connect()</div><div class="line"></div><div class="line"># recommended</div><div class="line">cmd = &apos;select * from Employees where EmployeeGroup == :group&apos;</div><div class="line">employeeGroup = &apos;Staff&apos;</div><div class="line">employees = connection.execute(text(cmd), group = employeeGroup)</div></pre></td></tr></table></figure>
 <p>get_or_create</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">def get_or_create(session, model, defaults=None, **kwargs):</div><div class="line">    instance = session.query(model).filter_by(**kwargs).first()</div><div class="line">    if instance:</div><div class="line">        return instance, False</div><div class="line">    else:</div><div class="line">        params = dict((k, v) for k, v in kwargs.iteritems() if not isinstance(v, ClauseElement))</div><div class="line">        params.update(defaults or &#123;&#125;)</div><div class="line">        instance = model(**params)</div><div class="line">        session.add(instance)</div><div class="line">        return instance, True</div></pre></td></tr></table></figure>
@@ -873,7 +2029,7 @@
 <p><a href="https://stackoverflow.com/questions/4201455/sqlalchemy-whats-the-difference-between-flush-and-commit" target="_blank" rel="external">https://stackoverflow.com/questions/4201455/sqlalchemy-whats-the-difference-between-flush-and-commit</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">x = Foo(bar=1)</div><div class="line">print x.id</div><div class="line"># None</div><div class="line">session.add(x)</div><div class="line">session.flush()</div><div class="line"># BEGIN</div><div class="line"># INSERT INTO foo (bar) VALUES(1)</div><div class="line"># COMMIT</div><div class="line">print x.id</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">qry = DBSession.query(User).filter(</div><div class="line">        and_(User.birthday &lt;= &apos;1988-01-17&apos;, User.birthday &gt;= &apos;1985-01-17&apos;))</div></pre></td></tr></table></figure>
-<h2 id="0x04-SQLAlchemy-的基础特性-Under-The-Hood"><a href="#0x04-SQLAlchemy-的基础特性-Under-The-Hood" class="headerlink" title="0x04 SQLAlchemy 的基础特性 Under The Hood"></a>0x04 SQLAlchemy 的基础特性 Under The Hood</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; from sqlalchemy.dialects import postgresql</div><div class="line">&gt;&gt;&gt; print str(q.statement.compile(dialect=postgresql.dialect()))</div><div class="line">Where q is defined as:</div></pre></td></tr></table></figure>
+<h2 id="0x04-SQLAlchemy-的基础特性-Under-The-Hood"><a href="#0x04-SQLAlchemy-的基础特性-Under-The-Hood" class="headerlink" title="0x04 SQLAlchemy 的基础特性 Under The Hood"></a>0x04 SQLAlchemy 的基础特性 Under The Hood</h2><h3 id="Loading-策略"><a href="#Loading-策略" class="headerlink" title="Loading 策略"></a>Loading 策略</h3><h4 id="Lazy-Loading"><a href="#Lazy-Loading" class="headerlink" title="Lazy Loading"></a>Lazy Loading</h4><h4 id="Eager-Loading"><a href="#Eager-Loading" class="headerlink" title="Eager Loading"></a>Eager Loading</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; from sqlalchemy.dialects import postgresql</div><div class="line">&gt;&gt;&gt; print str(q.statement.compile(dialect=postgresql.dialect()))</div><div class="line">Where q is defined as:</div></pre></td></tr></table></figure>
 <h2 id="0x05-SQLAlchemy-的高级特性-Under-The-Hood"><a href="#0x05-SQLAlchemy-的高级特性-Under-The-Hood" class="headerlink" title="0x05 SQLAlchemy 的高级特性 Under The Hood"></a>0x05 SQLAlchemy 的高级特性 Under The Hood</h2><h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p><a href="https://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy" target="_blank" rel="external">https://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy</a><br><a href="https://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications" target="_blank" rel="external">https://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">https://stackoverflow.com/questions/34322471/sqlalchemy-engine-connection-and-session-difference</div><div class="line">https://stackoverflow.com/questions/11769366/why-is-sqlalchemy-insert-with-sqlite-25-times-slower-than-using-sqlite3-directly</div><div class="line">https://stackoverflow.com/questions/12223335/sqlalchemy-creating-vs-reusing-a-session</div><div class="line">session 是个容器</div><div class="line"></div><div class="line">https://stackoverflow.com/questions/18199053/example-of-what-sqlalchemy-can-do-and-django-orm-cannot</div><div class="line">https://stackoverflow.com/questions/7389759/memory-efficient-built-in-sqlalchemy-iterator-generator</div><div class="line"></div><div class="line"># 日志</div><div class="line">import logging</div><div class="line">logging.basicConfig()</div><div class="line">logging.getLogger(&apos;sqlalchemy.engine&apos;).setLevel(logging.INFO)</div></pre></td></tr></table></figure>
 <h2 id="配置篇"><a href="#配置篇" class="headerlink" title="配置篇"></a>配置篇</h2><p>SQLALCHEMY_TRACK_MODIFICATIONS = False</p>
@@ -904,7 +2060,7 @@
 <h3 id="如何快速上手-ORM"><a href="#如何快速上手-ORM" class="headerlink" title="如何快速上手 ORM"></a>如何快速上手 ORM</h3><p>那么，对于这个 ORM 库还有那些通用性的知识需要了解？</p>
 <p>嗯，是时候了解本质了。</p>
 <p><a href="http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/" target="_blank" rel="external">http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/</a></p>
-<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<h2 id="0xFF-Glossary"><a href="#0xFF-Glossary" class="headerlink" title="0xFF Glossary"></a>0xFF Glossary</h2><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
 <li><a href="https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/" target="_blank" rel="external">https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/</a></li>
 <li><a href="https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create" target="_blank" rel="external">https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create</a></li>
 <li>除了文档本身，作者在 Stack Overflow 上的回答都是非常值得阅读的。<a href="https://stackoverflow.com/users/34549/zzzeek" target="_blank" rel="external">https://stackoverflow.com/users/34549/zzzeek</a></li>
@@ -918,6 +2074,233 @@
 <ul>
 <li><strong>2018-03-09</strong> 重修文字</li>
 </ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/03/09/Flask文档阅读笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/09/Flask文档阅读笔记/" itemprop="url">Flask 文档阅读笔记</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-09T16:27:03+08:00">
+                2018-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,048
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>因为最近需要新增一个 Flask 技术栈，所以准备趁这休息的时候更新关于 Flask 的两篇文章。</p>
+<p>前者是文档阅读笔记，后者是源码初步解析。</p>
+<blockquote>
+<p>嗯，其实这篇就是做了一些搬运的活。</p>
+</blockquote>
+<h2 id="0x01-文档"><a href="#0x01-文档" class="headerlink" title="0x01 文档"></a>0x01 文档</h2><p>由于 Flask 还依赖 Jinja2 与 Werkzeug, 并且往往大家在使用 Flask 的时候还是会使用 itsdangerous. 所以，当大家说 Flask 代码少的时候，我还是不服的。但如果你说，Flask 本身实现确实是简洁，扩展性强，我还是服气的。</p>
+<p>Flask 的文档有三种类型（其他框架类文档也是如此）：</p>
+<ul>
+<li>Tutorial 类，即教程类</li>
+<li>Guide 类，即指南类</li>
+<li>API 类，即接口级别的文档</li>
+</ul>
+<p>当你是一个老手，还想快速上手一个框架的时候，认真读一读前两者，然后挑选一个项目多看几遍即可。</p>
+<p>但是当你深入到框架里面的设计与实现的时候，则必须要多读读 API Document , 由于通常情况下 API Document 的内容往往是代码中的注释，加上 Flask 代码量本来就不多。所以，有的时候阅读 Flask 代码代码也会比 API 好很多。</p>
+<h2 id="0x02-Guide"><a href="#0x02-Guide" class="headerlink" title="0x02 Guide"></a>0x02 Guide</h2><h3 id="2-1-Templates"><a href="#2-1-Templates" class="headerlink" title="2.1 Templates"></a>2.1 Templates</h3><p>快速 Get 模板语言无非就是掌握：</p>
+<ol>
+<li>上下文变量</li>
+<li>条件语法</li>
+<li>列表语法</li>
+<li>模板的继承 (extend 语法）与组合 (include)</li>
+<li>额外的一些语法糖，比如 filter 的使用 / 组成</li>
+</ol>
+<h3 id="2-2-Testing-Flask-Applications"><a href="#2-2-Testing-Flask-Applications" class="headerlink" title="2.2 Testing Flask Applications"></a>2.2 Testing Flask Applications</h3><blockquote>
+<p>Something that is untested is broken.</p>
+</blockquote>
+<p>这里的测试，有哪些测试呢？</p>
+<ol>
+<li>非 flask 相关逻辑的测试。比如，我对一小段无关于 View 层的纯粹的逻辑进行测试，我比较喜欢使用 pytest 进行测试。</li>
+<li>Flask 相关<ul>
+<li>Setup</li>
+<li>TearDown</li>
+<li>登录前 / 登陆后</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-3-Application-Errors"><a href="#2-3-Application-Errors" class="headerlink" title="2.3 Application Errors"></a>2.3 Application Errors</h3><p>比如测试请求与响应结果。比如测试路由。测试某个与 View 层绑定的数据操作是否执行成功。</p>
+<p>首先，大致扫一眼 tutorial ，知道了 Flask 的教程讲了如下的东西：</p>
+<ol>
+<li>路由</li>
+<li>静态文件</li>
+<li>模板渲染</li>
+<li>接触请求数据</li>
+<li>重定向和错误</li>
+<li>响应</li>
+<li>Session</li>
+<li>Message Flash</li>
+<li>日志</li>
+<li>扩展</li>
+</ol>
+<p>当然，我们都是老手了，肯定是挑重点来看了。</p>
+<p>Routing, 发现现在的问题在于</p>
+<p>Flask 有两个主要依赖：</p>
+<ul>
+<li>路由、调试、WSGI</li>
+<li>模板</li>
+</ul>
+<h2 id="0x02-社区支持"><a href="#0x02-社区支持" class="headerlink" title="0x02 社区支持"></a>0x02 社区支持</h2><h2 id="0x04-读文档产生的疑问"><a href="#0x04-读文档产生的疑问" class="headerlink" title="0x04 读文档产生的疑问"></a>0x04 读文档产生的疑问</h2><p>1.</p>
+<p>For web applications it’s crucial to react to the data a client sends to the server. In Flask this information is provided by the global request object. If you have some experience with Python you might be wondering how that object can be global and how Flask manages to still be threadsafe. The answer is context locals:</p>
+<p>Context Locals<br>Insider Information<br>If you want to understand how that works and how you can implement tests with context locals, read this section, otherwise just skip it.</p>
+<p>Certain objects in Flask are global objects, but not of the usual kind. These objects are actually proxies to objects that are local to a specific context. What a mouthful. But that is actually quite easy to understand.</p>
+<p>Imagine the context being the handling thread. A request comes in and the web server decides to spawn a new thread (or something else, the underlying object is capable of dealing with concurrency systems other than threads). When Flask starts its internal request handling it figures out that the current thread is the active context and binds the current application and the WSGI environments to that context (thread). It does that in an intelligent way so that one application can invoke another application without breaking.</p>
+<p>So what does this mean to you? Basically you can completely ignore that this is the case unless you are doing something like unit testing. You will notice that code which depends on a request object will suddenly break because there is no request object. The solution is creating a request object yourself and binding it to the context. The easiest solution for unit testing is to use the test_request_context() context manager. In combination with the with statement it will bind a test request so that you can interact with it. Here is an example:</p>
+<h3 id="Thread-Local"><a href="#Thread-Local" class="headerlink" title="Thread Local"></a>Thread Local</h3><p>One of the design decisions in Flask was that simple tasks should be simple; they should not take a lot of code and yet they should not limit you. Because of that, Flask has a few design choices that some people might find surprising or unorthodox. For example, Flask uses thread-local objects internally so that you don’t have to pass objects around from function to function within a request in order to stay threadsafe. This approach is convenient, but requires a valid request context for dependency injection or when attempting to reuse code which uses a value pegged to the request. The Flask project is honest about thread-locals, does not hide them, and calls out in the code and documentation where they are used.</p>
 
           
         
@@ -1205,233 +2588,6 @@
 <ul>
 <li><strong>2018-03-09</strong> 重修文字</li>
 </ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/03/09/Flask文档阅读笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/03/09/Flask文档阅读笔记/" itemprop="url">Flask 文档阅读笔记</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-09T16:27:03+08:00">
-                2018-03-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">后端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,048
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>因为最近需要新增一个 Flask 技术栈，所以准备趁这休息的时候更新关于 Flask 的两篇文章。</p>
-<p>前者是文档阅读笔记，后者是源码初步解析。</p>
-<blockquote>
-<p>嗯，其实这篇就是做了一些搬运的活。</p>
-</blockquote>
-<h2 id="0x01-文档"><a href="#0x01-文档" class="headerlink" title="0x01 文档"></a>0x01 文档</h2><p>由于 Flask 还依赖 Jinja2 与 Werkzeug, 并且往往大家在使用 Flask 的时候还是会使用 itsdangerous. 所以，当大家说 Flask 代码少的时候，我还是不服的。但如果你说，Flask 本身实现确实是简洁，扩展性强，我还是服气的。</p>
-<p>Flask 的文档有三种类型（其他框架类文档也是如此）：</p>
-<ul>
-<li>Tutorial 类，即教程类</li>
-<li>Guide 类，即指南类</li>
-<li>API 类，即接口级别的文档</li>
-</ul>
-<p>当你是一个老手，还想快速上手一个框架的时候，认真读一读前两者，然后挑选一个项目多看几遍即可。</p>
-<p>但是当你深入到框架里面的设计与实现的时候，则必须要多读读 API Document , 由于通常情况下 API Document 的内容往往是代码中的注释，加上 Flask 代码量本来就不多。所以，有的时候阅读 Flask 代码代码也会比 API 好很多。</p>
-<h2 id="0x02-Guide"><a href="#0x02-Guide" class="headerlink" title="0x02 Guide"></a>0x02 Guide</h2><h3 id="2-1-Templates"><a href="#2-1-Templates" class="headerlink" title="2.1 Templates"></a>2.1 Templates</h3><p>快速 Get 模板语言无非就是掌握：</p>
-<ol>
-<li>上下文变量</li>
-<li>条件语法</li>
-<li>列表语法</li>
-<li>模板的继承 (extend 语法）与组合 (include)</li>
-<li>额外的一些语法糖，比如 filter 的使用 / 组成</li>
-</ol>
-<h3 id="2-2-Testing-Flask-Applications"><a href="#2-2-Testing-Flask-Applications" class="headerlink" title="2.2 Testing Flask Applications"></a>2.2 Testing Flask Applications</h3><blockquote>
-<p>Something that is untested is broken.</p>
-</blockquote>
-<p>这里的测试，有哪些测试呢？</p>
-<ol>
-<li>非 flask 相关逻辑的测试。比如，我对一小段无关于 View 层的纯粹的逻辑进行测试，我比较喜欢使用 pytest 进行测试。</li>
-<li>Flask 相关<ul>
-<li>Setup</li>
-<li>TearDown</li>
-<li>登录前 / 登陆后</li>
-</ul>
-</li>
-</ol>
-<h3 id="2-3-Application-Errors"><a href="#2-3-Application-Errors" class="headerlink" title="2.3 Application Errors"></a>2.3 Application Errors</h3><p>比如测试请求与响应结果。比如测试路由。测试某个与 View 层绑定的数据操作是否执行成功。</p>
-<p>首先，大致扫一眼 tutorial ，知道了 Flask 的教程讲了如下的东西：</p>
-<ol>
-<li>路由</li>
-<li>静态文件</li>
-<li>模板渲染</li>
-<li>接触请求数据</li>
-<li>重定向和错误</li>
-<li>响应</li>
-<li>Session</li>
-<li>Message Flash</li>
-<li>日志</li>
-<li>扩展</li>
-</ol>
-<p>当然，我们都是老手了，肯定是挑重点来看了。</p>
-<p>Routing, 发现现在的问题在于</p>
-<p>Flask 有两个主要依赖：</p>
-<ul>
-<li>路由、调试、WSGI</li>
-<li>模板</li>
-</ul>
-<h2 id="0x02-社区支持"><a href="#0x02-社区支持" class="headerlink" title="0x02 社区支持"></a>0x02 社区支持</h2><h2 id="0x04-读文档产生的疑问"><a href="#0x04-读文档产生的疑问" class="headerlink" title="0x04 读文档产生的疑问"></a>0x04 读文档产生的疑问</h2><p>1.</p>
-<p>For web applications it’s crucial to react to the data a client sends to the server. In Flask this information is provided by the global request object. If you have some experience with Python you might be wondering how that object can be global and how Flask manages to still be threadsafe. The answer is context locals:</p>
-<p>Context Locals<br>Insider Information<br>If you want to understand how that works and how you can implement tests with context locals, read this section, otherwise just skip it.</p>
-<p>Certain objects in Flask are global objects, but not of the usual kind. These objects are actually proxies to objects that are local to a specific context. What a mouthful. But that is actually quite easy to understand.</p>
-<p>Imagine the context being the handling thread. A request comes in and the web server decides to spawn a new thread (or something else, the underlying object is capable of dealing with concurrency systems other than threads). When Flask starts its internal request handling it figures out that the current thread is the active context and binds the current application and the WSGI environments to that context (thread). It does that in an intelligent way so that one application can invoke another application without breaking.</p>
-<p>So what does this mean to you? Basically you can completely ignore that this is the case unless you are doing something like unit testing. You will notice that code which depends on a request object will suddenly break because there is no request object. The solution is creating a request object yourself and binding it to the context. The easiest solution for unit testing is to use the test_request_context() context manager. In combination with the with statement it will bind a test request so that you can interact with it. Here is an example:</p>
-<h3 id="Thread-Local"><a href="#Thread-Local" class="headerlink" title="Thread Local"></a>Thread Local</h3><p>One of the design decisions in Flask was that simple tasks should be simple; they should not take a lot of code and yet they should not limit you. Because of that, Flask has a few design choices that some people might find surprising or unorthodox. For example, Flask uses thread-local objects internally so that you don’t have to pass objects around from function to function within a request in order to stay threadsafe. This approach is convenient, but requires a valid request context for dependency injection or when attempting to reuse code which uses a value pegged to the request. The Flask project is honest about thread-locals, does not hide them, and calls out in the code and documentation where they are used.</p>
 
           
         
@@ -1784,1410 +2940,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/23/YaDjangoBlog的前后端初步设计/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/23/YaDjangoBlog的前后端初步设计/" itemprop="url">YaDjangoBlog 的前后端设计</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-23T10:13:30+08:00">
-                2018-02-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">后端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2,333
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文是 Django 全栈开发教程的第二篇</p>
-<p>目录在这里，已经更新的文章如下</p>
-<ul>
-<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
-</ul>
-<p>本文需要完成两件事情：</p>
-<ul>
-<li>第一件事情，回答一个问题：为什么要选择博客系统作为教程而不是别的？</li>
-<li>第二件事情，简单说说 YaDjangoBlog 的前后端设计。</li>
-</ul>
-<h2 id="0x01-为什么是博客系统"><a href="#0x01-为什么是博客系统" class="headerlink" title="0x01 为什么是博客系统"></a>0x01 为什么是博客系统</h2><p>在目录评论区，有个读者问：</p>
-<p>为什么选择博客系统？而不是别的系统？</p>
-<p>一言以蔽之：因为合适。</p>
-<p>为什么说合适？</p>
-<ol>
-<li>第一点：代码量相对合适，业务逻辑大家都很清楚，博客系统说简单也简单，说复杂也复杂，待会我们就可以谈到。简单的例子反而是入门和深入了解 Django 技术栈（而不是设计一个优秀的程序）的最佳案例。</li>
-<li>第二点：言简意赅，知识点覆盖全面，注意，我们要学习的 Django 技术栈，Django 技术栈，Django 技术栈。不是学高可用架构设计，不是超级复杂系统的设计，不是业务逻辑设计。</li>
-<li>第三点：日常开发都是见招拆招，依据业务逻辑来，作为开发者，总不能直接把公司的业务代码上传的 Github 上吧？</li>
-</ol>
-<p>不妨想想，其实写个博客系统压根就不需要这么麻烦的使用各种组件来给自己的博客系统贴金。那么，我为何还是要『为赋新词强说愁』呢？</p>
-<p>答案是『醉翁之意不在酒，在乎山水之间』。通过这个简单的博客，来带大家过一遍 Django 技术栈，具体能学的多好，看个人努力。</p>
-<p>当然，借此也吐槽一下，有的人认为，博客系统简单，不就是 Blog / Category / Tag / Comment，有啥可练手的？</p>
-<p>其实不然，设计一个博客系统完全可以按照复杂系统的高标准来设计，举例来说：</p>
-<ol>
-<li>ORM 设计：如果我想把 Category/Tags/Comment 变成通用的，即可以对 Blog 进行分类 / 标签 / 评论，对新建的 Product 模型 也可以进行分类 / 标签 / 评论。</li>
-<li>数据库设计：Category 可能有三到四级子分类怎么办？ Comment 支持评论区互相回复评论。这里的不但要通用，还要用树形结构实现放在一张表里面。</li>
-<li>全文搜索：Blog 的 content 字段是长文对吧？这个总不能每次搜索都是 like 查询吧？Elasticsearch 怎么搞。</li>
-<li>缓存和定时任务：PV 和 UV 量总不能每次访问都更新一次数据库吧？为什么不用 Redis 呢？用上了 Redis, 为什么不加上定时任务呢帮忙把 PV/UV 以及点赞数量啥的定期更新到数据库中？</li>
-<li>Celery ：定时任务为啥不用神器 Celery 呢？</li>
-<li>其他问题：如何对某个接口进行 profile? 如果逻辑比较复杂，是不是要补上单元测试。Django 单实例如何使用多域名？</li>
-</ol>
-<p>那一套太祖长拳从宋兵甲手里使出来，不过是威力平平；</p>
-<blockquote>
-<p>如果是从那乔峰手里使出来，那威力如何？</p>
-</blockquote>
-<h2 id="0x02-前后端分离"><a href="#0x02-前后端分离" class="headerlink" title="0x02 前后端分离"></a>0x02 前后端分离</h2><h3 id="前后端分离的必要性"><a href="#前后端分离的必要性" class="headerlink" title="前后端分离的必要性"></a>前后端分离的必要性</h3><p>为什么前后端分离？</p>
-<ul>
-<li>一是需求：简简单单的套模板已经不够了，还要富交互，代码量上去了。</li>
-<li>二是技术条件成熟：NodeJS 横空出世，使得 JS 成了不仅仅可以在浏览器中运行的语言，成了一门和 Java,Python,Ruby 一样的客户端语言。</li>
-<li>三是生态：轮子多，这车轱辘如你所愿。</li>
-</ul>
-<p>前端的职责变重，代码量则上来了，相应的，模块化工具就自然出来了。</p>
-<blockquote>
-<p>PS: 前后端分离也不是啥新概念，当年开发客户端的不也是前后端分离？ 当然，这里的前后端分离指的是浏览器与服务器的前后端分离。</p>
-</blockquote>
-<p>前后端分离之后，依旧是前端发送请求，后端返回对应的数据。</p>
-<p>那么，哪里变了？我认为，主要有两点：</p>
-<ol>
-<li>前后端流程可以并行开发，即前后端可以同时干活。并且责任明确。</li>
-<li>JS 可以干客户端语言干的事情。</li>
-</ol>
-<p>以前，我们都是由美工设计页面，前端开发模板，后端开发 API, 前端再套 API, 再交给后端，后端接过前端的页面套模板。一切看起来是那么的和谐。</p>
-<p>但是，就是这么一个看起来一个简单的套模板 / 开发 API，就是一个时间黑洞。</p>
-<p>比如说：</p>
-<ul>
-<li>小美（美工）设计好设计稿，交给小钱（前端）</li>
-<li>小钱完成前端页面的设计，</li>
-<li>小侯（后端）开发 API,</li>
-<li>小钱套 API 后，完成页面设计，并将这个页面交给小侯</li>
-<li>小侯要做的事情，把小钱的前端页面切分成模板引擎里面的语法，从数据库里面取数据，交给模板引擎渲染，完成套前端页面流程。</li>
-</ul>
-<p>接着，产品经理跳出来，指出页面设计中有两个地方需要优化，于是：</p>
-<p>大家面临的选择就只有两个：</p>
-<ol>
-<li>合起伙来，解决掉产品经理</li>
-<li>大家在反反复复，迂迂回回的需求变更、BUG 解决、调试中，浪费了一些不应该浪费的时间。</li>
-</ol>
-<p>那么前后端分离了，前后端的开发就如同客户端开发和服务端开发一样：</p>
-<ul>
-<li>前端 / 客户端 负责路由，负责什么时候请求什么 API, 该去优化性能就去优化性能。</li>
-<li><p>后端 / 服务端 负责折腾后端组件，优化性能。</p>
-</li>
-<li><p>如果调页面，直接找前端去就好了。</p>
-</li>
-<li>如果是数据或者 API 有问题，直接找后端就好了。</li>
-</ul>
-<p>这么一分，其实职责就好界定了很多，由于修改与优化不会引发两个工种的交叉合作（前端改完，后端套模板）,BUG 率就减少了很多。</p>
-<blockquote>
-<p>PS: 其实职责好界定很多，但不能避免推锅。</p>
-</blockquote>
-<p>由于本博客只关注 Django 技术栈，而所谓使用 JavaScript 前后端通吃的『大前端』, 则不在我们的讨论范围之内。</p>
-<blockquote>
-<p>比起使用一门语言前后端通吃，笔者还是比较倾向于『见人说人话，见鬼说鬼话』, 即使用多种语言，去处理合适的问题的。</p>
-</blockquote>
-<h3 id="前后端分离的成本"><a href="#前后端分离的成本" class="headerlink" title="前后端分离的成本"></a>前后端分离的成本</h3><p>前后端分离并不是没有代价的。</p>
-<p>对于前端：</p>
-<ul>
-<li>首次页面 Loading 速度</li>
-<li>JWT 认证请求</li>
-<li>在特定场景下，有些看起来在多页面开发过程中比较简单的事情，反而比较复杂。</li>
-<li>需要注意内存的使用率。</li>
-</ul>
-<p>对于后端：</p>
-<ul>
-<li>JWT 认证响应，以前是 session 认证，而且 Django 都给你实现好了。现在变了，往往大家使用的都是 JWT 作为认证。</li>
-</ul>
-<p>但这些成本相比与节省的开发时间相比都是微不足道的。</p>
-<p>当然，我会在本系列的后面抽出一篇教程来专门讲解 Django 内置用户的扩展和前后端分离的登录认证。</p>
-<h2 id="0x03-博客系统设计"><a href="#0x03-博客系统设计" class="headerlink" title="0x03 博客系统设计"></a>0x03 博客系统设计</h2><p>这个博客最初要解决的问题是：</p>
-<ol>
-<li>hexo 用腻了，想自己写一个简单的博客系统。</li>
-<li>这个博客要可以导入文章，我不需要编辑器功能，在本地编辑完毕之后，导入数据库就好。</li>
-</ol>
-<h3 id="页面构成"><a href="#页面构成" class="headerlink" title="页面构成"></a>页面构成</h3><ol>
-<li>首页</li>
-<li>博客列表页</li>
-<li>博客存档页</li>
-<li>博客历史页</li>
-<li>博客详情页</li>
-<li>关于我页面</li>
-</ol>
-<h3 id="模型构成"><a href="#模型构成" class="headerlink" title="模型构成"></a>模型构成</h3><p>首先 M 模型层</p>
-<ol>
-<li>PostgreSQL : 博文 / 博文类型 / 博文标签</li>
-<li>Elasticsearch : 博文</li>
-<li>Redis : 每篇博文的阅读量，点赞量</li>
-</ol>
-<p>这里需要注意的是：</p>
-<ul>
-<li>第一：博文类型-博文：1 对多，博文标签-博文：多对多</li>
-<li>第二：博文中的 content 为文章内容，即可以在 Elasticsearch 中作为全文搜索的字段。具体降到 Elasticsearch 的时候我们会详细说明。</li>
-<li>第三：博文中的 阅读量和点赞量放在 Redis 里面，由 Celery 的定时任务定期刷到内存中。</li>
-</ul>
-<p>再考虑 VT 视图模板层，VT 层，会根据情况 DjangorestFramework 来进行序列化和反序列化。</p>
-<p>在设计模型的时候，尽量将涉及到模型的操作放在模型内。</p>
-<p>关于如何设计更好的模型，在以后的文章将会讲解，先挖个坑。</p>
-<h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p>理想环境中，我们的架构图如下：</p>
-<p>哦，不好意思，放错图了，是这样的。</p>
-<p>但这样的架构应该有专门的人来维护。</p>
-<p>于是在人力有限的情况下，本项目的架构图是这样的。</p>
-<p>哦，不好意思，放错图了，是这样的。</p>
-<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，Django 前后端分离最佳实践，点赞后，快上车吧</p>
-<ul>
-<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
-<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
-</ul>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2018-02-22</strong> 开启本文</li>
-<li><strong>2018-02-27</strong> 重修文字</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/23/YaDjangoBlog之前端VueJS篇/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/23/YaDjangoBlog之前端VueJS篇/" itemprop="url">YaDjangoBlog 之 前端 VueJS 篇</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-23T10:13:30+08:00">
-                2018-02-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">后端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2,344
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  10
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文是 Django 全栈开发教程的第四篇</p>
-<p>目录在这里，已经更新的文章如下</p>
-<ul>
-<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
-</ul>
-<p>本文需要完成三件事情：</p>
-<ul>
-<li>第一件事情，介绍为什么选择 VueJS？</li>
-<li>第二件事情，介绍 Vue 项目的一些注意点。</li>
-<li>第三件事情，蜻蜓点水搬的带大家过一编，YaDjangoBlog 前端的项目结构，静态资源管理，路由以及组件。</li>
-</ul>
-<h2 id="0x01-为什么是-VueJS"><a href="#0x01-为什么是-VueJS" class="headerlink" title="0x01 为什么是 VueJS"></a>0x01 为什么是 VueJS</h2><p>国产框架 + 语法简洁是我入坑 VueJS 初衷。</p>
-<p>后来却是 Vue 的丰富的生态和简洁的语法吸引了继续用下去。</p>
-<p>这里要感谢为 VueJS 持续贡献代码的人，从 Vue 本身，到 VueCLI, 到 Router, 到 VueX, 如果没有那么多人为之贡献代码，可能今天这一小节就变成了，『为什么是 React 了』逃。</p>
-<p>Vue 自称为 Vue 渐进式 JavaScript 框架。</p>
-<p>什么是渐进式？</p>
-<p>就是你可以逐步按照 Vue 的方式逐渐引入一些 Vue 的组件到项目中。没有必要上来就是 Vue 全家桶，依据场景逐步引入。</p>
-<p>参考链接 <a href="https://www.zhihu.com/question/51907207" target="_blank" rel="external">https://www.zhihu.com/question/51907207</a></p>
-<p>然而，依据我的经验，vue 全家桶用起来还是很舒服的。这里必须要感谢 Vue 社区。</p>
-<p>模板语法，数据驱动，双向绑定。写起代码来简直就是一个字，爽。</p>
-<h2 id="0x02-Vue-项目的一些注意点"><a href="#0x02-Vue-项目的一些注意点" class="headerlink" title="0x02 Vue 项目的一些注意点"></a>0x02 Vue 项目的一些注意点</h2><p>从项目角度，我们想想前端项目有哪些地方是需要注意的：</p>
-<ol>
-<li>开发环境和线上环境区分</li>
-<li>前端资源打包<ul>
-<li>Vue 项目资源打包</li>
-<li>DLL 打包</li>
-<li>字体文件打包</li>
-</ul>
-</li>
-<li>CSS/JS 如何管理</li>
-<li>有哪些必要的依赖，如何引入第三方库</li>
-<li>有哪些页面级组件，有哪些小组件？应该安排这些组件？组件与组件应该怎么通讯？</li>
-<li>路由怎么管理</li>
-<li>状态怎么管理</li>
-<li>登录，鉴权怎么做</li>
-</ol>
-<p>限于篇幅，我就不一一讲解了。挑在 YaDjangoBlog 中使用到的技术简单介绍一下。</p>
-<p>再次感谢 Vue 社区出品的 VueCLI 以及 Webpack 模板。</p>
-<p>下面依次介绍：</p>
-<ol>
-<li>项目结构</li>
-<li>静态资源管理</li>
-<li>路由</li>
-<li>组件</li>
-</ol>
-<h2 id="0x03-项目结构"><a href="#0x03-项目结构" class="headerlink" title="0x03 项目结构"></a>0x03 项目结构</h2><p>首先，YaDjangoBlog 文件的前端目录如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── README.md</div><div class="line">├── build</div><div class="line">│   ├── build.js</div><div class="line">│   ├── build_iconfont.js <span class="comment"># 构建 iconfont 脚本</span></div><div class="line">│   ├── check-versions.js</div><div class="line">│   ├── logo.png</div><div class="line">│   ├── utils.js</div><div class="line">│   ├── vue-loader.conf.js</div><div class="line">│   ├── webpack.base.conf.js</div><div class="line">│   ├── webpack.dev.conf.js <span class="comment"># 增加了 AutoDllPlugin 用于自动打包 DLL</span></div><div class="line">│   └── webpack.prod.conf.js</div><div class="line">├── config</div><div class="line">│   ├── dev.env.js <span class="comment"># 可以在这里添加开发环境的环境变脸</span></div><div class="line">│   ├── index.js</div><div class="line">│   ├── prod.env.js</div><div class="line">│   └── test.env.js</div><div class="line">├── extra</div><div class="line">│   └── svg-icon <span class="comment"># 这里存放需要生成 iconfont 的字体文件。</span></div><div class="line">├── index.html</div><div class="line">├── package.json <span class="comment"># 这里添加了一些构建脚本</span></div><div class="line">├── packages</div><div class="line">│   └── theme-future <span class="comment"># 注意，这里是另一个子项目，使用 Gulp 构建的纯 CSS 子项目。</span></div><div class="line">├── src</div><div class="line">│   ├── App.vue</div><div class="line">│   ├── api <span class="comment"># 对 axios 进行初步封装</span></div><div class="line">│   ├── assets <span class="comment"># 从使用 Gulp 生成的 CSS 可以放在这里。</span></div><div class="line">│   ├── components <span class="comment"># 跨页面的组件放在这里</span></div><div class="line">│   ├── directives <span class="comment"># 指令</span></div><div class="line">│   ├── filters    <span class="comment"># 过滤器</span></div><div class="line">│   ├── main.js    <span class="comment"># 初始化 Vue 实例</span></div><div class="line">│   ├── pages      <span class="comment"># 页面</span></div><div class="line">│   ├── router     <span class="comment"># 路由</span></div><div class="line">│   ├── store      <span class="comment"># vuex</span></div><div class="line">│   └── utils      <span class="comment"># 常用工具类</span></div><div class="line">├── static</div><div class="line">│   ├── hightlight <span class="comment"># hightlight 脚本</span></div><div class="line">│   ├── iconfont   <span class="comment"># 本地构建的 iconfont</span></div><div class="line">│   ├── images</div><div class="line">│   └── js</div><div class="line">├── <span class="built_in">test</span>           <span class="comment"># 没写测试，大家开源项目不要学我.... 逃</span></div><div class="line">│   ├── e2e</div><div class="line">│   └── unit</div><div class="line">└── yarn.lock</div></pre></td></tr></table></figure>
-<h2 id="0x04-静态资源管理"><a href="#0x04-静态资源管理" class="headerlink" title="0x04 静态资源管理"></a>0x04 静态资源管理</h2><p>静态资源管理，主要涉及到 JS/CSS/ 图片 / 字体</p>
-<p>首先，由于使用了 VueCli 的模板，所以大可以按照 VueCli 提供的写法来写。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Header</span>&gt;</span><span class="tag">&lt;/<span class="name">Header</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Footer</span>&gt;</span><span class="tag">&lt;/<span class="name">Footer</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">name</span>: <span class="string">'app'</span>,</div><div class="line">  <span class="attr">components</span>: &#123;</div><div class="line">    <span class="attr">Header</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./pages/commons/Header.vue'</span>),</div><div class="line">    <span class="attr">Footer</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./pages/commons/Footer.vue'</span>),</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"scss"</span>&gt;</span><span class="undefined"></span></div><div class="line">  $primary-color: #37b24d;</div><div class="line">  $dark-color: #2b5732;</div><div class="line">  $body-bg: #f9f9f9;</div><div class="line">  @import '~spectre.css/src/spectre-icons.scss';</div><div class="line">  @import '~spectre.css/src/spectre.scss';</div><div class="line">  @import '~spectre.css/src/spectre-exp.scss';</div><div class="line">  @import './assets/theme-future/index.css';</div><div class="line">  a &#123;</div><div class="line">    &amp;:focus,</div><div class="line">    &amp;:hover,</div><div class="line">    &amp;:active,</div><div class="line">    &amp;.active &#123;</div><div class="line">      text-decoration: none;</div><div class="line">      box-shadow: 0 0 0 0;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  #app &#123;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>依据我个人经验，做了一部分的微调：</p>
-<p><strong>第一</strong> 在代码中新建一个主题 CSS, 单独用于处理 SCSS 编译 CSS. 即除了 App.vue, 其他地方的 CSS 直接写在同一个地方。</p>
-<p><strong>第二</strong> 对于字体文件，不引入 IconFont 在线字体，而是使用 SVG 本地编译字体。这样减少对 iconfont cdn 的依赖，可以以后直接迁移这个字体到其他 CDN 上。</p>
-<p><strong>第三</strong> 对于依赖库管理，分为 npm 依赖库和外部 JS 依赖库两种</p>
-<p>对于 NPM 依赖库，如果有使用过 ECharts3.0 的 SPA 开发者应该对于万恶的 DLL 非常熟悉了。最早的时候，我们是这样做的：</p>
-<ul>
-<li>先写一个编译脚本，指定相关依赖包，打包出 dll 和一个 manifest 文件</li>
-<li>然后从 index.html 里引入打包好的 dll.</li>
-<li>再从 webpack 的配置文件中引入这个文件。</li>
-</ul>
-<p>这种恶心的配置随着 autodll-webpack-plugin 的出现从而得到缓解，于是现在的你只需要配置：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> AutoDllPlugin(&#123;</div><div class="line">  <span class="attr">inject</span>: <span class="literal">true</span>, <span class="comment">// will inject the DLL bundles to index.html</span></div><div class="line">  debug: <span class="literal">true</span>,</div><div class="line">  <span class="attr">filename</span>: <span class="string">'[name]_[hash].js'</span>,</div><div class="line">  <span class="attr">entry</span>: &#123;</div><div class="line">    <span class="attr">vendor</span>: [</div><div class="line">      <span class="string">'@antv/data-set'</span>,</div><div class="line">      <span class="string">'@antv/g2'</span>,</div><div class="line">      <span class="string">'@antv/g6'</span>,</div><div class="line">      <span class="string">'highlight.js'</span>,</div><div class="line">      <span class="string">'markdown-it'</span>,</div><div class="line">      <span class="string">'markdown-it-abbr'</span>,</div><div class="line">      <span class="string">'markdown-it-deflist'</span>,</div><div class="line">      <span class="string">'markdown-it-emoji'</span>,</div><div class="line">      <span class="string">'markdown-it-footnote'</span>,</div><div class="line">      <span class="string">'markdown-it-ins'</span>,</div><div class="line">      <span class="string">'markdown-it-katex'</span>,</div><div class="line">      <span class="string">'markdown-it-mark'</span>,</div><div class="line">      <span class="string">'markdown-it-sub'</span>,</div><div class="line">      <span class="string">'markdown-it-sup'</span>,</div><div class="line">      <span class="string">'markdown-it-task-lists'</span>,</div><div class="line">      <span class="string">'markdown-it-toc-and-anchor'</span>,</div><div class="line">      <span class="string">'typed.js'</span>,</div><div class="line">      <span class="string">'vue'</span>,</div><div class="line">      <span class="string">'vue-router'</span>,</div><div class="line">      <span class="string">'vuex'</span></div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">plugins</span>: [<span class="keyword">new</span> webpack.optimize.UglifyJsPlugin()],</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>当然，如果你用了 ECharts, 有的时候会出现莫名其妙的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">__DEV__ is not defined</div></pre></td></tr></table></figure>
-<p>解决方法就是在这上面的插件里面加个插件定义一个 Global 的变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">new webpack.DefinePlugin(&#123;</div><div class="line">  __DEV__: false</div><div class="line">&#125;),</div></pre></td></tr></table></figure>
-<blockquote>
-<p>PS: 去年的版本由于依赖库的一个路径问题导致 autodll-webpack-plugin 不能在 Windows 上使用，今年可以啦。还不快快用起来？</p>
-</blockquote>
-<p>对于外部的 JS/CSS 依赖库：</p>
-<ol>
-<li>直接拷贝到 static 下面，然后从 index.html 引入即可。</li>
-<li>动态创建 script 标签（比如动态引入高德地图）</li>
-</ol>
-<h2 id="0x04-路由"><a href="#0x04-路由" class="headerlink" title="0x04 路由"></a>0x04 路由</h2><p>博客项目，实际上路由比较简单。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">export default new Router(&#123;</div><div class="line">  mode: &apos;history&apos;,</div><div class="line">  base: &apos;/&apos;,</div><div class="line">  // 注释掉这里是因为和引入的 smooth-scroll 冲突</div><div class="line">  // scrollBehavior (to, from, savedPosition) &#123;</div><div class="line">  //   return &#123; x: 0, y: 0 &#125;</div><div class="line">  // &#125;,</div><div class="line">  routes: [</div><div class="line">    &#123;</div><div class="line">      path: &apos;/&apos;,</div><div class="line">      name: &apos;home&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Home.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    // 解决手贱带来的问题</div><div class="line">    &#123;</div><div class="line">      path: &apos;/index:suffix*&apos;,</div><div class="line">      name: &apos;index&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Home.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/blog&apos;,</div><div class="line">      name: &apos;blog&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Blog.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/blog/post/:title&apos;,</div><div class="line">      name: &apos;post&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Blog/ArticlePost.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/blog/:category(category/\\d+)?/:tags(tags/\\d+)?/:page(page/\\d+)?&apos;,</div><div class="line">      name: &apos;blogposts&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Blog.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/archive&apos;,</div><div class="line">      name: &apos;archive&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Archive.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/gallery&apos;,</div><div class="line">      name: &apos;gallery&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Gallery.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/works&apos;,</div><div class="line">      name: &apos;works&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Works.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/about&apos;,</div><div class="line">      name: &apos;about&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/About.vue&apos;)</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>除了 import 语法之外，需要注意的就是 ‘/blog/:category(category/\d+)?/:tags(tags/\d+)?/:page(page/\d+)?’ 这个奇怪的表达式。</p>
-<p>这个表达式可以用于匹配下面的路由</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/blog/category/1/tags/2/page/3</div><div class="line">/blog/category/1/page/3</div><div class="line">/blog/tags/3/page/3</div><div class="line">/blog/page/3</div></pre></td></tr></table></figure>
-<p>匹配完毕之后，就可以拿到 categroy tags page 的值然后提交数据库拿数据咯。</p>
-<h2 id="0x05-组件"><a href="#0x05-组件" class="headerlink" title="0x05 组件"></a>0x05 组件</h2><p>博客里面需要注意的就三个组件</p>
-<ul>
-<li>ArticlePost 组件</li>
-<li>分页组件</li>
-<li>打字终端组件</li>
-</ul>
-<p>第一个，ArticlePost 组件</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"p-article-post"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"columns"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-1 hide-xl"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-2 col-xl-3"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"g-sidebar"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">h4</span>&gt;</span>本文目录<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">"articleToc"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-6 col-xl-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">ArticleCard</span> <span class="attr">:article</span>=<span class="string">"article"</span> @<span class="attr">articleTocReady</span>=<span class="string">"initArticleToc"</span>&gt;</span><span class="tag">&lt;/<span class="name">ArticleCard</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-2 col-xl-3"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"g-sidebar"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">h4</span>&gt;</span>公告<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              MG 的编程小屋，其实就是我整理笔记，写写文章的地方。</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              专注 Python / JavaScript , 爱折腾的全干工程师 (Full Stuff Engineer)</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              如果我的文章给您的日常开发带来很大帮助的话</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              您可以关注我的公众号</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/static/images/mp_wechat.jpg"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">style</span>=<span class="string">"width: 200px"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              也可以扫描二维码进行投喂</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/static/images/tips_wechat.jpeg"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">style</span>=<span class="string">"width: 200px"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              听说关注或者进行投喂的人，技术都越来越牛咯。</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-1 hide-xl"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> &#123;fetchBlogPost&#125; <span class="keyword">from</span> <span class="string">'../../api/blog'</span>;</div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">'BlogPage'</span>,</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      <span class="attr">ArticleCard</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'../../components/Common/ArticleCard.vue'</span>),</div><div class="line">    &#125;,</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">article</span>: <span class="string">''</span>,</div><div class="line">        <span class="attr">articleToc</span>: <span class="literal">undefined</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">watch</span>: &#123;</div><div class="line">      <span class="string">'$route.params'</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.initArticle()</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    created() &#123;</div><div class="line">      <span class="keyword">this</span>.initArticle()</div><div class="line">    &#125;,</div><div class="line">    mounted() &#123;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      <span class="attr">initArticleToc</span>: <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.articleToc = v;</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">initArticle</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">let</span> title = <span class="keyword">this</span>.$route.params.title;</div><div class="line">        fetchBlogPost(title).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">          <span class="keyword">this</span>.article = res;</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>嗯，其实就是监听 url, 如果匹配上 url 的话，从 url 中取 title, 然后发送请求，接着取回响应的内容交给子组件处理。子组件处理完毕会 emit 出一个 toc 的值，将这个值赋值给左侧 toc 即可。</p>
-<ul>
-<li>分页组件</li>
-</ul>
-<p>见地址吧  <a href="https://github.com/twocucao/YaVueBlog/blob/master/src/components/Common/Pagination.vue" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog/blob/master/src/components/Common/Pagination.vue</a></p>
-<ul>
-<li>打字终端组件</li>
-</ul>
-<p>终端的样式，当然是抄别人的 CSS, 打字效果，来源于 typed.js 依赖库</p>
-<h2 id="0x06-扩展"><a href="#0x06-扩展" class="headerlink" title="0x06. 扩展"></a>0x06. 扩展</h2><p>对于其他的实现，自然是要多多看代码咯。</p>
-<p>其实前端工程化是一个很广的概念，本文没有提到代码风格、团队开发工作流、CSS 编写规范、组件优化、Webpack 详细配置等等。这都需要在日常开发中多多练习的。</p>
-<p>笔者最近换了份工作，以 React 为技术栈。 加上篇幅和精力有限，也就是不在以 Vue 为前端这一块详细展开了。</p>
-<p>下面的文章还是聚焦在后端上面。</p>
-<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，Django 前后端分离最佳实践，点赞后，快上车吧</p>
-<ul>
-<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
-<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
-</ul>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2018-03-18</strong> 重修文字</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/22/YaDjangoBlog开发环境配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/22/YaDjangoBlog开发环境配置/" itemprop="url">YaDjangoBlog 开发环境配置</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T10:13:30+08:00">
-                2018-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">后端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3,000
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  13
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文是 Django 全栈开发教程的第一篇，上一篇是第零篇，目录会随时更新，地址在这里 2018 年不容错过的 Django 全栈项目 <a href="https://zhuanlan.zhihu.com/p/33903527" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33903527</a></p>
-<blockquote>
-<p>为什么是第零篇，因为程序员从零计数呀。笑~~</p>
-</blockquote>
-<p>本文需要完成两件事情：</p>
-<ul>
-<li>配置基本的开发环境</li>
-<li>让代码先运行一下</li>
-</ul>
-<p>如果你使用的 macOS, 那么可以跟着下文一步一步走。如果是 linux/window 用户，可能稍微需要在配置环境上多花点时间。</p>
-<blockquote>
-<p>本文默认你至少会在 iTerm2 下面使用基本的 bash 命令与 git , 如果使用的 ohmyzsh 就更好了。 建议先参考请查看我之前的文章里面的配置环境 如何优雅地使用 macOS <a href="https://zhuanlan.zhihu.com/p/29892969" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/29892969</a></p>
-</blockquote>
-<h2 id="0x01-Python-开发环境配置"><a href="#0x01-Python-开发环境配置" class="headerlink" title="0x01 Python 开发环境配置"></a>0x01 Python 开发环境配置</h2><p>本小节的目的就是配置好基本的 python 开发环境</p>
-<p>使用了神器 pyenv</p>
-<blockquote>
-<p>BTW: 为什么不直接用 pipenv ? 因为网络不通畅，如若不然，pipenv 比 pyenv 更适合用来做 python 依赖包管理。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 新开终端</span></div><div class="line">git clone https://github.com/yyuu/pyenv.git ~/.pyenv</div><div class="line">git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv</div><div class="line">echo <span class="string">'export PYENV_ROOT="$HOME/.pyenv"'</span> &gt;&gt; ~/.zshrc</div><div class="line">echo <span class="string">'export PATH="$PYENV_ROOT/bin:$PATH"'</span> &gt;&gt; ~/.zshrc</div><div class="line">echo <span class="string">'eval "$(pyenv init -)"'</span> &gt;&gt; ~/.zshrc</div><div class="line">echo <span class="string">'eval "$(pyenv virtualenv-init -)"'</span> &gt;&gt; ~/.zshrc</div><div class="line"></div><div class="line"><span class="comment"># 接着另开终端</span></div><div class="line"><span class="comment"># 不喜写兼容代码，所有代码均向 3.5+ 靠拢</span></div><div class="line">v=<span class="number">3.5</span><span class="number">.2</span>|wget http://mirrors.sohu.com/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/;pyenv install $v</div><div class="line">v=<span class="number">3.6</span><span class="number">.0</span>|wget http://mirrors.sohu.com/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/;pyenv install $v</div><div class="line">v=<span class="number">2.7</span><span class="number">.11</span>|wget http://mirrors.sohu.com/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/;pyenv install $v</div><div class="line"></div><div class="line"><span class="comment"># 设置 Global Python 为 2.7.11, 备注：尽量不要把 Py3 设置为全局，否则由于 Homebrew 本身有一些依赖是依赖于 Py2 的，这样容易出现一些奇怪的问题。</span></div><div class="line">pyenv <span class="keyword">global</span> <span class="number">2.7</span><span class="number">.11</span></div><div class="line">pip install -i https://pypi.doubanio.com/simple requests</div><div class="line"><span class="comment"># 下面这个是用于安装基本的代码补全功能</span></div><div class="line">pip install -i https://pypi.doubanio.com/simple --upgrade <span class="string">"jedi&gt;=0.9.0"</span> <span class="string">"json-rpc&gt;=1.8.1"</span> <span class="string">"service_factory&gt;=0.1.5"</span> flake8 pytest autoflake hy</div><div class="line"></div><div class="line"><span class="comment"># 创建最常用 Py3 虚拟环境</span></div><div class="line">pyenv virtualenv <span class="number">3.5</span><span class="number">.2</span> py3-daily</div><div class="line">pyenv activate py3-daily</div><div class="line">pip install -i https://pypi.doubanio.com/simple requests</div><div class="line">pip install -i https://pypi.doubanio.com/simple beatutifulsoup4</div><div class="line">pip install -i https://pypi.doubanio.com/simple ipython[notebook]</div><div class="line">pip install -i https://pypi.doubanio.com/simple jupyter</div><div class="line"><span class="comment"># 下面这个是用于安装基本的代码补全功能</span></div><div class="line">pip install -i https://pypi.doubanio.com/simple --upgrade <span class="string">"jedi&gt;=0.9.0"</span> <span class="string">"json-rpc&gt;=1.8.1"</span> <span class="string">"service_factory&gt;=0.1.5"</span> flake8 pytest autoflake hy</div></pre></td></tr></table></figure>
-<p>好，Python 环境就安装完毕了。</p>
-<h2 id="0x02-JavaScript-开发环境配置"><a href="#0x02-JavaScript-开发环境配置" class="headerlink" title="0x02 JavaScript 开发环境配置"></a>0x02 JavaScript 开发环境配置</h2><blockquote>
-<p>本小节的目的就是配置好基本的 JS 开发环境，但估计 JSer 看了本小节依旧可以在配置上少一些麻烦。</p>
-</blockquote>
-<p>JS 可以前后端通吃，社区生态很丰富。ES6 之后从 python 和 ruby 里面借鉴了不少语法糖。现在写起来还是比较愉悦的。</p>
-<p>JavaScript 不管开发前端应用还是后端应用，都需要安装 node 环境。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 先安装 nvm</span></div><div class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash</div><div class="line"><span class="comment"># 新开终端</span></div><div class="line">nvm install 8</div><div class="line">nvm use 8</div><div class="line">nvm <span class="built_in">alias</span> default 8</div><div class="line"></div><div class="line">npm install cnpm</div><div class="line">cnpm install yarn -g</div><div class="line"><span class="comment"># 设置镜像</span></div><div class="line">yarn config <span class="built_in">set</span> registry https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
-<p>编辑 ~/.npmrc 配置文件，输入下文再配置各种奇奇怪怪的镜像地址。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">registry=https://registry.npm.taobao.org/</div><div class="line">chromedriver_cdnurl=http://cdn.npm.taobao.org/dist/chromedriver</div><div class="line">disturl=https://npm.taobao.org/dist</div><div class="line">operadriver_cdnurl=http://cdn.npm.taobao.org/dist/operadriver</div><div class="line">phantomjs_cdnurl=http://cdn.npm.taobao.org/dist/phantomjs</div><div class="line">fse_binary_host_mirror=https://npm.taobao.org/mirrors/fsevents</div><div class="line">sass_binary_site=http://cdn.npm.taobao.org/dist/node-sass</div><div class="line">electron_mirror=http://cdn.npm.taobao.org/dist/electron/</div></pre></td></tr></table></figure>
-<p>配置完毕</p>
-<h2 id="0x03-Docker-安装与配置"><a href="#0x03-Docker-安装与配置" class="headerlink" title="0x03 Docker 安装与配置"></a>0x03 Docker 安装与配置</h2><blockquote>
-<p>本小节主要解决一个最蛋疼的问题，就是网络问题</p>
-</blockquote>
-<p>下载并安装 docker for mac 地址如下 <a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="external">https://docs.docker.com/docker-for-mac/install/</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 安装成功后运行命令</span></div><div class="line">docker run hello-world</div></pre></td></tr></table></figure>
-<p>如果一切正常，则会显示如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">$ docker run hello-world</div><div class="line">Unable to find image <span class="string">'hello-world:latest'</span> locally</div><div class="line">latest: Pulling from library/hello-world</div><div class="line">ca4f61b1923c: Pull complete</div><div class="line">Digest: sha256:083de497cff944f969d8499ab94f07134c50bcf5e6b9559b27182d3fa80ce3f7</div><div class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</div><div class="line"></div><div class="line">Hello from Docker!</div><div class="line">This message shows that your installation appears to be working correctly.</div><div class="line"></div><div class="line">To generate this message, Docker took the following steps:</div><div class="line"> 1. The Docker client contacted the Docker daemon.</div><div class="line"> 2. The Docker daemon pulled the <span class="string">"hello-world"</span> image from the Docker Hub.</div><div class="line">    (amd64)</div><div class="line"> 3. The Docker daemon created a new container from that image <span class="built_in">which</span> runs the</div><div class="line">    executable that produces the output you are currently reading.</div><div class="line"> 4. The Docker daemon streamed that output to the Docker client, <span class="built_in">which</span> sent it</div><div class="line">    to your terminal.</div><div class="line"></div><div class="line">To try something more ambitious, you can run an Ubuntu container with:</div><div class="line"> $ docker run -it ubuntu bash</div><div class="line"></div><div class="line">Share images, automate workflows, and more with a free Docker ID:</div><div class="line"> https://cloud.docker.com/</div><div class="line"></div><div class="line">For more examples and ideas, visit:</div><div class="line"> https://docs.docker.com/engine/userguide/</div></pre></td></tr></table></figure>
-<p>好，配置到这里。</p>
-<p>你以为你已经配置好了，还先别激动，网络问题还没解决呢。小的镜像可以直接从 Docker 上直接拖下来，几百兆的镜像可就没这么容易了。</p>
-<p>这里我们使用了阿里云的 Docker 容器镜像。</p>
-<p>登录阿里云，到控制台，找到容器镜像服务，镜像加速器，</p>
-<p>如下图：</p>
-<p>右键点击桌面顶栏的 docker 图标，选择 Preferences ，在 Daemon 标签（Docker 17.03 之前版本为 Advanced 标签）下的 Registry mirrors 列表中将 <a href="https://your-url.mirror.aliyuncs.com" target="_blank" rel="external">https://your-url.mirror.aliyuncs.com</a> 加到”registry-mirrors”的数组里，点击 Apply &amp; Restart 按钮，等待 Docker 重启并应用配置的镜像加速器。</p>
-<p>Docker 配置完毕。</p>
-<h2 id="0x04-项目试运行"><a href="#0x04-项目试运行" class="headerlink" title="0x04 项目试运行"></a>0x04 项目试运行</h2><p>运行项目之前，保持你我的工作环境基本一致</p>
-<ul>
-<li>创建一些必须的目录</li>
-<li>clone 项目</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mkdir -p ~/Codes/YaB<span class="built_in">log</span>/DockerVolume/YaDjangoB<span class="built_in">log</span>/PostgreSQL/data</div><div class="line">mkdir -p ~/Codes/YaB<span class="built_in">log</span>/DockerVolume/YaDjangoB<span class="built_in">log</span>/Redis/data</div><div class="line">mkdir -p ~/Codes/YaB<span class="built_in">log</span>/DockerVolume/YaDjangoB<span class="built_in">log</span>/Backups</div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/</div><div class="line">git <span class="built_in">clone</span> git@github.com:twocucao/YaVueBlog.git</div><div class="line">git <span class="built_in">clone</span> git@github.com:twocucao/YaDjangoBlog.git</div></pre></td></tr></table></figure>
-<p>克隆下来项目之后还需要稍微折腾一下（没办法，CURD 开发 = 折腾折腾折腾 + 搬砖搬砖搬砖）</p>
-<ul>
-<li>运行 Vue 开发环境</li>
-<li>运行 Docker 化的 django 环境</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 新开一个终端 用于运行 Vue 应用</span></div><div class="line"><span class="comment"># 前端环境不放在 Docker 环境中。（因为开发环境没必要，生产环境才需要）</span></div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaVueB<span class="built_in">log</span>/ &amp;&amp; yarn &amp;&amp; <span class="built_in">cd</span> -</div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaVueB<span class="built_in">log</span>/packages/theme-future/ &amp;&amp; yarn &amp;&amp; <span class="built_in">cd</span> -</div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaVueB<span class="built_in">log</span>/</div><div class="line">npm run build:theme</div><div class="line">npm run dev</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 新开一个终端</span></div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make</div></pre></td></tr></table></figure>
-<p>看到下图，包含所有的命令。</p>
-<p>这是我用 Makefile 编写的一系列命令，方便我在开发过程将主要的精力花在业务逻辑上而不是花时间在强记大量的琐碎的命令。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make build-all</div><div class="line"><span class="comment"># 等待运行后端所有组件</span></div></pre></td></tr></table></figure>
-<p>然后，读者可以先去泡杯咖啡点个外卖吃个饭之类的。等待构建完毕。</p>
-<p>需要注意的是，务必配置好 docker 镜像加速地址，否则根据国内情况，你可能需要多去泡几杯咖啡，多吃几顿饭。</p>
-<p>好，接下来我们运行后端程序，首次运行需要花费不少时间</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make django-just-up</div></pre></td></tr></table></figure>
-<p>运行之后，终端结果如下：</p>
-<p>可以发现，服务已经都开始启动了。</p>
-<p>但不要冲动，先等等，因为一次开了如下的服务：</p>
-<ul>
-<li>postgres</li>
-<li>redis</li>
-<li>elasticsearch</li>
-<li>mailhog</li>
-<li>django</li>
-<li>celerybeat</li>
-<li>celeryworker</li>
-<li>celeryflower</li>
-</ul>
-<p>需要多等会儿时间到各个服务运行正常。直到出现下图：</p>
-<p>这意味着基本上所有的程序都运行正常了。如果有服务挂掉，欢迎到 github 的 issue 上提一下。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 接着再新开一个终端 用于导入基础数据</span></div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make django-import-articles</div></pre></td></tr></table></figure>
-<p>好，那么，我们来验证一下如下几个地址：</p>
-<ul>
-<li>接口地址 <a href="http://localhost:8000/api/v1/archive" target="_blank" rel="external">http://localhost:8000/api/v1/archive</a></li>
-<li>Vue 地址 <a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a></li>
-<li>在搜索框内输入 elasticsearch 查看接口是否正常返回数据</li>
-<li>查看 celery 的 task 是否正确</li>
-</ul>
-<p>如果一切正常，则所有的截图应该如下</p>
-<h2 id="0x05-Tmux-和-Tmuxinator"><a href="#0x05-Tmux-和-Tmuxinator" class="headerlink" title="0x05 Tmux 和 Tmuxinator"></a>0x05 Tmux 和 Tmuxinator</h2><p>我们在上文中可以发现有个极其蛋疼菊紧的问题。</p>
-<p>当我们运行 make django-just-up 这个命令的时候，所有服务运行的同时，所有的标准输入都打印到一个终端。</p>
-<p>这个和我们日常开发不太相同</p>
-<ol>
-<li>在 django 开发的时候，我们运行 runserver, 肯定是只想在那个终端里看到 runserver 的运行情况。而不是 Redis,Elasticsearch,PGsql 之类的 log。</li>
-<li>并且，django 的热加载会有些小问题，有些错误只能 ctrl+c 关掉 runserver, 然后重启。但当我们想 ctrl+c 关掉 runserver 的时候，却把所有的的服务都关掉了。</li>
-</ol>
-<p>解决方式也简单：</p>
-<p>对于暂时不想在开发时看到日志的服务，干脆直接放后台运行，执行我封装的命令 make django-before-up 把部分服务直接放在后台里，然后再开四个终端，运行下面的命令。</p>
-<ul>
-<li>make django-runserver # 运行 runserver , 并只把该容器的 log 打印出来。下面三者同上。</li>
-<li>make django-celerybeat</li>
-<li>make django-celeryworker</li>
-<li>make django-celeryflower</li>
-</ul>
-<p>显然还是很麻烦，我这种懒人可是能少写几行代码就少些几行代码的。</p>
-<p>那么我们还可以更省事（懒一些）么？</p>
-<p>我之前写了一篇简单的 tmux 与 Tmuxinator 教程 <a href="https://zhuanlan.zhihu.com/p/33369297" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33369297</a> , 具体配置步骤参考文中即可。</p>
-<p>配置好 Tmuxinator 之后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 先软连接一下</span></div><div class="line">ln -svf ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/yadjangoblog.yml ~/.tmuxinator/yadjangoblog.yml</div></pre></td></tr></table></figure>
-<p>当我需要运行的所有服务的时候，我只需要</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmuxinator start yadjangoblog</div></pre></td></tr></table></figure>
-<p>就可以开启所有命令。</p>
-<p>yadjangoblog.yml 的内容如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">windows:</div><div class="line">  - &quot;前端-页面开发&quot;:</div><div class="line">      root: ~/Codes/YaBlog/YaVueBlog/</div><div class="line">      layout: main-vertical</div><div class="line">      panes:</div><div class="line">        - &quot;前端页面 DEV&quot;:</div><div class="line">          - &quot;npm run dev&quot;</div><div class="line">  - &quot;前端-CSS 与字体文件&quot;:</div><div class="line">      root: ~/Codes/YaBlog/YaVueBlog/</div><div class="line">      layout: main-vertical</div><div class="line">      panes:</div><div class="line">        - &quot;npm run dev:theme&quot;</div><div class="line">        - &quot;npm run dev:iconfont&quot;</div><div class="line">  - &quot;后端-Django 及其服务&quot;:</div><div class="line">      root: ~/Codes/YaBlog/YaDjangoBlog/</div><div class="line">      layout: main-vertical</div><div class="line">      panes:</div><div class="line">        - &quot;make django-before-up &amp;&amp; make django-runserver&quot;</div><div class="line">  - &quot;后端-数据库相关&quot;:</div><div class="line">      layout: main-vertical</div><div class="line">      root: ~/Codes/YaBlog/YaDjangoBlog/</div><div class="line">      panes:</div><div class="line">        - &quot;sleep 20 &amp;&amp; make dbshell&quot;</div><div class="line">        - &quot;sleep 20 &amp;&amp; make shell&quot;</div><div class="line">  - &quot;后端-Celery&quot;:</div><div class="line">      layout: main-vertical</div><div class="line">      root: ~/Codes/YaBlog/YaDjangoBlog/</div><div class="line">      panes:</div><div class="line">        - &quot;sleep 20 &amp;&amp; make django-celerybeat&quot;</div><div class="line">        - &quot;sleep 20 &amp;&amp; make django-celeryworker&quot;</div></pre></td></tr></table></figure>
-<h2 id="0x06-PyCharm-基本设置"><a href="#0x06-PyCharm-基本设置" class="headerlink" title="0x06 PyCharm 基本设置"></a>0x06 PyCharm 基本设置</h2><blockquote>
-<p>大家应该都用 PyCharm 进行开发了吧。 如果是的话，不看本小节可能会让你栽个跟头</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 这步是给 pycharm 打开代码做准备</span></div><div class="line">pyenv activate py3-daily</div><div class="line">pip install -i https://pypi.doubanio.com/simple -r requirements/local.txt</div></pre></td></tr></table></figure>
-<p>务必完成下面两个步骤</p>
-<ol>
-<li>在 Preferences -&gt; project -&gt; interpreter 选择对应的 py3-daily 虚拟环境。</li>
-<li>在侧边栏把 yadjangoblog , 注意小写的。右键标记为 sources root</li>
-</ol>
-<p>这样的标记相当于告诉 PyCharm , 这个项目的 PYTHONPATH 是 yadjangoblog/ , 否则使用 PyCharm 导入 AModel 会自动导入 from yadjangoblog.yaadmin.models from AModel 而不是 from yaadmin.models import AModel , 这会导致程序运行错误。</p>
-<blockquote>
-<p>PS: 包括后面跑单元测试的时候，均手动设置了 PYTHONPATH 变量。</p>
-</blockquote>
-<h2 id="0x07-开发流程"><a href="#0x07-开发流程" class="headerlink" title="0x07 开发流程"></a>0x07 开发流程</h2><p>本小节，从笔者开机开始，回顾一下环境配置好之后，笔者是如何进入开发状态的：</p>
-<ol>
-<li>开机。输入密码进入桌面。</li>
-<li>打开 Iterm, 运行 tmuxinator start yadjangoblog 开启项目。打开 PyCharm 和 WebStorm</li>
-<li>开发<ul>
-<li>在 WebStorm 中写写前端代码，在 <a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 和 tmux 里的第一个 window 查看状态</li>
-<li>在 PyCharm 中写写后端代码，在第三个 window 查看 runserver 状态，在第四个 window 的两个 Panel 运行 python manage.py 相关命令。</li>
-<li>在 Chrome Elasticsearch Head 扩展里调试 Elasticsearch 语法</li>
-<li>在 <a href="http://localhost:8000/api/your-api-path" target="_blank" rel="external">http://localhost:8000/api/your-api-path</a> 里调试前后端 API</li>
-<li>在 <a href="http://localhost:5555" target="_blank" rel="external">http://localhost:5555</a> 通过 flower 查看相关</li>
-<li>…..</li>
-<li>当然，你也可以新开一个终端里面，执行 make 查看相关还可以执行哪些命令。</li>
-</ul>
-</li>
-</ol>
-<p>那么，具体执行这些命令背后究竟发生了什么？</p>
-<ul>
-<li>数十服务为何突然启动</li>
-<li>数百个任务为何半夜消失</li>
-<li>正常运行的服务为何屡屡崩溃</li>
-<li>这一切的背后！是工程师的人性扭曲还是码畜的道德沦丧？是内存的爆发还是处理器的无奈？</li>
-<li>敬请关注本专栏 『MG 的编程小屋』或者 Github 频道，让我们跟随教程走进全干工程师的代码世界。</li>
-</ul>
-<blockquote>
-<p>不好意思，顺手打了个硬广，防止别人把我的文章砍头去尾直接扒过去。</p>
-</blockquote>
-<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，点赞后，快上车吧</p>
-<ul>
-<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
-<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
-</ul>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2018-02-22</strong> 重修文字</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/21/FullStackDjangoDevOps/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/21/FullStackDjangoDevOps/" itemprop="url">2018 年不容错过的 Django 全栈项目</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-21T10:13:30+08:00">
-                2018-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">后端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,386
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><blockquote>
-<p>写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。</p>
-</blockquote>
-<p>这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。</p>
-<p>为什么写这系列的文章呢？目的总的来说有两个：</p>
-<ol>
-<li>一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。</li>
-<li>二是希望借由这个持续更新的过程让自己更加深入理解 Django 技术栈 Django / DjangoRestFramework / Docker / Vue.JS / Celery / PostgreSQL / Redis / RabbitMQ</li>
-</ol>
-<p>为什么说这个项目你不容错过？</p>
-<ul>
-<li>新！新！新！保持最新的软件开发版本，E.G: Django 2.0 + Vue.JS 2.5 + PostgreSQL 10 + Celery 4.1.0</li>
-<li>Django 框架：Django 及其 强大的生态圈</li>
-<li>后端组件：PostgreSQL RabbitMQ Redis Ngnix</li>
-<li>前端技术：单页应用 前后端分离 (VueJS+Webpack+DjangoRestFramework), 自动化部署</li>
-<li>Django 社区最佳实践：从配置 / 开发 / 测试 / 部署 <strong>全干</strong>工程师 (Full Stuff Engineer) 的最新的 DevOps 思考成果。</li>
-<li>基本覆盖了进阶 Django 开发所需要的各种组件与操作。</li>
-<li>只需要适当的调整，本项目就可以成为你新开项目的最佳脚手架。</li>
-</ul>
-<p>本系列文章的面向读者：</p>
-<ul>
-<li>目标是 DevOps 的 Pythonist</li>
-<li>爱瞎几把折腾的 Pythonist</li>
-<li>前后端分离的实践者</li>
-</ul>
-<blockquote>
-<p>生命苦短，赶快上车</p>
-<p>Life is Short , I Use Python</p>
-</blockquote>
-<h2 id="0x01-项目介绍"><a href="#0x01-项目介绍" class="headerlink" title="0x01 项目介绍"></a>0x01 项目介绍</h2><p>YaDjangoBlog 是另一个关于博客的轮子，但是其野心并不在于仅仅多造一个博客系统，还有通过本项目做 Django 全栈开发的最佳实践。</p>
-<h3 id="1-1-项目地址"><a href="#1-1-项目地址" class="headerlink" title="1.1 项目地址"></a>1.1 项目地址</h3><ul>
-<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
-<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
-</ul>
-<h3 id="1-2-项目技术栈"><a href="#1-2-项目技术栈" class="headerlink" title="1.2 项目技术栈"></a>1.2 项目技术栈</h3><ul>
-<li>开发与部署环境为 Docker</li>
-<li>Python 3.5.2</li>
-<li>前端 Vue + Webpack + ES2015 + axios</li>
-<li>后端 <a href="https://github.com/django/django" target="_blank" rel="external">Django 2.0</a> + <a href="https://github.com/tomchristie/django-rest-framework/" target="_blank" rel="external">DjangoRestFramework</a> + Celery</li>
-<li>自动化部署选用工具 Ansible 以及 Docker</li>
-<li>后端组件<ul>
-<li>ElasticSearch 用于搜索和推荐</li>
-<li>PostgreSQL 用于数据持久化</li>
-<li>Redis 用于 Session / 和缓存</li>
-<li>RabbitMQ 分布式队列 / 定时任务</li>
-<li>Nginx 用于反向代理</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-3-特别感谢"><a href="#1-3-特别感谢" class="headerlink" title="1.3 特别感谢"></a>1.3 特别感谢</h3><ul>
-<li>ansible django stack: <a href="https://github.com/jcalazan/ansible-django-stack" target="_blank" rel="external">https://github.com/jcalazan/ansible-django-stack</a></li>
-<li>cookiecutter-django: <a href="https://github.com/pydanny/cookiecutter-django" target="_blank" rel="external">https://github.com/pydanny/cookiecutter-django</a></li>
-<li>djangopackages: <a href="https://github.com/djangopackages/djangopackages" target="_blank" rel="external">https://github.com/djangopackages/djangopackages</a></li>
-<li>董伟明 关于 ElasticSearch 的几篇文章 <a href="http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/" target="_blank" rel="external">http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/</a></li>
-<li>各个组件的开发者们<ul>
-<li>ElasticSearch</li>
-<li>PostgreSQL</li>
-<li>Redis</li>
-<li>RabbitMQ</li>
-<li>Nginx</li>
-<li>Docker</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-4-项目截图"><a href="#1-4-项目截图" class="headerlink" title="1.4 项目截图"></a>1.4 项目截图</h3><p>好，讲了半天有的没的，还是贴点图吧，毕竟我不是 Markdown 程序员</p>
-<blockquote>
-<p>我们先看看能看得见的前端页面</p>
-</blockquote>
-<p>主页</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&amp;h=1822&amp;f=png&amp;s=1504757" alt=""></p>
-<p>博客详情</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&amp;h=1846&amp;f=png&amp;s=1021166" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&amp;h=1804&amp;f=png&amp;s=1016132" alt=""></p>
-<p>这是一个很普通的 Archive 页面</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&amp;h=1818&amp;f=png&amp;s=425859" alt=""></p>
-<p>这是以 Elasticsearch 为支持的 搜索功能</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&amp;h=1840&amp;f=png&amp;s=1582839" alt=""></p>
-<p>Django 自带后台</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&amp;h=1768&amp;f=png&amp;s=365303" alt=""></p>
-<p>前后端分离怎么能少的了 rest api 的实现与便捷的前端调试？</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&amp;h=1840&amp;f=png&amp;s=486772" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a" alt=""></p>
-<p>Django Debug Tools 帮你迅速调优接口</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&amp;h=1838&amp;f=png&amp;s=735083" alt=""></p>
-<blockquote>
-<p>我们再先看看能看得见的开发界面</p>
-</blockquote>
-<p>在终端执行 tmuxinator start yavueblog 就可以自动运行所有任务</p>
-<p>前端运行状态</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&amp;h=2054&amp;f=png&amp;s=539522" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&amp;h=2054&amp;f=png&amp;s=2446065" alt=""></p>
-<p>后端运行状态<br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&amp;h=2054&amp;f=png&amp;s=3296514" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&amp;h=2054&amp;f=png&amp;s=2720324" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&amp;h=2054&amp;f=png&amp;s=3932296" alt=""></p>
-<p>当然，你可以直接用客户端连接到对应的服务商检查组件的运行状态</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&amp;h=1430&amp;f=png&amp;s=640103" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&amp;h=1126&amp;f=png&amp;s=532337" alt=""></p>
-<h2 id="0x02-系列教程目录"><a href="#0x02-系列教程目录" class="headerlink" title="0x02 系列教程目录"></a>0x02 系列教程目录</h2><h3 id="2-1-教程注意项"><a href="#2-1-教程注意项" class="headerlink" title="2.1 教程注意项"></a>2.1 教程注意项</h3><ol>
-<li>本文的开发环境配置仅仅限于 macOS 上，如果读者使用的是 Windows / 可能需要自己搞定环境的配置。不过笔者使用了 Docker 进行环境配置，应该配置环境会省事很多。</li>
-<li>在阅读本教程，请读者至少跟着 Django 官方的教程跟着走一遍。不要零基础一通瞎搞。</li>
-<li>如果在使用过程中出现问题，请在 ISSUE 提供尽可能多的信息，将问题描述清楚。</li>
-</ol>
-<p>本系列教程并不按照一步一步增加代码的方式写教程。</p>
-<p>我先带着大家搭建好整个项目框架，然后从不同的视角开介绍这个项目，比如：</p>
-<ol>
-<li>某个模块的 models 是如何设计的？有哪些卧槽居然可以这么用的写代码方式。</li>
-<li>Django User 如何做扩展？同样在 Django 的生态圈里面，哪些场景有哪些值得围观的包，比如 guardian</li>
-<li>Restful API 应该如何写，Django 里面的 Rest API 应该如何写？会有哪些生产效率 guangguangguang 提升上去的使用方法？权限怎么做？限流怎么搞？</li>
-<li>Py.test TDD 测试驱动开发了解一下？</li>
-<li>使用 Tmux 等合理工具的优雅的单终端多开。</li>
-</ol>
-<h3 id="2-2-教程目录"><a href="#2-2-教程目录" class="headerlink" title="2.2 教程目录"></a>2.2 教程目录</h3><ul>
-<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件配置</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的前后端初步设计</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端初步实现</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的前端实现 YaVueBlog</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Redis</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 PostgreSQL</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Elasticsearch</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 RabbitMQ</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的生产环境部署</li>
-</ul>
-<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，快上车吧</p>
-<ul>
-<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
-<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
-</ul>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2018-02-21</strong> 重修文字</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/20/CeleryCheatSheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/20/CeleryCheatSheet/" itemprop="url">Celery CheatSheet</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-20T10:25:39+08:00">
-                2018-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后台组件/" itemprop="url" rel="index">
-                    <span itemprop="name">后台组件</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  927
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Celery 相关和命令。</p>
-<p>不定期更新。</p>
-<p>本文编写于 2018 年初，仅仅聚焦于 Django2.0 与 Celery 4.1.0</p>
-<p>本文需要结合我的开源项目 YaDjangoBlog 来看 <a href="https://github.com/twocucao/YaDjangoBlog">https://github.com/twocucao/YaDjangoBlog</a></p>
-<p>Celery 主要用于分布式队列。</p>
-<p>分布式队列可以用来做什么呢？</p>
-<p>试想一下这么个场景：</p>
-<ul>
-<li>假如用户提交一个耗时任务，Django 一般会在 Function Based View 里进行处理这个任务（假设这个任务耗时 30s)，我可以先把这个任务放在分布式队列里面，将耗时任务甩锅给 Celery 的 Worker 。这样的话，就可以极大的减少 Function Based View 处理耗时任务的时间。</li>
-</ul>
-<p>当然，除此之外，Celery 还可以用于其他的分布式队列场景：</p>
-<ul>
-<li>批量发送邮件</li>
-<li>定时任务 CronJob</li>
-<li>分配爬虫抓取任务</li>
-</ul>
-<p>当然，如果不用 Celery 的话也能搞定上面的场景，比如，借用数据库本身就可以直接做分布式任务派发。</p>
-<blockquote>
-<p>只是这样的实现本身代码可维护性，扩展性，性能等等都不是很好罢了。</p>
-</blockquote>
-<p>Celery 的特点如下：</p>
-<ul>
-<li>简单易维护</li>
-<li>高可用</li>
-<li>快：依据官网的资料，单进程可以在若干分钟内处理上百万级数据，亚毫秒级往返延迟 (using RabbitMQ, librabbitmq, and optimized settings)</li>
-<li>扩展性好：Almost every part of Celery can be extended or used on its own, Custom pool implementations, serializers, compression schemes, logging, schedulers, consumers, producers, broker transports, and much more.</li>
-</ul>
-<p>除此之外，还有什么特性呢？</p>
-<ul>
-<li>监控</li>
-<li>Work-Flows</li>
-<li>时间 / 速度 限制</li>
-<li>日程安排 (CronJob)</li>
-<li>资源泄露保护</li>
-<li>用户组件</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/20/CeleryCheatSheet/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -3237,7 +2989,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">73</span>
+                <span class="site-state-item-count">78</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -3259,7 +3011,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">91</span>
+                <span class="site-state-item-count">93</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
