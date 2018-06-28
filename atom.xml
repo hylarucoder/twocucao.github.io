@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2018-06-11T14:02:11.021Z</updated>
+  <updated>2018-06-17T00:22:27.397Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://twocucao.xyz/2018/06/10/SynologyNas/"/>
     <id>http://twocucao.xyz/2018/06/10/SynologyNas/</id>
     <published>2018-06-10T03:52:36.000Z</published>
-    <updated>2018-06-11T14:02:11.021Z</updated>
+    <updated>2018-06-17T00:22:27.397Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>百度云的人工智障总是误删我的文件，于是开始寻找其他存储方案。决定入手一台 NAS.</p>
 <h3 id="组装机-品牌机"><a href="#组装机-品牌机" class="headerlink" title="组装机 / 品牌机"></a>组装机 / 品牌机</h3><p>视具体情况，笔者缺乏足够的精力去折腾，如果精力足够，我还是很倾向于自己组装一台 nas 的。不过，现在年纪大了，还是老老实实买个品牌的 NAS 好了，折腾大抵是年轻人的事情。</p>
@@ -149,6 +149,69 @@
   </entry>
   
   <entry>
+    <title>Python 自动化工具 Fabric 支持 Python3 了</title>
+    <link href="http://twocucao.xyz/2018/05/22/pipenv/"/>
+    <id>http://twocucao.xyz/2018/05/22/pipenv/</id>
+    <published>2018-05-22T13:11:03.000Z</published>
+    <updated>2018-05-22T14:27:06.764Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。</p>
+<p>后来</p>
+<ul>
+<li><del>我总算学会了如何去爱。<del></del></del></li>
+<li>我喜欢的工具陆陆续续支持了 Python3</li>
+<li>Scrapy 支持了 Python3</li>
+<li>Ansible 支持了 Python3</li>
+</ul>
+<p>只有 Fabric 这个工具，死撑着没有支持 Python3 的的迹象。</p>
+<p>2018-05-08 的时候，Fabric 悄悄升级了 2.0 版本。</p>
+<p>而就在前两天，我升级网站的时候，突然发现 fabric (1.14 版本） 不能用了。</p>
+<p>查了一下版本，发现 fabric 更新到了 2.0 版本，支持了 python3.4</p>
+<p>在发现这个问题之后，火速刷了一波官方文档，把手头 Fabric 1.14 版本的脚本做了一些升级。</p>
+<h3 id="从-V1-到-V2"><a href="#从-V1-到-V2" class="headerlink" title="从 V1 到 V2"></a>从 V1 到 V2</h3><p>Fabric v2 基于 invoke 和 paramiko 两个库构建而成。</p>
+<ul>
+<li>invoke 库提供了 subprocess command execution 和 command-line</li>
+<li>paramiko 提供了 ssh 协议实现</li>
+</ul>
+<p>在这两者的基础上，做了一些扩展。</p>
+<p>甚至，如果你只用其中的本地功能，你都完全不需要使用 fabric, 直接用 invoke 即可。没错，我已经打算把我的本地脚本全部使用 invoke Python3 化了。</p>
+<p>v1 版本和 v2 版本初步用起来，个人觉得 v1 用起来 API 更加符合直觉一些。</p>
+<p>这东西怎么用呢？</p>
+<p>我们先定义 fabfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># fabfile.py</div><div class="line">from invoke import task</div><div class="line"></div><div class="line">def expand_path(c, path):</div><div class="line">    return &apos;&quot;$(echo %s)&quot;&apos; % path</div><div class="line"></div><div class="line">def exists(c, path):</div><div class="line">    cmd = &apos;stat %s&apos; % expand_path(c, path)</div><div class="line">    return c.run(cmd, warn=True, hide=True).ok</div><div class="line"></div><div class="line">@task</div><div class="line">def deploy(c):</div><div class="line">    c.local(&quot;youcmd&quot;)</div><div class="line">    c.put()</div><div class="line">    c.get()</div><div class="line">    c.run()</div><div class="line">    c.run(&quot;sudo youcmd&quot;)</div><div class="line">    ......</div><div class="line"></div><div class="line">@task</div><div class="line">def other_stuff(c):</div><div class="line">    ......</div></pre></td></tr></table></figure>
+<p>需要注意的是，invoke 里面默认的 replace_env 设置为了 False ,fabric 里面给 runner 设置了 replace_env 为 True , 这也就意味着默认情况下，执行 c.local 的时候会找不到自定义的环境变量，这意味着：</p>
+<ol>
+<li>你的 PATH 被重置了，这意味着你用 brew 安装的软件可能已经完全找不到了。</li>
+<li>你的环境变量 LANG 并不一定是 en_US.UTF-8 了</li>
+</ol>
+<p>于是设置一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ~/.fabric.py</div><div class="line">#!/usr/bin/env python</div><div class="line"># encoding: utf-8</div><div class="line"></div><div class="line">run = &#123;</div><div class="line">    &quot;replace_env&quot;: False</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当我要部署的时候直接执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fab -H webserver01,webserver02,webserver03,webserver04 deploy</div></pre></td></tr></table></figure>
+<p>到这里大家基本上看出来了，我并没有在文件中 import fabric 只是简单了配置了一个配置文件和执行一下 fab 命令。</p>
+<p>这个 v2 版本的 fabric 相当于 invoke 的包装。但我们也可以显式的 import fabric 里面的东西进行更加进阶的操作。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
+    
+      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
+    
+      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
+    
+  </entry>
+  
+  <entry>
     <title>PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具</title>
     <link href="http://twocucao.xyz/2018/05/22/fabric2/"/>
     <id>http://twocucao.xyz/2018/05/22/fabric2/</id>
@@ -219,69 +282,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
-    
-      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
-    
-      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Python 自动化工具 Fabric 支持 Python3 了</title>
-    <link href="http://twocucao.xyz/2018/05/22/pipenv/"/>
-    <id>http://twocucao.xyz/2018/05/22/pipenv/</id>
-    <published>2018-05-22T13:11:03.000Z</published>
-    <updated>2018-05-22T14:27:06.764Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。</p>
-<p>后来</p>
-<ul>
-<li><del>我总算学会了如何去爱。<del></del></del></li>
-<li>我喜欢的工具陆陆续续支持了 Python3</li>
-<li>Scrapy 支持了 Python3</li>
-<li>Ansible 支持了 Python3</li>
-</ul>
-<p>只有 Fabric 这个工具，死撑着没有支持 Python3 的的迹象。</p>
-<p>2018-05-08 的时候，Fabric 悄悄升级了 2.0 版本。</p>
-<p>而就在前两天，我升级网站的时候，突然发现 fabric (1.14 版本） 不能用了。</p>
-<p>查了一下版本，发现 fabric 更新到了 2.0 版本，支持了 python3.4</p>
-<p>在发现这个问题之后，火速刷了一波官方文档，把手头 Fabric 1.14 版本的脚本做了一些升级。</p>
-<h3 id="从-V1-到-V2"><a href="#从-V1-到-V2" class="headerlink" title="从 V1 到 V2"></a>从 V1 到 V2</h3><p>Fabric v2 基于 invoke 和 paramiko 两个库构建而成。</p>
-<ul>
-<li>invoke 库提供了 subprocess command execution 和 command-line</li>
-<li>paramiko 提供了 ssh 协议实现</li>
-</ul>
-<p>在这两者的基础上，做了一些扩展。</p>
-<p>甚至，如果你只用其中的本地功能，你都完全不需要使用 fabric, 直接用 invoke 即可。没错，我已经打算把我的本地脚本全部使用 invoke Python3 化了。</p>
-<p>v1 版本和 v2 版本初步用起来，个人觉得 v1 用起来 API 更加符合直觉一些。</p>
-<p>这东西怎么用呢？</p>
-<p>我们先定义 fabfile</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># fabfile.py</div><div class="line">from invoke import task</div><div class="line"></div><div class="line">def expand_path(c, path):</div><div class="line">    return &apos;&quot;$(echo %s)&quot;&apos; % path</div><div class="line"></div><div class="line">def exists(c, path):</div><div class="line">    cmd = &apos;stat %s&apos; % expand_path(c, path)</div><div class="line">    return c.run(cmd, warn=True, hide=True).ok</div><div class="line"></div><div class="line">@task</div><div class="line">def deploy(c):</div><div class="line">    c.local(&quot;youcmd&quot;)</div><div class="line">    c.put()</div><div class="line">    c.get()</div><div class="line">    c.run()</div><div class="line">    c.run(&quot;sudo youcmd&quot;)</div><div class="line">    ......</div><div class="line"></div><div class="line">@task</div><div class="line">def other_stuff(c):</div><div class="line">    ......</div></pre></td></tr></table></figure>
-<p>需要注意的是，invoke 里面默认的 replace_env 设置为了 False ,fabric 里面给 runner 设置了 replace_env 为 True , 这也就意味着默认情况下，执行 c.local 的时候会找不到自定义的环境变量，这意味着：</p>
-<ol>
-<li>你的 PATH 被重置了，这意味着你用 brew 安装的软件可能已经完全找不到了。</li>
-<li>你的环境变量 LANG 并不一定是 en_US.UTF-8 了</li>
-</ol>
-<p>于是设置一下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ~/.fabric.py</div><div class="line">#!/usr/bin/env python</div><div class="line"># encoding: utf-8</div><div class="line"></div><div class="line">run = &#123;</div><div class="line">    &quot;replace_env&quot;: False</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当我要部署的时候直接执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fab -H webserver01,webserver02,webserver03,webserver04 deploy</div></pre></td></tr></table></figure>
-<p>到这里大家基本上看出来了，我并没有在文件中 import fabric 只是简单了配置了一个配置文件和执行一下 fab 命令。</p>
-<p>这个 v2 版本的 fabric 相当于 invoke 的包装。但我们也可以显式的 import fabric 里面的东西进行更加进阶的操作。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。
     
     </summary>
     
@@ -871,97 +871,6 @@
   </entry>
   
   <entry>
-    <title>Flask 文档阅读笔记</title>
-    <link href="http://twocucao.xyz/2018/03/09/Flask%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
-    <id>http://twocucao.xyz/2018/03/09/Flask文档阅读笔记/</id>
-    <published>2018-03-09T08:27:03.000Z</published>
-    <updated>2018-03-18T06:47:22.795Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>因为最近需要新增一个 Flask 技术栈，所以准备趁这休息的时候更新关于 Flask 的两篇文章。</p>
-<p>前者是文档阅读笔记，后者是源码初步解析。</p>
-<blockquote>
-<p>嗯，其实这篇就是做了一些搬运的活。</p>
-</blockquote>
-<h2 id="0x01-文档"><a href="#0x01-文档" class="headerlink" title="0x01 文档"></a>0x01 文档</h2><p>由于 Flask 还依赖 Jinja2 与 Werkzeug, 并且往往大家在使用 Flask 的时候还是会使用 itsdangerous. 所以，当大家说 Flask 代码少的时候，我还是不服的。但如果你说，Flask 本身实现确实是简洁，扩展性强，我还是服气的。</p>
-<p>Flask 的文档有三种类型（其他框架类文档也是如此）：</p>
-<ul>
-<li>Tutorial 类，即教程类</li>
-<li>Guide 类，即指南类</li>
-<li>API 类，即接口级别的文档</li>
-</ul>
-<p>当你是一个老手，还想快速上手一个框架的时候，认真读一读前两者，然后挑选一个项目多看几遍即可。</p>
-<p>但是当你深入到框架里面的设计与实现的时候，则必须要多读读 API Document , 由于通常情况下 API Document 的内容往往是代码中的注释，加上 Flask 代码量本来就不多。所以，有的时候阅读 Flask 代码代码也会比 API 好很多。</p>
-<h2 id="0x02-Guide"><a href="#0x02-Guide" class="headerlink" title="0x02 Guide"></a>0x02 Guide</h2><h3 id="2-1-Templates"><a href="#2-1-Templates" class="headerlink" title="2.1 Templates"></a>2.1 Templates</h3><p>快速 Get 模板语言无非就是掌握：</p>
-<ol>
-<li>上下文变量</li>
-<li>条件语法</li>
-<li>列表语法</li>
-<li>模板的继承 (extend 语法）与组合 (include)</li>
-<li>额外的一些语法糖，比如 filter 的使用 / 组成</li>
-</ol>
-<h3 id="2-2-Testing-Flask-Applications"><a href="#2-2-Testing-Flask-Applications" class="headerlink" title="2.2 Testing Flask Applications"></a>2.2 Testing Flask Applications</h3><blockquote>
-<p>Something that is untested is broken.</p>
-</blockquote>
-<p>这里的测试，有哪些测试呢？</p>
-<ol>
-<li>非 flask 相关逻辑的测试。比如，我对一小段无关于 View 层的纯粹的逻辑进行测试，我比较喜欢使用 pytest 进行测试。</li>
-<li>Flask 相关<ul>
-<li>Setup</li>
-<li>TearDown</li>
-<li>登录前 / 登陆后</li>
-</ul>
-</li>
-</ol>
-<h3 id="2-3-Application-Errors"><a href="#2-3-Application-Errors" class="headerlink" title="2.3 Application Errors"></a>2.3 Application Errors</h3><p>比如测试请求与响应结果。比如测试路由。测试某个与 View 层绑定的数据操作是否执行成功。</p>
-<p>首先，大致扫一眼 tutorial ，知道了 Flask 的教程讲了如下的东西：</p>
-<ol>
-<li>路由</li>
-<li>静态文件</li>
-<li>模板渲染</li>
-<li>接触请求数据</li>
-<li>重定向和错误</li>
-<li>响应</li>
-<li>Session</li>
-<li>Message Flash</li>
-<li>日志</li>
-<li>扩展</li>
-</ol>
-<p>当然，我们都是老手了，肯定是挑重点来看了。</p>
-<p>Routing, 发现现在的问题在于</p>
-<p>Flask 有两个主要依赖：</p>
-<ul>
-<li>路由、调试、WSGI</li>
-<li>模板</li>
-</ul>
-<h2 id="0x02-社区支持"><a href="#0x02-社区支持" class="headerlink" title="0x02 社区支持"></a>0x02 社区支持</h2><h2 id="0x04-读文档产生的疑问"><a href="#0x04-读文档产生的疑问" class="headerlink" title="0x04 读文档产生的疑问"></a>0x04 读文档产生的疑问</h2><p>1.</p>
-<p>For web applications it’s crucial to react to the data a client sends to the server. In Flask this information is provided by the global request object. If you have some experience with Python you might be wondering how that object can be global and how Flask manages to still be threadsafe. The answer is context locals:</p>
-<p>Context Locals<br>Insider Information<br>If you want to understand how that works and how you can implement tests with context locals, read this section, otherwise just skip it.</p>
-<p>Certain objects in Flask are global objects, but not of the usual kind. These objects are actually proxies to objects that are local to a specific context. What a mouthful. But that is actually quite easy to understand.</p>
-<p>Imagine the context being the handling thread. A request comes in and the web server decides to spawn a new thread (or something else, the underlying object is capable of dealing with concurrency systems other than threads). When Flask starts its internal request handling it figures out that the current thread is the active context and binds the current application and the WSGI environments to that context (thread). It does that in an intelligent way so that one application can invoke another application without breaking.</p>
-<p>So what does this mean to you? Basically you can completely ignore that this is the case unless you are doing something like unit testing. You will notice that code which depends on a request object will suddenly break because there is no request object. The solution is creating a request object yourself and binding it to the context. The easiest solution for unit testing is to use the test_request_context() context manager. In combination with the with statement it will bind a test request so that you can interact with it. Here is an example:</p>
-<h3 id="Thread-Local"><a href="#Thread-Local" class="headerlink" title="Thread Local"></a>Thread Local</h3><p>One of the design decisions in Flask was that simple tasks should be simple; they should not take a lot of code and yet they should not limit you. Because of that, Flask has a few design choices that some people might find surprising or unorthodox. For example, Flask uses thread-local objects internally so that you don’t have to pass objects around from function to function within a request in order to stay threadsafe. This approach is convenient, but requires a valid request context for dependency injection or when attempting to reuse code which uses a value pegged to the request. The Flask project is honest about thread-locals, does not hide them, and calls out in the code and documentation where they are used.</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;因为最近需要新增一个 Flask 技术栈，所以准备趁这休息的时候更新关于 Flask 的两篇文章。&lt;
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
-    
-      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
-    
-      <category term="Flask" scheme="http://twocucao.xyz/tags/Flask/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Flask 源码初步解读</title>
     <link href="http://twocucao.xyz/2018/03/09/Flask%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/"/>
     <id>http://twocucao.xyz/2018/03/09/Flask源码解析/</id>
@@ -1097,6 +1006,97 @@
     
       &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;系列文章先暂时停更一下。今天换换口味。&lt;/p&gt;
 &lt;p&gt;久闻 Flask 是众多 Pythonist 
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
+    
+      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
+    
+      <category term="Flask" scheme="http://twocucao.xyz/tags/Flask/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Flask 文档阅读笔记</title>
+    <link href="http://twocucao.xyz/2018/03/09/Flask%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/"/>
+    <id>http://twocucao.xyz/2018/03/09/Flask文档阅读笔记/</id>
+    <published>2018-03-09T08:27:03.000Z</published>
+    <updated>2018-03-18T06:47:22.795Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>因为最近需要新增一个 Flask 技术栈，所以准备趁这休息的时候更新关于 Flask 的两篇文章。</p>
+<p>前者是文档阅读笔记，后者是源码初步解析。</p>
+<blockquote>
+<p>嗯，其实这篇就是做了一些搬运的活。</p>
+</blockquote>
+<h2 id="0x01-文档"><a href="#0x01-文档" class="headerlink" title="0x01 文档"></a>0x01 文档</h2><p>由于 Flask 还依赖 Jinja2 与 Werkzeug, 并且往往大家在使用 Flask 的时候还是会使用 itsdangerous. 所以，当大家说 Flask 代码少的时候，我还是不服的。但如果你说，Flask 本身实现确实是简洁，扩展性强，我还是服气的。</p>
+<p>Flask 的文档有三种类型（其他框架类文档也是如此）：</p>
+<ul>
+<li>Tutorial 类，即教程类</li>
+<li>Guide 类，即指南类</li>
+<li>API 类，即接口级别的文档</li>
+</ul>
+<p>当你是一个老手，还想快速上手一个框架的时候，认真读一读前两者，然后挑选一个项目多看几遍即可。</p>
+<p>但是当你深入到框架里面的设计与实现的时候，则必须要多读读 API Document , 由于通常情况下 API Document 的内容往往是代码中的注释，加上 Flask 代码量本来就不多。所以，有的时候阅读 Flask 代码代码也会比 API 好很多。</p>
+<h2 id="0x02-Guide"><a href="#0x02-Guide" class="headerlink" title="0x02 Guide"></a>0x02 Guide</h2><h3 id="2-1-Templates"><a href="#2-1-Templates" class="headerlink" title="2.1 Templates"></a>2.1 Templates</h3><p>快速 Get 模板语言无非就是掌握：</p>
+<ol>
+<li>上下文变量</li>
+<li>条件语法</li>
+<li>列表语法</li>
+<li>模板的继承 (extend 语法）与组合 (include)</li>
+<li>额外的一些语法糖，比如 filter 的使用 / 组成</li>
+</ol>
+<h3 id="2-2-Testing-Flask-Applications"><a href="#2-2-Testing-Flask-Applications" class="headerlink" title="2.2 Testing Flask Applications"></a>2.2 Testing Flask Applications</h3><blockquote>
+<p>Something that is untested is broken.</p>
+</blockquote>
+<p>这里的测试，有哪些测试呢？</p>
+<ol>
+<li>非 flask 相关逻辑的测试。比如，我对一小段无关于 View 层的纯粹的逻辑进行测试，我比较喜欢使用 pytest 进行测试。</li>
+<li>Flask 相关<ul>
+<li>Setup</li>
+<li>TearDown</li>
+<li>登录前 / 登陆后</li>
+</ul>
+</li>
+</ol>
+<h3 id="2-3-Application-Errors"><a href="#2-3-Application-Errors" class="headerlink" title="2.3 Application Errors"></a>2.3 Application Errors</h3><p>比如测试请求与响应结果。比如测试路由。测试某个与 View 层绑定的数据操作是否执行成功。</p>
+<p>首先，大致扫一眼 tutorial ，知道了 Flask 的教程讲了如下的东西：</p>
+<ol>
+<li>路由</li>
+<li>静态文件</li>
+<li>模板渲染</li>
+<li>接触请求数据</li>
+<li>重定向和错误</li>
+<li>响应</li>
+<li>Session</li>
+<li>Message Flash</li>
+<li>日志</li>
+<li>扩展</li>
+</ol>
+<p>当然，我们都是老手了，肯定是挑重点来看了。</p>
+<p>Routing, 发现现在的问题在于</p>
+<p>Flask 有两个主要依赖：</p>
+<ul>
+<li>路由、调试、WSGI</li>
+<li>模板</li>
+</ul>
+<h2 id="0x02-社区支持"><a href="#0x02-社区支持" class="headerlink" title="0x02 社区支持"></a>0x02 社区支持</h2><h2 id="0x04-读文档产生的疑问"><a href="#0x04-读文档产生的疑问" class="headerlink" title="0x04 读文档产生的疑问"></a>0x04 读文档产生的疑问</h2><p>1.</p>
+<p>For web applications it’s crucial to react to the data a client sends to the server. In Flask this information is provided by the global request object. If you have some experience with Python you might be wondering how that object can be global and how Flask manages to still be threadsafe. The answer is context locals:</p>
+<p>Context Locals<br>Insider Information<br>If you want to understand how that works and how you can implement tests with context locals, read this section, otherwise just skip it.</p>
+<p>Certain objects in Flask are global objects, but not of the usual kind. These objects are actually proxies to objects that are local to a specific context. What a mouthful. But that is actually quite easy to understand.</p>
+<p>Imagine the context being the handling thread. A request comes in and the web server decides to spawn a new thread (or something else, the underlying object is capable of dealing with concurrency systems other than threads). When Flask starts its internal request handling it figures out that the current thread is the active context and binds the current application and the WSGI environments to that context (thread). It does that in an intelligent way so that one application can invoke another application without breaking.</p>
+<p>So what does this mean to you? Basically you can completely ignore that this is the case unless you are doing something like unit testing. You will notice that code which depends on a request object will suddenly break because there is no request object. The solution is creating a request object yourself and binding it to the context. The easiest solution for unit testing is to use the test_request_context() context manager. In combination with the with statement it will bind a test request so that you can interact with it. Here is an example:</p>
+<h3 id="Thread-Local"><a href="#Thread-Local" class="headerlink" title="Thread Local"></a>Thread Local</h3><p>One of the design decisions in Flask was that simple tasks should be simple; they should not take a lot of code and yet they should not limit you. Because of that, Flask has a few design choices that some people might find surprising or unorthodox. For example, Flask uses thread-local objects internally so that you don’t have to pass objects around from function to function within a request in order to stay threadsafe. This approach is convenient, but requires a valid request context for dependency injection or when attempting to reuse code which uses a value pegged to the request. The Flask project is honest about thread-locals, does not hide them, and calls out in the code and documentation where they are used.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;因为最近需要新增一个 Flask 技术栈，所以准备趁这休息的时候更新关于 Flask 的两篇文章。&lt;
     
     </summary>
     
@@ -1297,6 +1297,148 @@
   </entry>
   
   <entry>
+    <title>YaDjangoBlog 之 前端 VueJS 篇</title>
+    <link href="http://twocucao.xyz/2018/02/23/YaDjangoBlog%E4%B9%8B%E5%89%8D%E7%AB%AFVueJS%E7%AF%87/"/>
+    <id>http://twocucao.xyz/2018/02/23/YaDjangoBlog之前端VueJS篇/</id>
+    <published>2018-02-23T02:13:30.000Z</published>
+    <updated>2018-03-18T03:20:11.330Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文是 Django 全栈开发教程的第四篇</p>
+<p>目录在这里，已经更新的文章如下</p>
+<ul>
+<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
+</ul>
+<p>本文需要完成三件事情：</p>
+<ul>
+<li>第一件事情，介绍为什么选择 VueJS？</li>
+<li>第二件事情，介绍 Vue 项目的一些注意点。</li>
+<li>第三件事情，蜻蜓点水搬的带大家过一编，YaDjangoBlog 前端的项目结构，静态资源管理，路由以及组件。</li>
+</ul>
+<h2 id="0x01-为什么是-VueJS"><a href="#0x01-为什么是-VueJS" class="headerlink" title="0x01 为什么是 VueJS"></a>0x01 为什么是 VueJS</h2><p>国产框架 + 语法简洁是我入坑 VueJS 初衷。</p>
+<p>后来却是 Vue 的丰富的生态和简洁的语法吸引了继续用下去。</p>
+<p>这里要感谢为 VueJS 持续贡献代码的人，从 Vue 本身，到 VueCLI, 到 Router, 到 VueX, 如果没有那么多人为之贡献代码，可能今天这一小节就变成了，『为什么是 React 了』逃。</p>
+<p>Vue 自称为 Vue 渐进式 JavaScript 框架。</p>
+<p>什么是渐进式？</p>
+<p>就是你可以逐步按照 Vue 的方式逐渐引入一些 Vue 的组件到项目中。没有必要上来就是 Vue 全家桶，依据场景逐步引入。</p>
+<p>参考链接 <a href="https://www.zhihu.com/question/51907207" target="_blank" rel="external">https://www.zhihu.com/question/51907207</a></p>
+<p>然而，依据我的经验，vue 全家桶用起来还是很舒服的。这里必须要感谢 Vue 社区。</p>
+<p>模板语法，数据驱动，双向绑定。写起代码来简直就是一个字，爽。</p>
+<h2 id="0x02-Vue-项目的一些注意点"><a href="#0x02-Vue-项目的一些注意点" class="headerlink" title="0x02 Vue 项目的一些注意点"></a>0x02 Vue 项目的一些注意点</h2><p>从项目角度，我们想想前端项目有哪些地方是需要注意的：</p>
+<ol>
+<li>开发环境和线上环境区分</li>
+<li>前端资源打包<ul>
+<li>Vue 项目资源打包</li>
+<li>DLL 打包</li>
+<li>字体文件打包</li>
+</ul>
+</li>
+<li>CSS/JS 如何管理</li>
+<li>有哪些必要的依赖，如何引入第三方库</li>
+<li>有哪些页面级组件，有哪些小组件？应该安排这些组件？组件与组件应该怎么通讯？</li>
+<li>路由怎么管理</li>
+<li>状态怎么管理</li>
+<li>登录，鉴权怎么做</li>
+</ol>
+<p>限于篇幅，我就不一一讲解了。挑在 YaDjangoBlog 中使用到的技术简单介绍一下。</p>
+<p>再次感谢 Vue 社区出品的 VueCLI 以及 Webpack 模板。</p>
+<p>下面依次介绍：</p>
+<ol>
+<li>项目结构</li>
+<li>静态资源管理</li>
+<li>路由</li>
+<li>组件</li>
+</ol>
+<h2 id="0x03-项目结构"><a href="#0x03-项目结构" class="headerlink" title="0x03 项目结构"></a>0x03 项目结构</h2><p>首先，YaDjangoBlog 文件的前端目录如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── README.md</div><div class="line">├── build</div><div class="line">│   ├── build.js</div><div class="line">│   ├── build_iconfont.js <span class="comment"># 构建 iconfont 脚本</span></div><div class="line">│   ├── check-versions.js</div><div class="line">│   ├── logo.png</div><div class="line">│   ├── utils.js</div><div class="line">│   ├── vue-loader.conf.js</div><div class="line">│   ├── webpack.base.conf.js</div><div class="line">│   ├── webpack.dev.conf.js <span class="comment"># 增加了 AutoDllPlugin 用于自动打包 DLL</span></div><div class="line">│   └── webpack.prod.conf.js</div><div class="line">├── config</div><div class="line">│   ├── dev.env.js <span class="comment"># 可以在这里添加开发环境的环境变脸</span></div><div class="line">│   ├── index.js</div><div class="line">│   ├── prod.env.js</div><div class="line">│   └── test.env.js</div><div class="line">├── extra</div><div class="line">│   └── svg-icon <span class="comment"># 这里存放需要生成 iconfont 的字体文件。</span></div><div class="line">├── index.html</div><div class="line">├── package.json <span class="comment"># 这里添加了一些构建脚本</span></div><div class="line">├── packages</div><div class="line">│   └── theme-future <span class="comment"># 注意，这里是另一个子项目，使用 Gulp 构建的纯 CSS 子项目。</span></div><div class="line">├── src</div><div class="line">│   ├── App.vue</div><div class="line">│   ├── api <span class="comment"># 对 axios 进行初步封装</span></div><div class="line">│   ├── assets <span class="comment"># 从使用 Gulp 生成的 CSS 可以放在这里。</span></div><div class="line">│   ├── components <span class="comment"># 跨页面的组件放在这里</span></div><div class="line">│   ├── directives <span class="comment"># 指令</span></div><div class="line">│   ├── filters    <span class="comment"># 过滤器</span></div><div class="line">│   ├── main.js    <span class="comment"># 初始化 Vue 实例</span></div><div class="line">│   ├── pages      <span class="comment"># 页面</span></div><div class="line">│   ├── router     <span class="comment"># 路由</span></div><div class="line">│   ├── store      <span class="comment"># vuex</span></div><div class="line">│   └── utils      <span class="comment"># 常用工具类</span></div><div class="line">├── static</div><div class="line">│   ├── hightlight <span class="comment"># hightlight 脚本</span></div><div class="line">│   ├── iconfont   <span class="comment"># 本地构建的 iconfont</span></div><div class="line">│   ├── images</div><div class="line">│   └── js</div><div class="line">├── <span class="built_in">test</span>           <span class="comment"># 没写测试，大家开源项目不要学我.... 逃</span></div><div class="line">│   ├── e2e</div><div class="line">│   └── unit</div><div class="line">└── yarn.lock</div></pre></td></tr></table></figure>
+<h2 id="0x04-静态资源管理"><a href="#0x04-静态资源管理" class="headerlink" title="0x04 静态资源管理"></a>0x04 静态资源管理</h2><p>静态资源管理，主要涉及到 JS/CSS/ 图片 / 字体</p>
+<p>首先，由于使用了 VueCli 的模板，所以大可以按照 VueCli 提供的写法来写。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Header</span>&gt;</span><span class="tag">&lt;/<span class="name">Header</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Footer</span>&gt;</span><span class="tag">&lt;/<span class="name">Footer</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">name</span>: <span class="string">'app'</span>,</div><div class="line">  <span class="attr">components</span>: &#123;</div><div class="line">    <span class="attr">Header</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./pages/commons/Header.vue'</span>),</div><div class="line">    <span class="attr">Footer</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./pages/commons/Footer.vue'</span>),</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"scss"</span>&gt;</span><span class="undefined"></span></div><div class="line">  $primary-color: #37b24d;</div><div class="line">  $dark-color: #2b5732;</div><div class="line">  $body-bg: #f9f9f9;</div><div class="line">  @import '~spectre.css/src/spectre-icons.scss';</div><div class="line">  @import '~spectre.css/src/spectre.scss';</div><div class="line">  @import '~spectre.css/src/spectre-exp.scss';</div><div class="line">  @import './assets/theme-future/index.css';</div><div class="line">  a &#123;</div><div class="line">    &amp;:focus,</div><div class="line">    &amp;:hover,</div><div class="line">    &amp;:active,</div><div class="line">    &amp;.active &#123;</div><div class="line">      text-decoration: none;</div><div class="line">      box-shadow: 0 0 0 0;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  #app &#123;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>依据我个人经验，做了一部分的微调：</p>
+<p><strong>第一</strong> 在代码中新建一个主题 CSS, 单独用于处理 SCSS 编译 CSS. 即除了 App.vue, 其他地方的 CSS 直接写在同一个地方。</p>
+<p><strong>第二</strong> 对于字体文件，不引入 IconFont 在线字体，而是使用 SVG 本地编译字体。这样减少对 iconfont cdn 的依赖，可以以后直接迁移这个字体到其他 CDN 上。</p>
+<p><strong>第三</strong> 对于依赖库管理，分为 npm 依赖库和外部 JS 依赖库两种</p>
+<p>对于 NPM 依赖库，如果有使用过 ECharts3.0 的 SPA 开发者应该对于万恶的 DLL 非常熟悉了。最早的时候，我们是这样做的：</p>
+<ul>
+<li>先写一个编译脚本，指定相关依赖包，打包出 dll 和一个 manifest 文件</li>
+<li>然后从 index.html 里引入打包好的 dll.</li>
+<li>再从 webpack 的配置文件中引入这个文件。</li>
+</ul>
+<p>这种恶心的配置随着 autodll-webpack-plugin 的出现从而得到缓解，于是现在的你只需要配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> AutoDllPlugin(&#123;</div><div class="line">  <span class="attr">inject</span>: <span class="literal">true</span>, <span class="comment">// will inject the DLL bundles to index.html</span></div><div class="line">  debug: <span class="literal">true</span>,</div><div class="line">  <span class="attr">filename</span>: <span class="string">'[name]_[hash].js'</span>,</div><div class="line">  <span class="attr">entry</span>: &#123;</div><div class="line">    <span class="attr">vendor</span>: [</div><div class="line">      <span class="string">'@antv/data-set'</span>,</div><div class="line">      <span class="string">'@antv/g2'</span>,</div><div class="line">      <span class="string">'@antv/g6'</span>,</div><div class="line">      <span class="string">'highlight.js'</span>,</div><div class="line">      <span class="string">'markdown-it'</span>,</div><div class="line">      <span class="string">'markdown-it-abbr'</span>,</div><div class="line">      <span class="string">'markdown-it-deflist'</span>,</div><div class="line">      <span class="string">'markdown-it-emoji'</span>,</div><div class="line">      <span class="string">'markdown-it-footnote'</span>,</div><div class="line">      <span class="string">'markdown-it-ins'</span>,</div><div class="line">      <span class="string">'markdown-it-katex'</span>,</div><div class="line">      <span class="string">'markdown-it-mark'</span>,</div><div class="line">      <span class="string">'markdown-it-sub'</span>,</div><div class="line">      <span class="string">'markdown-it-sup'</span>,</div><div class="line">      <span class="string">'markdown-it-task-lists'</span>,</div><div class="line">      <span class="string">'markdown-it-toc-and-anchor'</span>,</div><div class="line">      <span class="string">'typed.js'</span>,</div><div class="line">      <span class="string">'vue'</span>,</div><div class="line">      <span class="string">'vue-router'</span>,</div><div class="line">      <span class="string">'vuex'</span></div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">plugins</span>: [<span class="keyword">new</span> webpack.optimize.UglifyJsPlugin()],</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>当然，如果你用了 ECharts, 有的时候会出现莫名其妙的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">__DEV__ is not defined</div></pre></td></tr></table></figure>
+<p>解决方法就是在这上面的插件里面加个插件定义一个 Global 的变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">new webpack.DefinePlugin(&#123;</div><div class="line">  __DEV__: false</div><div class="line">&#125;),</div></pre></td></tr></table></figure>
+<blockquote>
+<p>PS: 去年的版本由于依赖库的一个路径问题导致 autodll-webpack-plugin 不能在 Windows 上使用，今年可以啦。还不快快用起来？</p>
+</blockquote>
+<p>对于外部的 JS/CSS 依赖库：</p>
+<ol>
+<li>直接拷贝到 static 下面，然后从 index.html 引入即可。</li>
+<li>动态创建 script 标签（比如动态引入高德地图）</li>
+</ol>
+<h2 id="0x04-路由"><a href="#0x04-路由" class="headerlink" title="0x04 路由"></a>0x04 路由</h2><p>博客项目，实际上路由比较简单。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">export default new Router(&#123;</div><div class="line">  mode: &apos;history&apos;,</div><div class="line">  base: &apos;/&apos;,</div><div class="line">  // 注释掉这里是因为和引入的 smooth-scroll 冲突</div><div class="line">  // scrollBehavior (to, from, savedPosition) &#123;</div><div class="line">  //   return &#123; x: 0, y: 0 &#125;</div><div class="line">  // &#125;,</div><div class="line">  routes: [</div><div class="line">    &#123;</div><div class="line">      path: &apos;/&apos;,</div><div class="line">      name: &apos;home&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Home.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    // 解决手贱带来的问题</div><div class="line">    &#123;</div><div class="line">      path: &apos;/index:suffix*&apos;,</div><div class="line">      name: &apos;index&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Home.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/blog&apos;,</div><div class="line">      name: &apos;blog&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Blog.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/blog/post/:title&apos;,</div><div class="line">      name: &apos;post&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Blog/ArticlePost.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/blog/:category(category/\\d+)?/:tags(tags/\\d+)?/:page(page/\\d+)?&apos;,</div><div class="line">      name: &apos;blogposts&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Blog.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/archive&apos;,</div><div class="line">      name: &apos;archive&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Archive.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/gallery&apos;,</div><div class="line">      name: &apos;gallery&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Gallery.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/works&apos;,</div><div class="line">      name: &apos;works&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Works.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/about&apos;,</div><div class="line">      name: &apos;about&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/About.vue&apos;)</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>除了 import 语法之外，需要注意的就是 ‘/blog/:category(category/\d+)?/:tags(tags/\d+)?/:page(page/\d+)?’ 这个奇怪的表达式。</p>
+<p>这个表达式可以用于匹配下面的路由</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/blog/category/1/tags/2/page/3</div><div class="line">/blog/category/1/page/3</div><div class="line">/blog/tags/3/page/3</div><div class="line">/blog/page/3</div></pre></td></tr></table></figure>
+<p>匹配完毕之后，就可以拿到 categroy tags page 的值然后提交数据库拿数据咯。</p>
+<h2 id="0x05-组件"><a href="#0x05-组件" class="headerlink" title="0x05 组件"></a>0x05 组件</h2><p>博客里面需要注意的就三个组件</p>
+<ul>
+<li>ArticlePost 组件</li>
+<li>分页组件</li>
+<li>打字终端组件</li>
+</ul>
+<p>第一个，ArticlePost 组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"p-article-post"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"columns"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-1 hide-xl"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-2 col-xl-3"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"g-sidebar"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">h4</span>&gt;</span>本文目录<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">"articleToc"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-6 col-xl-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">ArticleCard</span> <span class="attr">:article</span>=<span class="string">"article"</span> @<span class="attr">articleTocReady</span>=<span class="string">"initArticleToc"</span>&gt;</span><span class="tag">&lt;/<span class="name">ArticleCard</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-2 col-xl-3"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"g-sidebar"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">h4</span>&gt;</span>公告<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              MG 的编程小屋，其实就是我整理笔记，写写文章的地方。</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              专注 Python / JavaScript , 爱折腾的全干工程师 (Full Stuff Engineer)</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              如果我的文章给您的日常开发带来很大帮助的话</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              您可以关注我的公众号</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/static/images/mp_wechat.jpg"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">style</span>=<span class="string">"width: 200px"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              也可以扫描二维码进行投喂</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/static/images/tips_wechat.jpeg"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">style</span>=<span class="string">"width: 200px"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              听说关注或者进行投喂的人，技术都越来越牛咯。</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-1 hide-xl"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> &#123;fetchBlogPost&#125; <span class="keyword">from</span> <span class="string">'../../api/blog'</span>;</div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">'BlogPage'</span>,</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      <span class="attr">ArticleCard</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'../../components/Common/ArticleCard.vue'</span>),</div><div class="line">    &#125;,</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">article</span>: <span class="string">''</span>,</div><div class="line">        <span class="attr">articleToc</span>: <span class="literal">undefined</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">watch</span>: &#123;</div><div class="line">      <span class="string">'$route.params'</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.initArticle()</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    created() &#123;</div><div class="line">      <span class="keyword">this</span>.initArticle()</div><div class="line">    &#125;,</div><div class="line">    mounted() &#123;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      <span class="attr">initArticleToc</span>: <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.articleToc = v;</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">initArticle</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">let</span> title = <span class="keyword">this</span>.$route.params.title;</div><div class="line">        fetchBlogPost(title).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">          <span class="keyword">this</span>.article = res;</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>嗯，其实就是监听 url, 如果匹配上 url 的话，从 url 中取 title, 然后发送请求，接着取回响应的内容交给子组件处理。子组件处理完毕会 emit 出一个 toc 的值，将这个值赋值给左侧 toc 即可。</p>
+<ul>
+<li>分页组件</li>
+</ul>
+<p>见地址吧  <a href="https://github.com/twocucao/YaVueBlog/blob/master/src/components/Common/Pagination.vue" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog/blob/master/src/components/Common/Pagination.vue</a></p>
+<ul>
+<li>打字终端组件</li>
+</ul>
+<p>终端的样式，当然是抄别人的 CSS, 打字效果，来源于 typed.js 依赖库</p>
+<h2 id="0x06-扩展"><a href="#0x06-扩展" class="headerlink" title="0x06. 扩展"></a>0x06. 扩展</h2><p>对于其他的实现，自然是要多多看代码咯。</p>
+<p>其实前端工程化是一个很广的概念，本文没有提到代码风格、团队开发工作流、CSS 编写规范、组件优化、Webpack 详细配置等等。这都需要在日常开发中多多练习的。</p>
+<p>笔者最近换了份工作，以 React 为技术栈。 加上篇幅和精力有限，也就是不在以 Vue 为前端这一块详细展开了。</p>
+<p>下面的文章还是聚焦在后端上面。</p>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，Django 前后端分离最佳实践，点赞后，快上车吧</p>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-03-18</strong> 重修文字</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文是 Django 全栈开发教程的第四篇&lt;/p&gt;
+&lt;p&gt;目录在这里，已经更新的文章如下&lt;/p&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
+    
+      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
+    
+      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
+    
+  </entry>
+  
+  <entry>
     <title>YaDjangoBlog 的前后端设计</title>
     <link href="http://twocucao.xyz/2018/02/23/YaDjangoBlog%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%9D%E6%AD%A5%E8%AE%BE%E8%AE%A1/"/>
     <id>http://twocucao.xyz/2018/02/23/YaDjangoBlog的前后端初步设计/</id>
@@ -1451,148 +1593,6 @@
     <summary type="html">
     
       &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文是 Django 全栈开发教程的第二篇&lt;/p&gt;
-&lt;p&gt;目录在这里，已经更新的文章如下&lt;/p&gt;
-&lt;
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
-    
-      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
-    
-      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>YaDjangoBlog 之 前端 VueJS 篇</title>
-    <link href="http://twocucao.xyz/2018/02/23/YaDjangoBlog%E4%B9%8B%E5%89%8D%E7%AB%AFVueJS%E7%AF%87/"/>
-    <id>http://twocucao.xyz/2018/02/23/YaDjangoBlog之前端VueJS篇/</id>
-    <published>2018-02-23T02:13:30.000Z</published>
-    <updated>2018-03-18T03:20:11.330Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文是 Django 全栈开发教程的第四篇</p>
-<p>目录在这里，已经更新的文章如下</p>
-<ul>
-<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
-</ul>
-<p>本文需要完成三件事情：</p>
-<ul>
-<li>第一件事情，介绍为什么选择 VueJS？</li>
-<li>第二件事情，介绍 Vue 项目的一些注意点。</li>
-<li>第三件事情，蜻蜓点水搬的带大家过一编，YaDjangoBlog 前端的项目结构，静态资源管理，路由以及组件。</li>
-</ul>
-<h2 id="0x01-为什么是-VueJS"><a href="#0x01-为什么是-VueJS" class="headerlink" title="0x01 为什么是 VueJS"></a>0x01 为什么是 VueJS</h2><p>国产框架 + 语法简洁是我入坑 VueJS 初衷。</p>
-<p>后来却是 Vue 的丰富的生态和简洁的语法吸引了继续用下去。</p>
-<p>这里要感谢为 VueJS 持续贡献代码的人，从 Vue 本身，到 VueCLI, 到 Router, 到 VueX, 如果没有那么多人为之贡献代码，可能今天这一小节就变成了，『为什么是 React 了』逃。</p>
-<p>Vue 自称为 Vue 渐进式 JavaScript 框架。</p>
-<p>什么是渐进式？</p>
-<p>就是你可以逐步按照 Vue 的方式逐渐引入一些 Vue 的组件到项目中。没有必要上来就是 Vue 全家桶，依据场景逐步引入。</p>
-<p>参考链接 <a href="https://www.zhihu.com/question/51907207" target="_blank" rel="external">https://www.zhihu.com/question/51907207</a></p>
-<p>然而，依据我的经验，vue 全家桶用起来还是很舒服的。这里必须要感谢 Vue 社区。</p>
-<p>模板语法，数据驱动，双向绑定。写起代码来简直就是一个字，爽。</p>
-<h2 id="0x02-Vue-项目的一些注意点"><a href="#0x02-Vue-项目的一些注意点" class="headerlink" title="0x02 Vue 项目的一些注意点"></a>0x02 Vue 项目的一些注意点</h2><p>从项目角度，我们想想前端项目有哪些地方是需要注意的：</p>
-<ol>
-<li>开发环境和线上环境区分</li>
-<li>前端资源打包<ul>
-<li>Vue 项目资源打包</li>
-<li>DLL 打包</li>
-<li>字体文件打包</li>
-</ul>
-</li>
-<li>CSS/JS 如何管理</li>
-<li>有哪些必要的依赖，如何引入第三方库</li>
-<li>有哪些页面级组件，有哪些小组件？应该安排这些组件？组件与组件应该怎么通讯？</li>
-<li>路由怎么管理</li>
-<li>状态怎么管理</li>
-<li>登录，鉴权怎么做</li>
-</ol>
-<p>限于篇幅，我就不一一讲解了。挑在 YaDjangoBlog 中使用到的技术简单介绍一下。</p>
-<p>再次感谢 Vue 社区出品的 VueCLI 以及 Webpack 模板。</p>
-<p>下面依次介绍：</p>
-<ol>
-<li>项目结构</li>
-<li>静态资源管理</li>
-<li>路由</li>
-<li>组件</li>
-</ol>
-<h2 id="0x03-项目结构"><a href="#0x03-项目结构" class="headerlink" title="0x03 项目结构"></a>0x03 项目结构</h2><p>首先，YaDjangoBlog 文件的前端目录如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line">.</div><div class="line">├── README.md</div><div class="line">├── build</div><div class="line">│   ├── build.js</div><div class="line">│   ├── build_iconfont.js <span class="comment"># 构建 iconfont 脚本</span></div><div class="line">│   ├── check-versions.js</div><div class="line">│   ├── logo.png</div><div class="line">│   ├── utils.js</div><div class="line">│   ├── vue-loader.conf.js</div><div class="line">│   ├── webpack.base.conf.js</div><div class="line">│   ├── webpack.dev.conf.js <span class="comment"># 增加了 AutoDllPlugin 用于自动打包 DLL</span></div><div class="line">│   └── webpack.prod.conf.js</div><div class="line">├── config</div><div class="line">│   ├── dev.env.js <span class="comment"># 可以在这里添加开发环境的环境变脸</span></div><div class="line">│   ├── index.js</div><div class="line">│   ├── prod.env.js</div><div class="line">│   └── test.env.js</div><div class="line">├── extra</div><div class="line">│   └── svg-icon <span class="comment"># 这里存放需要生成 iconfont 的字体文件。</span></div><div class="line">├── index.html</div><div class="line">├── package.json <span class="comment"># 这里添加了一些构建脚本</span></div><div class="line">├── packages</div><div class="line">│   └── theme-future <span class="comment"># 注意，这里是另一个子项目，使用 Gulp 构建的纯 CSS 子项目。</span></div><div class="line">├── src</div><div class="line">│   ├── App.vue</div><div class="line">│   ├── api <span class="comment"># 对 axios 进行初步封装</span></div><div class="line">│   ├── assets <span class="comment"># 从使用 Gulp 生成的 CSS 可以放在这里。</span></div><div class="line">│   ├── components <span class="comment"># 跨页面的组件放在这里</span></div><div class="line">│   ├── directives <span class="comment"># 指令</span></div><div class="line">│   ├── filters    <span class="comment"># 过滤器</span></div><div class="line">│   ├── main.js    <span class="comment"># 初始化 Vue 实例</span></div><div class="line">│   ├── pages      <span class="comment"># 页面</span></div><div class="line">│   ├── router     <span class="comment"># 路由</span></div><div class="line">│   ├── store      <span class="comment"># vuex</span></div><div class="line">│   └── utils      <span class="comment"># 常用工具类</span></div><div class="line">├── static</div><div class="line">│   ├── hightlight <span class="comment"># hightlight 脚本</span></div><div class="line">│   ├── iconfont   <span class="comment"># 本地构建的 iconfont</span></div><div class="line">│   ├── images</div><div class="line">│   └── js</div><div class="line">├── <span class="built_in">test</span>           <span class="comment"># 没写测试，大家开源项目不要学我.... 逃</span></div><div class="line">│   ├── e2e</div><div class="line">│   └── unit</div><div class="line">└── yarn.lock</div></pre></td></tr></table></figure>
-<h2 id="0x04-静态资源管理"><a href="#0x04-静态资源管理" class="headerlink" title="0x04 静态资源管理"></a>0x04 静态资源管理</h2><p>静态资源管理，主要涉及到 JS/CSS/ 图片 / 字体</p>
-<p>首先，由于使用了 VueCli 的模板，所以大可以按照 VueCli 提供的写法来写。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Header</span>&gt;</span><span class="tag">&lt;/<span class="name">Header</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">Footer</span>&gt;</span><span class="tag">&lt;/<span class="name">Footer</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">  <span class="attr">name</span>: <span class="string">'app'</span>,</div><div class="line">  <span class="attr">components</span>: &#123;</div><div class="line">    <span class="attr">Header</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./pages/commons/Header.vue'</span>),</div><div class="line">    <span class="attr">Footer</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'./pages/commons/Footer.vue'</span>),</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">"scss"</span>&gt;</span><span class="undefined"></span></div><div class="line">  $primary-color: #37b24d;</div><div class="line">  $dark-color: #2b5732;</div><div class="line">  $body-bg: #f9f9f9;</div><div class="line">  @import '~spectre.css/src/spectre-icons.scss';</div><div class="line">  @import '~spectre.css/src/spectre.scss';</div><div class="line">  @import '~spectre.css/src/spectre-exp.scss';</div><div class="line">  @import './assets/theme-future/index.css';</div><div class="line">  a &#123;</div><div class="line">    &amp;:focus,</div><div class="line">    &amp;:hover,</div><div class="line">    &amp;:active,</div><div class="line">    &amp;.active &#123;</div><div class="line">      text-decoration: none;</div><div class="line">      box-shadow: 0 0 0 0;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  #app &#123;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>依据我个人经验，做了一部分的微调：</p>
-<p><strong>第一</strong> 在代码中新建一个主题 CSS, 单独用于处理 SCSS 编译 CSS. 即除了 App.vue, 其他地方的 CSS 直接写在同一个地方。</p>
-<p><strong>第二</strong> 对于字体文件，不引入 IconFont 在线字体，而是使用 SVG 本地编译字体。这样减少对 iconfont cdn 的依赖，可以以后直接迁移这个字体到其他 CDN 上。</p>
-<p><strong>第三</strong> 对于依赖库管理，分为 npm 依赖库和外部 JS 依赖库两种</p>
-<p>对于 NPM 依赖库，如果有使用过 ECharts3.0 的 SPA 开发者应该对于万恶的 DLL 非常熟悉了。最早的时候，我们是这样做的：</p>
-<ul>
-<li>先写一个编译脚本，指定相关依赖包，打包出 dll 和一个 manifest 文件</li>
-<li>然后从 index.html 里引入打包好的 dll.</li>
-<li>再从 webpack 的配置文件中引入这个文件。</li>
-</ul>
-<p>这种恶心的配置随着 autodll-webpack-plugin 的出现从而得到缓解，于是现在的你只需要配置：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> AutoDllPlugin(&#123;</div><div class="line">  <span class="attr">inject</span>: <span class="literal">true</span>, <span class="comment">// will inject the DLL bundles to index.html</span></div><div class="line">  debug: <span class="literal">true</span>,</div><div class="line">  <span class="attr">filename</span>: <span class="string">'[name]_[hash].js'</span>,</div><div class="line">  <span class="attr">entry</span>: &#123;</div><div class="line">    <span class="attr">vendor</span>: [</div><div class="line">      <span class="string">'@antv/data-set'</span>,</div><div class="line">      <span class="string">'@antv/g2'</span>,</div><div class="line">      <span class="string">'@antv/g6'</span>,</div><div class="line">      <span class="string">'highlight.js'</span>,</div><div class="line">      <span class="string">'markdown-it'</span>,</div><div class="line">      <span class="string">'markdown-it-abbr'</span>,</div><div class="line">      <span class="string">'markdown-it-deflist'</span>,</div><div class="line">      <span class="string">'markdown-it-emoji'</span>,</div><div class="line">      <span class="string">'markdown-it-footnote'</span>,</div><div class="line">      <span class="string">'markdown-it-ins'</span>,</div><div class="line">      <span class="string">'markdown-it-katex'</span>,</div><div class="line">      <span class="string">'markdown-it-mark'</span>,</div><div class="line">      <span class="string">'markdown-it-sub'</span>,</div><div class="line">      <span class="string">'markdown-it-sup'</span>,</div><div class="line">      <span class="string">'markdown-it-task-lists'</span>,</div><div class="line">      <span class="string">'markdown-it-toc-and-anchor'</span>,</div><div class="line">      <span class="string">'typed.js'</span>,</div><div class="line">      <span class="string">'vue'</span>,</div><div class="line">      <span class="string">'vue-router'</span>,</div><div class="line">      <span class="string">'vuex'</span></div><div class="line">    ]</div><div class="line">  &#125;,</div><div class="line">  <span class="attr">plugins</span>: [<span class="keyword">new</span> webpack.optimize.UglifyJsPlugin()],</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>当然，如果你用了 ECharts, 有的时候会出现莫名其妙的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">__DEV__ is not defined</div></pre></td></tr></table></figure>
-<p>解决方法就是在这上面的插件里面加个插件定义一个 Global 的变量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">new webpack.DefinePlugin(&#123;</div><div class="line">  __DEV__: false</div><div class="line">&#125;),</div></pre></td></tr></table></figure>
-<blockquote>
-<p>PS: 去年的版本由于依赖库的一个路径问题导致 autodll-webpack-plugin 不能在 Windows 上使用，今年可以啦。还不快快用起来？</p>
-</blockquote>
-<p>对于外部的 JS/CSS 依赖库：</p>
-<ol>
-<li>直接拷贝到 static 下面，然后从 index.html 引入即可。</li>
-<li>动态创建 script 标签（比如动态引入高德地图）</li>
-</ol>
-<h2 id="0x04-路由"><a href="#0x04-路由" class="headerlink" title="0x04 路由"></a>0x04 路由</h2><p>博客项目，实际上路由比较简单。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div></pre></td><td class="code"><pre><div class="line">export default new Router(&#123;</div><div class="line">  mode: &apos;history&apos;,</div><div class="line">  base: &apos;/&apos;,</div><div class="line">  // 注释掉这里是因为和引入的 smooth-scroll 冲突</div><div class="line">  // scrollBehavior (to, from, savedPosition) &#123;</div><div class="line">  //   return &#123; x: 0, y: 0 &#125;</div><div class="line">  // &#125;,</div><div class="line">  routes: [</div><div class="line">    &#123;</div><div class="line">      path: &apos;/&apos;,</div><div class="line">      name: &apos;home&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Home.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    // 解决手贱带来的问题</div><div class="line">    &#123;</div><div class="line">      path: &apos;/index:suffix*&apos;,</div><div class="line">      name: &apos;index&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Home.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/blog&apos;,</div><div class="line">      name: &apos;blog&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Blog.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/blog/post/:title&apos;,</div><div class="line">      name: &apos;post&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Blog/ArticlePost.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/blog/:category(category/\\d+)?/:tags(tags/\\d+)?/:page(page/\\d+)?&apos;,</div><div class="line">      name: &apos;blogposts&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Blog.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/archive&apos;,</div><div class="line">      name: &apos;archive&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Archive.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/gallery&apos;,</div><div class="line">      name: &apos;gallery&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Gallery.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/works&apos;,</div><div class="line">      name: &apos;works&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/Works.vue&apos;)</div><div class="line">    &#125;,</div><div class="line">    &#123;</div><div class="line">      path: &apos;/about&apos;,</div><div class="line">      name: &apos;about&apos;,</div><div class="line">      component: () =&gt; import(&apos;../pages/About.vue&apos;)</div><div class="line">    &#125;</div><div class="line">  ]</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
-<p>除了 import 语法之外，需要注意的就是 ‘/blog/:category(category/\d+)?/:tags(tags/\d+)?/:page(page/\d+)?’ 这个奇怪的表达式。</p>
-<p>这个表达式可以用于匹配下面的路由</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">/blog/category/1/tags/2/page/3</div><div class="line">/blog/category/1/page/3</div><div class="line">/blog/tags/3/page/3</div><div class="line">/blog/page/3</div></pre></td></tr></table></figure>
-<p>匹配完毕之后，就可以拿到 categroy tags page 的值然后提交数据库拿数据咯。</p>
-<h2 id="0x05-组件"><a href="#0x05-组件" class="headerlink" title="0x05 组件"></a>0x05 组件</h2><p>博客里面需要注意的就三个组件</p>
-<ul>
-<li>ArticlePost 组件</li>
-<li>分页组件</li>
-<li>打字终端组件</li>
-</ul>
-<p>第一个，ArticlePost 组件</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"p-article-post"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"columns"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-1 hide-xl"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-2 col-xl-3"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"g-sidebar"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">h4</span>&gt;</span>本文目录<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">"articleToc"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-6 col-xl-8"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">ArticleCard</span> <span class="attr">:article</span>=<span class="string">"article"</span> @<span class="attr">articleTocReady</span>=<span class="string">"initArticleToc"</span>&gt;</span><span class="tag">&lt;/<span class="name">ArticleCard</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-2 col-xl-3"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"g-sidebar"</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">h4</span>&gt;</span>公告<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></div><div class="line">          <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              MG 的编程小屋，其实就是我整理笔记，写写文章的地方。</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              专注 Python / JavaScript , 爱折腾的全干工程师 (Full Stuff Engineer)</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              如果我的文章给您的日常开发带来很大帮助的话</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              您可以关注我的公众号</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/static/images/mp_wechat.jpg"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">style</span>=<span class="string">"width: 200px"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              也可以扫描二维码进行投喂</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">              <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"/static/images/tips_wechat.jpeg"</span> <span class="attr">alt</span>=<span class="string">""</span> <span class="attr">style</span>=<span class="string">"width: 200px"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></div><div class="line">              听说关注或者进行投喂的人，技术都越来越牛咯。</div><div class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"col-1 hide-xl"</span>&gt;</span></div><div class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></div><div class="line"></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">  <span class="keyword">import</span> &#123;fetchBlogPost&#125; <span class="keyword">from</span> <span class="string">'../../api/blog'</span>;</div><div class="line">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">    <span class="attr">name</span>: <span class="string">'BlogPage'</span>,</div><div class="line">    <span class="attr">components</span>: &#123;</div><div class="line">      <span class="attr">ArticleCard</span>: <span class="function"><span class="params">()</span> =&gt;</span> <span class="keyword">import</span>(<span class="string">'../../components/Common/ArticleCard.vue'</span>),</div><div class="line">    &#125;,</div><div class="line">    data() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">article</span>: <span class="string">''</span>,</div><div class="line">        <span class="attr">articleToc</span>: <span class="literal">undefined</span></div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">watch</span>: &#123;</div><div class="line">      <span class="string">'$route.params'</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.initArticle()</div><div class="line">      &#125;</div><div class="line">    &#125;,</div><div class="line">    created() &#123;</div><div class="line">      <span class="keyword">this</span>.initArticle()</div><div class="line">    &#125;,</div><div class="line">    mounted() &#123;</div><div class="line">    &#125;,</div><div class="line">    <span class="attr">methods</span>: &#123;</div><div class="line">      <span class="attr">initArticleToc</span>: <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</div><div class="line">        <span class="keyword">this</span>.articleToc = v;</div><div class="line">      &#125;,</div><div class="line">      <span class="attr">initArticle</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">let</span> title = <span class="keyword">this</span>.$route.params.title;</div><div class="line">        fetchBlogPost(title).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</div><div class="line">          <span class="keyword">this</span>.article = res;</div><div class="line">        &#125;)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>嗯，其实就是监听 url, 如果匹配上 url 的话，从 url 中取 title, 然后发送请求，接着取回响应的内容交给子组件处理。子组件处理完毕会 emit 出一个 toc 的值，将这个值赋值给左侧 toc 即可。</p>
-<ul>
-<li>分页组件</li>
-</ul>
-<p>见地址吧  <a href="https://github.com/twocucao/YaVueBlog/blob/master/src/components/Common/Pagination.vue" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog/blob/master/src/components/Common/Pagination.vue</a></p>
-<ul>
-<li>打字终端组件</li>
-</ul>
-<p>终端的样式，当然是抄别人的 CSS, 打字效果，来源于 typed.js 依赖库</p>
-<h2 id="0x06-扩展"><a href="#0x06-扩展" class="headerlink" title="0x06. 扩展"></a>0x06. 扩展</h2><p>对于其他的实现，自然是要多多看代码咯。</p>
-<p>其实前端工程化是一个很广的概念，本文没有提到代码风格、团队开发工作流、CSS 编写规范、组件优化、Webpack 详细配置等等。这都需要在日常开发中多多练习的。</p>
-<p>笔者最近换了份工作，以 React 为技术栈。 加上篇幅和精力有限，也就是不在以 Vue 为前端这一块详细展开了。</p>
-<p>下面的文章还是聚焦在后端上面。</p>
-<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，Django 前后端分离最佳实践，点赞后，快上车吧</p>
-<ul>
-<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
-<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
-</ul>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2018-03-18</strong> 重修文字</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文是 Django 全栈开发教程的第四篇&lt;/p&gt;
 &lt;p&gt;目录在这里，已经更新的文章如下&lt;/p&gt;
 &lt;
     
