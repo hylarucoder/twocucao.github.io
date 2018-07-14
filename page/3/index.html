@@ -300,6 +300,401 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/01/28/TmuxWithTmuxinatorWorkflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/28/TmuxWithTmuxinatorWorkflow/" itemprop="url">用 tmux 与 tmuxinator 打造开发工作流</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-28T10:57:41+08:00">
+                2018-01-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/善用佳软/" itemprop="url" rel="index">
+                    <span itemprop="name">善用佳软</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  756
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文就我最近开发的一个前后端的项目（名字叫做 yavueblog) 来简单介绍两个神器</p>
+<ul>
+<li>一个是 tmux</li>
+<li>一个是 tmuxinator</li>
+</ul>
+<p>我在开发这个前后端的项目的时候要开启要通过不少的命令来启动服务：</p>
+<ul>
+<li>（前端开发）运行 npm run dev 进行开发前端页面</li>
+<li>（前端开发）运行 npm run dev:theme , 当主题的 SCSS 发生变化的同时，编译 SCSS</li>
+<li>（前端开发）运行 npm run dev:iconfont, 当移入了新的 svg 图标的时候，自动构建出新的字体文件与 iconfont.css 。</li>
+<li>（后端开发）运行 make dockerup 中开启 Django 应用。启动 Django 服务，PostgreSQL 数据库，Redis 等等，</li>
+</ul>
+<p>我的需求如下：</p>
+<ul>
+<li>一键启动这些脚本，前两个任务，放在第一个终端。</li>
+<li>后面两个任务放在第二、三个终端里。</li>
+</ul>
+<p>以前的做法都是新建三个终端选项卡，然后第一个终端分两屏，然后分别到各个终端 cd 或者 autojump 到对应的目录，然后手动运行命令。</p>
+<p>加上运行 npm run dev:theme 的时候，我是通过 Python 的 watchdog 来实现对指定目录和指定类型文件的变化进行监听的，所以还要切换 PyEnv 自定义的 Python 的环境中。</p>
+<p>这些命令反反复复输入还是挺麻烦的事情，为何不用工具来解决呢？</p>
+<h2 id="0x01-tmux-tmuxinator"><a href="#0x01-tmux-tmuxinator" class="headerlink" title="0x01 tmux + tmuxinator"></a>0x01 tmux + tmuxinator</h2><p>先安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">brew install tmux</div><div class="line">brew install ruby</div><div class="line">gem install tmuxinator</div></pre></td></tr></table></figure>
+<p>什么是 tmux?  简单而言，就是一个终端复用软件。<br>什么是 tmuxinator? 简单而言，就是为了简化 tmux 操作的软件。只需要编写 yaml 即快速开启一个比较适合你的终端窗口布局。</p>
+<p>关于 tmux 的配置，推荐这个 repo</p>
+<p><a href="https://github.com/gpakosz/.tmux" target="_blank" rel="external">https://github.com/gpakosz/.tmux</a></p>
+<h2 id="0x02-编写-Tmuxinator-配置文件"><a href="#0x02-编写-Tmuxinator-配置文件" class="headerlink" title="0x02 编写 Tmuxinator 配置文件"></a>0x02 编写 Tmuxinator 配置文件</h2><p>输入 tmuxinator new yavueblog</p>
+<p>修改文件如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"># ~/.tmuxinator/yavueblog.yml</div><div class="line"></div><div class="line">name: yavueblog</div><div class="line">root: ~/Codes/PublicRepos/YaBlogSystem/</div><div class="line"></div><div class="line"># Optional tmux socket</div><div class="line"># socket_name: foo</div><div class="line"></div><div class="line"># Runs before everything. Use it to start daemons etc.</div><div class="line"># pre: sudo /etc/rc.d/mysqld start</div><div class="line"></div><div class="line"># Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.</div><div class="line">pre_window: pyenv activate 3.5.2/envs/py3-daily</div><div class="line"></div><div class="line">windows:</div><div class="line">  - &quot;网站开发&quot;:</div><div class="line">      layout: main-vertical</div><div class="line">      # Synchronize all panes of this window, can be enabled before or after the pane commands run.</div><div class="line">      # &apos;before&apos; represents legacy functionality and will be deprecated in a future release, in favour of &apos;after&apos;</div><div class="line">      # synchronize: after</div><div class="line">      panes:</div><div class="line">        - &quot;cd ./YaVueBlog/ &amp;&amp; npm run dev&quot;</div><div class="line">        - &quot;cd ./YaVueBlog/ &amp;&amp; npm run dev:theme&quot;</div><div class="line">  - &quot;iconfont 构建&quot;: &quot;cd ./YaVueBlog/ &amp;&amp; npm run dev:iconfont&quot;</div><div class="line">  - &quot;DockerizedDjango&quot;: &quot;cd ./YaDjangoBlog/ &amp;&amp; make docker-compose-build-up&quot;</div></pre></td></tr></table></figure>
+<p>这样的话，每次开发就只需要运行 tmuxinator start yavueblog，并且打开 IDE 直接捋起袖子就是干就好了。</p>
+<h2 id="0x03-玩-tmux-首先要掌握的三个小技巧"><a href="#0x03-玩-tmux-首先要掌握的三个小技巧" class="headerlink" title="0x03 玩 tmux 首先要掌握的三个小技巧"></a>0x03 玩 tmux 首先要掌握的三个小技巧</h2><p>如果你刚用 tmux 的话，火速掌握下面三个小技巧。要不然会抓狂的。</p>
+<ol>
+<li>切换终端</li>
+</ol>
+<ul>
+<li>c-b + 数字</li>
+<li>c-b + n</li>
+</ul>
+<ol>
+<li>滚屏</li>
+</ol>
+<p><a href="https://superuser.com/questions/209437/how-do-i-scroll-in-tmux" target="_blank" rel="external">https://superuser.com/questions/209437/how-do-i-scroll-in-tmux</a></p>
+<ol>
+<li>复制文字</li>
+</ol>
+<p><a href="https://superuser.com/questions/196060/selecting-text-in-tmux-copy-mode" target="_blank" rel="external">https://superuser.com/questions/196060/selecting-text-in-tmux-copy-mode</a></p>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<li><a href="https://github.com/twocucao" target="_blank" rel="external">我的 Github</a></li>
+</ul>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-03-08 09:33:37</strong> 重新润饰文字，弃用 Rails 开发一年。现在主 DjangoRestFrameWork+VueJS</li>
+<li><strong>2018-01-28 11:44:00</strong> 重修文字，适配本文</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/01/23/PythonCompression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/23/PythonCompression/" itemprop="url">Python 中的数据压缩和存档</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T14:56:30+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-黑魔法/" itemprop="url" rel="index">
+                    <span itemprop="name">Python 黑魔法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  208
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>在一次数据分析过程中，对方扔过来 40GB 的数据 – data.tar.gz .</p>
+<p>我想着能不能直接用 pandas 直接读取这个文件呢？查找了一些资料，于是有了本文。</p>
+<p>Python 中支持如下：</p>
+<ul>
+<li>数据压缩算法：zlib, gzip, bzip2 and lzma</li>
+<li>存档格式：zip 以及 tar</li>
+</ul>
+<h2 id="0x01-压缩是怎么回事？"><a href="#0x01-压缩是怎么回事？" class="headerlink" title="0x01 压缩是怎么回事？"></a>0x01 压缩是怎么回事？</h2><h2 id="0x02-zlib-与-gzip"><a href="#0x02-zlib-与-gzip" class="headerlink" title="0x02 zlib 与 gzip"></a>0x02 zlib 与 gzip</h2><p>gzip 依赖于 zlib</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># 读取压缩文件</div><div class="line">import gzip</div><div class="line">with gzip.open(&apos;/home/joe/file.txt.gz&apos;, &apos;rb&apos;) as f:</div><div class="line">    file_content = f.read()</div><div class="line"></div><div class="line"># 写入压缩文件</div><div class="line">import gzip</div><div class="line">content = b&quot;Lots of content here&quot;</div><div class="line">with gzip.open(&apos;/home/joe/file.txt.gz&apos;, &apos;wb&apos;) as f:</div><div class="line">    f.write(content)</div><div class="line"></div><div class="line"># 拷贝压缩文件</div><div class="line">import gzip</div><div class="line">import shutil</div><div class="line">with open(&apos;/home/joe/file.txt&apos;, &apos;rb&apos;) as f_in:</div><div class="line">    with gzip.open(&apos;/home/joe/file.txt.gz&apos;, &apos;wb&apos;) as f_out:</div><div class="line">        shutil.copyfileobj(f_in, f_out)</div><div class="line"></div><div class="line"># 压缩二进制字符串</div><div class="line">import gzip</div><div class="line">s_in = b&quot;Lots of content here&quot;</div><div class="line">s_out = gzip.compress(s_in)</div></pre></td></tr></table></figure>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-12-20</strong> 初始化本文</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/12/28/AllStuffAboutCSS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1965,353 +2360,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/07/26/ReactCheatSheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/26/ReactCheatSheet/" itemprop="url">React CheatSheet</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-26T20:06:05+08:00">
-                2017-07-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/前端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">前端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,133
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><blockquote>
-<p>备注：由于目前没有上 React 的打算，本文暂时太监</p>
-</blockquote>
-<p>之前一直使用 VueJS 进行开发，心血来潮想换换口味，于是就借着自己的一个开源的项目尝试一下 ReactJS , 代码分为两部分，如下：</p>
-<ul>
-<li>前台系统（支持 SSR) <a href="https://github.com/twocucao/YaReactBlog">YaReactBlog</a></li>
-<li>后台系统 <a href="https://github.com/twocucao/YaReactAdmin">YaReactAdmin</a></li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">TODO:</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/26/ReactCheatSheet/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/07/17/数据科学的常识笔记/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/17/数据科学的常识笔记/" itemprop="url">数据科学的常识笔记</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-17T20:00:00+08:00">
-                2017-07-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据科学/" itemprop="url" rel="index">
-                    <span itemprop="name">数据科学</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2,152
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>2017 年 07 月，为了解统计学和机器学习的基本常识，开了这篇文章。</p>
-<p>当然，仅仅是为了了解，所以也就写的随性（不严谨）一些，排版什么的也都详细推敲。想到哪里就记录到哪里。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/17/数据科学的常识笔记/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2361,7 +2409,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">78</span>
+                <span class="site-state-item-count">80</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2383,7 +2431,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">93</span>
+                <span class="site-state-item-count">94</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
