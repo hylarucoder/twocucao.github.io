@@ -300,6 +300,1408 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/05/22/pipenv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/pipenv/" itemprop="url">Python 自动化工具 Fabric 支持 Python3 了</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T21:11:03+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  610
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。</p>
+<p>后来</p>
+<ul>
+<li><del>我总算学会了如何去爱。<del></del></del></li>
+<li>我喜欢的工具陆陆续续支持了 Python3</li>
+<li>Scrapy 支持了 Python3</li>
+<li>Ansible 支持了 Python3</li>
+</ul>
+<p>只有 Fabric 这个工具，死撑着没有支持 Python3 的的迹象。</p>
+<p>2018-05-08 的时候，Fabric 悄悄升级了 2.0 版本。</p>
+<p>而就在前两天，我升级网站的时候，突然发现 fabric (1.14 版本） 不能用了。</p>
+<p>查了一下版本，发现 fabric 更新到了 2.0 版本，支持了 python3.4</p>
+<p>在发现这个问题之后，火速刷了一波官方文档，把手头 Fabric 1.14 版本的脚本做了一些升级。</p>
+<h3 id="从-V1-到-V2"><a href="#从-V1-到-V2" class="headerlink" title="从 V1 到 V2"></a>从 V1 到 V2</h3><p>Fabric v2 基于 invoke 和 paramiko 两个库构建而成。</p>
+<ul>
+<li>invoke 库提供了 subprocess command execution 和 command-line</li>
+<li>paramiko 提供了 ssh 协议实现</li>
+</ul>
+<p>在这两者的基础上，做了一些扩展。</p>
+<p>甚至，如果你只用其中的本地功能，你都完全不需要使用 fabric, 直接用 invoke 即可。没错，我已经打算把我的本地脚本全部使用 invoke Python3 化了。</p>
+<p>v1 版本和 v2 版本初步用起来，个人觉得 v1 用起来 API 更加符合直觉一些。</p>
+<p>这东西怎么用呢？</p>
+<p>我们先定义 fabfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># fabfile.py</div><div class="line">from invoke import task</div><div class="line"></div><div class="line">def expand_path(c, path):</div><div class="line">    return &apos;&quot;$(echo %s)&quot;&apos; % path</div><div class="line"></div><div class="line">def exists(c, path):</div><div class="line">    cmd = &apos;stat %s&apos; % expand_path(c, path)</div><div class="line">    return c.run(cmd, warn=True, hide=True).ok</div><div class="line"></div><div class="line">@task</div><div class="line">def deploy(c):</div><div class="line">    c.local(&quot;youcmd&quot;)</div><div class="line">    c.put()</div><div class="line">    c.get()</div><div class="line">    c.run()</div><div class="line">    c.run(&quot;sudo youcmd&quot;)</div><div class="line">    ......</div><div class="line"></div><div class="line">@task</div><div class="line">def other_stuff(c):</div><div class="line">    ......</div></pre></td></tr></table></figure>
+<p>需要注意的是，invoke 里面默认的 replace_env 设置为了 False ,fabric 里面给 runner 设置了 replace_env 为 True , 这也就意味着默认情况下，执行 c.local 的时候会找不到自定义的环境变量，这意味着：</p>
+<ol>
+<li>你的 PATH 被重置了，这意味着你用 brew 安装的软件可能已经完全找不到了。</li>
+<li>你的环境变量 LANG 并不一定是 en_US.UTF-8 了</li>
+</ol>
+<p>于是设置一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ~/.fabric.py</div><div class="line">#!/usr/bin/env python</div><div class="line"># encoding: utf-8</div><div class="line"></div><div class="line">run = &#123;</div><div class="line">    &quot;replace_env&quot;: False</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当我要部署的时候直接执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fab -H webserver01,webserver02,webserver03,webserver04 deploy</div></pre></td></tr></table></figure>
+<p>到这里大家基本上看出来了，我并没有在文件中 import fabric 只是简单了配置了一个配置文件和执行一下 fab 命令。</p>
+<p>这个 v2 版本的 fabric 相当于 invoke 的包装。但我们也可以显式的 import fabric 里面的东西进行更加进阶的操作。</p>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/05/22/fabric2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/22/fabric2/" itemprop="url">PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-22T21:11:03+08:00">
+                2018-05-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,094
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的包管理工具 pipenv』</p>
+<p>Kenneth Reitz 出品，必属精品。</p>
+<h3 id="Python-打包历史"><a href="#Python-打包历史" class="headerlink" title="Python 打包历史"></a>Python 打包历史</h3><p>刚开始的时候，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl http://pypi.python.org/packages/alsdasdl/requests.tar.gz | tar zxf</div><div class="line">cd requests/</div><div class="line">python setup.py install</div></pre></td></tr></table></figure>
+<p>这个问题初看起来不是问题，但是随着你安装程序的增多就知道有多么痛苦了。</p>
+<ol>
+<li>有的依赖库依赖别的库你怎么解决？比如 pandas 需要安装 numpy</li>
+<li>有的依赖库依赖 c 库怎么办？比如 LXML</li>
+<li>在 python2.6.5 下，如果我需要安装两个不同版本的 Django 开发不同的软件怎么办？难道只能动态复制文件到 site-packages 里面？</li>
+</ol>
+<p>后来，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">easy_install requests</div></pre></td></tr></table></figure>
+<p>我们可以直接从 pypi 进行安装了。但尼玛，为什么 easy_install 安装很 easy, 但是没有 easy_uninstall?</p>
+<p>好，2010 年后，我们继续前进：</p>
+<ul>
+<li>可以通过 pip 替代 easy_install 了。</li>
+<li>可以通过 virtualenv 管理项目的依赖库了。虽然说，还是不能像 ruby gem 一样同时把多个版本的的软件装在同一个系统里。</li>
+<li>可以通过 requirements 锁依赖了。</li>
+</ul>
+<p>但，同期的其他编程语言社区分别出现了如下的包管理工具：</p>
+<ul>
+<li>node -&gt; yarn &amp;&amp; npm , 有 lockfile</li>
+<li>php -&gt; composer , 有 lockfile</li>
+<li>rust -&gt; cargo , 有 lockfile</li>
+<li>ruby -&gt; bundler , 有 lockfile</li>
+</ul>
+<p>而我大 Python 居然没跟上潮流</p>
+<ul>
+<li>python -&gt; pip &amp;&amp; virtualenv/venv , 无 lockfile</li>
+</ul>
+<blockquote>
+<p>PS: Python3.3 之后，默认可以直接使用 venv 模块，不需要再安装 virtualenv 了。但还是需要手动，并且用起来比较反直觉。</p>
+</blockquote>
+<p>关于 requirements.txt</p>
+<ul>
+<li>如果你使用 pip freeze 来形成这个文件，则不直观，完全看不出来哪个依赖库依赖哪个依赖。</li>
+<li>如果你直接手动指定你所需要的库，比如 flask 的话，似乎又有些太直观了。</li>
+</ul>
+<p>如果能有一个东西，既可以表示 freeze 的结果 (what you want)，又可以表示你需要的库 (what you need). 就好了。</p>
+<blockquote>
+<p>这当然可以考虑用两份 requirements 来解决。先安装 what you need 用来开发，然后 freeze 为 what you want 去部署。</p>
+</blockquote>
+<p>当然，铺垫了这么多 K 神肯定是来介绍他的 pipenv 的。</p>
+<p>比如说，我想查看，本项目的依赖库，直接 pipenv graph</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">coverage==4.5.1</div><div class="line">fabric==2.0.1</div><div class="line">  - cryptography [required: &gt;=1.1, installed: 2.2.2]</div><div class="line">    - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]</div><div class="line">    - cffi [required: &gt;=1.7, installed: 1.11.5]</div><div class="line">      - pycparser [required: Any, installed: 2.18]</div><div class="line">    - idna [required: &gt;=2.1, installed: 2.6]</div><div class="line">    - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">  - invoke [required: &lt;2.0,&gt;=1.0, installed: 1.0.0]</div><div class="line">  - paramiko [required: &gt;=2.4, installed: 2.4.1]</div><div class="line">    - bcrypt [required: &gt;=3.1.3, installed: 3.1.4]</div><div class="line">      - cffi [required: &gt;=1.1, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">    - cryptography [required: &gt;=1.5, installed: 2.2.2]</div><div class="line">      - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]</div><div class="line">      - cffi [required: &gt;=1.7, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - idna [required: &gt;=2.1, installed: 2.6]</div><div class="line">      - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">    - pyasn1 [required: &gt;=0.1.7, installed: 0.4.2]</div><div class="line">    - pynacl [required: &gt;=1.0.1, installed: 1.2.1]</div><div class="line">      - cffi [required: &gt;=1.4.1, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - six [required: Any, installed: 1.11.0]</div><div class="line">flake8==3.5.0</div><div class="line">  - mccabe [required: &gt;=0.6.0,&lt;0.7.0, installed: 0.6.1]</div><div class="line">  - pycodestyle [required: &lt;2.4.0,&gt;=2.0.0, installed: 2.3.1]</div><div class="line">  - pyflakes [required: &gt;=1.5.0,&lt;1.7.0, installed: 1.6.0]</div><div class="line"># 其他省略</div></pre></td></tr></table></figure>
+<p>如何尝鲜？我最近更新到了之前写的一个库（代码写的惨不忍赌，最近准备重构，勿喷）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:twocucao/YaPyLib.git</div><div class="line">cd YaPyLib/</div><div class="line">brew install pipenv</div><div class="line">pipenv --three</div><div class="line">pipenv install --dev</div><div class="line">pipenv shell</div></pre></td></tr></table></figure>
+<p>记住几个命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pipenv --venv # 查看 venv 位置</div><div class="line">pipenv --python 3.6.5</div><div class="line">exit 退出 pipenv shell</div></pre></td></tr></table></figure>
+<p>至于其他的功能，参考官网自己摸索吧。</p>
+<h3 id="FAQ-环节"><a href="#FAQ-环节" class="headerlink" title="FAQ 环节"></a>FAQ 环节</h3><p>FAQ 环节有一个问题非常有趣，应该把 lockfile 放在 git 仓库里面吗？</p>
+<p>k 神是这么回答的 yes。 这个问题很久之前就在 issue 上回答过了</p>
+<p><a href="https://github.com/pypa/pipenv/issues/598" target="_blank" rel="external">https://github.com/pypa/pipenv/issues/598</a></p>
+<p>我刚开始觉得不提交会好一些，后来觉得 track 一下也无妨。</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><blockquote>
+<p>在用 npm 和 yarn 的时候，我有这么一个想法，希望 python 圈子里面能出一个类似于包管理工具。今年 2 月份的时候把自己的项目迁移过来，发现 pipenv 用起来很挺舒服的。</p>
+<p>pipenv 是未来。火速用上吧。</p>
+<p>觉得有趣就点个赞或者关注下呗。</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/05/16/PyConDjango/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/05/16/PyConDjango/" itemprop="url">PyCon 2018 之 Django 专题与 未来的包管理工具 pipenv</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-16T19:18:35+08:00">
+                2018-05-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  2,147
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  9
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>PyCon 2018 有很多精彩的演讲，今天的文章里，挑出 Django 的几篇演讲大致讲讲。</p>
+<blockquote>
+<p>注意：为什么是大致讲讲呢？因为即便是你看了我的这篇文章，依然需要多下点功夫自己去看演讲，自己去查资料，自己去消化。我的这篇文章只不过是我看演讲查资料慢慢消化过程中的产物而已。</p>
+</blockquote>
+<h2 id="0x01-演讲-1-Taking-Django-Async"><a href="#0x01-演讲-1-Taking-Django-Async" class="headerlink" title="0x01 演讲 1 - Taking Django Async"></a>0x01 演讲 1 - Taking Django Async</h2><p>本演讲其实就是为了推广 Django 的新库。django-channels</p>
+<p>这个库从 2015 年首发，现在已经经过了三年的进程。应该算是相对成熟了。</p>
+<p>这个库有什么不走寻常路的地方吗？答案是有的：</p>
+<ol>
+<li>使得 Django 增加了异步协议，比如说 WebSocket 协议</li>
+<li>使得 Django 可运行后台任务。</li>
+</ol>
+<p>作为 v2 版本的核心开发，作者必然是要吐槽一下 v1 版本，然后推荐一下 v2 版本。</p>
+<p>v1 版本的架构设计是这样的。</p>
+<p>核心开发给出了这样的评价：</p>
+<ol>
+<li>在 Python2.7 的时候，就只能这么搞了。</li>
+<li>需要维护的东西太多</li>
+<li>没有 asyncio support</li>
+<li>搬砖时候一不小心容易砸到脚</li>
+</ol>
+<blockquote>
+<p>TODO : 补充一些其他的缺点</p>
+</blockquote>
+<p>异步与同步接口耦合</p>
+<p>作者认为此并非长久之计。</p>
+<p>v2 时候，</p>
+<p>重写 75% 的代码</p>
+<p>异步与同步接口分离</p>
+<p>这么设计的话，需要解决接下来的一个问题，同步转异步，异步转同步。</p>
+<p>比如，我访问 view, 实际上是 async 转 sync, 然后才能调用 django 相关的方法，接着返回响应内容的时候，我还需要 sync 转 async.<br>再比如，我使用 websocket, 访问一条数据，但 ORM 是 sync 的方法，我还是要 async 转 sync 再转 async</p>
+<p>这个 async 和 sync 的相互转换应该怎么做呢？</p>
+<p>于是，两个适配方法就诞生了：</p>
+<ul>
+<li>sync_to_async : 接收一个 async 的 function, 使之 awaitable, 然后使之在后台线程里运行。</li>
+<li>async_to_sync : 接收一个 awaitable 的 coroutine , 使之转化成一个同步的 function, 该 function 暂停你调用的当前的线程，跳转到包含 eventloop 的主线程执行完毕，然后跳转回来。</li>
+</ul>
+<p><a href="https://www.aeracode.org/2018/02/19/python-async-simplified/" target="_blank" rel="external">https://www.aeracode.org/2018/02/19/python-async-simplified/</a></p>
+<h3 id="WSGI-如何运行-async"><a href="#WSGI-如何运行-async" class="headerlink" title="WSGI 如何运行 async"></a>WSGI 如何运行 async</h3><h3 id="ASGI-如何运行-A"><a href="#ASGI-如何运行-A" class="headerlink" title="ASGI 如何运行 A"></a>ASGI 如何运行 A</h3><h3 id="这对-Django-意味着什么？"><a href="#这对-Django-意味着什么？" class="headerlink" title="这对 Django 意味着什么？"></a>这对 Django 意味着什么？</h3><h3 id="如何保持兼容性"><a href="#如何保持兼容性" class="headerlink" title="如何保持兼容性"></a>如何保持兼容性</h3><h2 id="0x02-演讲-2-Beyond-Django-Basic"><a href="#0x02-演讲-2-Beyond-Django-Basic" class="headerlink" title="0x02 演讲 2 - Beyond Django Basic"></a>0x02 演讲 2 - Beyond Django Basic</h2><p>作为一名有一定经验的 Django 开发者，用快进的方式看完了这个演讲。毕竟，我已经不是 Django 新手了。</p>
+<blockquote>
+<p>毕竟这篇演讲只是给那些学完 tutorial 的人</p>
+</blockquote>
+<p>想深入了解 Django, 多刷几遍文档比什么都好。</p>
+<p>嗯，就不介绍了。</p>
+<h2 id="0x03-演讲-3-Introduction-to-TDD-with-Django-amp-amp-Intermediate-testing-with-Django"><a href="#0x03-演讲-3-Introduction-to-TDD-with-Django-amp-amp-Intermediate-testing-with-Django" class="headerlink" title="0x03 演讲 3 - Introduction to TDD with Django &amp;&amp; Intermediate testing with Django"></a>0x03 演讲 3 - Introduction to TDD with Django &amp;&amp; Intermediate testing with Django</h2><p>本演讲主要内容是 TDD 测试和 Mock 的技巧。</p>
+<p>建议熟手直接看演讲者的书吧，本视频本人仅仅匆匆倍速看了一遍，估计并没有超出他的书的范围。</p>
+<p>简单介绍了以下内容</p>
+<ul>
+<li>单元测试和功能性测试</li>
+<li>通过 Selenium browser 进行自动化测试</li>
+<li>unittest 标准库</li>
+<li>Django models, views and templates</li>
+<li>测试前后端代码</li>
+<li>基于测试的重构</li>
+<li>TDD workflow</li>
+</ul>
+<p>地址如下</p>
+<p><a href="https://www.obeythetestinggoat.com/book/praise.harry.html" target="_blank" rel="external">https://www.obeythetestinggoat.com/book/praise.harry.html</a></p>
+<p>说说个人对测试和 TDD 测试的基本态度，我觉得测试是好事，适当的测试是可以提升代码质量和程序稳定性的。</p>
+<p>说测试会降低开发速度的，八成是没有善用测试。如果测试拖慢了你的开发速度，只能说明没有进行合适的测试，比如对一些无关紧要的功能进行测试。</p>
+<p>但，这篇演讲和配套资料很好，不过有些美中不足。 这里基本上都还在用 Django 的 MTV 这一套。</p>
+<blockquote>
+<p>我反正是不用这一套了。这个年头流行 SPA 呀。</p>
+</blockquote>
+<p>所以，我们这篇演讲指的关注的内容就变成如下内容了。</p>
+<ul>
+<li>单元测试和功能性测试</li>
+<li>unittest 标准库</li>
+<li>Django models</li>
+<li>基于测试的重构</li>
+<li>TDD workflow</li>
+</ul>
+<p>而且，对于 API 的测试，现在基本上流行 POSTMAN</p>
+<p>用 POSTMAN 的优点就在于可以把参数缓存下来下次接着用。有个小技巧就是从 chrome 拷贝一下 curl 到 postman 中。非常好用。</p>
+<p>既然流行 SPA, 那么本次有没有介绍开 API 的利器呢？</p>
+<h2 id="0x04-演讲-4-API-Driven-Django"><a href="#0x04-演讲-4-API-Driven-Django" class="headerlink" title="0x04 演讲 4 - API-Driven Django"></a>0x04 演讲 4 - API-Driven Django</h2><p>嗯，Django + django-rest-framework 实在是开 WebAPI 的神器。</p>
+<p>这篇演讲，算是普及了一下常识。并没有想象当中的深入。</p>
+<p>想用 Django 和 DjangoRestFramework 搞事情的，可以过来看我这篇文章。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/33903527" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33903527</a></p>
+<blockquote>
+<p>需要注意的是，本次 PyCon 中有很多人已经用上了 pipenv 了。</p>
+</blockquote>
+<h2 id="0x05-演讲-5-pipenv-未来的-Python-包管理工具"><a href="#0x05-演讲-5-pipenv-未来的-Python-包管理工具" class="headerlink" title="0x05 演讲 5 - pipenv 未来的 Python 包管理工具"></a>0x05 演讲 5 - pipenv 未来的 Python 包管理工具</h2><p>Kenneth Reitz 出品，必属精品。</p>
+<h3 id="Python-打包历史"><a href="#Python-打包历史" class="headerlink" title="Python 打包历史"></a>Python 打包历史</h3><p>刚开始，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl http://pypi.python.org/packages/alsdasdl/requests.tar.gz | tar zxf</div><div class="line">cd requests/</div><div class="line">python setup.py install</div></pre></td></tr></table></figure>
+<p>这个问题初看起来不是问题，但是随着你安装程序的增多就知道有多么痛苦了。</p>
+<ol>
+<li>有的依赖库依赖别的库你怎么解决？比如 pandas 需要安装 numpy</li>
+<li>有的依赖库依赖 c 库怎么办？比如 LXML</li>
+<li>在 python2.6.5 下，如果我需要安装两个不同版本的 Django 开发不同的软件怎么办？难道只能动态复制文件到 site-packages 里面？</li>
+</ol>
+<p>后来，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">easy_install requests</div></pre></td></tr></table></figure>
+<p>我们可以直接从 pypi 进行安装了。但尼玛，为什么 easy_install 安装很 easy, 但是没有 easy_uninstall?</p>
+<p>好，2010 年后，我们继续前进：</p>
+<ul>
+<li>可以通过 pip 替代 easy_install 了。</li>
+<li>可以通过 virtualenv 管理项目的依赖库了。虽然说，还是不能像 ruby gem 一样同时把多个版本的的软件装在同一个系统里。</li>
+<li>可以通过 requirements 锁依赖了。</li>
+</ul>
+<p>但，其他编程语言社区分别出现了如下的包管理工具：</p>
+<ul>
+<li>node -&gt; yarn &amp;&amp; npm , 有 lockfile</li>
+<li>php -&gt; composer , 有 lockfile</li>
+<li>rust -&gt; cargo , 有 lockfile</li>
+<li>ruby -&gt; bundler , 有 lockfile</li>
+</ul>
+<p>而生命苦短一方居然</p>
+<ul>
+<li>python -&gt; pip &amp;&amp; virtualenv/venv , 无 lockfile</li>
+</ul>
+<blockquote>
+<p>PS: Python3.3 之后，默认可以直接使用 venv 模块，不需要再安装 virtualenv 了。但还是需要手动，并且用起来比较反直觉。</p>
+</blockquote>
+<p>关于 requirements.txt</p>
+<ul>
+<li>如果你使用 pip freeze 来形成这个文件，则不直观，完全看不出来哪个依赖库依赖哪个依赖。</li>
+<li>如果你直接手动指定你所需要的库，比如 flask 的话，似乎又有些太直观了。</li>
+</ul>
+<p>如果能有一个东西，既可以表示 freeze 的结果 (what you want)，又可以表示你需要的库 (what you need). 就好了。</p>
+<blockquote>
+<p>这当然可以考虑用两份 requirements 来解决。先安装 what you need 用来开发，然后 freeze 为 what you want 去部署。</p>
+</blockquote>
+<p>当然，铺垫了这么多 K 神肯定是来介绍他的 pipenv 的。</p>
+<p>比如说，我想查看，本项目的依赖库，直接 pipenv graph</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">coverage==4.5.1</div><div class="line">fabric==2.0.1</div><div class="line">  - cryptography [required: &gt;=1.1, installed: 2.2.2]</div><div class="line">    - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]</div><div class="line">    - cffi [required: &gt;=1.7, installed: 1.11.5]</div><div class="line">      - pycparser [required: Any, installed: 2.18]</div><div class="line">    - idna [required: &gt;=2.1, installed: 2.6]</div><div class="line">    - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">  - invoke [required: &lt;2.0,&gt;=1.0, installed: 1.0.0]</div><div class="line">  - paramiko [required: &gt;=2.4, installed: 2.4.1]</div><div class="line">    - bcrypt [required: &gt;=3.1.3, installed: 3.1.4]</div><div class="line">      - cffi [required: &gt;=1.1, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">    - cryptography [required: &gt;=1.5, installed: 2.2.2]</div><div class="line">      - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]</div><div class="line">      - cffi [required: &gt;=1.7, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - idna [required: &gt;=2.1, installed: 2.6]</div><div class="line">      - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">    - pyasn1 [required: &gt;=0.1.7, installed: 0.4.2]</div><div class="line">    - pynacl [required: &gt;=1.0.1, installed: 1.2.1]</div><div class="line">      - cffi [required: &gt;=1.4.1, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - six [required: Any, installed: 1.11.0]</div><div class="line">flake8==3.5.0</div><div class="line">  - mccabe [required: &gt;=0.6.0,&lt;0.7.0, installed: 0.6.1]</div><div class="line">  - pycodestyle [required: &lt;2.4.0,&gt;=2.0.0, installed: 2.3.1]</div><div class="line">  - pyflakes [required: &gt;=1.5.0,&lt;1.7.0, installed: 1.6.0]</div><div class="line"># 其他省略</div></pre></td></tr></table></figure>
+<p>如何尝鲜？我最近更新到了之前写的一个库（代码写的惨不忍赌，最近准备重构）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:twocucao/YaPyLib.git</div><div class="line">cd YaPyLib/</div><div class="line">brew install pipenv</div><div class="line">pipenv --three</div><div class="line">pipenv install --dev</div><div class="line">pipenv shell</div></pre></td></tr></table></figure>
+<p>至于其他的功能，参考官网自己摸索吧。</p>
+<blockquote>
+<p>在用 npm 和 yarn 的时候，我有这么一个想法，希望 python 圈子里面能出一个类似于包管理工具。今年 2 月份的时候把自己的项目迁移过来，发现 pipenv 用起来很挺舒服的。</p>
+<p>pipenv 是未来。火速用上吧。</p>
+</blockquote>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-03-09</strong> 重修文字</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/04/28/DjangoORMCheatSheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/04/28/DjangoORMCheatSheet/" itemprop="url">DjangoORMCheatSheet</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-04-28T18:29:58+08:00">
+                2018-04-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,088
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。</p>
+<p>所以，本文记录的是 Django ORM</p>
+<p>逃。</p>
+<p>这篇文章也是我对比 SqlAlchemy 以及 DjangoORM 的产物</p>
+<h2 id="0x01-如何快速上手"><a href="#0x01-如何快速上手" class="headerlink" title="0x01 如何快速上手"></a>0x01 如何快速上手</h2><p>Django 世界里面，Django 的文档每次刷都会有新的发现。</p>
+<h2 id="0x02-DjangoORM-的基本功能"><a href="#0x02-DjangoORM-的基本功能" class="headerlink" title="0x02 DjangoORM 的基本功能"></a>0x02 DjangoORM 的基本功能</h2><h3 id="2-1-模型定义-Model"><a href="#2-1-模型定义-Model" class="headerlink" title="2.1 模型定义 Model"></a>2.1 模型定义 Model</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">from django.db import models</div><div class="line"></div><div class="line">class Musician(models.Model):</div><div class="line">    first_name = models.CharField(max_length=50) # Field</div><div class="line">    last_name = models.CharField(max_length=50)</div><div class="line">    instrument = models.CharField(max_length=100)</div><div class="line"></div><div class="line">class Album(models.Model):</div><div class="line">    artist = models.ForeignKey(Musician, on_delete=models.CASCADE)</div><div class="line">    name = models.CharField(max_length=100)</div><div class="line">    release_date = models.DateField()</div><div class="line">    num_stars = models.IntegerField()</div><div class="line"></div><div class="line">    class Meta: # Model Meta</div><div class="line">        order_with_respect_to = &apos;question&apos;</div></pre></td></tr></table></figure>
+<p>可以看出，包含如下的部分：</p>
+<ol>
+<li>Model 与 Model 内部的 Meta</li>
+<li>Field 与 Field 内部的 Options</li>
+<li>Model 与 Model 之间的关系</li>
+<li>其他，比如索引</li>
+</ol>
+<h4 id="Models-与-Meta"><a href="#Models-与-Meta" class="headerlink" title="Models 与 Meta"></a>Models 与 Meta</h4><blockquote>
+<p>DjangoORM 是 ActivityRecord 模式的一种实现，在该模式下，Model 与 session 耦合。</p>
+</blockquote>
+<h4 id="Field-与-Field-Options"><a href="#Field-与-Field-Options" class="headerlink" title="Field 与 Field Options"></a>Field 与 Field Options</h4><h5 id="Field"><a href="#Field" class="headerlink" title="Field"></a>Field</h5><ul>
+<li>AutoField</li>
+<li>BigAutoField</li>
+<li>BigIntegerField</li>
+<li>BinaryField</li>
+<li>BooleanField</li>
+<li>CharField</li>
+<li>DateField</li>
+<li>DateTimeField</li>
+<li>DecimalField</li>
+<li>DurationField</li>
+<li>EmailField</li>
+<li>FileField</li>
+<li>FileField and FieldFile</li>
+<li>FilePathField</li>
+<li>FloatField</li>
+<li>ImageField</li>
+<li>IntegerField</li>
+<li>GenericIPAddressField</li>
+<li>NullBooleanField</li>
+<li>PositiveIntegerField</li>
+<li>PositiveSmallIntegerField</li>
+<li>SlugField</li>
+<li>SmallIntegerField</li>
+<li>TextField</li>
+<li>TimeField</li>
+<li>URLField</li>
+<li>UUIDField</li>
+</ul>
+<p>虽然有这么多东东，但是还是建议直接</p>
+<h5 id="Field-Options"><a href="#Field-Options" class="headerlink" title="Field Options"></a>Field Options</h5><ul>
+<li>null</li>
+<li>blank</li>
+<li>choices<ul>
+<li>p.shirt_size</li>
+<li>p.get_shirt_size_display()</li>
+</ul>
+</li>
+<li>db_column</li>
+<li>db_index</li>
+<li>db_tablespace</li>
+<li>default</li>
+<li>editable</li>
+<li>error_messages</li>
+<li>help_text</li>
+<li>primary_key</li>
+<li>unique</li>
+<li>unique_for_date</li>
+<li>unique_for_month</li>
+<li>unique_for_year</li>
+<li>verbose_name</li>
+<li>validators</li>
+</ul>
+<h5 id="ForeignKey-的-Models"><a href="#ForeignKey-的-Models" class="headerlink" title="ForeignKey 的 Models"></a>ForeignKey 的 Models</h5><p>on_delete=models.CASCADE</p>
+<h4 id="Relationship"><a href="#Relationship" class="headerlink" title="Relationship"></a>Relationship</h4><p>表和表之间的关系</p>
+<ol>
+<li>A 表和 B 表 一对多 / 多对一</li>
+<li>A 表和 B 表 一对一 （特殊的一对多）</li>
+<li>A 表和 B 表 简单多对多 （借助中间的 Mapping 表进行映射）</li>
+<li>A 表和 B 表 复杂多对多</li>
+<li>A 表和 B 表 一对多</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">from django.db import models</div><div class="line"></div><div class="line">class Manufacturer(models.Model):</div><div class="line">    # ...</div><div class="line">    pass</div><div class="line"></div><div class="line">class Car(models.Model):</div><div class="line">    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)</div><div class="line">    # ...</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">from django.db import models</div><div class="line"></div><div class="line">class Topping(models.Model):</div><div class="line">    # ...</div><div class="line">    pass</div><div class="line"></div><div class="line">class Pizza(models.Model):</div><div class="line">    # ...</div><div class="line">    toppings = models.ManyToManyField(Topping)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">from django.db import models</div><div class="line"></div><div class="line">class Person(models.Model):</div><div class="line">    name = models.CharField(max_length=128)</div><div class="line"></div><div class="line">    def __str__(self):</div><div class="line">        return self.name</div><div class="line"></div><div class="line">class Group(models.Model):</div><div class="line">    name = models.CharField(max_length=128)</div><div class="line">    members = models.ManyToManyField(Person, through=&apos;Membership&apos;)</div><div class="line"></div><div class="line">    def __str__(self):</div><div class="line">        return self.name</div><div class="line"></div><div class="line">class Membership(models.Model):</div><div class="line">    person = models.ForeignKey(Person, on_delete=models.CASCADE)</div><div class="line">    group = models.ForeignKey(Group, on_delete=models.CASCADE)</div><div class="line">    date_joined = models.DateField()</div><div class="line">    invite_reason = models.CharField(max_length=64)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Models across files</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">objects</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Models 重写方法</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Models 继承</div><div class="line">https://docs.djangoproject.com/en/2.0/topics/db/models/#model-inheritance</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">组织代码 - 以及应对循环引用</div></pre></td></tr></table></figure>
+<h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><h3 id="2-2-QuerySet"><a href="#2-2-QuerySet" class="headerlink" title="2.2 QuerySet"></a>2.2 QuerySet</h3><h4 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">c = Child(name=&quot;苏轼&quot;)</div><div class="line">c.save()</div><div class="line">p = Parent(name=&quot;苏辙&quot;)</div><div class="line">p.best_child = c</div><div class="line">p.children.add([c,c2,c3,c4])</div><div class="line">p.save()</div></pre></td></tr></table></figure>
+<h4 id="Retrieve"><a href="#Retrieve" class="headerlink" title="Retrieve"></a>Retrieve</h4><p>过滤</p>
+<p>filter(<strong>kwargs)<br>exclude(</strong>kwargs)<br>.all()</p>
+<h5 id="跨关系（跨表）查询"><a href="#跨关系（跨表）查询" class="headerlink" title="跨关系（跨表）查询"></a>跨关系（跨表）查询</h5><p>Blog.objects.filter(entry<strong>headline</strong>contains=’Lennon’)</p>
+<p><a href="https://docs.djangoproject.com/en/2.0/topics/db/queries/#lookups-that-span-relationships" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/queries/#lookups-that-span-relationships</a></p>
+<p><a href="https://docs.djangoproject.com/en/2.0/topics/db/queries/#spanning-multi-valued-relationships" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/queries/#spanning-multi-valued-relationships</a></p>
+<h5 id="Limit-Offset-分页"><a href="#Limit-Offset-分页" class="headerlink" title="Limit / Offset / 分页"></a>Limit / Offset / 分页</h5><p>Blog.objects.filter(entry<strong>headline</strong>contains=’Lennon’)[30:20]</p>
+<h5 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h5><p>query = query.filter(<strong>kwargs)<br>query = query.exclude(</strong>kwargs)</p>
+<h5 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h5><p>Django 里面最强大的就是其 Q 表达式了</p>
+<p>Q(question<strong>startswith=’Who’) | Q(question</strong>startswith=’What’)</p>
+<p>Poll.objects.get(<br>    Q(question__startswith=’Who’),<br>    Q(pub_date=date(2005, 5, 2)) | Q(pub_date=date(2005, 5, 6))<br>)</p>
+<p>这个表达式甚至可以嵌套超级深从而完成一个比较深的跨表查询。</p>
+<blockquote>
+<p>并且，这种 API 查询反而在写前端 API 的时候，可以传入 question__startswith 这类参数，从而直接完成一组搜索。</p>
+</blockquote>
+<p>Q / F</p>
+<h5 id="执行查询"><a href="#执行查询" class="headerlink" title="执行查询"></a>执行查询</h5><p>需要注意的的是，SQLAlchemy 必须显式执行查询，而 Django 不一定。</p>
+<p><a href="https://docs.djangoproject.com/en/2.0/ref/models/querysets/#when-querysets-are-evaluated" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/ref/models/querysets/#when-querysets-are-evaluated</a></p>
+<p>在 Django 内部实现的时候，一个 queryset 创建 / 过滤 / 切片 / 传送，<strong>除非这个 queryset 被 evaluated 了</strong>, 否则不会做数据库的操作。</p>
+<ul>
+<li>iteration</li>
+<li>Slicing</li>
+<li>Pickling/Caching</li>
+<li>repr</li>
+<li>len</li>
+<li>list</li>
+<li>bool</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">all()</div><div class="line">first()</div><div class="line">last()</div><div class="line">exist()</div></pre></td></tr></table></figure>
+<h5 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h5><ul>
+<li>pk</li>
+<li>model</li>
+</ul>
+<h5 id="复制-实例"><a href="#复制-实例" class="headerlink" title="复制 实例"></a>复制 实例</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">blog = Blog(name=&apos;My blog&apos;, tagline=&apos;Blogging is easy&apos;)</div><div class="line">blog.save() # blog.pk == 1</div><div class="line"></div><div class="line">blog.pk = None</div><div class="line">blog.save() # blog.pk == 2</div><div class="line"></div><div class="line"># 但这个并不拷贝外键？???</div><div class="line">https://docs.djangoproject.com/en/2.0/topics/db/queries/#copying-model-instances</div></pre></td></tr></table></figure>
+<h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 默认查询的是所有字段，但我希望查询部分字段</div><div class="line"># TODO: 阿萨德</div><div class="line"># Distinct</div><div class="line"># OrderBy</div></pre></td></tr></table></figure>
+<h5 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h5><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/queries/#caching-and-querysets" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/queries/#caching-and-querysets</a></p>
+<h4 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h4><p>单个 object 更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">blog.title = &quot;大宝天天见&quot;</div><div class="line">blog.save()</div></pre></td></tr></table></figure>
+<p>批量更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">query.update(headline=F(&apos;blog__name&apos;))</div></pre></td></tr></table></figure>
+<p>一对多的更新（类似于 Set 操作）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">add(obj1, obj2, ...)</div><div class="line">create(**kwargs)</div><div class="line">remove(obj1, obj2, ...)</div><div class="line">clear()</div><div class="line">set(objs)</div></pre></td></tr></table></figure>
+<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><h4 id="聚集查询"><a href="#聚集查询" class="headerlink" title="聚集查询"></a>聚集查询</h4><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/aggregation/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/aggregation/</a></p>
+<h4 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h4><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/search/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/search/</a></p>
+<h3 id="2-2-Model-Instances"><a href="#2-2-Model-Instances" class="headerlink" title="2.2 Model Instances"></a>2.2 Model Instances</h3><p><a href="https://docs.djangoproject.com/en/2.0/ref/models/instances/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/ref/models/instances/</a></p>
+<h3 id="2-3-模型实例"><a href="#2-3-模型实例" class="headerlink" title="2.3 模型实例"></a>2.3 模型实例</h3><h3 id="2-4-迁移机制"><a href="#2-4-迁移机制" class="headerlink" title="2.4 迁移机制"></a>2.4 迁移机制</h3><ol>
+<li>加 INSTALLED_APPS</li>
+</ol>
+<h2 id="0x03-Django-ORM-的高级功能"><a href="#0x03-Django-ORM-的高级功能" class="headerlink" title="0x03 Django ORM 的高级功能"></a>0x03 Django ORM 的高级功能</h2><h3 id="maneger"><a href="#maneger" class="headerlink" title="maneger"></a>maneger</h3><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/managers/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/managers/</a></p>
+<h3 id="raw-sql"><a href="#raw-sql" class="headerlink" title="raw sql"></a>raw sql</h3><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/sql/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/sql/</a></p>
+<h4 id="database-fuction"><a href="#database-fuction" class="headerlink" title="database-fuction"></a>database-fuction</h4><p><a href="https://docs.djangoproject.com/en/2.0/ref/models/database-functions/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/ref/models/database-functions/</a></p>
+<h2 id="0x04-Django-ORM-Under-The-Hood"><a href="#0x04-Django-ORM-Under-The-Hood" class="headerlink" title="0x04 Django ORM Under The Hood"></a>0x04 Django ORM Under The Hood</h2><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-03-09</strong> 重修文字</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/03/31/SQLAlchemyCheatSheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/03/31/SQLAlchemyCheatSheet/" itemprop="url">SQLAlchemyCheatSheet</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-31T17:16:35+08:00">
+                2018-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/后端开发/" itemprop="url" rel="index">
+                    <span itemprop="name">后端开发</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  3,607
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  18
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。</p>
+<p>本笔记于 2018-03-31 开启，SQLAlchemy 版本为 1.2.0。</p>
+<p>Python 圈内三大 ORM SQLAlchemy VS Django ORM VS Peewee</p>
+<ol>
+<li>SQLAlchemy 复杂程度最高，同时，这也意味着 SQLAlchemy 可以做更多的事情。使用 DataMapper 方式实现</li>
+<li>Django ORM 个人最喜欢，使用 ActiveRecord 实现 如果不是因为现在 Flask 项目已经是用了 SQLAlchemy , 否则的话我甚至会考虑将 Django ORM 配置到 Flask 项目中。当然，也有蛋疼的 SqlAlchemy 使用者已经移植给 django 配置了 SQLAlchemy 的库。</li>
+<li>Peewee 没用过，不好评论。以后有机会试试。</li>
+</ol>
+<h2 id="0x01-如何快速上手"><a href="#0x01-如何快速上手" class="headerlink" title="0x01 如何快速上手"></a>0x01 如何快速上手</h2><p>了解一个框架，最好是从下面几处入手：</p>
+<ul>
+<li>官方 Tuorial</li>
+<li>官方 Example</li>
+<li>官方 Guide</li>
+<li>官方 APIDocument</li>
+<li>源码</li>
+</ul>
+<p>对框架掌握越深，就越需要使用者多多从上开始逐渐向下了解。</p>
+<p>其实还有一些途径：</p>
+<ul>
+<li>Github 上面的 issue</li>
+<li>Stack Overflow 的高 vote 常见问题</li>
+<li><strong>如果作者有一些活跃的社区的话，可以火速前往</strong></li>
+</ul>
+<p>鉴于我们的目标在于入手，所以可以火速过一下：</p>
+<ul>
+<li>官方 Tuorial</li>
+<li>官方 Example</li>
+<li>官方 Guide</li>
+<li>Github 上面的 issue</li>
+<li>Stack Overflow 的高 vote 常见问题</li>
+<li><strong>如果作者有一些活跃的社区的话，可以火速前往</strong></li>
+</ul>
+<h2 id="0x02-SQLAlchemy-的基本功能"><a href="#0x02-SQLAlchemy-的基本功能" class="headerlink" title="0x02 SQLAlchemy 的基本功能"></a>0x02 SQLAlchemy 的基本功能</h2><h3 id="2-0-SQLAlchemy-VS-DjangoORM"><a href="#2-0-SQLAlchemy-VS-DjangoORM" class="headerlink" title="2.0 SQLAlchemy VS DjangoORM"></a>2.0 SQLAlchemy VS DjangoORM</h3><p>ORM 通常有 DataMapper 实现和 ActiveRecord 实现两种。</p>
+<p>依照我的经验，ActiveRecord 使用起来的更接近对象 (Object) 的操作，DataMapper 使用起来更接近 (Table) 的操作。</p>
+<blockquote>
+<p>SQLAlchemy 是 DataMapper 模式的实现，在该模式下，session 会暴露出来，即 Model 与 session 并不耦合。</p>
+<p>DjangoORM 是 ActivityRecord 模式的一种实现，在该模式下，session 并不暴露出来，即 Model 与 session 耦合。</p>
+</blockquote>
+<p>使用 Django ORM 的时候，往往是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">b = Blog(**data)</div><div class="line">b.save()</div></pre></td></tr></table></figure>
+<p>使用 SQLAlchemy 的时候，往往是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">b = Blog(**data)</div><div class="line">session.add(b)</div><div class="line">session.session(b)</div></pre></td></tr></table></figure>
+<p>由于 Django 帮你屏蔽了 session 的操作。</p>
+<p>在通常情况下，</p>
+<ol>
+<li>DjangoORM 使用起来更加接近 Object 的操作。</li>
+<li>SQLAlchemy 使用起来更加接近 Table 的操作。</li>
+</ol>
+<p>举个例子，</p>
+<p>一对多，Father 添加两个小孩（其中一个小孩是已经存在的）</p>
+<p>在 DjangoORM 里面， 这里更像是一个 Set 的 add 操作。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">father.children.add(new_child,exsit_child)</div></pre></td></tr></table></figure>
+<p>在 SQLAlchemy 里面，这里更像是一个 table 的 insert 操作。（麻蛋，你要说是一个 list 的 append 操作也行）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">for child in (new_child,exsit_child):</div><div class="line">    if child in father.children:</div><div class="line">        father.children.append(child)</div></pre></td></tr></table></figure>
+<blockquote>
+<p>写 SQLAlchemy 更接近操作放在数据库里面的数据记录，而 DjangoORM 更接近操作一批放在数据库里面的对象。</p>
+</blockquote>
+<p>由于 session 的使用姿势不同，所以往往会有很多使用上面的区别。</p>
+<p>至于孰优孰劣，难以评判。</p>
+<ul>
+<li><p>技术老大 (Flask 和 React 大神）倾向于使用 SQLAlchemy, 他认为</p>
+<ul>
+<li>对于一个技术『知其然，知其所以然』</li>
+<li>对于 ORM<ul>
+<li>操作数据库，操作最好要落实在成 SQL</li>
+<li>如果有可能的话，每一个 SQL 语句都要经过推敲，而且写这个 SQL 和 ORM 过程要反复练习</li>
+</ul>
+</li>
+<li>对于 Migration 机制<ul>
+<li>Alembic 这个迁移工具是为了省事用的，甚至在某些情况下没必要用。完全可以写 SQL 代替</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>我 (Django 和 Vue 弱鸡）倾向于使用 DjangoORM, 我认为</p>
+<ul>
+<li>对于一个技术『先知其大致然，需要深入的时候知其所以然』</li>
+<li>对于 ORM<ul>
+<li>操作数据，最好抽象为对对象的操作。</li>
+<li>测试到位的情况下，快糙狠先出东西。到需要优化的时候该怎么 Profile 怎么 Profile</li>
+</ul>
+</li>
+<li>对于 Migration 机制<ul>
+<li>用起来啊，能操作对象为什么还要强行到数据库操作？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-1-模型定义"><a href="#2-1-模型定义" class="headerlink" title="2.1 模型定义"></a>2.1 模型定义</h3><p>先看一组模型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sqlalchemy.ext.declarative <span class="keyword">import</span> declarative_base</div><div class="line">Base = declarative_base() <span class="comment"># 模型基类</span></div><div class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> Column, Integer, String</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span><span class="params">(Base)</span>:</span></div><div class="line">    __tablename__ = <span class="string">'users'</span></div><div class="line"></div><div class="line">    id = Column(Integer, primary_key=<span class="keyword">True</span>) <span class="comment"># 主键</span></div><div class="line">    name = Column(String)</div><div class="line">    fullname = Column(String)</div><div class="line">    password = Column(String)</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__repr__</span><span class="params">(self)</span>:</span></div><div class="line">       <span class="keyword">return</span> <span class="string">"&lt;User(name='%s', fullname='%s', password='%s')&gt;"</span> % (</div><div class="line">                            self.name, self.fullname, self.password)</div><div class="line">Base.metadata.create_all(engine)</div></pre></td></tr></table></figure>
+<p>可以看出，包含如下的部分：</p>
+<ol>
+<li>Model 与 Model 内部的 Meta</li>
+<li>Field 与 Field 内部的 Options</li>
+<li>Model 与 Model 之间的关系</li>
+<li>其他，比如索引</li>
+</ol>
+<h4 id="Models-与-Meta"><a href="#Models-与-Meta" class="headerlink" title="Models 与 Meta"></a>Models 与 Meta</h4><p><a href="https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685" target="_blank" rel="external">https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685</a></p>
+<h4 id="关系"><a href="#关系" class="headerlink" title="关系"></a>关系</h4><h5 id="One-To-Many"><a href="#One-To-Many" class="headerlink" title="One To Many"></a>One To Many</h5><p>母亲有若干个孩子，外键在孩子上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">class Parent(Base):</div><div class="line">    #...</div><div class="line">    children = relationship(&quot;Child&quot;, backref=&quot;parent&quot;)</div><div class="line"></div><div class="line">class Child(Base):</div><div class="line">    #...</div><div class="line">    parent_id = Column(Integer, ForeignKey(&apos;parent.id&apos;))</div></pre></td></tr></table></figure>
+<h5 id="Many-To-One"><a href="#Many-To-One" class="headerlink" title="Many To One"></a>Many To One</h5><p>多个母亲共享一个孩子，外键在母亲上。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">class Parent(Base):</div><div class="line">    child_id = Column(Integer, ForeignKey(&apos;child.id&apos;))</div><div class="line">    child = relationship(&quot;Child&quot;)</div><div class="line"></div><div class="line">class Child(Base):</div><div class="line">    # ...</div></pre></td></tr></table></figure>
+<h5 id="One-To-One"><a href="#One-To-One" class="headerlink" title="One To One"></a>One To One</h5><p>One to One 是 One to Many 或者是 Many to One 的简化版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"># Many To One</div><div class="line">class Parent(Base):</div><div class="line">    # ...</div><div class="line">    child_id = Column(Integer, ForeignKey(&apos;child.id&apos;))</div><div class="line">    child = relationship(&quot;Child&quot;, backref=backref(&quot;parent&quot;, uselist=False))</div><div class="line"></div><div class="line">class Child(Base):</div><div class="line">    # ...</div><div class="line"></div><div class="line"># One To Many 改 One To One</div><div class="line">class Parent(Base):</div><div class="line">    # ...</div><div class="line"></div><div class="line">class Child(Base):</div><div class="line">    # ...</div><div class="line">    parent_id = Column(Integer, ForeignKey(&apos;parent.id&apos;))</div><div class="line">    parent = relationship(&quot;Parent&quot;, backref=backref(&quot;child&quot;, uselist=False))</div></pre></td></tr></table></figure>
+<h5 id="Many-To-Many"><a href="#Many-To-Many" class="headerlink" title="Many To Many"></a>Many To Many</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">association_table = Table(&apos;association&apos;, Base.metadata,</div><div class="line">    Column(&apos;left_id&apos;, Integer, ForeignKey(&apos;left.id&apos;)),</div><div class="line">    Column(&apos;right_id&apos;, Integer, ForeignKey(&apos;right.id&apos;))</div><div class="line">)</div><div class="line"></div><div class="line">class Parent(Base):</div><div class="line">    # ...</div><div class="line">    children = relationship(&quot;Child&quot;,</div><div class="line">                    secondary=association_table,</div><div class="line">                    backref=&quot;parents&quot;)</div><div class="line"></div><div class="line">class Child(Base):</div><div class="line">    # ...</div></pre></td></tr></table></figure>
+<p>注意事项</p>
+<p>执行删除 mapping 表的时候尽量这样。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">myparent.children.remove(somechild)</div></pre></td></tr></table></figure>
+<p>当你想干掉 somechild 的时候，会执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">session.delete(somechild)</div></pre></td></tr></table></figure>
+<ol>
+<li>假如 Child 没有 ref Parent 的话，Secondary Table 无删除，则无法删除。</li>
+<li>假如 ref 了的话，则删除 secondary 里面的记录。</li>
+<li>TODO</li>
+</ol>
+<h5 id="邻接列表关系"><a href="#邻接列表关系" class="headerlink" title="邻接列表关系"></a>邻接列表关系</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">class Node(Base):</div><div class="line">    __tablename__ = &apos;node&apos;</div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    parent_id = Column(Integer, ForeignKey(&apos;node.id&apos;))</div><div class="line">    data = Column(String(50))</div><div class="line">    children = relationship(&quot;Node&quot;,</div><div class="line">                backref=backref(&apos;parent&apos;, remote_side=[id])</div><div class="line">            )</div></pre></td></tr></table></figure>
+<h5 id="relationship-详解"><a href="#relationship-详解" class="headerlink" title="relationship 详解"></a>relationship 详解</h5><h3 id="2-1-Query"><a href="#2-1-Query" class="headerlink" title="2.1 Query"></a>2.1 Query</h3><h4 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">c1 = Child(name=&quot;苏轼&quot;)</div><div class="line">session.add(c1)</div><div class="line">session.flush()</div><div class="line">p = Parent(name=&quot;苏辙&quot;)</div><div class="line">p.best_child = c1</div><div class="line">for c in [c1,c2,c3,c4]:</div><div class="line">    p.children.append(c)</div><div class="line">session.add(c1)</div><div class="line">session.commit()</div></pre></td></tr></table></figure>
+<h4 id="Retrieve"><a href="#Retrieve" class="headerlink" title="Retrieve"></a>Retrieve</h4><p>过滤</p>
+<p>filter(**kwargs)<br>filter(Singer.name == “周杰伦”)<br>filter(Singer.name =! “周杰棍”)</p>
+<h5 id="跨关系（跨表）查询"><a href="#跨关系（跨表）查询" class="headerlink" title="跨关系（跨表）查询"></a>跨关系（跨表）查询</h5><p>session.query(Entry).join(Blog,Blog.entry_id == Entry.id).filter(Blog.name = “SqlAlchemy CheatSheet”)</p>
+<h5 id="Limit-Offset-分页"><a href="#Limit-Offset-分页" class="headerlink" title="Limit / Offset / 分页"></a>Limit / Offset / 分页</h5><ul>
+<li>limit()</li>
+<li>offset()</li>
+</ul>
+<h5 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">query = session.query(Order) # query = session.query(Order)</div><div class="line">query = query.filter(Order.name.like(f&quot;%name%&quot;))</div></pre></td></tr></table></figure>
+<h5 id="二进制表达式"><a href="#二进制表达式" class="headerlink" title="二进制表达式"></a>二进制表达式</h5><p>我们先 type 一下表达式，找到 eq 的类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">type(model.column_name == <span class="string">'asdf'</span>) → sqlalchemy.sql.elements.BinaryExpression</div></pre></td></tr></table></figure>
+<p>是一个二进制表达式。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 等于</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>)</div><div class="line"><span class="comment"># 不等于</span></div><div class="line">query.filter(User.name != <span class="string">'ed'</span>)</div><div class="line"><span class="comment"># Like（有的数据库不区分大小写）</span></div><div class="line">query.filter(User.name.like(<span class="string">'%ed%'</span>))</div><div class="line"><span class="comment"># ILIKE (case-insensitive LIKE)</span></div><div class="line">query.filter(User.name.ilike(<span class="string">'%ed%'</span>))</div><div class="line"><span class="comment"># IN</span></div><div class="line">query.filter(User.name.in_([<span class="string">'ed'</span>, <span class="string">'wendy'</span>, <span class="string">'jack'</span>]))</div><div class="line"><span class="comment"># Not in</span></div><div class="line">query.filter(~User.name.in_([<span class="string">'ed'</span>, <span class="string">'wendy'</span>, <span class="string">'jack'</span>]))</div><div class="line"><span class="comment"># IS NULL</span></div><div class="line">query.filter(User.name == <span class="keyword">None</span>)</div><div class="line"><span class="comment">## 如果你用了 pep8/linter 的话</span></div><div class="line">query.filter(User.name.is_(<span class="keyword">None</span>))</div><div class="line"><span class="comment"># IS NOT NULL:</span></div><div class="line">query.filter(User.name != <span class="keyword">None</span>)</div><div class="line"><span class="comment">## 如果你用了 pep8/linter 的话</span></div><div class="line">query.filter(User.name.isnot(<span class="keyword">None</span>))</div><div class="line"><span class="comment"># AND</span></div><div class="line"><span class="comment">## use and_()</span></div><div class="line">query.filter(and_(User.name == <span class="string">'ed'</span>, User.fullname == <span class="string">'Ed Jones'</span>))</div><div class="line"><span class="comment">## or send multiple expressions to .filter()</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>, User.fullname == <span class="string">'Ed Jones'</span>)</div><div class="line"><span class="comment">## or chain multiple filter()/filter_by() calls</span></div><div class="line">query.filter(User.name == <span class="string">'ed'</span>).filter(User.fullname == <span class="string">'Ed Jones'</span>)</div><div class="line"><span class="comment"># OR</span></div><div class="line">query.filter(or_(User.name == <span class="string">'ed'</span>, User.name == <span class="string">'wendy'</span>))</div><div class="line"><span class="comment"># MATCH</span></div><div class="line">query.filter(User.name.match(<span class="string">'wendy'</span>))</div></pre></td></tr></table></figure>
+<h5 id="执行查询"><a href="#执行查询" class="headerlink" title="执行查询"></a>执行查询</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">all()</div><div class="line">first()</div><div class="line">one()</div><div class="line">one_or_none()</div><div class="line">scalar()</div></pre></td></tr></table></figure>
+<p>YourModel.query.get((pk1, pk2))</p>
+<h5 id="比较"><a href="#比较" class="headerlink" title="比较"></a>比较</h5><blockquote>
+<p>同一个 Session 下面，取到的某一条数据对应的 objects 应该是一样的？</p>
+</blockquote>
+<h5 id="复制-实例"><a href="#复制-实例" class="headerlink" title="复制 实例"></a>复制 实例</h5><h5 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"># 查询的是 SomeModel 里面所有的字段 即 select *</div><div class="line">query = session.query(SomeModel)</div><div class="line"># 查询的是 SomeModel 里面部分的字段 即 select acol, bcol</div><div class="line">query = session.query(SomeModel.acol,SomeModel.bcol)</div><div class="line"># 即 select acol , bcol</div><div class="line"># alias</div><div class="line">user_alias = aliased(User, name=&apos;user_alias&apos;)</div><div class="line">for row in session.query(user_alias, user_alias.name).all():</div><div class="line">    # 即相当于 select name as name_label</div><div class="line">    print(row.user_alias)</div><div class="line"></div><div class="line"># limit 和 offset</div><div class="line">for u in session.query(User).order_by(User.id)[1:3]:</div><div class="line">    print(u)</div><div class="line"></div><div class="line"># distinct</div><div class="line">session.query(model.Name).distinct(model.Name.value).order_by(model.Name.value)</div><div class="line"># order_by</div><div class="line">User.query.order_by(User.popularity.desc(),User.date_created.desc()).limit(10).all()</div></pre></td></tr></table></figure>
+<h4 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h4><p>单个 object 更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">blog.title = &quot;大宝天天见&quot;</div><div class="line">session.add(blog)</div><div class="line">session.commit()</div></pre></td></tr></table></figure>
+<p>批量更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">session.query.filter(Blog.content.like(&quot;% 敏感词 %&quot;)).update(&#123;</div><div class="line">    Blog.content: &quot;依照相关 XX 无法查看&quot;</div><div class="line">&#125;)</div></pre></td></tr></table></figure>
+<p>一对多的更新</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">append</div></pre></td></tr></table></figure>
+<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><p>query.delete()</p>
+<h4 id="JOIN"><a href="#JOIN" class="headerlink" title="JOIN"></a>JOIN</h4><p><a href="https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query" target="_blank" rel="external">https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query</a></p>
+<h5 id="两表-InnerJoin"><a href="#两表-InnerJoin" class="headerlink" title="两表 InnerJoin"></a>两表 InnerJoin</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> u, a <span class="keyword">in</span> session.query(User, Address).\</div><div class="line">                    filter(User.id==Address.user_id).\</div><div class="line">                    filter(Address.email_address==<span class="string">'jack@google.com'</span>).\</div><div class="line">                    all():</div><div class="line">    print(u)</div><div class="line">    print(a)</div><div class="line"><span class="comment"># &lt;User(name='jack', fullname='Jack Bean', password='gjffdd')&gt;</span></div><div class="line"><span class="comment"># &lt;Address(email_address='jack@google.com')&gt;</span></div></pre></td></tr></table></figure>
+<h5 id="多表-InnerJoin-LeftJoin"><a href="#多表-InnerJoin-LeftJoin" class="headerlink" title="多表 InnerJoin + LeftJoin"></a>多表 InnerJoin + LeftJoin</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">query.outerjoin(User.addresses)   # LEFT OUTER JOIN</div></pre></td></tr></table></figure>
+<h4 id="聚集查询"><a href="#聚集查询" class="headerlink" title="聚集查询"></a>聚集查询</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">session.query(User).filter(User.name.like(&apos;%ed&apos;)).count()</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">from sqlalchemy import func</div><div class="line">session.query(Table.column, func.count(Table.column)).group_by(Table.column).all()</div><div class="line"></div><div class="line">self.session.query(func.count(Table.column1),Table.column1, Table.column2).group_by(Table.column1, Table.column2).all()</div><div class="line"></div><div class="line">from sqlalchemy.sql import func</div><div class="line">session.query(func.avg(Rating.field2).label(&apos;average&apos;)).filter(Rating.url==url_string.netloc)</div></pre></td></tr></table></figure>
+<h4 id="缓存机制"><a href="#缓存机制" class="headerlink" title="缓存机制"></a>缓存机制</h4><p>Query 对象，下文中，我会聊到这个 Query 对象。这里先跳过。</p>
+<h3 id="2-2-原生查询"><a href="#2-2-原生查询" class="headerlink" title="2.2 原生查询"></a>2.2 原生查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">from sqlalchemy import text</div><div class="line"></div><div class="line">sql = text(&apos;select name from penguins&apos;)</div><div class="line">result = db.engine.execute(sql)</div><div class="line">names = []</div><div class="line">for row in result:</div><div class="line">    names.append(row[0])</div><div class="line"></div><div class="line">print names</div><div class="line"></div><div class="line">from collections import namedtuple</div><div class="line"></div><div class="line">Record = namedtuple(&apos;Record&apos;, result.keys())</div><div class="line">records = [Record(*r) for r in result.fetchall()]</div><div class="line">for r in records:</div><div class="line">    print(r)</div><div class="line"></div><div class="line">from sqlalchemy.sql import text</div><div class="line"></div><div class="line">connection = engine.connect()</div><div class="line"></div><div class="line"># recommended</div><div class="line">cmd = &apos;select * from Employees where EmployeeGroup == :group&apos;</div><div class="line">employeeGroup = &apos;Staff&apos;</div><div class="line">employees = connection.execute(text(cmd), group = employeeGroup)</div></pre></td></tr></table></figure>
+<p>get_or_create</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">def get_or_create(session, model, defaults=None, **kwargs):</div><div class="line">    instance = session.query(model).filter_by(**kwargs).first()</div><div class="line">    if instance:</div><div class="line">        return instance, False</div><div class="line">    else:</div><div class="line">        params = dict((k, v) for k, v in kwargs.iteritems() if not isinstance(v, ClauseElement))</div><div class="line">        params.update(defaults or &#123;&#125;)</div><div class="line">        instance = model(**params)</div><div class="line">        session.add(instance)</div><div class="line">        return instance, True</div></pre></td></tr></table></figure>
+<h3 id="2-3-更新查询"><a href="#2-3-更新查询" class="headerlink" title="2.3 更新查询"></a>2.3 更新查询</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">session.query(Stuff).update(&#123;Stuff.foo: Stuff.foo + 1&#125;)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">1) for c in session.query(Stuff).all():</div><div class="line">       c.foo += 1</div><div class="line">   session.commit()</div><div class="line"></div><div class="line">2) session.query().\</div><div class="line">       update(&#123;&quot;foo&quot;: (Stuff.foo + 1)&#125;)</div><div class="line">   session.commit()</div><div class="line"></div><div class="line">3) conn = engine.connect()</div><div class="line">   stmt = Stuff.update().\</div><div class="line">       values(Stuff.foo = (Stuff.foo + 1))</div><div class="line">   conn.execute(stmt)</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">1) user.no_of_logins += 1</div><div class="line">   session.commit()</div><div class="line"></div><div class="line">2) session.query().\</div><div class="line">       filter(User.username == form.username.data).\</div><div class="line">       update(&#123;&quot;no_of_logins&quot;: (User.no_of_logins +1)&#125;)</div><div class="line">   session.commit()</div><div class="line"></div><div class="line">3) conn = engine.connect()</div><div class="line">   stmt = User.update().\</div><div class="line">       values(no_of_logins=(User.no_of_logins + 1)).\</div><div class="line">       where(User.username == form.username.data)</div><div class="line">   conn.execute(stmt)</div><div class="line"></div><div class="line">4) setattr(user, &apos;no_of_logins&apos;, user.no_of_logins+1)</div><div class="line">   session.commit()</div></pre></td></tr></table></figure>
+<h3 id="2-4-删除"><a href="#2-4-删除" class="headerlink" title="2.4 删除"></a>2.4 删除</h3><p><a href="https://stackoverflow.com/questions/5033547/sqlalchemy-cascade-delete" target="_blank" rel="external">https://stackoverflow.com/questions/5033547/sqlalchemy-cascade-delete</a></p>
+<h4 id="OnDelete"><a href="#OnDelete" class="headerlink" title="OnDelete"></a>OnDelete</h4><p>ondelete=’CASCADE’))</p>
+<h4 id="批量操作"><a href="#批量操作" class="headerlink" title="批量操作"></a>批量操作</h4><p>models.User.query.delete()</p>
+<h3 id="如何从-Object-到一个-ORM"><a href="#如何从-Object-到一个-ORM" class="headerlink" title="如何从 Object 到一个 ORM"></a>如何从 Object 到一个 ORM</h3><p>如何追踪 Object 的变化？</p>
+<h2 id="0x03-SQLAlchemy-的高级特性"><a href="#0x03-SQLAlchemy-的高级特性" class="headerlink" title="0x03 SQLAlchemy 的高级特性"></a>0x03 SQLAlchemy 的高级特性</h2><h3 id="表继承"><a href="#表继承" class="headerlink" title="表继承"></a>表继承</h3><p><a href="https://stackoverflow.com/questions/1337095/sqlalchemy-inheritance" target="_blank" rel="external">https://stackoverflow.com/questions/1337095/sqlalchemy-inheritance</a></p>
+<h3 id="啥玩意"><a href="#啥玩意" class="headerlink" title="啥玩意"></a>啥玩意</h3><p>Flush 和 commit</p>
+<p><a href="https://stackoverflow.com/questions/4201455/sqlalchemy-whats-the-difference-between-flush-and-commit" target="_blank" rel="external">https://stackoverflow.com/questions/4201455/sqlalchemy-whats-the-difference-between-flush-and-commit</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">x = Foo(bar=1)</div><div class="line">print x.id</div><div class="line"># None</div><div class="line">session.add(x)</div><div class="line">session.flush()</div><div class="line"># BEGIN</div><div class="line"># INSERT INTO foo (bar) VALUES(1)</div><div class="line"># COMMIT</div><div class="line">print x.id</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">qry = DBSession.query(User).filter(</div><div class="line">        and_(User.birthday &lt;= &apos;1988-01-17&apos;, User.birthday &gt;= &apos;1985-01-17&apos;))</div></pre></td></tr></table></figure>
+<h2 id="0x04-SQLAlchemy-的基础特性-Under-The-Hood"><a href="#0x04-SQLAlchemy-的基础特性-Under-The-Hood" class="headerlink" title="0x04 SQLAlchemy 的基础特性 Under The Hood"></a>0x04 SQLAlchemy 的基础特性 Under The Hood</h2><h3 id="Loading-策略"><a href="#Loading-策略" class="headerlink" title="Loading 策略"></a>Loading 策略</h3><h4 id="Lazy-Loading"><a href="#Lazy-Loading" class="headerlink" title="Lazy Loading"></a>Lazy Loading</h4><h4 id="Eager-Loading"><a href="#Eager-Loading" class="headerlink" title="Eager Loading"></a>Eager Loading</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; from sqlalchemy.dialects import postgresql</div><div class="line">&gt;&gt;&gt; print str(q.statement.compile(dialect=postgresql.dialect()))</div><div class="line">Where q is defined as:</div></pre></td></tr></table></figure>
+<h2 id="0x05-SQLAlchemy-的高级特性-Under-The-Hood"><a href="#0x05-SQLAlchemy-的高级特性-Under-The-Hood" class="headerlink" title="0x05 SQLAlchemy 的高级特性 Under The Hood"></a>0x05 SQLAlchemy 的高级特性 Under The Hood</h2><h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p><a href="https://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy" target="_blank" rel="external">https://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy</a><br><a href="https://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications" target="_blank" rel="external">https://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">https://stackoverflow.com/questions/34322471/sqlalchemy-engine-connection-and-session-difference</div><div class="line">https://stackoverflow.com/questions/11769366/why-is-sqlalchemy-insert-with-sqlite-25-times-slower-than-using-sqlite3-directly</div><div class="line">https://stackoverflow.com/questions/12223335/sqlalchemy-creating-vs-reusing-a-session</div><div class="line">session 是个容器</div><div class="line"></div><div class="line">https://stackoverflow.com/questions/18199053/example-of-what-sqlalchemy-can-do-and-django-orm-cannot</div><div class="line">https://stackoverflow.com/questions/7389759/memory-efficient-built-in-sqlalchemy-iterator-generator</div><div class="line"></div><div class="line"># 日志</div><div class="line">import logging</div><div class="line">logging.basicConfig()</div><div class="line">logging.getLogger(&apos;sqlalchemy.engine&apos;).setLevel(logging.INFO)</div></pre></td></tr></table></figure>
+<h2 id="配置篇"><a href="#配置篇" class="headerlink" title="配置篇"></a>配置篇</h2><p>SQLALCHEMY_TRACK_MODIFICATIONS = False</p>
+<h2 id="0x06-DEBUG-和-Profile-技巧"><a href="#0x06-DEBUG-和-Profile-技巧" class="headerlink" title="0x06 DEBUG 和 Profile 技巧"></a>0x06 DEBUG 和 Profile 技巧</h2><h3 id="6-1-查看技巧"><a href="#6-1-查看技巧" class="headerlink" title="6.1 查看技巧"></a>6.1 查看技巧</h3><p>dict(u)<br>u.<strong>dict</strong></p>
+<p><a href="https://stackoverflow.com/questions/1171166/how-can-i-profile-a-sqlalchemy-powered-application" target="_blank" rel="external">https://stackoverflow.com/questions/1171166/how-can-i-profile-a-sqlalchemy-powered-application</a></p>
+<h2 id="0x07-ORM-的本质"><a href="#0x07-ORM-的本质" class="headerlink" title="0x07 ORM 的本质"></a>0x07 ORM 的本质</h2><p>ORM 的本质是 Data Access Layer 上的一层封装。如果你写原生 SQL, 即手写 DAL 的话，开发效率可能会大打折扣。</p>
+<h3 id="ORM-的两种类型-Active-Record-与-Data-Mappers"><a href="#ORM-的两种类型-Active-Record-与-Data-Mappers" class="headerlink" title="ORM 的两种类型 Active Record 与 Data Mappers"></a>ORM 的两种类型 Active Record 与 Data Mappers</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"># ActiveRecord 风格写起来类似于 Django ORM, 大致是这样的</div><div class="line"></div><div class="line">## AR 的模型定义</div><div class="line"></div><div class="line">class User(db.models):</div><div class="line">    name = db.StringField(verbose=&quot;xyz&quot;)</div><div class="line"></div><div class="line">## AR 的新增</div><div class="line">user = User()</div><div class="line">user.name = &quot;123456&quot;</div><div class="line">user.save() ## 正好对应数据库中的一行</div><div class="line"></div><div class="line">## AR 的查询</div><div class="line"></div><div class="line">users = User.objects.filter(Q(name=&quot;黄老板的小姨子&quot;)).all()</div><div class="line"></div><div class="line"># Data Mappers 风格写起来类似于 SQLAlchemy ORM, 大致是这样的</div><div class="line"></div><div class="line">## SA 的定义</div><div class="line"></div><div class="line">from sqlalchemy.ext.declarative import declarative_base</div><div class="line"></div><div class="line">Base = declarative_base()</div><div class="line"></div><div class="line">from sqlalchemy import Column, Integer, String</div><div class="line">class User(Base):</div><div class="line">    __tablename__ = &apos;users&apos;</div><div class="line"></div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    name = Column(String)</div><div class="line"></div><div class="line">Base.metadata.create_all(engine)</div><div class="line"></div><div class="line">## SA 的新增</div><div class="line"></div><div class="line">user = User()</div><div class="line">user.name = &quot;123456&quot;</div><div class="line">session.add(user)</div><div class="line">sessoon.commit() ## 嗯？其实也是对应数据库中的一行。</div><div class="line"></div><div class="line">## SA 的查询</div><div class="line"></div><div class="line">session.query(User).filter(User.name)</div></pre></td></tr></table></figure>
+<p>问题来了，这两者到底是什么，看起来似乎相差不大。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">class Person:</div><div class="line"></div><div class="line">    lastname</div><div class="line">    firstname</div><div class="line">    children</div><div class="line"></div><div class="line">    # 数据操作</div><div class="line">    def findone(self):</div><div class="line">        pass</div><div class="line"></div><div class="line">    def insert(self):</div><div class="line">        pass</div><div class="line"></div><div class="line">    def update(self):</div><div class="line">        pass</div><div class="line"></div><div class="line">    def delete(self):</div><div class="line">        pass</div><div class="line"></div><div class="line">    # 业务逻辑</div><div class="line">    def getChildrenTax(self):</div><div class="line">        pass</div></pre></td></tr></table></figure>
+<p>lastName firstName numberOfDependents</p>
+<p>insert update delete</p>
+<p>getExemption isFlaggedForAudit getTaxableEarnings</p>
+<p>An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data.</p>
+<p>The essence of an Active Record is a Domain Model (116) in which the classes match very closely the record structure of an underlying database. Each Active Record is responsible for saving and loading to the database and also for any domain logic that acts on the data. This may be all the domain logic in the application, or you may ﬁnd that some domain logic is held in Transaction Scripts (110) with common and data-oriented code in the Active Record.</p>
+<p>The data structure of the Active Record should exactly match that of the database: one ﬁeld in the class for each column in the table. Type the ﬁelds the way the SQL interface gives you the data—don’t do any conversion at this stage. You may consider Foreign Key Mapping (236), but you may also leave the foreign keys as they are. You can use views or tables with Active Record, although updates through views are obviously harder. Views are particularly useful for reporting purposes.</p>
+<p>objects correspond directly to the database tables: an isomorphic schema. If your business logic is complex, you’ll soon want to use your object’s direct relationships, collections, inheritance, and so forth. These don’t map easily onto Active Record, and adding them piecemeal gets very messy. That’s what will lead you to use Data Mapper (165) instead.</p>
+<p>Another argument against Active Record is the fact that it couples the object design to the database design. This makes it more difﬁcult to refactor either design as a project goes forward.</p>
+<p>Active Record is a good pattern to consider if you’re using Transaction Script (110) and are beginning to feel the pain of code duplication and the difﬁculty in updating scripts and tables that Transaction Script (110) often brings. In this case you can gradually start creating Active Records and then slowly refactor behavior into them. It often helps to wrap the tables as a Gateway (466) ﬁrst, and then start moving behavior so that the tables evolve to a Active Record.</p>
+<p>其实为什么不选择设计成 ActiveRecord , 而是选择设计成 Data Mapper, 其实就可以回答这个问题：</p>
+<blockquote>
+<p>虽然要设计成 ORM, 考虑到数量和性能因素，SQL 数据库（多个表）并不应该是表现像 Object 集合那样（换言之，也就是 AR 表现的像 Object 的集合一样）。<br>同时，出于更好的抽象，object 集合也应该表现的像表以及行</p>
+</blockquote>
+<p>于是我们可以得出结论，可以在 SQLAlchemy 上面进行一定的封装，使得最后用起来非常的 Django ORM like，其实 SQLAlchemy 稍加定制还是可以很 Django ORM-like 的。</p>
+<p>:TODO: 有机会看看那本书再修改一下本小节</p>
+<p>这不，果然有人就这么搞了 <a href="https://github.com/absent1706/sqlalchemy-mixins" target="_blank" rel="external">https://github.com/absent1706/sqlalchemy-mixins</a></p>
+<h2 id="0x07-其他"><a href="#0x07-其他" class="headerlink" title="0x07 其他"></a>0x07 其他</h2><h3 id="SQL-注入"><a href="#SQL-注入" class="headerlink" title="SQL 注入"></a>SQL 注入</h3><p>session.query(MyClass).filter(“foo={}”.format(getArgs[‘val’]))</p>
+<h2 id="0x02-SQLAlchemy-及其生态"><a href="#0x02-SQLAlchemy-及其生态" class="headerlink" title="0x02 SQLAlchemy 及其生态"></a>0x02 SQLAlchemy 及其生态</h2><p>如果用上 Flask+SQLAlchemy 一般也要带上，Flask-Migration 与 Flask-SQLAlchemy, 这两个库也是对 Alembic 和 SQLAlchemy 的浅封装。</p>
+<h3 id="如何快速上手-ORM"><a href="#如何快速上手-ORM" class="headerlink" title="如何快速上手 ORM"></a>如何快速上手 ORM</h3><p>那么，对于这个 ORM 库还有那些通用性的知识需要了解？</p>
+<p>嗯，是时候了解本质了。</p>
+<p><a href="http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/" target="_blank" rel="external">http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/</a></p>
+<h2 id="0xFF-Glossary"><a href="#0xFF-Glossary" class="headerlink" title="0xFF Glossary"></a>0xFF Glossary</h2><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<li><a href="https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/" target="_blank" rel="external">https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/</a></li>
+<li><a href="https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create" target="_blank" rel="external">https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create</a></li>
+<li>除了文档本身，作者在 Stack Overflow 上的回答都是非常值得阅读的。<a href="https://stackoverflow.com/users/34549/zzzeek" target="_blank" rel="external">https://stackoverflow.com/users/34549/zzzeek</a></li>
+<li>Patterns of Enterprise Application Architecture - Martin Fowler</li>
+<li><p><a href="http://aosabook.org/en/sqlalchemy.html" target="_blank" rel="external">http://aosabook.org/en/sqlalchemy.html</a></p>
+<p>  <a href="http://techspot.zzzeek.org/" target="_blank" rel="external">http://techspot.zzzeek.org/</a></p>
+</li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-03-09</strong> 重修文字</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/03/09/Flask文档阅读笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1706,1202 +3108,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/22/YaDjangoBlog开发环境配置/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/22/YaDjangoBlog开发环境配置/" itemprop="url">YaDjangoBlog 开发环境配置</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-22T10:13:30+08:00">
-                2018-02-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">后端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3,000
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  13
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文是 Django 全栈开发教程的第一篇，上一篇是第零篇，目录会随时更新，地址在这里 2018 年不容错过的 Django 全栈项目 <a href="https://zhuanlan.zhihu.com/p/33903527" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33903527</a></p>
-<blockquote>
-<p>为什么是第零篇，因为程序员从零计数呀。笑~~</p>
-</blockquote>
-<p>本文需要完成两件事情：</p>
-<ul>
-<li>配置基本的开发环境</li>
-<li>让代码先运行一下</li>
-</ul>
-<p>如果你使用的 macOS, 那么可以跟着下文一步一步走。如果是 linux/window 用户，可能稍微需要在配置环境上多花点时间。</p>
-<blockquote>
-<p>本文默认你至少会在 iTerm2 下面使用基本的 bash 命令与 git , 如果使用的 ohmyzsh 就更好了。 建议先参考请查看我之前的文章里面的配置环境 如何优雅地使用 macOS <a href="https://zhuanlan.zhihu.com/p/29892969" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/29892969</a></p>
-</blockquote>
-<h2 id="0x01-Python-开发环境配置"><a href="#0x01-Python-开发环境配置" class="headerlink" title="0x01 Python 开发环境配置"></a>0x01 Python 开发环境配置</h2><p>本小节的目的就是配置好基本的 python 开发环境</p>
-<p>使用了神器 pyenv</p>
-<blockquote>
-<p>BTW: 为什么不直接用 pipenv ? 因为网络不通畅，如若不然，pipenv 比 pyenv 更适合用来做 python 依赖包管理。</p>
-</blockquote>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 新开终端</span></div><div class="line">git clone https://github.com/yyuu/pyenv.git ~/.pyenv</div><div class="line">git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv</div><div class="line">echo <span class="string">'export PYENV_ROOT="$HOME/.pyenv"'</span> &gt;&gt; ~/.zshrc</div><div class="line">echo <span class="string">'export PATH="$PYENV_ROOT/bin:$PATH"'</span> &gt;&gt; ~/.zshrc</div><div class="line">echo <span class="string">'eval "$(pyenv init -)"'</span> &gt;&gt; ~/.zshrc</div><div class="line">echo <span class="string">'eval "$(pyenv virtualenv-init -)"'</span> &gt;&gt; ~/.zshrc</div><div class="line"></div><div class="line"><span class="comment"># 接着另开终端</span></div><div class="line"><span class="comment"># 不喜写兼容代码，所有代码均向 3.5+ 靠拢</span></div><div class="line">v=<span class="number">3.5</span><span class="number">.2</span>|wget http://mirrors.sohu.com/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/;pyenv install $v</div><div class="line">v=<span class="number">3.6</span><span class="number">.0</span>|wget http://mirrors.sohu.com/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/;pyenv install $v</div><div class="line">v=<span class="number">2.7</span><span class="number">.11</span>|wget http://mirrors.sohu.com/python/$v/Python-$v.tar.xz -P ~/.pyenv/cache/;pyenv install $v</div><div class="line"></div><div class="line"><span class="comment"># 设置 Global Python 为 2.7.11, 备注：尽量不要把 Py3 设置为全局，否则由于 Homebrew 本身有一些依赖是依赖于 Py2 的，这样容易出现一些奇怪的问题。</span></div><div class="line">pyenv <span class="keyword">global</span> <span class="number">2.7</span><span class="number">.11</span></div><div class="line">pip install -i https://pypi.doubanio.com/simple requests</div><div class="line"><span class="comment"># 下面这个是用于安装基本的代码补全功能</span></div><div class="line">pip install -i https://pypi.doubanio.com/simple --upgrade <span class="string">"jedi&gt;=0.9.0"</span> <span class="string">"json-rpc&gt;=1.8.1"</span> <span class="string">"service_factory&gt;=0.1.5"</span> flake8 pytest autoflake hy</div><div class="line"></div><div class="line"><span class="comment"># 创建最常用 Py3 虚拟环境</span></div><div class="line">pyenv virtualenv <span class="number">3.5</span><span class="number">.2</span> py3-daily</div><div class="line">pyenv activate py3-daily</div><div class="line">pip install -i https://pypi.doubanio.com/simple requests</div><div class="line">pip install -i https://pypi.doubanio.com/simple beatutifulsoup4</div><div class="line">pip install -i https://pypi.doubanio.com/simple ipython[notebook]</div><div class="line">pip install -i https://pypi.doubanio.com/simple jupyter</div><div class="line"><span class="comment"># 下面这个是用于安装基本的代码补全功能</span></div><div class="line">pip install -i https://pypi.doubanio.com/simple --upgrade <span class="string">"jedi&gt;=0.9.0"</span> <span class="string">"json-rpc&gt;=1.8.1"</span> <span class="string">"service_factory&gt;=0.1.5"</span> flake8 pytest autoflake hy</div></pre></td></tr></table></figure>
-<p>好，Python 环境就安装完毕了。</p>
-<h2 id="0x02-JavaScript-开发环境配置"><a href="#0x02-JavaScript-开发环境配置" class="headerlink" title="0x02 JavaScript 开发环境配置"></a>0x02 JavaScript 开发环境配置</h2><blockquote>
-<p>本小节的目的就是配置好基本的 JS 开发环境，但估计 JSer 看了本小节依旧可以在配置上少一些麻烦。</p>
-</blockquote>
-<p>JS 可以前后端通吃，社区生态很丰富。ES6 之后从 python 和 ruby 里面借鉴了不少语法糖。现在写起来还是比较愉悦的。</p>
-<p>JavaScript 不管开发前端应用还是后端应用，都需要安装 node 环境。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 先安装 nvm</span></div><div class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash</div><div class="line"><span class="comment"># 新开终端</span></div><div class="line">nvm install 8</div><div class="line">nvm use 8</div><div class="line">nvm <span class="built_in">alias</span> default 8</div><div class="line"></div><div class="line">npm install cnpm</div><div class="line">cnpm install yarn -g</div><div class="line"><span class="comment"># 设置镜像</span></div><div class="line">yarn config <span class="built_in">set</span> registry https://registry.npm.taobao.org</div></pre></td></tr></table></figure>
-<p>编辑 ~/.npmrc 配置文件，输入下文再配置各种奇奇怪怪的镜像地址。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">registry=https://registry.npm.taobao.org/</div><div class="line">chromedriver_cdnurl=http://cdn.npm.taobao.org/dist/chromedriver</div><div class="line">disturl=https://npm.taobao.org/dist</div><div class="line">operadriver_cdnurl=http://cdn.npm.taobao.org/dist/operadriver</div><div class="line">phantomjs_cdnurl=http://cdn.npm.taobao.org/dist/phantomjs</div><div class="line">fse_binary_host_mirror=https://npm.taobao.org/mirrors/fsevents</div><div class="line">sass_binary_site=http://cdn.npm.taobao.org/dist/node-sass</div><div class="line">electron_mirror=http://cdn.npm.taobao.org/dist/electron/</div></pre></td></tr></table></figure>
-<p>配置完毕</p>
-<h2 id="0x03-Docker-安装与配置"><a href="#0x03-Docker-安装与配置" class="headerlink" title="0x03 Docker 安装与配置"></a>0x03 Docker 安装与配置</h2><blockquote>
-<p>本小节主要解决一个最蛋疼的问题，就是网络问题</p>
-</blockquote>
-<p>下载并安装 docker for mac 地址如下 <a href="https://docs.docker.com/docker-for-mac/install/" target="_blank" rel="external">https://docs.docker.com/docker-for-mac/install/</a></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 安装成功后运行命令</span></div><div class="line">docker run hello-world</div></pre></td></tr></table></figure>
-<p>如果一切正常，则会显示如下</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line">$ docker run hello-world</div><div class="line">Unable to find image <span class="string">'hello-world:latest'</span> locally</div><div class="line">latest: Pulling from library/hello-world</div><div class="line">ca4f61b1923c: Pull complete</div><div class="line">Digest: sha256:083de497cff944f969d8499ab94f07134c50bcf5e6b9559b27182d3fa80ce3f7</div><div class="line">Status: Downloaded newer image <span class="keyword">for</span> hello-world:latest</div><div class="line"></div><div class="line">Hello from Docker!</div><div class="line">This message shows that your installation appears to be working correctly.</div><div class="line"></div><div class="line">To generate this message, Docker took the following steps:</div><div class="line"> 1. The Docker client contacted the Docker daemon.</div><div class="line"> 2. The Docker daemon pulled the <span class="string">"hello-world"</span> image from the Docker Hub.</div><div class="line">    (amd64)</div><div class="line"> 3. The Docker daemon created a new container from that image <span class="built_in">which</span> runs the</div><div class="line">    executable that produces the output you are currently reading.</div><div class="line"> 4. The Docker daemon streamed that output to the Docker client, <span class="built_in">which</span> sent it</div><div class="line">    to your terminal.</div><div class="line"></div><div class="line">To try something more ambitious, you can run an Ubuntu container with:</div><div class="line"> $ docker run -it ubuntu bash</div><div class="line"></div><div class="line">Share images, automate workflows, and more with a free Docker ID:</div><div class="line"> https://cloud.docker.com/</div><div class="line"></div><div class="line">For more examples and ideas, visit:</div><div class="line"> https://docs.docker.com/engine/userguide/</div></pre></td></tr></table></figure>
-<p>好，配置到这里。</p>
-<p>你以为你已经配置好了，还先别激动，网络问题还没解决呢。小的镜像可以直接从 Docker 上直接拖下来，几百兆的镜像可就没这么容易了。</p>
-<p>这里我们使用了阿里云的 Docker 容器镜像。</p>
-<p>登录阿里云，到控制台，找到容器镜像服务，镜像加速器，</p>
-<p>如下图：</p>
-<p>右键点击桌面顶栏的 docker 图标，选择 Preferences ，在 Daemon 标签（Docker 17.03 之前版本为 Advanced 标签）下的 Registry mirrors 列表中将 <a href="https://your-url.mirror.aliyuncs.com" target="_blank" rel="external">https://your-url.mirror.aliyuncs.com</a> 加到”registry-mirrors”的数组里，点击 Apply &amp; Restart 按钮，等待 Docker 重启并应用配置的镜像加速器。</p>
-<p>Docker 配置完毕。</p>
-<h2 id="0x04-项目试运行"><a href="#0x04-项目试运行" class="headerlink" title="0x04 项目试运行"></a>0x04 项目试运行</h2><p>运行项目之前，保持你我的工作环境基本一致</p>
-<ul>
-<li>创建一些必须的目录</li>
-<li>clone 项目</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">mkdir -p ~/Codes/YaB<span class="built_in">log</span>/DockerVolume/YaDjangoB<span class="built_in">log</span>/PostgreSQL/data</div><div class="line">mkdir -p ~/Codes/YaB<span class="built_in">log</span>/DockerVolume/YaDjangoB<span class="built_in">log</span>/Redis/data</div><div class="line">mkdir -p ~/Codes/YaB<span class="built_in">log</span>/DockerVolume/YaDjangoB<span class="built_in">log</span>/Backups</div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/</div><div class="line">git <span class="built_in">clone</span> git@github.com:twocucao/YaVueBlog.git</div><div class="line">git <span class="built_in">clone</span> git@github.com:twocucao/YaDjangoBlog.git</div></pre></td></tr></table></figure>
-<p>克隆下来项目之后还需要稍微折腾一下（没办法，CURD 开发 = 折腾折腾折腾 + 搬砖搬砖搬砖）</p>
-<ul>
-<li>运行 Vue 开发环境</li>
-<li>运行 Docker 化的 django 环境</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 新开一个终端 用于运行 Vue 应用</span></div><div class="line"><span class="comment"># 前端环境不放在 Docker 环境中。（因为开发环境没必要，生产环境才需要）</span></div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaVueB<span class="built_in">log</span>/ &amp;&amp; yarn &amp;&amp; <span class="built_in">cd</span> -</div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaVueB<span class="built_in">log</span>/packages/theme-future/ &amp;&amp; yarn &amp;&amp; <span class="built_in">cd</span> -</div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaVueB<span class="built_in">log</span>/</div><div class="line">npm run build:theme</div><div class="line">npm run dev</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 新开一个终端</span></div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make</div></pre></td></tr></table></figure>
-<p>看到下图，包含所有的命令。</p>
-<p>这是我用 Makefile 编写的一系列命令，方便我在开发过程将主要的精力花在业务逻辑上而不是花时间在强记大量的琐碎的命令。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make build-all</div><div class="line"><span class="comment"># 等待运行后端所有组件</span></div></pre></td></tr></table></figure>
-<p>然后，读者可以先去泡杯咖啡点个外卖吃个饭之类的。等待构建完毕。</p>
-<p>需要注意的是，务必配置好 docker 镜像加速地址，否则根据国内情况，你可能需要多去泡几杯咖啡，多吃几顿饭。</p>
-<p>好，接下来我们运行后端程序，首次运行需要花费不少时间</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make django-just-up</div></pre></td></tr></table></figure>
-<p>运行之后，终端结果如下：</p>
-<p>可以发现，服务已经都开始启动了。</p>
-<p>但不要冲动，先等等，因为一次开了如下的服务：</p>
-<ul>
-<li>postgres</li>
-<li>redis</li>
-<li>elasticsearch</li>
-<li>mailhog</li>
-<li>django</li>
-<li>celerybeat</li>
-<li>celeryworker</li>
-<li>celeryflower</li>
-</ul>
-<p>需要多等会儿时间到各个服务运行正常。直到出现下图：</p>
-<p>这意味着基本上所有的程序都运行正常了。如果有服务挂掉，欢迎到 github 的 issue 上提一下。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 接着再新开一个终端 用于导入基础数据</span></div><div class="line"><span class="built_in">cd</span> ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/</div><div class="line">make django-import-articles</div></pre></td></tr></table></figure>
-<p>好，那么，我们来验证一下如下几个地址：</p>
-<ul>
-<li>接口地址 <a href="http://localhost:8000/api/v1/archive" target="_blank" rel="external">http://localhost:8000/api/v1/archive</a></li>
-<li>Vue 地址 <a href="http://localhost:8080/" target="_blank" rel="external">http://localhost:8080/</a></li>
-<li>在搜索框内输入 elasticsearch 查看接口是否正常返回数据</li>
-<li>查看 celery 的 task 是否正确</li>
-</ul>
-<p>如果一切正常，则所有的截图应该如下</p>
-<h2 id="0x05-Tmux-和-Tmuxinator"><a href="#0x05-Tmux-和-Tmuxinator" class="headerlink" title="0x05 Tmux 和 Tmuxinator"></a>0x05 Tmux 和 Tmuxinator</h2><p>我们在上文中可以发现有个极其蛋疼菊紧的问题。</p>
-<p>当我们运行 make django-just-up 这个命令的时候，所有服务运行的同时，所有的标准输入都打印到一个终端。</p>
-<p>这个和我们日常开发不太相同</p>
-<ol>
-<li>在 django 开发的时候，我们运行 runserver, 肯定是只想在那个终端里看到 runserver 的运行情况。而不是 Redis,Elasticsearch,PGsql 之类的 log。</li>
-<li>并且，django 的热加载会有些小问题，有些错误只能 ctrl+c 关掉 runserver, 然后重启。但当我们想 ctrl+c 关掉 runserver 的时候，却把所有的的服务都关掉了。</li>
-</ol>
-<p>解决方式也简单：</p>
-<p>对于暂时不想在开发时看到日志的服务，干脆直接放后台运行，执行我封装的命令 make django-before-up 把部分服务直接放在后台里，然后再开四个终端，运行下面的命令。</p>
-<ul>
-<li>make django-runserver # 运行 runserver , 并只把该容器的 log 打印出来。下面三者同上。</li>
-<li>make django-celerybeat</li>
-<li>make django-celeryworker</li>
-<li>make django-celeryflower</li>
-</ul>
-<p>显然还是很麻烦，我这种懒人可是能少写几行代码就少些几行代码的。</p>
-<p>那么我们还可以更省事（懒一些）么？</p>
-<p>我之前写了一篇简单的 tmux 与 Tmuxinator 教程 <a href="https://zhuanlan.zhihu.com/p/33369297" target="_blank" rel="external">https://zhuanlan.zhihu.com/p/33369297</a> , 具体配置步骤参考文中即可。</p>
-<p>配置好 Tmuxinator 之后</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 先软连接一下</span></div><div class="line">ln -svf ~/Codes/YaB<span class="built_in">log</span>/YaDjangoB<span class="built_in">log</span>/yadjangoblog.yml ~/.tmuxinator/yadjangoblog.yml</div></pre></td></tr></table></figure>
-<p>当我需要运行的所有服务的时候，我只需要</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">tmuxinator start yadjangoblog</div></pre></td></tr></table></figure>
-<p>就可以开启所有命令。</p>
-<p>yadjangoblog.yml 的内容如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">windows:</div><div class="line">  - &quot;前端-页面开发&quot;:</div><div class="line">      root: ~/Codes/YaBlog/YaVueBlog/</div><div class="line">      layout: main-vertical</div><div class="line">      panes:</div><div class="line">        - &quot;前端页面 DEV&quot;:</div><div class="line">          - &quot;npm run dev&quot;</div><div class="line">  - &quot;前端-CSS 与字体文件&quot;:</div><div class="line">      root: ~/Codes/YaBlog/YaVueBlog/</div><div class="line">      layout: main-vertical</div><div class="line">      panes:</div><div class="line">        - &quot;npm run dev:theme&quot;</div><div class="line">        - &quot;npm run dev:iconfont&quot;</div><div class="line">  - &quot;后端-Django 及其服务&quot;:</div><div class="line">      root: ~/Codes/YaBlog/YaDjangoBlog/</div><div class="line">      layout: main-vertical</div><div class="line">      panes:</div><div class="line">        - &quot;make django-before-up &amp;&amp; make django-runserver&quot;</div><div class="line">  - &quot;后端-数据库相关&quot;:</div><div class="line">      layout: main-vertical</div><div class="line">      root: ~/Codes/YaBlog/YaDjangoBlog/</div><div class="line">      panes:</div><div class="line">        - &quot;sleep 20 &amp;&amp; make dbshell&quot;</div><div class="line">        - &quot;sleep 20 &amp;&amp; make shell&quot;</div><div class="line">  - &quot;后端-Celery&quot;:</div><div class="line">      layout: main-vertical</div><div class="line">      root: ~/Codes/YaBlog/YaDjangoBlog/</div><div class="line">      panes:</div><div class="line">        - &quot;sleep 20 &amp;&amp; make django-celerybeat&quot;</div><div class="line">        - &quot;sleep 20 &amp;&amp; make django-celeryworker&quot;</div></pre></td></tr></table></figure>
-<h2 id="0x06-PyCharm-基本设置"><a href="#0x06-PyCharm-基本设置" class="headerlink" title="0x06 PyCharm 基本设置"></a>0x06 PyCharm 基本设置</h2><blockquote>
-<p>大家应该都用 PyCharm 进行开发了吧。 如果是的话，不看本小节可能会让你栽个跟头</p>
-</blockquote>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 这步是给 pycharm 打开代码做准备</span></div><div class="line">pyenv activate py3-daily</div><div class="line">pip install -i https://pypi.doubanio.com/simple -r requirements/local.txt</div></pre></td></tr></table></figure>
-<p>务必完成下面两个步骤</p>
-<ol>
-<li>在 Preferences -&gt; project -&gt; interpreter 选择对应的 py3-daily 虚拟环境。</li>
-<li>在侧边栏把 yadjangoblog , 注意小写的。右键标记为 sources root</li>
-</ol>
-<p>这样的标记相当于告诉 PyCharm , 这个项目的 PYTHONPATH 是 yadjangoblog/ , 否则使用 PyCharm 导入 AModel 会自动导入 from yadjangoblog.yaadmin.models from AModel 而不是 from yaadmin.models import AModel , 这会导致程序运行错误。</p>
-<blockquote>
-<p>PS: 包括后面跑单元测试的时候，均手动设置了 PYTHONPATH 变量。</p>
-</blockquote>
-<h2 id="0x07-开发流程"><a href="#0x07-开发流程" class="headerlink" title="0x07 开发流程"></a>0x07 开发流程</h2><p>本小节，从笔者开机开始，回顾一下环境配置好之后，笔者是如何进入开发状态的：</p>
-<ol>
-<li>开机。输入密码进入桌面。</li>
-<li>打开 Iterm, 运行 tmuxinator start yadjangoblog 开启项目。打开 PyCharm 和 WebStorm</li>
-<li>开发<ul>
-<li>在 WebStorm 中写写前端代码，在 <a href="http://localhost:8080" target="_blank" rel="external">http://localhost:8080</a> 和 tmux 里的第一个 window 查看状态</li>
-<li>在 PyCharm 中写写后端代码，在第三个 window 查看 runserver 状态，在第四个 window 的两个 Panel 运行 python manage.py 相关命令。</li>
-<li>在 Chrome Elasticsearch Head 扩展里调试 Elasticsearch 语法</li>
-<li>在 <a href="http://localhost:8000/api/your-api-path" target="_blank" rel="external">http://localhost:8000/api/your-api-path</a> 里调试前后端 API</li>
-<li>在 <a href="http://localhost:5555" target="_blank" rel="external">http://localhost:5555</a> 通过 flower 查看相关</li>
-<li>…..</li>
-<li>当然，你也可以新开一个终端里面，执行 make 查看相关还可以执行哪些命令。</li>
-</ul>
-</li>
-</ol>
-<p>那么，具体执行这些命令背后究竟发生了什么？</p>
-<ul>
-<li>数十服务为何突然启动</li>
-<li>数百个任务为何半夜消失</li>
-<li>正常运行的服务为何屡屡崩溃</li>
-<li>这一切的背后！是工程师的人性扭曲还是码畜的道德沦丧？是内存的爆发还是处理器的无奈？</li>
-<li>敬请关注本专栏 『MG 的编程小屋』或者 Github 频道，让我们跟随教程走进全干工程师的代码世界。</li>
-</ul>
-<blockquote>
-<p>不好意思，顺手打了个硬广，防止别人把我的文章砍头去尾直接扒过去。</p>
-</blockquote>
-<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，点赞后，快上车吧</p>
-<ul>
-<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
-<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
-</ul>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2018-02-22</strong> 重修文字</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/21/FullStackDjangoDevOps/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/21/FullStackDjangoDevOps/" itemprop="url">2018 年不容错过的 Django 全栈项目</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-21T10:13:30+08:00">
-                2018-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">后端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,386
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><blockquote>
-<p>写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。</p>
-</blockquote>
-<p>这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。</p>
-<p>为什么写这系列的文章呢？目的总的来说有两个：</p>
-<ol>
-<li>一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。</li>
-<li>二是希望借由这个持续更新的过程让自己更加深入理解 Django 技术栈 Django / DjangoRestFramework / Docker / Vue.JS / Celery / PostgreSQL / Redis / RabbitMQ</li>
-</ol>
-<p>为什么说这个项目你不容错过？</p>
-<ul>
-<li>新！新！新！保持最新的软件开发版本，E.G: Django 2.0 + Vue.JS 2.5 + PostgreSQL 10 + Celery 4.1.0</li>
-<li>Django 框架：Django 及其 强大的生态圈</li>
-<li>后端组件：PostgreSQL RabbitMQ Redis Ngnix</li>
-<li>前端技术：单页应用 前后端分离 (VueJS+Webpack+DjangoRestFramework), 自动化部署</li>
-<li>Django 社区最佳实践：从配置 / 开发 / 测试 / 部署 <strong>全干</strong>工程师 (Full Stuff Engineer) 的最新的 DevOps 思考成果。</li>
-<li>基本覆盖了进阶 Django 开发所需要的各种组件与操作。</li>
-<li>只需要适当的调整，本项目就可以成为你新开项目的最佳脚手架。</li>
-</ul>
-<p>本系列文章的面向读者：</p>
-<ul>
-<li>目标是 DevOps 的 Pythonist</li>
-<li>爱瞎几把折腾的 Pythonist</li>
-<li>前后端分离的实践者</li>
-</ul>
-<blockquote>
-<p>生命苦短，赶快上车</p>
-<p>Life is Short , I Use Python</p>
-</blockquote>
-<h2 id="0x01-项目介绍"><a href="#0x01-项目介绍" class="headerlink" title="0x01 项目介绍"></a>0x01 项目介绍</h2><p>YaDjangoBlog 是另一个关于博客的轮子，但是其野心并不在于仅仅多造一个博客系统，还有通过本项目做 Django 全栈开发的最佳实践。</p>
-<h3 id="1-1-项目地址"><a href="#1-1-项目地址" class="headerlink" title="1.1 项目地址"></a>1.1 项目地址</h3><ul>
-<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
-<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
-</ul>
-<h3 id="1-2-项目技术栈"><a href="#1-2-项目技术栈" class="headerlink" title="1.2 项目技术栈"></a>1.2 项目技术栈</h3><ul>
-<li>开发与部署环境为 Docker</li>
-<li>Python 3.5.2</li>
-<li>前端 Vue + Webpack + ES2015 + axios</li>
-<li>后端 <a href="https://github.com/django/django" target="_blank" rel="external">Django 2.0</a> + <a href="https://github.com/tomchristie/django-rest-framework/" target="_blank" rel="external">DjangoRestFramework</a> + Celery</li>
-<li>自动化部署选用工具 Ansible 以及 Docker</li>
-<li>后端组件<ul>
-<li>ElasticSearch 用于搜索和推荐</li>
-<li>PostgreSQL 用于数据持久化</li>
-<li>Redis 用于 Session / 和缓存</li>
-<li>RabbitMQ 分布式队列 / 定时任务</li>
-<li>Nginx 用于反向代理</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-3-特别感谢"><a href="#1-3-特别感谢" class="headerlink" title="1.3 特别感谢"></a>1.3 特别感谢</h3><ul>
-<li>ansible django stack: <a href="https://github.com/jcalazan/ansible-django-stack" target="_blank" rel="external">https://github.com/jcalazan/ansible-django-stack</a></li>
-<li>cookiecutter-django: <a href="https://github.com/pydanny/cookiecutter-django" target="_blank" rel="external">https://github.com/pydanny/cookiecutter-django</a></li>
-<li>djangopackages: <a href="https://github.com/djangopackages/djangopackages" target="_blank" rel="external">https://github.com/djangopackages/djangopackages</a></li>
-<li>董伟明 关于 ElasticSearch 的几篇文章 <a href="http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/" target="_blank" rel="external">http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/</a></li>
-<li>各个组件的开发者们<ul>
-<li>ElasticSearch</li>
-<li>PostgreSQL</li>
-<li>Redis</li>
-<li>RabbitMQ</li>
-<li>Nginx</li>
-<li>Docker</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-4-项目截图"><a href="#1-4-项目截图" class="headerlink" title="1.4 项目截图"></a>1.4 项目截图</h3><p>好，讲了半天有的没的，还是贴点图吧，毕竟我不是 Markdown 程序员</p>
-<blockquote>
-<p>我们先看看能看得见的前端页面</p>
-</blockquote>
-<p>主页</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&amp;h=1822&amp;f=png&amp;s=1504757" alt=""></p>
-<p>博客详情</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&amp;h=1846&amp;f=png&amp;s=1021166" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&amp;h=1804&amp;f=png&amp;s=1016132" alt=""></p>
-<p>这是一个很普通的 Archive 页面</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&amp;h=1818&amp;f=png&amp;s=425859" alt=""></p>
-<p>这是以 Elasticsearch 为支持的 搜索功能</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&amp;h=1840&amp;f=png&amp;s=1582839" alt=""></p>
-<p>Django 自带后台</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&amp;h=1768&amp;f=png&amp;s=365303" alt=""></p>
-<p>前后端分离怎么能少的了 rest api 的实现与便捷的前端调试？</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&amp;h=1840&amp;f=png&amp;s=486772" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a" alt=""></p>
-<p>Django Debug Tools 帮你迅速调优接口</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&amp;h=1838&amp;f=png&amp;s=735083" alt=""></p>
-<blockquote>
-<p>我们再先看看能看得见的开发界面</p>
-</blockquote>
-<p>在终端执行 tmuxinator start yavueblog 就可以自动运行所有任务</p>
-<p>前端运行状态</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&amp;h=2054&amp;f=png&amp;s=539522" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&amp;h=2054&amp;f=png&amp;s=2446065" alt=""></p>
-<p>后端运行状态<br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&amp;h=2054&amp;f=png&amp;s=3296514" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&amp;h=2054&amp;f=png&amp;s=2720324" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&amp;h=2054&amp;f=png&amp;s=3932296" alt=""></p>
-<p>当然，你可以直接用客户端连接到对应的服务商检查组件的运行状态</p>
-<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&amp;h=1430&amp;f=png&amp;s=640103" alt=""><br><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&amp;h=1126&amp;f=png&amp;s=532337" alt=""></p>
-<h2 id="0x02-系列教程目录"><a href="#0x02-系列教程目录" class="headerlink" title="0x02 系列教程目录"></a>0x02 系列教程目录</h2><h3 id="2-1-教程注意项"><a href="#2-1-教程注意项" class="headerlink" title="2.1 教程注意项"></a>2.1 教程注意项</h3><ol>
-<li>本文的开发环境配置仅仅限于 macOS 上，如果读者使用的是 Windows / 可能需要自己搞定环境的配置。不过笔者使用了 Docker 进行环境配置，应该配置环境会省事很多。</li>
-<li>在阅读本教程，请读者至少跟着 Django 官方的教程跟着走一遍。不要零基础一通瞎搞。</li>
-<li>如果在使用过程中出现问题，请在 ISSUE 提供尽可能多的信息，将问题描述清楚。</li>
-</ol>
-<p>本系列教程并不按照一步一步增加代码的方式写教程。</p>
-<p>我先带着大家搭建好整个项目框架，然后从不同的视角开介绍这个项目，比如：</p>
-<ol>
-<li>某个模块的 models 是如何设计的？有哪些卧槽居然可以这么用的写代码方式。</li>
-<li>Django User 如何做扩展？同样在 Django 的生态圈里面，哪些场景有哪些值得围观的包，比如 guardian</li>
-<li>Restful API 应该如何写，Django 里面的 Rest API 应该如何写？会有哪些生产效率 guangguangguang 提升上去的使用方法？权限怎么做？限流怎么搞？</li>
-<li>Py.test TDD 测试驱动开发了解一下？</li>
-<li>使用 Tmux 等合理工具的优雅的单终端多开。</li>
-</ol>
-<h3 id="2-2-教程目录"><a href="#2-2-教程目录" class="headerlink" title="2.2 教程目录"></a>2.2 教程目录</h3><ul>
-<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件配置</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的前后端初步设计</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端初步实现</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的前端实现 YaVueBlog</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Redis</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 PostgreSQL</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Elasticsearch</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 RabbitMQ</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 的生产环境部署</li>
-</ul>
-<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，快上车吧</p>
-<ul>
-<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
-<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
-</ul>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2018-02-21</strong> 重修文字</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/20/CeleryCheatSheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/20/CeleryCheatSheet/" itemprop="url">Celery CheatSheet</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-20T10:25:39+08:00">
-                2018-02-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后台组件/" itemprop="url" rel="index">
-                    <span itemprop="name">后台组件</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  927
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  4
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Celery 相关和命令。</p>
-<p>不定期更新。</p>
-<p>本文编写于 2018 年初，仅仅聚焦于 Django2.0 与 Celery 4.1.0</p>
-<p>本文需要结合我的开源项目 YaDjangoBlog 来看 <a href="https://github.com/twocucao/YaDjangoBlog">https://github.com/twocucao/YaDjangoBlog</a></p>
-<p>Celery 主要用于分布式队列。</p>
-<p>分布式队列可以用来做什么呢？</p>
-<p>试想一下这么个场景：</p>
-<ul>
-<li>假如用户提交一个耗时任务，Django 一般会在 Function Based View 里进行处理这个任务（假设这个任务耗时 30s)，我可以先把这个任务放在分布式队列里面，将耗时任务甩锅给 Celery 的 Worker 。这样的话，就可以极大的减少 Function Based View 处理耗时任务的时间。</li>
-</ul>
-<p>当然，除此之外，Celery 还可以用于其他的分布式队列场景：</p>
-<ul>
-<li>批量发送邮件</li>
-<li>定时任务 CronJob</li>
-<li>分配爬虫抓取任务</li>
-</ul>
-<p>当然，如果不用 Celery 的话也能搞定上面的场景，比如，借用数据库本身就可以直接做分布式任务派发。</p>
-<blockquote>
-<p>只是这样的实现本身代码可维护性，扩展性，性能等等都不是很好罢了。</p>
-</blockquote>
-<p>Celery 的特点如下：</p>
-<ul>
-<li>简单易维护</li>
-<li>高可用</li>
-<li>快：依据官网的资料，单进程可以在若干分钟内处理上百万级数据，亚毫秒级往返延迟 (using RabbitMQ, librabbitmq, and optimized settings)</li>
-<li>扩展性好：Almost every part of Celery can be extended or used on its own, Custom pool implementations, serializers, compression schemes, logging, schedulers, consumers, producers, broker transports, and much more.</li>
-</ul>
-<p>除此之外，还有什么特性呢？</p>
-<ul>
-<li>监控</li>
-<li>Work-Flows</li>
-<li>时间 / 速度 限制</li>
-<li>日程安排 (CronJob)</li>
-<li>资源泄露保护</li>
-<li>用户组件</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/20/CeleryCheatSheet/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/10/ElasticSearchCheatSheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/10/ElasticSearchCheatSheet/" itemprop="url">ElasticSearch CheatSheet</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T10:25:39+08:00">
-                2018-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后台组件/" itemprop="url" rel="index">
-                    <span itemprop="name">后台组件</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  4,346
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  16
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。</p>
-<blockquote>
-<p>最早使用 ElasticSearch 是两年前了。最近准备用 Django 写一个全栈式的应用，借用强大的 ES 来做搜索。</p>
-</blockquote>
-<p>这是我在写程序之余写这篇笔记的原因。最近因为换工作的事情耽误了教程更新，就把这篇笔记放出来吧。不定期更新。</p>
-<p>官网介绍 ElasticSearch 不仅仅是全文搜索，也可以结构化搜索（这里用结构化查询会更准确一些），处理人类语言，地理位置，以及关系。</p>
-<p>然而，我在项目使用过程中还是主要用到了全文搜索以及推荐。</p>
-<p>不用其他的主要原因是因为 ES 尺有所短寸有所长：</p>
-<ol>
-<li>geo 处理方面 postgis 完全就是神一般的存在。为什么还要用 ES 呢？</li>
-<li>关系型数据库的核心不就是处理关系？复杂的关系肯定还是放在关系数据库里面。</li>
-</ol>
-<ul>
-<li>highlighted search</li>
-<li>search-as-you-type</li>
-<li>did-you-mean suggestions</li>
-</ul>
-<p>我对 ElasticSearch 在后台组件里的作用在于搜索与推荐：</p>
-<ol>
-<li>整站的搜索功能<ul>
-<li>全文搜索</li>
-</ul>
-</li>
-<li>推荐<ul>
-<li>依据某几个维度的数据进行排序</li>
-</ul>
-</li>
-</ol>
-<p>知乎的文章居然不支持 toc, 实在是太蛋疼了。</p>
-<p>文章目录如下</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">▼ 0x00 前言 : section</div><div class="line">▼ 0x01 安装，配置，基本 shell 命令 : section</div><div class="line">    1. 安装 : section</div><div class="line">    2. 配置 : section</div><div class="line">    3. 插件 : section</div><div class="line">  0x02 ElasticSearch 配套工具 : section</div><div class="line">▼ 0x03 ElasticSearch 基础概念 : section</div><div class="line">  ▼ 3.1 Elasticsearch CRUDE 以及基本操作 : section</div><div class="line">      CURDE : section</div><div class="line">      普通搜索 : section</div><div class="line">      聚集搜索 : section</div><div class="line">▼ 0x04 全文搜索的基本概念 : section</div><div class="line">    4.1 全文搜索遇到的挑战 : section</div><div class="line">  ▼ 4.2 全文搜索的索引时与查询时 : section</div><div class="line">      1. 索引时 ES 做了什么？ : section</div><div class="line">      2. 查询时 ES 做了什么？ : section</div><div class="line">      3. 全文搜索调优之中文分词 : section</div><div class="line">      4. 全文搜索调优之停止词 : section</div><div class="line">      5. 全文搜索调优之同义词 : section</div><div class="line">      6. 全文搜索调优之拼写错误 : section</div><div class="line">    ▼ 7. 全文搜索调优之相关性 : section</div><div class="line">        索引时三因素 : section</div><div class="line">        查询时 : section</div><div class="line">        计算公式 : section</div><div class="line">  0x05 搜索语法 : section</div><div class="line">  0x06 Python SDK : section</div><div class="line">  0x07 踩坑集 : section</div><div class="line">  0xEE 参考链接 : section</div></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/ElasticSearchCheatSheet/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/10/DockerCheatSheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/10/DockerCheatSheet/" itemprop="url">Docker CheatSheet</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-10T09:01:55+08:00">
-                2018-02-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的开源项目/" itemprop="url" rel="index">
-                    <span itemprop="name">我的开源项目</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2,179
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  9
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。</p>
-<ul>
-<li>Docker 相关概念</li>
-<li>Docker 配套工具</li>
-<li>Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化</li>
-<li>Docker 踩坑记录</li>
-</ul>
-<p>不定期更新。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/10/DockerCheatSheet/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2951,7 +3157,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">86</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2962,7 +3168,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2973,7 +3179,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">94</span>
+                <span class="site-state-item-count">97</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

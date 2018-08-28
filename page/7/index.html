@@ -300,6 +300,828 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/12/03/TextProcessingCheatsheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/12/03/TextProcessingCheatsheet/" itemprop="url">Text Processing CheatSheet</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-03T18:41:47+08:00">
+                2016-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-黑魔法/" itemprop="url" rel="index">
+                    <span itemprop="name">Python 黑魔法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,573
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中的文本处理相关思路。</p>
+<p>本文的目录为：</p>
+<ul>
+<li>正则处理相关</li>
+<li>HTML/XML 处理相关</li>
+<li>Python 中的文本处理</li>
+</ul>
+<h2 id="0x01-正则处理相关"><a href="#0x01-正则处理相关" class="headerlink" title="0x01 正则处理相关"></a>0x01 正则处理相关</h2><h3 id="1-1-正则表达式"><a href="#1-1-正则表达式" class="headerlink" title="1.1. 正则表达式"></a>1.1. 正则表达式</h3><p>正则是个很奇葩的名字，为什么叫做正则表达式呢，首先是个表达式，其次，这是一种叫做正则 (regular expression, rational expression) 的表达式。<br>名称为什么叫做 regular 呢，因为它基于 regular language. 而 regular language 是一种 formal language. 得，现在又开始是编译原理相关概念了。为了逃避概念，通过用途来简单定义正则表达式。</p>
+<p>简而言之，就是一种用于字符串搜索的模式。或者就是一种领域专用编程语言。</p>
+<p><a href="https://en.wikipedia.org/wiki/Regular_expression" target="_blank" rel="external">https://en.wikipedia.org/wiki/Regular_expression</a></p>
+<h3 id="1-2-Python-中正则表达式语法"><a href="#1-2-Python-中正则表达式语法" class="headerlink" title="1.2. Python 中正则表达式语法"></a>1.2. Python 中正则表达式语法</h3><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"># 元字符</div><div class="line">. ^ $ * + ? &#123; &#125; [ ] \ | ( )</div><div class="line"></div><div class="line">* # 速记，天上一个星星都没有，0 到多个。</div><div class="line">+ # 一加手机..... 1 到多个。</div><div class="line">? # 有还是没有 即 0 or 1</div><div class="line">*? # 没有疑问就是贪婪，有疑问就是非贪婪</div><div class="line">+?</div><div class="line">??</div><div class="line"></div><div class="line">&#123;m&#125; # m 份</div><div class="line">&#123;m,n&#125; # 优先匹配 a&#123;2,&#125;b 优先匹配 aaaab 中 aaaab</div><div class="line">&#123;m,n&#125;? # 优先匹配 a&#123;2,&#125;b 优先匹配 aaaab 中 aab</div><div class="line"></div><div class="line">[] # [a\-z] == [az-]</div><div class="line"># 1. [\w] [\S]</div><div class="line"># 2. [^5]</div><div class="line"># 3. [akm$]  在 [] 中 $ 并不具备元字符特点</div><div class="line"></div><div class="line">PattenA | PattenB</div><div class="line">(...) # 捕获 , 引用可以使用、1 , 但是还有一种扩展语法</div><div class="line"></div><div class="line">(?...) # 扩展</div><div class="line"># - (?aiLmsux)</div><div class="line"># - (?:...) 不捕获</div><div class="line"># - (?P&lt;quote&gt;...) 正则内引用 (?P=quote);python 内获取 m.group('quote') ,m.end('quote');re.sub 内 repl 参数为、g&lt;quote&gt; \g&lt;1&gt; \1</div></pre></td></tr></table></figure>
+<h3 id="1-3-Python-中使用正则的方法"><a href="#1-3-Python-中使用正则的方法" class="headerlink" title="1.3. Python 中使用正则的方法"></a>1.3. Python 中使用正则的方法</h3><h4 id="1-3-1-re-模块的用法"><a href="#1-3-1-re-模块的用法" class="headerlink" title="1.3.1. re 模块的用法"></a>1.3.1. re 模块的用法</h4><ul>
+<li>sub 替换</li>
+<li>match / fullmatch 匹配</li>
+<li>search 搜索</li>
+<li>split 分片</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">re.split(<span class="string">'(\W+)'</span>, <span class="string">'...words, words...'</span>)</div><div class="line"><span class="comment"># ['', '...', 'words', ', ', 'words', '...', '']</span></div></pre></td></tr></table></figure>
+<blockquote>
+<p>match 为匹配起始字符 / fullmatch 为全部字符 / search 为搜索</p>
+</blockquote>
+<h4 id="1-3-2-match-object-的用法"><a href="#1-3-2-match-object-的用法" class="headerlink" title="1.3.2. match object 的用法"></a>1.3.2. match object 的用法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">m.group(<span class="number">0</span>)</div><div class="line">m.group(<span class="number">1</span>, <span class="number">2</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>m = re.match(<span class="string">r"(?P&lt;first_name&gt;\w+) (?P&lt;last_name&gt;\w+)"</span>, <span class="string">"Malcolm Reynolds"</span>)</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>m.group(<span class="string">'first_name'</span>)</div><div class="line"><span class="string">'Malcolm'</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>m.group(<span class="string">'last_name'</span>)</div><div class="line"><span class="string">'Reynolds'</span></div><div class="line">m.start() <span class="comment"># 起始</span></div><div class="line">m.end()   <span class="comment"># 结尾</span></div></pre></td></tr></table></figure>
+<h2 id="1-4-正则表达式性能"><a href="#1-4-正则表达式性能" class="headerlink" title="1.4. 正则表达式性能"></a>1.4. 正则表达式性能</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 编译优于不编译</span></div><div class="line">prog = re.compile(pattern)</div><div class="line">result = prog.match(string)</div><div class="line">re.match(pattern,string)</div></pre></td></tr></table></figure>
+<h2 id="0x02-HTML-XML-处理相关"><a href="#0x02-HTML-XML-处理相关" class="headerlink" title="0x02 HTML/XML 处理相关"></a>0x02 HTML/XML 处理相关</h2><h3 id="2-1-Beautifulsoup-处理-HTML"><a href="#2-1-Beautifulsoup-处理-HTML" class="headerlink" title="2.1. Beautifulsoup 处理 HTML"></a>2.1. Beautifulsoup 处理 HTML</h3><p>解析往往伴随着各种各样奇葩的不奇葩的，诡异的不诡异的网页数据抽取，这个过程中，我们常使用两个库来解决问题，一个库叫做 lxml, 另一个库叫做 BeautifulSoup.</p>
+<p>beautifulsoup 可是让我们通过直接手动编写遍历 dom 树的方法来快速遍历 dom 树从而获得数据。相比自己写解析器而言，可以算得上非常的节省时间了。</p>
+<p>只要能手动遍历 dom 树，基本上所有的数据都是可以获取的。痛点就是手动编写遍历 Dom 树并且完成测试的时间可能长一些。</p>
+<p>但是开发效率就比较低了。</p>
+<p>举个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"lal"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">itemprop</span>=<span class="string">"street-address"</span> <span class="attr">title</span>=<span class="string">"浦东南路八佰伴西面"</span>&gt;</span></div><div class="line">       地址：浦东南路八佰伴西面</div><div class="line">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"item"</span> <span class="attr">itemprop</span>=<span class="string">"street-address"</span> <span class="attr">title</span>=<span class="string">"浦东南路"</span>&gt;</span></div><div class="line">       名称：xxxx</div><div class="line">    <span class="tag">&lt;/<span class="name">div</span> &gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>我想要地址属性，如果是 beautifulsoup, 则我们需要先定位到 id 为 lal 的 div 元素。然后获取每个元素的 text 部分，然后使用 if 判断地址属性，然后提取 text.</p>
+<p><strong>但是如果用 xpath, 则可以把对元素的简单定位简单判断直接写在 xpath 表达式。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sel.xpath(<span class="string">'//div[@id="lal"]/*[contains(text(),"地址")]/text()'</span>).extract_first()</div><div class="line"><span class="comment"># 如果还需要添加筛选名称，则可是使用</span></div><div class="line">sel.xpath(<span class="string">'//div[@id="lal"]/*[contains(text(),"名称")]/text()'</span>).extract_first()</div></pre></td></tr></table></figure>
+<p>这样可以极大的提升开发效率。</p>
+<p>页面的结构越复杂，则 xpath 带来的开发效率越高。</p>
+<h3 id="2-2-XPath-处理-HTML"><a href="#2-2-XPath-处理-HTML" class="headerlink" title="2.2. XPath 处理 HTML"></a>2.2. XPath 处理 HTML</h3><h4 id="2-2-1-概念"><a href="#2-2-1-概念" class="headerlink" title="2.2.1. 概念"></a>2.2.1. 概念</h4><p>XPath 是一种通过路径表达式定位 XML 文档内容的语法。<br>由于内置了大量的表达式函数，可以通过极少的代码完成定位。<br>有七种<strong>节点类型</strong>:</p>
+<ul>
+<li>element</li>
+<li>attribute</li>
+<li>text</li>
+<li>namespace</li>
+<li>processing-instruction</li>
+<li>comment</li>
+<li>document nodes</li>
+</ul>
+<p>有五种<strong>节点间关系</strong>:</p>
+<ul>
+<li>父节点 Parent</li>
+<li>子节点 Children</li>
+<li>兄弟节点 Siblings</li>
+<li>先祖节点，即父与父父节点。Ancestors</li>
+<li>后代节点，即子与子子节点。Descendants</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>nodename</td>
+<td>节点名称</td>
+<td>a</td>
+</tr>
+<tr>
+<td>/</td>
+<td>根节点</td>
+<td>/</td>
+</tr>
+<tr>
+<td>//</td>
+<td>匹配所有</td>
+<td>bookstore//book</td>
+</tr>
+<tr>
+<td>.</td>
+<td>当前节点</td>
+<td></td>
+</tr>
+<tr>
+<td>..</td>
+<td>父节点</td>
+<td>a/../a/..</td>
+</tr>
+<tr>
+<td>@</td>
+<td>属性</td>
+<td>a/@href</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>谓语</td>
+<td>book[1] , book[last()-1]</td>
+</tr>
+<tr>
+<td>func()</td>
+<td>表达式函数</td>
+<td>postion()</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">response.xpath(<span class="string">"//*[@id=\"landlb_B04_04\"]/span[2]/a[contains(@href,'market')]"</span>)</div><div class="line">response.xpath(<span class="string">"//*[@id=\"landlb_B04_04\"]/span[2]/a[not(@class)]"</span>)</div><div class="line">response.xpath(<span class="string">"//ul/li/b[contains(text(),'什么玩意')]/following-sibling::span/text()"</span>)</div><div class="line">response.xpath(<span class="string">"//div[@class='address']/text()[preceding::span[@class='item' and contains(text(),'地址：')]]"</span>)</div><div class="line">response.xpath(<span class="string">"//ul/li/b[contains(text(),'什么玩意：')]/following-sibling::a/text()"</span>)</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">//*[contains(text(),<span class="string">'ABC'</span>)]</div><div class="line"><span class="comment"># http://stackoverflow.com/questions/3655549/xpath-containstext-some-string-doesnt-work-when-used-with-node-with-more/3655588#3655588</span></div><div class="line"></div><div class="line">&lt;div class=<span class="string">"atag btag"</span> /&gt;</div><div class="line">//div[contains(@class, <span class="string">'atag'</span>) and contains(@class ,<span class="string">'btag'</span>)]</div></pre></td></tr></table></figure>
+<h4 id="2-2-2-lxml-parsel"><a href="#2-2-2-lxml-parsel" class="headerlink" title="2.2.2. lxml parsel"></a>2.2.2. lxml parsel</h4><p>这两个库是 Python 中常用的解析表达式， parsel 依赖于 lxml , 安装完 lxml 后直接安装即可。</p>
+<h4 id="2-2-3-lxml-的番外"><a href="#2-2-3-lxml-的番外" class="headerlink" title="2.2.3. lxml 的番外"></a>2.2.3. lxml 的番外</h4><p>众所周知，Mac 的 Homebrew 很方便，每一次遇到需要下载编译的组件的时候，只需要执行 brew install xxx, 很快就可以使用了。</p>
+<p>但 homebrew 安装的软件都是最新的，这很容易导致部分软件由于版本更新带来的兼容性问题。</p>
+<p>这不，最近在 Mac 上进行开发的时候每次调用初始化 lxml 的时候总是无法进行解析，最后经过排查发现问题是 lxml 在编译的时候使用的 libxml 2.9.4 但是 使用的版本为 2.9.2 , 于是每当我使用 lxml 的时候，就会报错。</p>
+<p>不得已，找到 lxml 的 F&amp;Q 部分发现提 issue 之前需要先查看依赖版本。</p>
+<p>于是进入 IPython 排查。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</div><div class="line"></div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'Python'</span>, sys.version_info))</div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'lxml.etree'</span>, etree.LXML_VERSION))</div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'libxml used'</span>, etree.LIBXML_VERSION))</div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'libxml compiled'</span>, etree.LIBXML_COMPILED_VERSION))</div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'libxslt used'</span>, etree.LIBXSLT_VERSION))</div><div class="line">print(<span class="string">"%-20s: %s"</span> % (<span class="string">'libxslt compiled'</span>, etree.LIBXSLT_COMPILED_VERSION))</div><div class="line"></div><div class="line"><span class="comment"># Python : sys.version_info(major=3, minor=5, micro=1, releaselevel='final', serial=0)</span></div><div class="line"><span class="comment"># lxml.etree : (3, 6, 2, 0)</span></div><div class="line"><span class="comment"># libxml used : (2, 9, 2)</span></div><div class="line"><span class="comment"># libxml compiled : (2, 9, 4) # 注意问题出在这里。</span></div><div class="line"><span class="comment"># libxslt used : (1, 1, 28)</span></div><div class="line"><span class="comment"># libxslt compiled : (1, 1, 28)</span></div></pre></td></tr></table></figure></p>
+<p>于是使用 pip 强制进行安装升级。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">STATIC_DEPS=true pip install -i http://pypi.douban.com/simple/ –trusted-host pypi.douban.com lxml –ignore-installed –no-cache-dir –upgrade -vvv</div></pre></td></tr></table></figure>
+<p>安装完毕即可。</p>
+<h3 id="2-3-标准库处理-HTML"><a href="#2-3-标准库处理-HTML" class="headerlink" title="2.3. 标准库处理 HTML"></a>2.3. 标准库处理 HTML</h3>
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/11/25/PythonistAwesomeList/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/11/25/PythonistAwesomeList/" itemprop="url">Python 爬虫工程师的武器库</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-25T19:53:47+08:00">
+                2016-11-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-黑魔法/" itemprop="url" rel="index">
+                    <span itemprop="name">Python 黑魔法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,733
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  7
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>从大三接触 Python 到现在几乎已经有两年的接触经验了，除去中间有一年左右接私活写写 Android 和 Lamp 之外，有 Python 实际项目开发经验也算是 9 个多月，也稍微算得上是一个入门级别的 Python 程序员了。</p>
+<p>网上不乏一些不错的 Awesome list, 但是说实话，这种类型的清单某些程度上不就相当于推荐自己没有看过的书单？</p>
+<p>而我对自己的 Awesome List 是有要求的。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/25/PythonistAwesomeList/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/11/23/重新整理再度出发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/11/23/重新整理再度出发/" itemprop="url">重新整理，再度出发</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-23T20:20:20+08:00">
+                2016-11-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/写在人生的边上/" itemprop="url" rel="index">
+                    <span itemprop="name">写在人生的边上</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  584
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  2
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p>整理自己的心情，整理自己的经历，也要整理自己的博客。</p>
+</blockquote>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2016/11/23/重新整理再度出发/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/09/20/IPynb和ECharts/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2016/09/20/IPynb和ECharts/" itemprop="url">IPython Notebook 引入 ECharts 做可视化</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-20T19:26:26+08:00">
+                2016-09-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-黑魔法/" itemprop="url" rel="index">
+                    <span itemprop="name">Python 黑魔法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  1,045
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  4
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Python 的开发生态圈有相当多的好用的数据分析挖掘工具。Pandas,Numpy,Scikit-Learn 等等。</p>
+<p>在进行数据分析挖掘的方面，我们选用 IPython Notebook 对数据进行前期的探索和挖掘。以及内部的可视化交流。</p>
+<p>也需要经常新的进行一些可视化来使得探索过程更加的顺利。面对海量的数据可视化，也依照目的使用不同的工具。</p>
+<ul>
+<li>对于后台开发 / 数据挖掘 / 爬虫工程师而言，内部沟通的过程中注重信息交流沟通的快捷和准确，而不需要考虑可视化的美观程度，所以使用 IPython Notebook 配上 Matplotlib 或者是 Seaborn 进行可视化。</li>
+<li>与其他非开发的技术人员交流沟通的时候，这个时候优美的图表就成为了重中之重。</li>
+</ul>
+<blockquote>
+<p>可是 Seaborn Matplotlib 这些库画出来的图，如同那些其貌不扬的高手，包含大量信息，美中不足的就是<strong>不美</strong>。那可不可以使用更加漂亮的图来可视化呢？</p>
+</blockquote>
+<p>有，ECharts<a href="http://echarts.baidu.com/examples.html" target="_blank" rel="external">案例地址戳这里</a></p>
+<blockquote>
+<p>想拥有 IPython Notebook 的优点上，还能够最大化 IPython Notebook 的美观程度，这就是我们想在 IPython Notebook 中引入 ECharts 作为可视化的初衷。</p>
+<p>如果你使用过 IPython Notebook，细心的你一定大致了解，核心困难点在于如何在 IPython Notebook 中引入 ECharts.</p>
+</blockquote>
+<p>今天我们使用 IPython NoteBook 来演示一个简单的 ECharts 饼图案例。本文的数据来自大众点评闵行区部分美食店铺。</p>
+<h2 id="代码思路"><a href="#代码思路" class="headerlink" title="代码思路"></a>代码思路</h2><p>IPython 中，我们知道，可以通过 IPython.display 导入 HTML.<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> IPython.display <span class="keyword">import</span> HTML</div><div class="line">HTML(<span class="string">"""</span></div><div class="line">&lt;div&gt;这是一小块 HTML&lt;/div&gt;</div><div class="line">""")</div></pre></td></tr></table></figure></p>
+<p>执行就 IPython Notebook 中看到：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;div&gt;这是一小块 HTML&lt;/div&gt;</div></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-e7646baa6145766b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="显示 HTML"></p>
+<p>但问题来了，我们知道，在通常的情况下，是不能动态引入 JS 脚本的。因此我们在开发 HTML 静态页面的时候，往往脚本都是在 Head 或者 Body 结束标签之前就写死了。如果要在 IPython 中增加 ECharts, 是不是需要修改一些配置文件，让 IPython Notebook 在 Header 部分引入 ECharts 脚本呢？</p>
+<p>答案是<strong>不需要</strong>.</p>
+<blockquote>
+<p>为何？因为 IPython Notebook 本身自带一个 Js 模块，叫做 RequireJS. 通过这个模块<strong>可以动态引入并执行 JS.</strong></p>
+</blockquote>
+<p>具体原理不详细介绍，但是这个模块为 IPython Notebook 动态引入其他 JS 框架和代码带来了无限的可能性。注意，再次强调，这个模块可以帮助我们<strong>可以动态引入并执行 JS.</strong></p>
+<p>于是通过下面的代码，我们就轻松的将 ECharts 引入到 IPython Notebook 中。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">chart_header_html = <span class="string">"""</span></div><div class="line">&lt;div id="chart" style="width:800px; height:600px;"&gt;&lt;/div&gt;</div><div class="line">&lt;script&gt;</div><div class="line">    require.config(&#123;</div><div class="line">         paths:&#123;</div><div class="line">            echarts: '//cdn.bootcss.com/echarts/3.2.3/echarts.min',</div><div class="line">         &#125;</div><div class="line">    &#125;);</div><div class="line">    require(['echarts'],function(ec)&#123;</div><div class="line">var myChart = ec.init(document.getElementById('chart'));</div><div class="line">                var option = &#123;</div><div class="line">                    title: &#123;</div><div class="line">                        text: '闵行区美食类人均消费餐馆分布',</div><div class="line">                        subtext: '数据来自大众点评',</div><div class="line">                        x: 'center'</div><div class="line">                    &#125;,</div><div class="line">                    tooltip: &#123;</div><div class="line">                        trigger: 'item',</div><div class="line">                        formatter: "&#123;a&#125; &lt;br/&gt;&#123;b&#125; : &#123;c&#125; (&#123;d&#125;%)"</div><div class="line">                    &#125;,</div><div class="line">                    legend: &#123;</div><div class="line">                        orient: 'vertical',</div><div class="line">                        left: 'left',</div><div class="line">                        data: ['人均消费不明','人均消费 0~50 元', '人均消费 50~100 元', '人均消费 100~150 元', '人均消费 150~200 元', '人均消费 200 元以上']</div><div class="line">                    &#125;,</div><div class="line">                    series: [</div><div class="line">                        &#123;</div><div class="line">                            name: '店铺比例',</div><div class="line">                            type: 'pie',</div><div class="line">                            radius: '55%',</div><div class="line">                            center: ['50%', '60%'],</div><div class="line">                            data: [</div><div class="line"></div><div class="line">"""</div><div class="line">chart_content_html = <span class="string">"""</span></div><div class="line">                                &#123;value: %s, name: '人均消费不明'&#125;,</div><div class="line">                                &#123;value: %s, name: '人均消费 0~50 元'&#125;,</div><div class="line">                                &#123;value: %s, name: '人均消费 50~100 元'&#125;,</div><div class="line">                                &#123;value: %s, name: '人均消费 100~150 元'&#125;,</div><div class="line">                                &#123;value: %s, name: '人均消费 150~200 元'&#125;,</div><div class="line">                                &#123;value: %s, name: '人均消费 200 元以上'&#125;</div><div class="line">""" % (consume_unknown_restaurant_count,consume_0_50_restaurant_count,consume_50_100_restaurant_count,consume_100_150_restaurant_count,consume_150_200_restaurant_count,consume_200_greater_restaurant_count)</div><div class="line">chart_footer_html = <span class="string">"""</span></div><div class="line">                            ],</div><div class="line">                            itemStyle: &#123;</div><div class="line">                                emphasis: &#123;</div><div class="line">                                    shadowBlur: 10,</div><div class="line">                                    shadowOffsetX: 0,</div><div class="line">                                    shadowColor: 'rgba(0, 0, 0, 0.5)'</div><div class="line">                                &#125;</div><div class="line">                            &#125;</div><div class="line">                        &#125;</div><div class="line">                    ]</div><div class="line">                &#125;;</div><div class="line">                myChart.setOption(option);</div><div class="line">    &#125;);</div><div class="line">&lt;/script&gt;</div><div class="line">"""</div><div class="line"></div><div class="line">HTML(</div><div class="line"> chart_header_html + chart_content_html + chart_footer_html</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>看一看代码，首先，配置对应的脚本。引入 requirejs 的配置模块。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>.config(&#123;</div><div class="line">     <span class="attr">paths</span>:&#123;</div><div class="line">        <span class="attr">echarts</span>: <span class="string">'//cdn.bootcss.com/echarts/3.2.3/echarts.min'</span>,</div><div class="line">     &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>接着使用如下代码进行引入和执行代码，具体的 Demo 可以参考文章末尾的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">require</span>([<span class="string">'echarts'</span>],<span class="function"><span class="keyword">function</span>(<span class="params">ec</span>)</span>&#123;</div><div class="line"> <span class="keyword">var</span> option = &#123;</div><div class="line"><span class="comment">//... 图表配置</span></div><div class="line">&#125;</div><div class="line"><span class="comment">//... 获取图表 div</span></div><div class="line"><span class="comment">//... 为所获取的图表 DIV 设置</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p>于是，美观漂亮的可视化图就出来了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-59bffc49212928be.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="ECharts 饼图"></p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>附上 IPythonNotebook 以及 Excel 表用于大家分析。</p>
+<ul>
+<li><a href="https://github.com/twocucao/DataScience/blob/master/project_03_dianpin/simple_stat.ipynb" target="_blank" rel="external">对应的 IPythonNotebook</a></li>
+<li><a href="https://github.com/twocucao/DataScience/blob/master/project_03_dianpin/%E5%A4%A7%E4%BC%97%E7%82%B9%E8%AF%84%E9%97%B5%E8%A1%8C%E5%8C%BA%E7%BE%8E%E9%A3%9F%E9%A4%90%E5%8E%85%E7%AE%80%E5%8D%95%E7%BB%9F%E8%AE%A1.xlsx" target="_blank" rel="external">对应的 Excel 表</a></li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/09/12/MySQLCheatSheet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1418,942 +2240,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/02/24/关于背单词软件,你不知道的惊人真相/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/02/24/关于背单词软件,你不知道的惊人真相/" itemprop="url">关于背单词软件，你不知道的惊人真相</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-24T18:50:23+08:00">
-                2016-02-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的开源项目/" itemprop="url" rel="index">
-                    <span itemprop="name">我的开源项目</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  2,180
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  8
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><ul>
-<li>你想知道背单词软件有大概多少人注册第一天都没有背完嘛？</li>
-<li>你想知道背单词软件这么火，这么多人在使用，真的有多少人真的在背诵嘛？</li>
-</ul>
-<p>别急，Python 程序员用数据给你说话。</p>
-<p>文章目录如下：</p>
-<ul>
-<li>0x00 前言</li>
-<li>0x01 问题的提出和任务的分解</li>
-<li>0x02 任务一，信息爬取</li>
-<li>ox03 任务二，清理和存储</li>
-<li>0x04 任务三，分析</li>
-<li>0x05 任务四，结论</li>
-<li>0x06 整个流程的不足和反思。</li>
-<li>0x07 代码。</li>
-</ul>
-<h2 id="0x01-问题的提出和任务的分解"><a href="#0x01-问题的提出和任务的分解" class="headerlink" title="0x01 问题的提出和任务的分解"></a>0x01 问题的提出和任务的分解</h2><p>前两天，就在一个雷电交加的夜晚，我躺在床上，草草的看了一篇英文文章，突然想到一个非常有意思的问题：</p>
-<blockquote>
-<p>是不是大部分的人做事真的不能坚持呢？比如，背单词。</p>
-</blockquote>
-<p>好，那我就看看到底有多少人是坚持不下来的？</p>
-<p>那么，我们的问题就变成了这样子：</p>
-<ul>
-<li>有多少人是在坚持或者曾经坚持过背单词呢？（假设 100 天以上算的上是背单词的话）</li>
-<li>有多少梦想，毁于不能坚持？</li>
-<li>背单词的人们学习的量，是不是符合正太分布呢？</li>
-</ul>
-<p>于是我选中了业内的标杆扇贝软件作为分析的对象。抽取其中的大约 1/30 的用户的公开数据，也就是游客用户都可以看得到的数据，进行抽样调查。</p>
-<p> 调查的具体内容如下：</p>
-<ul>
-<li>打卡最高 / 成长值最高 / 学习单词数量最高</li>
-<li>平均每个人打卡次数 / 成长值 / 学习单词数量</li>
-<li>打卡 / 成长值 / 学习单词数量的分布（也就是已经坚持了多少天了）</li>
-</ul>
-<p>那么，我的任务也就可以分解如下：</p>
-<ul>
-<li>爬取数据<ul>
-<li>使用 Python2 的 Scrapy 进行爬站</li>
-</ul>
-</li>
-<li>清理数据<ul>
-<li>sql 语句和 pandas 运算</li>
-</ul>
-</li>
-<li>分析数据<ul>
-<li>pandas + seaborn + ipython book</li>
-</ul>
-</li>
-<li>得出结论</li>
-</ul>
-<h2 id="0x02-任务一，信息爬取，清理和存储"><a href="#0x02-任务一，信息爬取，清理和存储" class="headerlink" title="0x02 任务一，信息爬取，清理和存储"></a>0x02 任务一，信息爬取，清理和存储</h2><p>每个用户的信息都在这里：</p>
-<p><a href="http://www.shanbay.com/bdc/review/progress/2" target="_blank" rel="external">http://www.shanbay.com/bdc/review/progress/2</a></p>
-<p>使用 beautifulsoup4 进行解析即可。其他部分参考代码。</p>
-<p>扇贝的工程师反爬虫做的还不错，主要有两点：</p>
-<ul>
-<li>访问数量超标，封禁 IP 半个小时。对应的方法就是代理服务器.（代码中已经删除代理服务器，所以，如果你运行不了代码，那你应该知道怎么做了.)</li>
-<li>cookie 如果不禁用很快就无法爬取。对应的方法就是禁用 Cookie.</li>
-</ul>
-<h2 id="0x03-任务二，清理和存储"><a href="#0x03-任务二，清理和存储" class="headerlink" title="0x03 任务二，清理和存储"></a>0x03 任务二，清理和存储</h2><p>对于数据库，使用 Postgresql 存储就好了。也没有什么大问题。参考代码。有问题在评论下面问。</p>
-<p>通常情况下在存入数据库的时候需要进行数据的净化，不处理也没有什么大问题。</p>
-<h2 id="0x04-任务三，分析"><a href="#0x04-任务三，分析" class="headerlink" title="0x04 任务三，分析"></a>0x04 任务三，分析</h2><p>分析阶段，使用 IPython notebook. 通常情况下，我们使用的是 Anaconda 里面的 Python3 版本 . 可以到这里下载，注意，mac 和 ubuntu 下载的是命令行版本。</p>
-<p><a href="https://www.continuum.io/downloads" target="_blank" rel="external">https://www.continuum.io/downloads</a></p>
-<p>安装完毕以后，重启终端。环境变量生效。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#直接安装 seaborn</span></div><div class="line">pip install seaborn</div></pre></td></tr></table></figure>
-<p>切换到指定目录然后敲入命令 ipython notebook 打开浏览器进行编辑。</p>
-<p>至于怎么使用，请看代码。</p>
-<h2 id="0x05-任务三，结论"><a href="#0x05-任务三，结论" class="headerlink" title="0x05 任务三，结论"></a>0x05 任务三，结论</h2><p>在这里省去部分的分析过程直接贴出结论。</p>
-<p>总共抓取 1111111 张网页，成功获取 610888 个用户的信息。</p>
-<p>于是得出结论如下：</p>
-<p><strong>扇贝之最：</strong></p>
-<ul>
-<li>最高打卡天数：chainyu 1830 天</li>
-<li>最高成长值：Lerystal 成长值 28767</li>
-<li>最高单词数量：chenmaoboss 单词量 38313</li>
-</ul>
-<p><strong>平均到每一个人身上</strong></p>
-<ul>
-<li>平均每人打卡天数：14.18, 而超过成长平均值的人数为 71342, 占总抽样人数的，额，11.69%</li>
-<li>平均成长值：121.79, 而超过平均成长的人数为 13351, 占总抽样人数的，额，11.42%</li>
-<li>平均学习单词数量：78.92, 而背超过平均单词的人数为 13351, 占总抽样人数的，额，2.19%（注意，真的是 2% 左右）</li>
-</ul>
-<p><strong>那么，我们来看看打卡，成长值，单词数量的，分布吧.</strong></p>
-<p>第一个，所有人的打卡数量直方图。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/52890-700e3adc4e88dd4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这是所有人的打卡数量直方图"></p>
-<p>简直惨不忍睹。</p>
-<p>第二个，非零用户的打卡数量直方图。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/52890-d43f053706de8b37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="非零用户的打卡数量的直方图"></p>
-<p>这真是一段悲伤的故事。由于坚持不了几天的用户实在是太多，简直就是反比例函数嘛，导致图像严重畸形。那么，我们只能分段了看用户打卡天数在 0~20,20~100,100~500,500~2000 范围的分布图了。</p>
-<p>分别如下：</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/52890-532a24af7f6a4c0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0~20"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/52890-a1adbb9a925128a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20~100"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/52890-6e0b3c72b5c02c13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="100~500"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/52890-2cf944cc1c837507.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="500~2000"></p>
-<p>其他成长值的各种分布也是如此，在此就不贴出来了。</p>
-<p>正如你所看到的，我再来总结一下，</p>
-<p>在抽样中，</p>
-<ol>
-<li>英语梦死在前 0 天的有 416351 人，占总比 68.15%;</li>
-<li>英语梦死在前 1 天的有 466761 人，占总比 76.40%;</li>
-<li>英语梦死在前 2 天的有 484535 人，占总比 79.31%;</li>
-<li>英语梦死在前 5 天的有 510230 人，占总比 83.52%;</li>
-<li>英语梦死在前 10 天的有 531219 人，占总比 86.95%;</li>
-<li>英语梦死在前 20 天的有 551557 人，占总比 90.28%;</li>
-<li>英语梦死在前 50 天的有 575975 人，占总比的 94.28%;</li>
-<li>英语梦死在前 100 天的有 590700 人，占总比 96.69%;</li>
-<li>英语梦死在前 200 天的有 575975 人，占总比 98.36%;</li>
-<li>英语梦死在前 263 天的有 600875 人，占总比 98.81%;</li>
-</ol>
-<p>你可以大致感受到残酷的现实，几乎没有多少人可以坚持到 200 天以后。</p>
-<p>但是，你还需要注意到的事情是：</p>
-<blockquote>
-<p>抽样的来源是 ID 为 1~1111111 之间的 60W 成员</p>
-</blockquote>
-<p>众所周知的事情是：</p>
-<ul>
-<li>早期的用户往往质量相对会高一些。而且，注册的 ID 越大，证明注册时间距离现在越近。获得 200 天的几率也就低了不少。</li>
-</ul>
-<blockquote>
-<p>那么，这样的话，英语梦死在 200 天之前的人数比例还会大上不少。</p>
-</blockquote>
-<p>回到文章开始：</p>
-<p>问：背单词软件有大概多少人注册第一天都没有背完嘛？<br>答：68.15%</p>
-<p>问：有多少人是在坚持或者曾经坚持过背单词呢？（假设 100 天以上算的上是背单词的话）<br>答：保守估计，不足 3.4%</p>
-<p>问：有多少梦想，毁于不能坚持？<br>答：不妨干了这碗鸡汤，歌唱青春一去不复返。</p>
-<p>问：背单词的人们学习的量，是不是符合正太分布呢？<br>答：不是，简直就是反比例函数。</p>
-<p>抛出一个结论：</p>
-<blockquote>
-<p>以绝大部分人努力之低，根本就用不着拼天赋。</p>
-</blockquote>
-<p>赠给你我，共勉。</p>
-<h2 id="0x06-整个流程的不足和反思。"><a href="#0x06-整个流程的不足和反思。" class="headerlink" title="0x06 整个流程的不足和反思。"></a>0x06 整个流程的不足和反思。</h2><p>扇贝的工程师反爬虫做的还不错，主要有两点：</p>
-<ul>
-<li>访问数量超标，封禁 IP 半个小时。对应的方法就是代理服务器。</li>
-<li>cookie 如果不禁用很快就无法爬取。对应的方法就是禁用 Cookie.</li>
-</ul>
-<p>爬虫框架使用 Scrapy, 这样就免去了大量的繁琐的线程调度问题，直接写获取信息的逻辑代码，以及存储信息的逻辑代码就好了。</p>
-<p>在编写爬虫的过程中，有一些经验：</p>
-<ul>
-<li>在爬虫开启以后，由于我暴力的关闭，导致还是有不少的 item 没有完成请求处理和存储。</li>
-<li>我在处理异常的时候忘了应当把失败的 item 存放放在文件中，方便我第二次补充，这样的话就不会丢失一部分的用户信息了。</li>
-<li>代理服务器需要自己写脚本进行测试，否则你可能有很多很多的请求都会超时（毕竟很多代理服务器还是很不靠谱的）.</li>
-</ul>
-<p>我的分析数据能力并不是很强，仅仅是从 CS109 里面偷学了一点点，然后使用 Seaborn 画图，但是这整个过程中还是觉得自己分析不过来，不是写不出代码，而是不清楚使用什么样的数据模型进行分析更好。</p>
-<h2 id="0x07-代码"><a href="#0x07-代码" class="headerlink" title="0x07 代码"></a>0x07 代码</h2><p>代码放在了 Github 上面，咳咳，注意，没有把代理服务器放进去。如果你跑一下会发现只能半小时抓取 300+ 页面，这不是我的问题，是你没有把代理服务器填好。代码比较粗糙，还请轻拍。</p>
-<p>代码的地址为：</p>
-<p><a href="https://github.com/twocucao/DataScience/" target="_blank" rel="external">https://github.com/twocucao/DataScience/</a></p>
-<p>仓库里包含了抓取网站的代码和分析数据的 IPython Notebook, 自己阅读吧。</p>
-<p>如果喜欢本文，就点个喜欢吧。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/02/21/UnKnownCheatSheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/02/21/UnKnownCheatSheet/" itemprop="url">Unknown Cheatsheet</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-21T10:13:30+08:00">
-                2016-02-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">后端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  5,051
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  19
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><blockquote>
-<p>写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。</p>
-</blockquote>
-<p>这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。目的总的来说有两个：</p>
-<ol>
-<li>一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。</li>
-<li>二是希望借由这个持续更新的过程让自己更加深入理解 Django 技术栈 Django / DjangoRestFramework / Docker / Vue.JS / Celery / PostgreSQL / Redis / RabbitMQ</li>
-</ol>
-<blockquote>
-<p>生命苦短，我用 Python</p>
-</blockquote>
-<p>为什么说这个项目你不容错过？</p>
-<ul>
-<li>新！新！新！保持最新的软件开发版本，E.G: Django 2.0 + Vue.JS 2.5 + PostgreSQL 10 + Celery 4.1.0</li>
-<li>Django 框架：Django 及其 强大的生态圈</li>
-<li>后端组件：PostgreSQL RabbitMQ Redis Ngnix</li>
-<li>前端技术：单页应用 前后端分离 (VueJS+Webpack+DjangoRestFramework), 自动化部署</li>
-<li>Django 社区最佳实践：从配置 / 开发 / 测试 / 部署 <strong>全干</strong>工程师 (Full Stuff Engineer) 的最新的 DevOps 思考成果。</li>
-<li>基本覆盖了进阶 Django 开发所需要的各种组件与操作。</li>
-<li>只需要适当的调整，本项目就可以成为你新开项目的最佳脚手架。</li>
-</ul>
-<p>本系列文章的面向读者：</p>
-<ul>
-<li>目标是 DevOps 的 Pythonist</li>
-<li>爱瞎几把折腾的 Pythonist</li>
-<li>前后端分离的实践者</li>
-</ul>
-<blockquote>
-<p>生命苦短，赶快上车</p>
-</blockquote>
-<h2 id="0x01-项目介绍"><a href="#0x01-项目介绍" class="headerlink" title="0x01 项目介绍"></a>0x01 项目介绍</h2><p>YaDjangoBlog 是另一个关于博客的轮子，但是其野心并不在于仅仅多造一个博客系统，还有通过本项目做 Django 全栈开发的最佳实践。</p>
-<h3 id="1-1-项目地址"><a href="#1-1-项目地址" class="headerlink" title="1.1 项目地址"></a>1.1 项目地址</h3><ul>
-<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog">https://github.com/twocucao/YaVueBlog</a></li>
-<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog">https://github.com/twocucao/YaDjangoBlog</a></li>
-</ul>
-<h3 id="1-2-项目技术栈"><a href="#1-2-项目技术栈" class="headerlink" title="1.2 项目技术栈"></a>1.2 项目技术栈</h3><ul>
-<li>开发与部署环境为 Docker</li>
-<li>Python 3.5.2</li>
-<li>前端 Vue + Webpack + ES2015 + axios</li>
-<li>后端 <a href="https://github.com/django/django">Django 2.0</a> + <a href="https://github.com/tomchristie/django-rest-framework/">DjangoRestFramework</a> + Celery</li>
-<li>自动化部署选用工具 Ansible 以及 Docker</li>
-<li>后端组件<ul>
-<li>ElasticSearch 用于搜索和推荐</li>
-<li>PostgreSQL 用于数据持久化</li>
-<li>Redis 用于 Session / 和缓存</li>
-<li>RabbitMQ 分布式队列 / 定时任务</li>
-<li>Nginx 用于反向代理</li>
-</ul>
-</li>
-</ul>
-<h3 id="1-3-特别感谢"><a href="#1-3-特别感谢" class="headerlink" title="1.3 特别感谢"></a>1.3 特别感谢</h3><ul>
-<li>ansible django stack: <a href="https://github.com/jcalazan/ansible-django-stack">https://github.com/jcalazan/ansible-django-stack</a></li>
-<li>cookiecutter-django: <a href="https://github.com/pydanny/cookiecutter-django">https://github.com/pydanny/cookiecutter-django</a></li>
-<li>djangopackages: <a href="https://github.com/djangopackages/djangopackages">https://github.com/djangopackages/djangopackages</a></li>
-<li>董伟明 关于 ElasticSearch 的几篇文章 <a href="http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/">http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/</a></li>
-<li>各个组件的开发者们<ul>
-<li>ElasticSearch</li>
-<li>PostgreSQL</li>
-<li>Redis</li>
-<li>RabbitMQ</li>
-<li>Nginx</li>
-<li>Docker</li>
-</ul>
-</li>
-</ul>
-<h2 id="0x02-系列教程目录"><a href="#0x02-系列教程目录" class="headerlink" title="0x02 系列教程目录"></a>0x02 系列教程目录</h2><h3 id="2-1-教程注意项"><a href="#2-1-教程注意项" class="headerlink" title="2.1 教程注意项"></a>2.1 教程注意项</h3><ol>
-<li>本文的开发环境配置仅仅限于 macOS 上，如果读者使用的是 Windows / 可能需要自己搞定环境的配置。不过笔者使用了 Docker 进行环境配置，应该配置环境会省事很多。</li>
-<li>在阅读本教程，请读者至少跟着 Django 官方的教程跟着走一遍。不要零基础一通瞎搞。</li>
-<li>如果在使用过程中出现问题，请在 ISSUE 提供尽可能多的信息，将问题描述清楚。</li>
-</ol>
-<blockquote>
-<p>本系列教程并不按照一步一步增加代码的方式写教程。我先带着大家搭建好整个项目框架，然后从不同的视角开介绍这个项目，比如：</p>
-</blockquote>
-<ol>
-<li>某个模块的 models 是如何设计的？有哪些卧槽居然可以这么用的方式。</li>
-<li>Django User 如何做扩展？同样在 Django 的生态圈里面，哪些场景有哪些值得围观的包，比如 guardian</li>
-<li>Rest API 应该如何写，Django 里面的 Rest API 应该如何写？会有哪些生产效率 guangguangguang 提升上去的使用方法？权限怎么做？限流怎么搞？</li>
-<li>Py.test TDD 测试驱动开发了解一下？</li>
-</ol>
-<h3 id="2-2-教程目录"><a href="#2-2-教程目录" class="headerlink" title="2.2 教程目录"></a>2.2 教程目录</h3><ul>
-<li>Django 全栈开发教程 - Python 和 Docker 环境配置</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 博客的后端组件配置</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 博客的前后端初步设计</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 博客的后端初步实现</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 博客的前端实现 YaVueBlog</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 博客的后端组件之 Redis</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 博客的后端组件之 PostgreSQL</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 博客的后端组件之 Elasticsearch</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 博客的后端组件之 RabbitMQ</li>
-<li>Django 全栈开发教程 - YaDjangoBlog 博客的部署</li>
-</ul>
-<p>于是，本文的内容就如下：</p>
-<ul>
-<li>前后端分离</li>
-<li>自动化部署</li>
-<li>数据库相关</li>
-<li>其他踩坑经历</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/02/21/UnKnownCheatSheet/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/02/15/Python斗鱼弹幕助手/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/02/15/Python斗鱼弹幕助手/" itemprop="url">Python 程序员如何优雅的看斗鱼 TV</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-15T18:50:23+08:00">
-                2016-02-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的开源项目/" itemprop="url" rel="index">
-                    <span itemprop="name">我的开源项目</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  543
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  2
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>过年的一段时间抽空研究写了一些关于斗鱼 TV 的弹幕的获取。分别使用 Python 和 Ruby 写了弹幕获取的客户端。</p>
-<p>文章地址为：</p>
-<p>Python 版本：<br><a href="http://www.jianshu.com/p/2e0d14978ae9" target="_blank" rel="external">http://www.jianshu.com/p/2e0d14978ae9</a></p>
-<p>Ruby 版本附加原理讲解：<br><a href="http://www.jianshu.com/p/ef0225b6bb0e" target="_blank" rel="external">http://www.jianshu.com/p/ef0225b6bb0e</a></p>
-<p>文章末尾写到了我有一个痛点 –rtmp 直播视频无法获取，后来在网友 <a href="http://www.jianshu.com/users/0675b42ac3ba" target="_blank" rel="external">往事侞湮</a>] 的友善提醒下，终于 Get 到了。</p>
-<p>于是，稍微完善了一下，我就发布了第一个命令行版本的斗鱼 TV 浏览弹幕小助手。</p>
-<p>如果你是 MacOSX 的用户，你只需要</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">brew install mplayer</div><div class="line">pip3 install danmu.fm</div><div class="line"><span class="comment"># danmu.fm -q 1 -v 1 [url]</span></div><div class="line"><span class="comment"># 比如</span></div><div class="line">danmu.fm -q 2 -v 1 http://www.douyutv.com/16789</div><div class="line"><span class="comment"># -q 参数 0 为不调用 mplayer 进行播放，1 为使用 mplayer 进行普清视频的播放，2 为使用 mplayer 进行高清视频的播放，3 为使用 mplayer 进行超清视频的播放</span></div></pre></td></tr></table></figure>
-<p>如果你是 Ubuntu 用户，你只需要</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install mplayer</div><div class="line">pip3 install danmu.fm</div><div class="line"><span class="comment"># danmu.fm  -v 1 [url]</span></div><div class="line"><span class="comment"># 比如</span></div><div class="line">danmu.fm  -v 1 -q http://www.douyutv.com/16789</div><div class="line"><span class="comment">#ubuntu 上 mplayer 播放器可以正常播放</span></div></pre></td></tr></table></figure>
-<p>如果你是 Win 用户，</p>
-<blockquote>
-<p>唉，windows 上面糟糕的编码问题。那单纯来看字幕的话也不是不可以的。只是我暂时没有对 Win 进行兼容。还是换 Linux 吧。</p>
-</blockquote>
-<h2 id="0x01-演示效果"><a href="#0x01-演示效果" class="headerlink" title="0x01 演示效果"></a>0x01 演示效果</h2><p><img src="http://upload-images.jianshu.io/upload_images/52890-396d6451c68d2a83.gif?imageMogr2/auto-orient/strip" alt="1123.gif"></p>
-<h2 id="0xEE-代码地址"><a href="#0xEE-代码地址" class="headerlink" title="0xEE 代码地址"></a>0xEE 代码地址</h2><p><a href="https://github.com/twocucao/danmu.fm" target="_blank" rel="external">https://github.com/twocucao/danmu.fm</a></p>
-<p>如果喜欢，请点个喜欢或者 star 一下</p>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>Update 20160609 : </strong> 更新 Python 客户端，修复由于斗鱼网页版面修改带来的小问题，直接开启海量弹幕模式（请大家不要问我为什么端午节这一天为什么闲着没事更新代码，这个真的和情人节是同一个原因）.</li>
-<li><strong>Update 20160220 : </strong>更新 Python 客户端，增加直播视频的 Live 获取，以及 Mac 平台下面的 Mplayer 的视频播放。代码均放在 Github 上面。<a href="//link.zhihu.com/?target=https%3A//github.com/twocucao/danmu.fm">GitHub - twocucao/danmu.fm: douyutv danmu 斗鱼 TV 弹幕助手**</a></li>
-<li><strong>Update 20160214 : </strong>更新 Python 和 Ruby 客户端（请大家不要问我为什么情人节这一天为什么闲着没事更新代码）**</li>
-</ul>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/02/04/斗鱼TV弹幕助手/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2016/02/04/斗鱼TV弹幕助手/" itemprop="url">斗鱼 TV 弹幕助手</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-02-04T18:50:23+08:00">
-                2016-02-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/我的开源项目/" itemprop="url" rel="index">
-                    <span itemprop="name">我的开源项目</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  3,050
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  11
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="斗鱼弹幕助手"><a href="#斗鱼弹幕助手" class="headerlink" title="斗鱼弹幕助手"></a>斗鱼弹幕助手</h1><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p>前几天闲着无聊，看到舍友们都在看斗鱼 TV，虽然我对那些网络游戏东西都不是非常感兴趣。只是我突然间想到，如果我可以获取上面的弹幕内容。不就有点意思了么？</p>
-<h2 id="1-分析阶段"><a href="#1-分析阶段" class="headerlink" title="1. 分析阶段"></a>1. 分析阶段</h2><p>如果我想要抓取网页上面的东西，无非就是两种方法</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2016/02/04/斗鱼TV弹幕助手/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2403,7 +2289,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-count">86</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -2414,7 +2300,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">15</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -2425,7 +2311,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">94</span>
+                <span class="site-state-item-count">97</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
