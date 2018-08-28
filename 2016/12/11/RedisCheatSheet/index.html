@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2016/12/11/RedisCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py Django 中使用 Redis 进行缓存 踩坑记录  不定期更新。">
-<meta property="og:updated_time" content="2018-01-28T01:19:31.447Z">
+<meta property="og:updated_time" content="2018-08-28T09:22:37.420Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis Cheatsheet">
 <meta name="twitter:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py Django 中使用 Redis 进行缓存 踩坑记录  不定期更新。">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  460
+                  703
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  3
                 </span>
               
             </div>
@@ -427,12 +427,28 @@
 </ul>
 <p>不定期更新。</p>
 <a id="more"></a>
-<h2 id="0x01-Redis-Shell"><a href="#0x01-Redis-Shell" class="headerlink" title="0x01. Redis Shell"></a>0x01. Redis Shell</h2><ul>
+<h2 id="0x01-Redis-Shell"><a href="#0x01-Redis-Shell" class="headerlink" title="0x01 Redis Shell"></a>0x01 Redis Shell</h2><ul>
 <li>RedisClient</li>
 <li>通过网络或者 Dash 查看文档</li>
 <li>Redis 官方自带工具</li>
 </ul>
-<h2 id="0x02-Redis-配套工具"><a href="#0x02-Redis-配套工具" class="headerlink" title="0x02. Redis 配套工具"></a>0x02. Redis 配套工具</h2><h2 id="0x03-Redis-Py"><a href="#0x03-Redis-Py" class="headerlink" title="0x03. Redis-Py"></a>0x03. Redis-Py</h2><h2 id="0x04-踩坑记录"><a href="#0x04-踩坑记录" class="headerlink" title="0x04. 踩坑记录"></a>0x04. 踩坑记录</h2><h3 id="1-无法磁盘持久化"><a href="#1-无法磁盘持久化" class="headerlink" title="1. 无法磁盘持久化"></a>1. 无法磁盘持久化</h3><p>用 scrapy 配合 scrapy-redis 抓取网页并且存储到 MongoDB 里面。</p>
+<h2 id="0x02-Redis-使用场景"><a href="#0x02-Redis-使用场景" class="headerlink" title="0x02 Redis 使用场景"></a>0x02 Redis 使用场景</h2><ol>
+<li>记录点赞数 hash</li>
+<li>记录最近帖子列表 便于快速显示 zset</li>
+<li>记录帖子的点赞人，和去重 zset</li>
+<li>相关内容。list</li>
+<li>计数器，用于分配 ID</li>
+</ol>
+<h2 id="0x03-Redis-Py"><a href="#0x03-Redis-Py" class="headerlink" title="0x03 Redis-Py"></a>0x03 Redis-Py</h2><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><p>string</p>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">set/get</div><div class="line">mget name1,name2,name3</div><div class="line">mset name1 value1 name2 value2</div><div class="line">expire name1 5</div><div class="line">setex name1 5 value1</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 队列</div><div class="line">rpush queue item1 item2 item3</div><div class="line">llen queue</div><div class="line">lpop queue</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 栈</div><div class="line">rpush stack item1 item2 item3</div><div class="line">llen stack</div><div class="line">rpop stack</div></pre></td></tr></table></figure>
+<p>慢操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">lindex # O(n)</div><div class="line"></div><div class="line">lrange queue 0 -1</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># hash 操作</div><div class="line">hgetall</div><div class="line">hlen</div><div class="line">hget</div><div class="line">hset</div><div class="line">hmset</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 有序列表</div><div class="line">zadd</div><div class="line">xrange</div><div class="line">zrevrange</div><div class="line">zcard</div></pre></td></tr></table></figure>
+<h2 id="0x04-常见问题"><a href="#0x04-常见问题" class="headerlink" title="0x04 常见问题"></a>0x04 常见问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bgsave 镜像全量持久化 耗时长</div><div class="line">bgsave 子进程创建之后，父子进程共享数据段，父进程继续提供读写服务，写脏的页面数据会逐渐和子进程分离开.fork / cow</div><div class="line">aof 增量持久化，定期 aof 重写，redis4.0 混合了 bgsave 和 aof, 效果更好</div><div class="line">aof 如果每条数据 sync 一下，那么就会不丢数据。然而，鬼才会这么做。</div></pre></td></tr></table></figure>
+<h2 id="0x05-踩坑记录"><a href="#0x05-踩坑记录" class="headerlink" title="0x05 踩坑记录"></a>0x05 踩坑记录</h2><h3 id="1-无法磁盘持久化"><a href="#1-无法磁盘持久化" class="headerlink" title="1. 无法磁盘持久化"></a>1. 无法磁盘持久化</h3><p>用 scrapy 配合 scrapy-redis 抓取网页并且存储到 MongoDB 里面。</p>
 <p>由于 scrapy-redis 重写了 scrapy 的几个核心模块，借助 redis 来实现多个 scrapy 节点从而实现分布式。</p>
 <p>默认的 scrapy 设置会把 items 放在 redis 从而方便程序对 items 进行后续处理。这个设计很完美，只是美中不足的是，我常常需要抓取大量页面直接缓存到数据库中。这就导致了 redis 很快就满了。</p>
 <p>于是很容易报出这么一个错误。</p>
@@ -450,6 +466,12 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 进入 redis-cli 删除 items</span></div><div class="line">config <span class="built_in">set</span> stop-writes-on-bgsave-error no</div><div class="line">del xxx_html:items</div><div class="line">config <span class="built_in">set</span> stop-writes-on-bgsave-error yes</div><div class="line"><span class="comment"># 到 bash 下面检查磁盘，我的机器瞬间释放了 3GB 的磁盘空间</span></div><div class="line">df -hl</div></pre></td></tr></table></figure>
 <p>备注：del 一次即可，因为有程序正在运行，所以当 del 之后，原来阻塞的程序接着开始运行。 xxx_html:items 会不断出现新的值。</p>
 <p>Scrapy 立马就开始工作了（无需重启）</p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2016-12-11</strong> 重修文字</li>
+<li><strong>2018-08-28</strong> 常用场景</li>
+</ul>
 
       
     </div>
@@ -671,7 +693,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Redis-Shell"><span class="nav-number">2.</span> <span class="nav-text">0x01. Redis Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Redis-配套工具"><span class="nav-number">3.</span> <span class="nav-text">0x02. Redis 配套工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Redis-Py"><span class="nav-number">4.</span> <span class="nav-text">0x03. Redis-Py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-踩坑记录"><span class="nav-number">5.</span> <span class="nav-text">0x04. 踩坑记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-无法磁盘持久化"><span class="nav-number">5.1.</span> <span class="nav-text">1. 无法磁盘持久化</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Redis-Shell"><span class="nav-number">2.</span> <span class="nav-text">0x01 Redis Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Redis-使用场景"><span class="nav-number">3.</span> <span class="nav-text">0x02 Redis 使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Redis-Py"><span class="nav-number">4.</span> <span class="nav-text">0x03 Redis-Py</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型"><span class="nav-number">4.1.</span> <span class="nav-text">基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本操作"><span class="nav-number">4.2.</span> <span class="nav-text">基本操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-常见问题"><span class="nav-number">5.</span> <span class="nav-text">0x04 常见问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-踩坑记录"><span class="nav-number">6.</span> <span class="nav-text">0x05 踩坑记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-无法磁盘持久化"><span class="nav-number">6.1.</span> <span class="nav-text">1. 无法磁盘持久化</span></a></li></ol></li></ol></div>
             
 
           </div>
