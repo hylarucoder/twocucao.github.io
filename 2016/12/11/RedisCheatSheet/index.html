@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py Django 中使用 Redis 进行缓存 踩坑记录  不定期更新。">
+<meta name="description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py 常见问题 踩坑记录  不定期更新。">
 <meta name="keywords" content="Cheatsheet,Redis">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Redis Cheatsheet">
 <meta property="og:url" content="http://twocucao.xyz/2016/12/11/RedisCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py Django 中使用 Redis 进行缓存 踩坑记录  不定期更新。">
-<meta property="og:updated_time" content="2018-08-28T09:22:37.420Z">
+<meta property="og:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py 常见问题 踩坑记录  不定期更新。">
+<meta property="og:updated_time" content="2018-08-29T02:56:05.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis Cheatsheet">
-<meta name="twitter:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py Django 中使用 Redis 进行缓存 踩坑记录  不定期更新。">
+<meta name="twitter:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py 常见问题 踩坑记录  不定期更新。">
 
 
 
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  703
+                  860
                 </span>
               
 
@@ -422,7 +422,7 @@
 <li>Redis Shell</li>
 <li>Redis 配套工具</li>
 <li>Redis-Py</li>
-<li>Django 中使用 Redis 进行缓存</li>
+<li>常见问题</li>
 <li>踩坑记录</li>
 </ul>
 <p>不定期更新。</p>
@@ -439,15 +439,27 @@
 <li>相关内容。list</li>
 <li>计数器，用于分配 ID</li>
 </ol>
-<h2 id="0x03-Redis-Py"><a href="#0x03-Redis-Py" class="headerlink" title="0x03 Redis-Py"></a>0x03 Redis-Py</h2><h3 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h3><p>string</p>
-<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">set/get</div><div class="line">mget name1,name2,name3</div><div class="line">mset name1 value1 name2 value2</div><div class="line">expire name1 5</div><div class="line">setex name1 5 value1</div></pre></td></tr></table></figure>
+<h3 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h3><p>基本用法就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">set lock:upgdatenewprofile true ex 5 nx</div><div class="line">TODO: 搞事情</div><div class="line">del lock:upgdatenewprofile</div></pre></td></tr></table></figure>
+<p>但是呢？这个逻辑还是有问题的，比如第一个线程的搞事情的时间大于 5s, 那么第二个线程就会加个锁，然后第一个线程释放掉锁。</p>
+<p>于是第三个线程一看，哟，没锁，就开始搞事情。</p>
+<p>这种情况可以使用可重入锁.（但可重入锁本身就会增加代码的复杂度）</p>
+<h3 id="延时队列"><a href="#延时队列" class="headerlink" title="延时队列"></a>延时队列</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brpop</div><div class="line">blpop</div></pre></td></tr></table></figure>
+<p>blocking 本身也会爆异常，所以，也要处理好异常。</p>
+<h2 id="0x03-Redis-Py"><a href="#0x03-Redis-Py" class="headerlink" title="0x03 Redis-Py"></a>0x03 Redis-Py</h2><h3 id="基本类型与其操作"><a href="#基本类型与其操作" class="headerlink" title="基本类型与其操作"></a>基本类型与其操作</h3><ul>
+<li>string</li>
+<li>hash</li>
+<li>set</li>
+<li>zset 有序集合</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">set/get</div><div class="line">mget name1,name2,name3</div><div class="line">mset name1 value1 name2 value2</div><div class="line">expire name1 5</div><div class="line">setex name1 5 value1</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 队列</div><div class="line">rpush queue item1 item2 item3</div><div class="line">llen queue</div><div class="line">lpop queue</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 栈</div><div class="line">rpush stack item1 item2 item3</div><div class="line">llen stack</div><div class="line">rpop stack</div></pre></td></tr></table></figure>
 <p>慢操作</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">lindex # O(n)</div><div class="line"></div><div class="line">lrange queue 0 -1</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># hash 操作</div><div class="line">hgetall</div><div class="line">hlen</div><div class="line">hget</div><div class="line">hset</div><div class="line">hmset</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 有序列表</div><div class="line">zadd</div><div class="line">xrange</div><div class="line">zrevrange</div><div class="line">zcard</div></pre></td></tr></table></figure>
-<h2 id="0x04-常见问题"><a href="#0x04-常见问题" class="headerlink" title="0x04 常见问题"></a>0x04 常见问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bgsave 镜像全量持久化 耗时长</div><div class="line">bgsave 子进程创建之后，父子进程共享数据段，父进程继续提供读写服务，写脏的页面数据会逐渐和子进程分离开.fork / cow</div><div class="line">aof 增量持久化，定期 aof 重写，redis4.0 混合了 bgsave 和 aof, 效果更好</div><div class="line">aof 如果每条数据 sync 一下，那么就会不丢数据。然而，鬼才会这么做。</div></pre></td></tr></table></figure>
+<h3 id="高级类型与其操作"><a href="#高级类型与其操作" class="headerlink" title="高级类型与其操作"></a>高级类型与其操作</h3><h2 id="0x04-常见问题"><a href="#0x04-常见问题" class="headerlink" title="0x04 常见问题"></a>0x04 常见问题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">bgsave 镜像全量持久化 耗时长</div><div class="line">bgsave 子进程创建之后，父子进程共享数据段，父进程继续提供读写服务，写脏的页面数据会逐渐和子进程分离开.fork / cow</div><div class="line">aof 增量持久化，定期 aof 重写，redis4.0 混合了 bgsave 和 aof, 效果更好</div><div class="line">aof 如果每条数据 sync 一下，那么就会不丢数据。然而，鬼才会这么做。</div></pre></td></tr></table></figure>
 <h2 id="0x05-踩坑记录"><a href="#0x05-踩坑记录" class="headerlink" title="0x05 踩坑记录"></a>0x05 踩坑记录</h2><h3 id="1-无法磁盘持久化"><a href="#1-无法磁盘持久化" class="headerlink" title="1. 无法磁盘持久化"></a>1. 无法磁盘持久化</h3><p>用 scrapy 配合 scrapy-redis 抓取网页并且存储到 MongoDB 里面。</p>
 <p>由于 scrapy-redis 重写了 scrapy 的几个核心模块，借助 redis 来实现多个 scrapy 节点从而实现分布式。</p>
 <p>默认的 scrapy 设置会把 items 放在 redis 从而方便程序对 items 进行后续处理。这个设计很完美，只是美中不足的是，我常常需要抓取大量页面直接缓存到数据库中。这就导致了 redis 很快就满了。</p>
@@ -600,7 +612,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">86</span>
+                <span class="site-state-item-count">85</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -622,7 +634,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">97</span>
+                <span class="site-state-item-count">96</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -693,7 +705,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Redis-Shell"><span class="nav-number">2.</span> <span class="nav-text">0x01 Redis Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Redis-使用场景"><span class="nav-number">3.</span> <span class="nav-text">0x02 Redis 使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Redis-Py"><span class="nav-number">4.</span> <span class="nav-text">0x03 Redis-Py</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型"><span class="nav-number">4.1.</span> <span class="nav-text">基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本操作"><span class="nav-number">4.2.</span> <span class="nav-text">基本操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-常见问题"><span class="nav-number">5.</span> <span class="nav-text">0x04 常见问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-踩坑记录"><span class="nav-number">6.</span> <span class="nav-text">0x05 踩坑记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-无法磁盘持久化"><span class="nav-number">6.1.</span> <span class="nav-text">1. 无法磁盘持久化</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Redis-Shell"><span class="nav-number">2.</span> <span class="nav-text">0x01 Redis Shell</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Redis-使用场景"><span class="nav-number">3.</span> <span class="nav-text">0x02 Redis 使用场景</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分布式锁"><span class="nav-number">3.1.</span> <span class="nav-text">分布式锁</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延时队列"><span class="nav-number">3.2.</span> <span class="nav-text">延时队列</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Redis-Py"><span class="nav-number">4.</span> <span class="nav-text">0x03 Redis-Py</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型与其操作"><span class="nav-number">4.1.</span> <span class="nav-text">基本类型与其操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级类型与其操作"><span class="nav-number">4.2.</span> <span class="nav-text">高级类型与其操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-常见问题"><span class="nav-number">5.</span> <span class="nav-text">0x04 常见问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-踩坑记录"><span class="nav-number">6.</span> <span class="nav-text">0x05 踩坑记录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-无法磁盘持久化"><span class="nav-number">6.1.</span> <span class="nav-text">1. 无法磁盘持久化</span></a></li></ol></li></ol></div>
             
 
           </div>

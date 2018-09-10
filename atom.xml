@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://twocucao.xyz/"/>
-  <updated>2018-08-28T14:29:56.048Z</updated>
+  <updated>2018-09-04T03:20:42.314Z</updated>
   <id>http://twocucao.xyz/</id>
   
   <author>
@@ -14,6 +14,149 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Thinking In Web Developing</title>
+    <link href="http://twocucao.xyz/2018/09/04/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/"/>
+    <id>http://twocucao.xyz/2018/09/04/系统设计入门笔记/</id>
+    <published>2018-09-04T02:39:45.000Z</published>
+    <updated>2018-09-04T03:20:42.314Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><h2 id="0x02-前端"><a href="#0x02-前端" class="headerlink" title="0x02 前端"></a>0x02 前端</h2><h3 id="CDN"><a href="#CDN" class="headerlink" title="CDN"></a>CDN</h3><p>代理服务器分布式网络，它从靠近用户的位置提供内容</p>
+<h4 id="更新方式"><a href="#更新方式" class="headerlink" title="更新方式"></a>更新方式</h4><p>推送 PUSH</p>
+<p>当服务器内容发生变动，推送 CDN 接受新的内容。</p>
+<ul>
+<li>更新最快</li>
+<li>流量最小化</li>
+<li>存储最大化</li>
+</ul>
+<p>拉取 PULL</p>
+<p>当用户请求该资源的时候，从服务器拉取资源。</p>
+<ul>
+<li>更新有延迟</li>
+<li>存储最小化</li>
+</ul>
+<h4 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h4><ol>
+<li>CDN 成本可能会很高</li>
+<li>TTL 过期之前更新内容，CDN 缓存内容可能会过时</li>
+</ol>
+<h2 id="0x02-前端-1"><a href="#0x02-前端-1" class="headerlink" title="0x02 前端"></a>0x02 前端</h2><h3 id="负载均衡器"><a href="#负载均衡器" class="headerlink" title="负载均衡器"></a>负载均衡器</h3><p>负载均衡起到了一个均衡负载的作用</p>
+<ol>
+<li>防止请求进入运行情况糟糕的服务器。</li>
+<li>防止资源过载。</li>
+<li>帮助消除单一故障点。</li>
+</ol>
+<p>额外的功能：</p>
+<ol>
+<li>SSL 终结：解密传入的请求，并加密服务器响应。</li>
+</ol>
+<p>工作-备用 / 双工作</p>
+<h4 id="选-Worker"><a href="#选-Worker" class="headerlink" title="选 Worker"></a>选 Worker</h4><ul>
+<li>Random</li>
+<li>Round Robin</li>
+<li>Least Busy</li>
+<li>Sticky session / Cookie</li>
+<li>By request paramters</li>
+</ul>
+<h4 id="路由流量"><a href="#路由流量" class="headerlink" title="路由流量"></a>路由流量</h4><ul>
+<li>随机</li>
+<li>最少负载</li>
+<li>Session/Cookie</li>
+<li>轮询调度或加权轮询调度</li>
+<li>四层负载均衡</li>
+<li>七层负载均衡</li>
+</ul>
+<h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><ul>
+<li>安全性：隐藏后端服务器信息</li>
+<li>可扩展性和灵活性：客户端只能看到服务器，服务端</li>
+<li>本地终结 SSL 会话：</li>
+<li>压缩：</li>
+<li>缓存：</li>
+<li>静态内容：</li>
+</ul>
+<h2 id="0xEE-结论"><a href="#0xEE-结论" class="headerlink" title="0xEE 结论"></a>0xEE 结论</h2>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;h2 id=&quot;0x02-前端&quot;&gt;&lt;a href=&quot;#0x02-前端&quot; class=&quot;headerlink
+    
+    </summary>
+    
+      <category term="编程思索" scheme="http://twocucao.xyz/categories/%E7%BC%96%E7%A8%8B%E6%80%9D%E7%B4%A2/"/>
+    
+    
+      <category term="后端开发" scheme="http://twocucao.xyz/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Thinking In Go Language</title>
+    <link href="http://twocucao.xyz/2018/08/29/GoLang/"/>
+    <id>http://twocucao.xyz/2018/08/29/GoLang/</id>
+    <published>2018-08-29T00:35:21.000Z</published>
+    <updated>2018-09-03T01:57:47.170Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本来这篇文章是写 Rust 的，结果刚开了一个开头就弃坑了。</p>
+<a id="more"></a>
+<h3 id="为什么是-Go"><a href="#为什么是-Go" class="headerlink" title="为什么是 Go"></a>为什么是 Go</h3><p>写着玩玩的….</p>
+<h3 id="工具链"><a href="#工具链" class="headerlink" title="工具链"></a>工具链</h3><h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><h3 id="社区"><a href="#社区" class="headerlink" title="社区"></a>社区</h3><h3 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><h3 id="内置简单类型"><a href="#内置简单类型" class="headerlink" title="内置简单类型"></a>内置简单类型</h3><p>对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</p>
+<ul>
+<li>数字类型</li>
+<li>布尔类型</li>
+<li>字符串类型</li>
+<li>数组 / 列表</li>
+<li>字典</li>
+</ul>
+<h3 id="内置复杂类型"><a href="#内置复杂类型" class="headerlink" title="内置复杂类型"></a>内置复杂类型</h3><ul>
+<li>集合结构 : 串</li>
+<li>线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，<strong>栈，队列</strong>)</li>
+<li>树形结构 : 树（二叉树，B+ 树，红黑树）</li>
+<li>图形结构 : 图</li>
+</ul>
+<h3 id="对象"><a href="#对象" class="headerlink" title="对象"></a>对象</h3><h3 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。</p>
+<p>这里的模块指的是一个包下的函数。</p>
+<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p>面向对象有三大概念：</p>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><p>异常处理实际上可以考验一个程序员编写代码的健壮性。</p>
+<p>事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。</p>
+<h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><blockquote>
+<p>Go 多线程约等于并发。</p>
+</blockquote>
+<h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><p>如果有两个线程，同时进行 IO 请求，当其中一个线程连接之后，立即会<strong>主动让出 GIL</strong>, 其他线程就可以运行。</p>
+<blockquote>
+<p>当 N 个线程在网络 I/O 堵塞，或等待重新获取 GIL，而一个线程运行 Python。</p>
+</blockquote>
+<p>让出之后还要执行代码呀，所以要有个收回 GIL 的动作。</p>
+<h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><p>原子操作：sort 之类不需要<br>非原子操作：n=n+2 的字节码分为 加载 n , 加载 2 , 相加，存储 n, 四个步骤，由于不是原子性，很可能被由于 15 ms 而被打断。</p>
+<p>当然，懒人一向是 : <strong>优先级不决加括号，线程不决加 lock</strong></p>
+<p>对于 Java, 程序员努力在尽可能短的时间内加锁存取共享数据，减轻线程的争夺，实现最大并行。但 Python 中，线程无法并行运行，细粒度的锁就没有了优势。</p>
+<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h2 id="0x05-第三方库"><a href="#0x05-第三方库" class="headerlink" title="0x05 第三方库"></a>0x05 第三方库</h2><ul>
+<li>Requests : API 人性化</li>
+</ul>
+<h2 id="0x06-代码质量"><a href="#0x06-代码质量" class="headerlink" title="0x06 代码质量"></a>0x06 代码质量</h2><h3 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h3><h3 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h3><h3 id="可读性"><a href="#可读性" class="headerlink" title="可读性"></a>可读性</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0x07-常用命令"><a href="#0x07-常用命令" class="headerlink" title="0x07 常用命令"></a>0x07 常用命令</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">go build</div><div class="line">go install -v</div><div class="line">go clean</div><div class="line">go fmt</div><div class="line">go get</div><div class="line">go test</div><div class="line">go tool fix . # 修复老代码到新版本</div><div class="line">go tool vet directory|files</div><div class="line">go tool yacc -o gopher.go -p parser gopher.y</div><div class="line">godoc -http=:8080</div><div class="line">go version 查看 go 当前的版本</div><div class="line">go env 查看当前 go 的环境变量</div><div class="line">go list 列出当前全部安装的 package</div><div class="line">go run 编译并运行 Go 程序</div></pre></td></tr></table></figure>
+<h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-08-22</strong> 初始化接口</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本来这篇文章是写 Rust 的，结果刚开了一个开头就弃坑了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Go" scheme="http://twocucao.xyz/categories/Go/"/>
+    
+    
+      <category term="后端开发" scheme="http://twocucao.xyz/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+  </entry>
   
   <entry>
     <title>Shell CheatSheet</title>
@@ -166,199 +309,6 @@
       <category term="macOS" scheme="http://twocucao.xyz/tags/macOS/"/>
     
       <category term="Linux" scheme="http://twocucao.xyz/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>K8s CheatSheet</title>
-    <link href="http://twocucao.xyz/2018/08/25/K8sCheatSheet/"/>
-    <id>http://twocucao.xyz/2018/08/25/K8sCheatSheet/</id>
-    <published>2018-08-25T00:53:02.891Z</published>
-    <updated>2018-08-25T00:53:02.891Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 k8s 相关和命令。</p>
-<p>不定期更新。</p>
-<p>源码放在</p>
-<a id="more"></a>
-<h2 id="0x01-k8s-相关概念"><a href="#0x01-k8s-相关概念" class="headerlink" title="0x01 k8s 相关概念"></a>0x01 k8s 相关概念</h2><h1 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h1><ul>
-<li><a href="https://github.com/wsargent/docker-cheat-sheet" target="_blank" rel="external">https://github.com/wsargent/docker-cheat-sheet</a></li>
-</ul>
-<hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2017-01-20</strong> 初始化本文</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 k8s 相关和命令。&lt;/p&gt;
-&lt;p&gt;不定期更新。&lt;/p&gt;
-&lt;p&gt;源码放在&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="我的开源项目" scheme="http://twocucao.xyz/categories/%E6%88%91%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"/>
-    
-    
-      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
-    
-      <category term="Docker" scheme="http://twocucao.xyz/tags/Docker/"/>
-    
-      <category term="DevOps" scheme="http://twocucao.xyz/tags/DevOps/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>RabbitMQ CheatSheet</title>
-    <link href="http://twocucao.xyz/2018/08/23/RabbitMQCheatSheet/"/>
-    <id>http://twocucao.xyz/2018/08/23/RabbitMQCheatSheet/</id>
-    <published>2018-08-23T10:05:29.000Z</published>
-    <updated>2018-08-23T13:54:37.523Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 RabbitMQ 相关和命令。</p>
-<ul>
-<li>安装与基本配置</li>
-<li>RabbitMQ 配套工具</li>
-</ul>
-<p>不定期更新。</p>
-<a id="more"></a>
-<h2 id="0x01-安装，配置，基本-shell-命令"><a href="#0x01-安装，配置，基本-shell-命令" class="headerlink" title="0x01 安装，配置，基本 shell 命令"></a>0x01 安装，配置，基本 shell 命令</h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h3 id="基本-Shell-命令"><a href="#基本-Shell-命令" class="headerlink" title="基本 Shell 命令"></a>基本 Shell 命令</h3><h2 id="0x02-RabbitMQ-基本概念"><a href="#0x02-RabbitMQ-基本概念" class="headerlink" title="0x02 RabbitMQ 基本概念"></a>0x02 RabbitMQ 基本概念</h2><p>发布者的消息经过交换机，分发到不同的队列，最后由接收方进行处理。</p>
-<p>那么问题来了，交换机都是用来干嘛的</p>
-<ul>
-<li>Direct 单播路由：扔一条消息到一个队列中，依照 routingkey 投递</li>
-<li>Topic  多播路由：发给某几类队列（通知）.</li>
-<li>Fanout 广播路由：发给全部绑定在该路由上面的队列。</li>
-<li>Headers</li>
-</ul>
-<ol>
-<li>应用解耦。（平台无关，语言无关）</li>
-</ol>
-<p>比如说，但项目足够大的时候，更新一个活动，可能需要更新用户的一些状态，可能要更新一波统计数据，可能要记录一批日志。这个时候原来的代码可能这么写：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">update_activity()</div><div class="line">update_user()</div><div class="line">update_user_cache()</div><div class="line">update_stats()</div><div class="line">record_user_log()</div></pre></td></tr></table></figure>
-<p>现在代码就可能这么写：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">send_task_update_activity()</div><div class="line">send_task_update_user()</div><div class="line">send_task_update_user_cache()</div><div class="line">send_task_update_stats()</div><div class="line">send_task_record_user_log()</div></pre></td></tr></table></figure>
-<ol>
-<li>异步通信。（减轻请求峰值）</li>
-</ol>
-<p>原本一个 webapp 不做异步的话，也能搞定，但做了异步之后，可以大幅度提升吞吐量和响应时间。</p>
-<ol>
-<li>数据持久化。（不丢失消息）</li>
-<li>送达保证。(ack late)</li>
-</ol>
-<h2 id="0x07-踩坑集"><a href="#0x07-踩坑集" class="headerlink" title="0x07. 踩坑集"></a>0x07. 踩坑集</h2><ul>
-<li>序列问题</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 RabbitMQ 相关和命令。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;安装与基本配置&lt;/li&gt;
-&lt;li&gt;RabbitMQ 配套工具&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;不定期更新。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="后台组件" scheme="http://twocucao.xyz/categories/%E5%90%8E%E5%8F%B0%E7%BB%84%E4%BB%B6/"/>
-    
-    
-      <category term="CheatSheet" scheme="http://twocucao.xyz/tags/CheatSheet/"/>
-    
-      <category term="RabbitMQ" scheme="http://twocucao.xyz/tags/RabbitMQ/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Thinking In Go Language</title>
-    <link href="http://twocucao.xyz/2018/08/22/GoLearn/"/>
-    <id>http://twocucao.xyz/2018/08/22/GoLearn/</id>
-    <published>2018-08-22T12:06:05.000Z</published>
-    <updated>2018-08-22T03:06:33.210Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><blockquote>
-<p>Go 简略笔记</p>
-</blockquote>
-<a id="more"></a>
-<h3 id="1-为什么是-Go"><a href="#1-为什么是-Go" class="headerlink" title="1. 为什么是 Go"></a>1. 为什么是 Go</h3><p>好吧，其实是因为不想写 Java…. 逃。</p>
-<h3 id="2-工具链"><a href="#2-工具链" class="headerlink" title="2. 工具链"></a>2. 工具链</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vim ~/.gvm/scripts/install</div><div class="line">GO_SOURCE_URL=https://github.com/golang/go</div></pre></td></tr></table></figure>
-<h3 id="4-文档"><a href="#4-文档" class="headerlink" title="4. 文档"></a>4. 文档</h3><h3 id="5-社区"><a href="#5-社区" class="headerlink" title="5. 社区"></a>5. 社区</h3><h3 id="6-书籍"><a href="#6-书籍" class="headerlink" title="6. 书籍"></a>6. 书籍</h3><h2 id="0x01-基本概念"><a href="#0x01-基本概念" class="headerlink" title="0x01 基本概念"></a>0x01 基本概念</h2><blockquote>
-<p> 程序 = 算法 + 数据结构</p>
-</blockquote>
-<p>这句话当然是不全面的，但并不影响这句话在计算机世界里面的地位。</p>
-<p>依我看来，对我的启发大致是：</p>
-<blockquote>
-<p>我会把 API 的调用和数据结构以及算法想清楚，然后才动手把代码分解成伪代码。</p>
-</blockquote>
-<h3 id="1-数据类型"><a href="#1-数据类型" class="headerlink" title="1. 数据类型"></a>1. 数据类型</h3><p>数据类型按照不同的划分标准可以进行不同的划分：</p>
-<p>按照复杂性可以这么划分：</p>
-<ul>
-<li>简单类型</li>
-<li>复杂类型</li>
-</ul>
-<p>按照复杂性可以这么划分：</p>
-<ul>
-<li>基本类型</li>
-<li>引用类型</li>
-</ul>
-<p>按照数据结构可以这么划分：</p>
-<ul>
-<li>集合结构 : 串</li>
-<li>线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，<strong>栈，队列</strong>)</li>
-<li>树形结构 : 树（二叉树，B+ 树，红黑树）</li>
-<li>图形结构 : 图</li>
-</ul>
-<h3 id="2-操作"><a href="#2-操作" class="headerlink" title="2. 操作"></a>2. 操作</h3><h4 id="操作"><a href="#操作" class="headerlink" title="操作"></a>操作</h4><p>对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</p>
-<p>对于复杂的一些数据类型，则需要对数据结构多一些了解。</p>
-<p>比如，对队列而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对 hash 而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字典而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字符串而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？</p>
-<p>那字符串来说，Java 推荐使用 StringBuilder 来合并多个字符串，Python 推荐 join 多个字符串等等。</p>
-<h4 id="操作-1"><a href="#操作-1" class="headerlink" title="操作"></a>操作</h4><h3 id="3-语句"><a href="#3-语句" class="headerlink" title="3. 语句"></a>3. 语句</h3><h2 id="0x02-中级概念"><a href="#0x02-中级概念" class="headerlink" title="0x02 中级概念"></a>0x02 中级概念</h2><h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><h3 id="模块"><a href="#模块" class="headerlink" title="模块"></a>模块</h3><p>模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。</p>
-<p>这里的模块指的是一个包下的函数。</p>
-<h3 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h3><p>面向对象有三大概念：</p>
-<ul>
-<li>封装</li>
-<li>继承</li>
-<li>多态</li>
-</ul>
-<h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><p>异常处理实际上可以考验一个程序员编写代码的健壮性。</p>
-<p>事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。</p>
-<h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="进程和线程"><a href="#进程和线程" class="headerlink" title="进程和线程"></a>进程和线程</h3><h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><blockquote>
-<p>Go 多线程约等于并发。</p>
-</blockquote>
-<h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><p>如果有两个线程，同时进行 IO 请求，当其中一个线程连接之后，立即会<strong>主动让出 GIL</strong>, 其他线程就可以运行。</p>
-<blockquote>
-<p>当 N 个线程在网络 I/O 堵塞，或等待重新获取 GIL，而一个线程运行 Python。</p>
-</blockquote>
-<p>让出之后还要执行代码呀，所以要有个收回 GIL 的动作。</p>
-<h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><p>原子操作：sort 之类不需要<br>非原子操作：n=n+2 的字节码分为 加载 n , 加载 2 , 相加，存储 n, 四个步骤，由于不是原子性，很可能被由于 15 ms 而被打断。</p>
-<p>当然，懒人一向是 : <strong>优先级不决加括号，线程不决加 lock</strong></p>
-<p>对于 Java, 程序员努力在尽可能短的时间内加锁存取共享数据，减轻线程的争夺，实现最大并行。但 Python 中，线程无法并行运行，细粒度的锁就没有了优势。</p>
-<h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x03-高级技巧"><a href="#0x03-高级技巧" class="headerlink" title="0x03 高级技巧"></a>0x03 高级技巧</h2><h2 id="0x04-标准库"><a href="#0x04-标准库" class="headerlink" title="0x04 标准库"></a>0x04 标准库</h2><h3 id="常用内建模块"><a href="#常用内建模块" class="headerlink" title="常用内建模块"></a>常用内建模块</h3><h3 id="系统化模块"><a href="#系统化模块" class="headerlink" title="系统化模块"></a>系统化模块</h3><h2 id="0x05-第三方库"><a href="#0x05-第三方库" class="headerlink" title="0x05 第三方库"></a>0x05 第三方库</h2><ul>
-<li>Requests : API 人性化</li>
-</ul>
-<h2 id="0x06-代码质量"><a href="#0x06-代码质量" class="headerlink" title="0x06 代码质量"></a>0x06 代码质量</h2><h3 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h3><h3 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h3><h3 id="可读性"><a href="#可读性" class="headerlink" title="可读性"></a>可读性</h3><h3 id="安全性"><a href="#安全性" class="headerlink" title="安全性"></a>安全性</h3><h3 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h3><h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><hr>
-<p>ChangeLog:</p>
-<ul>
-<li><strong>2018-08-22</strong> 初始化接口</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;Go 简略笔记&lt;/p&gt;
-&lt;/blockquote&gt;
-    
-    </summary>
-    
-      <category term="Go" scheme="http://twocucao.xyz/categories/Go/"/>
-    
-    
-      <category term="Go" scheme="http://twocucao.xyz/tags/Go/"/>
-    
-      <category term="后端开发" scheme="http://twocucao.xyz/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
     
   </entry>
   
@@ -969,69 +919,6 @@
   </entry>
   
   <entry>
-    <title>Python 自动化工具 Fabric 支持 Python3 了</title>
-    <link href="http://twocucao.xyz/2018/05/22/pipenv/"/>
-    <id>http://twocucao.xyz/2018/05/22/pipenv/</id>
-    <published>2018-05-22T13:11:03.000Z</published>
-    <updated>2018-05-22T14:27:06.764Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。</p>
-<p>后来</p>
-<ul>
-<li><del>我总算学会了如何去爱。<del></del></del></li>
-<li>我喜欢的工具陆陆续续支持了 Python3</li>
-<li>Scrapy 支持了 Python3</li>
-<li>Ansible 支持了 Python3</li>
-</ul>
-<p>只有 Fabric 这个工具，死撑着没有支持 Python3 的的迹象。</p>
-<p>2018-05-08 的时候，Fabric 悄悄升级了 2.0 版本。</p>
-<p>而就在前两天，我升级网站的时候，突然发现 fabric (1.14 版本） 不能用了。</p>
-<p>查了一下版本，发现 fabric 更新到了 2.0 版本，支持了 python3.4</p>
-<p>在发现这个问题之后，火速刷了一波官方文档，把手头 Fabric 1.14 版本的脚本做了一些升级。</p>
-<h3 id="从-V1-到-V2"><a href="#从-V1-到-V2" class="headerlink" title="从 V1 到 V2"></a>从 V1 到 V2</h3><p>Fabric v2 基于 invoke 和 paramiko 两个库构建而成。</p>
-<ul>
-<li>invoke 库提供了 subprocess command execution 和 command-line</li>
-<li>paramiko 提供了 ssh 协议实现</li>
-</ul>
-<p>在这两者的基础上，做了一些扩展。</p>
-<p>甚至，如果你只用其中的本地功能，你都完全不需要使用 fabric, 直接用 invoke 即可。没错，我已经打算把我的本地脚本全部使用 invoke Python3 化了。</p>
-<p>v1 版本和 v2 版本初步用起来，个人觉得 v1 用起来 API 更加符合直觉一些。</p>
-<p>这东西怎么用呢？</p>
-<p>我们先定义 fabfile</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># fabfile.py</div><div class="line">from invoke import task</div><div class="line"></div><div class="line">def expand_path(c, path):</div><div class="line">    return &apos;&quot;$(echo %s)&quot;&apos; % path</div><div class="line"></div><div class="line">def exists(c, path):</div><div class="line">    cmd = &apos;stat %s&apos; % expand_path(c, path)</div><div class="line">    return c.run(cmd, warn=True, hide=True).ok</div><div class="line"></div><div class="line">@task</div><div class="line">def deploy(c):</div><div class="line">    c.local(&quot;youcmd&quot;)</div><div class="line">    c.put()</div><div class="line">    c.get()</div><div class="line">    c.run()</div><div class="line">    c.run(&quot;sudo youcmd&quot;)</div><div class="line">    ......</div><div class="line"></div><div class="line">@task</div><div class="line">def other_stuff(c):</div><div class="line">    ......</div></pre></td></tr></table></figure>
-<p>需要注意的是，invoke 里面默认的 replace_env 设置为了 False ,fabric 里面给 runner 设置了 replace_env 为 True , 这也就意味着默认情况下，执行 c.local 的时候会找不到自定义的环境变量，这意味着：</p>
-<ol>
-<li>你的 PATH 被重置了，这意味着你用 brew 安装的软件可能已经完全找不到了。</li>
-<li>你的环境变量 LANG 并不一定是 en_US.UTF-8 了</li>
-</ol>
-<p>于是设置一下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ~/.fabric.py</div><div class="line">#!/usr/bin/env python</div><div class="line"># encoding: utf-8</div><div class="line"></div><div class="line">run = &#123;</div><div class="line">    &quot;replace_env&quot;: False</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当我要部署的时候直接执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fab -H webserver01,webserver02,webserver03,webserver04 deploy</div></pre></td></tr></table></figure>
-<p>到这里大家基本上看出来了，我并没有在文件中 import fabric 只是简单了配置了一个配置文件和执行一下 fab 命令。</p>
-<p>这个 v2 版本的 fabric 相当于 invoke 的包装。但我们也可以显式的 import fabric 里面的东西进行更加进阶的操作。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。
-    
-    </summary>
-    
-      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
-    
-    
-      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
-    
-      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
-    
-      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
-    
-      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
-    
-  </entry>
-  
-  <entry>
     <title>PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具</title>
     <link href="http://twocucao.xyz/2018/05/22/fabric2/"/>
     <id>http://twocucao.xyz/2018/05/22/fabric2/</id>
@@ -1102,6 +989,69 @@
     <summary type="html">
     
       &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
+    
+      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
+    
+      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python 自动化工具 Fabric 支持 Python3 了</title>
+    <link href="http://twocucao.xyz/2018/05/22/pipenv/"/>
+    <id>http://twocucao.xyz/2018/05/22/pipenv/</id>
+    <published>2018-05-22T13:11:03.000Z</published>
+    <updated>2018-05-22T14:27:06.764Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。</p>
+<p>后来</p>
+<ul>
+<li><del>我总算学会了如何去爱。<del></del></del></li>
+<li>我喜欢的工具陆陆续续支持了 Python3</li>
+<li>Scrapy 支持了 Python3</li>
+<li>Ansible 支持了 Python3</li>
+</ul>
+<p>只有 Fabric 这个工具，死撑着没有支持 Python3 的的迹象。</p>
+<p>2018-05-08 的时候，Fabric 悄悄升级了 2.0 版本。</p>
+<p>而就在前两天，我升级网站的时候，突然发现 fabric (1.14 版本） 不能用了。</p>
+<p>查了一下版本，发现 fabric 更新到了 2.0 版本，支持了 python3.4</p>
+<p>在发现这个问题之后，火速刷了一波官方文档，把手头 Fabric 1.14 版本的脚本做了一些升级。</p>
+<h3 id="从-V1-到-V2"><a href="#从-V1-到-V2" class="headerlink" title="从 V1 到 V2"></a>从 V1 到 V2</h3><p>Fabric v2 基于 invoke 和 paramiko 两个库构建而成。</p>
+<ul>
+<li>invoke 库提供了 subprocess command execution 和 command-line</li>
+<li>paramiko 提供了 ssh 协议实现</li>
+</ul>
+<p>在这两者的基础上，做了一些扩展。</p>
+<p>甚至，如果你只用其中的本地功能，你都完全不需要使用 fabric, 直接用 invoke 即可。没错，我已经打算把我的本地脚本全部使用 invoke Python3 化了。</p>
+<p>v1 版本和 v2 版本初步用起来，个人觉得 v1 用起来 API 更加符合直觉一些。</p>
+<p>这东西怎么用呢？</p>
+<p>我们先定义 fabfile</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># fabfile.py</div><div class="line">from invoke import task</div><div class="line"></div><div class="line">def expand_path(c, path):</div><div class="line">    return &apos;&quot;$(echo %s)&quot;&apos; % path</div><div class="line"></div><div class="line">def exists(c, path):</div><div class="line">    cmd = &apos;stat %s&apos; % expand_path(c, path)</div><div class="line">    return c.run(cmd, warn=True, hide=True).ok</div><div class="line"></div><div class="line">@task</div><div class="line">def deploy(c):</div><div class="line">    c.local(&quot;youcmd&quot;)</div><div class="line">    c.put()</div><div class="line">    c.get()</div><div class="line">    c.run()</div><div class="line">    c.run(&quot;sudo youcmd&quot;)</div><div class="line">    ......</div><div class="line"></div><div class="line">@task</div><div class="line">def other_stuff(c):</div><div class="line">    ......</div></pre></td></tr></table></figure>
+<p>需要注意的是，invoke 里面默认的 replace_env 设置为了 False ,fabric 里面给 runner 设置了 replace_env 为 True , 这也就意味着默认情况下，执行 c.local 的时候会找不到自定义的环境变量，这意味着：</p>
+<ol>
+<li>你的 PATH 被重置了，这意味着你用 brew 安装的软件可能已经完全找不到了。</li>
+<li>你的环境变量 LANG 并不一定是 en_US.UTF-8 了</li>
+</ol>
+<p>于是设置一下。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ~/.fabric.py</div><div class="line">#!/usr/bin/env python</div><div class="line"># encoding: utf-8</div><div class="line"></div><div class="line">run = &#123;</div><div class="line">    &quot;replace_env&quot;: False</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当我要部署的时候直接执行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fab -H webserver01,webserver02,webserver03,webserver04 deploy</div></pre></td></tr></table></figure>
+<p>到这里大家基本上看出来了，我并没有在文件中 import fabric 只是简单了配置了一个配置文件和执行一下 fab 命令。</p>
+<p>这个 v2 版本的 fabric 相当于 invoke 的包装。但我们也可以显式的 import fabric 里面的东西进行更加进阶的操作。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。
     
     </summary>
     
@@ -1458,7 +1408,7 @@
     <link href="http://twocucao.xyz/2018/03/31/SQLAlchemyCheatSheet/"/>
     <id>http://twocucao.xyz/2018/03/31/SQLAlchemyCheatSheet/</id>
     <published>2018-03-31T09:16:35.000Z</published>
-    <updated>2018-05-18T11:36:28.745Z</updated>
+    <updated>2018-09-01T11:55:42.870Z</updated>
     
     <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。</p>
 <p>本笔记于 2018-03-31 开启，SQLAlchemy 版本为 1.2.0。</p>
@@ -1627,9 +1577,13 @@
 <h2 id="0x04-SQLAlchemy-的基础特性-Under-The-Hood"><a href="#0x04-SQLAlchemy-的基础特性-Under-The-Hood" class="headerlink" title="0x04 SQLAlchemy 的基础特性 Under The Hood"></a>0x04 SQLAlchemy 的基础特性 Under The Hood</h2><h3 id="Loading-策略"><a href="#Loading-策略" class="headerlink" title="Loading 策略"></a>Loading 策略</h3><h4 id="Lazy-Loading"><a href="#Lazy-Loading" class="headerlink" title="Lazy Loading"></a>Lazy Loading</h4><h4 id="Eager-Loading"><a href="#Eager-Loading" class="headerlink" title="Eager Loading"></a>Eager Loading</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; from sqlalchemy.dialects import postgresql</div><div class="line">&gt;&gt;&gt; print str(q.statement.compile(dialect=postgresql.dialect()))</div><div class="line">Where q is defined as:</div></pre></td></tr></table></figure>
 <h2 id="0x05-SQLAlchemy-的高级特性-Under-The-Hood"><a href="#0x05-SQLAlchemy-的高级特性-Under-The-Hood" class="headerlink" title="0x05 SQLAlchemy 的高级特性 Under The Hood"></a>0x05 SQLAlchemy 的高级特性 Under The Hood</h2><h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p><a href="https://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy" target="_blank" rel="external">https://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy</a><br><a href="https://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications" target="_blank" rel="external">https://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">https://stackoverflow.com/questions/34322471/sqlalchemy-engine-connection-and-session-difference</div><div class="line">https://stackoverflow.com/questions/11769366/why-is-sqlalchemy-insert-with-sqlite-25-times-slower-than-using-sqlite3-directly</div><div class="line">https://stackoverflow.com/questions/12223335/sqlalchemy-creating-vs-reusing-a-session</div><div class="line">session 是个容器</div><div class="line"></div><div class="line">https://stackoverflow.com/questions/18199053/example-of-what-sqlalchemy-can-do-and-django-orm-cannot</div><div class="line">https://stackoverflow.com/questions/7389759/memory-efficient-built-in-sqlalchemy-iterator-generator</div><div class="line"></div><div class="line"># 日志</div><div class="line">import logging</div><div class="line">logging.basicConfig()</div><div class="line">logging.getLogger(&apos;sqlalchemy.engine&apos;).setLevel(logging.INFO)</div></pre></td></tr></table></figure>
-<h2 id="配置篇"><a href="#配置篇" class="headerlink" title="配置篇"></a>配置篇</h2><p>SQLALCHEMY_TRACK_MODIFICATIONS = False</p>
-<h2 id="0x06-DEBUG-和-Profile-技巧"><a href="#0x06-DEBUG-和-Profile-技巧" class="headerlink" title="0x06 DEBUG 和 Profile 技巧"></a>0x06 DEBUG 和 Profile 技巧</h2><h3 id="6-1-查看技巧"><a href="#6-1-查看技巧" class="headerlink" title="6.1 查看技巧"></a>6.1 查看技巧</h3><p>dict(u)<br>u.<strong>dict</strong></p>
+<h2 id="0x06-DEBUG-和-Profile-技巧"><a href="#0x06-DEBUG-和-Profile-技巧" class="headerlink" title="0x06 DEBUG 和 Profile 技巧"></a>0x06 DEBUG 和 Profile 技巧</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">SQLALCHEMY_TRACK_MODIFICATIONS = False</div></pre></td></tr></table></figure>
+<h3 id="6-1-查看技巧"><a href="#6-1-查看技巧" class="headerlink" title="6.1 查看技巧"></a>6.1 查看技巧</h3><p>dict(u)<br>u.<strong>dict</strong></p>
 <p><a href="https://stackoverflow.com/questions/1171166/how-can-i-profile-a-sqlalchemy-powered-application" target="_blank" rel="external">https://stackoverflow.com/questions/1171166/how-can-i-profile-a-sqlalchemy-powered-application</a></p>
+<p>如果用上 Flask+SQLAlchemy 一般也要带上，Flask-Migration 与 Flask-SQLAlchemy, 这两个库也是对 Alembic 和 SQLAlchemy 的浅封装。</p>
+<p>那么，对于这个 ORM 库还有那些通用性的知识需要了解？</p>
+<p>嗯，是时候了解本质了。</p>
+<p><a href="http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/" target="_blank" rel="external">http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/</a></p>
 <h2 id="0x07-ORM-的本质"><a href="#0x07-ORM-的本质" class="headerlink" title="0x07 ORM 的本质"></a>0x07 ORM 的本质</h2><p>ORM 的本质是 Data Access Layer 上的一层封装。如果你写原生 SQL, 即手写 DAL 的话，开发效率可能会大打折扣。</p>
 <h3 id="ORM-的两种类型-Active-Record-与-Data-Mappers"><a href="#ORM-的两种类型-Active-Record-与-Data-Mappers" class="headerlink" title="ORM 的两种类型 Active Record 与 Data Mappers"></a>ORM 的两种类型 Active Record 与 Data Mappers</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"># ActiveRecord 风格写起来类似于 Django ORM, 大致是这样的</div><div class="line"></div><div class="line">## AR 的模型定义</div><div class="line"></div><div class="line">class User(db.models):</div><div class="line">    name = db.StringField(verbose=&quot;xyz&quot;)</div><div class="line"></div><div class="line">## AR 的新增</div><div class="line">user = User()</div><div class="line">user.name = &quot;123456&quot;</div><div class="line">user.save() ## 正好对应数据库中的一行</div><div class="line"></div><div class="line">## AR 的查询</div><div class="line"></div><div class="line">users = User.objects.filter(Q(name=&quot;黄老板的小姨子&quot;)).all()</div><div class="line"></div><div class="line"># Data Mappers 风格写起来类似于 SQLAlchemy ORM, 大致是这样的</div><div class="line"></div><div class="line">## SA 的定义</div><div class="line"></div><div class="line">from sqlalchemy.ext.declarative import declarative_base</div><div class="line"></div><div class="line">Base = declarative_base()</div><div class="line"></div><div class="line">from sqlalchemy import Column, Integer, String</div><div class="line">class User(Base):</div><div class="line">    __tablename__ = &apos;users&apos;</div><div class="line"></div><div class="line">    id = Column(Integer, primary_key=True)</div><div class="line">    name = Column(String)</div><div class="line"></div><div class="line">Base.metadata.create_all(engine)</div><div class="line"></div><div class="line">## SA 的新增</div><div class="line"></div><div class="line">user = User()</div><div class="line">user.name = &quot;123456&quot;</div><div class="line">session.add(user)</div><div class="line">sessoon.commit() ## 嗯？其实也是对应数据库中的一行。</div><div class="line"></div><div class="line">## SA 的查询</div><div class="line"></div><div class="line">session.query(User).filter(User.name)</div></pre></td></tr></table></figure>
 <p>问题来了，这两者到底是什么，看起来似乎相差不大。</p>
@@ -1650,12 +1604,12 @@
 <p>于是我们可以得出结论，可以在 SQLAlchemy 上面进行一定的封装，使得最后用起来非常的 Django ORM like，其实 SQLAlchemy 稍加定制还是可以很 Django ORM-like 的。</p>
 <p>:TODO: 有机会看看那本书再修改一下本小节</p>
 <p>这不，果然有人就这么搞了 <a href="https://github.com/absent1706/sqlalchemy-mixins" target="_blank" rel="external">https://github.com/absent1706/sqlalchemy-mixins</a></p>
-<h2 id="0x07-其他"><a href="#0x07-其他" class="headerlink" title="0x07 其他"></a>0x07 其他</h2><h3 id="SQL-注入"><a href="#SQL-注入" class="headerlink" title="SQL 注入"></a>SQL 注入</h3><p>session.query(MyClass).filter(“foo={}”.format(getArgs[‘val’]))</p>
-<h2 id="0x02-SQLAlchemy-及其生态"><a href="#0x02-SQLAlchemy-及其生态" class="headerlink" title="0x02 SQLAlchemy 及其生态"></a>0x02 SQLAlchemy 及其生态</h2><p>如果用上 Flask+SQLAlchemy 一般也要带上，Flask-Migration 与 Flask-SQLAlchemy, 这两个库也是对 Alembic 和 SQLAlchemy 的浅封装。</p>
-<h3 id="如何快速上手-ORM"><a href="#如何快速上手-ORM" class="headerlink" title="如何快速上手 ORM"></a>如何快速上手 ORM</h3><p>那么，对于这个 ORM 库还有那些通用性的知识需要了解？</p>
-<p>嗯，是时候了解本质了。</p>
-<p><a href="http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/" target="_blank" rel="external">http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/</a></p>
-<h2 id="0xFF-Glossary"><a href="#0xFF-Glossary" class="headerlink" title="0xFF Glossary"></a>0xFF Glossary</h2><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<h2 id="0x09-踩坑集"><a href="#0x09-踩坑集" class="headerlink" title="0x09 踩坑集"></a>0x09 踩坑集</h2><h3 id="关系持久化坑"><a href="#关系持久化坑" class="headerlink" title="关系持久化坑"></a>关系持久化坑</h3><ol>
+<li>Rows that point to themselves : 比如一个 insert 一个推荐自己的用户，则需要保存 id / ref_id , 但是在这个 user 插入之前，并不存在 id. 所以，一般情况下是先 insert, 然后保存 ref_id</li>
+<li>Mutually Dependent Rows</li>
+</ol>
+<h3 id="SQL-注入"><a href="#SQL-注入" class="headerlink" title="SQL 注入"></a>SQL 注入</h3><p>session.query(MyClass).filter(“foo={}”.format(getArgs[‘val’]))</p>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
 <li><a href="https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/" target="_blank" rel="external">https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/</a></li>
 <li><a href="https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create" target="_blank" rel="external">https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create</a></li>
 <li>除了文档本身，作者在 Stack Overflow 上的回答都是非常值得阅读的。<a href="https://stackoverflow.com/users/34549/zzzeek" target="_blank" rel="external">https://stackoverflow.com/users/34549/zzzeek</a></li>
@@ -2240,6 +2194,179 @@
     <summary type="html">
     
       &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文是 Django 全栈开发教程的第四篇&lt;/p&gt;
+&lt;p&gt;目录在这里，已经更新的文章如下&lt;/p&gt;
+&lt;
+    
+    </summary>
+    
+      <category term="后端开发" scheme="http://twocucao.xyz/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/"/>
+    
+    
+      <category term="Django" scheme="http://twocucao.xyz/tags/Django/"/>
+    
+      <category term="全栈开发" scheme="http://twocucao.xyz/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/"/>
+    
+      <category term="VueJS" scheme="http://twocucao.xyz/tags/VueJS/"/>
+    
+      <category term="RestAPI" scheme="http://twocucao.xyz/tags/RestAPI/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>YaDjangoBlog 的前后端设计</title>
+    <link href="http://twocucao.xyz/2018/02/23/YaDjangoBlog%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%9D%E6%AD%A5%E8%AE%BE%E8%AE%A1/"/>
+    <id>http://twocucao.xyz/2018/02/23/YaDjangoBlog的前后端初步设计/</id>
+    <published>2018-02-23T02:13:30.000Z</published>
+    <updated>2018-03-18T06:59:27.083Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文是 Django 全栈开发教程的第二篇</p>
+<p>目录在这里，已经更新的文章如下</p>
+<ul>
+<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
+</ul>
+<p>本文需要完成两件事情：</p>
+<ul>
+<li>第一件事情，回答一个问题：为什么要选择博客系统作为教程而不是别的？</li>
+<li>第二件事情，简单说说 YaDjangoBlog 的前后端设计。</li>
+</ul>
+<h2 id="0x01-为什么是博客系统"><a href="#0x01-为什么是博客系统" class="headerlink" title="0x01 为什么是博客系统"></a>0x01 为什么是博客系统</h2><p>在目录评论区，有个读者问：</p>
+<p>为什么选择博客系统？而不是别的系统？</p>
+<p>一言以蔽之：因为合适。</p>
+<p>为什么说合适？</p>
+<ol>
+<li>第一点：代码量相对合适，业务逻辑大家都很清楚，博客系统说简单也简单，说复杂也复杂，待会我们就可以谈到。简单的例子反而是入门和深入了解 Django 技术栈（而不是设计一个优秀的程序）的最佳案例。</li>
+<li>第二点：言简意赅，知识点覆盖全面，注意，我们要学习的 Django 技术栈，Django 技术栈，Django 技术栈。不是学高可用架构设计，不是超级复杂系统的设计，不是业务逻辑设计。</li>
+<li>第三点：日常开发都是见招拆招，依据业务逻辑来，作为开发者，总不能直接把公司的业务代码上传的 Github 上吧？</li>
+</ol>
+<p>不妨想想，其实写个博客系统压根就不需要这么麻烦的使用各种组件来给自己的博客系统贴金。那么，我为何还是要『为赋新词强说愁』呢？</p>
+<p>答案是『醉翁之意不在酒，在乎山水之间』。通过这个简单的博客，来带大家过一遍 Django 技术栈，具体能学的多好，看个人努力。</p>
+<p>当然，借此也吐槽一下，有的人认为，博客系统简单，不就是 Blog / Category / Tag / Comment，有啥可练手的？</p>
+<p>其实不然，设计一个博客系统完全可以按照复杂系统的高标准来设计，举例来说：</p>
+<ol>
+<li>ORM 设计：如果我想把 Category/Tags/Comment 变成通用的，即可以对 Blog 进行分类 / 标签 / 评论，对新建的 Product 模型 也可以进行分类 / 标签 / 评论。</li>
+<li>数据库设计：Category 可能有三到四级子分类怎么办？ Comment 支持评论区互相回复评论。这里的不但要通用，还要用树形结构实现放在一张表里面。</li>
+<li>全文搜索：Blog 的 content 字段是长文对吧？这个总不能每次搜索都是 like 查询吧？Elasticsearch 怎么搞。</li>
+<li>缓存和定时任务：PV 和 UV 量总不能每次访问都更新一次数据库吧？为什么不用 Redis 呢？用上了 Redis, 为什么不加上定时任务呢帮忙把 PV/UV 以及点赞数量啥的定期更新到数据库中？</li>
+<li>Celery ：定时任务为啥不用神器 Celery 呢？</li>
+<li>其他问题：如何对某个接口进行 profile? 如果逻辑比较复杂，是不是要补上单元测试。Django 单实例如何使用多域名？</li>
+</ol>
+<p>那一套太祖长拳从宋兵甲手里使出来，不过是威力平平；</p>
+<blockquote>
+<p>如果是从那乔峰手里使出来，那威力如何？</p>
+</blockquote>
+<h2 id="0x02-前后端分离"><a href="#0x02-前后端分离" class="headerlink" title="0x02 前后端分离"></a>0x02 前后端分离</h2><h3 id="前后端分离的必要性"><a href="#前后端分离的必要性" class="headerlink" title="前后端分离的必要性"></a>前后端分离的必要性</h3><p>为什么前后端分离？</p>
+<ul>
+<li>一是需求：简简单单的套模板已经不够了，还要富交互，代码量上去了。</li>
+<li>二是技术条件成熟：NodeJS 横空出世，使得 JS 成了不仅仅可以在浏览器中运行的语言，成了一门和 Java,Python,Ruby 一样的客户端语言。</li>
+<li>三是生态：轮子多，这车轱辘如你所愿。</li>
+</ul>
+<p>前端的职责变重，代码量则上来了，相应的，模块化工具就自然出来了。</p>
+<blockquote>
+<p>PS: 前后端分离也不是啥新概念，当年开发客户端的不也是前后端分离？ 当然，这里的前后端分离指的是浏览器与服务器的前后端分离。</p>
+</blockquote>
+<p>前后端分离之后，依旧是前端发送请求，后端返回对应的数据。</p>
+<p>那么，哪里变了？我认为，主要有两点：</p>
+<ol>
+<li>前后端流程可以并行开发，即前后端可以同时干活。并且责任明确。</li>
+<li>JS 可以干客户端语言干的事情。</li>
+</ol>
+<p>以前，我们都是由美工设计页面，前端开发模板，后端开发 API, 前端再套 API, 再交给后端，后端接过前端的页面套模板。一切看起来是那么的和谐。</p>
+<p>但是，就是这么一个看起来一个简单的套模板 / 开发 API，就是一个时间黑洞。</p>
+<p>比如说：</p>
+<ul>
+<li>小美（美工）设计好设计稿，交给小钱（前端）</li>
+<li>小钱完成前端页面的设计，</li>
+<li>小侯（后端）开发 API,</li>
+<li>小钱套 API 后，完成页面设计，并将这个页面交给小侯</li>
+<li>小侯要做的事情，把小钱的前端页面切分成模板引擎里面的语法，从数据库里面取数据，交给模板引擎渲染，完成套前端页面流程。</li>
+</ul>
+<p>接着，产品经理跳出来，指出页面设计中有两个地方需要优化，于是：</p>
+<p>大家面临的选择就只有两个：</p>
+<ol>
+<li>合起伙来，解决掉产品经理</li>
+<li>大家在反反复复，迂迂回回的需求变更、BUG 解决、调试中，浪费了一些不应该浪费的时间。</li>
+</ol>
+<p>那么前后端分离了，前后端的开发就如同客户端开发和服务端开发一样：</p>
+<ul>
+<li>前端 / 客户端 负责路由，负责什么时候请求什么 API, 该去优化性能就去优化性能。</li>
+<li><p>后端 / 服务端 负责折腾后端组件，优化性能。</p>
+</li>
+<li><p>如果调页面，直接找前端去就好了。</p>
+</li>
+<li>如果是数据或者 API 有问题，直接找后端就好了。</li>
+</ul>
+<p>这么一分，其实职责就好界定了很多，由于修改与优化不会引发两个工种的交叉合作（前端改完，后端套模板）,BUG 率就减少了很多。</p>
+<blockquote>
+<p>PS: 其实职责好界定很多，但不能避免推锅。</p>
+</blockquote>
+<p>由于本博客只关注 Django 技术栈，而所谓使用 JavaScript 前后端通吃的『大前端』, 则不在我们的讨论范围之内。</p>
+<blockquote>
+<p>比起使用一门语言前后端通吃，笔者还是比较倾向于『见人说人话，见鬼说鬼话』, 即使用多种语言，去处理合适的问题的。</p>
+</blockquote>
+<h3 id="前后端分离的成本"><a href="#前后端分离的成本" class="headerlink" title="前后端分离的成本"></a>前后端分离的成本</h3><p>前后端分离并不是没有代价的。</p>
+<p>对于前端：</p>
+<ul>
+<li>首次页面 Loading 速度</li>
+<li>JWT 认证请求</li>
+<li>在特定场景下，有些看起来在多页面开发过程中比较简单的事情，反而比较复杂。</li>
+<li>需要注意内存的使用率。</li>
+</ul>
+<p>对于后端：</p>
+<ul>
+<li>JWT 认证响应，以前是 session 认证，而且 Django 都给你实现好了。现在变了，往往大家使用的都是 JWT 作为认证。</li>
+</ul>
+<p>但这些成本相比与节省的开发时间相比都是微不足道的。</p>
+<p>当然，我会在本系列的后面抽出一篇教程来专门讲解 Django 内置用户的扩展和前后端分离的登录认证。</p>
+<h2 id="0x03-博客系统设计"><a href="#0x03-博客系统设计" class="headerlink" title="0x03 博客系统设计"></a>0x03 博客系统设计</h2><p>这个博客最初要解决的问题是：</p>
+<ol>
+<li>hexo 用腻了，想自己写一个简单的博客系统。</li>
+<li>这个博客要可以导入文章，我不需要编辑器功能，在本地编辑完毕之后，导入数据库就好。</li>
+</ol>
+<h3 id="页面构成"><a href="#页面构成" class="headerlink" title="页面构成"></a>页面构成</h3><ol>
+<li>首页</li>
+<li>博客列表页</li>
+<li>博客存档页</li>
+<li>博客历史页</li>
+<li>博客详情页</li>
+<li>关于我页面</li>
+</ol>
+<h3 id="模型构成"><a href="#模型构成" class="headerlink" title="模型构成"></a>模型构成</h3><p>首先 M 模型层</p>
+<ol>
+<li>PostgreSQL : 博文 / 博文类型 / 博文标签</li>
+<li>Elasticsearch : 博文</li>
+<li>Redis : 每篇博文的阅读量，点赞量</li>
+</ol>
+<p>这里需要注意的是：</p>
+<ul>
+<li>第一：博文类型-博文：1 对多，博文标签-博文：多对多</li>
+<li>第二：博文中的 content 为文章内容，即可以在 Elasticsearch 中作为全文搜索的字段。具体降到 Elasticsearch 的时候我们会详细说明。</li>
+<li>第三：博文中的 阅读量和点赞量放在 Redis 里面，由 Celery 的定时任务定期刷到内存中。</li>
+</ul>
+<p>再考虑 VT 视图模板层，VT 层，会根据情况 DjangorestFramework 来进行序列化和反序列化。</p>
+<p>在设计模型的时候，尽量将涉及到模型的操作放在模型内。</p>
+<p>关于如何设计更好的模型，在以后的文章将会讲解，先挖个坑。</p>
+<h3 id="架构图"><a href="#架构图" class="headerlink" title="架构图"></a>架构图</h3><p>理想环境中，我们的架构图如下：</p>
+<p>哦，不好意思，放错图了，是这样的。</p>
+<p>但这样的架构应该有专门的人来维护。</p>
+<p>于是在人力有限的情况下，本项目的架构图是这样的。</p>
+<p>哦，不好意思，放错图了，是这样的。</p>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，Django 前后端分离最佳实践，点赞后，快上车吧</p>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog" target="_blank" rel="external">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog" target="_blank" rel="external">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-22</strong> 开启本文</li>
+<li><strong>2018-02-27</strong> 重修文字</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;0x00-前言&quot;&gt;&lt;a href=&quot;#0x00-前言&quot; class=&quot;headerlink&quot; title=&quot;0x00 前言&quot;&gt;&lt;/a&gt;0x00 前言&lt;/h2&gt;&lt;p&gt;本文是 Django 全栈开发教程的第二篇&lt;/p&gt;
 &lt;p&gt;目录在这里，已经更新的文章如下&lt;/p&gt;
 &lt;
     
