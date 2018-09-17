@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="0x00 前言当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。 后来  我总算学会了如何去爱。 我喜欢的工具陆陆续续支持了 Python3 Scrapy 支持了 Python3 Ansible 支持了 Python3  只有 Fabric 这个工具，死撑着没有支持 Python3 的的迹象。 2018-05-08 的时候，Fabric 悄悄升级了">
+<meta name="description" content="0x00 前言PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的包管理工具 pipenv』 Kenneth Reitz 出品，必属精品。 Python 打包历史刚开始的时候，我们是这样安装包的。 123curl http://pypi.python.org/packages/alsdasdl/requests.tar.gz | tar zxfcd">
 <meta name="keywords" content="Django,全栈开发,VueJS,RestAPI">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Python 自动化工具 Fabric 支持 Python3 了">
-<meta property="og:url" content="http://twocucao.xyz/2018/05/22/pipenv/index.html">
+<meta property="og:title" content="PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具">
+<meta property="og:url" content="http://twocucao.xyz/2018/05/22/PipEnv/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="0x00 前言当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。 后来  我总算学会了如何去爱。 我喜欢的工具陆陆续续支持了 Python3 Scrapy 支持了 Python3 Ansible 支持了 Python3  只有 Fabric 这个工具，死撑着没有支持 Python3 的的迹象。 2018-05-08 的时候，Fabric 悄悄升级了">
-<meta property="og:updated_time" content="2018-05-22T14:27:06.764Z">
+<meta property="og:description" content="0x00 前言PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的包管理工具 pipenv』 Kenneth Reitz 出品，必属精品。 Python 打包历史刚开始的时候，我们是这样安装包的。 123curl http://pypi.python.org/packages/alsdasdl/requests.tar.gz | tar zxfcd">
+<meta property="og:updated_time" content="2018-09-15T09:00:24.344Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Python 自动化工具 Fabric 支持 Python3 了">
-<meta name="twitter:description" content="0x00 前言当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。 后来  我总算学会了如何去爱。 我喜欢的工具陆陆续续支持了 Python3 Scrapy 支持了 Python3 Ansible 支持了 Python3  只有 Fabric 这个工具，死撑着没有支持 Python3 的的迹象。 2018-05-08 的时候，Fabric 悄悄升级了">
+<meta name="twitter:title" content="PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具">
+<meta name="twitter:description" content="0x00 前言PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的包管理工具 pipenv』 Kenneth Reitz 出品，必属精品。 Python 打包历史刚开始的时候，我们是这样安装包的。 123curl http://pypi.python.org/packages/alsdasdl/requests.tar.gz | tar zxfcd">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://twocucao.xyz/2018/05/22/pipenv/"/>
+  <link rel="canonical" href="http://twocucao.xyz/2018/05/22/PipEnv/"/>
 
 
 
 
 
-  <title>Python 自动化工具 Fabric 支持 Python3 了 | MG的编程小屋</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具 | MG的编程小屋</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -300,7 +300,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/05/22/pipenv/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/05/22/PipEnv/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Micheal Gardner">
@@ -317,7 +317,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">Python 自动化工具 Fabric 支持 Python3 了</h2>
+          <h2 class="post-title" itemprop="name headline">PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具</h2>
         
 
         <div class="post-meta">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  610
+                  1,094
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  2
+                  5
                 </span>
               
             </div>
@@ -417,41 +417,65 @@
       
 
       
-        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。</p>
-<p>后来</p>
-<ul>
-<li><del>我总算学会了如何去爱。<del></del></del></li>
-<li>我喜欢的工具陆陆续续支持了 Python3</li>
-<li>Scrapy 支持了 Python3</li>
-<li>Ansible 支持了 Python3</li>
-</ul>
-<p>只有 Fabric 这个工具，死撑着没有支持 Python3 的的迹象。</p>
-<p>2018-05-08 的时候，Fabric 悄悄升级了 2.0 版本。</p>
-<p>而就在前两天，我升级网站的时候，突然发现 fabric (1.14 版本） 不能用了。</p>
-<p>查了一下版本，发现 fabric 更新到了 2.0 版本，支持了 python3.4</p>
-<p>在发现这个问题之后，火速刷了一波官方文档，把手头 Fabric 1.14 版本的脚本做了一些升级。</p>
-<h3 id="从-V1-到-V2"><a href="#从-V1-到-V2" class="headerlink" title="从 V1 到 V2"></a>从 V1 到 V2</h3><p>Fabric v2 基于 invoke 和 paramiko 两个库构建而成。</p>
-<ul>
-<li>invoke 库提供了 subprocess command execution 和 command-line</li>
-<li>paramiko 提供了 ssh 协议实现</li>
-</ul>
-<p>在这两者的基础上，做了一些扩展。</p>
-<p>甚至，如果你只用其中的本地功能，你都完全不需要使用 fabric, 直接用 invoke 即可。没错，我已经打算把我的本地脚本全部使用 invoke Python3 化了。</p>
-<p>v1 版本和 v2 版本初步用起来，个人觉得 v1 用起来 API 更加符合直觉一些。</p>
-<p>这东西怎么用呢？</p>
-<p>我们先定义 fabfile</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># fabfile.py</div><div class="line">from invoke import task</div><div class="line"></div><div class="line">def expand_path(c, path):</div><div class="line">    return &apos;&quot;$(echo %s)&quot;&apos; % path</div><div class="line"></div><div class="line">def exists(c, path):</div><div class="line">    cmd = &apos;stat %s&apos; % expand_path(c, path)</div><div class="line">    return c.run(cmd, warn=True, hide=True).ok</div><div class="line"></div><div class="line">@task</div><div class="line">def deploy(c):</div><div class="line">    c.local(&quot;youcmd&quot;)</div><div class="line">    c.put()</div><div class="line">    c.get()</div><div class="line">    c.run()</div><div class="line">    c.run(&quot;sudo youcmd&quot;)</div><div class="line">    ......</div><div class="line"></div><div class="line">@task</div><div class="line">def other_stuff(c):</div><div class="line">    ......</div></pre></td></tr></table></figure>
-<p>需要注意的是，invoke 里面默认的 replace_env 设置为了 False ,fabric 里面给 runner 设置了 replace_env 为 True , 这也就意味着默认情况下，执行 c.local 的时候会找不到自定义的环境变量，这意味着：</p>
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的包管理工具 pipenv』</p>
+<p>Kenneth Reitz 出品，必属精品。</p>
+<h3 id="Python-打包历史"><a href="#Python-打包历史" class="headerlink" title="Python 打包历史"></a>Python 打包历史</h3><p>刚开始的时候，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">curl http://pypi.python.org/packages/alsdasdl/requests.tar.gz | tar zxf</div><div class="line">cd requests/</div><div class="line">python setup.py install</div></pre></td></tr></table></figure>
+<p>这个问题初看起来不是问题，但是随着你安装程序的增多就知道有多么痛苦了。</p>
 <ol>
-<li>你的 PATH 被重置了，这意味着你用 brew 安装的软件可能已经完全找不到了。</li>
-<li>你的环境变量 LANG 并不一定是 en_US.UTF-8 了</li>
+<li>有的依赖库依赖别的库你怎么解决？比如 pandas 需要安装 numpy</li>
+<li>有的依赖库依赖 c 库怎么办？比如 LXML</li>
+<li>在 python2.6.5 下，如果我需要安装两个不同版本的 Django 开发不同的软件怎么办？难道只能动态复制文件到 site-packages 里面？</li>
 </ol>
-<p>于是设置一下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># ~/.fabric.py</div><div class="line">#!/usr/bin/env python</div><div class="line"># encoding: utf-8</div><div class="line"></div><div class="line">run = &#123;</div><div class="line">    &quot;replace_env&quot;: False</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>当我要部署的时候直接执行</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fab -H webserver01,webserver02,webserver03,webserver04 deploy</div></pre></td></tr></table></figure>
-<p>到这里大家基本上看出来了，我并没有在文件中 import fabric 只是简单了配置了一个配置文件和执行一下 fab 命令。</p>
-<p>这个 v2 版本的 fabric 相当于 invoke 的包装。但我们也可以显式的 import fabric 里面的东西进行更加进阶的操作。</p>
+<p>后来，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">easy_install requests</div></pre></td></tr></table></figure>
+<p>我们可以直接从 pypi 进行安装了。但尼玛，为什么 easy_install 安装很 easy, 但是没有 easy_uninstall?</p>
+<p>好，2010 年后，我们继续前进：</p>
+<ul>
+<li>可以通过 pip 替代 easy_install 了。</li>
+<li>可以通过 virtualenv 管理项目的依赖库了。虽然说，还是不能像 ruby gem 一样同时把多个版本的的软件装在同一个系统里。</li>
+<li>可以通过 requirements 锁依赖了。</li>
+</ul>
+<p>但，同期的其他编程语言社区分别出现了如下的包管理工具：</p>
+<ul>
+<li>node -&gt; yarn &amp;&amp; npm , 有 lockfile</li>
+<li>php -&gt; composer , 有 lockfile</li>
+<li>rust -&gt; cargo , 有 lockfile</li>
+<li>ruby -&gt; bundler , 有 lockfile</li>
+</ul>
+<p>而我大 Python 居然没跟上潮流</p>
+<ul>
+<li>python -&gt; pip &amp;&amp; virtualenv/venv , 无 lockfile</li>
+</ul>
+<blockquote>
+<p>PS: Python3.3 之后，默认可以直接使用 venv 模块，不需要再安装 virtualenv 了。但还是需要手动，并且用起来比较反直觉。</p>
+</blockquote>
+<p>关于 requirements.txt</p>
+<ul>
+<li>如果你使用 pip freeze 来形成这个文件，则不直观，完全看不出来哪个依赖库依赖哪个依赖。</li>
+<li>如果你直接手动指定你所需要的库，比如 flask 的话，似乎又有些太直观了。</li>
+</ul>
+<p>如果能有一个东西，既可以表示 freeze 的结果 (what you want)，又可以表示你需要的库 (what you need). 就好了。</p>
+<blockquote>
+<p>这当然可以考虑用两份 requirements 来解决。先安装 what you need 用来开发，然后 freeze 为 what you want 去部署。</p>
+</blockquote>
+<p>当然，铺垫了这么多 K 神肯定是来介绍他的 pipenv 的。</p>
+<p>比如说，我想查看，本项目的依赖库，直接 pipenv graph</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">coverage==4.5.1</div><div class="line">fabric==2.0.1</div><div class="line">  - cryptography [required: &gt;=1.1, installed: 2.2.2]</div><div class="line">    - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]</div><div class="line">    - cffi [required: &gt;=1.7, installed: 1.11.5]</div><div class="line">      - pycparser [required: Any, installed: 2.18]</div><div class="line">    - idna [required: &gt;=2.1, installed: 2.6]</div><div class="line">    - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">  - invoke [required: &lt;2.0,&gt;=1.0, installed: 1.0.0]</div><div class="line">  - paramiko [required: &gt;=2.4, installed: 2.4.1]</div><div class="line">    - bcrypt [required: &gt;=3.1.3, installed: 3.1.4]</div><div class="line">      - cffi [required: &gt;=1.1, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">    - cryptography [required: &gt;=1.5, installed: 2.2.2]</div><div class="line">      - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]</div><div class="line">      - cffi [required: &gt;=1.7, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - idna [required: &gt;=2.1, installed: 2.6]</div><div class="line">      - six [required: &gt;=1.4.1, installed: 1.11.0]</div><div class="line">    - pyasn1 [required: &gt;=0.1.7, installed: 0.4.2]</div><div class="line">    - pynacl [required: &gt;=1.0.1, installed: 1.2.1]</div><div class="line">      - cffi [required: &gt;=1.4.1, installed: 1.11.5]</div><div class="line">        - pycparser [required: Any, installed: 2.18]</div><div class="line">      - six [required: Any, installed: 1.11.0]</div><div class="line">flake8==3.5.0</div><div class="line">  - mccabe [required: &gt;=0.6.0,&lt;0.7.0, installed: 0.6.1]</div><div class="line">  - pycodestyle [required: &lt;2.4.0,&gt;=2.0.0, installed: 2.3.1]</div><div class="line">  - pyflakes [required: &gt;=1.5.0,&lt;1.7.0, installed: 1.6.0]</div><div class="line"># 其他省略</div></pre></td></tr></table></figure>
+<p>如何尝鲜？我最近更新到了之前写的一个库（代码写的惨不忍赌，最近准备重构，勿喷）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:twocucao/YaPyLib.git</div><div class="line">cd YaPyLib/</div><div class="line">brew install pipenv</div><div class="line">pipenv --three</div><div class="line">pipenv install --dev</div><div class="line">pipenv shell</div></pre></td></tr></table></figure>
+<p>记住几个命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">pipenv --venv # 查看 venv 位置</div><div class="line">pipenv --python 3.6.5</div><div class="line">exit 退出 pipenv shell</div></pre></td></tr></table></figure>
+<p>至于其他的功能，参考官网自己摸索吧。</p>
+<h3 id="FAQ-环节"><a href="#FAQ-环节" class="headerlink" title="FAQ 环节"></a>FAQ 环节</h3><p>FAQ 环节有一个问题非常有趣，应该把 lockfile 放在 git 仓库里面吗？</p>
+<p>k 神是这么回答的 yes。 这个问题很久之前就在 issue 上回答过了</p>
+<p><a href="https://github.com/pypa/pipenv/issues/598" target="_blank" rel="external">https://github.com/pypa/pipenv/issues/598</a></p>
+<p>我刚开始觉得不提交会好一些，后来觉得 track 一下也无妨。</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><blockquote>
+<p>在用 npm 和 yarn 的时候，我有这么一个想法，希望 python 圈子里面能出一个类似于包管理工具。今年 2 月份的时候把自己的项目迁移过来，发现 pipenv 用起来很挺舒服的。</p>
+<p>pipenv 是未来。火速用上吧。</p>
+<p>觉得有趣就点个赞或者关注下呗。</p>
+</blockquote>
 
       
     </div>
@@ -500,8 +524,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/22/fabric2/" rel="next" title="PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具">
-                <i class="fa fa-chevron-left"></i> PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具
+              <a href="/2018/05/22/Fabric2/" rel="next" title="Python 自动化工具 Fabric 支持 Python3 了">
+                <i class="fa fa-chevron-left"></i> Python 自动化工具 Fabric 支持 Python3 了
               </a>
             
           </div>
@@ -677,7 +701,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#从-V1-到-V2"><span class="nav-number">1.1.</span> <span class="nav-text">从 V1 到 V2</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-打包历史"><span class="nav-number">1.1.</span> <span class="nav-text">Python 打包历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FAQ-环节"><span class="nav-number">1.2.</span> <span class="nav-text">FAQ 环节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#写在最后"><span class="nav-number">2.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
             
 
           </div>
