@@ -300,6 +300,367 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/09/17/ThinkingInProgrammingLanguage/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/17/ThinkingInProgrammingLanguage/" itemprop="url">Thinking In Programming Language</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-17T10:42:25+08:00">
+                2018-09-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程思索/" itemprop="url" rel="index">
+                    <span itemprop="name">编程思索</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  3,523
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>笔者对于涉猎的语言都是草草了解，深入不敢谈。能用罢了。</p>
+<p>即便是用过几种语言，得出的经验依然是片面的。</p>
+<p>很多人得出一些结论，往往是样本就一个。比如说一个只用过 PHP 的人叫嚣 PHP 是最好的语言。</p>
+<p>所以，我得出的结论，不过是一家之言罢了。</p>
+<p>本文文章就是总结一下，我使用的一些语言的经验，我整理出一个大致的框架，方便我以后切换到其他编程语言可以更顺滑一些。</p>
+<h2 id="0x01-语言胡论"><a href="#0x01-语言胡论" class="headerlink" title="0x01 语言胡论"></a>0x01 语言胡论</h2><p>在我看来，一个人说他会且只精通一门编程语言是很让我不能理解的事情，在我看来，什么编程语言框架上手两三天就能去写，但是这严格意义上应该叫做能用，和精通相差甚远。那是不是说写的时间长的人经验就老道了呢？也不见得。下棋下了一辈子是烂棋篓子的人比比皆是。</p>
+<p>那我认为什么样子的人才是懂写代码的人。</p>
+<pre><code>拥有良好的组织代码的能力的人。
+</code></pre><p>恩，组织代码的能力，一个文件排布混乱的人，不太可能写出整齐严谨的代码，当然，人也可能是复杂的，比如，这个人写的代码挺好，但是生活住处一团糟。</p>
+<p>当然这是题外话了，依个人经验而言，学习任何一个复杂的系统，也需要像组织一个东西一样，系统性的学习。</p>
+<p>系统化的东西往往像《如何阅读一本书》里面描述一本书的复杂架构那样。</p>
+<pre><code>没有一种物质或产品是绝对简单的。所有的东西都是复杂的组合体。当你看一个整体组成复杂的东西的时候，如果只看它如何呈现一体的面貌，那是还没有掌握精髓，你还必须要明白它怎样呈现多个的面貌，但不是各自为政、互不相干的多个面貌，而是互相融合成有机体的多个面貌。如果组成的各个部分没有有机的关联，仅仅是一个集合体罢了。
+
+这就像是一堆砖头跟一栋又砖头建造起来的房子是有区别的。而单一的房子与建造的房子也不相同。一本书就像是一栋单一的房子。一栋大厦，拥有许多房间，每层楼都有房间，有不同的尺寸和形状，不同的外观，不同的用途，这些房间是独立的，分离的，每个房间都有自己的架构和装潢设计，但却不是完全独立与分离的，这些房间使用普通门 / 拱门 / 走廊 / 楼梯串联起来的，即建筑师错位的动线架构，因为这些架构师彼此联结的，因此每一个部分在整体的使用功能上要贡献出自己的力量。否则这栋房子便是不适合居住的。
+</code></pre><h3 id="独一无二"><a href="#独一无二" class="headerlink" title="独一无二"></a>独一无二</h3><p>有的人认为所有的编程语言都是一样的。</p>
+<p>依我看，所有的编程语言都是有特点的，也是有优缺点的。</p>
+<p>举一个我朋友的爱说的很粗俗的例子：</p>
+<pre><code>虽然说关了灯全都一个样，但是每一个女孩子都有是独一无二的存在。
+</code></pre><p>编程语言也是一样。</p>
+<ul>
+<li>有的偏向于运行效率，有的偏向于开发效率。</li>
+<li>有的据说是让人编程时候感到快乐 (ruby)，有的说你生命苦短，为什么不用 Python。</li>
+<li>有的偏向于 Web 开发 (PHP)，有的偏向于并发操作</li>
+<li>有的是 Windows 上面自动化的小白工具 (Autohotkey)</li>
+<li>有的是据说是一次编译，到处运行 (Java)</li>
+<li>有的是亲妈平台万金油 (C#), 当然，最近也在亲妈的带领下往其他方向前进了。</li>
+</ul>
+<p>编程语言往往是上面这些因素的取舍。</p>
+<ul>
+<li>你要运行效率，往往开发效率就会打折。</li>
+<li>你要开发效率，往往就需要堆更多的机器来提升性能。</li>
+<li>你要充分利用某个平台，往往就没有极高兼容性。</li>
+<li>你要编程语言帮你处理掉不需要考虑的问题，有的程序员就站出来了，你是不相信我控制<br>  内存的能力么？</li>
+</ul>
+<p>有的语言生态好，比如 对于我定位于全栈工程师（其实是全干工程师）的程序员来说：</p>
+<p>  文能写虫爬数据<br>  武能后端写网站<br>  进能数据搞 AI<br>  退能机器跑运维</p>
+<p>十八般武艺武艺样样稀疏的 API 搬运工，那，那就 Python 好了。你还要啥自行车？</p>
+<h2 id="0x02-语言的工具链"><a href="#0x02-语言的工具链" class="headerlink" title="0x02 语言的工具链"></a>0x02 语言的工具链</h2><p>工欲善其事必先利其器</p>
+<h3 id="编辑器-amp-amp-IDE"><a href="#编辑器-amp-amp-IDE" class="headerlink" title="编辑器 &amp;&amp; IDE"></a>编辑器 &amp;&amp; IDE</h3><p>大学里有个老师喜欢用 Notepad 手撸 Pascal 代码，然后拖到 IDE 里面运行。</p>
+<p>集成开发环境 (IDE) = 编辑器 + 编译器 + 构建系统 + 调试 + 其他编辑提升（补全，重构，格式化）</p>
+<p>到底是 IDE 好，还是 Editor 好。其实你看到这里就差不多明白了。一般情况下，选择<br>JetBrain 的 IDE 总是没问题的。</p>
+<p>那么什么情况下，会选择编辑器呢？</p>
+<p>多个</p>
+<p>对于，这个经典的问题，可以这么回答：抓到好猫的猫，你管他是黑猫还是白猫。</p>
+<p>那么，这个问题就变成了另一个问题。编辑器或者 IDE 可以满足我当前的开发工作流么？</p>
+<h3 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h3><p>那么，我们从编辑器 + 集成环境</p>
+<ul>
+<li>Mac Homebrew</li>
+<li>开发环境里面的 shell</li>
+<li>cmake</li>
+</ul>
+<h2 id="0x03-语言的学习资源"><a href="#0x03-语言的学习资源" class="headerlink" title="0x03 语言的学习资源"></a>0x03 语言的学习资源</h2><p>官网的文档是最应该反复查看的东西，这是我现在依然喜欢强调的。</p>
+<p>而官网的文档也分为四种</p>
+<ul>
+<li>一种是 tutorial      – 用于<strong>上手</strong>对应的软件 / 编程语言</li>
+<li>一种是 guide         – 用于<strong> Topic Reading </strong></li>
+<li>一种是 api document  – 用于<strong>查看细节</strong></li>
+<li>一种是 RTFSC ( Read The Fucking Source Code ) 阅读源码</li>
+</ul>
+<blockquote>
+<p>注：把 StackOverFlow 中某个标签的 Most Votes 的答案，是除了大略看看 tutorial 之外的另一种快速熟悉入门时候的痛点的手段。</p>
+</blockquote>
+<p>当然，其实代码写的足够好的话本身就是一种注释。</p>
+<h3 id="社区"><a href="#社区" class="headerlink" title="社区"></a>社区</h3><p>社区一般情况下都会有的，但有几个网站特别值得提出来</p>
+<ul>
+<li>官网上一般都会放一些比较出色的社区</li>
+<li>Github</li>
+<li>reddit</li>
+<li>某个技术对应的 Weekly 订阅</li>
+</ul>
+<h3 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h3><p>特别值得一提的是有一个持续不断阅读到有趣的文章的方法：</p>
+<ol>
+<li>Google 出对应的 书 / Weekly 周报 / 博客，比如 Python Weekly 然后订阅</li>
+<li>接着不断的查看列入优质文章的作者的文章，Github 地址啦，他关注的 Repo 啦等等等等。</li>
+<li>然后去阅读他的代码 / 博客。</li>
+</ol>
+<h2 id="0x04-基础概念"><a href="#0x04-基础概念" class="headerlink" title="0x04 基础概念"></a>0x04 基础概念</h2><blockquote>
+<p> 程序 = 算法 + 数据结构</p>
+</blockquote>
+<p>这句话当然是不全面的，这句话经典就经典在高度概括了程序中算法和数据结构的重要性，但并不影响这句话在计算机世界里面的地位。</p>
+<p>依我看来，对我的启发是：</p>
+<blockquote>
+<p>我会把 API 的调用和数据结构以及算法想清楚，然后才动手把代码分解成伪代码。最后写成代码。</p>
+</blockquote>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>按照复杂性可划分为：</p>
+<ul>
+<li>简单类型</li>
+<li>复杂类型</li>
+</ul>
+<p>按照复杂性可划分为：</p>
+<ul>
+<li>基本类型</li>
+<li>引用类型</li>
+</ul>
+<p>按照数据结构可划分为：</p>
+<ul>
+<li>集合结构 : 串</li>
+<li>线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，<strong>栈，队列</strong>)</li>
+<li>树形结构 : 树（二叉树，B+ 树，红黑树）</li>
+<li>图形结构 : 图</li>
+</ul>
+<p>对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</p>
+<p>对于复杂的一些数据类型，则需要对数据结构多一些了解。</p>
+<p>比如，对队列而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对 hash 而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字典而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>比如，对字符串而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？</p>
+<p>那字符串来说，Java 推荐使用 StringBuilder 来合并多个字符串，Python 推荐 join 多个字符串等等。</p>
+<h3 id="语句"><a href="#语句" class="headerlink" title="语句"></a>语句</h3><ul>
+<li>声明语句</li>
+<li>赋值语句</li>
+<li><p>条件语句</p>
+<ol>
+<li>判断的时候不确定操作符优先级的时候，加括号</li>
+<li>尽量显式判断，不要用隐式判断。</li>
+</ol>
+</li>
+<li><p>循环语句</p>
+<ol>
+<li>Break 和 Continue</li>
+</ol>
+</li>
+</ul>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><ol>
+<li>传值还是传引用</li>
+<li>参数</li>
+</ol>
+<p>函数或者叫做方法，叫法不同。</p>
+<p>函数，我有个很私人的称呼，称它为最小操作模块。</p>
+<p>实际上，在编程的过程中，程序员用面向对象的思想进行编码的人可能真的不是很多。把一段长程序按照自己的需求进行切分成若干个函数的倒是比比皆是。</p>
+<p>不过按照什么样子的标准来切分一段程序为多个函数，仁者见仁智者见智。</p>
+<p>这里面需要注意的事情是：</p>
+<ul>
+<li><ol>
+<li>注意传值（基本类型）和传引用（引用类型）</li>
+</ol>
+</li>
+<li><ol>
+<li>函数重载</li>
+</ol>
+</li>
+</ul>
+<p>对于不同的编程语言，传值（基本类型）和传引用（引用类型）基本上达成了共识。<br>但在实现函数重载的时候则是有所不同，</p>
+<p>比如，Java 里面选择了多写几个函数，Python 则没有这个机制，不过，通过默认参数却可以曲线救国，实现这个机制。</p>
+<p>递归<br>函数式编程<br>高阶函数 mapreduce/ filter / sorted / 返回函数 / 匿名函数 / 装饰器 / 偏函数</p>
+<h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = <span class="number">1</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a = <span class="number">2</span></div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># 1</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = <span class="number">1</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a = <span class="number">2</span></div><div class="line">    print(a)</div><div class="line">    inner()</div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># 1</span></div><div class="line"><span class="comment"># 1</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">outer</span><span class="params">()</span>:</span></div><div class="line">    a = [<span class="number">1</span>]</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">inner</span><span class="params">()</span>:</span></div><div class="line">        a.append(<span class="number">2</span>)</div><div class="line">    print(a)</div><div class="line">    inner()</div><div class="line">    print(a)</div><div class="line"></div><div class="line">outer()</div><div class="line"><span class="comment"># [1]</span></div><div class="line"><span class="comment"># [1, 2]</span></div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line">var outer = function()&#123;</div><div class="line">    var a = 1;</div><div class="line">    var inner = function()&#123;</div><div class="line">        a = 2</div><div class="line">    &#125;;</div><div class="line">    console.log(a);</div><div class="line">    inner();</div><div class="line">    console.log(a);</div><div class="line">&#125;</div><div class="line">outer()</div><div class="line"># 1</div><div class="line"># 2</div><div class="line"></div><div class="line">var outer = function()&#123;</div><div class="line">    var a = 1;</div><div class="line">    var inner = function()&#123;</div><div class="line">        var a = 2</div><div class="line">    &#125;;</div><div class="line">    console.log(a);</div><div class="line">    inner();</div><div class="line">    console.log(a);</div><div class="line">&#125;</div><div class="line">outer()</div><div class="line"># 1</div><div class="line"># 1</div></pre></td></tr></table></figure>
+<h4 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h4><ul>
+<li>map</li>
+<li>reduce</li>
+<li>filter</li>
+</ul>
+<h4 id="递归"><a href="#递归" class="headerlink" title="递归"></a>递归</h4><h2 id="0x05-中级概念"><a href="#0x05-中级概念" class="headerlink" title="0x05 中级概念"></a>0x05 中级概念</h2><h3 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h3><p>面向对象有三大概念：</p>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h3 id="模块与包"><a href="#模块与包" class="headerlink" title="模块与包"></a>模块与包</h3><p>模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。</p>
+<p>这里的模块指的是一个包下的函数。</p>
+<h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><p>异常处理实际上可以考验一个程序员编写代码的健壮性。</p>
+<p>事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。</p>
+<h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><h2 id="0x06-高级概念"><a href="#0x06-高级概念" class="headerlink" title="0x06 高级概念"></a>0x06 高级概念</h2><h3 id="元编程"><a href="#元编程" class="headerlink" title="元编程"></a>元编程</h3><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>Spawn - 产卵，为什么叫做产卵呢，因为生出大量的 child process<br>Spawn = fork + exec</p>
+<h3 id="并发-并行"><a href="#并发-并行" class="headerlink" title="并发 / 并行"></a>并发 / 并行</h3><h4 id="并行架构"><a href="#并行架构" class="headerlink" title="并行架构"></a>并行架构</h4><p>并行并不完全等同与多核并行</p>
+<ol>
+<li>bit-level 并行 : 即 8bit 与 32bit 的区别</li>
+<li>instrction-level 并行：CPU 的并行度：流水线，乱序执行，猜测执行</li>
+<li>data-level 并行：比如 GPU 在调整图像亮度的时候。</li>
+<li>task-level 并行：即多处理器，按照内存模型氛围共享内存模型与分布式内存模型</li>
+</ol>
+<h4 id="七个并发-并行模型"><a href="#七个并发-并行模型" class="headerlink" title="七个并发 / 并行模型"></a>七个并发 / 并行模型</h4><ol>
+<li>线程与锁</li>
+<li>函数式编程</li>
+<li>分离标志与状态</li>
+<li>Actor</li>
+<li>通信顺序进程 (CSP)</li>
+<li>数据级并行</li>
+<li>Lambda 架构</li>
+</ol>
+<h4 id="模型-1-线程与锁"><a href="#模型-1-线程与锁" class="headerlink" title="模型 1. 线程与锁"></a>模型 1. 线程与锁</h4><p>互斥<br>竞态条件<br>死锁</p>
+<h5 id="内置锁"><a href="#内置锁" class="headerlink" title="内置锁"></a>内置锁</h5><p>当若干个线程进行对某个变量进行一个非原子性的操作的时候，比如<br>(read-modify-write), 就吹出现竞态条件。解决方式就是进行对某个变量使用同步访问 (java 中的 synchronized)。</p>
+<p>内存可见性</p>
+<p>当一个线程使用了多把锁的时候，就可能出现死锁。简单避开死锁的方式就是总是按照一个<br>全局的固定思路获取多把锁</p>
+<p>哲学家进餐：五个哲学家围绕着桌子，两边五双筷子，如果饿了，就拿起两边的筷子吃饭。则迟早会出现一个情<br>况，所有的哲学家在同一时刻决定吃饭。于是两边都拿不到筷子。</p>
+<p>最终的解决方案就是按照全局的顺序来获取多把锁。</p>
+<h5 id="可重入锁-Reentrant-Lock"><a href="#可重入锁-Reentrant-Lock" class="headerlink" title="可重入锁 Reentrant Lock"></a>可重入锁 Reentrant Lock</h5><p>可以用 try lock 来和超时时间来避免无尽死锁。</p>
+<p>交替锁，避免锁整个链表，而是锁上下结点。</p>
+<h4 id="模型-2-函数式编程"><a href="#模型-2-函数式编程" class="headerlink" title="模型 2. 函数式编程"></a>模型 2. 函数式编程</h4><h4 id="模型-3-分离标志与状态"><a href="#模型-3-分离标志与状态" class="headerlink" title="模型 3. 分离标志与状态"></a>模型 3. 分离标志与状态</h4><h4 id="模型-4-Actor"><a href="#模型-4-Actor" class="headerlink" title="模型 4. Actor"></a>模型 4. Actor</h4><h4 id="模型-5-通信顺序进程-CSP"><a href="#模型-5-通信顺序进程-CSP" class="headerlink" title="模型 5. 通信顺序进程 (CSP)"></a>模型 5. 通信顺序进程 (CSP)</h4><h4 id="模型-6-数据级并行"><a href="#模型-6-数据级并行" class="headerlink" title="模型 6. 数据级并行"></a>模型 6. 数据级并行</h4><h4 id="模型-7-Lambda-架构"><a href="#模型-7-Lambda-架构" class="headerlink" title="模型 7. Lambda 架构"></a>模型 7. Lambda 架构</h4><h2 id="0x05-标准库"><a href="#0x05-标准库" class="headerlink" title="0x05 标准库"></a>0x05 标准库</h2><h3 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h3><h3 id="字符串与文本"><a href="#字符串与文本" class="headerlink" title="字符串与文本"></a>字符串与文本</h3><h3 id="数字日期与时间"><a href="#数字日期与时间" class="headerlink" title="数字日期与时间"></a>数字日期与时间</h3><h3 id="迭代器与生成器"><a href="#迭代器与生成器" class="headerlink" title="迭代器与生成器"></a>迭代器与生成器</h3><h3 id="文本处理"><a href="#文本处理" class="headerlink" title="文本处理"></a>文本处理</h3><h2 id="0x07-番外篇"><a href="#0x07-番外篇" class="headerlink" title="0x07 番外篇"></a>0x07 番外篇</h2><h2 id="0x08-调试和-Profile"><a href="#0x08-调试和-Profile" class="headerlink" title="0x08 调试和 Profile"></a>0x08 调试和 Profile</h2><h3 id="8-1-测试"><a href="#8-1-测试" class="headerlink" title="8.1 测试"></a>8.1 测试</h3><p>hash 算法</p>
+<p>rehash | redis 渐进式 rehash</p>
+<h2 id="0xEE-参考"><a href="#0xEE-参考" class="headerlink" title="0xEE 参考"></a>0xEE 参考</h2><ul>
+<li><a href="http://www.yinwang.org/blog-cn/2017/07/06/master-pl" target="_blank" rel="external">http://www.yinwang.org/blog-cn/2017/07/06/master-pl</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-03-21</strong> 初始化本文</li>
+<li><strong>2017-05-11</strong> 增加代码质量模块</li>
+<li><strong>2018-08-29</strong> 重修文字</li>
+<li><strong>2018-09-08</strong> 阅读七周七并发之后，针对并发章节做了补充</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/09/04/系统设计入门笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -385,7 +746,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  325
+                  584
                 </span>
               
 
@@ -401,7 +762,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  1
+                  2
                 </span>
               
             </div>
@@ -439,7 +800,7 @@
 <li>CDN 成本可能会很高</li>
 <li>TTL 过期之前更新内容，CDN 缓存内容可能会过时</li>
 </ol>
-<h2 id="0x02-前端-1"><a href="#0x02-前端-1" class="headerlink" title="0x02 前端"></a>0x02 前端</h2><h3 id="负载均衡器"><a href="#负载均衡器" class="headerlink" title="负载均衡器"></a>负载均衡器</h3><p>负载均衡起到了一个均衡负载的作用</p>
+<h2 id="0x02-后端组件"><a href="#0x02-后端组件" class="headerlink" title="0x02 后端组件"></a>0x02 后端组件</h2><h3 id="负载均衡器"><a href="#负载均衡器" class="headerlink" title="负载均衡器"></a>负载均衡器</h3><p>负载均衡起到了一个均衡负载的作用</p>
 <ol>
 <li>防止请求进入运行情况糟糕的服务器。</li>
 <li>防止资源过载。</li>
@@ -473,6 +834,36 @@
 <li>缓存：</li>
 <li>静态内容：</li>
 </ul>
+<h2 id="0x08-Http-Server-Model"><a href="#0x08-Http-Server-Model" class="headerlink" title="0x08 Http Server Model"></a>0x08 Http Server Model</h2><h3 id="Master"><a href="#Master" class="headerlink" title="Master"></a>Master</h3><p>主进程监听不同的进程信号，并且作出反馈。</p>
+<ul>
+<li>TTIN TTOU 告诉 master 升高或者降低运行的 worker</li>
+<li>CHLD 子进程已结束</li>
+</ul>
+<h3 id="四种-Worker"><a href="#四种-Worker" class="headerlink" title="四种 Worker"></a>四种 Worker</h3><h4 id="同步-Workers"><a href="#同步-Workers" class="headerlink" title="同步 Workers"></a>同步 Workers</h4><p>单请求单 worker, 并且不支持 persistent connections</p>
+<p>在 CPU 和网络贷款上资源有限。（啥意思，,,,)</p>
+<p>即请求时间不定的情况应该是要避免的。</p>
+<h4 id="异步-Workers"><a href="#异步-Workers" class="headerlink" title="异步 Workers"></a>异步 Workers</h4><p>异步场景</p>
+<ul>
+<li>Applications making long blocking calls (Ie, external web services)</li>
+<li>Serving requests directly to the internet</li>
+<li>Streaming requests and responses</li>
+<li>Long polling</li>
+<li>Web sockets</li>
+<li>Comet （其实就是推送）</li>
+</ul>
+<p>通过 eventlet / gevent 使用 Greenlets</p>
+<h4 id="Tornado-Workers"><a href="#Tornado-Workers" class="headerlink" title="Tornado Workers"></a>Tornado Workers</h4><p>tornado</p>
+<h4 id="AsyncIO-Workers"><a href="#AsyncIO-Workers" class="headerlink" title="AsyncIO Workers"></a>AsyncIO Workers</h4><ul>
+<li>gthread</li>
+<li>gaiohttp</li>
+</ul>
+<h3 id="Pre-fork-Web-Server"><a href="#Pre-fork-Web-Server" class="headerlink" title="Pre-fork Web Server"></a>Pre-fork Web Server</h3><p><a href="https://stackoverflow.com/questions/25834333/what-exactly-is-a-pre-fork-web-server-model" target="_blank" rel="external">https://stackoverflow.com/questions/25834333/what-exactly-is-a-pre-fork-web-server-model</a></p>
+<p>pre-forking 意味着 一个 master 创建了多个 fork 来处理请求。每一个分叉意味着一个独立的 *nix 进程（不一定吧，异步 worker 怎么算？)。</p>
+<p>The pre in pre-fork means that these processes are forked before a request comes in. They can however usually be increased or decreased as the load goes up and down.</p>
+<p>libev / libuv</p>
+<p>epoll or kqueue, it is always indispensable to the asynchronous topic.</p>
+<p>asyncio</p>
+<p>sanic<br>libuv<br>uvloop</p>
 <h2 id="0xEE-结论"><a href="#0xEE-结论" class="headerlink" title="0xEE 结论"></a>0xEE 结论</h2>
           
         
@@ -770,7 +1161,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  2,614
+                  2,677
                 </span>
               
 
@@ -786,7 +1177,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  12
+                  13
                 </span>
               
             </div>
@@ -1031,7 +1422,7 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/07/27/SonyA6500Vlog/">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/07/27/ToneColor/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Micheal Gardner">
@@ -1050,7 +1441,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/27/SonyA6500Vlog/" itemprop="url">Sony A6500 视频与后期剪辑</a></h2>
+                <a class="post-title-link" href="/2018/07/27/ToneColor/" itemprop="url">Tone Color</a></h2>
         
 
         <div class="post-meta">
@@ -1116,7 +1507,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  81
+                  64
                 </span>
               
 
@@ -1154,7 +1545,7 @@
           <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>不定期更新。</p>
           <!--noindex-->
           <div class="post-button text-center">
-            <a class="btn" href="/2018/07/27/SonyA6500Vlog/#more" rel="contents">
+            <a class="btn" href="/2018/07/27/ToneColor/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1219,7 +1610,7 @@
         
           <h2 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/17/Portrait/" itemprop="url">小清新人像摄影入门指北</a></h2>
+                <a class="post-title-link" href="/2018/07/17/Portrait/" itemprop="url">人像摄影指北</a></h2>
         
 
         <div class="post-meta">
@@ -1285,7 +1676,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,001
+                  1,380
                 </span>
               
 
@@ -1301,7 +1692,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  3
+                  6
                 </span>
               
             </div>
@@ -1321,7 +1712,7 @@
       
         
           
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><h3 id="本文目录"><a href="#本文目录" class="headerlink" title="本文目录"></a>本文目录</h3><h2 id="0x01-小清新风格特点"><a href="#0x01-小清新风格特点" class="headerlink" title="0x01 小清新风格特点"></a>0x01 小清新风格特点</h2><h3 id="画面感觉"><a href="#画面感觉" class="headerlink" title="画面感觉"></a>画面感觉</h3><ul>
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><h3 id="本文目录"><a href="#本文目录" class="headerlink" title="本文目录"></a>本文目录</h3><h2 id="0x01-风格特点"><a href="#0x01-风格特点" class="headerlink" title="0x01 风格特点"></a>0x01 风格特点</h2><h3 id="小清新"><a href="#小清新" class="headerlink" title="小清新"></a>小清新</h3><ul>
 <li>安静</li>
 <li>温暖</li>
 <li>舒适</li>
@@ -1396,7 +1787,22 @@
 <li>高频启用图像-应用图像，图层 = 低频，混合 = 相加，缩放 =2</li>
 <li>高频混合模式改为线性光，然后污点去除。</li>
 </ul>
-<h4 id="中性灰磨皮"><a href="#中性灰磨皮" class="headerlink" title="中性灰磨皮"></a>中性灰磨皮</h4><h4 id="双曲线磨皮"><a href="#双曲线磨皮" class="headerlink" title="双曲线磨皮"></a>双曲线磨皮</h4>
+<h4 id="中性灰磨皮"><a href="#中性灰磨皮" class="headerlink" title="中性灰磨皮"></a>中性灰磨皮</h4><h4 id="双曲线磨皮"><a href="#双曲线磨皮" class="headerlink" title="双曲线磨皮"></a>双曲线磨皮</h4><h3 id="胶片风格-VSCO"><a href="#胶片风格-VSCO" class="headerlink" title="胶片风格 VSCO"></a>胶片风格 VSCO</h3><h4 id="Modern-Films"><a href="#Modern-Films" class="headerlink" title="Modern Films"></a>Modern Films</h4><p>Modern Films is an excellent all-around pack, emulating the look of contemporary, popular film stocks. Classic, clean, and universal, this collection is well-balanced and ideal for an array of settings, from wedding photography to editorial, and everything in between.</p>
+<h4 id="Classic-Films"><a href="#Classic-Films" class="headerlink" title="Classic Films"></a>Classic Films</h4><p>Classic Films is a diverse pack of film emulations that recreates the look of many discontinued and expired film stocks. With a vintage-inspired and slightly gritty aesthetic, this collection is perfect for lifestyle, wedding, and portrait photography.</p>
+<h4 id="Instant-Films"><a href="#Instant-Films" class="headerlink" title="Instant Films"></a>Instant Films</h4><p>Instant Films features digital emulations of beautiful tones and magical tints. Classic and nostalgic, this highly-stylized collection recreates the looks of traditional instant films.</p>
+<h4 id="Slide-Films"><a href="#Slide-Films" class="headerlink" title="Slide Films"></a>Slide Films</h4><p>Slide Films features digital emulations of positive film — a slide film that produces a positive image when developed. With high contrasts and bold colors, this collection is ideal for travel, landscape, street, and fashion photography.</p>
+<h4 id="Archetype-Films"><a href="#Archetype-Films" class="headerlink" title="Archetype Films"></a>Archetype Films</h4><p>Archetype Films is a collection of mass market, consumer film emulations from the golden era of analog. With familiar fade and grit aesthetics, VSCO Film 05 captures the nostalgia of old childhood photos, and is great for portraits, weddings, and lifestyle photography.</p>
+<h4 id="Alternative-Process-Films"><a href="#Alternative-Process-Films" class="headerlink" title="Alternative Process Films"></a>Alternative Process Films</h4><p>Alternative Process Films is a well-balanced pack that includes a wide range of push and pull processed looks, which alter grain, contrast, and richness. It also includes cross processed looks, which are best suited for dramatic color effects and vibrancy. From subtle enhancements to bold stylistic editing, this collection is ideal for outdoor and lifestyle photography, modern portraiture, and sunwashed settings.</p>
+<h4 id="Eclectic-Films"><a href="#Eclectic-Films" class="headerlink" title="Eclectic Films"></a>Eclectic Films</h4><p>Eclectic Films features a wide range of looks in our largest release to date, with 18 films and over 100 presets in total. The spectrum of this collection translates to versatility in use and includes muted, vivid, tungsten-balanced, and black and white films — all of which embody an elegant and modern aesthetic. This pack is ideal for most settings and subjects, particularly portraits, night photography, and architecture.</p>
+<h3 id="小清新日系"><a href="#小清新日系" class="headerlink" title="小清新日系"></a>小清新日系</h3><h3 id="港系风格"><a href="#港系风格" class="headerlink" title="港系风格"></a>港系风格</h3><p>高对比，欠曝光，部分过曝光</p>
+<p>图层 1 高斯模糊 screen 25% 复制一层 soften light 50%</p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-07-17</strong> 初始化本文</li>
+<li><strong>2018-09-17</strong> 重修文字</li>
+</ul>
+
           
         
       
@@ -2142,180 +2548,6 @@
 <li>速度在可接受范围内。我在用 LR 修图的时候只是稍微比本地的慢一点。</li>
 </ul>
 <p>不过似乎还有一些其他的功能可以继续发掘一下。以后有机会再分享一下。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/06/06/CPython/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/06/06/CPython/" itemprop="url">CPython 源码初步阅读笔记</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-06T10:08:12+08:00">
-                2018-06-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/后端开发/" itemprop="url" rel="index">
-                    <span itemprop="name">后端开发</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  222
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  1
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>先挖坑，以后有机会填</p>
-<p>├── Grammar # 语法<br>├── Include # C 语言头文件，如果需要自定义模块扩展 Python, 也需要这块。<br>├── Modules # C 语言编写的模块，对速度要求高，比如 random<br>├── Objects # 内建对象 包含整数，list,dict 等。<br>├── Parser # Scanner 和 parser<br>├── Python # 各种 Python 共享库<br>├── Lib # Python 自带的所有标准库<br>├── Doc # 文档<br>├── Tools # 一些 Python 程序，方便扩展 Python<br>├── Misc # 不清楚放哪，就放这里好了<br>├── PC # Windows 编译姿势<br>├── PCbuild # Windows 编译姿势<br>├── Mac # Mac 上编译姿势<br>├── Programs<br>├── README.rst<br>├── aclocal.m4<br>├── config.guess<br>├── config.sub<br>├── configure<br>├── configure.ac<br>├── install-sh<br>├── m4<br>├── pyconfig.h.in<br>├── setup.py<br>├── LICENSE<br>├── Makefile.pre.in</p>
-<h2 id="Ch01-Python-对象初探"><a href="#Ch01-Python-对象初探" class="headerlink" title="Ch01 Python 对象初探"></a>Ch01 Python 对象初探</h2><p>一切都是对象</p>
-<p>类型对象</p>
-<ul>
-<li>内置对象：int / string / dict</li>
-<li>自定义对象：class A</li>
-</ul>
-<p>实例对象</p>
-<h3 id="1-1-Python-内的对象"><a href="#1-1-Python-内的对象" class="headerlink" title="1.1 Python 内的对象"></a>1.1 Python 内的对象</h3><p>Python 里的对象就是 C 中结构体在堆上申请的一块内存。</p>
 
           
         
