@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Django,全栈开发,VueJS,RestAPI," />
+  <meta name="keywords" content="Django,VueJS,全栈开发,RestAPI," />
 
 
 
@@ -96,17 +96,17 @@
 
 
 
-<meta name="description" content="0x00 前言新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。 所以，本文记录的是 Django ORM 逃。 这篇文章也是我对比 SqlAlchemy 以及 DjangoORM 的产物 0x01 如何快速上手Django 世界里面，Django 的文档每次刷都会有新的发现。 0x02 DjangoORM 的基本功能2.1">
-<meta name="keywords" content="Django,全栈开发,VueJS,RestAPI">
+<meta name="description" content="0x00 前言新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。  所以，本文记录的是 Django ORM  逃。 这篇文章也是我对比 SqlAlchemy 以及 DjangoORM 的产物 0x01 如何快速上手Django 世界里面，Django 的文档每次刷都会有新的发现。 0x02 DjangoORM 的基本功能2">
+<meta name="keywords" content="Django,VueJS,全栈开发,RestAPI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DjangoORMCheatSheet">
 <meta property="og:url" content="http://twocucao.xyz/2018/04/28/DjangoORMCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="0x00 前言新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。 所以，本文记录的是 Django ORM 逃。 这篇文章也是我对比 SqlAlchemy 以及 DjangoORM 的产物 0x01 如何快速上手Django 世界里面，Django 的文档每次刷都会有新的发现。 0x02 DjangoORM 的基本功能2.1">
-<meta property="og:updated_time" content="2018-05-01T00:14:49.323Z">
+<meta property="og:description" content="0x00 前言新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。  所以，本文记录的是 Django ORM  逃。 这篇文章也是我对比 SqlAlchemy 以及 DjangoORM 的产物 0x01 如何快速上手Django 世界里面，Django 的文档每次刷都会有新的发现。 0x02 DjangoORM 的基本功能2">
+<meta property="og:updated_time" content="2018-11-16T10:25:47.636Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DjangoORMCheatSheet">
-<meta name="twitter:description" content="0x00 前言新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。 所以，本文记录的是 Django ORM 逃。 这篇文章也是我对比 SqlAlchemy 以及 DjangoORM 的产物 0x01 如何快速上手Django 世界里面，Django 的文档每次刷都会有新的发现。 0x02 DjangoORM 的基本功能2.1">
+<meta name="twitter:description" content="0x00 前言新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。  所以，本文记录的是 Django ORM  逃。 这篇文章也是我对比 SqlAlchemy 以及 DjangoORM 的产物 0x01 如何快速上手Django 世界里面，Django 的文档每次刷都会有新的发现。 0x02 DjangoORM 的基本功能2">
 
 
 
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  1,088
+                  1,476
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  5
+                  7
                 </span>
               
             </div>
@@ -418,7 +418,9 @@
 
       
         <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。</p>
+<blockquote>
 <p>所以，本文记录的是 Django ORM</p>
+</blockquote>
 <p>逃。</p>
 <p>这篇文章也是我对比 SqlAlchemy 以及 DjangoORM 的产物</p>
 <h2 id="0x01-如何快速上手"><a href="#0x01-如何快速上手" class="headerlink" title="0x01 如何快速上手"></a>0x01 如何快速上手</h2><p>Django 世界里面，Django 的文档每次刷都会有新的发现。</p>
@@ -462,7 +464,20 @@
 <li>URLField</li>
 <li>UUIDField</li>
 </ul>
-<p>虽然有这么多东东，但是还是建议直接</p>
+<p>虽然有这么多东东，其实常用的如下</p>
+<ul>
+<li>BigIntegerField</li>
+<li>BooleanField</li>
+<li>CharField</li>
+<li>DateField</li>
+<li>DateTimeField</li>
+<li>DecimalField</li>
+<li>IntegerField</li>
+<li>TextField</li>
+<li>TimeField</li>
+</ul>
+<p>有的字段属于那种，有也可以，没有也可以的。</p>
+<p>FileField 之类的 往往现在都被 CDN 取代</p>
 <h5 id="Field-Options"><a href="#Field-Options" class="headerlink" title="Field Options"></a>Field Options</h5><ul>
 <li>null</li>
 <li>blank</li>
@@ -486,7 +501,7 @@
 <li>verbose_name</li>
 <li>validators</li>
 </ul>
-<h5 id="ForeignKey-的-Models"><a href="#ForeignKey-的-Models" class="headerlink" title="ForeignKey 的 Models"></a>ForeignKey 的 Models</h5><p>on_delete=models.CASCADE</p>
+<p>如此可见，Django 的 ORM 比起 SQLAlchemy 做了不少应用层的校验，一些 help_text</p>
 <h4 id="Relationship"><a href="#Relationship" class="headerlink" title="Relationship"></a>Relationship</h4><p>表和表之间的关系</p>
 <ol>
 <li>A 表和 B 表 一对多 / 多对一</li>
@@ -503,12 +518,13 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Models 重写方法</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Models 继承</div><div class="line">https://docs.djangoproject.com/en/2.0/topics/db/models/#model-inheritance</div></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">组织代码 - 以及应对循环引用</div></pre></td></tr></table></figure>
-<h4 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h4><h3 id="2-2-QuerySet"><a href="#2-2-QuerySet" class="headerlink" title="2.2 QuerySet"></a>2.2 QuerySet</h3><h4 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">c = Child(name=&quot;苏轼&quot;)</div><div class="line">c.save()</div><div class="line">p = Parent(name=&quot;苏辙&quot;)</div><div class="line">p.best_child = c</div><div class="line">p.children.add([c,c2,c3,c4])</div><div class="line">p.save()</div></pre></td></tr></table></figure>
+<h3 id="2-2-QuerySet"><a href="#2-2-QuerySet" class="headerlink" title="2.2 QuerySet"></a>2.2 QuerySet</h3><h4 id="Create"><a href="#Create" class="headerlink" title="Create"></a>Create</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">c = Child(name=&quot;苏轼&quot;)</div><div class="line">c.save()</div><div class="line">p = Parent(name=&quot;苏辙&quot;)</div><div class="line">p.best_child = c</div><div class="line">p.children.add([c,c2,c3,c4])</div><div class="line">p.save()</div></pre></td></tr></table></figure>
 <h4 id="Retrieve"><a href="#Retrieve" class="headerlink" title="Retrieve"></a>Retrieve</h4><p>过滤</p>
 <p>filter(<strong>kwargs)<br>exclude(</strong>kwargs)<br>.all()</p>
 <h5 id="跨关系（跨表）查询"><a href="#跨关系（跨表）查询" class="headerlink" title="跨关系（跨表）查询"></a>跨关系（跨表）查询</h5><p>Blog.objects.filter(entry<strong>headline</strong>contains=’Lennon’)</p>
 <p><a href="https://docs.djangoproject.com/en/2.0/topics/db/queries/#lookups-that-span-relationships" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/queries/#lookups-that-span-relationships</a></p>
 <p><a href="https://docs.djangoproject.com/en/2.0/topics/db/queries/#spanning-multi-valued-relationships" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/queries/#spanning-multi-valued-relationships</a></p>
+<h5 id="prefetch-related-amp-amp-select-related"><a href="#prefetch-related-amp-amp-select-related" class="headerlink" title="prefetch_related &amp;&amp; select_related"></a>prefetch_related &amp;&amp; select_related</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">select_related</div><div class="line"></div><div class="line">生成 join 的 SQL, 可以用来减少 N+1 , 不过仅仅支持一对多，和一对一</div><div class="line"></div><div class="line">prefetch_related</div></pre></td></tr></table></figure>
 <h5 id="Limit-Offset-分页"><a href="#Limit-Offset-分页" class="headerlink" title="Limit / Offset / 分页"></a>Limit / Offset / 分页</h5><p>Blog.objects.filter(entry<strong>headline</strong>contains=’Lennon’)[30:20]</p>
 <h5 id="链式调用"><a href="#链式调用" class="headerlink" title="链式调用"></a>链式调用</h5><p>query = query.filter(<strong>kwargs)<br>query = query.exclude(</strong>kwargs)</p>
 <h5 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h5><p>Django 里面最强大的就是其 Q 表达式了</p>
@@ -545,8 +561,20 @@
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">query.update(headline=F(&apos;blog__name&apos;))</div></pre></td></tr></table></figure>
 <p>一对多的更新（类似于 Set 操作）</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">add(obj1, obj2, ...)</div><div class="line">create(**kwargs)</div><div class="line">remove(obj1, obj2, ...)</div><div class="line">clear()</div><div class="line">set(objs)</div></pre></td></tr></table></figure>
-<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><h4 id="聚集查询"><a href="#聚集查询" class="headerlink" title="聚集查询"></a>聚集查询</h4><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/aggregation/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/aggregation/</a></p>
+<h4 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h4><h5 id="ForeignKey"><a href="#ForeignKey" class="headerlink" title="ForeignKey"></a>ForeignKey</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">class Car(models.Model):</div><div class="line">    manufacturer = models.ForeignKey(</div><div class="line">        &apos;production.Manufacturer&apos;, # 用来解决循环 circular import</div><div class="line">        on_delete=models.CASCADE,</div><div class="line">    )</div></pre></td></tr></table></figure>
+<p>on_delete 的情况</p>
+<ul>
+<li>PROTECT 阻止</li>
+<li>CASCADE 应用层的级联删除</li>
+<li>SET_NULL 应用层的级联 SET_NULL</li>
+<li>SET_DEFAULT</li>
+<li>DO_NOTHING</li>
+<li>SET() 一个 callback</li>
+</ul>
+<h4 id="聚集查询"><a href="#聚集查询" class="headerlink" title="聚集查询"></a>聚集查询</h4><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/aggregation/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/aggregation/</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Book.objects.all().aggregate(Max(&apos;price&apos;))</div><div class="line">Book.objects.aggregate(price_diff=Max(&apos;price&apos;, output_field=FloatField()) - Avg(&apos;price&apos;))</div><div class="line">Book.objects.annotate(num_authors=Count(&apos;authors&apos;))</div><div class="line">Book.objects.annotate(num_authors=Count(&apos;authors&apos;)).aggregate(Avg(&apos;num_authors&apos;)) # &#123;&apos;num_authors__avg&apos;: 1.66&#125;</div></pre></td></tr></table></figure>
 <h4 id="Search"><a href="#Search" class="headerlink" title="Search"></a>Search</h4><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/search/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/search/</a></p>
+<h4 id="Window-Function"><a href="#Window-Function" class="headerlink" title="Window Function"></a>Window Function</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">Option.objects.annotate(</div><div class="line">		rank_num=Window(</div><div class="line">				expression=Rank(),</div><div class="line">				partition_by=F(&quot;vote_id&quot;),</div><div class="line">				order_by=[F(&quot;current_vote_count&quot;).desc(), F(&quot;id&quot;).desc()],</div><div class="line">		),</div><div class="line">		lag_vote_num=Window(</div><div class="line">				expression=Lag(&quot;current_vote_count&quot;),</div><div class="line">				partition_by=F(&quot;vote_id&quot;),</div><div class="line">				order_by=[F(&quot;current_vote_count&quot;).desc(), F(&quot;id&quot;).desc()],</div><div class="line">		),</div><div class="line">)</div><div class="line">.filter(vote=obj.vote)</div><div class="line">.order_by(&quot;-current_vote_count&quot;, &quot;id&quot;)</div><div class="line">.values(&quot;id&quot;, &quot;rank_num&quot;, &quot;current_vote_count&quot;, &quot;lag_vote_num&quot;)</div></pre></td></tr></table></figure>
 <h3 id="2-2-Model-Instances"><a href="#2-2-Model-Instances" class="headerlink" title="2.2 Model Instances"></a>2.2 Model Instances</h3><p><a href="https://docs.djangoproject.com/en/2.0/ref/models/instances/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/ref/models/instances/</a></p>
 <h3 id="2-3-模型实例"><a href="#2-3-模型实例" class="headerlink" title="2.3 模型实例"></a>2.3 模型实例</h3><h3 id="2-4-迁移机制"><a href="#2-4-迁移机制" class="headerlink" title="2.4 迁移机制"></a>2.4 迁移机制</h3><ol>
 <li>加 INSTALLED_APPS</li>
@@ -554,7 +582,35 @@
 <h2 id="0x03-Django-ORM-的高级功能"><a href="#0x03-Django-ORM-的高级功能" class="headerlink" title="0x03 Django ORM 的高级功能"></a>0x03 Django ORM 的高级功能</h2><h3 id="maneger"><a href="#maneger" class="headerlink" title="maneger"></a>maneger</h3><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/managers/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/managers/</a></p>
 <h3 id="raw-sql"><a href="#raw-sql" class="headerlink" title="raw sql"></a>raw sql</h3><p><a href="https://docs.djangoproject.com/en/2.0/topics/db/sql/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/topics/db/sql/</a></p>
 <h4 id="database-fuction"><a href="#database-fuction" class="headerlink" title="database-fuction"></a>database-fuction</h4><p><a href="https://docs.djangoproject.com/en/2.0/ref/models/database-functions/" target="_blank" rel="external">https://docs.djangoproject.com/en/2.0/ref/models/database-functions/</a></p>
-<h2 id="0x04-Django-ORM-Under-The-Hood"><a href="#0x04-Django-ORM-Under-The-Hood" class="headerlink" title="0x04 Django ORM Under The Hood"></a>0x04 Django ORM Under The Hood</h2><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><hr>
+<h2 id="0x04-Database-Access-Optimization"><a href="#0x04-Database-Access-Optimization" class="headerlink" title="0x04 Database Access Optimization"></a>0x04 Database Access Optimization</h2><h3 id="4-1-使用连接池"><a href="#4-1-使用连接池" class="headerlink" title="4.1 使用连接池"></a>4.1 使用连接池</h3><p>连接池是一种永远在线模型的实现</p>
+<p>连接池：驱动程序类型</p>
+<p>连接池：代理类型</p>
+<h3 id="4-2-减少对-MySQL-的访问"><a href="#4-2-减少对-MySQL-的访问" class="headerlink" title="4.2 减少对 MySQL 的访问"></a>4.2 减少对 MySQL 的访问</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select count(*) from pg_stat_activity where pid &lt;&gt; pg_backend_pid() and usename = current_user;</div></pre></td></tr></table></figure>
+<h3 id="Before"><a href="#Before" class="headerlink" title="Before"></a>Before</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">select count(*) from pg_stat_activity where pid &lt;&gt; pg_backend_pid() and usename = current_user;</div></pre></td></tr></table></figure>
+<h3 id="Profile-First"><a href="#Profile-First" class="headerlink" title="Profile First"></a>Profile First</h3><ol>
+<li>django-extentions</li>
+<li>django-debug-toolbar</li>
+</ol>
+<p>手动</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">queryset.explain</div><div class="line"></div><div class="line">from django.db import connection</div><div class="line">connection.queries</div><div class="line"></div><div class="line">from django.db import reset_queries</div><div class="line">reset_queries()</div></pre></td></tr></table></figure>
+<h2 id="0x05-Django-ORM-Under-The-Hood"><a href="#0x05-Django-ORM-Under-The-Hood" class="headerlink" title="0x05 Django ORM Under The Hood"></a>0x05 Django ORM Under The Hood</h2><h3 id="理解-QuerySet"><a href="#理解-QuerySet" class="headerlink" title="理解 QuerySet"></a>理解 QuerySet</h3><ul>
+<li>querysets-are-lazy when-querysets-are-evaluated<ul>
+<li>Iteration</li>
+<li>Slicing</li>
+<li>Pickling/Caching</li>
+<li>len</li>
+<li>repr</li>
+<li>list</li>
+<li>bool</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">obj == nobj # obj.id == nobj.id</div></pre></td></tr></table></figure>
+<ul>
+<li>caching-and-querysets</li>
+</ul>
+<h3 id="理解-cached-attributes"><a href="#理解-cached-attributes" class="headerlink" title="理解 cached attributes"></a>理解 cached attributes</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; entry = Entry.objects.get(id=1)</div><div class="line">&gt;&gt;&gt; entry.blog   # Blog object is retrieved at this point</div><div class="line">&gt;&gt;&gt; entry.blog   # cached version, no DB access</div><div class="line"></div><div class="line">&gt;&gt;&gt; entry = Entry.objects.get(id=1)</div><div class="line">&gt;&gt;&gt; entry.authors.all()   # query performed</div><div class="line">&gt;&gt;&gt; entry.authors.all()   # query performed again</div></pre></td></tr></table></figure>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><hr>
 <p>ChangeLog:</p>
 <ul>
 <li><strong>2018-03-09</strong> 重修文字</li>
@@ -590,9 +646,9 @@
           
             <a href="/tags/Django/" rel="tag"># Django</a>
           
-            <a href="/tags/全栈开发/" rel="tag"># 全栈开发</a>
-          
             <a href="/tags/VueJS/" rel="tag"># VueJS</a>
+          
+            <a href="/tags/全栈开发/" rel="tag"># 全栈开发</a>
           
             <a href="/tags/RestAPI/" rel="tag"># RestAPI</a>
           
@@ -691,7 +747,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-count">86</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -784,7 +840,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-如何快速上手"><span class="nav-number">2.</span> <span class="nav-text">0x01 如何快速上手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-DjangoORM-的基本功能"><span class="nav-number">3.</span> <span class="nav-text">0x02 DjangoORM 的基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-模型定义-Model"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 模型定义 Model</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Models-与-Meta"><span class="nav-number">3.1.1.</span> <span class="nav-text">Models 与 Meta</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Field-与-Field-Options"><span class="nav-number">3.1.2.</span> <span class="nav-text">Field 与 Field Options</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Field"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">Field</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Field-Options"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">Field Options</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ForeignKey-的-Models"><span class="nav-number">3.1.2.3.</span> <span class="nav-text">ForeignKey 的 Models</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Relationship"><span class="nav-number">3.1.3.</span> <span class="nav-text">Relationship</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#索引"><span class="nav-number">3.1.4.</span> <span class="nav-text">索引</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-QuerySet"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 QuerySet</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Create"><span class="nav-number">3.2.1.</span> <span class="nav-text">Create</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Retrieve"><span class="nav-number">3.2.2.</span> <span class="nav-text">Retrieve</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#跨关系（跨表）查询"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">跨关系（跨表）查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Limit-Offset-分页"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">Limit / Offset / 分页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#链式调用"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">链式调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#表达式"><span class="nav-number">3.2.2.4.</span> <span class="nav-text">表达式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行查询"><span class="nav-number">3.2.2.5.</span> <span class="nav-text">执行查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#比较"><span class="nav-number">3.2.2.6.</span> <span class="nav-text">比较</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复制-实例"><span class="nav-number">3.2.2.7.</span> <span class="nav-text">复制 实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他"><span class="nav-number">3.2.2.8.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缓存机制"><span class="nav-number">3.2.2.9.</span> <span class="nav-text">缓存机制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Update"><span class="nav-number">3.2.3.</span> <span class="nav-text">Update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delete"><span class="nav-number">3.2.4.</span> <span class="nav-text">Delete</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#聚集查询"><span class="nav-number">3.2.5.</span> <span class="nav-text">聚集查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Search"><span class="nav-number">3.2.6.</span> <span class="nav-text">Search</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Model-Instances"><span class="nav-number">3.3.</span> <span class="nav-text">2.2 Model Instances</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-模型实例"><span class="nav-number">3.4.</span> <span class="nav-text">2.3 模型实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-迁移机制"><span class="nav-number">3.5.</span> <span class="nav-text">2.4 迁移机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Django-ORM-的高级功能"><span class="nav-number">4.</span> <span class="nav-text">0x03 Django ORM 的高级功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#maneger"><span class="nav-number">4.1.</span> <span class="nav-text">maneger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#raw-sql"><span class="nav-number">4.2.</span> <span class="nav-text">raw sql</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#database-fuction"><span class="nav-number">4.2.1.</span> <span class="nav-text">database-fuction</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-Django-ORM-Under-The-Hood"><span class="nav-number">5.</span> <span class="nav-text">0x04 Django ORM Under The Hood</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-参考链接"><span class="nav-number">6.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-前言"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-如何快速上手"><span class="nav-number">2.</span> <span class="nav-text">0x01 如何快速上手</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-DjangoORM-的基本功能"><span class="nav-number">3.</span> <span class="nav-text">0x02 DjangoORM 的基本功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-模型定义-Model"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 模型定义 Model</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Models-与-Meta"><span class="nav-number">3.1.1.</span> <span class="nav-text">Models 与 Meta</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Field-与-Field-Options"><span class="nav-number">3.1.2.</span> <span class="nav-text">Field 与 Field Options</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Field"><span class="nav-number">3.1.2.1.</span> <span class="nav-text">Field</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Field-Options"><span class="nav-number">3.1.2.2.</span> <span class="nav-text">Field Options</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Relationship"><span class="nav-number">3.1.3.</span> <span class="nav-text">Relationship</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-QuerySet"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 QuerySet</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Create"><span class="nav-number">3.2.1.</span> <span class="nav-text">Create</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Retrieve"><span class="nav-number">3.2.2.</span> <span class="nav-text">Retrieve</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#跨关系（跨表）查询"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">跨关系（跨表）查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#prefetch-related-amp-amp-select-related"><span class="nav-number">3.2.2.2.</span> <span class="nav-text">prefetch_related && select_related</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Limit-Offset-分页"><span class="nav-number">3.2.2.3.</span> <span class="nav-text">Limit / Offset / 分页</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#链式调用"><span class="nav-number">3.2.2.4.</span> <span class="nav-text">链式调用</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#表达式"><span class="nav-number">3.2.2.5.</span> <span class="nav-text">表达式</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#执行查询"><span class="nav-number">3.2.2.6.</span> <span class="nav-text">执行查询</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#比较"><span class="nav-number">3.2.2.7.</span> <span class="nav-text">比较</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复制-实例"><span class="nav-number">3.2.2.8.</span> <span class="nav-text">复制 实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他"><span class="nav-number">3.2.2.9.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缓存机制"><span class="nav-number">3.2.2.10.</span> <span class="nav-text">缓存机制</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Update"><span class="nav-number">3.2.3.</span> <span class="nav-text">Update</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delete"><span class="nav-number">3.2.4.</span> <span class="nav-text">Delete</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#ForeignKey"><span class="nav-number">3.2.4.1.</span> <span class="nav-text">ForeignKey</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#聚集查询"><span class="nav-number">3.2.5.</span> <span class="nav-text">聚集查询</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Search"><span class="nav-number">3.2.6.</span> <span class="nav-text">Search</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Window-Function"><span class="nav-number">3.2.7.</span> <span class="nav-text">Window Function</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-Model-Instances"><span class="nav-number">3.3.</span> <span class="nav-text">2.2 Model Instances</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-模型实例"><span class="nav-number">3.4.</span> <span class="nav-text">2.3 模型实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-迁移机制"><span class="nav-number">3.5.</span> <span class="nav-text">2.4 迁移机制</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Django-ORM-的高级功能"><span class="nav-number">4.</span> <span class="nav-text">0x03 Django ORM 的高级功能</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#maneger"><span class="nav-number">4.1.</span> <span class="nav-text">maneger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#raw-sql"><span class="nav-number">4.2.</span> <span class="nav-text">raw sql</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#database-fuction"><span class="nav-number">4.2.1.</span> <span class="nav-text">database-fuction</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-Database-Access-Optimization"><span class="nav-number">5.</span> <span class="nav-text">0x04 Database Access Optimization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-使用连接池"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 使用连接池</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-减少对-MySQL-的访问"><span class="nav-number">5.2.</span> <span class="nav-text">4.2 减少对 MySQL 的访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Before"><span class="nav-number">5.3.</span> <span class="nav-text">Before</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Profile-First"><span class="nav-number">5.4.</span> <span class="nav-text">Profile First</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-Django-ORM-Under-The-Hood"><span class="nav-number">6.</span> <span class="nav-text">0x05 Django ORM Under The Hood</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#理解-QuerySet"><span class="nav-number">6.1.</span> <span class="nav-text">理解 QuerySet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理解-cached-attributes"><span class="nav-number">6.2.</span> <span class="nav-text">理解 cached attributes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-参考链接"><span class="nav-number">7.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
             
 
           </div>

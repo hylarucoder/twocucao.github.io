@@ -300,6 +300,184 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/01/23/PythonCompression/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/01/23/PythonCompression/" itemprop="url">Python 中的数据压缩和存档</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-23T14:56:30+08:00">
+                2018-01-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-黑魔法/" itemprop="url" rel="index">
+                    <span itemprop="name">Python 黑魔法</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计</span>
+                
+                <span title="字数统计">
+                  208
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长</span>
+                
+                <span title="阅读时长">
+                  1
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>在一次数据分析过程中，对方扔过来 40GB 的数据 – data.tar.gz .</p>
+<p>我想着能不能直接用 pandas 直接读取这个文件呢？查找了一些资料，于是有了本文。</p>
+<p>Python 中支持如下：</p>
+<ul>
+<li>数据压缩算法：zlib, gzip, bzip2 and lzma</li>
+<li>存档格式：zip 以及 tar</li>
+</ul>
+<h2 id="0x01-压缩是怎么回事？"><a href="#0x01-压缩是怎么回事？" class="headerlink" title="0x01 压缩是怎么回事？"></a>0x01 压缩是怎么回事？</h2><h2 id="0x02-zlib-与-gzip"><a href="#0x02-zlib-与-gzip" class="headerlink" title="0x02 zlib 与 gzip"></a>0x02 zlib 与 gzip</h2><p>gzip 依赖于 zlib</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"># 读取压缩文件</div><div class="line">import gzip</div><div class="line">with gzip.open(&apos;/home/joe/file.txt.gz&apos;, &apos;rb&apos;) as f:</div><div class="line">    file_content = f.read()</div><div class="line"></div><div class="line"># 写入压缩文件</div><div class="line">import gzip</div><div class="line">content = b&quot;Lots of content here&quot;</div><div class="line">with gzip.open(&apos;/home/joe/file.txt.gz&apos;, &apos;wb&apos;) as f:</div><div class="line">    f.write(content)</div><div class="line"></div><div class="line"># 拷贝压缩文件</div><div class="line">import gzip</div><div class="line">import shutil</div><div class="line">with open(&apos;/home/joe/file.txt&apos;, &apos;rb&apos;) as f_in:</div><div class="line">    with gzip.open(&apos;/home/joe/file.txt.gz&apos;, &apos;wb&apos;) as f_out:</div><div class="line">        shutil.copyfileobj(f_in, f_out)</div><div class="line"></div><div class="line"># 压缩二进制字符串</div><div class="line">import gzip</div><div class="line">s_in = b&quot;Lots of content here&quot;</div><div class="line">s_out = gzip.compress(s_in)</div></pre></td></tr></table></figure>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-12-20</strong> 初始化本文</li>
+</ul>
+
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
     <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/12/28/AllStuffAboutCSS/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1537,7 +1715,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  4,076
+                  3,628
                 </span>
               
 
@@ -1553,7 +1731,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  18
+                  16
                 </span>
               
             </div>
@@ -1572,8 +1750,8 @@
 
       
         
-          <p>当时写这篇文章的时候才接触 mac 没多久，使用快两年之后，再次修订了本文。</p>
-<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>谈及 macOS , 很多人喜欢和 Win 比个高下。在我看来， Win 虽在非编程类生态和易用性比 Mac 要好很多，可专业人士之所以专业是因为他能挑选适合的武器发挥最大的效用，不是吗？</p>
+          <p>当时写这篇文章的时候才接触 mac 没多久，在使用的第二年的时候，修订了这篇文章，今年<br>是第三年，再次修订了本文。</p>
+<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>谈及 macOS , 很多人喜欢和 Win 比个高下。在我看来， Win 虽在非编程类（除了.NET) 生态和易用性比 Mac 要好很多，可专业人士之所以专业是因为他能挑选适合的武器发挥最大的效用，不是吗？</p>
 <blockquote>
 <p>适合自己的，能让自己用最大效率生产或者是娱乐的，才是更好的工具。</p>
 </blockquote>
@@ -2137,189 +2315,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/07/11/GeoProcessingWithPython/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://oh1n2bfoj.bkt.clouddn.com/avatar.png">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h2 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/07/11/GeoProcessingWithPython/" itemprop="url">Geoprocessing With Python</a></h2>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-11T12:13:20+08:00">
-                2017-07-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python-黑魔法/" itemprop="url" rel="index">
-                    <span itemprop="name">Python 黑魔法</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计</span>
-                
-                <span title="字数统计">
-                  1,144
-                </span>
-              
-
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长</span>
-                
-                <span title="阅读时长">
-                  5
-                </span>
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>16 年 12 月研究 GIS 相关资料用于处理 GIS 相关问题，完成基本 GIS 功能。<br>最新需要进阶相关内容用于更好的处理相关数据。</p>
-<ul>
-<li>书籍：<ul>
-<li>Geoprocessing With Python</li>
-<li>PostGIS In Action 2rd</li>
-</ul>
-</li>
-<li>框架：<ul>
-<li>前端 Leaflets D3</li>
-<li>后端 GeoDjango</li>
-</ul>
-</li>
-<li>其他零零碎碎的资料</li>
-</ul>
-<p>特此记录。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/07/11/GeoProcessingWithPython/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
@@ -2369,7 +2364,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">85</span>
+                <span class="site-state-item-count">86</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
