@@ -103,7 +103,7 @@
 <meta property="og:url" content="http://twocucao.xyz/2016/12/11/RedisCheatSheet/index.html">
 <meta property="og:site_name" content="MG的编程小屋">
 <meta property="og:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py 常见问题 踩坑记录  不定期更新。">
-<meta property="og:updated_time" content="2018-08-29T02:56:05.523Z">
+<meta property="og:updated_time" content="2018-11-30T03:28:02.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Redis Cheatsheet">
 <meta name="twitter:description" content="0x00. 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。  Redis Shell Redis 配套工具 Redis-Py 常见问题 踩坑记录  不定期更新。">
@@ -383,7 +383,7 @@
                   <span class="post-meta-item-text">字数统计</span>
                 
                 <span title="字数统计">
-                  860
+                  950
                 </span>
               
 
@@ -399,7 +399,7 @@
                   <span class="post-meta-item-text">阅读时长</span>
                 
                 <span title="阅读时长">
-                  3
+                  4
                 </span>
               
             </div>
@@ -478,6 +478,9 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 进入 redis-cli 删除 items</span></div><div class="line">config <span class="built_in">set</span> stop-writes-on-bgsave-error no</div><div class="line">del xxx_html:items</div><div class="line">config <span class="built_in">set</span> stop-writes-on-bgsave-error yes</div><div class="line"><span class="comment"># 到 bash 下面检查磁盘，我的机器瞬间释放了 3GB 的磁盘空间</span></div><div class="line">df -hl</div></pre></td></tr></table></figure>
 <p>备注：del 一次即可，因为有程序正在运行，所以当 del 之后，原来阻塞的程序接着开始运行。 xxx_html:items 会不断出现新的值。</p>
 <p>Scrapy 立马就开始工作了（无需重启）</p>
+<p>但是这也不是没有弊端的，依据官方文档所言，只有你完全不 care 数据持久化的情况下才可以使用这种方式</p>
+<p>最好的方式当然是让 bgsave 完全 work 了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"># redis-cli</div><div class="line">127.0.0.1:6379&gt; CONFIG SET dir /data/tmp</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; CONFIG SET dbfilename temp.rdb</div><div class="line">OK</div><div class="line">127.0.0.1:6379&gt; BGSAVE</div><div class="line">Background saving started</div><div class="line">127.0.0.1:6379&gt;</div></pre></td></tr></table></figure>
 <hr>
 <p>ChangeLog:</p>
 <ul>
