@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MG的编程小屋">
+<meta property="og:url" content="http://twocucao.xyz/page/9/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+<meta property="og:locale">
+<meta property="article:author" content="Micheal Gardner">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/page/9/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>MG的编程小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/02/15/Python%E6%96%97%E9%B1%BC%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/02/15/Python%E6%96%97%E9%B1%BC%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/" class="post-title-link" itemprop="url">Python 程序员如何优雅的看斗鱼 TV</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-02-15 18:50:23" itemprop="dateCreated datePublished" datetime="2016-02-15T18:50:23+08:00">2016-02-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-30 16:48:09" itemprop="dateModified" datetime="2018-01-30T16:48:09+08:00">2018-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%91%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">我的开源项目</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>过年的一段时间抽空研究写了一些关于斗鱼 TV 的弹幕的获取。分别使用 Python 和 Ruby 写了弹幕获取的客户端。</p>
+<p>文章地址为：</p>
+<p>Python 版本：<br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/2e0d14978ae9">http://www.jianshu.com/p/2e0d14978ae9</a></p>
+<p>Ruby 版本附加原理讲解：<br><a target="_blank" rel="noopener" href="http://www.jianshu.com/p/ef0225b6bb0e">http://www.jianshu.com/p/ef0225b6bb0e</a></p>
+<p>文章末尾写到了我有一个痛点 –rtmp 直播视频无法获取，后来在网友 <a target="_blank" rel="noopener" href="http://www.jianshu.com/users/0675b42ac3ba">往事侞湮</a>] 的友善提醒下，终于 Get 到了。</p>
+<p>于是，稍微完善了一下，我就发布了第一个命令行版本的斗鱼 TV 浏览弹幕小助手。</p>
+<p>如果你是 MacOSX 的用户，你只需要</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">brew install mplayer</span><br><span class="line">pip3 install danmu.fm</span><br><span class="line"><span class="comment"># danmu.fm -q 1 -v 1 [url]</span></span><br><span class="line"><span class="comment"># 比如</span></span><br><span class="line">danmu.fm -q 2 -v 1 http://www.douyutv.com/16789</span><br><span class="line"><span class="comment"># -q 参数 0 为不调用 mplayer 进行播放，1 为使用 mplayer 进行普清视频的播放，2 为使用 mplayer 进行高清视频的播放，3 为使用 mplayer 进行超清视频的播放</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你是 Ubuntu 用户，你只需要</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mplayer</span><br><span class="line">pip3 install danmu.fm</span><br><span class="line"><span class="comment"># danmu.fm  -v 1 [url]</span></span><br><span class="line"><span class="comment"># 比如</span></span><br><span class="line">danmu.fm  -v 1 -q http://www.douyutv.com/16789</span><br><span class="line"><span class="comment">#ubuntu 上 mplayer 播放器可以正常播放</span></span><br></pre></td></tr></table></figure>
+
+<p>如果你是 Win 用户，</p>
+<blockquote>
+<p>唉，windows 上面糟糕的编码问题。那单纯来看字幕的话也不是不可以的。只是我暂时没有对 Win 进行兼容。还是换 Linux 吧。</p>
+</blockquote>
+<h2 id="0x01-演示效果"><a href="#0x01-演示效果" class="headerlink" title="0x01 演示效果"></a>0x01 演示效果</h2><p><img src="http://upload-images.jianshu.io/upload_images/52890-396d6451c68d2a83.gif?imageMogr2/auto-orient/strip" alt="1123.gif"></p>
+<h2 id="0xEE-代码地址"><a href="#0xEE-代码地址" class="headerlink" title="0xEE 代码地址"></a>0xEE 代码地址</h2><p><a target="_blank" rel="noopener" href="https://github.com/twocucao/danmu.fm">https://github.com/twocucao/danmu.fm</a></p>
+<p>如果喜欢，请点个喜欢或者 star 一下</p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li>**Update 20160609 : ** 更新 Python 客户端，修复由于斗鱼网页版面修改带来的小问题，直接开启海量弹幕模式（请大家不要问我为什么端午节这一天为什么闲着没事更新代码，这个真的和情人节是同一个原因）.</li>
+<li>**Update 20160220 : **更新 Python 客户端，增加直播视频的 Live 获取，以及 Mac 平台下面的 Mplayer 的视频播放。代码均放在 Github 上面。<a href="//link.zhihu.com/?target=https://github.com/twocucao/danmu.fm">GitHub - twocucao/danmu.fm: douyutv danmu 斗鱼 TV 弹幕助手**</a></li>
+<li><strong>Update 20160214 : **更新 Python 和 Ruby 客户端（请大家不要问我为什么情人节这一天为什么闲着没事更新代码）</strong></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/02/04/%E6%96%97%E9%B1%BCTV%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/02/04/%E6%96%97%E9%B1%BCTV%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/" class="post-title-link" itemprop="url">斗鱼 TV 弹幕助手</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-02-04 18:50:23" itemprop="dateCreated datePublished" datetime="2016-02-04T18:50:23+08:00">2016-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-28 01:38:12" itemprop="dateModified" datetime="2018-01-28T01:38:12+08:00">2018-01-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%91%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">我的开源项目</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="斗鱼弹幕助手"><a href="#斗鱼弹幕助手" class="headerlink" title="斗鱼弹幕助手"></a>斗鱼弹幕助手</h1><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p>前几天闲着无聊，看到舍友们都在看斗鱼 TV，虽然我对那些网络游戏东西都不是非常感兴趣。只是我突然间想到，如果我可以获取上面的弹幕内容。不就有点意思了么？</p>
+<h2 id="1-分析阶段"><a href="#1-分析阶段" class="headerlink" title="1. 分析阶段"></a>1. 分析阶段</h2><p>如果我想要抓取网页上面的东西，无非就是两种方法</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/02/04/%E6%96%97%E9%B1%BCTV%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/02/01/PC2MAC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2016/02/01/PC2MAC/" class="post-title-link" itemprop="url">Oh My Mac!</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-02-01 18:50:23" itemprop="dateCreated datePublished" datetime="2016-02-01T18:50:23+08:00">2016-02-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-28 01:36:56" itemprop="dateModified" datetime="2018-01-28T01:36:56+08:00">2018-01-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/" itemprop="url" rel="index"><span itemprop="name">善用佳软</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>我会想念 Windows 上面的一切，但我选择了 Mac。</p>
+<p>从某种程度上讲，我并不是讨厌 Windows。尽管我是一个伪装成、*nix 程序员的技术菜鸟。</p>
+<p>我还记得高一时候家里给我买的第一台二手电脑，那是一台烂到令人发指的破电脑，你可能见过那种俗称大屁股的电脑，512M 内存，64M 显存。我就在那一台机器上打了仙剑三通关和仙剑四的青鸾峰到寿阳城阶段，千佛寺时候家里电脑实在是烂到令人发指，于是电脑就报废了。后来，家里面换了一台电脑，128 显存，内存 2g 的联想杨天电脑。我就在这一台机器上打了仙剑四的寿阳城之后的剧情。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/02/01/PC2MAC/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2015/12/31/%E4%B9%A6%E5%8D%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/12/31/%E4%B9%A6%E5%8D%95/" class="post-title-link" itemprop="url">2015-2019 年书单</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-12-31 18:41:47" itemprop="dateCreated datePublished" datetime="2015-12-31T18:41:47+08:00">2015-12-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-30 16:09:45" itemprop="dateModified" datetime="2018-01-30T16:09:45+08:00">2018-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/" itemprop="url" rel="index"><span itemprop="name">写在人生的边上</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>记下一些看过的和没有看过的书籍。</p>
+<p>标记如下：</p>
+<ul>
+<li>[o] 看过，并且留有读书笔记</li>
+<li><input checked="" disabled="" type="checkbox"> 没看过，或者准备再看一次</li>
+<li>[-] 正在看</li>
+</ul>
+<h3 id="技术类"><a href="#技术类" class="headerlink" title="技术类"></a>技术类</h3><p>其实程序员的编程类知识的获取大多来源于官网的 api docment 以及 guide, 但也并不完全如此。</p>
+<p>有的官网的 tutorial 写的不够入门，guide 写的缺乏案例，api document 写的相当及简略。</p>
+<blockquote>
+<p>很多时候，还是需要去阅读源码的。</p>
+</blockquote>
+<p>但下面的一些书籍，或多或少让我觉得应该和官网结合起来看。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/12/31/%E4%B9%A6%E5%8D%95/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2015/09/19/%E5%8D%9A%E4%BA%BA%E4%BC%A0%E5%BD%B1%E8%AF%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/09/19/%E5%8D%9A%E4%BA%BA%E4%BC%A0%E5%BD%B1%E8%AF%84/" class="post-title-link" itemprop="url">『博人传』影评</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-09-19 18:50:23" itemprop="dateCreated datePublished" datetime="2015-09-19T18:50:23+08:00">2015-09-19</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-30 17:16:11" itemprop="dateModified" datetime="2018-01-30T17:16:11+08:00">2018-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/" itemprop="url" rel="index"><span itemprop="name">写在人生的边上</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p><strong>全国最大忍者村火影忍者村倒闭了！！！</strong></p>
+<p>博人传影评内无剧透。</p>
+<p>故事发生在鸣人当上火影之后。天天忙于公务，一直没有时间陪自己的孩子。</p>
+<p>也是在这时，世界的科技日新月异，转眼间木叶的电脑技术已经杰出到世人无法理解的地步。</p>
+<p>宇智波童参考这查克拉的结构，结合中国功夫中的内功，外功，亦欲以究天人之际，通古今之变，终于在 SCI 上发表论文《查克拉的数学原理和中国周易的必然联系》，该论文深刻阐述了<strong>查克拉的本质</strong>，查克拉由两个东西构成，一个叫做阴，另一个叫做阳，而所有人的查克拉都可以都可以通过一定量的排序组合变成不同属性的查克拉。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/09/19/%E5%8D%9A%E4%BA%BA%E4%BC%A0%E5%BD%B1%E8%AF%84/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2015/06/14/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8Windows10/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/06/14/%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8Windows10/" class="post-title-link" itemprop="url">如何优雅的使用 Windows 10</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-06-14 08:50:23" itemprop="dateCreated datePublished" datetime="2015-06-14T08:50:23+08:00">2015-06-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-28 01:34:23" itemprop="dateModified" datetime="2018-01-28T01:34:23+08:00">2018-01-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/" itemprop="url" rel="index"><span itemprop="name">善用佳软</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>刚开始 Win10 发布没有多久的时候我就写了这篇回答，放在知乎上，后来又搬运到 jianshu 上，现在搬运到自己的博客上，也算是落叶归根。</p>
+<blockquote>
+<p>已经过了折腾的年龄，答案仅仅从提升效率方面来说，是否优雅就看诸位的审美了。</p>
+</blockquote>
+<p>本文目录</p>
+<ol>
+<li>文件夹与文件一定要分类命名好。</li>
+<li>Win10 自带功能怎样提升效率。</li>
+</ol>
+<ul>
+<li>2.1 快捷键</li>
+<li>2.2 触摸板手势</li>
+<li>2.3 Win+R</li>
+</ul>
+<ol start="3">
+<li>非 Windows 自带的必备的提升效率，节省时间的软件。</li>
+</ol>
+<ul>
+<li>3.1 文档，图片，文本，以及通用文件管理器</li>
+<li>3.2 Everything is OK</li>
+<li>3.3 Chrome （Google 出品，必属精品）</li>
+<li>3.4 阅读方面 calibre ， 欧路词典</li>
+<li>3.5 笔记软件 xmind，wiznote</li>
+<li>3.6 播放器</li>
+<li>3.7 其他想到再补充</li>
+</ul>
+<p>4. 不写点代码优化一下工作流程，你都不好意思说自己逼格高。</p>
+<ul>
+<li>4.1 autohotkey</li>
+</ul>
+<h2 id="0x01-文件命名"><a href="#0x01-文件命名" class="headerlink" title="0x01. 文件命名"></a>0x01. 文件命名</h2><blockquote>
+<p>文件夹与文件一定要分类命名好</p>
+</blockquote>
+<p>贴上我的几张图来看一下我的文件夹命名：</p>
+<p>一级文件夹如下：<br><img src="http://upload-images.jianshu.io/upload_images/52890-b6a5322beca48d2c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>二级文件夹如下：<br><img src="http://upload-images.jianshu.io/upload_images/52890-656d90e16abaff66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>三级或者三级以上文件夹</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-bdf7349fccedda52.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>文件命名规范（因为涉及到后面使用 Everything，所以我们的命名尽量追求便于搜索）</p>
+<p>举个例子，对于读书笔记 ：读书笔记、_设计模式、_20150303_v2.1.xmind</p>
+<p>对于照片这种文件比较多的，优先命名文件夹，其次按照地址人物日期命名，比如：大明湖胖、_夏雨荷、_20150101</p>
+<blockquote>
+<p>无需刻意追求命名，方便搜索，方便管理就好。</p>
+</blockquote>
+<p>不妨参考下面文章：</p>
+<p><a target="_blank" rel="noopener" href="http://www.zhihu.com/question/21537488">电脑上的文件夹该如何命名（整理）才能做到很久都不用重新整理的那种？ - 文件整理</a></p>
+<p>嗯这样你在搜索笔记的时候在 Everything 里面只需要键入 2015 笔记就可以查看 2015 笔记文件。</p>
+<p>是不是很方便？</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-f4a815755900d627.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-1fb3ac3766e59044.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>当然桌面上尽量少放或者不放文件夹，我的桌面上仅仅有一个链接到 OneDrive 里面的 TEMP 文件夹的快捷方式，用于存放临时没有整理的文件。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-be22e9252b149d1f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<h2 id="0x02-Win10-自带功能怎样提升效率"><a href="#0x02-Win10-自带功能怎样提升效率" class="headerlink" title="0x02. Win10 自带功能怎样提升效率"></a>0x02. Win10 自带功能怎样提升效率</h2><ul>
+<li><p>2.1 快捷键其他答主说的都可以，你就直接参考他们的答案中的关于快捷键。我仅仅说一些重点快捷键。Win+ 数字键 把常用的软件附在任务栏上。建议四个以内，方便单手操作。Win+X Alt+tab 切换窗口 WIn+R 运行</p>
+</li>
+<li><p>2.2 触摸板手势参考最高票的答案。虽然我觉得增加的那么多的触摸手势比较鸡肋。</p>
+</li>
+<li><p>2.3 Win+RWin+R 主要用于启动一些程序或者一些 DOS 小命令。</p>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-d39ea3f078f1d800.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>我将所有的便携与非便携软件的快捷方式放在这里并且配置环境变量。比如，我需要启动为知笔记，我就仅仅需要闭上眼睛输入 Win+R + wz +<Enter></p>
+<p>其他软件同理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sublime text 打开需要输入 </span></span><br><span class="line">Win+R + st +&lt;Enter&gt;</span><br><span class="line"><span class="comment"># 欧路词典 打开需要输入 </span></span><br><span class="line">Win+R + ol +&lt;Enter&gt;</span><br><span class="line"><span class="comment"># 这里省去若干软件打开方式。</span></span><br></pre></td></tr></table></figure>
+
+<p>关于 Win+R 你可以参考善用佳软 <a target="_blank" rel="noopener" href="http://xbeta.info/win-run.htm">最绿色最高效，用 win+r 启动常用程序和文档</a> 的介绍。</p>
+<h2 id="0x03-非-Windows-自带的必备软件"><a href="#0x03-非-Windows-自带的必备软件" class="headerlink" title="0x03. 非 Windows 自带的必备软件"></a>0x03. 非 Windows 自带的必备软件</h2><ol start="3">
+<li>非 Windows 自带的必备的提升效率，节省时间的软件。</li>
+</ol>
+<ul>
+<li>3.1 文档，图片，文本，以及通用文件管理器如果文件多，就一定需要一个用于管理这种类型文件的管理器 - 托马斯。电脑达人</li>
+</ul>
+<p>图片管理用 Picasa</p>
+<p>文本管理直接使用笔记软件比如为知笔记，或者印象笔记。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-efe86c9e4bd48b95.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>文件管理进阶的话可以使用 totalcmd，不过学习路线比较陡峭，没有足够的需求，不要搞 TC.</p>
+<p>用 Everything。或者 listary</p>
+<ul>
+<li>3.2 Everything is OK</li>
+</ul>
+<p>无坚不摧，为快不破。 everything 是搜索效率最快的软件。没有之一。合理的命名可以为你的生活节省一半找资料的时间。</p>
+<ul>
+<li>3.3 Chrome （Google 出品，必属精品）</li>
+</ul>
+<p>浏览器本身速度快，配合强大的插件库。让你在实力派装逼的道路上越走越远</p>
+<p>这玩意的强大在哪到处都有，直接在知乎上搜一下就好了。</p>
+<ul>
+<li>3.4 阅读方面 calibre ， 欧路词典，</li>
+</ul>
+<p>calibre 主要是用来看经济学人，老乡恶魔的奶爸推荐。</p>
+<p>欧路词典可以外挂其他的开源词库，查词速度超级快。</p>
+<ul>
+<li><p>3.5 笔记软件 xmind，wiznote 用于记录笔记。前者用于梳理思路，把一本书读薄，后者用于将自己的知识体系梳理一遍，把书读厚。消化资料。</p>
+</li>
+<li><p>3.6 播放器</p>
+</li>
+</ul>
+<p>QQ 影音 – 满足普通播放需求</p>
+<p>kmplayer – 用于视频截图</p>
+<p>foobar2000 – 逼格提升必备</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-1d8bc57d69948d60.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"></p>
+<p>网易云音乐 – 这货真的不错。</p>
+<ul>
+<li>3.7 其他想到再补充</li>
+</ul>
+<h2 id="0x04-不写点代码优化一下工作流程，你都不好意思说自己逼格高。"><a href="#0x04-不写点代码优化一下工作流程，你都不好意思说自己逼格高。" class="headerlink" title="0x04. 不写点代码优化一下工作流程，你都不好意思说自己逼格高。"></a>0x04. 不写点代码优化一下工作流程，你都不好意思说自己逼格高。</h2><p>不写点代码优化一下工作流程，你都不好意思说自己逼格高。- autohotkey</p>
+<p>可以针对快捷键进行编程。有了它，妈妈再也不担心我操作速度慢的要死了。</p>
+<p>有如下场景：一大段文字中有一个网址，你需要访问它，我的解决方法就是选中那些文字，然后一个 Win+b，直接打开 chrome 进行搜索，如果文字中没有网址，那么对选中文字进行百度。同理可以推淘宝，京东 github 等等。或者这样一个场景，你需要大量的文本编辑，但是上下左右离自己的工作区比较远，你可以小拇指按住大写锁定按键，然后使用 HJKL 进行移动。</p>
+<p>教程参考 <a target="_blank" rel="noopener" href="http://zhuanlan.zhihu.com/autohotkey">AutoHotkey 之美 - 知乎专栏</a></p>
+<p>新手可以先拿我搜刮整理的 AHK 代码看看。<a target="_blank" rel="noopener" href="https://github.com/twocucao/ChortHotKey">twocucao/ChortHotKey · GitHub</a></p>
+<p>PS：我上面提到的软件几乎都是神级软件，都是入门容易精通难的深坑，想调教好也不是想象中呢么简单的，但，书到用时方恨少，你可以先挑一些使用。如果你以后有不少的文件需要管理，在未来，你一定会用到。</p>
+<p>至于哪些图标怎么搞定？步骤如下：制作出那样的图片文件 （PS）<br>转换成 ico 文件（Iconmaster），把 ico 文件拷贝到指定文件夹内部（这步是为了方便修改文件夹切换电脑带来的文件夹图标恢复原样）<br>ico 设置到文件夹上 （修改文件夹内部的 desktop.ini 文件）</p>
+<p>附上制作的 PSD 文件，ICONMASTER 以及一个样板文件夹（注意要开启显示系统文件以及隐藏文件两个选项，然后查看样板文件夹中的 desktop.ini 以及 ico 文件。修改的话，也就是修改 desktop.ini 文件里面的对应文件名称就好了）</p>
+<p>链接： <a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1qWyx6oc">百度云地址</a> 密码：g9up</p>
+<p>foobar 链接：<a target="_blank" rel="noopener" href="http://pan.baidu.com/s/1e7xZC">百度云地址</a> 密码：e0as</p>
+<p>文件图标受此答案启发：<a target="_blank" rel="noopener" href="http://www.zhihu.com/question/19901022">如何整理电脑文件夹？ - 计算机</a></p>
+<blockquote>
+<p>2016-01-04 已经更换 Macbook Pro, 依然挂念 Windows.<br>2017-05-01 21:42:00 已经更换 2016 年 Macbook Pro With Multi-Touchbar, 再无挂念 Windows.</p>
+</blockquote>
+<h2 id="0x05-后续"><a href="#0x05-后续" class="headerlink" title="0x05. 后续"></a>0x05. 后续</h2><p>所谓用 Windows 还是 MacOS 都是一种选择而已，孰高孰下谁知道呢。并不是说用了一个操作系统，用了某个软件，就会显得自己多么高明，如果不能为自己的日常工作提高效率，让自己节省下来的时间留给自己，那又有什么意义呢？</p>
+<p>当我在 Windows 上的时候一味追求 APM, 即高效的操作，但其实最高效的还是自己的思路清晰，想好了再动手。</p>
+<blockquote>
+<p>谋定而后动</p>
+</blockquote>
+<p>如是而已。</p>
+<blockquote>
+<p>抓到老鼠的猫才是好猫呀！</p>
+</blockquote>
+<p>ChangeLog:</p>
+<ul>
+<li>2017-03-08 09:32:15 整理知乎回答，搬运到博客上。</li>
+<li>2017-05-01 09:32:15 补充现在使用的电脑信息</li>
+<li>2017-06-10 09:32:15 重新排版，增加后续章节。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2015/05/04/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/05/04/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E%E7%9A%84%E4%B8%80%E4%BA%9B%E6%8A%80%E5%B7%A7/" class="post-title-link" itemprop="url">搜索引擎的一些技巧</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-05-04 08:50:23" itemprop="dateCreated datePublished" datetime="2015-05-04T08:50:23+08:00">2015-05-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-30 16:48:36" itemprop="dateModified" datetime="2018-01-30T16:48:36+08:00">2018-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/" itemprop="url" rel="index"><span itemprop="name">善用佳软</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="0x01-Google-搜索引擎技巧"><a href="#0x01-Google-搜索引擎技巧" class="headerlink" title="0x01 Google 搜索引擎技巧"></a>0x01 Google 搜索引擎技巧</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">intitle: 古文观止 site: pan.baidu.com</span><br><span class="line">+ or</span><br><span class="line">link:http://www.reanren.com</span><br><span class="line">inurl</span><br><span class="line"><span class="string">&quot;&quot;</span></span><br><span class="line">『长城防*墙』</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x02-Baidu-搜索引擎技巧"><a href="#0x02-Baidu-搜索引擎技巧" class="headerlink" title="0x02 Baidu 搜索引擎技巧"></a>0x02 Baidu 搜索引擎技巧</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">site:</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2016-12-22</strong> 几乎重修文字，修改标题为 搜索引擎的一些技巧。</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2015/03/17/%E6%89%87%E8%B4%9D%E8%83%8C%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%8A%A9%E6%89%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/03/17/%E6%89%87%E8%B4%9D%E8%83%8C%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%8A%A9%E6%89%8B/" class="post-title-link" itemprop="url">扇贝背单词小助手</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-03-17 11:20:51" itemprop="dateCreated datePublished" datetime="2015-03-17T11:20:51+08:00">2015-03-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2017-12-19 13:50:12" itemprop="dateModified" datetime="2017-12-19T13:50:12+08:00">2017-12-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">Python 黑魔法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="本文内容"><a href="#本文内容" class="headerlink" title="本文内容"></a>本文内容</h2><h3 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h3><ul>
+<li>英文单词的处理</li>
+<li>shanbay 单词本的提交</li>
+</ul>
+<h3 id="英文单词的处理"><a href="#英文单词的处理" class="headerlink" title="英文单词的处理"></a>英文单词的处理</h3><p>正则表达式进行提取，然后通过 Python 的自然语言处理工具 ntlk 进行单词原型的转换</p>
+<h3 id="shanbay-单词的处理"><a href="#shanbay-单词的处理" class="headerlink" title="shanbay 单词的处理"></a>shanbay 单词的处理</h3><p>由于使用了传说中的 requests，使得代码简洁程度大大提升。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/03/17/%E6%89%87%E8%B4%9D%E8%83%8C%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%8A%A9%E6%89%8B/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2015/03/09/%E4%B8%80%E4%B8%AA%E5%B0%8F%E7%88%AC%E8%99%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/03/09/%E4%B8%80%E4%B8%AA%E5%B0%8F%E7%88%AC%E8%99%AB/" class="post-title-link" itemprop="url">Python 小爬虫案例 -- 抓取女神邓紫棋相关照片</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-03-09 18:40:23" itemprop="dateCreated datePublished" datetime="2015-03-09T18:40:23+08:00">2015-03-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-28 19:42:41" itemprop="dateModified" datetime="2018-01-28T19:42:41+08:00">2018-01-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">Python 黑魔法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>在平时抓取部分自己喜欢的资源的时候，我们常常会去下载一些比较有用的资源，比如，我比较喜欢 GEM 的照片，但是，这个东西，总不能总是去找别人要吧，那么，怎么办？</p>
+<p>很简单，我们只需要通过 Python 写一个小小的爬虫就可以解决这些问题。</p>
+<p>什么是爬虫？自己可以百度去。</p>
+<p>我这里指的爬虫是那些可以模拟浏览器的行为的小程序。</p>
+<p>比如，我要抓取 G.E.M 的相片，那么，我就想个办法。把图片的地址解析出来。然后写一个小功能下载不就好了么。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/03/09/%E4%B8%80%E4%B8%AA%E5%B0%8F%E7%88%AC%E8%99%AB/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2015/02/27/%E7%BC%96%E8%BE%91%E5%99%A8Sublime/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2015/02/27/%E7%BC%96%E8%BE%91%E5%99%A8Sublime/" class="post-title-link" itemprop="url">如何优雅的使用 Windows 之编辑器 Sublime Text</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2015-02-27 20:00:51" itemprop="dateCreated datePublished" datetime="2015-02-27T20:00:51+08:00">2015-02-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-28 01:31:32" itemprop="dateModified" datetime="2018-01-28T01:31:32+08:00">2018-01-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/" itemprop="url" rel="index"><span itemprop="name">善用佳软</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>于<strong>2016 中期</strong> 重修文字，声明已转投 Vim. sublime 作为非主力编辑器。<br>于<strong>2017 前期</strong> 重修文字，声明已转投 Spacemacs.<br>于<strong>2017 后期</strong> 重修文字，重回 Vim.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2015/02/27/%E7%BC%96%E8%BE%91%E5%99%A8Sublime/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0x00 前言之前草草整理过一些 Vue 的小技巧，最近温习了一遍文档，重聊一遍。 鉴于 VueCLI 越做越臃肿，我最后还是选择了自己搭架子。 https:&#x2F;&#x2F;github.com&#x2F;twocucao&#x2F;vue-starter-kit 0x01 项目结构123456789101112131415161718# 根文件public&#x2F; # 部署文件src&#x2F; # 源码.babelrc.editorconf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue 项目漫谈 2018 版">
+<meta property="og:url" content="http://twocucao.xyz/2018/08/01/VueProjectTalking/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言之前草草整理过一些 Vue 的小技巧，最近温习了一遍文档，重聊一遍。 鉴于 VueCLI 越做越臃肿，我最后还是选择了自己搭架子。 https:&#x2F;&#x2F;github.com&#x2F;twocucao&#x2F;vue-starter-kit 0x01 项目结构123456789101112131415161718# 根文件public&#x2F; # 部署文件src&#x2F; # 源码.babelrc.editorconf">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-08-01T12:06:05.000Z">
+<meta property="article:modified_time" content="2018-08-01T09:23:53.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="VueJS">
+<meta property="article:tag" content="全栈开发">
+<meta property="article:tag" content="项目经验">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2018/08/01/VueProjectTalking/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>Vue 项目漫谈 2018 版 | MG的编程小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/08/01/VueProjectTalking/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue 项目漫谈 2018 版
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+              
+
+              <time title="Created: 2018-08-01 20:06:05 / Modified: 17:23:53" itemprop="dateCreated datePublished" datetime="2018-08-01T20:06:05+08:00">2018-08-01</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>之前草草整理过一些 Vue 的小技巧，最近温习了一遍文档，重聊一遍。</p>
+<p>鉴于 VueCLI 越做越臃肿，我最后还是选择了自己搭架子。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/twocucao/vue-starter-kit">https://github.com/twocucao/vue-starter-kit</a></p>
+<h2 id="0x01-项目结构"><a href="#0x01-项目结构" class="headerlink" title="0x01 项目结构"></a>0x01 项目结构</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 根文件</span></span><br><span class="line">public/ <span class="comment"># 部署文件</span></span><br><span class="line">src/ <span class="comment"># 源码</span></span><br><span class="line">.babelrc</span><br><span class="line">.editorconfig</span><br><span class="line">.eslintignore</span><br><span class="line">.eslintrc</span><br><span class="line">.gitignore</span><br><span class="line">.postcssrc.js</span><br><span class="line">LICENSE</span><br><span class="line">README.md</span><br><span class="line">jsconfig.json</span><br><span class="line">package-lock.json</span><br><span class="line">package.json</span><br><span class="line">webpack.common.js</span><br><span class="line">webpack.dev.js</span><br><span class="line">webpack.dll.js</span><br><span class="line">webpack.prod.js</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在 src 文件夹下面</span></span><br><span class="line"></span><br><span class="line">api <span class="comment"># 相关的 Web API 定义</span></span><br><span class="line">assets <span class="comment"># 静态资源，对于已经压缩的，还是直接放在 Static 下面</span></span><br><span class="line">components <span class="comment"># 公用组件</span></span><br><span class="line">mixins <span class="comment"># mixin</span></span><br><span class="line">directives <span class="comment"># 定义指令，比如 v-loading</span></span><br><span class="line">pages <span class="comment"># 页面</span></span><br><span class="line">store <span class="comment"># Store</span></span><br><span class="line">App.vue <span class="comment"># CORE 组件</span></span><br><span class="line">consts.js <span class="comment">#定义常量名称</span></span><br><span class="line">index.js <span class="comment"># 用于初始化项目，注册组件等等</span></span><br><span class="line">routes.js <span class="comment"># 路由</span></span><br><span class="line">utils <span class="comment"># 工具方法</span></span><br></pre></td></tr></table></figure>
+
+<p>值得一提的就是 index.js 应该要做的事情</p>
+<ul>
+<li>注册全局组件和过滤器</li>
+<li>给 Vue 实例加戏，哦，说错了，给实例加一些全局性的方法，比如 $comfirm 等对话框 $verbose $warning 等日志</li>
+<li>完成刷新界面之后的从 localStorage 的重新赋值</li>
+<li>注册路由切换的时候的调用的各类方法</li>
+</ul>
+<h2 id="0x02-开发技巧"><a href="#0x02-开发技巧" class="headerlink" title="0x02 开发技巧"></a>0x02 开发技巧</h2><h3 id="1-登录，登录校验以及权限"><a href="#1-登录，登录校验以及权限" class="headerlink" title="1. 登录，登录校验以及权限"></a>1. 登录，登录校验以及权限</h3><p>通过路由的 meta 属性来区分</p>
+<h3 id="8-日志管理"><a href="#8-日志管理" class="headerlink" title="8. 日志管理"></a>8. 日志管理</h3><p>我觉得日志管理也应该是比较重要的部分，不管是调试程序，还是用于检查用户浏览器这块的错误日志，甚至是埋点。</p>
+<p>依据具体技术栈可以考虑上个 sentry 或者 ELK</p>
+<h3 id="7-首屏-Loading"><a href="#7-首屏-Loading" class="headerlink" title="7. 首屏 Loading"></a>7. 首屏 Loading</h3><p>这个可以放在 index.html 里面</p>
+<h3 id="4-路由管理与嵌套路由"><a href="#4-路由管理与嵌套路由" class="headerlink" title="4. 路由管理与嵌套路由"></a>4. 路由管理与嵌套路由</h3><p>路由管理</p>
+<p>嵌套路由有什么优点？</p>
+<ol>
+<li>使得子路由里的页面可以复用父级路由的页面的组件</li>
+<li>减少手动硬编码 meta 和 props 的代码量</li>
+<li>便于定制面包屑组件</li>
+<li>其他</li>
+</ol>
+<h2 id="0x03-构建技巧"><a href="#0x03-构建技巧" class="headerlink" title="0x03 构建技巧"></a>0x03 构建技巧</h2><h3 id="3-1-离线-IconFont"><a href="#3-1-离线-IconFont" class="headerlink" title="3.1 离线 IconFont"></a>3.1 离线 IconFont</h3><p>经常需要离线调试网页，顺手写了这个脚本。</p>
+<p>之前在研究某个网站的反爬机制的时候发现时动态生成 iconfont, 然后通过 unicode 码来实现数字的显示，从而让爬虫小白无法爬取。研究了一下他们的 iconfont, 知道了 font-carrier, 然后调用 node 脚本打包字体文件，并在这个过程中自动生成对应的 iconfont.css</p>
+<p>最后的结果就是，当我放一个文件到 svg 文件夹下面的时候，比如 bank.svg , 我执行一下脚本，生成对应的字体文件，在 html 里面编写脚本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;span class&#x3D;&quot;iconfont iconfont-bank&quot; &gt;&lt;&#x2F;span&gt;</span><br></pre></td></tr></table></figure>
+
+<p>然后对应图标就呈现出来了。</p>
+<h3 id="3-2-Webpack-构建工具"><a href="#3-2-Webpack-构建工具" class="headerlink" title="3.2 Webpack 构建工具"></a>3.2 Webpack 构建工具</h3><p>日常开发用的是 VueCli, 配置还是非常人性化的。开箱即用。</p>
+<h4 id="开发环境与部署环境"><a href="#开发环境与部署环境" class="headerlink" title="开发环境与部署环境"></a>开发环境与部署环境</h4><p>VueCLI 内置了变量的管理，你可以定义 config/dev.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = merge(prodEnv, &#123;</span><br><span class="line">  NODE_ENV: <span class="string">&#x27;&quot;development&quot;&#x27;</span>,</span><br><span class="line">  API_ROOT: <span class="string">&#x27;&quot;http://dev-data.twocucao.xyz&quot;&#x27;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>其实，开发的环境用一组变量是不行的。比如，开发的人分为纯前端，纯后端，我这样的前后都会一些的人，每个对于环境的配置都是不太一样的。</p>
+<ul>
+<li>对于前端 Windowser 直接执行 npm run dev 对接到局域网服务器</li>
+<li>对于单个人同时调试后端和前端的时候，一般要把 Web API 对应到本地的机器上。可是使用环境便来配置不同的 DEBUG_MODE=True npm run dev</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">``</span><span class="string">`</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">#### DLL 打包</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">大约在半年前，开发过程中突然在使用 ECharts 后，仅仅不到 10M 大小的项目居然开发 build 的时间需要 5MIN, 打包出来的文件超级大。居然接近了 100 多 M</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">震惊之余，差点准备写一篇骗点击量的文章：**看完震惊了！！前端和后端男程序员都无法忍受的大小！**, 然后文章内就介绍 Webpack 打包文件居然没有避免重复引入依赖库导致打包文件太大提出抗议。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">回到主题，使用 npm run analyze 发现问题出现在 ECharts 上， 每一个图表组件都是依赖于 ECharts, 而每一个组件都包含了一个完整的 ECharts 库的大小。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">于是，我一边吐槽 webpack 考虑不周，另一方面寻找解决方案。最后找到了 DLL 方案</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">这个方案的原理大致是：</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">- 编写独立的脚本，把几个需要复用的库一个配置文件 (manifest.json), 以及打包库到一个 JS 文件中。</span></span><br><span class="line"><span class="string">- 然后从 index.html 引入这个 JS 文件。</span></span><br><span class="line"><span class="string">- 接着在 webpack 配置中使之每次引入一个库的时候，避免重复引入。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&gt; 但这不应该是 Webpack 本身就应该做的吗？为嘛还要配置，还要不伦不类的生成一个配置文件和一个 JS 文件，再从 index.html 里面导入？</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">当然，Webpack 生态还是很丰富的，后来出来了一个 https://github.com/asfktz/autodll-webpack-plugin 尝试了之后。感觉很赞。</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript</span><br></pre></td></tr></table></figure>
+<p>可惜在 mac 上一切安好，Windows 上晴天霹雳，debug 了一下，发现是这个库的一个依赖库对 windows 的路径处理好像还有点小问题。而公司的前端小伙伴是 Windowser, 只好作罢。</p>
+<p>Macer 可以先用试试，至于 Windowser, 那就去这个 ISSUE 下面催催作者吧… 哈哈哈</p>
+<blockquote>
+<p>update: 现在 windows 已经可以用了。</p>
+</blockquote>
+<h2 id="0x03-代码质量工程管理"><a href="#0x03-代码质量工程管理" class="headerlink" title="0x03 代码质量工程管理"></a>0x03 代码质量工程管理</h2><h3 id="1-语义化与可读性"><a href="#1-语义化与可读性" class="headerlink" title="1. 语义化与可读性"></a>1. 语义化与可读性</h3><h3 id="2-提取公共逻辑（通过-Service-Mixin-来）"><a href="#2-提取公共逻辑（通过-Service-Mixin-来）" class="headerlink" title="2. 提取公共逻辑（通过 Service, Mixin 来）"></a>2. 提取公共逻辑（通过 Service, Mixin 来）</h3><h3 id="3-CSS-管理"><a href="#3-CSS-管理" class="headerlink" title="3. CSS 管理"></a>3. CSS 管理</h3><p>在项目中，我采用 SCSS 来管理 CSS 代码，</p>
+<p>过去的时候有两种 css 的代码命名方法</p>
+<p>第一种，我管他叫做<strong>配置式写法</strong>，通过将 CSS 语法的几个片段转化成名称，从而实现快速配置出效果的的 CSS</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.fl</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: left</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.fr</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>: right</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.mr10</span> &#123;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">10px</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.pb10</span> &#123;</span><br><span class="line">  <span class="attribute">padding-bottom</span>: <span class="number">10px</span></span><br><span class="line">&#125;</span><br><span class="line">....</span><br></pre></td></tr></table></figure>
+
+<p>这种写法对于简单页面来说确实也是可以使用的。缺点就是当页面变得复杂一些的时候，则比较难控制这种短小精捍（不直观）的变量。比如</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.tmd01</span>&#123;</span><br><span class="line">  <span class="attribute">padding-bottom</span>: <span class="number">10px</span></span><br><span class="line">  font-size: <span class="number">16px</span>;</span><br><span class="line">  <span class="attribute">position</span>: relative;</span><br><span class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#2d3c48</span>;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">1.6</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>请脑补一下我的黄人问号脸</p>
+</blockquote>
+<p>当然，如果用得好的话，自然是 OK, 如果用不好的话，</p>
+<p>后来进入了嵌套写法时代（感谢伟大的 Rails 社区出的 SASS）, 下面的语法都是 SCSS.</p>
+<p>第二种写法就变成了这样</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.actions</span> &#123;</span><br><span class="line">  <span class="selector-class">.card_wrapper</span> &#123;</span><br><span class="line">    <span class="selector-class">.card</span> &#123;</span><br><span class="line">      <span class="selector-class">.title</span> &#123;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="selector-class">.content</span> &#123;</span><br><span class="line">        <span class="selector-class">.list</span> &#123;</span><br><span class="line">          <span class="selector-class">.fa</span> &#123;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>外加变量和 mixin 以及函数的话，基本上就可以完成代码的组织了。</p>
+<p>这种写法倒是比原来不知道高到哪里去了，但问题依旧存在，比如 title,content 这些玩意太多，完完全全的看不懂。更加糟糕的事情是，有的小伙伴直接是乱用嵌套，也不用伪类和伪选择器，从而达到单页面调出来小伙比较快，但因为代码不能重用，调多个页面的时候速度巨慢无比。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">.apage &#123;</span><br><span class="line">  bbizlogic &#123;</span><br><span class="line">    .actions &#123;</span><br><span class="line">      .card_wrapper &#123;</span><br><span class="line">        .card &#123;</span><br><span class="line">          .title &#123;</span><br><span class="line">          &#125;</span><br><span class="line">          .content &#123;</span><br><span class="line">            .list &#123;</span><br><span class="line">              .fa &#123;</span><br><span class="line">              &#125;</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我本人推荐（其实我是写 Python Web 后端的，逃… ) 代码风格比较倾向于 BEM 命名，关于 BEM 的介绍，请参考简单心理团队的教程。</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://jiandanxinli.github.io/2016-08-11.html">https://jiandanxinli.github.io/2016-08-11.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://juejin.im/post/58d0e5caa22b9d00643e8b51">https://juejin.im/post/58d0e5caa22b9d00643e8b51</a></li>
+</ul>
+<p>然而，最好的方式，就是读一个非常使用 SCSS 来组织项目的 CSS 代码的成熟项目。</p>
+<p>我推荐两个：</p>
+<ul>
+<li>BOOTSTRAP V4: Bootstrap V4 使用 SCSS 来写</li>
+<li>ELEMENT UI: 饿了么的团队出的，前段时间从 v1 版本升级到 v2 版本，发现网站大部分样式都没有出现大变动，在这里给个赞。</li>
+</ul>
+<h4 id="0-先从整体上设计好骨架"><a href="#0-先从整体上设计好骨架" class="headerlink" title="0. 先从整体上设计好骨架"></a>0. 先从整体上设计好骨架</h4><p>接着才是 HTML, 然后才是 CSS</p>
+<p>现在前端入行的人越来越多，很多的新手前端 er 会用比较快的思维来编写，这就导致代码质量奇差无比。</p>
+<ul>
+<li>哎，我看看，面粉加多了，我加点水，水加多了，我再加点面粉。</li>
+<li>哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。</li>
+<li>哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。</li>
+<li>哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。</li>
+<li>哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。</li>
+</ul>
+<p>当设计出来的网页本身的 HTML 写的就很混乱，CSS 能写的好在哪里呢？</p>
+<p>命名都很混乱，遑论代码可维护性？</p>
+<p>可以多去参考一些成熟的项目的 CSS 是怎么命名的呀，HTML 是怎么设计的呀</p>
+<h4 id="1-Scoped-的滥用"><a href="#1-Scoped-的滥用" class="headerlink" title="1. Scoped 的滥用"></a>1. Scoped 的滥用</h4><p>我印象中，有个小伙伴把一个比较大的 CSS 库多次 import 到被 Scoped 的组件中，于是开发时猛然发现 head 处多了大量的 style 标签，除了 css 选择器后面随机的属性 hash, 文件内容都一样。</p>
+<blockquote>
+<p>公共组件往往可以通过嵌套和加前缀的方式来防止污染。如果 scoped 的属性里面有成吨的 style, 慎用 import.</p>
+</blockquote>
+<p>还有小伙伴喜欢在很多七七八八的组件各种 import scss. 其实对于中小型项目，完全可以直接全局一个文件 style 即可。</p>
+<p>我现在的做法，是直接在 src 的上方直接用 gulp 搭建一个只用来编译 SCSS 到 CSS 的项目，每次编译后输出到页面里面。</p>
+<p>如果项目是小项目，建议直接在 app.vue 里面 import pages</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">├── common</span><br><span class="line">├── fonts</span><br><span class="line">├── global.scss</span><br><span class="line">├── index.scss</span><br><span class="line">├── mixins</span><br><span class="line">├── pages.scss</span><br><span class="line">└── reset.scss</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-保持代码的通用性"><a href="#2-保持代码的通用性" class="headerlink" title="2. 保持代码的通用性"></a>2. 保持代码的通用性</h4><p>一般，当同一段逻辑出现三次的时候，是要停下来重构一下的，这样的话，就可以节省很多时间。</p>
+<p>套用在 CSS 的样式上也是如此。</p>
+<h2 id="0x04-Tmux-和-Tmuxnator-打造工作流"><a href="#0x04-Tmux-和-Tmuxnator-打造工作流" class="headerlink" title="0x04 Tmux 和 Tmuxnator 打造工作流"></a>0x04 Tmux 和 Tmuxnator 打造工作流</h2><p>具体参考我的文章 <a href="l">用 Tmux 和 Tmuxnator 打造工作流</a></p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-09-25</strong> 初始化本文</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/VueJS/" rel="tag"># VueJS</a>
+              <a href="/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/" rel="tag"># 全栈开发</a>
+              <a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/" rel="tag"># 项目经验</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/07/27/ToneColor/" rel="prev" title="Tone Color">
+      <i class="fa fa-chevron-left"></i> Tone Color
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/08/28/ShellCheatSheet/" rel="next" title="Shell CheatSheet">
+      Shell CheatSheet <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">0x01 项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7"><span class="nav-number">3.</span> <span class="nav-text">0x02 开发技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%99%BB%E5%BD%95%EF%BC%8C%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E4%BB%A5%E5%8F%8A%E6%9D%83%E9%99%90"><span class="nav-number">3.1.</span> <span class="nav-text">1. 登录，登录校验以及权限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86"><span class="nav-number">3.2.</span> <span class="nav-text">8. 日志管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-%E9%A6%96%E5%B1%8F-Loading"><span class="nav-number">3.3.</span> <span class="nav-text">7. 首屏 Loading</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86%E4%B8%8E%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1"><span class="nav-number">3.4.</span> <span class="nav-text">4. 路由管理与嵌套路由</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E6%9E%84%E5%BB%BA%E6%8A%80%E5%B7%A7"><span class="nav-number">4.</span> <span class="nav-text">0x03 构建技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-%E7%A6%BB%E7%BA%BF-IconFont"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 离线 IconFont</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Webpack-%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 Webpack 构建工具</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%B8%8E%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83"><span class="nav-number">4.2.1.</span> <span class="nav-text">开发环境与部署环境</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%B7%A5%E7%A8%8B%E7%AE%A1%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">0x03 代码质量工程管理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E8%AF%AD%E4%B9%89%E5%8C%96%E4%B8%8E%E5%8F%AF%E8%AF%BB%E6%80%A7"><span class="nav-number">5.1.</span> <span class="nav-text">1. 语义化与可读性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%8F%90%E5%8F%96%E5%85%AC%E5%85%B1%E9%80%BB%E8%BE%91%EF%BC%88%E9%80%9A%E8%BF%87-Service-Mixin-%E6%9D%A5%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">2. 提取公共逻辑（通过 Service, Mixin 来）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-CSS-%E7%AE%A1%E7%90%86"><span class="nav-number">5.3.</span> <span class="nav-text">3. CSS 管理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#0-%E5%85%88%E4%BB%8E%E6%95%B4%E4%BD%93%E4%B8%8A%E8%AE%BE%E8%AE%A1%E5%A5%BD%E9%AA%A8%E6%9E%B6"><span class="nav-number">5.3.1.</span> <span class="nav-text">0. 先从整体上设计好骨架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Scoped-%E7%9A%84%E6%BB%A5%E7%94%A8"><span class="nav-number">5.3.2.</span> <span class="nav-text">1. Scoped 的滥用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BF%9D%E6%8C%81%E4%BB%A3%E7%A0%81%E7%9A%84%E9%80%9A%E7%94%A8%E6%80%A7"><span class="nav-number">5.3.3.</span> <span class="nav-text">2. 保持代码的通用性</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-Tmux-%E5%92%8C-Tmuxnator-%E6%89%93%E9%80%A0%E5%B7%A5%E4%BD%9C%E6%B5%81"><span class="nav-number">6.</span> <span class="nav-text">0x04 Tmux 和 Tmuxnator 打造工作流</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

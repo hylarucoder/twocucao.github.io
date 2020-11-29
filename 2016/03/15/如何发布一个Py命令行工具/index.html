@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文简介上次写的一个终端里面斗鱼 TV 弹幕 Python 版本和 Ruby 版本，并且发布到 PIP 和 RubyGems 上面。在发布 PIP 包的时候，居然 Google 不到一篇可以非常好的讲解这个流程的文章。于是整理这篇文章，并且方便后来自己检索，并且方便他人找资料。 自推荐下依照本文定制的命令行工具 danmu.fm 的 github 地址： https:&#x2F;&#x2F;github.com&#x2F;tw">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何发布一个 Python 命令行工具">
+<meta property="og:url" content="http://twocucao.xyz/2016/03/15/%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAPy%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="本文简介上次写的一个终端里面斗鱼 TV 弹幕 Python 版本和 Ruby 版本，并且发布到 PIP 和 RubyGems 上面。在发布 PIP 包的时候，居然 Google 不到一篇可以非常好的讲解这个流程的文章。于是整理这篇文章，并且方便后来自己检索，并且方便他人找资料。 自推荐下依照本文定制的命令行工具 danmu.fm 的 github 地址： https:&#x2F;&#x2F;github.com&#x2F;tw">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-03-15T10:50:23.000Z">
+<meta property="article:modified_time" content="2018-01-30T08:49:02.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="pip">
+<meta property="article:tag" content="命令行">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2016/03/15/%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAPy%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>如何发布一个 Python 命令行工具 | MG的编程小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/03/15/%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAPy%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何发布一个 Python 命令行工具
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-03-15 18:50:23" itemprop="dateCreated datePublished" datetime="2016-03-15T18:50:23+08:00">2016-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-30 16:49:02" itemprop="dateModified" datetime="2018-01-30T16:49:02+08:00">2018-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%91%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">我的开源项目</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="本文简介"><a href="#本文简介" class="headerlink" title="本文简介"></a>本文简介</h2><p>上次写的一个终端里面斗鱼 TV 弹幕 Python 版本和 Ruby 版本，并且发布到 PIP 和 RubyGems 上面。在发布 PIP 包的时候，居然 Google 不到一篇可以非常好的讲解这个流程的文章。于是整理这篇文章，并且方便后来自己检索，并且方便他人找资料。</p>
+<p>自推荐下依照本文定制的命令行工具 danmu.fm 的 github 地址：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/twocucao/danmu.fm">https://github.com/twocucao/danmu.fm</a></p>
+<p>本文的目的也是非常简单：</p>
+<blockquote>
+<p>**写一个 Python 命令行工具，并且发布到 PIP 上面.**并且在这个过程中给出我自己的一些思考。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="如何分解这个发布任务？"><a href="#如何分解这个发布任务？" class="headerlink" title="如何分解这个发布任务？"></a>如何分解这个发布任务？</h2><p>只需要进行如下的两个步骤便可以：</p>
+<ul>
+<li><ol>
+<li>写好一个 Python 命令行工具。</li>
+</ol>
+</li>
+<li><ol start="2">
+<li>发布它。</li>
+</ol>
+</li>
+</ul>
+<p>当然，这样不够细致。再细分一下。</p>
+<ul>
+<li><ol>
+<li>写好一个 Python 命令行工具</li>
+</ol>
+<ul>
+<li>1.1. 命令行的特点，以及 Python 的如何编写命令行</li>
+<li>1.2. 如何组织代码结构。</li>
+</ul>
+</li>
+<li><ol start="2">
+<li>发布</li>
+</ol>
+</li>
+<li>2.1. 注册 pypi 账户<ul>
+<li>2.2. 注册在账户下面注册 Python 包</li>
+<li>2.3. 上传<strong>打包</strong>好的 Python 命令行工具。</li>
+</ul>
+</li>
+<li><ol start="3">
+<li>完善代码</li>
+</ol>
+</li>
+</ul>
+<h2 id="1-写好一个-Python-命令行工具"><a href="#1-写好一个-Python-命令行工具" class="headerlink" title="1. 写好一个 Python 命令行工具"></a>1. 写好一个 Python 命令行工具</h2><p>写好一个命令行工具首先要知道命令行工具是什么？</p>
+<blockquote>
+<p>在我看来，命令行工具就是一种完成某种类型的任务的终端程序。</p>
+</blockquote>
+<p>也就是基本上没有什么用户界面的程序。</p>
+<p>由于基本上没有什么用户界面，所以导致单个命令行的交互能力及其低下。但这种低下的交互性对于一些固定工作而言，简直就是最灵活的工具。只需要输入一些命令便可以完成某种类型的工作。实在是方便的很。</p>
+<p>所以，某种程度上，终端程序低交互的缺点反而成了优点。</p>
+<h3 id="1-1-Python-的如何编写一个简单的命令行"><a href="#1-1-Python-的如何编写一个简单的命令行" class="headerlink" title="1.1.Python 的如何编写一个简单的命令行"></a>1.1.Python 的如何编写一个简单的命令行</h3><p>对于 Python 和命令行交互，我们很容易想出一个比较方便的方案。</p>
+<p>sys.argv 就是这样的嘛！</p>
+<p>我们很容易这样写代码。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python testargv.py thisisaargv1</span><br></pre></td></tr></table></figure>
+<p>甚至我们也可以这样写命令行，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python testargv.py thisisaargv1 -d -f 0</span><br></pre></td></tr></table></figure>
+<p>那么，这样写的后果就是，不方便解析出（不是不能，是不方便） -d -f 0 以及 thisisaargv1.</p>
+<p>不信的话，你解析一个下面场景的命令行试试，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 用户可能这样输入</span></span><br><span class="line">danmu.fm http://www.douyutv.com/xiaocang -q 1 -v 2</span><br><span class="line">danmu.fm -q 1 -v 2 http://www.douyutv.com/xiaocang</span><br><span class="line"><span class="comment"># 当然，肯定还有漏写啦，等等，你得需要转类型，增加各种 blablabla 的描述吧，添加默认的参数值吧。</span></span><br></pre></td></tr></table></figure>
+
+<p>于是 Python 就提供了一个非常好用的模块可以使用。叫做 argparse.</p>
+<p>上面的描述就变成了这个样子</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">APP_DESC=<span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">这就是描述</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">print(APP_DESC)</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">len</span>(sys.argv) == <span class="number">1</span>:</span><br><span class="line">    sys.argv.append(<span class="string">&#x27;--help&#x27;</span>)</span><br><span class="line">parser = argparse.ArgumentParser()</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-q&#x27;</span>,<span class="string">&#x27;--quality&#x27;</span>,<span class="built_in">type</span>=<span class="built_in">int</span>,default=<span class="number">0</span>,<span class="built_in">help</span>=<span class="string">&quot;download video quality : 1 for the standard-definition; 3 for the super-definition&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-v&#x27;</span>,<span class="string">&#x27;--verbose&#x27;</span>, default=<span class="number">0</span>,<span class="built_in">help</span>=<span class="string">&quot;print more debuging information&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-s&#x27;</span>,<span class="string">&#x27;--store&#x27;</span>,<span class="built_in">help</span>=<span class="string">&quot;保存流媒体文件到指定位置&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;-c&#x27;</span>,<span class="string">&#x27;--config&#x27;</span>,default=<span class="number">0</span>,<span class="built_in">help</span>=<span class="string">&quot;读取~/.danmu.fm 配置，请~/.danmu.fm 指定数据库&quot;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;url&#x27;</span>,metavar=<span class="string">&#x27;URL&#x27;</span>,nargs=<span class="string">&#x27;+&#x27;</span>, <span class="built_in">help</span>=<span class="string">&quot;zhubo page URL (http://www.douyutv.com/*/)&quot;</span>)</span><br><span class="line">args = parser.parse_args()</span><br><span class="line"><span class="comment"># 获取对应参数只需要 args.quality,args.url 之类。</span></span><br><span class="line">url = (args.url)[<span class="number">0</span>]</span><br><span class="line">print(url)</span><br><span class="line"><span class="comment">#其他执行逻辑</span></span><br></pre></td></tr></table></figure>
+<p>保存为 danmu.py</p>
+<p>这样就可以执行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python danmu.py http:&#x2F;&#x2F;www.douyutv.com&#x2F;xiaocang -q 1 -v 2</span><br></pre></td></tr></table></figure>
+<p>通过 args 就可以获取参数，然后进行终端程序的参数初始化。</p>
+<p>可是这和我们的要求还是不同嘛，我们不想多写 Python XXX, 我们想直接 XXX. 就像这样。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">danmu.fm -q 1 -v 2 http://www.douyutv.com/xiaocang</span><br></pre></td></tr></table></figure>
+
+<p>不急，下面就是了。</p>
+<h3 id="1-2-如何组织代码结构。"><a href="#1-2-如何组织代码结构。" class="headerlink" title="1.2. 如何组织代码结构。"></a>1.2. 如何组织代码结构。</h3><p>于是，现在就要开始组织代码结构了。</p>
+<p>我们在最终的代码目录大概是这样的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">danmu.fm</span><br><span class="line">├── README.md</span><br><span class="line">├── danmufm</span><br><span class="line">│   ├── __init__.py</span><br><span class="line">│   ├── client</span><br><span class="line">│   │   ├── __init__.py</span><br><span class="line">│   │   ├── __init__.pyc</span><br><span class="line">│   │   ├── douyu_client.py</span><br><span class="line">│   │   └── douyu_danmu_client.py</span><br><span class="line">│   ├── danmu.py</span><br><span class="line">│   ├── misc</span><br><span class="line">│   │   ├── __init__.py</span><br><span class="line">│   │   ├── color_printer.py</span><br><span class="line">│   │   ├── downloaders.py</span><br><span class="line">│   │   └── player.py</span><br><span class="line">│   └── model</span><br><span class="line">│       ├── __init__.py</span><br><span class="line">│       └── douyu_msg.py</span><br><span class="line">├── docs</span><br><span class="line">├── setup.cfg</span><br><span class="line">├── setup.py</span><br><span class="line">├── sh.py</span><br><span class="line">└── tests</span><br></pre></td></tr></table></figure>
+<p>这就是我上次写的 danmu.fm 的代码目录。</p>
+<p>聪明的你这时候你注意到了：</p>
+<ol>
+<li>主要的程序不是放在根目录下面，而是放在第二目录 danmufm 下面。</li>
+<li>setup.cfg 是什么鬼东西</li>
+<li>setup.py 是什么鬼东西</li>
+</ol>
+<p>对于上面几点，我们分别进行解释</p>
+<p>###1.2.1 为什么主要程序在第二目录下</p>
+<p>为了把主要的程序分离出来，放在第二目录下面，这样的待会打包以后多出很多文件夹就不会对源码造成干扰。</p>
+<p>当然，由于把程序放在了第二目录下面，所以，脚本里面的 from import 语句应该使用相对路径导入。</p>
+<p>相对路径导入的的时候需要注意运行的时候使用如下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 -m danmufm.danmu [xxxx]</span><br></pre></td></tr></table></figure>
+
+<p>###1.2.2 setup.cfg</p>
+<p>填写如下内容即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[metadata]</span><br><span class="line">description-file &#x3D; README.md</span><br></pre></td></tr></table></figure>
+<p>然后去写 Markdown 的 Readme 就好了。</p>
+<p>###1.2.3 setup.py</p>
+<p>这个是重头戏了。</p>
+<p>setup 这个 py 文件就是打包配置文件。对这个程序是谁的，有什么依赖，入口是什么，等等等等的配置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">#-*- encoding: UTF-8 -*-</span></span><br><span class="line"><span class="keyword">from</span> setuptools <span class="keyword">import</span> setup, find_packages</span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">打包的用的 setup 必须引入，</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"></span><br><span class="line">VERSION = <span class="string">&#x27;0.1.1&#x27;</span></span><br><span class="line"></span><br><span class="line">setup(name=<span class="string">&#x27;danmu.fm&#x27;</span>,</span><br><span class="line">      version=VERSION,</span><br><span class="line">      description=<span class="string">&quot;a tiny and smart cli player of douyutv,ximalayad,anmu based on Python&quot;</span>,</span><br><span class="line">      long_description=<span class="string">&#x27;just enjoy&#x27;</span>,</span><br><span class="line">      classifiers=[], <span class="comment"># Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers</span></span><br><span class="line">      keywords=<span class="string">&#x27;python douyu danmu danmu.fm terminal&#x27;</span>,</span><br><span class="line">      author=<span class="string">&#x27;twocucao&#x27;</span>,</span><br><span class="line">      author_email=<span class="string">&#x27;twocucao@gmail.com&#x27;</span>,</span><br><span class="line">      url=<span class="string">&#x27;https://github.com/twocucao/doumu.fm&#x27;</span>,</span><br><span class="line">      license=<span class="string">&#x27;MIT&#x27;</span>,</span><br><span class="line">      packages=find_packages(),</span><br><span class="line">      include_package_data=<span class="literal">True</span>,</span><br><span class="line">      zip_safe=<span class="literal">True</span>,</span><br><span class="line">      install_requires=[</span><br><span class="line">        <span class="string">&#x27;requests&#x27;</span>,</span><br><span class="line">      ],</span><br><span class="line">      entry_points=&#123;</span><br><span class="line">        <span class="string">&#x27;console_scripts&#x27;</span>:[</span><br><span class="line">            <span class="string">&#x27;danmu.fm = danmufm.danmu:main&#x27;</span></span><br><span class="line">        ]</span><br><span class="line">      &#125;,</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>官方有 distutils 这个包管理器工具，设置也非常的简单，只是，它不支持 entry_points 属性，由于无法使用 entry_point, 也就无法通过命令来跳转到指定模块运行程序，这也就意味着，官方工具不方便写成命令行。还是 setuptools 好。</p>
+<p>上面需要注意的就是 install_requires 可以添加依赖。其他的你猜都可以猜出来是做什么的。自己去看代码，我就不多说了。</p>
+<h2 id="2-发布"><a href="#2-发布" class="headerlink" title="2. 发布"></a>2. 发布</h2><p>所谓的发布，就是将打包好的程序的某个版本发布到某个仓库中。</p>
+<h3 id="2-1-注册-pypi-账户"><a href="#2-1-注册-pypi-账户" class="headerlink" title="2.1. 注册 pypi 账户"></a>2.1. 注册 pypi 账户</h3><p>到这个上面注册账号：<br><a target="_blank" rel="noopener" href="https://pypi.python.org/pypi">https://pypi.python.org/pypi</a></p>
+<h3 id="2-2-注册在账户下面注册-Python-包"><a href="#2-2-注册在账户下面注册-Python-包" class="headerlink" title="2.2. 注册在账户下面注册 Python 包"></a>2.2. 注册在账户下面注册 Python 包</h3><p>进入对应项目根文件，然后执行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python3 setup.py register</span><br></pre></td></tr></table></figure>
+<p>这一步程序会让你输入刚刚注册的账号和密码，然后注册该包。注册该包以后，你就有了一个小仓库。可以存放不同版本的 danmu.fm.</p>
+<p>注册的仓库是可以在这个地址看到的，<br><a target="_blank" rel="noopener" href="https://pypi.python.org/pypi?:action=pkg_edit&amp;name=danmu.fm">https://pypi.python.org/pypi?%3Aaction=pkg_edit&amp;name=danmu.fm</a></p>
+<h3 id="2-3-上传打包好的-Python-命令行工具。"><a href="#2-3-上传打包好的-Python-命令行工具。" class="headerlink" title="2.3. 上传打包好的 Python 命令行工具。"></a>2.3. 上传<strong>打包</strong>好的 Python 命令行工具。</h3><p>这里需要借助一个小工具，twine.twine 是一个更加安全方便上传打包好的代码的工具。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install twine</span><br></pre></td></tr></table></figure>
+
+<p>接着开始打包，打包成两个版本，一个是不需要 build 的版本，另一个是需要 build 的版本（顺带吐槽下，这两个诡异的命名）.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python setup.py sdist bdist_wheel</span><br></pre></td></tr></table></figure>
+
+<p>于是剩下来的就显而易见了，上传 build 完毕的程序到仓库中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">twine upload dist/danmu.fm-0.1.2*</span><br></pre></td></tr></table></figure>
+
+<p>于是，安装一下，测试是否成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip3 install danmu.fm --upgrade</span><br></pre></td></tr></table></figure>
+
+<p>命令行的工具是这样使用的。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">danmu.fm -q 2 -v 1 http://www.douyutv.com/16789</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-完善"><a href="#3-完善" class="headerlink" title="3. 完善"></a>3. 完善</h2><p>不断的完善代码，然后打包终端程序发布到仓库给别人用，这就是整个的 PIP 打包发布流程。</p>
+<ul>
+<li>这个时候，你可能需要使用版本控制软件。</li>
+<li>你可能需要增多的代码的测试。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/pip/" rel="tag"># pip</a>
+              <a href="/tags/%E5%91%BD%E4%BB%A4%E8%A1%8C/" rel="tag"># 命令行</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/02/24/%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6,%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8/" rel="prev" title="关于背单词软件，你不知道的惊人真相">
+      <i class="fa fa-chevron-left"></i> 关于背单词软件，你不知道的惊人真相
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/04/02/MacRemoteControl/" rel="next" title="Mac 上面的远程控制 Teamviewer">
+      Mac 上面的远程控制 Teamviewer <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">本文简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%88%86%E8%A7%A3%E8%BF%99%E4%B8%AA%E5%8F%91%E5%B8%83%E4%BB%BB%E5%8A%A1%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">如何分解这个发布任务？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%86%99%E5%A5%BD%E4%B8%80%E4%B8%AA-Python-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7"><span class="nav-number">3.</span> <span class="nav-text">1. 写好一个 Python 命令行工具</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-Python-%E7%9A%84%E5%A6%82%E4%BD%95%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E7%9A%84%E5%91%BD%E4%BB%A4%E8%A1%8C"><span class="nav-number">3.1.</span> <span class="nav-text">1.1.Python 的如何编写一个简单的命令行</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87%E4%BB%A3%E7%A0%81%E7%BB%93%E6%9E%84%E3%80%82"><span class="nav-number">3.2.</span> <span class="nav-text">1.2. 如何组织代码结构。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%8F%91%E5%B8%83"><span class="nav-number">4.</span> <span class="nav-text">2. 发布</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%B3%A8%E5%86%8C-pypi-%E8%B4%A6%E6%88%B7"><span class="nav-number">4.1.</span> <span class="nav-text">2.1. 注册 pypi 账户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E6%B3%A8%E5%86%8C%E5%9C%A8%E8%B4%A6%E6%88%B7%E4%B8%8B%E9%9D%A2%E6%B3%A8%E5%86%8C-Python-%E5%8C%85"><span class="nav-number">4.2.</span> <span class="nav-text">2.2. 注册在账户下面注册 Python 包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E4%B8%8A%E4%BC%A0%E6%89%93%E5%8C%85%E5%A5%BD%E7%9A%84-Python-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7%E3%80%82"><span class="nav-number">4.3.</span> <span class="nav-text">2.3. 上传打包好的 Python 命令行工具。</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-%E5%AE%8C%E5%96%84"><span class="nav-number">5.</span> <span class="nav-text">3. 完善</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

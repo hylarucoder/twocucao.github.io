@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言Fluent Python 适用于中级 Pythoner。  以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="『Fluent Python』读书笔记">
+<meta property="og:url" content="http://twocucao.xyz/2017/04/18/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_FluentPython/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="前言Fluent Python 适用于中级 Pythoner。  以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-04-18T12:16:37.000Z">
+<meta property="article:modified_time" content="2018-01-30T09:32:37.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="碎碎念">
+<meta property="article:tag" content="书单与简评">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2017/04/18/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_FluentPython/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>『Fluent Python』读书笔记 | MG的编程小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/04/18/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_FluentPython/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          『Fluent Python』读书笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-04-18 20:16:37" itemprop="dateCreated datePublished" datetime="2017-04-18T20:16:37+08:00">2017-04-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-30 17:32:37" itemprop="dateModified" datetime="2018-01-30T17:32:37+08:00">2018-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">Python 黑魔法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Fluent Python 适用于中级 Pythoner。</p>
+<blockquote>
+<p>以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。</p>
+</blockquote>
+<a id="more"></a>
+
+<h2 id="本文目录"><a href="#本文目录" class="headerlink" title="本文目录"></a>本文目录</h2><h2 id="本书结构"><a href="#本书结构" class="headerlink" title="本书结构"></a>本书结构</h2><ul>
+<li>P1. Prologue<ul>
+<li>C01. The Python Data Model</li>
+</ul>
+</li>
+<li>P2. Data Structure<ul>
+<li>C02. An Array of Sequences<ul>
+<li>Overview of Built-in Sequences</li>
+<li>List Comprehensions and Generator Expressions</li>
+<li>Tuples Are Not Just Immutable Lists</li>
+<li>Slicing</li>
+<li>Using plus and star with Sequences</li>
+<li>Augmented Assignment with Sequences</li>
+<li>list.sort and the sorted Built-In Function</li>
+<li>Managing Ordered Sequences with bisect</li>
+<li>When a List Is Not the Answer</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C03. Dictionaries and Sets<ul>
+<li>Generic Mapping Types</li>
+<li>Dict Comprehensions</li>
+<li>Common Mapping Methods</li>
+<li>Mappings with Flexiable Key Lookup</li>
+<li>Variations of Dict</li>
+<li>Subclassing UserDict</li>
+<li>Immutable Mappings</li>
+<li>Set Theory</li>
+<li>Dict and Set Under the Hood</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C04. Text VS Bytes<ul>
+<li>Character Issues</li>
+<li>Byte Essentials</li>
+<li>Basic Encoders/Decoders</li>
+<li>Understanding Encode/Decode Problems</li>
+<li>Handling Text Files</li>
+<li>Normalizng Unicode for Saner Comparisons</li>
+<li>Sorting Unicode Text</li>
+<li>The Unicode Database</li>
+<li>Dual-Mode str and bytes APIs</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>P3. Function as Objects<ul>
+<li>C05. First-Class Function<ul>
+<li>Treating a Function Like an Object</li>
+<li>Higher-Order Functions</li>
+<li>Anonymous Functions</li>
+<li>The Seven Flavors of Callable Objects</li>
+<li>User-Defined Callable Types</li>
+<li>Function Introspection</li>
+<li>From Positional to Keyword-Only Parameters</li>
+<li>Function Annotations</li>
+<li>Packages for Functional Programming</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C06. Design Patterns with First-Class Functions<ul>
+<li>Refactoring Strategy</li>
+<li>Command</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C07. Function Decorators and Closures<ul>
+<li>Decorators 101</li>
+<li>When Python Executes Decorators</li>
+<li>Decorator-Enhanced Strategy Pattern</li>
+<li>Variable Scope Rules</li>
+<li>Closures</li>
+<li>The nonlocal Declaration</li>
+<li>Implementing a Simple Decorator</li>
+<li>Decorators In the Standard Library</li>
+<li>Stacked Decorators</li>
+<li>Parameterized Decorators</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>P4. Object-Oriented Idioms<ul>
+<li>C08. Object References, Mutability, and Recycling<ul>
+<li>Variables Are Not Boxes</li>
+<li>Identity, Equality , and Aliases</li>
+<li>Copies Are Shallow by Default</li>
+<li>Function Parameters as References</li>
+<li>del and Garbage Collection</li>
+<li>Weak References</li>
+<li>Tricts Python Plays with Immutables</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C09. A Pythonic Object<ul>
+<li>Object Representations</li>
+<li>Vector Class Redux</li>
+<li>An Alternative Constructor</li>
+<li>classmethod VS staticmethod</li>
+<li>Formatted Displays</li>
+<li>A Hashable Vector2d</li>
+<li>Private and “Protected” Attributes in Python</li>
+<li>Saving Space with the slots Class Attribute</li>
+<li>Overriding Class Attributes</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C10. Sequence Hacking , Hashing , and Slicing<ul>
+<li>Vector: A User-Defined Sequence Type</li>
+<li>Vector Take #1: Vector2d Compatible</li>
+<li>Protocols and Duck Typing</li>
+<li>Vector Take #2: A Sliceable Sequence</li>
+<li>Vector Take #3: Dynamic Attribute Access</li>
+<li>Vector Take #4: Hashing and a Faster ==</li>
+<li>Vector Take #5: Formatting</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C11. Interfaces: From Protocols to ABCs<ul>
+<li>Interfaces and Protocols in Python Culture</li>
+<li>Python Digs Sequences</li>
+<li>Monkey-Patching to Implement a Protocol at Runtime</li>
+<li>Alex Martelli’s Waterfowl</li>
+<li>Subclassing an ABC</li>
+<li>ABCs in the Standard Library</li>
+<li>Defining and Using an ABC</li>
+<li>How the Tombola Subclasses Were Tested</li>
+<li>Usage of register in Practice</li>
+<li>Geese Can Behave as Ducks</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C12. Inheritance: For Good or For Worse<ul>
+<li>Subclassing Built-In Types Is Tricty</li>
+<li>Multiple Inheritance and Method Resolution Order</li>
+<li>Multiple Inheritance in the Real World</li>
+<li>Coping with Multiple Inheritance</li>
+<li>A Modern Example: Mixins in Django Generic Views</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C13. Operator Overloading: Doing It Right<ul>
+<li>Operator Overloading 101</li>
+<li>Unary Operators</li>
+<li>Overloading plus for Verctor Addtion</li>
+<li>Overloading star for Scalar Multiplication</li>
+<li>Rich Comparison Operators</li>
+<li>Augmented Assignment Operator</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>P5. Control Flow<ul>
+<li>C14. Iterables, Iterators , and Generators<ul>
+<li>Sentence Take #1 : A Sequence of Words Iterables VS Iterators</li>
+<li>Iterables Versus Itertors</li>
+<li>Sentence Take #2 : A Classic Iterator</li>
+<li>Sentence Take #3 : A Generator Function</li>
+<li>Sentence Take #4 : A Lazy Implementation</li>
+<li>Sentence Take #5 : A Generator Expression</li>
+<li>Generator Expressions : When to Use Them</li>
+<li>Another Example : Arithmetic Progression Generator</li>
+<li>Generator Functions in the Standard Library</li>
+<li>New Syntax In Python 3.3 : yield from</li>
+<li>Iterable Reducing Functions</li>
+<li>A Closer Look at the iter Function</li>
+<li>Case Study : Generators in a Databse Conversion Utility</li>
+<li>Generators as Coroutines</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C15. Context Managers and else Blocks<ul>
+<li>Do This , Then That: else Blocks Beyond if</li>
+<li>Context Managers and with Blocks</li>
+<li>The contextlib Utilities</li>
+<li>Using @contextmanager</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C16. Coroutines<ul>
+<li>How Coroutines Evolved from Generators</li>
+<li>Basic Behavior of a Generator Used as a Coroutine</li>
+<li>Example: Coroutine to Compute a Running Average</li>
+<li>Decorators for Conroutine Priming</li>
+<li>Coroutine Termination and Exception Handing</li>
+<li>Returning a Value from a Coroutine</li>
+<li>Using Yield from</li>
+<li>The Meaning of yield from</li>
+<li>Use Case: Coroutines for Discrete Event Simulation</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C17. Concurrency with Futures<ul>
+<li>e.g. Web Downloads in Three Styles</li>
+<li>Blocking I/O and the GIL</li>
+<li>Launching Processes with concurrent.futures</li>
+<li>Experimenting with Executor.map</li>
+<li>Downloads with Progress Display and Error Handling</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C18. Concurrency with asyncio<ul>
+<li>Thread VS Coroutine : A Comparison</li>
+<li>Downloading with asyncio and aiohttp</li>
+<li>Running Circling Around Blocking Calls</li>
+<li>Enhancing the asyncio downloader Script</li>
+<li>From Callbacks to Futures and Coroutines</li>
+<li>Writing asyncio Servers</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>P6. Metaprogramming<ul>
+<li>C19. Dynamic Attributes and Properties<ul>
+<li>Data Wrangling with Dynamic Attributes</li>
+<li>Using a Property for Attribute Validation</li>
+<li>A Proper Look at Properties</li>
+<li>Coding a Property Factory</li>
+<li>Handling Attribute Deletion</li>
+<li>Essential Attributes and Functions For Attribute Handling</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C20. Attribute Descriptors<ul>
+<li>Desciptor Example: Attribute Validation</li>
+<li>Overriding VS Nonoverriding Descriptors</li>
+<li>Methods Are Descriptors</li>
+<li>Descriptor Usage Tips</li>
+<li>Descriptor docstring and Overriding Deletion</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C21. Class Metaprogramming<ul>
+<li>A Class Factory</li>
+<li>A Class Decorator for Customizing Descriptors</li>
+<li>What Happens When: Import Time VS Runtime</li>
+<li>Metaclasses 101</li>
+<li>A Metaclass for Customizing Descriptors</li>
+<li>The Metaclass prepare Special Method</li>
+<li>Classes as Objects</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="P1-Prologue"><a href="#P1-Prologue" class="headerlink" title="P1. Prologue"></a>P1. Prologue</h2><p>序言部分讲了很重要的一点，Python 最优秀的地方就是其统一性。</p>
+<p>Pythonic 体现在使用的 Python Data Model 来表述，其途径主要编写<strong>特殊方法 (Special/Magic Method)</strong></p>
+<ul>
+<li>Iteration</li>
+<li>Collections</li>
+<li>Attribute access</li>
+<li>Operator overloading</li>
+<li>Function and method invocation</li>
+<li>Object creation and destruction</li>
+<li>String representation and formatting</li>
+<li>Managed contexts (i.e., with blocks)</li>
+</ul>
+<h3 id="C01-The-Python-Data-Model"><a href="#C01-The-Python-Data-Model" class="headerlink" title="C01. The Python Data Model"></a>C01. The Python Data Model</h3><p>扩展阅读：<a target="_blank" rel="noopener" href="http://zopeinterface.readthedocs.io/en/latest/">http://zopeinterface.readthedocs.io/en/latest/</a></p>
+<h4 id="A-Pythonic-Card-Deck"><a href="#A-Pythonic-Card-Deck" class="headerlink" title="A Pythonic Card Deck"></a>A Pythonic Card Deck</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#### 1. 案例一：纸牌 nametuple</span></span><br><span class="line">Card = collections.namedtuple(<span class="string">&#x27;Card&#x27;</span>, [<span class="string">&#x27;rank&#x27;</span>, <span class="string">&#x27;suit&#x27;</span>])</span><br><span class="line"><span class="comment"># Card 是一个类</span></span><br><span class="line"><span class="comment"># 重载到 Cards(object) 的 __init__ , __len__ , __getitem__</span></span><br><span class="line"><span class="comment"># 重载可以之后可以使用 [] 语法 ( [0] [-1] random.choice(cards) [:3] [12::13] for in sorted reversed,sorted(cards, key=calc_score) card in cards ),</span></span><br><span class="line"><span class="comment"># 还可以重载 __setitem__, 之后就可以 shuffle</span></span><br><span class="line"><span class="comment"># 重载 __repr__ , __abs__ , __bool__ , __add__ , __mul__ 可以 repr() abs() bool() + *</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="How-Special-Methods-Are-Used"><a href="#How-Special-Methods-Are-Used" class="headerlink" title="How Special Methods Are Used"></a>How Special Methods Are Used</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">obj.__len__()</span><br><span class="line"><span class="built_in">len</span>()</span><br><span class="line"></span><br><span class="line">obj.__</span><br></pre></td></tr></table></figure>
+<h4 id="Overview-of-Special-Methods"><a href="#Overview-of-Special-Methods" class="headerlink" title="Overview of Special Methods"></a>Overview of Special Methods</h4><p>对于内置类型 (list, str , bytearray) 解释器在调用特殊方法的时候调用 C 库，比如 CPython 实现的 len 方法一般直接会调用 PyVarObject C Struct ob_size</p>
+<p>特殊方法往往并不是显示调用，而是被隐式调用。比如 init 在 new 中的作用，比如 for item in items 世界上会调用 iter(items), 这也会隐式调用 items.<strong>iter</strong>() .</p>
+<p>一般当大量使用特殊方法的时候，都是在进行元编程。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span>(x) 先调用 x.__bool__() , 如果 x.__bool__() 没有实现，则调用 x.__len__(), 如果为 <span class="number">0</span> 则返回 <span class="literal">False</span></span><br><span class="line"><span class="built_in">sorted</span>(arr) 可以直接返回 arr，arr.sort() 是排序内部。</span><br></pre></td></tr></table></figure>
+
+<p>特殊方法名 （有操作符）</p>
+<table>
+<thead>
+<tr>
+<th>种类</th>
+<th>方法名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String/Bytes</td>
+<td>repr , str , format , bytes</td>
+</tr>
+<tr>
+<td>Conversion to number</td>
+<td>abs , bool , complex , init , float , hash , index</td>
+</tr>
+<tr>
+<td>Emulating collections</td>
+<td>len , getitem , setitem , delitem , contains</td>
+</tr>
+<tr>
+<td>Iteration</td>
+<td>iter, reversed , next</td>
+</tr>
+<tr>
+<td>Emulating callables</td>
+<td>call</td>
+</tr>
+<tr>
+<td>Context management</td>
+<td>enter, exit</td>
+</tr>
+<tr>
+<td>Instance creation &amp; destruction</td>
+<td>new , init , del</td>
+</tr>
+<tr>
+<td>Attribute management</td>
+<td>getattr , getattribute , setattr , delattr, dir</td>
+</tr>
+<tr>
+<td>Attribute descriptors</td>
+<td>get , set ,delete</td>
+</tr>
+<tr>
+<td>Class service</td>
+<td>prepare , instancecheck , subclasscheck</td>
+</tr>
+</tbody></table>
+<p>特殊方法名 （无操作符）</p>
+<table>
+<thead>
+<tr>
+<th>种类</th>
+<th>方法名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Unary numeric operators</td>
+<td>neg  , pos  , abs</td>
+</tr>
+<tr>
+<td>Rich comparison operators</td>
+<td>lt  , le  , eq  , ne  , gt  , ge</td>
+</tr>
+<tr>
+<td>Arithmetic operators</td>
+<td>add  ,sub  , mul  ,truediv  ,floordiv  ,mod , divmod , pow , round round</td>
+</tr>
+<tr>
+<td>Reversed arithmetic operators</td>
+<td>radd , rsub , rmul , rtruediv, rfloordiv , rmod , rdivmod, rpow</td>
+</tr>
+<tr>
+<td>Augmented assignment mathmatic</td>
+<td>iadd , isub , imul , itruediv, ifloordiv</td>
+</tr>
+<tr>
+<td>Bitwise operators</td>
+<td>invert  , lshift  , rshift  , and  , or</td>
+</tr>
+<tr>
+<td>Reversed bitwise operators</td>
+<td>rlshift , rrshift , rand , rxor , ror</td>
+</tr>
+<tr>
+<td>Augmented assignment bitwise</td>
+<td>ilshift , irshift , iand , ixor , ior</td>
+</tr>
+</tbody></table>
+<h4 id="Why-len-Is-Not-a-Method"><a href="#Why-len-Is-Not-a-Method" class="headerlink" title="Why len Is Not a Method"></a>Why len Is Not a Method</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">因为对 不同类型并不是一定调用 __len__ , 对于基本类型查看 c struct 中长度，对于其他类型直接调用 __len__ , 这种区分对待</span><br></pre></td></tr></table></figure>
+
+<h2 id="P2-Data-Structure"><a href="#P2-Data-Structure" class="headerlink" title="P2. Data Structure"></a>P2. Data Structure</h2><h3 id="C02-An-Array-of-Sequences"><a href="#C02-An-Array-of-Sequences" class="headerlink" title="C02. An Array of Sequences"></a>C02. An Array of Sequences</h3><p>Strings, lists, byte sequences, arrays, XML elements, and database results share a rich set of common operations including iteration, slicing, sorting, and concatenation.</p>
+<h4 id="Overview-of-Built-in-Sequences"><a href="#Overview-of-Built-in-Sequences" class="headerlink" title="Overview of Built-in Sequences"></a>Overview of Built-in Sequences</h4><p>C 实现的按照 item 是否为同一类型分为：</p>
+<ul>
+<li><strong>Container sequences</strong>:  list, tuple, and collections.deque can hold items of different types.</li>
+<li><strong>Flat sequences</strong>: str, bytes, bytearray, memoryview, and array.array hold items of one type.</li>
+</ul>
+<p>C 实现按照 item 是否可修改分为：</p>
+<ul>
+<li><strong>Mutable sequences</strong>: list, bytearray, array.array, collections.deque, and memoryview</li>
+<li><strong>Immutable sequences</strong>: tuple, str, and bytes</li>
+</ul>
+<h4 id="List-Comprehensions-and-Generator-Expressions"><a href="#List-Comprehensions-and-Generator-Expressions" class="headerlink" title="List Comprehensions and Generator Expressions"></a>List Comprehensions and Generator Expressions</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new_items = [func(a) <span class="keyword">for</span> item <span class="keyword">in</span> items]</span><br><span class="line">new_items = [ <span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>) <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line">new_items = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">str</span>,<span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span> , <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">100</span>))))))</span><br><span class="line"><span class="comment"># 可写成</span></span><br><span class="line">new_items = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">str</span>,<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span> , <span class="built_in">range</span>(<span class="number">100</span>))))</span><br></pre></td></tr></table></figure>
+<p>list 往往和 map filter 以及 listcomp 用于创建简单的序列</p>
+<h4 id="Tuples-Are-Not-Just-Immutable-Lists"><a href="#Tuples-Are-Not-Just-Immutable-Lists" class="headerlink" title="Tuples Are Not Just Immutable Lists"></a>Tuples Are Not Just Immutable Lists</h4><ul>
+<li><p>解包赋值</p>
+</li>
+<li><p>不要手贱加逗号</p>
+</li>
+<li><p>下划线可以用作临时变量 （但是 django 中下划线用于中英文）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a, b, *rest = <span class="built_in">range</span>(<span class="number">5</span>) <span class="comment"># (0, 1, [2, 3, 4])</span></span><br><span class="line">a, b, *rest = <span class="built_in">range</span>(<span class="number">3</span>) <span class="comment"># (0, 1, [2])</span></span><br><span class="line">a, b, *rest = <span class="built_in">range</span>(<span class="number">2</span>) <span class="comment"># (0, 1, [])</span></span><br><span class="line"></span><br><span class="line">a, *body, c, d = <span class="built_in">range</span>(<span class="number">5</span>) <span class="comment"># (0, [1, 2], 3, 4)</span></span><br><span class="line">*head, b, c, d = <span class="built_in">range</span>(<span class="number">5</span>) <span class="comment"># ([0, 1], 2, 3, 4)</span></span><br></pre></td></tr></table></figure></li>
+<li><p>namedtuple</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">City = namedtuple(<span class="string">&#x27;City&#x27;</span>, <span class="string">&#x27;name country population coordinates&#x27;</span>)</span><br><span class="line">tokyo = City(<span class="string">&#x27;Tokyo&#x27;</span>, <span class="string">&#x27;JP&#x27;</span>, <span class="number">36.933</span>, (<span class="number">35.689722</span>, <span class="number">139.691667</span>))</span><br><span class="line">tokyo.population</span><br><span class="line">tokyo.coordinates</span><br><span class="line">tokyo[<span class="number">1</span>]</span><br><span class="line">City._fields <span class="comment"># tuple</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h4 id="Slicing"><a href="#Slicing" class="headerlink" title="Slicing"></a>Slicing</h4><p>为何 Slice 和 Range 会排除 最后一个 Item?</p>
+<p>书中讲的太复杂，其实这个和尺子是一个作用，尺子从 0 刻度开始，这样方便丈量。</p>
+<p>比如说：</p>
+<ul>
+<li>items[0:10] 为 10 厘米</li>
+<li>items[10] 为 10 刻度后一个单位，即 items[10:11]</li>
+<li>items[2:] 为 2 刻度后面若干个单位</li>
+<li>items[::3] 以三为单位，从 0 刻度开始，最后为结尾，每三个</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[i, j] # 调用 a.__getitem__((i, j))</span><br></pre></td></tr></table></figure>
+
+<h4 id="Augmented-Assignment-with-Sequences"><a href="#Augmented-Assignment-with-Sequences" class="headerlink" title="Augmented Assignment with Sequences"></a>Augmented Assignment with Sequences</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">对于不可变类型 赋值 l *= <span class="number">2</span> 在内存中则是创建了新的两个长度的元祖，然后赋值</span><br><span class="line">而由于字符串则需要注意，str_a += <span class="string">&quot;str b&quot;</span> , 虽然为不可变变量，但并不需要拷贝整个字符串（特殊情况）, 但字符串的拼接建议还是<span class="string">&quot;&quot;</span>.join()</span><br><span class="line"></span><br><span class="line">t = (<span class="number">1</span>, <span class="number">2</span>, [<span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line">t[<span class="number">2</span>] += [<span class="number">50</span>, <span class="number">60</span>]</span><br><span class="line"><span class="comment"># 结果为既赋值成功，又报错</span></span><br><span class="line"><span class="comment"># 但 t[2].extend([50, 60]) 可以赋值成功</span></span><br><span class="line"><span class="keyword">import</span> dis</span><br><span class="line">dis.dis(<span class="string">&#x27;s[a] += b&#x27;</span>) <span class="comment"># 可以查看字节码</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>尽量不要在不可变变量内保存可变变量</li>
+<li>t[2] += [50,60] 并不是原子操作，因为，当做了一半的时候，抛出的错误。</li>
+</ol>
+<h4 id="list-sort-and-the-sorted-Built-In-Function"><a href="#list-sort-and-the-sorted-Built-In-Function" class="headerlink" title="list.sort and the sorted Built-In Function"></a>list.sort and the sorted Built-In Function</h4><p>对于 sort 和 sorted 来说，reverse 代表 desc,key 为单参数用于计算每一个值的结果的函数。<br>list.sort 直接针对列表排序，并且返回 None（出于编程习惯的问题，直接返回 None 的函数大多是对程序有一定的修改）</p>
+<h4 id="Managing-Ordered-Sequences-with-bisect"><a href="#Managing-Ordered-Sequences-with-bisect" class="headerlink" title="Managing Ordered Sequences with bisect"></a>Managing Ordered Sequences with bisect</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bisect</span><br><span class="line">bisect -&gt; bisect_right</span><br><span class="line">bisect_left</span><br><span class="line">insort -&gt; insort_left</span><br><span class="line">insort_right</span><br><span class="line"><span class="comment"># 搜索可以用来划分档次</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">grade</span>(<span class="params">score, breakpoints=[<span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span>], grades=<span class="string">&#x27;FDCBA&#x27;</span></span>):</span></span><br><span class="line">    i = bisect.bisect(breakpoints, score)</span><br><span class="line">    <span class="keyword">return</span> grades[i]</span><br><span class="line"></span><br><span class="line">[grade(score) <span class="keyword">for</span> score <span class="keyword">in</span> [<span class="number">33</span>, <span class="number">99</span>, <span class="number">77</span>, <span class="number">70</span>, <span class="number">89</span>, <span class="number">90</span>, <span class="number">100</span>]] <span class="comment"># [&#x27;F&#x27;, &#x27;A&#x27;, &#x27;C&#x27;, &#x27;C&#x27;, &#x27;B&#x27;, &#x27;A&#x27;, &#x27;A&#x27;]</span></span><br></pre></td></tr></table></figure>
+<h4 id="When-a-List-Is-Not-the-Answer"><a href="#When-a-List-Is-Not-the-Answer" class="headerlink" title="When a List Is Not the Answer"></a>When a List Is Not the Answer</h4><p>list 是一种 mix-typed 的数据结构，即可以存放不同种类型的数据结构，由此带来的问题自然是性能问题：</p>
+<ul>
+<li>list 第一是 mix-typed 的数据结构</li>
+<li>动态数组，并非数组</li>
+</ul>
+<p>当考虑性能的时候，则需要考虑是不是要换一个更好的数据结构：</p>
+<ul>
+<li>适用于类型单一的 array</li>
+<li>增删比较多，或者需要使用 FIFO,LIFO, 则使用 deque (double-ended queue)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Arrays</span></span><br><span class="line">floats = array(<span class="string">&#x27;d&#x27;</span>, (random() <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>**<span class="number">7</span>)))</span><br><span class="line"><span class="comment"># NumPy and SciPy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deques and Other Queue</span></span><br></pre></td></tr></table></figure>
+<h4 id="Deques-and-Other-Queue"><a href="#Deques-and-Other-Queue" class="headerlink" title="Deques and Other Queue"></a>Deques and Other Queue</h4><ul>
+<li>Deque</li>
+<li>queue 线程安全 Queue, LifoQueue, and PriorityQueue</li>
+<li>multiprocessing Queue 和 JoinableQueue</li>
+<li>asyncio Queue, LifoQueue, PriorityQueue, and JoinableQueue</li>
+</ul>
+<h3 id="C03-Dictionaries-and-Sets"><a href="#C03-Dictionaries-and-Sets" class="headerlink" title="C03. Dictionaries and Sets"></a>C03. Dictionaries and Sets</h3><p>本章内容：</p>
+<ul>
+<li>Common dictionary methods</li>
+<li>Special handling for missing keys</li>
+<li>Variations of dict in the standard library</li>
+<li>The set and frozenset types</li>
+<li>How hash tables work</li>
+<li>Implications of hash tables (key type limitations, unpredictable ordering, etc.)</li>
+</ul>
+<h5 id="Generic-Mapping-Types"><a href="#Generic-Mapping-Types" class="headerlink" title="Generic Mapping Types"></a>Generic Mapping Types</h5><p>Hashable ?  一个 obj 的 hash value 在他生命周期内 hash value 是不变的。一个 frozen set 也是 hashable 的（包括每个子元素）.</p>
+<blockquote>
+<p>All of Python’s immutable built-in objects are hashable , except that tuple<br>如果一个 tuple 是每个子元素都是 hashable 的话，则该 tuple 也是 hashable 的。</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 直接在 dict 上面进行操作</span></span><br><span class="line">index.setdefault(word, []).append(location)</span><br></pre></td></tr></table></figure>
+<h5 id="missing-方法"><a href="#missing-方法" class="headerlink" title="missing 方法"></a>missing 方法</h5><p>keyerror 会触发 missing 方法</p>
+<h5 id="Variations-of-Dict"><a href="#Variations-of-Dict" class="headerlink" title="Variations of Dict"></a>Variations of Dict</h5><p>OrderedDict - 有序字典<br>ChainMap - 组装多个字典，按照次序搜索<br>Counter - COUNTER</p>
+<h5 id="Immutable-Mappings"><a href="#Immutable-Mappings" class="headerlink" title="Immutable Mappings"></a>Immutable Mappings</h5><h5 id="Set-Theory"><a href="#Set-Theory" class="headerlink" title="Set Theory"></a>Set Theory</h5><p>交差并补</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 交集</span></span><br><span class="line">s &amp; z</span><br><span class="line">z &amp; s</span><br><span class="line">s &amp;= z</span><br><span class="line"><span class="comment"># 2. 差集</span></span><br><span class="line">s - z</span><br><span class="line">z - s</span><br><span class="line">s -= z</span><br><span class="line"><span class="comment"># 3. 并集</span></span><br><span class="line">s | z</span><br><span class="line">z | s</span><br><span class="line">s |= z</span><br><span class="line"><span class="comment"># 4. 补集</span></span><br><span class="line">s ^ z</span><br><span class="line">z ^ s</span><br><span class="line">s ^= z</span><br><span class="line"></span><br><span class="line"><span class="comment"># 被包含</span></span><br><span class="line">e <span class="keyword">in</span> z</span><br><span class="line"></span><br><span class="line"><span class="comment"># 子集</span></span><br><span class="line">s &lt;= z</span><br><span class="line">s =&gt; z</span><br></pre></td></tr></table></figure>
+
+<h5 id="Dict-and-Set-Under-the-Hood"><a href="#Dict-and-Set-Under-the-Hood" class="headerlink" title="Dict and Set Under the Hood"></a>Dict and Set Under the Hood</h5><h3 id="C04-Text-VS-Bytes"><a href="#C04-Text-VS-Bytes" class="headerlink" title="C04. Text VS Bytes"></a>C04. Text VS Bytes</h3><pre><code> - Character Issues
+ - Byte Essentials
+ - Basic Encoders/Decoders
+ - Understanding Encode/Decode Problems
+ - Handling Text Files
+ - Normalizng Unicode for Saner Comparisons
+ - Sorting Unicode Text
+ - The Unicode Database
+ - Dual-Mode str and bytes APIs
+ - Summary
+ - Further Reading</code></pre>
+<h2 id="P3-Function-as-Objects"><a href="#P3-Function-as-Objects" class="headerlink" title="P3. Function as Objects"></a>P3. Function as Objects</h2><p>function is the first-class object</p>
+<p>Higher-Order Functions</p>
+<ul>
+<li><p>设计模式</p>
+</li>
+<li><p>装饰器</p>
+</li>
+<li><p>callables</p>
+</li>
+<li><p>function attributes</p>
+</li>
+<li><p>introspection</p>
+</li>
+<li><p>parameter annotations</p>
+</li>
+<li><p>nonlocal declaration</p>
+</li>
+<li><p> references, mutability, 实例生命周期，定制自己集合类 collections and ABCs, 多继承，重载操作符。</p>
+</li>
+<li><p>生成器</p>
+</li>
+<li><p>上下文管理器</p>
+</li>
+<li><p>协程 （包括 Yield)</p>
+</li>
+<li><p>concurrency</p>
+</li>
+<li><p>event-oriented IO asyncio</p>
+</li>
+<li><p>动态创建类</p>
+</li>
+<li><p>descriptors</p>
+</li>
+<li><p>class decorators</p>
+</li>
+<li><p>metaclasses</p>
+</li>
+</ul>
+<h3 id="C05-First-Class-Function"><a href="#C05-First-Class-Function" class="headerlink" title="C05. First-Class Function"></a>C05. First-Class Function</h3><pre><code> - Treating a Function Like an Object
+ - Higher-Order Functions
+ - Anonymous Functions
+ - The Seven Flavors of Callable Objects
+ - User-Defined Callable Types
+ - Function Introspection
+ - From Positional to Keyword-Only Parameters
+ - Function Annotations
+ - Packages for Functional Programming
+ - Summary
+ - Further Reading</code></pre>
+<h3 id="C06-Design-Patterns-with-First-Class-Functions"><a href="#C06-Design-Patterns-with-First-Class-Functions" class="headerlink" title="C06. Design Patterns with First-Class Functions"></a>C06. Design Patterns with First-Class Functions</h3><pre><code> - Refactoring Strategy
+ - Command
+ - Summary
+ - Further Reading</code></pre>
+<h3 id="C07-Function-Decorators-and-Closures"><a href="#C07-Function-Decorators-and-Closures" class="headerlink" title="C07. Function Decorators and Closures"></a>C07. Function Decorators and Closures</h3><pre><code> - Decorators 101
+ - When Python Executes Decorators
+ - Decorator-Enhanced Strategy Pattern
+ - Variable Scope Rules
+ - Closures
+ - The nonlocal Declaration
+ - Implementing a Simple Decorator
+ - Decorators In the Standard Library
+ - Stacked Decorators
+ - Parameterized Decorators
+ - Summary
+ - Further Reading</code></pre>
+<h2 id="P4-Object-Oriented-Idioms"><a href="#P4-Object-Oriented-Idioms" class="headerlink" title="P4. Object-Oriented Idioms"></a>P4. Object-Oriented Idioms</h2><h3 id="C08-Object-References-Mutability-and-Recycling"><a href="#C08-Object-References-Mutability-and-Recycling" class="headerlink" title="C08. Object References, Mutability, and Recycling"></a>C08. Object References, Mutability, and Recycling</h3><p>reference variable : variable 不是盒子，贴在盒子上的标签。</p>
+<p>赋值并非创建 Copy<br>赋值给一个值并非改变之前绑定的值，而仅仅是重新绑定 rebinding<br>函数由于参数为 reference, 所以可以修改 mutable 的变量<br>函数参数不应当初始化为可修改的值。</p>
+<p>id 与 == : 内存值 和 值相等<br>copy 默认是浅拷贝<br>函数参数是引用<br>GC 使用的引用计数，通过 weakref.finalize 可以增加 obj 被回收的回调函数<br>强引用和弱引用，weakref 具体使用场景？ <a target="_blank" rel="noopener" href="https://pymotw.com/3/weakref/">https://pymotw.com/3/weakref/</a><br>One example is a class that wants to keep track of all its current instances. This can be done with weak references, a low-level mechanism underlying the more useful collections WeakValueDictionary, WeakKey Dictionary, WeakSet, and the finalize function from the weakref module.<br>公用字符串字面量和小的数的技巧叫做 interning</p>
+<p>PS:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">在 IPython 中 _ 为某个表达式返回的值</span><br></pre></td></tr></table></figure>
+
+<pre><code> - Weak References
+ - Tricts Python Plays with Immutables
+ - Summary
+ - Further Reading</code></pre>
+<h3 id="C09-A-Pythonic-Object"><a href="#C09-A-Pythonic-Object" class="headerlink" title="C09. A Pythonic Object"></a>C09. A Pythonic Object</h3><pre><code> - Object Representations
+ - Vector Class Redux
+ - An Alternative Constructor
+ - classmethod VS staticmethod
+ - Formatted Displays
+ - A Hashable Vector2d
+ - Private and &quot;Protected&quot; Attributes in Python
+ - Saving Space with the slots Class Attribute
+ - Overriding Class Attributes
+ - Summary
+ - Further Reading</code></pre>
+<h3 id="C10-Sequence-Hacking-Hashing-and-Slicing"><a href="#C10-Sequence-Hacking-Hashing-and-Slicing" class="headerlink" title="C10. Sequence Hacking , Hashing , and Slicing"></a>C10. Sequence Hacking , Hashing , and Slicing</h3><pre><code> - Vector: A User-Defined Sequence Type
+ - Vector Take #1: Vector2d Compatible
+ - Protocols and Duck Typing
+ - Vector Take #2: A Sliceable Sequence
+ - Vector Take #3: Dynamic Attribute Access
+ - Vector Take #4: Hashing and a Faster ==
+ - Vector Take #5: Formatting
+ - Summary
+ - Further Reading</code></pre>
+<h3 id="C11-Interfaces-From-Protocols-to-ABCs"><a href="#C11-Interfaces-From-Protocols-to-ABCs" class="headerlink" title="C11. Interfaces: From Protocols to ABCs"></a>C11. Interfaces: From Protocols to ABCs</h3><pre><code> - Interfaces and Protocols in Python Culture
+ - Python Digs Sequences
+ - Monkey-Patching to Implement a Protocol at Runtime
+ - Alex Martelli&#39;s Waterfowl
+ - Subclassing an ABC
+ - ABCs in the Standard Library
+ - Defining and Using an ABC
+ - How the Tombola Subclasses Were Tested
+ - Usage of register in Practice
+ - Geese Can Behave as Ducks
+ - Chapter Summary
+ - Further Reading</code></pre>
+<h3 id="C12-Inheritance-For-Good-or-For-Worse"><a href="#C12-Inheritance-For-Good-or-For-Worse" class="headerlink" title="C12. Inheritance: For Good or For Worse"></a>C12. Inheritance: For Good or For Worse</h3><pre><code> - Subclassing Built-In Types Is Tricty
+ - Multiple Inheritance and Method Resolution Order
+ - Multiple Inheritance in the Real World
+ - Coping with Multiple Inheritance
+ - A Modern Example: Mixins in Django Generic Views
+ - Chapter Summary
+ - Further Reading</code></pre>
+<h3 id="C13-Operator-Overloading-Doing-It-Right"><a href="#C13-Operator-Overloading-Doing-It-Right" class="headerlink" title="C13. Operator Overloading: Doing It Right"></a>C13. Operator Overloading: Doing It Right</h3><blockquote>
+<p>依据我的经验。除非特别适合，比如说矩阵相加，否则不要进行操作符重载。 因为 加减乘除之类的操作符本身就容易有二义性。</p>
+</blockquote>
+<h2 id="P5-Control-Flow"><a href="#P5-Control-Flow" class="headerlink" title="P5. Control Flow"></a>P5. Control Flow</h2><h3 id="C14-Iterables-Iterators-and-Generators"><a href="#C14-Iterables-Iterators-and-Generators" class="headerlink" title="C14. Iterables, Iterators , and Generators"></a>C14. Iterables, Iterators , and Generators</h3><pre><code> - Sentence Take #1 : A Sequence of Words Iterables VS Iterators
+ - Iterables Versus Itertors
+ - Sentence Take #2 : A Classic Iterator
+ - Sentence Take #3 : A Generator Function
+ - Sentence Take #4 : A Lazy Implementation
+ - Sentence Take #5 : A Generator Expression
+ - Generator Expressions : When to Use Them
+ - Another Example : Arithmetic Progression Generator
+ - Generator Functions in the Standard Library
+ - New Syntax In Python 3.3 : yield from
+ - Iterable Reducing Functions
+ - A Closer Look at the iter Function
+ - Case Study : Generators in a Databse Conversion Utility
+ - Generators as Coroutines
+ - Chapter Summary
+ - Further Reading</code></pre>
+<h3 id="C15-Context-Managers-and-else-Blocks"><a href="#C15-Context-Managers-and-else-Blocks" class="headerlink" title="C15. Context Managers and else Blocks"></a>C15. Context Managers and else Blocks</h3><pre><code> - Do This , Then That: else Blocks Beyond if
+ - Context Managers and with Blocks
+ - The contextlib Utilities
+ - Using @contextmanager
+ - Chapter Summary
+ - Further Reading</code></pre>
+<h3 id="C16-Coroutines"><a href="#C16-Coroutines" class="headerlink" title="C16. Coroutines"></a>C16. Coroutines</h3><pre><code> - How Coroutines Evolved from Generators
+ - Basic Behavior of a Generator Used as a Coroutine
+ - Example: Coroutine to Compute a Running Average
+ - Decorators for Conroutine Priming
+ - Coroutine Termination and Exception Handing
+ - Returning a Value from a Coroutine
+ - Using Yield from
+ - The Meaning of yield from
+ - Use Case: Coroutines for Discrete Event Simulation
+ - Chapter Summary
+ - Further Reading</code></pre>
+<h3 id="C17-Concurrency-with-Futures"><a href="#C17-Concurrency-with-Futures" class="headerlink" title="C17. Concurrency with Futures"></a>C17. Concurrency with Futures</h3><pre><code> - e.g. Web Downloads in Three Styles
+ - Blocking I/O and the GIL
+ - Launching Processes with concurrent.futures
+ - Experimenting with Executor.map
+ - Downloads with Progress Display and Error Handling
+ - Chapter Summary
+ - Further Reading</code></pre>
+<h3 id="C18-Concurrency-with-asyncio"><a href="#C18-Concurrency-with-asyncio" class="headerlink" title="C18. Concurrency with asyncio"></a>C18. Concurrency with asyncio</h3><pre><code> - Thread VS Coroutine : A Comparison
+ - Downloading with asyncio and aiohttp
+ - Running Circling Around Blocking Calls
+ - Enhancing the asyncio downloader Script
+ - From Callbacks to Futures and Coroutines
+ - Writing asyncio Servers
+ - Chapter Summary
+ - Further Reading</code></pre>
+<h2 id="P6-Metaprogramming"><a href="#P6-Metaprogramming" class="headerlink" title="P6. Metaprogramming"></a>P6. Metaprogramming</h2><h3 id="C19-Dynamic-Attributes-and-Properties"><a href="#C19-Dynamic-Attributes-and-Properties" class="headerlink" title="C19. Dynamic Attributes and Properties"></a>C19. Dynamic Attributes and Properties</h3><pre><code> - Data Wrangling with Dynamic Attributes
+ - Using a Property for Attribute Validation
+ - A Proper Look at Properties
+ - Coding a Property Factory
+ - Handling Attribute Deletion
+ - Essential Attributes and Functions For Attribute Handling
+ - Chapter Summary
+ - Further Reading</code></pre>
+<h3 id="C20-Attribute-Descriptors"><a href="#C20-Attribute-Descriptors" class="headerlink" title="C20. Attribute Descriptors"></a>C20. Attribute Descriptors</h3><pre><code> - Desciptor Example: Attribute Validation
+ - Overriding VS Nonoverriding Descriptors
+ - Methods Are Descriptors
+ - Descriptor Usage Tips
+ - Descriptor docstring and Overriding Deletion
+ - Chapter Summary
+ - Further Reading</code></pre>
+<h3 id="C21-Class-Metaprogramming"><a href="#C21-Class-Metaprogramming" class="headerlink" title="C21. Class Metaprogramming"></a>C21. Class Metaprogramming</h3><pre><code> - A Class Factory
+ - A Class Decorator for Customizing Descriptors
+ - What Happens When: Import Time VS Runtime
+ - Metaclasses 101
+ - A Metaclass for Customizing Descriptors
+ - The Metaclass prepare Special Method
+ - Classes as Objects
+ - Chapter Summary
+ - Further Reading</code></pre>
+<h2 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://docs.python.org/3/reference/datamodel.html">https://docs.python.org/3/reference/datamodel.html</a></li>
+<li>Python Cookbook</li>
+<li>Python Essential Reference, 4th Edition</li>
+<li>The Art of the Metaobject Protocol</li>
+</ul>
+<p>UPDATE:</p>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>类型</th>
+<th>详细操作</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>2017-04-18</strong></td>
+<td>动笔</td>
+<td>初始化本文结构</td>
+</tr>
+<tr>
+<td><strong>2017-04-26</strong></td>
+<td>重构</td>
+<td>添加目录和阅读笔记</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E7%A2%8E%E7%A2%8E%E5%BF%B5/" rel="tag"># 碎碎念</a>
+              <a href="/tags/%E4%B9%A6%E5%8D%95%E4%B8%8E%E7%AE%80%E8%AF%84/" rel="tag"># 书单与简评</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/03/21/ThinkingInPython/" rel="prev" title="Thinking In Python Language">
+      <i class="fa fa-chevron-left"></i> Thinking In Python Language
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/05/01/OhMyNewMac/" rel="next" title="MacBook Pro 15.4 Multi-Touch Bar">
+      MacBook Pro 15.4 Multi-Touch Bar <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%9B%AE%E5%BD%95"><span class="nav-number">2.</span> <span class="nav-text">本文目录</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E4%B9%A6%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">本书结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P1-Prologue"><span class="nav-number">4.</span> <span class="nav-text">P1. Prologue</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C01-The-Python-Data-Model"><span class="nav-number">4.1.</span> <span class="nav-text">C01. The Python Data Model</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#A-Pythonic-Card-Deck"><span class="nav-number">4.1.1.</span> <span class="nav-text">A Pythonic Card Deck</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#How-Special-Methods-Are-Used"><span class="nav-number">4.1.2.</span> <span class="nav-text">How Special Methods Are Used</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Overview-of-Special-Methods"><span class="nav-number">4.1.3.</span> <span class="nav-text">Overview of Special Methods</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Why-len-Is-Not-a-Method"><span class="nav-number">4.1.4.</span> <span class="nav-text">Why len Is Not a Method</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P2-Data-Structure"><span class="nav-number">5.</span> <span class="nav-text">P2. Data Structure</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C02-An-Array-of-Sequences"><span class="nav-number">5.1.</span> <span class="nav-text">C02. An Array of Sequences</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Overview-of-Built-in-Sequences"><span class="nav-number">5.1.1.</span> <span class="nav-text">Overview of Built-in Sequences</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#List-Comprehensions-and-Generator-Expressions"><span class="nav-number">5.1.2.</span> <span class="nav-text">List Comprehensions and Generator Expressions</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tuples-Are-Not-Just-Immutable-Lists"><span class="nav-number">5.1.3.</span> <span class="nav-text">Tuples Are Not Just Immutable Lists</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Slicing"><span class="nav-number">5.1.4.</span> <span class="nav-text">Slicing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Augmented-Assignment-with-Sequences"><span class="nav-number">5.1.5.</span> <span class="nav-text">Augmented Assignment with Sequences</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#list-sort-and-the-sorted-Built-In-Function"><span class="nav-number">5.1.6.</span> <span class="nav-text">list.sort and the sorted Built-In Function</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Managing-Ordered-Sequences-with-bisect"><span class="nav-number">5.1.7.</span> <span class="nav-text">Managing Ordered Sequences with bisect</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#When-a-List-Is-Not-the-Answer"><span class="nav-number">5.1.8.</span> <span class="nav-text">When a List Is Not the Answer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Deques-and-Other-Queue"><span class="nav-number">5.1.9.</span> <span class="nav-text">Deques and Other Queue</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C03-Dictionaries-and-Sets"><span class="nav-number">5.2.</span> <span class="nav-text">C03. Dictionaries and Sets</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Generic-Mapping-Types"><span class="nav-number">5.2.0.1.</span> <span class="nav-text">Generic Mapping Types</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#missing-%E6%96%B9%E6%B3%95"><span class="nav-number">5.2.0.2.</span> <span class="nav-text">missing 方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Variations-of-Dict"><span class="nav-number">5.2.0.3.</span> <span class="nav-text">Variations of Dict</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Immutable-Mappings"><span class="nav-number">5.2.0.4.</span> <span class="nav-text">Immutable Mappings</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Set-Theory"><span class="nav-number">5.2.0.5.</span> <span class="nav-text">Set Theory</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Dict-and-Set-Under-the-Hood"><span class="nav-number">5.2.0.6.</span> <span class="nav-text">Dict and Set Under the Hood</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C04-Text-VS-Bytes"><span class="nav-number">5.3.</span> <span class="nav-text">C04. Text VS Bytes</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P3-Function-as-Objects"><span class="nav-number">6.</span> <span class="nav-text">P3. Function as Objects</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C05-First-Class-Function"><span class="nav-number">6.1.</span> <span class="nav-text">C05. First-Class Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C06-Design-Patterns-with-First-Class-Functions"><span class="nav-number">6.2.</span> <span class="nav-text">C06. Design Patterns with First-Class Functions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C07-Function-Decorators-and-Closures"><span class="nav-number">6.3.</span> <span class="nav-text">C07. Function Decorators and Closures</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P4-Object-Oriented-Idioms"><span class="nav-number">7.</span> <span class="nav-text">P4. Object-Oriented Idioms</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C08-Object-References-Mutability-and-Recycling"><span class="nav-number">7.1.</span> <span class="nav-text">C08. Object References, Mutability, and Recycling</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C09-A-Pythonic-Object"><span class="nav-number">7.2.</span> <span class="nav-text">C09. A Pythonic Object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C10-Sequence-Hacking-Hashing-and-Slicing"><span class="nav-number">7.3.</span> <span class="nav-text">C10. Sequence Hacking , Hashing , and Slicing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C11-Interfaces-From-Protocols-to-ABCs"><span class="nav-number">7.4.</span> <span class="nav-text">C11. Interfaces: From Protocols to ABCs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C12-Inheritance-For-Good-or-For-Worse"><span class="nav-number">7.5.</span> <span class="nav-text">C12. Inheritance: For Good or For Worse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C13-Operator-Overloading-Doing-It-Right"><span class="nav-number">7.6.</span> <span class="nav-text">C13. Operator Overloading: Doing It Right</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P5-Control-Flow"><span class="nav-number">8.</span> <span class="nav-text">P5. Control Flow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C14-Iterables-Iterators-and-Generators"><span class="nav-number">8.1.</span> <span class="nav-text">C14. Iterables, Iterators , and Generators</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C15-Context-Managers-and-else-Blocks"><span class="nav-number">8.2.</span> <span class="nav-text">C15. Context Managers and else Blocks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C16-Coroutines"><span class="nav-number">8.3.</span> <span class="nav-text">C16. Coroutines</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C17-Concurrency-with-Futures"><span class="nav-number">8.4.</span> <span class="nav-text">C17. Concurrency with Futures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C18-Concurrency-with-asyncio"><span class="nav-number">8.5.</span> <span class="nav-text">C18. Concurrency with asyncio</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P6-Metaprogramming"><span class="nav-number">9.</span> <span class="nav-text">P6. Metaprogramming</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#C19-Dynamic-Attributes-and-Properties"><span class="nav-number">9.1.</span> <span class="nav-text">C19. Dynamic Attributes and Properties</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C20-Attribute-Descriptors"><span class="nav-number">9.2.</span> <span class="nav-text">C20. Attribute Descriptors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C21-Class-Metaprogramming"><span class="nav-number">9.3.</span> <span class="nav-text">C21. Class Metaprogramming</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5"><span class="nav-number">10.</span> <span class="nav-text">相关链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

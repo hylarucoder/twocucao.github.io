@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="ReThinking In Python0x00 前言本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。 0x01 Python 胡论Why Python是要用一门编程语言无非是两种原因：  这门技术很火，能挣钱 写起来很舒服，开发效率高  这也是我在涉猎了很多编程语言为什么选择了 Pyth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ReThinking In Python">
+<meta property="og:url" content="http://twocucao.xyz/2017/07/04/RethinkingInPython/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="ReThinking In Python0x00 前言本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。 0x01 Python 胡论Why Python是要用一门编程语言无非是两种原因：  这门技术很火，能挣钱 写起来很舒服，开发效率高  这也是我在涉猎了很多编程语言为什么选择了 Pyth">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-07-04T12:08:21.000Z">
+<meta property="article:modified_time" content="2018-09-01T11:44:08.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="随笔">
+<meta property="article:tag" content="重构技巧">
+<meta property="article:tag" content="编程语言">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2017/07/04/RethinkingInPython/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>ReThinking In Python | MG的编程小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/07/04/RethinkingInPython/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ReThinking In Python
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-07-04 20:08:21" itemprop="dateCreated datePublished" datetime="2017-07-04T20:08:21+08:00">2017-07-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-09-01 19:44:08" itemprop="dateModified" datetime="2018-09-01T19:44:08+08:00">2018-09-01</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">Python 黑魔法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="ReThinking-In-Python"><a href="#ReThinking-In-Python" class="headerlink" title="ReThinking In Python"></a>ReThinking In Python</h1><h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。</p>
+<h2 id="0x01-Python-胡论"><a href="#0x01-Python-胡论" class="headerlink" title="0x01 Python 胡论"></a>0x01 Python 胡论</h2><h3 id="Why-Python"><a href="#Why-Python" class="headerlink" title="Why Python"></a>Why Python</h3><p>是要用一门编程语言无非是两种原因：</p>
+<ul>
+<li>这门技术很火，能挣钱</li>
+<li>写起来很舒服，开发效率高</li>
+</ul>
+<p>这也是我在涉猎了很多编程语言为什么选择了 Python 和 TypeScript 作为自己的主要技能树。</p>
+<p>Python 具备这两点，TS （更加准确的说是 JavaScript）具备前一点。</p>
+<p>Python 写起来真的特别舒服，语法简洁，第三方库丰富，而且也比较火。</p>
+<p>有什么东西比，写代码效率高、生态圈好还重要了。</p>
+<p>生态圈好，比如</p>
+<ul>
+<li>Web 开发用 Django/Flask</li>
+<li>数据抓取用 Requests</li>
+<li>数据分析清洗用 Pandas</li>
+<li>机器学习 Tensorflow SCIPY</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="工具链"><a href="#工具链" class="headerlink" title="工具链"></a>工具链</h3><p><a href="./ch04/s03_Pythonista_%E7%9A%84%E5%B7%A5%E5%85%B7%E9%9B%86.md">Pythonista 的工具集</a></p>
+<h3 id="文档"><a href="#文档" class="headerlink" title="文档"></a>文档</h3><h3 id="社区"><a href="#社区" class="headerlink" title="社区"></a>社区</h3><h3 id="书籍"><a href="#书籍" class="headerlink" title="书籍"></a>书籍</h3><h2 id="0x02-基础概念"><a href="#0x02-基础概念" class="headerlink" title="0x02 基础概念"></a>0x02 基础概念</h2><h3 id="2-1-数据类型"><a href="#2-1-数据类型" class="headerlink" title="2.1 数据类型"></a>2.1 数据类型</h3><h4 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">False</span><br><span class="line">True</span><br><span class="line">None</span><br><span class="line">NotImplemented</span><br><span class="line">Elilipsis ...</span><br></pre></td></tr></table></figure>
+<h5 id="布尔"><a href="#布尔" class="headerlink" title="布尔"></a>布尔</h5><p>布尔常量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">None</span><br><span class="line">False</span><br><span class="line">0 0.0 0j</span><br><span class="line">&#39;&#39; () []</span><br><span class="line">&#123;&#125;</span><br><span class="line">一个对象 __bool__() &#x3D; False , 如果上一个为 True 则__len__()</span><br></pre></td></tr></table></figure>
+
+<p>布尔运算符</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x or y</span><br><span class="line">x and y</span><br><span class="line">not x</span><br></pre></td></tr></table></figure>
+
+<p>布尔比较值</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># 可以定制</span><br><span class="line">&lt; &lt;&#x3D; &gt;&#x3D; &gt; &#x3D;&#x3D; !&#x3D;</span><br><span class="line"># 无法定制</span><br><span class="line">is &#x2F; is not</span><br></pre></td></tr></table></figure>
+
+<h5 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h5><p>五种 format 方式</p>
+<ol>
+<li>古代 %</li>
+<li>近代 format</li>
+<li>现代 f 字符串</li>
+<li>内置的 template</li>
+<li>jinja2 的模板</li>
+</ol>
+<h4 id="数字类型"><a href="#数字类型" class="headerlink" title="数字类型"></a>数字类型</h4><ul>
+<li>int</li>
+<li>float</li>
+<li>complex</li>
+</ul>
+<h5 id="操作符"><a href="#操作符" class="headerlink" title="操作符"></a>操作符</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">+ - * &#x2F; &#x2F;&#x2F; % -n +n abs() int() float()</span><br><span class="line">complex(re,im)</span><br><span class="line">c.conjugate()</span><br><span class="line">divmod(x,y)</span><br><span class="line">pow(x,y) x ** y</span><br><span class="line">math.trunc(x)</span><br><span class="line">math.round(x[,n])</span><br><span class="line">math.floor(x) &lt;&#x3D;x</span><br><span class="line">math.ceil(x)  &gt;&#x3D;x</span><br><span class="line">| ^ &amp; &lt;&lt; &gt;&gt; ~x</span><br></pre></td></tr></table></figure>
+
+<p>注意</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">(-1) &#x2F; 2 # -1</span><br><span class="line">1 &#x2F; (-2) # -1</span><br></pre></td></tr></table></figure>
+
+<h5 id="数值哈希"><a href="#数值哈希" class="headerlink" title="数值哈希"></a>数值哈希</h5><p>// TODO : 麻蛋居然没看懂 4.4.4. Hashing of numeric types</p>
+<h4 id="迭代器类型"><a href="#迭代器类型" class="headerlink" title="迭代器类型"></a>迭代器类型</h4><p>迭代器类型</p>
+<h4 id="序列类型"><a href="#序列类型" class="headerlink" title="序列类型"></a>序列类型</h4><p>C 实现的按照 item 是否为同一类型分为：</p>
+<ul>
+<li><strong>Container sequences</strong>:  list, tuple, and collections.deque can hold items of different types.</li>
+<li><strong>Flat sequences</strong>: str, bytes, bytearray, memoryview, and array.array hold items of one type.</li>
+</ul>
+<p>C 实现按照 item 是否可修改分为：</p>
+<ul>
+<li><strong>Mutable sequences</strong>: list, bytearray, array.array, collections.deque, and memoryview</li>
+<li><strong>Immutable sequences</strong>: tuple, str, and bytes</li>
+</ul>
+<h5 id="通用序列操作"><a href="#通用序列操作" class="headerlink" title="通用序列操作"></a>通用序列操作</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">x <span class="keyword">in</span> s</span><br><span class="line">x not <span class="keyword">in</span> s</span><br><span class="line">s + t</span><br><span class="line">s * n 或者 n * s</span><br><span class="line">s[i]</span><br><span class="line">s[i:j]</span><br><span class="line">s[i:j:s]</span><br><span class="line">len(s)</span><br><span class="line">min(s)</span><br><span class="line">max(s)</span><br><span class="line">s.index(x,i,j)</span><br><span class="line">s.count(x)</span><br><span class="line">// TODO 封装 deepEqual</span><br></pre></td></tr></table></figure>
+
+<p>切片</p>
+<p>为何 Slice 和 Range 会排除 最后一个 Item?</p>
+<p>书中讲的太复杂，其实这个和尺子是一个作用，尺子从 0 刻度开始，这样方便丈量。</p>
+<p>比如说：</p>
+<ul>
+<li>items[0:10] 为 10 厘米</li>
+<li>items[10] 为 10 刻度后一个单位，即 items[10:11]</li>
+<li>items[2:] 为 2 刻度后面若干个单位</li>
+<li>items[::3] 以三为单位，从 0 刻度开始，最后为结尾，每三个</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a[i, j] <span class="comment"># 调用 a.__getitem__((i, j))</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="不可变序列"><a href="#不可变序列" class="headerlink" title="不可变序列"></a>不可变序列</h5><ul>
+<li><p>解包赋值</p>
+</li>
+<li><p>不要手贱加逗号</p>
+</li>
+<li><p>下划线可以用作临时变量 （但是 django 中下划线用于中英文）</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">a, b, *rest = <span class="built_in">range</span>(<span class="number">5</span>) <span class="comment"># (0, 1, [2, 3, 4])</span></span><br><span class="line">a, b, *rest = <span class="built_in">range</span>(<span class="number">3</span>) <span class="comment"># (0, 1, [2])</span></span><br><span class="line">a, b, *rest = <span class="built_in">range</span>(<span class="number">2</span>) <span class="comment"># (0, 1, [])</span></span><br><span class="line"></span><br><span class="line">a, *body, c, d = <span class="built_in">range</span>(<span class="number">5</span>) <span class="comment"># (0, [1, 2], 3, 4)</span></span><br><span class="line">*head, b, c, d = <span class="built_in">range</span>(<span class="number">5</span>) <span class="comment"># ([0, 1], 2, 3, 4)</span></span><br></pre></td></tr></table></figure></li>
+<li><p>namedtuple</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">City = namedtuple(<span class="string">&#x27;City&#x27;</span>, <span class="string">&#x27;name country population coordinates&#x27;</span>)</span><br><span class="line">tokyo = City(<span class="string">&#x27;Tokyo&#x27;</span>, <span class="string">&#x27;JP&#x27;</span>, <span class="number">36.933</span>, (<span class="number">35.689722</span>, <span class="number">139.691667</span>))</span><br><span class="line">tokyo.population</span><br><span class="line">tokyo.coordinates</span><br><span class="line">tokyo[<span class="number">1</span>]</span><br><span class="line">City._fields <span class="comment"># tuple</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="可变序列"><a href="#可变序列" class="headerlink" title="可变序列"></a>可变序列</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">s[i] &#x3D; x</span><br><span class="line">s[i:j] &#x3D; t</span><br><span class="line">del s[i:j]</span><br><span class="line">s[i:j:k] &#x3D; t</span><br><span class="line">del s[i:j:k]</span><br><span class="line">s.append(x)</span><br><span class="line">s.clear()</span><br><span class="line">s.copy()</span><br><span class="line">s.extend(t) 或者 s +&#x3D; t</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h5 id="List-Comprehensions-and-Generator-Expressions"><a href="#List-Comprehensions-and-Generator-Expressions" class="headerlink" title="List Comprehensions and Generator Expressions"></a>List Comprehensions and Generator Expressions</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new_items = [func(a) <span class="keyword">for</span> item <span class="keyword">in</span> items]</span><br><span class="line">new_items = [ <span class="built_in">str</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">100</span>) <span class="keyword">if</span> x % <span class="number">2</span> == <span class="number">0</span>]</span><br><span class="line">new_items = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">str</span>,<span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span> , <span class="built_in">list</span>(<span class="built_in">range</span>(<span class="number">100</span>))))))</span><br><span class="line"><span class="comment"># 可写成</span></span><br><span class="line">new_items = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">str</span>,<span class="built_in">filter</span>(<span class="keyword">lambda</span> x: x % <span class="number">2</span> == <span class="number">0</span> , <span class="built_in">range</span>(<span class="number">100</span>))))</span><br></pre></td></tr></table></figure>
+<p>list 往往和 map filter 以及 listcomp 用于创建简单的序列</p>
+<h5 id="序列赋值"><a href="#序列赋值" class="headerlink" title="序列赋值"></a>序列赋值</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">对于不可变类型 赋值 l *= <span class="number">2</span> 在内存中则是创建了新的两个长度的元祖，然后赋值</span><br><span class="line">而由于字符串则需要注意，str_a += <span class="string">&quot;str b&quot;</span> , 虽然为不可变变量，但并不需要拷贝整个字符串（特殊情况）, 但字符串的拼接建议还是<span class="string">&quot;&quot;</span>.join()</span><br><span class="line"></span><br><span class="line">t = (<span class="number">1</span>, <span class="number">2</span>, [<span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line">t[<span class="number">2</span>] += [<span class="number">50</span>, <span class="number">60</span>]</span><br><span class="line"><span class="comment"># 结果为既赋值成功，又报错</span></span><br><span class="line"><span class="comment"># 但 t[2].extend([50, 60]) 可以赋值成功</span></span><br><span class="line"><span class="keyword">import</span> dis</span><br><span class="line">dis.dis(<span class="string">&#x27;s[a] += b&#x27;</span>) <span class="comment"># 可以查看字节码</span></span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>尽量不要在不可变变量内保存可变变量</li>
+<li>t[2] += [50,60] 并不是原子操作，因为，当做了一半的时候，抛出的错误。</li>
+</ol>
+<h5 id="objs-sort-与-sorted"><a href="#objs-sort-与-sorted" class="headerlink" title="objs.sort 与 sorted()"></a>objs.sort 与 sorted()</h5><p>对于 sort 和 sorted 来说，reverse 代表 desc,key 为单参数用于计算每一个值的结果的函数。<br>list.sort 直接针对列表排序，并且返回 None（出于编程习惯的问题，直接返回 None 的函数大多是对程序有一定的修改）</p>
+<h5 id="二分搜索"><a href="#二分搜索" class="headerlink" title="二分搜索"></a>二分搜索</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> bisect</span><br><span class="line">bisect -&gt; bisect_right</span><br><span class="line">bisect_left</span><br><span class="line">insort -&gt; insort_left</span><br><span class="line">insort_right</span><br><span class="line"><span class="comment"># 搜索可以用来划分档次</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">grade</span>(<span class="params">score, breakpoints=[<span class="number">60</span>, <span class="number">70</span>, <span class="number">80</span>, <span class="number">90</span>], grades=<span class="string">&#x27;FDCBA&#x27;</span></span>):</span></span><br><span class="line">    i = bisect.bisect(breakpoints, score)</span><br><span class="line">    <span class="keyword">return</span> grades[i]</span><br><span class="line"></span><br><span class="line">[grade(score) <span class="keyword">for</span> score <span class="keyword">in</span> [<span class="number">33</span>, <span class="number">99</span>, <span class="number">77</span>, <span class="number">70</span>, <span class="number">89</span>, <span class="number">90</span>, <span class="number">100</span>]] <span class="comment"># [&#x27;F&#x27;, &#x27;A&#x27;, &#x27;C&#x27;, &#x27;C&#x27;, &#x27;B&#x27;, &#x27;A&#x27;, &#x27;A&#x27;]</span></span><br></pre></td></tr></table></figure>
+<h5 id="列表"><a href="#列表" class="headerlink" title="列表"></a>列表</h5><p>list 是一种 mix-typed 的数据结构，即可以存放不同种类型的数据结构，由此带来的问题自然是性能问题：</p>
+<ul>
+<li>list 第一是 mix-typed 的数据结构</li>
+<li>动态数组，并非数组</li>
+</ul>
+<p>当考虑性能的时候，则需要考虑是不是要换一个更好的数据结构：</p>
+<ul>
+<li>适用于类型单一的 array</li>
+<li>增删比较多，或者需要使用 FIFO,LIFO, 则使用 deque (double-ended queue)</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Arrays</span></span><br><span class="line">floats = array(<span class="string">&#x27;d&#x27;</span>, (random() <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">10</span>**<span class="number">7</span>)))</span><br><span class="line"><span class="comment"># NumPy and SciPy</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deques and Other Queue</span></span><br></pre></td></tr></table></figure>
+<h5 id="Queue-与-Deque"><a href="#Queue-与-Deque" class="headerlink" title="Queue 与 Deque"></a>Queue 与 Deque</h5><ul>
+<li>Deque</li>
+<li>queue 线程安全 Queue, LifoQueue, and PriorityQueue</li>
+<li>multiprocessing Queue 和 JoinableQueue</li>
+<li>asyncio Queue, LifoQueue, PriorityQueue, and JoinableQueue</li>
+</ul>
+<h3 id="2-2-语句"><a href="#2-2-语句" class="headerlink" title="2.2 语句"></a>2.2 语句</h3><p>语句</p>
+<h3 id="2-3-函数"><a href="#2-3-函数" class="headerlink" title="2.3 函数"></a>2.3 函数</h3><h4 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h4><h4 id="闭包与作用域"><a href="#闭包与作用域" class="headerlink" title="闭包与作用域"></a>闭包与作用域</h4><p>本部分具备一定文字量，故单独抽取出来到文章，请参考 Python 中的闭包和作用域。</p>
+<h4 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h4><ul>
+<li>map</li>
+<li>reduce</li>
+<li>filter</li>
+</ul>
+<h4 id="特殊方法"><a href="#特殊方法" class="headerlink" title="特殊方法"></a>特殊方法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">obj.__len__()</span><br><span class="line"><span class="built_in">len</span>()</span><br><span class="line"></span><br><span class="line">obj.__</span><br></pre></td></tr></table></figure>
+
+<p>对于内置类型 (list, str , bytearray) 解释器在调用特殊方法的时候调用 C 库，比如 CPython 实现的 len 方法一般直接会调用 PyVarObject C Struct ob_size</p>
+<p>特殊方法往往并不是显示调用，而是被隐式调用。比如 init 在 new 中的作用，比如 for item in items 世界上会调用 iter(items), 这也会隐式调用 items.<strong>iter</strong>() .</p>
+<p>一般当大量使用特殊方法的时候，都是在进行元编程。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">bool</span>(x) 先调用 x.__bool__() , 如果 x.__bool__() 没有实现，则调用 x.__len__(), 如果为 <span class="number">0</span> 则返回 <span class="literal">False</span></span><br><span class="line"><span class="built_in">sorted</span>(arr) 可以直接返回 arr，arr.sort() 是排序内部。</span><br></pre></td></tr></table></figure>
+
+<p>特殊方法名 （有操作符）</p>
+<table>
+<thead>
+<tr>
+<th>种类</th>
+<th>方法名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>String/Bytes</td>
+<td>repr , str , format , bytes</td>
+</tr>
+<tr>
+<td>Conversion to number</td>
+<td>abs , bool , complex , init , float , hash , index</td>
+</tr>
+<tr>
+<td>Emulating collections</td>
+<td>len , getitem , setitem , delitem , contains</td>
+</tr>
+<tr>
+<td>Iteration</td>
+<td>iter, reversed , next</td>
+</tr>
+<tr>
+<td>Emulating callables</td>
+<td>call</td>
+</tr>
+<tr>
+<td>Context management</td>
+<td>enter, exit</td>
+</tr>
+<tr>
+<td>Instance creation &amp; destruction</td>
+<td>new , init , del</td>
+</tr>
+<tr>
+<td>Attribute management</td>
+<td>getattr , getattribute , setattr , delattr, dir</td>
+</tr>
+<tr>
+<td>Attribute descriptors</td>
+<td>get , set ,delete</td>
+</tr>
+<tr>
+<td>Class service</td>
+<td>prepare , instancecheck , subclasscheck</td>
+</tr>
+</tbody></table>
+<p>特殊方法名 （无操作符）</p>
+<table>
+<thead>
+<tr>
+<th>种类</th>
+<th>方法名</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Unary numeric operators</td>
+<td>neg  , pos  , abs</td>
+</tr>
+<tr>
+<td>Rich comparison operators</td>
+<td>lt  , le  , eq  , ne  , gt  , ge</td>
+</tr>
+<tr>
+<td>Arithmetic operators</td>
+<td>add  ,sub  , mul  ,truediv  ,floordiv  ,mod , divmod , pow , round round</td>
+</tr>
+<tr>
+<td>Reversed arithmetic operators</td>
+<td>radd , rsub , rmul , rtruediv, rfloordiv , rmod , rdivmod, rpow</td>
+</tr>
+<tr>
+<td>Augmented assignment mathmatic</td>
+<td>iadd , isub , imul , itruediv, ifloordiv</td>
+</tr>
+<tr>
+<td>Bitwise operators</td>
+<td>invert  , lshift  , rshift  , and  , or</td>
+</tr>
+<tr>
+<td>Reversed bitwise operators</td>
+<td>rlshift , rrshift , rand , rxor , ror</td>
+</tr>
+<tr>
+<td>Augmented assignment bitwise</td>
+<td>ilshift , irshift , iand , ixor , ior</td>
+</tr>
+</tbody></table>
+<p>Why len Is Not a Method</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">因为对 不同类型并不是一定调用 __len__ , 对于基本类型查看 c struct 中长度，对于其他类型直接调用 __len__ , 这种区分对待</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-生成器"><a href="#2-4-生成器" class="headerlink" title="2.4 生成器"></a>2.4 生成器</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">1</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">2</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">3</span></span><br><span class="line">    <span class="comment"># 这里为了省事，标记 123, 但是一般会有个循环，或者多个循环</span></span><br><span class="line"></span><br><span class="line">gen <span class="comment"># &lt;function __main__.gen&gt;</span></span><br><span class="line"><span class="comment"># 显式调用，返回方法对象</span></span><br><span class="line">g = gen() <span class="comment"># &lt;generator object gen at 0x10ec23dc0&gt;</span></span><br><span class="line"><span class="built_in">next</span>(g)</span><br><span class="line"><span class="built_in">next</span>(g)</span><br><span class="line"><span class="built_in">next</span>(g)</span><br><span class="line"><span class="built_in">next</span>(g) <span class="comment"># 执行到结尾部分或者其他报错 StopIteration</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> gen():</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+
+<p>生成器的作用就在于将遍历 lazy 化。嗯？其实编写代码的时候完全不中写生成器也可以 lazy 化很多操作。</p>
+<p>需要注意的是，generator 后面支持了一个方法叫做 send(), 是 next() 的升级版本。将原来的数据的单向流通变成了双向流通。</p>
+<p>见 <a href="#423-%E5%8D%8F%E7%A8%8B">协程</a></p>
+<h2 id="0x03-中级概念"><a href="#0x03-中级概念" class="headerlink" title="0x03 中级概念"></a>0x03 中级概念</h2><h3 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h3><p>包含元编程</p>
+<h3 id="模块与包"><a href="#模块与包" class="headerlink" title="模块与包"></a>模块与包</h3><h4 id="单下划线与双下划线"><a href="#单下划线与双下划线" class="headerlink" title="单下划线与双下划线"></a>单下划线与双下划线</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">前缀单下划线 _var # 在类中被认为是私有变量，在模块中可以通过 amodule._func() 来使用，但是没有办法 from xx.amodule import * 然后调用。</span><br><span class="line">后缀单下划线 var_ # 一般用于表示被占用的关键字 比如 default_ int_ class_ object_</span><br><span class="line">前缀双下划线 __var # 放在类中的话，实例化的时候会被转成&#39;_A__size&#39;, 这个解释器进行的操作叫做 name mangling</span><br><span class="line"></span><br><span class="line">In [13]: class A:</span><br><span class="line">    ...:     def __init__(self):</span><br><span class="line">    ...:         self.__eq__ &#x3D; 2</span><br><span class="line">    ...:         self.__size &#x3D; 34</span><br><span class="line">    ...:         self.__size__ &#x3D; 44</span><br><span class="line"></span><br><span class="line">前后双下划线 __var__</span><br><span class="line">单下划线 _</span><br></pre></td></tr></table></figure>
+
+<h3 id="错误-调试测试"><a href="#错误-调试测试" class="headerlink" title="错误 / 调试测试"></a>错误 / 调试测试</h3><h3 id="IO-编程"><a href="#IO-编程" class="headerlink" title="IO 编程"></a>IO 编程</h3><h3 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">. ^ $ * + ? &#123; &#125; [ ] \ | ( )</span><br><span class="line"></span><br><span class="line">Regular String</span><br><span class="line"></span><br><span class="line"><span class="string">&quot;ab*&quot;</span></span><br><span class="line"><span class="string">&quot;\\\\section&quot;</span></span><br><span class="line"><span class="string">&quot;\\w+\\s+\\1&quot;</span></span><br><span class="line"></span><br><span class="line">Raw string</span><br><span class="line"></span><br><span class="line"><span class="string">r&quot;ab*&quot;</span></span><br><span class="line"><span class="string">r&quot;\\section&quot;</span></span><br><span class="line"><span class="string">r&quot;\w+\s+\1&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="0x04-高级概念"><a href="#0x04-高级概念" class="headerlink" title="0x04 高级概念"></a>0x04 高级概念</h2><h3 id="元编程"><a href="#元编程" class="headerlink" title="元编程"></a>元编程</h3><h4 id="装饰器"><a href="#装饰器" class="headerlink" title="装饰器"></a>装饰器</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">enforcing access control and authentication</span><br><span class="line">instrumentation and timing functions</span><br><span class="line">rate-limiting</span><br><span class="line">caching, and more”</span><br></pre></td></tr></table></figure>
+
+<h4 id="Dynamic-Attributes-and-Properties"><a href="#Dynamic-Attributes-and-Properties" class="headerlink" title="Dynamic Attributes and Properties"></a>Dynamic Attributes and Properties</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">obj.attr</span><br><span class="line"></span><br><span class="line">重写__getattr__</span><br><span class="line"></span><br><span class="line">// TODO: 什么时候完成 python 的 DICT 以及 JSON 的相等？</span><br><span class="line"></span><br><span class="line">accessor?</span><br><span class="line">__new__ 是一个 class method, 但是并没有 xxx</span><br><span class="line"></span><br><span class="line">x = Foo(<span class="string">&#x27;a&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">object_maker</span>(<span class="params">the_class, some_arg</span>):</span></span><br><span class="line">    new_object = the_class.__new__(some_arg)</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(new_object, the_class):</span><br><span class="line">        the_class.__init__(new_object, some_arg)</span><br><span class="line">    <span class="keyword">return</span> new_object</span><br><span class="line"></span><br><span class="line">x = object_maker(Foo,<span class="string">&#x27;a&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="Attributes-Descriptors"><a href="#Attributes-Descriptors" class="headerlink" title="Attributes Descriptors"></a>Attributes Descriptors</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@property</span></span><br><span class="line"></span><br><span class="line">__class__ <span class="comment"># 接近 type()</span></span><br><span class="line">__dict__</span><br><span class="line">__slot__</span><br><span class="line"></span><br><span class="line"><span class="built_in">dir</span>(obj) <span class="comment"># 与__dict__接近</span></span><br><span class="line"><span class="built_in">getattr</span></span><br><span class="line"><span class="built_in">setattr</span></span><br><span class="line"><span class="built_in">hasattr</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="Class-MetaProgramming"><a href="#Class-MetaProgramming" class="headerlink" title="Class MetaProgramming"></a>Class MetaProgramming</h4><h3 id="并发编程"><a href="#并发编程" class="headerlink" title="并发编程"></a>并发编程</h3><h4 id="GIL-Global-Interpreter-Lock"><a href="#GIL-Global-Interpreter-Lock" class="headerlink" title="GIL - Global Interpreter Lock"></a>GIL - Global Interpreter Lock</h4><p>并不是所有的解释器语言都有 GIL （尽管 Python 和 Ruby 里面都有）, 也并不是没有尝试过去除 GIL, 但是每次去除都会导致单线程性能的下降。所以暂时保留。</p>
+<p>GIL 对程序中的影响：</p>
+<blockquote>
+<p>一个线程运行 Python , 而其他 N 个睡眠或者等待 I/O - <strong>同一时刻只有一个线程对共享资源进行存取</strong> , Python 线程也可以等待 threading.Lock 或者线程模块中的其他同步对象；</p>
+</blockquote>
+<h5 id="协同式多任务处理"><a href="#协同式多任务处理" class="headerlink" title="协同式多任务处理"></a>协同式多任务处理</h5><p>如果有两个线程，同时进行 IO 请求，当其中一个线程连接之后，立即会<strong>主动让出 GIL</strong>, 其他线程就可以运行。</p>
+<blockquote>
+<p>当 N 个线程在网络 I/O 堵塞，或等待重新获取 GIL，而一个线程运行 Python。</p>
+</blockquote>
+<p>让出之后还要执行代码呀，所以要有个收回 GIL 的动作。</p>
+<h5 id="抢占式多任务处理"><a href="#抢占式多任务处理" class="headerlink" title="抢占式多任务处理"></a>抢占式多任务处理</h5><p>Python 2 GIL , 尝试收回 GIL 为 执行 1000 字节码。<br>Python 3 GIL , 尝试收回 GIL 检测间隔为 15ms</p>
+<h5 id="线程安全"><a href="#线程安全" class="headerlink" title="线程安全"></a>线程安全</h5><p>原子操作：sort 之类不需要<br>非原子操作：n=n+2 的字节码分为 加载 n , 加载 2 , 相加，存储 n, 四个步骤，由于不是原子性，很可能被由于 15 ms 而被打断。</p>
+<p>当然，懒人一向是 : <strong>优先级不决加括号，线程不决加 lock</strong></p>
+<p>对于 Java, 程序员努力在尽可能短的时间内加锁存取共享数据，减轻线程的争夺，实现最大并行。但 Python 中，线程无法并行运行，细粒度的锁就没有了优势。</p>
+<h4 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h4><blockquote>
+<p>Python 多线程约等于并发。</p>
+</blockquote>
+<h4 id="多进程"><a href="#多进程" class="headerlink" title="多进程"></a>多进程</h4><h4 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h4><p>Python 中，协程在语法上接近于生成器（函数内包含 yield 关键字）.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成器</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">g</span>():</span></span><br><span class="line">    <span class="keyword">yield</span> a</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 协程</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">c</span>():</span></span><br><span class="line">    <span class="comment"># b = yield a</span></span><br><span class="line">    b = <span class="keyword">yield</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>协程在</p>
+<h2 id="0x05-标准库与第三方库"><a href="#0x05-标准库与第三方库" class="headerlink" title="0x05 标准库与第三方库"></a>0x05 标准库与第三方库</h2><h3 id="数据结构与算法"><a href="#数据结构与算法" class="headerlink" title="数据结构与算法"></a>数据结构与算法</h3><h3 id="字符串与文本"><a href="#字符串与文本" class="headerlink" title="字符串与文本"></a>字符串与文本</h3><h3 id="数字日期与时间"><a href="#数字日期与时间" class="headerlink" title="数字日期与时间"></a>数字日期与时间</h3><h3 id="迭代器与生成器"><a href="#迭代器与生成器" class="headerlink" title="迭代器与生成器"></a>迭代器与生成器</h3><ol>
+<li>Introduction</li>
+<li>Built-in Functions</li>
+<li>Built-in Constants</li>
+<li>Built-in Types</li>
+<li>Built-in Exceptions</li>
+<li>Text Processing Services</li>
+<li>Binary Data Services</li>
+<li>Data Types</li>
+<li>Numeric and Mathematical Modules</li>
+<li>Functional Programming Modules</li>
+<li>File and Directory Access</li>
+<li>Data Persistence</li>
+<li>Data Compression and Archiving</li>
+<li>File Formats</li>
+<li>Cryptographic Services</li>
+<li>Generic Operating System Services</li>
+<li>Concurrent Execution</li>
+<li>Interprocess Communication and Networking</li>
+<li>Internet Data Handling</li>
+<li>Structured Markup Processing Tools</li>
+<li>Internet Protocols and Support</li>
+<li>Multimedia Services</li>
+<li>Internationalization</li>
+<li>Program Frameworks</li>
+<li>Graphical User Interfaces with Tk</li>
+<li>Development Tools</li>
+<li>Debugging and Profiling</li>
+<li>Software Packaging and Distribution</li>
+<li>Python Runtime Services</li>
+<li>Custom Python Interpreters</li>
+<li>Importing Modules</li>
+<li>Python Language Services</li>
+<li>Miscellaneous Services</li>
+<li>MS Windows Specific Services</li>
+<li>Unix Specific Services</li>
+<li>Superseded Modules</li>
+<li>Undocumented Modules</li>
+</ol>
+<h2 id="0xAA-测试"><a href="#0xAA-测试" class="headerlink" title="0xAA 测试"></a>0xAA 测试</h2><h3 id="单元测试"><a href="#单元测试" class="headerlink" title="单元测试"></a>单元测试</h3><p>单元测试我只用 pytest</p>
+<ol>
+<li>给对象打补丁</li>
+<li>测试异常情况</li>
+<li>测试输出到日志文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pytest --pdb</span><br><span class="line">pytest --tb&#x3D;long    # exhaustive, informative traceback formatting</span><br></pre></td></tr></table></figure>
+
+<h2 id="0xBB-调试技巧"><a href="#0xBB-调试技巧" class="headerlink" title="0xBB 调试技巧"></a>0xBB 调试技巧</h2><h3 id="IPython"><a href="#IPython" class="headerlink" title="IPython"></a>IPython</h3><h3 id="IPdb"><a href="#IPdb" class="headerlink" title="IPdb"></a>IPdb</h3><h2 id="0xCC-优化技巧"><a href="#0xCC-优化技巧" class="headerlink" title="0xCC 优化技巧"></a>0xCC 优化技巧</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cProfile</span><br></pre></td></tr></table></figure>
+
+<h3 id="统计型优化"><a href="#统计型优化" class="headerlink" title="统计型优化"></a>统计型优化</h3><p><a target="_blank" rel="noopener" href="https://github.com/what-studio/profiling">https://github.com/what-studio/profiling</a></p>
+<h2 id="0xDD-代码质量"><a href="#0xDD-代码质量" class="headerlink" title="0xDD 代码质量"></a>0xDD 代码质量</h2><h3 id="社区推崇的代码风格-Pythonic"><a href="#社区推崇的代码风格-Pythonic" class="headerlink" title="社区推崇的代码风格 Pythonic"></a>社区推崇的代码风格 Pythonic</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">The Zen of Python, by Tim Peters</span><br><span class="line"></span><br><span class="line">Beautiful is better than ugly.</span><br><span class="line">Explicit is better than implicit.</span><br><span class="line">Simple is better than complex.</span><br><span class="line">Complex is better than complicated.</span><br><span class="line">Flat is better than nested.</span><br><span class="line">Sparse is better than dense.</span><br><span class="line">Readability counts.</span><br><span class="line">Special cases aren&#39;t special enough to break the rules.</span><br><span class="line">Although practicality beats purity.</span><br><span class="line">Errors should never pass silently.</span><br><span class="line">Unless explicitly silenced.</span><br><span class="line">In the face of ambiguity, refuse the temptation to guess.</span><br><span class="line">There should be one-- and preferably only one --obvious way to do it.</span><br><span class="line">Although that way may not be obvious at first unless you&#39;re Dutch.</span><br><span class="line">Now is better than never.</span><br><span class="line">Although never is often better than *right* now.</span><br><span class="line">If the implementation is hard to explain, it&#39;s a bad idea.</span><br><span class="line">If the implementation is easy to explain, it may be a good idea.</span><br><span class="line">Namespaces are one honking great idea -- let&#39;s do more of those!</span><br></pre></td></tr></table></figure>
+
+<h3 id="Python-代码质量"><a href="#Python-代码质量" class="headerlink" title="Python 代码质量"></a>Python 代码质量</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;github.com&#x2F;ambv&#x2F;black</span><br></pre></td></tr></table></figure>
+
+<h4 id="正确性"><a href="#正确性" class="headerlink" title="正确性"></a>正确性</h4><ul>
+<li>外部<strong>不该</strong>引用 protected member （单下划线）</li>
+<li>lambda 为一次使用，最好不要赋值。</li>
+<li>不要给 buildin 函数赋值</li>
+<li>py3 直接 super()</li>
+<li>for in else 如果不内置 break 则出会在最后 for in 为 empty 的时候再执行 else 中的语句</li>
+<li>context exit 如果不 catch 掉异常让其自然向上一级抛出错误的话，必须为 (self, exception_type, exception_value, traceback):</li>
+<li>不要在 init 里面 return 数据</li>
+<li>不要混用 tab 和 space</li>
+<li>4 个 space 缩进</li>
+<li>staticmethod 直接是 参数，classmethod 第一个参数为 cls</li>
+<li>可变的 default value 是不能作为 参数的。（可能是解释器在确定函数的定义的时候完成赋值？)</li>
+<li>遵循 exception hierachy <a target="_blank" rel="noopener" href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy">https://docs.python.org/3/library/exceptions.html#exception-hierarchy</a></li>
+<li>defaultdict defaultdict(lambda : 6) , 必须 callable</li>
+<li>尽量 unpack 赋值</li>
+<li>字典用获取用 get(“myk”,None) , 赋值用 dictionary.setdefault(“list”, []).append(“list_item”)</li>
+</ul>
+<h4 id="可维护性"><a href="#可维护性" class="headerlink" title="可维护性"></a>可维护性</h4><ul>
+<li>避免使用 import * , 我觉得这点值得商榷 , 如果是某个模块下，完全可以先把模块拆分成多个，最后 import 进来，接着使用 all.</li>
+<li>getxxx 获取实际值，如果不为实际值，返回 None 显然不如 try catch 来的实在。</li>
+<li>避免使用 global</li>
+<li>命名要注意</li>
+<li>动态创建方法 , 我觉得这点值得商榷。</li>
+</ul>
+<h4 id="可读性"><a href="#可读性" class="headerlink" title="可读性"></a>可读性</h4><ul>
+<li>不要检查，如果可能有异常，尽量抛出异常来 trycatch 解决。</li>
+<li>a is None , if flag</li>
+<li>isinstance , not type(r) is types.ListType</li>
+<li>“{name}{city}”.format(**info_dict)</li>
+<li>for k , v in infodict.items()</li>
+<li>使用 poiinfo = namedtuple(“poiinfo”,[“name”,”lng”,”lat”]) 返回 poiinfo[‘上海’,121.00,23] 最后返回值打印 poi.name , poi.lng , poi lat</li>
+<li>for numbers_value, letters_value in zip(numbers, letters):</li>
+<li>enumerate</li>
+<li>如果能用 listcomp 则不使用 map 和 filter</li>
+</ul>
+<h4 id="性能"><a href="#性能" class="headerlink" title="性能"></a>性能</h4><ul>
+<li>用 set</li>
+<li>d.iteritems() 比 items() 省内存</li>
+</ul>
+<h2 id="0xEE-文章更新"><a href="#0xEE-文章更新" class="headerlink" title="0xEE 文章更新"></a>0xEE 文章更新</h2><ul>
+<li><strong>2017-05-11 19:43:00</strong> : 增加代码质量模块</li>
+<li><strong>2017-08-04 19:43:00</strong> : 增加部分 Fluent Python 的笔记</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag"># 随笔</a>
+              <a href="/tags/%E9%87%8D%E6%9E%84%E6%8A%80%E5%B7%A7/" rel="tag"># 重构技巧</a>
+              <a href="/tags/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80/" rel="tag"># 编程语言</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/06/23/VimCheatSheet/" rel="prev" title="Vim Cheatsheet">
+      <i class="fa fa-chevron-left"></i> Vim Cheatsheet
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/07/04/RethinkingInJavaScript/" rel="next" title="ReThinking In JavaScript">
+      ReThinking In JavaScript <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ReThinking-In-Python"><span class="nav-number">1.</span> <span class="nav-text">ReThinking In Python</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Python-%E8%83%A1%E8%AE%BA"><span class="nav-number">1.2.</span> <span class="nav-text">0x01 Python 胡论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Why-Python"><span class="nav-number">1.2.1.</span> <span class="nav-text">Why Python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A5%E5%85%B7%E9%93%BE"><span class="nav-number">1.2.2.</span> <span class="nav-text">工具链</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%96%87%E6%A1%A3"><span class="nav-number">1.2.3.</span> <span class="nav-text">文档</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BE%E5%8C%BA"><span class="nav-number">1.2.4.</span> <span class="nav-text">社区</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B9%A6%E7%B1%8D"><span class="nav-number">1.2.5.</span> <span class="nav-text">书籍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5"><span class="nav-number">1.3.</span> <span class="nav-text">0x02 基础概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.1.</span> <span class="nav-text">2.1 数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E9%87%8F"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">常量</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%B8%83%E5%B0%94"><span class="nav-number">1.3.1.1.1.</span> <span class="nav-text">布尔</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.3.1.1.2.</span> <span class="nav-text">字符串</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">数字类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%AC%A6"><span class="nav-number">1.3.1.2.1.</span> <span class="nav-text">操作符</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E5%80%BC%E5%93%88%E5%B8%8C"><span class="nav-number">1.3.1.2.2.</span> <span class="nav-text">数值哈希</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">迭代器类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">序列类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E5%BA%8F%E5%88%97%E6%93%8D%E4%BD%9C"><span class="nav-number">1.3.1.4.1.</span> <span class="nav-text">通用序列操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%8D%E5%8F%AF%E5%8F%98%E5%BA%8F%E5%88%97"><span class="nav-number">1.3.1.4.2.</span> <span class="nav-text">不可变序列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8F%AF%E5%8F%98%E5%BA%8F%E5%88%97"><span class="nav-number">1.3.1.4.3.</span> <span class="nav-text">可变序列</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#List-Comprehensions-and-Generator-Expressions"><span class="nav-number">1.3.1.4.4.</span> <span class="nav-text">List Comprehensions and Generator Expressions</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%BA%8F%E5%88%97%E8%B5%8B%E5%80%BC"><span class="nav-number">1.3.1.4.5.</span> <span class="nav-text">序列赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#objs-sort-%E4%B8%8E-sorted"><span class="nav-number">1.3.1.4.6.</span> <span class="nav-text">objs.sort 与 sorted()</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%90%9C%E7%B4%A2"><span class="nav-number">1.3.1.4.7.</span> <span class="nav-text">二分搜索</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%88%97%E8%A1%A8"><span class="nav-number">1.3.1.4.8.</span> <span class="nav-text">列表</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Queue-%E4%B8%8E-Deque"><span class="nav-number">1.3.1.4.9.</span> <span class="nav-text">Queue 与 Deque</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E8%AF%AD%E5%8F%A5"><span class="nav-number">1.3.2.</span> <span class="nav-text">2.2 语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.3 函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E6%95%B0"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AD%E5%8C%85%E4%B8%8E%E4%BD%9C%E7%94%A8%E5%9F%9F"><span class="nav-number">1.3.3.2.</span> <span class="nav-text">闭包与作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0"><span class="nav-number">1.3.3.3.</span> <span class="nav-text">高阶函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E6%AE%8A%E6%96%B9%E6%B3%95"><span class="nav-number">1.3.3.4.</span> <span class="nav-text">特殊方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.3.4.</span> <span class="nav-text">2.4 生成器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E4%B8%AD%E7%BA%A7%E6%A6%82%E5%BF%B5"><span class="nav-number">1.4.</span> <span class="nav-text">0x03 中级概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.4.1.</span> <span class="nav-text">类和对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85"><span class="nav-number">1.4.2.</span> <span class="nav-text">模块与包</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%95%E4%B8%8B%E5%88%92%E7%BA%BF%E4%B8%8E%E5%8F%8C%E4%B8%8B%E5%88%92%E7%BA%BF"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">单下划线与双下划线</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%94%99%E8%AF%AF-%E8%B0%83%E8%AF%95%E6%B5%8B%E8%AF%95"><span class="nav-number">1.4.3.</span> <span class="nav-text">错误 &#x2F; 调试测试</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IO-%E7%BC%96%E7%A8%8B"><span class="nav-number">1.4.4.</span> <span class="nav-text">IO 编程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">1.4.5.</span> <span class="nav-text">正则表达式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-%E9%AB%98%E7%BA%A7%E6%A6%82%E5%BF%B5"><span class="nav-number">1.5.</span> <span class="nav-text">0x04 高级概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%83%E7%BC%96%E7%A8%8B"><span class="nav-number">1.5.1.</span> <span class="nav-text">元编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A3%85%E9%A5%B0%E5%99%A8"><span class="nav-number">1.5.1.1.</span> <span class="nav-text">装饰器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Dynamic-Attributes-and-Properties"><span class="nav-number">1.5.1.2.</span> <span class="nav-text">Dynamic Attributes and Properties</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Attributes-Descriptors"><span class="nav-number">1.5.1.3.</span> <span class="nav-text">Attributes Descriptors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Class-MetaProgramming"><span class="nav-number">1.5.1.4.</span> <span class="nav-text">Class MetaProgramming</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B"><span class="nav-number">1.5.2.</span> <span class="nav-text">并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GIL-Global-Interpreter-Lock"><span class="nav-number">1.5.2.1.</span> <span class="nav-text">GIL - Global Interpreter Lock</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%8D%8F%E5%90%8C%E5%BC%8F%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86"><span class="nav-number">1.5.2.1.1.</span> <span class="nav-text">协同式多任务处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8A%A2%E5%8D%A0%E5%BC%8F%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86"><span class="nav-number">1.5.2.1.2.</span> <span class="nav-text">抢占式多任务处理</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8"><span class="nav-number">1.5.2.1.3.</span> <span class="nav-text">线程安全</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B"><span class="nav-number">1.5.2.2.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B"><span class="nav-number">1.5.2.3.</span> <span class="nav-text">多进程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B"><span class="nav-number">1.5.2.4.</span> <span class="nav-text">协程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-%E6%A0%87%E5%87%86%E5%BA%93%E4%B8%8E%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93"><span class="nav-number">1.6.</span> <span class="nav-text">0x05 标准库与第三方库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95"><span class="nav-number">1.6.1.</span> <span class="nav-text">数据结构与算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%96%87%E6%9C%AC"><span class="nav-number">1.6.2.</span> <span class="nav-text">字符串与文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E6%97%A5%E6%9C%9F%E4%B8%8E%E6%97%B6%E9%97%B4"><span class="nav-number">1.6.3.</span> <span class="nav-text">数字日期与时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8"><span class="nav-number">1.6.4.</span> <span class="nav-text">迭代器与生成器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xAA-%E6%B5%8B%E8%AF%95"><span class="nav-number">1.7.</span> <span class="nav-text">0xAA 测试</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E5%85%83%E6%B5%8B%E8%AF%95"><span class="nav-number">1.7.1.</span> <span class="nav-text">单元测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xBB-%E8%B0%83%E8%AF%95%E6%8A%80%E5%B7%A7"><span class="nav-number">1.8.</span> <span class="nav-text">0xBB 调试技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IPython"><span class="nav-number">1.8.1.</span> <span class="nav-text">IPython</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#IPdb"><span class="nav-number">1.8.2.</span> <span class="nav-text">IPdb</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xCC-%E4%BC%98%E5%8C%96%E6%8A%80%E5%B7%A7"><span class="nav-number">1.9.</span> <span class="nav-text">0xCC 优化技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9F%E8%AE%A1%E5%9E%8B%E4%BC%98%E5%8C%96"><span class="nav-number">1.9.1.</span> <span class="nav-text">统计型优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xDD-%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F"><span class="nav-number">1.10.</span> <span class="nav-text">0xDD 代码质量</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A4%BE%E5%8C%BA%E6%8E%A8%E5%B4%87%E7%9A%84%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC-Pythonic"><span class="nav-number">1.10.1.</span> <span class="nav-text">社区推崇的代码风格 Pythonic</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F"><span class="nav-number">1.10.2.</span> <span class="nav-text">Python 代码质量</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E7%A1%AE%E6%80%A7"><span class="nav-number">1.10.2.1.</span> <span class="nav-text">正确性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E7%BB%B4%E6%8A%A4%E6%80%A7"><span class="nav-number">1.10.2.2.</span> <span class="nav-text">可维护性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E8%AF%BB%E6%80%A7"><span class="nav-number">1.10.2.3.</span> <span class="nav-text">可读性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%80%A7%E8%83%BD"><span class="nav-number">1.10.2.4.</span> <span class="nav-text">性能</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-%E6%96%87%E7%AB%A0%E6%9B%B4%E6%96%B0"><span class="nav-number">1.11.</span> <span class="nav-text">0xEE 文章更新</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

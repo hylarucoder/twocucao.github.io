@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="本文是《提升你的 Python 项目代码健壮性和性能》系列的第七篇文章。 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性第二篇，讲的是 如何通过测试提升 Python 代码的健壮性第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能第五篇，讲的是 为你的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何写出整洁的 Python 代码 中">
+<meta property="og:url" content="http://twocucao.xyz/2018/08/29/2019-clean-code-part02/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="本文是《提升你的 Python 项目代码健壮性和性能》系列的第七篇文章。 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性第二篇，讲的是 如何通过测试提升 Python 代码的健壮性第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能第五篇，讲的是 为你的">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-08-29T00:35:21.000Z">
+<meta property="article:modified_time" content="2020-11-29T15:40:50.729Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="后端开发">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2018/08/29/2019-clean-code-part02/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>如何写出整洁的 Python 代码 中 | MG的编程小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/08/29/2019-clean-code-part02/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何写出整洁的 Python 代码 中
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-08-29 08:35:21" itemprop="dateCreated datePublished" datetime="2018-08-29T08:35:21+08:00">2018-08-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2020-11-29 23:40:50" itemprop="dateModified" datetime="2020-11-29T23:40:50+08:00">2020-11-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文是《提升你的 Python 项目代码健壮性和性能》系列的第七篇文章。</p>
+<p>第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性<br>第二篇，讲的是 如何通过测试提升 Python 代码的健壮性<br>第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性<br>第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能<br>第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统<br>第六篇，《如何写出整洁的代码 上》 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码</p>
+<p>目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">▼ 如何写出整洁的 Python 代码 中 : section</span><br><span class="line">    0x00 前言 : section</span><br><span class="line">    0x01 避免过深的缩进 : section</span><br><span class="line">    0x02 使用异常 : section</span><br><span class="line">    0x03 类与 OOP : section</span><br><span class="line">  ▼ 0x04 SOLID 设计原则 : section</span><br><span class="line">      单一职责 : section</span><br><span class="line">      开闭原则 : section</span><br><span class="line">      里氏替换原则 : section</span><br><span class="line">      接口隔离原则 : section</span><br><span class="line">      依赖反转原则 : section</span><br><span class="line">    0x05 边界和第三方库的挑选 : section</span><br><span class="line">    0xDD 结论 : section</span><br><span class="line">    0xEE 参考 : section</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>上篇地址在这里 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/59510165">https://zhuanlan.zhihu.com/p/59510165</a></p>
+<p>还是通过代码上的一些小技巧和一些原则来让代码更加整齐。</p>
+<h2 id="0x01-避免过深的缩进"><a href="#0x01-避免过深的缩进" class="headerlink" title="0x01 避免过深的缩进"></a>0x01 避免过深的缩进</h2><p>场景，你在做一个 B2B2C 的商城系统。商家的活动需要在某些比较严格的条件下才能参与（假设有五个字段吧）。</p>
+<p>如果不动手捋一捋判断的路径，上来就动手写代码，则很容易写出如下的代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">if cond1:</span><br><span class="line">	dosomething()</span><br><span class="line">	if cond2:</span><br><span class="line">		dosomething()</span><br><span class="line">		if cond3 and cond4:</span><br><span class="line">			dosomething()</span><br><span class="line">			else:</span><br><span class="line">				dosomething()</span><br><span class="line">			if condx:</span><br><span class="line">			dosomething()</span><br><span class="line">else:</span><br><span class="line">	if cond2:</span><br><span class="line">		dosomething()</span><br><span class="line">		if cond3 and cond4:</span><br><span class="line">			dosomething()</span><br><span class="line">			if condx:</span><br><span class="line">			dosomething()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>想想你这个时候才判断了 5 个字段… 如果想都不想就开始写这种代码的话，就做好修改的时候崩溃吧。</p>
+<p>当你写出 if 超过两层缩进的时候，代码的复杂度就值得注意了。</p>
+<p>这个时候，应该火速的拿出纸和笔出来，快速的捋一捋所有的变量和情况，</p>
+<p>『以减少缩进为目标』</p>
+<p>能提前判断掉的就提前判断掉</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 能提前判断掉的就提前判断掉</span><br><span class="line">if cond2:</span><br><span class="line">	raise AlreadPaid():</span><br><span class="line">if cond3:</span><br><span class="line">	raise ActivityExhaused():</span><br><span class="line">if cond4:</span><br><span class="line">	raise ActivityCancel():</span><br></pre></td></tr></table></figure>
+
+<p>代码的缩进越浅，代表着代码越容易维护，用学长的话说，老手才知道『九浅一深』的奥妙……</p>
+<h2 id="0x02-使用异常"><a href="#0x02-使用异常" class="headerlink" title="0x02 使用异常"></a>0x02 使用异常</h2><p>使用异常而不是状态码，这点重点点名一下 Go 语言的状态码….</p>
+<p>遇到异常返回状态码写业务的话，很容易抓狂。如果你在深层抛出一个错误，使用状态码的话，必须一层一层的返回状态码。</p>
+<ol>
+<li>遇到问题，抛出异常，raise ApiException 。就可以在上层捕获错误进行处理。这样的<br>  话，就没有必要每次都在函数签名上返回状态码了。</li>
+<li>让代码更佳清晰的是 try except finally 机制。try 块定义了一个范围，try 中的结果可以看执行中有没有遇到一些奇奇怪怪的情况，然后把 try 块里面的东西取消掉。甚至抛出一个错误，丢到 catch 里面执行。这种接近于事务的做法是状态码机制没法比的。</li>
+</ol>
+<p>拿第一小节的代码来说，可以在最深层抛出异常，然后在最外面统一处理异常，有些异常可能只是报 apiexception, 有的异常可能还要针对情况打日志，或者有的情况是你在写代码的时候没有考虑到的情况，都可以进行各种灵活的处理。</p>
+<p>这样的话，代码就非常的清晰了。</p>
+<h2 id="0x03-类与-OOP"><a href="#0x03-类与-OOP" class="headerlink" title="0x03 类与 OOP"></a>0x03 类与 OOP</h2><p>注意！</p>
+<ol>
+<li>OOP 语言让封装 / 继承 / 多态更佳方便快捷安全。</li>
+<li>封装 / 多态 / 继承 并不是 OOP 对象的专利，实际上利用指针 C 也可以写出来具备封装 / 继承 / 多态的程序。只是相对危险一些罢了。</li>
+</ol>
+<p>比如，你有这么个场景，计算购物车里面东西的价格：</p>
+<ol>
+<li>面向过程思考方式，用户我选了一些商品，然后把商品放到购物车里，然后我算一下物品价格。</li>
+<li>OOP 思考方式，用户我需要一个购物车，帮我把这些物品放到购物车里面，购物车告诉我价格。这个时候，你封装一个购物车类会比较合适。</li>
+</ol>
+<p>你这个时候就问了，这不就是一个 calcPrice(cart) 和 cart.calcPrice 的区别么？</p>
+<p>区别在哪？</p>
+<ol>
+<li>『真实世界建模』购物车的是一个对真实世界的建模。</li>
+<li>『职责转移』。计算价格这件事情就是『购物车』这个 Object 的事情了。</li>
+<li>封装性：我不需要维护一个物品集合。都交给购物车来做这件事情。</li>
+</ol>
+<p>什么情况下需要类，用 OOP 的方式思考是合理的，明显的，清晰的，就可以了。</p>
+<p>当然，采用了 OOP, 可以更快的结合继承 / 多态来完成『依赖反转』。</p>
+<p>这个名词听起来不明觉厉，但其实很简单。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># base.py</span><br><span class="line">class Human:</span><br><span class="line">	def perform(self):</span><br><span class="line">		pass</span><br><span class="line"></span><br><span class="line"># foo&#x2F;man.py</span><br><span class="line">class Man(Human):</span><br><span class="line">	def perform(self):</span><br><span class="line">		print(&quot;大哥，真不会唱歌&quot;)</span><br><span class="line"></span><br><span class="line"># bar&#x2F;woman.py</span><br><span class="line">class Woman(Human):</span><br><span class="line">	def perform(self):</span><br><span class="line">		print(&quot;大哥，真不会跳舞&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>如果老大哥让你跳舞，就必须要把你的代码给 import 到老大哥的源代码里面。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># bar&#x2F;bigbother.py</span><br><span class="line">from foo.man import man_instance</span><br><span class="line">from bar.woman import woman_instance</span><br><span class="line"></span><br><span class="line">man_instance.perform()</span><br><span class="line">woman_instance.perform()</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>这样会带来一个问题，产生了源代码上面的依赖。这样带来结果是老大哥依赖于几个具体 man 和 woman, 这是不合理的，应该是铁打的老大哥，流水的 man 和 woman</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 源码不依赖 bigbother.py</span><br><span class="line"></span><br><span class="line">def order_perform(h):</span><br><span class="line">	h.perform()</span><br><span class="line"></span><br><span class="line">humans &#x3D; scan_humans()</span><br><span class="line"></span><br><span class="line">for human in humans:</span><br><span class="line">	order_perform(human)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>利用多态，则将这个问题完美的解决了。当然，考虑到动态语言，本身就可以很『多态』…. 你甚至<br>都不需要继承了…</p>
+<p>策略层与实现完美分离。甚至可以分开进行独立部署。</p>
+<p>结论：</p>
+<ol>
+<li>对真实世界的建模</li>
+<li>代码清晰为主，如果能用简单函数解决的事情，就不要封装成类。</li>
+<li>以多态为手段对源代码中的依赖关系进行控制的能力。借此，可以构建<br>  出插件式架构，让高层策略性组件和底层实现性组件分离。底层实现可以编译成插件，实<br>  现独立于高层组件的开发和部署。</li>
+</ol>
+<h2 id="0x04-SOLID-设计原则"><a href="#0x04-SOLID-设计原则" class="headerlink" title="0x04 SOLID 设计原则"></a>0x04 SOLID 设计原则</h2><ul>
+<li>SRP 单一职责 原则</li>
+<li>OCP 开闭原则</li>
+<li>LSP 里式替换原则</li>
+<li>ISP 接口隔离原则</li>
+<li>DIP 依赖反转原则</li>
+</ul>
+<p>原则是原则，是追求，是启迪思路的思想，但也要随机应变。</p>
+<ol>
+<li>假如你不了解业务，强行用依赖反转原则写了抽象层，后面 PM 过来说，我有这么一个思路。那么，你的代码写起来就很痛苦了。</li>
+<li>假如你不了解场景，在使用单一职责的时候，往往就会业务区分不明确。</li>
+</ol>
+<p>在现实场景中，往往是先保持足够的清晰简单的代码，随着代码的演进，用上面的原则再次思<br>考一下可不可以做的更好。</p>
+<h3 id="单一职责"><a href="#单一职责" class="headerlink" title="单一职责"></a>单一职责</h3><p>比如说，单一职责原则听起来很简单，一个函数只完成一个功能（事情）。</p>
+<p>但现实情况是这种往往只是一个追求，站在不同的角度有不同的看法：</p>
+<p>比如说，</p>
+<ol>
+<li>你说，你今天想学习。这是一件事情。</li>
+<li>你说，你今天上午想学习数学。这是一件事情。</li>
+<li>你说，你今天上午想学习高数第三章，接着做完笔记，回头抽卡默背一遍公式。这是三<br>  件事情，并且也可以是一件事情。</li>
+</ol>
+<p>你的拆分粒度决定了一件事情的指代范围。</p>
+<h3 id="开闭原则"><a href="#开闭原则" class="headerlink" title="开闭原则"></a>开闭原则</h3><p>开闭原则强调的事情是计算机系统应该在不需要修改的前提下被扩展。将系统划分为一系列组件，并且将这些组件的依赖关系按照层次结构进行组织，使得高阶组件不会因为低阶组件被修改而受到影响</p>
+<h3 id="里氏替换原则"><a href="#里氏替换原则" class="headerlink" title="里氏替换原则"></a>里氏替换原则</h3><p>在不改变软件行为的基础上，衍生类可以替换掉基类</p>
+<h3 id="接口隔离原则"><a href="#接口隔离原则" class="headerlink" title="接口隔离原则"></a>接口隔离原则</h3><p>任何层次的软件设计如果依赖了它并不需要的东西的时候，就会带来意料之外的麻烦。</p>
+<h3 id="依赖反转原则"><a href="#依赖反转原则" class="headerlink" title="依赖反转原则"></a>依赖反转原则</h3><p>什么叫做依赖反转？</p>
+<p>依赖反转就是设计软件的时候设计稳定的抽象层。针对抽象的东西编程。</p>
+<h2 id="0x05-边界和第三方库的挑选"><a href="#0x05-边界和第三方库的挑选" class="headerlink" title="0x05 边界和第三方库的挑选"></a>0x05 边界和第三方库的挑选</h2><p>在软件包膨胀的今天，应该如何挑选第三方库呢？</p>
+<p>我给出几个挑选的原则。</p>
+<ol>
+<li>靠谱依赖原则：如果 flask 是靠谱的，那么，flask 依赖的 click 包，werkzeuk 包一定是靠谱的。</li>
+<li>浓缩精华原则：如果一个库依赖少，代码清晰简单，那么可以采用。</li>
+<li>活跃维护原则：如果维护很活跃，证明前景相对较好。</li>
+<li>多人维护原则：如果是多人维护，则不会因一个人的喜好和个人状态而断了维护。别问我怎么知道的，都是泪</li>
+</ol>
+<p>挑选有这个原则，那么，使用有什么原则么？</p>
+<p>就一条，尽量减少依赖库对你现有代码的侵入性。</p>
+<p>比如，你用了 cryptography 之后，应该封装一个接口用来调用 cryptography 防止以后这个项目挂了，这样你可以只修改该接口，和 pycrypto 对接。</p>
+<p>这和里氏替换的思路也是比较类似的</p>
+<h2 id="0xDD-结论"><a href="#0xDD-结论" class="headerlink" title="0xDD 结论"></a>0xDD 结论</h2><blockquote>
+<p>所谓『不能谋万世者不能谋一时，不能谋全局者不能谋一隅』</p>
+</blockquote>
+<p>在软件开发中，其实最重要的过程是梳理流程，流程梳理的足够清楚，代码就足够简单。</p>
+<p>不管是避免深缩进，还是使用异常，还是 Solid 原则。都是建立在全局观足够高，对当前的流程非常熟悉的基础上的。</p>
+<p>当然，考虑到需求变更的不确定性，代码还是足够简单清晰为上策。</p>
+<h2 id="0xEE-参考"><a href="#0xEE-参考" class="headerlink" title="0xEE 参考"></a>0xEE 参考</h2><ul>
+<li>《架构整洁之道》</li>
+<li>《代码整洁之道》</li>
+<li>Photo by Joseph Kellner on Unsplash</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="tag"># 后端开发</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/08/28/ShellCheatSheet/" rel="prev" title="Shell CheatSheet">
+      <i class="fa fa-chevron-left"></i> Shell CheatSheet
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/04/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" rel="next" title="Thinking In Web Developing">
+      Thinking In Web Developing <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E9%81%BF%E5%85%8D%E8%BF%87%E6%B7%B1%E7%9A%84%E7%BC%A9%E8%BF%9B"><span class="nav-number">2.</span> <span class="nav-text">0x01 避免过深的缩进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E4%BD%BF%E7%94%A8%E5%BC%82%E5%B8%B8"><span class="nav-number">3.</span> <span class="nav-text">0x02 使用异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E7%B1%BB%E4%B8%8E-OOP"><span class="nav-number">4.</span> <span class="nav-text">0x03 类与 OOP</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-SOLID-%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99"><span class="nav-number">5.</span> <span class="nav-text">0x04 SOLID 设计原则</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%95%E4%B8%80%E8%81%8C%E8%B4%A3"><span class="nav-number">5.1.</span> <span class="nav-text">单一职责</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E9%97%AD%E5%8E%9F%E5%88%99"><span class="nav-number">5.2.</span> <span class="nav-text">开闭原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%87%8C%E6%B0%8F%E6%9B%BF%E6%8D%A2%E5%8E%9F%E5%88%99"><span class="nav-number">5.3.</span> <span class="nav-text">里氏替换原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8E%A5%E5%8F%A3%E9%9A%94%E7%A6%BB%E5%8E%9F%E5%88%99"><span class="nav-number">5.4.</span> <span class="nav-text">接口隔离原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%9D%E8%B5%96%E5%8F%8D%E8%BD%AC%E5%8E%9F%E5%88%99"><span class="nav-number">5.5.</span> <span class="nav-text">依赖反转原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-%E8%BE%B9%E7%95%8C%E5%92%8C%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E7%9A%84%E6%8C%91%E9%80%89"><span class="nav-number">6.</span> <span class="nav-text">0x05 边界和第三方库的挑选</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xDD-%E7%BB%93%E8%AE%BA"><span class="nav-number">7.</span> <span class="nav-text">0xDD 结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-%E5%8F%82%E8%80%83"><span class="nav-number">8.</span> <span class="nav-text">0xEE 参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言一不小心写成上下两篇了。真是有些过意不去。毕竟，写的太多就少了一部分读者（少了一部分赞额）. 之所以拆成上下两篇，主要是因为在研究的过程中越发感到在一篇中强行植入那么多的东西，自己的文章结构组织起来有些困难，对读者来说，也是不容易理解。那倒不如拆分成两部分。 任务分解我的需求如此简单，统计 Mac 上面一天的运行情况，然后在每天的下午六点把统计的情况汇总通过 Email 发送给我。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Python 监控 Mac 一天的运行（上）">
+<meta property="og:url" content="http://twocucao.xyz/2016/04/15/MacPythonMonitorPart1/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="前言一不小心写成上下两篇了。真是有些过意不去。毕竟，写的太多就少了一部分读者（少了一部分赞额）. 之所以拆成上下两篇，主要是因为在研究的过程中越发感到在一篇中强行植入那么多的东西，自己的文章结构组织起来有些困难，对读者来说，也是不容易理解。那倒不如拆分成两部分。 任务分解我的需求如此简单，统计 Mac 上面一天的运行情况，然后在每天的下午六点把统计的情况汇总通过 Email 发送给我。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-04-15T10:50:23.000Z">
+<meta property="article:modified_time" content="2018-01-30T08:49:16.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="编程工具">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2016/04/15/MacPythonMonitorPart1/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>使用 Python 监控 Mac 一天的运行（上） | MG的编程小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/04/15/MacPythonMonitorPart1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 Python 监控 Mac 一天的运行（上）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-04-15 18:50:23" itemprop="dateCreated datePublished" datetime="2016-04-15T18:50:23+08:00">2016-04-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-30 16:49:16" itemprop="dateModified" datetime="2018-01-30T16:49:16+08:00">2018-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">Python 黑魔法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一不小心写成上下两篇了。真是有些过意不去。毕竟，写的太多就少了一部分读者（少了一部分赞额）.</p>
+<p>之所以拆成上下两篇，主要是因为在研究的过程中越发感到在一篇中强行植入那么多的东西，自己的文章结构组织起来有些困难，对读者来说，也是不容易理解。那倒不如拆分成两部分。</p>
+<h2 id="任务分解"><a href="#任务分解" class="headerlink" title="任务分解"></a>任务分解</h2><p>我的需求如此简单，统计 Mac 上面一天的运行情况，然后在每天的下午六点把统计的情况汇总通过 Email 发送给我。</p>
+<a id="more"></a>
+
+<p>用更加具体来说，就是，</p>
+<blockquote>
+<p>隔一段时间使用 Python 脚本，统计当前电脑的运行情况，CPU, 内存，硬盘，网络使用状况，然后在每天的下午六点通过 Email 把统计情况汇总，并且必须要有监控图，并通过 Email 发送给我的邮箱。</p>
+</blockquote>
+<p>初看这玩意是挺简单的，但是自己动手写了以后就知道，其实还是稍微有些费时间的。</p>
+<p>比如：</p>
+<ul>
+<li>linux 下面定时执行一个脚本只需要 crontab 或者 at 以下就好了.mac 上是是什么？怎么运行一个任务？</li>
+<li>统计的数据存哪儿？用什么存？</li>
+<li>表格绘图怎么画出来？</li>
+<li>Email 怎么发送，如果要发送好看一点点的 Email 怎么办？</li>
+</ul>
+<p>既然那么多，那就分成两篇，一篇用来介绍 Mac 上面的定时任务（简单，短文）, 另一篇用 Python 来监控 Mac 电脑，并持久化监控数据，绘图，汇总，发送 email.(稍微复杂一点，带图长文）</p>
+<ul>
+<li>上篇讲在 Mac 上如何让一个脚本定时运行。</li>
+<li>下篇讲如何写一个 Python 监控脚本。</li>
+</ul>
+<h2 id="本文结构"><a href="#本文结构" class="headerlink" title="本文结构"></a>本文结构</h2><ul>
+<li>前言</li>
+<li>本文结构</li>
+<li>为什么需要定时任务？</li>
+<li>Mac 上面如何进行定时任务。</li>
+<li>疑问和解答</li>
+<li>扩展阅读</li>
+</ul>
+<h2 id="为什么需要定时任务？"><a href="#为什么需要定时任务？" class="headerlink" title="为什么需要定时任务？"></a>为什么需要定时任务？</h2><p>所谓的定时任务，分为两种：</p>
+<ol>
+<li>指定时间执行的程序</li>
+<li>每隔一段时间执行的程序</li>
+</ol>
+<p>执行的内容，通常情况下和要做什么事情有关，但是从内容上，分为两种：</p>
+<ol>
+<li>任务之间的数据没有什么关联的</li>
+</ol>
+<ul>
+<li>比如，你想去抓一些数据（迅雷会员账号）但是懒得自己动手，于是就写了一个小脚本，放在每天早上的 8 点钟，去抓来账号。</li>
+</ul>
+<ol start="2">
+<li>任务之间的数据有关联的，甚至某种程度上可以绘制图像。</li>
+</ol>
+<ul>
+<li>比如，下一篇要说的使用 Python 监控自己的电脑情况，e.g: 流量。隔一段时间就查看一下自己的电脑运行情况，把情况存下来。甚至，在某个时间点，把结果汇总发给某个人。</li>
+</ul>
+<h2 id="Mac-上面如何进行定时任务。"><a href="#Mac-上面如何进行定时任务。" class="headerlink" title="Mac 上面如何进行定时任务。"></a>Mac 上面如何进行定时任务。</h2><ul>
+<li>首先，你要写一个任务。</li>
+<li>其次，让这个任务定时执行。</li>
+</ul>
+<p>好，简单的写一个任务 get_time.sh.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line">date &gt;&gt; /Users/twocucao/Downloads/dates.txt</span><br></pre></td></tr></table></figure>
+<p>接着加上可执行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chmod a+x get_time.sh</span><br></pre></td></tr></table></figure>
+
+<p>那么，怎么让 Mac 通过 launchd 隔一段时间就执行脚本呢？</p>
+<p>创建一个特殊的 xml 文件叫做 com.twocucao.apple.getdates.plist, 给你所要运行的命令建立一个进程。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">plist</span> <span class="meta-keyword">PUBLIC</span> <span class="meta-string">&quot;-//Apple//DTD PLIST 1.0//EN&quot;</span> <span class="meta-string">&quot;http://www.apple.com/DTDs/PropertyList-1.0.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">&quot;1.0&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>Label<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">string</span>&gt;</span>com.twocucao.apple.getdates<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>ProgramArguments<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">array</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">string</span>&gt;</span>/Users/twocucao/OhMyCode/Bash/get_time.sh<span class="tag">&lt;/<span class="name">string</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">array</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">key</span>&gt;</span>StartInterval<span class="tag">&lt;/<span class="name">key</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">integer</span>&gt;</span>10<span class="tag">&lt;/<span class="name">integer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>对于这个 com.twocucao.apple.getdates 随你命名的，保证唯一就好。通常情况下选择反转域名（和 Java 编程类似）, 其他的，依照你的脚本位置和间隔时间修改。</p>
+<p>拷贝到 LaunchDaemons, 加载定时工作，然后检查是否加载成功</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cp com.twocucao.apple.getdates.plist /Library/LaunchDaemons</span><br><span class="line">launchctl load -w /Library/LaunchDaemons/com.twocucao.apple.getdates.plist</span><br><span class="line"><span class="comment">#列出定时任务，并且筛选一下。确认是否加载成功。</span></span><br><span class="line">launchctl list | grep twocucao</span><br></pre></td></tr></table></figure>
+
+<p>由于这个脚本实在是太弱智了仅仅是为了演示，所以，记得把他给卸载，删除</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">launchctl unload -w /Library/LaunchDaemons/com.twocucao.apple.getdates.plist</span><br><span class="line">rm /Library/LaunchDaemons/com.twocucao.apple.getdates.plist</span><br></pre></td></tr></table></figure>
+
+<h2 id="疑问和解答"><a href="#疑问和解答" class="headerlink" title="疑问和解答"></a>疑问和解答</h2><ul>
+<li>问：为什么要把脚本的配置放在 /Library/LaunchAgents 呢？</li>
+<li>答：当然，你可以拷贝到其他的地方，<ul>
+<li>如果你的需求是该用户登录时候执行的话，那么拷贝到：~/Library/LaunchAgents, 这叫做 User Agents.</li>
+<li>如果你的需求是该用户登录时候执行的话，那么拷贝到：/Library/LaunchAgents, 这叫做 Global Agents</li>
+<li>如果你的需求是让 Root 用户或者指定用户登录时候执行的话，那么拷贝到：/Library/LaunchDaemons , 这叫做 Global Daemons</li>
+<li>如果你的需求是用户登录执行，那么拷贝到：/System/Library/LaunchAgents ,System Agents</li>
+<li>如果你的需求是让 Root 用户或者指定用户登录时候执行的话，那么拷贝到：/System/Library/LaunchDaemons, 这叫做 System Daemons.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>user-agents 是级别最低，其他所需权限依次递增。</p>
+</blockquote>
+<ul>
+<li><p>问：怎么检查任务执行结果？</p>
+</li>
+<li><p>答：tail -f /Users/twocucao/Downloads/dates.txt</p>
+</li>
+<li><p>问：如何确定 launchd 存在这个任务</p>
+</li>
+<li><p>答：launchctl list</p>
+</li>
+<li><p>问：既然是隔一段时间就能执行脚本，那么，我可以先用简单的 shell 脚本，配置好相关执行信息，让他定时执行，接着修改 shell 脚本执行新的逻辑么？</p>
+</li>
+<li><p>答：可以。</p>
+</li>
+<li><p>问：bash 命令监控多么方便，为何下一篇要使用 Python 作为监控工具。</p>
+</li>
+<li><p>答：shell 命令编写代码不直观，编写效率低.Python 有很好的第三方库可以使用。</p>
+</li>
+</ul>
+<h2 id="扩展阅读（精选优质资料）"><a href="#扩展阅读（精选优质资料）" class="headerlink" title="扩展阅读（精选优质资料）"></a>扩展阅读（精选优质资料）</h2><ol>
+<li>一个关于 Linux 命令的各种奇技的网站 <a target="_blank" rel="noopener" href="http://www.commandlinefu.com/commands/browse">http://www.commandlinefu.com/commands/browse</a></li>
+<li>Linux 工具快速教程 <a target="_blank" rel="noopener" href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/index.html">http://linuxtools-rst.readthedocs.org/zh_CN/latest/index.html</a></li>
+<li>关于 launchd 的参考链接，</li>
+</ol>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://launchd.info/">http://launchd.info/</a> <a target="_blank" rel="noopener" href="http://www.splinter.com.au/using-launchd-to-run-a-script-every-5-mins-on/">http://www.splinter.com.au/using-launchd-to-run-a-script-every-5-mins-on/</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html">https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html</a></li>
+<li><a target="_blank" rel="noopener" href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/index.html">http://linuxtools-rst.readthedocs.org/zh_CN/latest/index.html</a></li>
+</ul>
+<ol start="4">
+<li>命令行的艺术  <a target="_blank" rel="noopener" href="https://github.com/jlevy/the-art-of-command-line">https://github.com/jlevy/the-art-of-command-line</a></li>
+</ol>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2016-12-05</strong> 重新排版。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/" rel="tag"># 编程工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/04/02/MacRemoteControl/" rel="prev" title="Mac 上面的远程控制 Teamviewer">
+      <i class="fa fa-chevron-left"></i> Mac 上面的远程控制 Teamviewer
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/07/01/MacCheatSheet/" rel="next" title="Mac Cheatsheet">
+      Mac Cheatsheet <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%BB%E5%8A%A1%E5%88%86%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">任务分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%BB%93%E6%9E%84"><span class="nav-number">3.</span> <span class="nav-text">本文结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">为什么需要定时任务？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mac-%E4%B8%8A%E9%9D%A2%E5%A6%82%E4%BD%95%E8%BF%9B%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1%E3%80%82"><span class="nav-number">5.</span> <span class="nav-text">Mac 上面如何进行定时任务。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%96%91%E9%97%AE%E5%92%8C%E8%A7%A3%E7%AD%94"><span class="nav-number">6.</span> <span class="nav-text">疑问和解答</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%A9%E5%B1%95%E9%98%85%E8%AF%BB%EF%BC%88%E7%B2%BE%E9%80%89%E4%BC%98%E8%B4%A8%E8%B5%84%E6%96%99%EF%BC%89"><span class="nav-number">7.</span> <span class="nav-text">扩展阅读（精选优质资料）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

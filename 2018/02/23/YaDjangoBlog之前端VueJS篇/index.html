@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0x00 前言本文是 Django 全栈开发教程的第四篇 目录在这里，已经更新的文章如下  Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇 Django 全栈开发教程 - YaDjangoBlog 的开发环境配置  本文需要完成三件事情：  第一件事情，介绍为什么选择 VueJS？ 第二件事情，介绍 Vue 项目的一些注意点。 第三件事情，蜻蜓点水搬的带">
+<meta property="og:type" content="article">
+<meta property="og:title" content="YaDjangoBlog 之 前端 VueJS 篇">
+<meta property="og:url" content="http://twocucao.xyz/2018/02/23/YaDjangoBlog%E4%B9%8B%E5%89%8D%E7%AB%AFVueJS%E7%AF%87/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言本文是 Django 全栈开发教程的第四篇 目录在这里，已经更新的文章如下  Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇 Django 全栈开发教程 - YaDjangoBlog 的开发环境配置  本文需要完成三件事情：  第一件事情，介绍为什么选择 VueJS？ 第二件事情，介绍 Vue 项目的一些注意点。 第三件事情，蜻蜓点水搬的带">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-02-23T02:13:30.000Z">
+<meta property="article:modified_time" content="2018-03-18T03:20:11.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="Django">
+<meta property="article:tag" content="VueJS">
+<meta property="article:tag" content="全栈开发">
+<meta property="article:tag" content="RestAPI">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2018/02/23/YaDjangoBlog%E4%B9%8B%E5%89%8D%E7%AB%AFVueJS%E7%AF%87/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>YaDjangoBlog 之 前端 VueJS 篇 | MG的编程小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/23/YaDjangoBlog%E4%B9%8B%E5%89%8D%E7%AB%AFVueJS%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          YaDjangoBlog 之 前端 VueJS 篇
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-02-23 10:13:30" itemprop="dateCreated datePublished" datetime="2018-02-23T10:13:30+08:00">2018-02-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-03-18 11:20:11" itemprop="dateModified" datetime="2018-03-18T11:20:11+08:00">2018-03-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文是 Django 全栈开发教程的第四篇</p>
+<p>目录在这里，已经更新的文章如下</p>
+<ul>
+<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
+</ul>
+<p>本文需要完成三件事情：</p>
+<ul>
+<li>第一件事情，介绍为什么选择 VueJS？</li>
+<li>第二件事情，介绍 Vue 项目的一些注意点。</li>
+<li>第三件事情，蜻蜓点水搬的带大家过一编，YaDjangoBlog 前端的项目结构，静态资源管理，路由以及组件。</li>
+</ul>
+<h2 id="0x01-为什么是-VueJS"><a href="#0x01-为什么是-VueJS" class="headerlink" title="0x01 为什么是 VueJS"></a>0x01 为什么是 VueJS</h2><p>国产框架 + 语法简洁是我入坑 VueJS 初衷。</p>
+<p>后来却是 Vue 的丰富的生态和简洁的语法吸引了继续用下去。</p>
+<p>这里要感谢为 VueJS 持续贡献代码的人，从 Vue 本身，到 VueCLI, 到 Router, 到 VueX, 如果没有那么多人为之贡献代码，可能今天这一小节就变成了，『为什么是 React 了』逃。</p>
+<p>Vue 自称为 Vue 渐进式 JavaScript 框架。</p>
+<p>什么是渐进式？</p>
+<p>就是你可以逐步按照 Vue 的方式逐渐引入一些 Vue 的组件到项目中。没有必要上来就是 Vue 全家桶，依据场景逐步引入。</p>
+<p>参考链接 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/51907207">https://www.zhihu.com/question/51907207</a></p>
+<p>然而，依据我的经验，vue 全家桶用起来还是很舒服的。这里必须要感谢 Vue 社区。</p>
+<p>模板语法，数据驱动，双向绑定。写起代码来简直就是一个字，爽。</p>
+<h2 id="0x02-Vue-项目的一些注意点"><a href="#0x02-Vue-项目的一些注意点" class="headerlink" title="0x02 Vue 项目的一些注意点"></a>0x02 Vue 项目的一些注意点</h2><p>从项目角度，我们想想前端项目有哪些地方是需要注意的：</p>
+<ol>
+<li>开发环境和线上环境区分</li>
+<li>前端资源打包</li>
+</ol>
+<ul>
+<li>Vue 项目资源打包</li>
+<li>DLL 打包</li>
+<li>字体文件打包</li>
+</ul>
+<ol start="3">
+<li>CSS/JS 如何管理</li>
+<li>有哪些必要的依赖，如何引入第三方库</li>
+<li>有哪些页面级组件，有哪些小组件？应该安排这些组件？组件与组件应该怎么通讯？</li>
+<li>路由怎么管理</li>
+<li>状态怎么管理</li>
+<li>登录，鉴权怎么做</li>
+</ol>
+<p>限于篇幅，我就不一一讲解了。挑在 YaDjangoBlog 中使用到的技术简单介绍一下。</p>
+<p>再次感谢 Vue 社区出品的 VueCLI 以及 Webpack 模板。</p>
+<p>下面依次介绍：</p>
+<ol>
+<li>项目结构</li>
+<li>静态资源管理</li>
+<li>路由</li>
+<li>组件</li>
+</ol>
+<h2 id="0x03-项目结构"><a href="#0x03-项目结构" class="headerlink" title="0x03 项目结构"></a>0x03 项目结构</h2><p>首先，YaDjangoBlog 文件的前端目录如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">.</span><br><span class="line">├── README.md</span><br><span class="line">├── build</span><br><span class="line">│   ├── build.js</span><br><span class="line">│   ├── build_iconfont.js <span class="comment"># 构建 iconfont 脚本</span></span><br><span class="line">│   ├── check-versions.js</span><br><span class="line">│   ├── logo.png</span><br><span class="line">│   ├── utils.js</span><br><span class="line">│   ├── vue-loader.conf.js</span><br><span class="line">│   ├── webpack.base.conf.js</span><br><span class="line">│   ├── webpack.dev.conf.js <span class="comment"># 增加了 AutoDllPlugin 用于自动打包 DLL</span></span><br><span class="line">│   └── webpack.prod.conf.js</span><br><span class="line">├── config</span><br><span class="line">│   ├── dev.env.js <span class="comment"># 可以在这里添加开发环境的环境变脸</span></span><br><span class="line">│   ├── index.js</span><br><span class="line">│   ├── prod.env.js</span><br><span class="line">│   └── test.env.js</span><br><span class="line">├── extra</span><br><span class="line">│   └── svg-icon <span class="comment"># 这里存放需要生成 iconfont 的字体文件。</span></span><br><span class="line">├── index.html</span><br><span class="line">├── package.json <span class="comment"># 这里添加了一些构建脚本</span></span><br><span class="line">├── packages</span><br><span class="line">│   └── theme-future <span class="comment"># 注意，这里是另一个子项目，使用 Gulp 构建的纯 CSS 子项目。</span></span><br><span class="line">├── src</span><br><span class="line">│   ├── App.vue</span><br><span class="line">│   ├── api <span class="comment"># 对 axios 进行初步封装</span></span><br><span class="line">│   ├── assets <span class="comment"># 从使用 Gulp 生成的 CSS 可以放在这里。</span></span><br><span class="line">│   ├── components <span class="comment"># 跨页面的组件放在这里</span></span><br><span class="line">│   ├── directives <span class="comment"># 指令</span></span><br><span class="line">│   ├── filters    <span class="comment"># 过滤器</span></span><br><span class="line">│   ├── main.js    <span class="comment"># 初始化 Vue 实例</span></span><br><span class="line">│   ├── pages      <span class="comment"># 页面</span></span><br><span class="line">│   ├── router     <span class="comment"># 路由</span></span><br><span class="line">│   ├── store      <span class="comment"># vuex</span></span><br><span class="line">│   └── utils      <span class="comment"># 常用工具类</span></span><br><span class="line">├── static</span><br><span class="line">│   ├── hightlight <span class="comment"># hightlight 脚本</span></span><br><span class="line">│   ├── iconfont   <span class="comment"># 本地构建的 iconfont</span></span><br><span class="line">│   ├── images</span><br><span class="line">│   └── js</span><br><span class="line">├── <span class="built_in">test</span>           <span class="comment"># 没写测试，大家开源项目不要学我.... 逃</span></span><br><span class="line">│   ├── e2e</span><br><span class="line">│   └── unit</span><br><span class="line">└── yarn.lock</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x04-静态资源管理"><a href="#0x04-静态资源管理" class="headerlink" title="0x04 静态资源管理"></a>0x04 静态资源管理</h2><p>静态资源管理，主要涉及到 JS/CSS/ 图片 / 字体</p>
+<p>首先，由于使用了 VueCli 的模板，所以大可以按照 VueCli 提供的写法来写。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Header</span>&gt;</span><span class="tag">&lt;/<span class="name">Header</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">router-view</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">Footer</span>&gt;</span><span class="tag">&lt;/<span class="name">Footer</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">  name: <span class="string">&#x27;app&#x27;</span>,</span></span><br><span class="line">  components: &#123;</span><br><span class="line"><span class="javascript">    Header: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;./pages/commons/Header.vue&#x27;</span>),</span></span><br><span class="line"><span class="javascript">    Footer: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;./pages/commons/Footer.vue&#x27;</span>),</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">&quot;scss&quot;</span>&gt;</span></span><br><span class="line">  $primary-color: #37b24d;</span><br><span class="line">  $dark-color: #2b5732;</span><br><span class="line">  $body-bg: #f9f9f9;</span><br><span class="line"><span class="css">  <span class="keyword">@import</span> <span class="string">&#x27;~spectre.css/src/spectre-icons.scss&#x27;</span>;</span></span><br><span class="line"><span class="css">  <span class="keyword">@import</span> <span class="string">&#x27;~spectre.css/src/spectre.scss&#x27;</span>;</span></span><br><span class="line"><span class="css">  <span class="keyword">@import</span> <span class="string">&#x27;~spectre.css/src/spectre-exp.scss&#x27;</span>;</span></span><br><span class="line"><span class="css">  <span class="keyword">@import</span> <span class="string">&#x27;./assets/theme-future/index.css&#x27;</span>;</span></span><br><span class="line">  a &#123;</span><br><span class="line"><span class="css">    &amp;<span class="selector-pseudo">:focus</span>,</span></span><br><span class="line"><span class="css">    &amp;<span class="selector-pseudo">:hover</span>,</span></span><br><span class="line"><span class="css">    &amp;<span class="selector-pseudo">:active</span>,</span></span><br><span class="line"><span class="css">    &amp;<span class="selector-class">.active</span> &#123;</span></span><br><span class="line">      text-decoration: none;</span><br><span class="line">      box-shadow: 0 0 0 0;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="css">  <span class="selector-id">#app</span> &#123;</span></span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>依据我个人经验，做了一部分的微调：</p>
+<p><strong>第一</strong> 在代码中新建一个主题 CSS, 单独用于处理 SCSS 编译 CSS. 即除了 App.vue, 其他地方的 CSS 直接写在同一个地方。</p>
+<p><strong>第二</strong> 对于字体文件，不引入 IconFont 在线字体，而是使用 SVG 本地编译字体。这样减少对 iconfont cdn 的依赖，可以以后直接迁移这个字体到其他 CDN 上。</p>
+<p><strong>第三</strong> 对于依赖库管理，分为 npm 依赖库和外部 JS 依赖库两种</p>
+<p>对于 NPM 依赖库，如果有使用过 ECharts3.0 的 SPA 开发者应该对于万恶的 DLL 非常熟悉了。最早的时候，我们是这样做的：</p>
+<ul>
+<li>先写一个编译脚本，指定相关依赖包，打包出 dll 和一个 manifest 文件</li>
+<li>然后从 index.html 里引入打包好的 dll.</li>
+<li>再从 webpack 的配置文件中引入这个文件。</li>
+</ul>
+<p>这种恶心的配置随着 autodll-webpack-plugin 的出现从而得到缓解，于是现在的你只需要配置：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> AutoDllPlugin(&#123;</span><br><span class="line">  inject: <span class="literal">true</span>, <span class="comment">// will inject the DLL bundles to index.html</span></span><br><span class="line">  debug: <span class="literal">true</span>,</span><br><span class="line">  filename: <span class="string">&#x27;[name]_[hash].js&#x27;</span>,</span><br><span class="line">  entry: &#123;</span><br><span class="line">    vendor: [</span><br><span class="line">      <span class="string">&#x27;@antv/data-set&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;@antv/g2&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;@antv/g6&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;highlight.js&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it-abbr&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it-deflist&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it-emoji&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it-footnote&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it-ins&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it-katex&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it-mark&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it-sub&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it-sup&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it-task-lists&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;markdown-it-toc-and-anchor&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;typed.js&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;vue&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;vue-router&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;vuex&#x27;</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  plugins: [<span class="keyword">new</span> webpack.optimize.UglifyJsPlugin()],</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>当然，如果你用了 ECharts, 有的时候会出现莫名其妙的</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">__DEV__ is not defined</span><br></pre></td></tr></table></figure>
+
+<p>解决方法就是在这上面的插件里面加个插件定义一个 Global 的变量</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new webpack.DefinePlugin(&#123;</span><br><span class="line">  __DEV__: false</span><br><span class="line">&#125;),</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>PS: 去年的版本由于依赖库的一个路径问题导致 autodll-webpack-plugin 不能在 Windows 上使用，今年可以啦。还不快快用起来？</p>
+</blockquote>
+<p>对于外部的 JS/CSS 依赖库：</p>
+<ol>
+<li>直接拷贝到 static 下面，然后从 index.html 引入即可。</li>
+<li>动态创建 script 标签（比如动态引入高德地图）</li>
+</ol>
+<h2 id="0x04-路由"><a href="#0x04-路由" class="headerlink" title="0x04 路由"></a>0x04 路由</h2><p>博客项目，实际上路由比较简单。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">export default new Router(&#123;</span><br><span class="line">  mode: &#39;history&#39;,</span><br><span class="line">  base: &#39;&#x2F;&#39;,</span><br><span class="line">  &#x2F;&#x2F; 注释掉这里是因为和引入的 smooth-scroll 冲突</span><br><span class="line">  &#x2F;&#x2F; scrollBehavior (to, from, savedPosition) &#123;</span><br><span class="line">  &#x2F;&#x2F;   return &#123; x: 0, y: 0 &#125;</span><br><span class="line">  &#x2F;&#x2F; &#125;,</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;&#39;,</span><br><span class="line">      name: &#39;home&#39;,</span><br><span class="line">      component: () &#x3D;&gt; import(&#39;..&#x2F;pages&#x2F;Home.vue&#39;)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#x2F;&#x2F; 解决手贱带来的问题</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;index:suffix*&#39;,</span><br><span class="line">      name: &#39;index&#39;,</span><br><span class="line">      component: () &#x3D;&gt; import(&#39;..&#x2F;pages&#x2F;Home.vue&#39;)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;blog&#39;,</span><br><span class="line">      name: &#39;blog&#39;,</span><br><span class="line">      component: () &#x3D;&gt; import(&#39;..&#x2F;pages&#x2F;Blog.vue&#39;)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;blog&#x2F;post&#x2F;:title&#39;,</span><br><span class="line">      name: &#39;post&#39;,</span><br><span class="line">      component: () &#x3D;&gt; import(&#39;..&#x2F;pages&#x2F;Blog&#x2F;ArticlePost.vue&#39;)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;blog&#x2F;:category(category&#x2F;\\d+)?&#x2F;:tags(tags&#x2F;\\d+)?&#x2F;:page(page&#x2F;\\d+)?&#39;,</span><br><span class="line">      name: &#39;blogposts&#39;,</span><br><span class="line">      component: () &#x3D;&gt; import(&#39;..&#x2F;pages&#x2F;Blog.vue&#39;)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;archive&#39;,</span><br><span class="line">      name: &#39;archive&#39;,</span><br><span class="line">      component: () &#x3D;&gt; import(&#39;..&#x2F;pages&#x2F;Archive.vue&#39;)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;gallery&#39;,</span><br><span class="line">      name: &#39;gallery&#39;,</span><br><span class="line">      component: () &#x3D;&gt; import(&#39;..&#x2F;pages&#x2F;Gallery.vue&#39;)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;works&#39;,</span><br><span class="line">      name: &#39;works&#39;,</span><br><span class="line">      component: () &#x3D;&gt; import(&#39;..&#x2F;pages&#x2F;Works.vue&#39;)</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: &#39;&#x2F;about&#39;,</span><br><span class="line">      name: &#39;about&#39;,</span><br><span class="line">      component: () &#x3D;&gt; import(&#39;..&#x2F;pages&#x2F;About.vue&#39;)</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>除了 import 语法之外，需要注意的就是 ‘/blog/:category(category/\d+)?/:tags(tags/\d+)?/:page(page/\d+)?’ 这个奇怪的表达式。</p>
+<p>这个表达式可以用于匹配下面的路由</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/blog/category/1/tags/2/page/3</span><br><span class="line">/blog/category/1/page/3</span><br><span class="line">/blog/tags/3/page/3</span><br><span class="line">/blog/page/3</span><br></pre></td></tr></table></figure>
+
+<p>匹配完毕之后，就可以拿到 categroy tags page 的值然后提交数据库拿数据咯。</p>
+<h2 id="0x05-组件"><a href="#0x05-组件" class="headerlink" title="0x05 组件"></a>0x05 组件</h2><p>博客里面需要注意的就三个组件</p>
+<ul>
+<li>ArticlePost 组件</li>
+<li>分页组件</li>
+<li>打字终端组件</li>
+</ul>
+<p>第一个，ArticlePost 组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;p-article-post&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;columns&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-1 hide-xl&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-2 col-xl-3&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;g-sidebar&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">h4</span>&gt;</span>本文目录<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-html</span>=<span class="string">&quot;articleToc&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-6 col-xl-8&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">ArticleCard</span> <span class="attr">:article</span>=<span class="string">&quot;article&quot;</span> @<span class="attr">articleTocReady</span>=<span class="string">&quot;initArticleToc&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">ArticleCard</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-2 col-xl-3&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;g-sidebar&quot;</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">h4</span>&gt;</span>公告<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">              MG 的编程小屋，其实就是我整理笔记，写写文章的地方。</span><br><span class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">              专注 Python / JavaScript , 爱折腾的全干工程师 (Full Stuff Engineer)</span><br><span class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">              如果我的文章给您的日常开发带来很大帮助的话</span><br><span class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">              您可以关注我的公众号</span><br><span class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;/static/images/mp_wechat.jpg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width: 200px&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">              也可以扫描二维码进行投喂</span><br><span class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">              <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;/static/images/tips_wechat.jpeg&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;&quot;</span> <span class="attr">style</span>=<span class="string">&quot;width: 200px&quot;</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">              听说关注或者进行投喂的人，技术都越来越牛咯。</span><br><span class="line">            <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">          <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;col-1 hide-xl&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">import</span> &#123;fetchBlogPost&#125; <span class="keyword">from</span> <span class="string">&#x27;../../api/blog&#x27;</span>;</span></span><br><span class="line"><span class="javascript">  <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">    name: <span class="string">&#x27;BlogPage&#x27;</span>,</span></span><br><span class="line">    components: &#123;</span><br><span class="line"><span class="javascript">      ArticleCard: <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;../../components/Common/ArticleCard.vue&#x27;</span>),</span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">data</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="javascript">        article: <span class="string">&#x27;&#x27;</span>,</span></span><br><span class="line"><span class="javascript">        articleToc: <span class="literal">undefined</span></span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    watch: &#123;</span><br><span class="line"><span class="javascript">      <span class="string">&#x27;$route.params&#x27;</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">this</span>.initArticle()</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">created</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line"><span class="javascript">      <span class="built_in">this</span>.initArticle()</span></span><br><span class="line">    &#125;,</span><br><span class="line"><span class="javascript">    <span class="function"><span class="title">mounted</span>(<span class="params"></span>)</span> &#123;</span></span><br><span class="line">    &#125;,</span><br><span class="line">    methods: &#123;</span><br><span class="line"><span class="javascript">      initArticleToc: <span class="function"><span class="keyword">function</span> (<span class="params">v</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="built_in">this</span>.articleToc = v;</span></span><br><span class="line">      &#125;,</span><br><span class="line"><span class="javascript">      initArticle: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> title = <span class="built_in">this</span>.$route.params.title;</span></span><br><span class="line"><span class="javascript">        fetchBlogPost(title).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">          <span class="built_in">this</span>.article = res;</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>嗯，其实就是监听 url, 如果匹配上 url 的话，从 url 中取 title, 然后发送请求，接着取回响应的内容交给子组件处理。子组件处理完毕会 emit 出一个 toc 的值，将这个值赋值给左侧 toc 即可。</p>
+<ul>
+<li>分页组件</li>
+</ul>
+<p>见地址吧  <a target="_blank" rel="noopener" href="https://github.com/twocucao/YaVueBlog/blob/master/src/components/Common/Pagination.vue">https://github.com/twocucao/YaVueBlog/blob/master/src/components/Common/Pagination.vue</a></p>
+<ul>
+<li>打字终端组件</li>
+</ul>
+<p>终端的样式，当然是抄别人的 CSS, 打字效果，来源于 typed.js 依赖库</p>
+<h2 id="0x06-扩展"><a href="#0x06-扩展" class="headerlink" title="0x06. 扩展"></a>0x06. 扩展</h2><p>对于其他的实现，自然是要多多看代码咯。</p>
+<p>其实前端工程化是一个很广的概念，本文没有提到代码风格、团队开发工作流、CSS 编写规范、组件优化、Webpack 详细配置等等。这都需要在日常开发中多多练习的。</p>
+<p>笔者最近换了份工作，以 React 为技术栈。 加上篇幅和精力有限，也就是不在以 Vue 为前端这一块详细展开了。</p>
+<p>下面的文章还是聚焦在后端上面。</p>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE. 参考链接"></a>0xEE. 参考链接</h2><p>还犹豫啥，Django 前后端分离最佳实践，点赞后，快上车吧</p>
+<ul>
+<li>前端代码 <a target="_blank" rel="noopener" href="https://github.com/twocucao/YaVueBlog">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a target="_blank" rel="noopener" href="https://github.com/twocucao/YaDjangoBlog">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-03-18</strong> 重修文字</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Django/" rel="tag"># Django</a>
+              <a href="/tags/VueJS/" rel="tag"># VueJS</a>
+              <a href="/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/" rel="tag"># 全栈开发</a>
+              <a href="/tags/RestAPI/" rel="tag"># RestAPI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/02/23/YaDjangoBlog%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%9D%E6%AD%A5%E8%AE%BE%E8%AE%A1/" rel="prev" title="YaDjangoBlog 的前后端设计">
+      <i class="fa fa-chevron-left"></i> YaDjangoBlog 的前后端设计
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/03/04/YaDjangoBlog%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%AF%87/" rel="next" title="YaDjangoBlog 之前后端分离篇">
+      YaDjangoBlog 之前后端分离篇 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-VueJS"><span class="nav-number">2.</span> <span class="nav-text">0x01 为什么是 VueJS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Vue-%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">3.</span> <span class="nav-text">0x02 Vue 项目的一些注意点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">4.</span> <span class="nav-text">0x03 项目结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E7%AE%A1%E7%90%86"><span class="nav-number">5.</span> <span class="nav-text">0x04 静态资源管理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-%E8%B7%AF%E7%94%B1"><span class="nav-number">6.</span> <span class="nav-text">0x04 路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-%E7%BB%84%E4%BB%B6"><span class="nav-number">7.</span> <span class="nav-text">0x05 组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-%E6%89%A9%E5%B1%95"><span class="nav-number">8.</span> <span class="nav-text">0x06. 扩展</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">9.</span> <span class="nav-text">0xEE. 参考链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

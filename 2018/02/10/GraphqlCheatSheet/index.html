@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0x00 前言不定期更新。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GraphQL CheetSheet">
+<meta property="og:url" content="http://twocucao.xyz/2018/02/10/GraphqlCheatSheet/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言不定期更新。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-02-10T01:01:55.000Z">
+<meta property="article:modified_time" content="2018-09-15T09:03:49.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="Django">
+<meta property="article:tag" content="Docker">
+<meta property="article:tag" content="DevOps">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2018/02/10/GraphqlCheatSheet/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>GraphQL CheetSheet | MG的编程小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/10/GraphqlCheatSheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GraphQL CheetSheet
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-02-10 09:01:55" itemprop="dateCreated datePublished" datetime="2018-02-10T09:01:55+08:00">2018-02-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-09-15 17:03:49" itemprop="dateModified" datetime="2018-09-15T17:03:49+08:00">2018-09-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%91%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">我的开源项目</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>不定期更新。</p>
+<a id="more"></a>
+
+<h2 id="0x01-开接口这件小事情"><a href="#0x01-开接口这件小事情" class="headerlink" title="0x01 开接口这件小事情"></a>0x01 开接口这件小事情</h2><p>开接口，究竟什么样的接口才是一个好接口？</p>
+<ol>
+<li>刚开始的时候，后台开接口都是比较随便，本着方便，快速的方式一个一个接口的开。</li>
+<li>后来呢？觉得接口开出来没有最佳实践，所以有人提出 Restful 的开接口姿势。 Swagger, DjangorestFramework, 以及 Apistar 便是这种最佳实践的代表性项目</li>
+<li>再后来呢？Facebook 又搞了套自己的开接口姿势叫做 GraphQL, graphene-python , graphene-js , apollo-client , apollo-server 便是这种最佳实践的代表性项目</li>
+</ol>
+<h3 id="开接口注意点"><a href="#开接口注意点" class="headerlink" title="开接口注意点"></a>开接口注意点</h3><ol>
+<li>尽量做到代码即文档。</li>
+<li>便于前端调试。</li>
+<li>分页处理。</li>
+<li>API 版本管理。</li>
+<li>额外的语义。</li>
+<li>校验。</li>
+<li>权限。</li>
+</ol>
+<p>不管是 Restful 的实现，还是 GraphQL 的实现，在 1/2/5 上面做的非常优秀了。</p>
+<p>拿 Restful 的实现 DjangoRestframework 来说，直接可以在 ApiView 的注释里面写 Markdown 语法，兼容 payload 和 form 表单调试。内置 Serializer 进行序列化和校验。</p>
+<p>DRF 还是一个功能非常全面的框架。 PS: 如果你是不折腾的 Django 用户，DRF 绝对让你欲罢不能。</p>
+<h3 id="开接口不能解决的问题"><a href="#开接口不能解决的问题" class="headerlink" title="开接口不能解决的问题"></a>开接口不能解决的问题</h3><blockquote>
+<p>业务逻辑的沟通问题</p>
+</blockquote>
+<p>抛开前后端分离所带来的优点，前后端分离的一大问题就是，前后端人员的分离。</p>
+<p>如果你的公司规模不是很大，开发的项目需要一定的背景知识，团队开发比较（经常）敏（调整）捷（需求）, 沟通上就会有些问题，</p>
+<p>具体表现为，后端理解了需求，还需要和前端讲清楚，而刚讲清楚没几天，产品又跑过来说，这个业务我们需要调整一下。几次折腾下来，就会出现一个尴尬的局面。</p>
+<p>前后端有的时候对业务理解出现来偏差。在以前不区分前后端的时候，一个东西到实现基本上一个人就可以 Cover 掉，只要这个人理解了业务逻辑，就行了。现在前后端分离，就要求前后端对需求的理解</p>
+<p>如果需求不明确，就会出现如下情况，前端一脸懵逼的问后端与产品『眼前的黑不是黑，你说的白是什么白』</p>
+<p>当然，这个不属于技术问题，只是提一下。</p>
+<h2 id="0x02-GraphQL-相关概念"><a href="#0x02-GraphQL-相关概念" class="headerlink" title="0x02 GraphQL 相关概念"></a>0x02 GraphQL 相关概念</h2><h3 id="GraphQL-是什么？"><a href="#GraphQL-是什么？" class="headerlink" title="GraphQL 是什么？"></a>GraphQL 是什么？</h3><p>GraphQL 也不是什么革命性的产品，不过是一种新的开 Web 接口的方式罢了。</p>
+<p>而请求接口提交的参数也变成了包含参数的一种查询语言。</p>
+<p>官方宣传的 GraphQL 搞好了，只需如此：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"># Step1. 描述你的数据</span><br><span class="line"></span><br><span class="line">type Project &#123;</span><br><span class="line">  name: String</span><br><span class="line">  tagline: String</span><br><span class="line">  contributors: [User]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Step2. 请求所需数据。</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  project(name: &quot;GraphQL&quot;) &#123;</span><br><span class="line">    tagline</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"># Step3. 拿到所需数据。</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">  &quot;project&quot;: &#123;</span><br><span class="line">    &quot;tagline&quot;: &quot;A query language for APIs&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>嗯，是不是和 SQL 看起来有点像？当然咯，都是查询语言 (QL) 嘛。</p>
+<h3 id="GraphQL-好处"><a href="#GraphQL-好处" class="headerlink" title="GraphQL 好处"></a>GraphQL 好处</h3><p>GraphQL 的好处，自然是前端写起来就是一个字，爽。</p>
+<p>比如我们使用 Github 的 API 做一个简单的查询</p>
+<p>地址如下 <a target="_blank" rel="noopener" href="https://developer.github.com/v4/explorer/">https://developer.github.com/v4/explorer/</a></p>
+<p>查询如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">query &#123;</span><br><span class="line">  viewer &#123;</span><br><span class="line">    login</span><br><span class="line">    bio</span><br><span class="line">    repositories(first:10, orderBy : &#123; field: STARGAZERS, direction: DESC&#125;   ) &#123;</span><br><span class="line">      nodes &#123;</span><br><span class="line">        nameWithOwner</span><br><span class="line">        viewerHasStarred</span><br><span class="line">        watchers &#123;</span><br><span class="line">          totalCount</span><br><span class="line">        &#125;</span><br><span class="line">        stargazers &#123;</span><br><span class="line">          totalCount</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      totalCount</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>结果如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;data&quot;: &#123;</span><br><span class="line">    &quot;viewer&quot;: &#123;</span><br><span class="line">      &quot;login&quot;: &quot;twocucao&quot;,</span><br><span class="line">      &quot;bio&quot;: &quot;Pythonist In Shanghai.&quot;,</span><br><span class="line">      &quot;repositories&quot;: &#123;</span><br><span class="line">        &quot;nodes&quot;: [</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;nameWithOwner&quot;: &quot;twocucao&#x2F;danmu.fm&quot;,</span><br><span class="line">            &quot;viewerHasStarred&quot;: true,</span><br><span class="line">            &quot;watchers&quot;: &#123;</span><br><span class="line">              &quot;totalCount&quot;: 22</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;stargazers&quot;: &#123;</span><br><span class="line">              &quot;totalCount&quot;: 282</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;nameWithOwner&quot;: &quot;twocucao&#x2F;YaDjangoBlog&quot;,</span><br><span class="line">            &quot;viewerHasStarred&quot;: true,</span><br><span class="line">            &quot;watchers&quot;: &#123;</span><br><span class="line">              &quot;totalCount&quot;: 9</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;stargazers&quot;: &#123;</span><br><span class="line">              &quot;totalCount&quot;: 120</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;,</span><br><span class="line">          &#123;</span><br><span class="line">            &quot;nameWithOwner&quot;: &quot;twocucao&#x2F;danmu&quot;,</span><br><span class="line">            &quot;viewerHasStarred&quot;: true,</span><br><span class="line">            &quot;watchers&quot;: &#123;</span><br><span class="line">              &quot;totalCount&quot;: 5</span><br><span class="line">            &#125;,</span><br><span class="line">            &quot;stargazers&quot;: &#123;</span><br><span class="line">              &quot;totalCount&quot;: 64</span><br><span class="line">            &#125;</span><br><span class="line">          &#125;</span><br><span class="line">        ],</span><br><span class="line">        &quot;totalCount&quot;: 33</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你说，我还要看看这个 repo 的主要语言，那么增加一行查询即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">query &#123;</span><br><span class="line">  viewer &#123;</span><br><span class="line">    login</span><br><span class="line">    bio</span><br><span class="line">    repositories(first:3, orderBy : &#123; field: STARGAZERS, direction: DESC&#125;   ) &#123;</span><br><span class="line">      nodes &#123;</span><br><span class="line">        nameWithOwner</span><br><span class="line">        viewerHasStarred</span><br><span class="line">        languages(first: 3) &#123; # 在这里增加查询编程语言</span><br><span class="line">          nodes &#123;</span><br><span class="line">            name</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        watchers &#123;</span><br><span class="line">          totalCount</span><br><span class="line">        &#125;</span><br><span class="line">        stargazers &#123;</span><br><span class="line">          totalCount</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      totalCount</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>依照这个简单的查询，可以看出 GraphQL 的便捷之处。后端编写完毕之后，前端基本上就可以对着 Schemas 里面的 query 查询完毕了。</p>
+<p>查询这么搞可以，增删改查之类的操作呢？GraphQL 里面还有 Mutation 可以帮你解决这个问题，在后端定义完 Mutation , 前端在 Mutation 里面可以直接传参。</p>
+<p>就像这样。</p>
+<h2 id="0x03-GraphQL-客户端怎么做？"><a href="#0x03-GraphQL-客户端怎么做？" class="headerlink" title="0x03 GraphQL 客户端怎么做？"></a>0x03 GraphQL 客户端怎么做？</h2><h2 id="0x04-GraphQL-Python-服务端怎么做？"><a href="#0x04-GraphQL-Python-服务端怎么做？" class="headerlink" title="0x04 GraphQL Python 服务端怎么做？"></a>0x04 GraphQL Python 服务端怎么做？</h2><h2 id="0x05-GraphQL-解决的痛点与坑"><a href="#0x05-GraphQL-解决的痛点与坑" class="headerlink" title="0x05 GraphQL 解决的痛点与坑"></a>0x05 GraphQL 解决的痛点与坑</h2><h2 id="0x06-其他思考点"><a href="#0x06-其他思考点" class="headerlink" title="0x06 其他思考点"></a>0x06 其他思考点</h2><ul>
+<li>埋点</li>
+</ul>
+<h1 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h1><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/wsargent/docker-cheat-sheet">https://github.com/wsargent/docker-cheat-sheet</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-01-20</strong> 初始化本文</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Django/" rel="tag"># Django</a>
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+              <a href="/tags/DevOps/" rel="tag"># DevOps</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/02/03/NumpyCheatSheet/" rel="prev" title="Numpy Cheatsheet">
+      <i class="fa fa-chevron-left"></i> Numpy Cheatsheet
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/02/10/DockerCheatSheet/" rel="next" title="Docker CheatSheet">
+      Docker CheatSheet <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E5%BC%80%E6%8E%A5%E5%8F%A3%E8%BF%99%E4%BB%B6%E5%B0%8F%E4%BA%8B%E6%83%85"><span class="nav-number">2.</span> <span class="nav-text">0x01 开接口这件小事情</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%8E%A5%E5%8F%A3%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="nav-number">2.1.</span> <span class="nav-text">开接口注意点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E6%8E%A5%E5%8F%A3%E4%B8%8D%E8%83%BD%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="nav-number">2.2.</span> <span class="nav-text">开接口不能解决的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-GraphQL-%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5"><span class="nav-number">3.</span> <span class="nav-text">0x02 GraphQL 相关概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#GraphQL-%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">3.1.</span> <span class="nav-text">GraphQL 是什么？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GraphQL-%E5%A5%BD%E5%A4%84"><span class="nav-number">3.2.</span> <span class="nav-text">GraphQL 好处</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-GraphQL-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F"><span class="nav-number">4.</span> <span class="nav-text">0x03 GraphQL 客户端怎么做？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-GraphQL-Python-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%80%8E%E4%B9%88%E5%81%9A%EF%BC%9F"><span class="nav-number">5.</span> <span class="nav-text">0x04 GraphQL Python 服务端怎么做？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-GraphQL-%E8%A7%A3%E5%86%B3%E7%9A%84%E7%97%9B%E7%82%B9%E4%B8%8E%E5%9D%91"><span class="nav-number">6.</span> <span class="nav-text">0x05 GraphQL 解决的痛点与坑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-%E5%85%B6%E4%BB%96%E6%80%9D%E8%80%83%E7%82%B9"><span class="nav-number">7.</span> <span class="nav-text">0x06 其他思考点</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#0xEE-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number"></span> <span class="nav-text">0xEE 参考链接</span></a></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

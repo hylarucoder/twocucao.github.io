@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="斗鱼弹幕助手0. 前言前几天闲着无聊，看到舍友们都在看斗鱼 TV，虽然我对那些网络游戏东西都不是非常感兴趣。只是我突然间想到，如果我可以获取上面的弹幕内容。不就有点意思了么？ 1. 分析阶段如果我想要抓取网页上面的东西，无非就是两种方法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="斗鱼 TV 弹幕助手">
+<meta property="og:url" content="http://twocucao.xyz/2016/02/04/%E6%96%97%E9%B1%BCTV%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="斗鱼弹幕助手0. 前言前几天闲着无聊，看到舍友们都在看斗鱼 TV，虽然我对那些网络游戏东西都不是非常感兴趣。只是我突然间想到，如果我可以获取上面的弹幕内容。不就有点意思了么？ 1. 分析阶段如果我想要抓取网页上面的东西，无非就是两种方法">
+<meta property="og:locale">
+<meta property="og:image" content="http://twocucao.xyz/images/douyutveachmsg.png">
+<meta property="og:image" content="http://twocucao.xyz/images/douyutvinfo.jpg">
+<meta property="og:image" content="http://twocucao.xyz/images/douyutveachmsg.png">
+<meta property="article:published_time" content="2016-02-04T10:50:23.000Z">
+<meta property="article:modified_time" content="2018-01-27T17:38:12.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="Ruby">
+<meta property="article:tag" content="Wireshark">
+<meta property="article:tag" content="逆向工程">
+<meta property="article:tag" content="爬虫">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://twocucao.xyz/images/douyutveachmsg.png">
+
+<link rel="canonical" href="http://twocucao.xyz/2016/02/04/%E6%96%97%E9%B1%BCTV%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+
+  <title>斗鱼 TV 弹幕助手 | MG的编程小屋</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+        <li class="menu-item menu-item-schedule">
+
+    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
+
+  </li>
+        <li class="menu-item menu-item-sitemap">
+
+    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/02/04/%E6%96%97%E9%B1%BCTV%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          斗鱼 TV 弹幕助手
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-02-04 18:50:23" itemprop="dateCreated datePublished" datetime="2016-02-04T18:50:23+08:00">2016-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-28 01:38:12" itemprop="dateModified" datetime="2018-01-28T01:38:12+08:00">2018-01-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%91%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">我的开源项目</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="斗鱼弹幕助手"><a href="#斗鱼弹幕助手" class="headerlink" title="斗鱼弹幕助手"></a>斗鱼弹幕助手</h1><h2 id="0-前言"><a href="#0-前言" class="headerlink" title="0. 前言"></a>0. 前言</h2><p>前几天闲着无聊，看到舍友们都在看斗鱼 TV，虽然我对那些网络游戏东西都不是非常感兴趣。只是我突然间想到，如果我可以获取上面的弹幕内容。不就有点意思了么？</p>
+<h2 id="1-分析阶段"><a href="#1-分析阶段" class="headerlink" title="1. 分析阶段"></a>1. 分析阶段</h2><p>如果我想要抓取网页上面的东西，无非就是两种方法</p>
+<a id="more"></a>
+
+<ol>
+<li>使用浏览器，手工（自己点击）或者非手工（使用 JS 脚本），存取我想要的东西。</li>
+<li>编写 HTTP 客户端（斗鱼无 HTTPS 通讯）</li>
+</ol>
+<p>第一种方法是万能的，但显然是不行的， 原因如下：</p>
+<ul>
+<li>手动保存实在是不可行，程序员不为也。</li>
+<li>浏览器与本地交互有限，换而言之，也就是即使我抓取了对应的弹幕，我也没有办法解决持久化的问题。</li>
+<li>假设你选择的是 Chrome 或者 firefox 浏览器，也不是不能实现持久化，但这需要写扩展，Chrome 扩展没有写过，也不是很感兴趣。</li>
+</ul>
+<p>第二种方法显然是一个正常的程序员的做法。</p>
+<p>写一个客户端，也就是写一个小爬虫，使用的场景：</p>
+<blockquote>
+<p>用户在终端执行命令</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>回想一下抓取网站的方法</p>
+<p>四步走：请求网页（原始数据） - 提取数据（提纯数据） - 保存数据 - 分析数据</p>
+<p>很显然，只要解决了请求网页，其他的也就无非解析和 SQL 语句什么的。</p>
+<h3 id="1-1-斗鱼-TV-弹幕抓取的思路确定"><a href="#1-1-斗鱼-TV-弹幕抓取的思路确定" class="headerlink" title="1.1. 斗鱼 TV 弹幕抓取的思路确定"></a>1.1. 斗鱼 TV 弹幕抓取的思路确定</h3><p>如果是像我上面说的那么简单，也就不必再写一篇文章。毕竟，网页小爬虫没有什么技术含量。分布式爬虫才有。</p>
+<p>通常情况下的网页小爬虫无非要解决如下问题：</p>
+<p>请求，如果对方有一定策略的反爬虫，那需要反反爬虫。比如，</p>
+<ul>
+<li>header 带上 host，带上 refer，带上其他</li>
+<li>需要验证，那就申请用户名和密码，然后登陆</li>
+<li>如果在登录时期有防跨站机制，那就先获取一次登录页面，然后解析出 token，带上对应的 token 然后登陆。</li>
+<li>在程序中加入 Log，并且存到本地。防止出现各种各样的反爬虫机制 ban 掉了程序，从而方便进行下一步防反爬虫对策。</li>
+</ul>
+<p>并且，由于请求响应机制的存在，通常情况下，每一个请求对应一个响应，如果出错了，要么超时，要么有状态码，所以 web 爬虫实在也相对而言比较容易些。</p>
+<p>那么，斗鱼 TV 的站点是不是这样子的容易爬取呢？</p>
+<p>你猜到了，答案是“不是”。</p>
+<p>由于弹幕具有实时性，就决定了斗鱼 TV 的弹幕无法通过保存完整指定时间端弹幕的 XML（比如 BILIBILI 的一个视频弹幕是存在一段 xml 中的）或者 Json 数据来显示弹幕。要不然的话，那主播操作很出色的时候，观众的弹幕岂不是无法实时显示了么？</p>
+<p>那么，肯定就是 WebSocket 了，于是，我一如既往的打开 F12，查看网络流量。</p>
+<blockquote>
+<p>正如你想到的那样，没有任何的弹幕流量来往。一个 WebSocket 的消息都没有。</p>
+</blockquote>
+<p>那么，消息肯定是有的，但是消息并不是通过 HTTP 协议或者 WebSocket 协议传输的，那么问题会出在哪呢？</p>
+<p>分析前端的代码，找出获取弹幕的 JS 代码，苦于代码太多，找了很久没有找到。那也就是执行逻辑可能在 flash 里面。</p>
+<p>于是祭出大杀器 WireShark，抓一下流量。终于看到弹幕的样子了。</p>
+<p>是这样的。</p>
+<p><img src="/images/douyutveachmsg.png" alt="每条消息的内容"></p>
+<p>原来使用的是 Flash 的 Socket 功能。</p>
+<p>多分析几组数据，但还是对发送消息内容缺乏把握，特别是在用户认证，用户接收弹幕这一块。在搜索引擎上搜索了一阵，发现知乎上有个帖子，读完终于解了我的疑惑。</p>
+<p>省略若干消息分析过程。</p>
+<p>总结后得出斗鱼 TV 网站的服务器分布。</p>
+<p><img src="/images/douyutvinfo.jpg" alt="猜测网站架构图"></p>
+<h3 id="1-2-房间信息和弹幕认证服务器获取"><a href="#1-2-房间信息和弹幕认证服务器获取" class="headerlink" title="1.2. 房间信息和弹幕认证服务器获取"></a>1.2. 房间信息和弹幕认证服务器获取</h3><p>首先我们拿随便一个主播房间来说，比如，mkk</p>
+<p>Ta 的房间链接分为两种</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="http://www.douyutv.com/mkk">http://www.douyutv.com/mkk</a></li>
+<li><a target="_blank" rel="noopener" href="http://www.douyutv.com/%E3%80%8E%E6%88%BF%E9%97%B4">http://www.douyutv.com/『房间</a> id]</li>
+</ul>
+<p>对这个主播房间页面请求，正常，所有的有用信息都不是放在 HTML 中渲染出来，而是放在 HTML 中内置的 JS 脚本中，这是为了减少服务器渲染 HTML 的压力？可是渲染放在 JS 里面不也一样需要渲染？（不明白）总之，就是程序先加载没有具体数据填充页面，然后 JS 更新数据。</p>
+<p>内置的两段 JS 脚本，JS 脚本中有两个变量，该变量很容易转换成 JSON 数据，也就是两段 JSON 数据，一个是关于主播的个人信息，另一个是关于弹幕认证服务器的列表（该列表中的任意一个服务器均可以认证，但每一次请求主播页面得到的认证服务器列表都不一样）</p>
+<p>通过这步，我们就拿到了主播的信息以及弹幕服务器的认证地址，端口。</p>
+<h3 id="1-3-发送-Socket-消息的流程简介"><a href="#1-3-发送-Socket-消息的流程简介" class="headerlink" title="1.3. 发送 Socket 消息的流程简介"></a>1.3. 发送 Socket 消息的流程简介</h3><p>我们通过抓包，分析那一大坨数据包，可以确定以下通过以下的流程便可以获取弹幕消息。（分析过程比较繁琐）</p>
+<p>首先建立两个 Socket。一个用于认证 (@danmu_auth_socket)，另一个用户获取弹幕 (@danmu_client)。</p>
+<ul>
+<li><strong>步骤 1:</strong> @danmu_auth_socket 发送消息登陆，获取消息 1 解析出匿名用户的用户名，再获取消息 2 解析出 gid</li>
+<li><strong>步骤 2:</strong> @danmu_auth_socket 发送 qrl 消息，获取两个没有什么用的消息</li>
+<li><strong>步骤 3:</strong> @danmu_auth_socket 发送 keeplive 消息</li>
+<li><strong>步骤 4:</strong> @danmu_socket 发送伪登陆消息（所有匿名用户都一样只需要输入步骤一中用户名就行了，因为认证已经在上面做过了）</li>
+<li><strong>步骤 5:</strong> @danmu_socket 发送 join_group 消息需要步骤一中国的 gid</li>
+<li><strong>步骤 6:</strong> @danmu_socket 不断的 recv 消息就可以获取弹幕消息了</li>
+</ul>
+<p>后面会详细解释</p>
+<h3 id="2-1-消息-Socket-消息格式以及发送一条消息"><a href="#2-1-消息-Socket-消息格式以及发送一条消息" class="headerlink" title="2.1. 消息 Socket 消息格式以及发送一条消息"></a>2.1. 消息 Socket 消息格式以及发送一条消息</h3><p>既然是发消息，那么每条消息总是有些格式的。</p>
+<p>斗鱼的消息格式大致如下：</p>
+<p><img src="/images/douyutveachmsg.png" alt="每条消息的内容"></p>
+<p>并遵循下面的格式：</p>
+<ol>
+<li>通信协议长度，后四个部分的长度，四个字节</li>
+<li>第二部分与第一部分一样</li>
+<li>请求代码，发送给斗鱼的话，内容为 0xb1,0x02, 斗鱼返回的代码为 0xb2,0x02</li>
+<li>发送内容</li>
+<li>末尾字节</li>
+</ol>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># -*- encoding : utf-8 -*-</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Message</span></span></span><br><span class="line">  <span class="comment"># 向斗鱼发送的消息</span></span><br><span class="line">  <span class="comment"># 1. 通信协议长度，后四个部分的长度，四个字节</span></span><br><span class="line">  <span class="comment"># 2. 第二部分与第一部分一样</span></span><br><span class="line">  <span class="comment"># 3. 请求代码，发送给斗鱼的话，内容为 0xb1,0x02, 斗鱼返回的代码为 0xb2,0x02</span></span><br><span class="line">  <span class="comment"># 4. 发送内容</span></span><br><span class="line">  <span class="comment"># 5. 末尾字节</span></span><br><span class="line">  <span class="comment">#pack(&#x27;c*&#x27;) 是字节数组转字符串的一种诡异的转化方式</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">initialize</span><span class="params">(content)</span></span></span><br><span class="line">    <span class="variable">@length</span> = [content.size + <span class="number">9</span>,<span class="number">0x00</span>,<span class="number">0x00</span>,<span class="number">0x00</span>].pack(<span class="string">&#x27;c*&#x27;</span>)</span><br><span class="line">    <span class="variable">@code</span> = <span class="variable">@length</span>.dup</span><br><span class="line">    <span class="variable">@magic</span> = [<span class="number">0xb1</span>,<span class="number">0x02</span>,<span class="number">0x00</span>,<span class="number">0x00</span>].pack(<span class="string">&#x27;c*&#x27;</span>)</span><br><span class="line">    <span class="variable">@content</span>  = content</span><br><span class="line">    <span class="variable">@end</span> = [<span class="number">0x00</span>].pack(<span class="string">&#x27;c*&#x27;</span>)</span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">to_s</span></span></span><br><span class="line">    <span class="variable">@length</span> + <span class="variable">@code</span> + <span class="variable">@magic</span> + <span class="variable">@content</span> + @<span class="keyword">end</span></span><br><span class="line">  <span class="keyword">end</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">end</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>经过封装，我们仅仅关注那些可见的字符串，也就是 Content 部分就可以了。<br>content 部分，也就是发送消息的内容，在文章后面将会详解。</p>
+<p>开启两个 Socket，一个用户认证，另一个用于弹幕的获取。</p>
+<p>用于用户弹幕认证的，是 2.1 中所说的认证服务器列表中任意一个。挑选出来一组 ip 和端口</p>
+<blockquote>
+<p>@danmu_auth_socket = TCPSocket.new @auth_dst_ip,@auth_dst_port</p>
+</blockquote>
+<p>用户获取弹幕的只要为</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">danmu.douyutv.<span class="symbol">com:</span><span class="number">8601</span></span><br><span class="line">danmu.douyutv.<span class="symbol">com:</span><span class="number">8602</span></span><br><span class="line">danmu.douyutv.<span class="symbol">com:</span><span class="number">12601</span></span><br><span class="line">danmu.douyutv.<span class="symbol">com:</span><span class="number">12602</span></span><br></pre></td></tr></table></figure>
+<p>四组域名：端口均可以作为如下的 DANMU_SERVER 和 PORT</p>
+<blockquote>
+<p>@danmu_socket = TCPSocket.new DANMU_SERVER,DANMU_PORT</p>
+</blockquote>
+<p>发送一条消息只需如此</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = <span class="string">&quot;type@=loginreq/username@=&quot;</span>+<span class="variable">@username</span>+<span class="string">&quot;/password@=1234567890123456/roomid@=&quot;</span> + <span class="variable">@room_id</span>.to_s + <span class="string">&quot;/&quot;</span></span><br><span class="line">all_data = message(data)</span><br><span class="line"><span class="variable">@danmu_socket</span>.write all_data</span><br></pre></td></tr></table></figure>
+
+<p><strong>接下来，我们需处理上面说的六个步骤</strong></p>
+<h3 id="2-2-发送消息详细流程之步骤一"><a href="#2-2-发送消息详细流程之步骤一" class="headerlink" title="2.2. 发送消息详细流程之步骤一"></a>2.2. 发送消息详细流程之步骤一</h3><p>发送消息内容为：</p>
+<blockquote>
+<p>type@=loginreq/username@=/ct@=0/password@=/roomid@=156277/devid@=DF9E4515E0EE766B39F8D8A2E928BB7C/rt@=1453795822/vk@=4fc6e613fc650a058757331ed6c8a619/ver@=20150929/</p>
+</blockquote>
+<p>我们需要注意的内容如下：</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">type 表示消息的类型登陆消息为 loginreq</span><br><span class="line">username 不需要，请求登陆以后系统会自动的返回对应的游客账号。</span><br><span class="line">ct 不清楚什么意思，默认为 <span class="number">0</span> 并无影响</span><br><span class="line">password 不需要</span><br><span class="line">roomid 房间的 id</span><br><span class="line">devid 为设备标识，无所谓，所以我们使用随机的 UUID 生成</span><br><span class="line">rt 应该是 runtime 吧，时间戳</span><br><span class="line">vk 为时间戳 +<span class="string">&quot;7oE9nPEG9xXV69phU31FYCLUagKeYtsF&quot;</span>+devid 的字符串拼接结果的 MD5 值（这个是参考了一篇文章，关于这一处我也不大明白怎么探究出来的）</span><br><span class="line">ver 默认</span><br></pre></td></tr></table></figure>
+
+<p>通过这一步，我们可以获取两条消息，并从消息中使用正则表达式获取对应的用户名以及 gid</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">str = <span class="variable">@danmu_auth_socket</span>.recv(<span class="number">4000</span>)</span><br><span class="line"><span class="variable">@username</span>= str[<span class="regexp">/\/username@=(.+)\/nickname/</span>,<span class="number">1</span>]</span><br><span class="line">str = <span class="variable">@danmu_auth_socket</span>.recv(<span class="number">4000</span>)</span><br><span class="line"><span class="variable">@gid</span> = str[<span class="regexp">/\/gid@=(\d+)\//</span>,<span class="number">1</span>]</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-发送消息详细流程之步骤二"><a href="#2-3-发送消息详细流程之步骤二" class="headerlink" title="2.3. 发送消息详细流程之步骤二"></a>2.3. 发送消息详细流程之步骤二</h3><p>发送的消息内容为</p>
+<blockquote>
+<p>“type@=qrl/rid@=” + @room_id.to_s + “/“</p>
+</blockquote>
+<p>无需多说，类型为 qrl，rid 为 roomid，直接发送这条消息就好。返回的两条消息也没有什么价值。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">send_message(<span class="symbol">:qrl</span>,<span class="variable">@danmu_auth_socket</span>,<span class="string">&quot;&quot;</span>)</span><br><span class="line">str = <span class="variable">@danmu_auth_socket</span>.recv(<span class="number">4000</span>)</span><br><span class="line">str = <span class="variable">@danmu_auth_socket</span>.recv(<span class="number">4000</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-4-发送消息详细流程之步骤三"><a href="#2-4-发送消息详细流程之步骤三" class="headerlink" title="2.4. 发送消息详细流程之步骤三"></a>2.4. 发送消息详细流程之步骤三</h3><p>发送的消息内容为</p>
+<blockquote>
+<p>“type@=keeplive/tick@=” + timestamp + “/vbw@=0/k@=19beba41da8ac2b4c7895a66cab81e23/“</p>
+</blockquote>
+<p>直接发送。无太大意义。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">send_message(<span class="symbol">:keeplive</span>,<span class="variable">@danmu_auth_socket</span>,<span class="string">&quot;&quot;</span>)</span><br><span class="line">str = <span class="variable">@danmu_auth_socket</span>.recv(<span class="number">4000</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>前三步，也就是 2.2-2.3-2.4 三步骤，也就是使用 @danmu_auth_socket 完成获取 username 和 gid 的重要步骤。获取这两个字段以后，也就完成了它存在的使命。</strong></p>
+<p>接下来的就是 @danmu_socket 获取弹幕的时候了！</p>
+<h3 id="2-5-发送消息详细流程之步骤四"><a href="#2-5-发送消息详细流程之步骤四" class="headerlink" title="2.5. 发送消息详细流程之步骤四"></a>2.5. 发送消息详细流程之步骤四</h3><p>消息内容为：”type@=loginreq/username@=”+@username+”/password@=1234567890123456/roomid@=” + @room_id.to_s + “/“</p>
+<p>和上面 2.2 中略有不同。但是，需要注意的是</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">username 为 <span class="number">2.2</span> 中所得到的 username</span><br><span class="line">password 的变化</span><br><span class="line">少了几个字段</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data = <span class="string">&quot;type@=loginreq/username@=&quot;</span>+<span class="variable">@username</span>+<span class="string">&quot;/password@=1234567890123456/roomid@=&quot;</span> + <span class="variable">@room_id</span>.to_s + <span class="string">&quot;/&quot;</span></span><br><span class="line">all_data = message(data)</span><br><span class="line"><span class="variable">@danmu_socket</span>.write all_data</span><br><span class="line">str = <span class="variable">@danmu_socket</span>.recv(<span class="number">4000</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="2-6-发送消息详细流程之步骤五"><a href="#2-6-发送消息详细流程之步骤五" class="headerlink" title="2.6. 发送消息详细流程之步骤五"></a>2.6. 发送消息详细流程之步骤五</h3><p>接下来就是完成认证的最后一步了，join_group 的消息内容为</p>
+<blockquote>
+<p>“type@=joingroup/rid@=” + @room_id.to_s + “/gid@=”+@gid+”/“</p>
+</blockquote>
+<p>gid 为 2.2 中所得到的 gid。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">send_message(<span class="symbol">:join_group</span>,<span class="variable">@danmu_socket</span>,<span class="string">&quot;&quot;</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="2-7-发送消息详细流程之步骤六"><a href="#2-7-发送消息详细流程之步骤六" class="headerlink" title="2.7. 发送消息详细流程之步骤六"></a>2.7. 发送消息详细流程之步骤六</h3><p>获取弹幕，并且打印出来。</p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">danmu_data = <span class="variable">@danmu_socket</span>.recv(<span class="number">4000</span>)</span><br><span class="line">type = danmu_data[danmu_data.index(<span class="string">&quot;type@=&quot;</span>)..-<span class="number">3</span>]</span><br><span class="line">puts type.gsub(<span class="string">&#x27;sui&#x27;</span>,<span class="string">&#x27;&#x27;</span>).gsub(<span class="string">&#x27;@S&#x27;</span>,<span class="string">&#x27;/&#x27;</span>).gsub(<span class="string">&#x27;@A=&#x27;</span>,<span class="string">&#x27;:&#x27;</span>).gsub(<span class="string">&#x27;@=&#x27;</span>,<span class="string">&#x27;:&#x27;</span>).split(<span class="string">&#x27;/&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><strong>后三步，则是 @danmu_socket</strong> 获取弹幕的步骤。</p>
+<p>于是，通过这些步骤，就可以完成了简单的 douutv 的和新代码，接下来的步骤就是完善，重构这些代码了。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="1-痛点一，头疼的过度封装"><a href="#1-痛点一，头疼的过度封装" class="headerlink" title="1. 痛点一，头疼的过度封装"></a>1. 痛点一，头疼的过度封装</h3><p>我们知道，在编写 Ruby 的 Socket Server 和 Client 的时候，非常方便，特别是传输的 socket 消息内容为字符串的时候。</p>
+<p>但是，当处理的消息内容不可打印的字符串的时候，必须要转化成字节数组的时候，让我着实混乱了一阵，直到使用了 pack(”c*“) 和 unpack(“c*“), 并且通过 wireshark 抓包验证了自己的发送的数据包和接受的数据包才安心使用 pack 与 unpack。</p>
+<h3 id="2-痛点二，至今还没有解决-rtmp-地址的获取"><a href="#2-痛点二，至今还没有解决-rtmp-地址的获取" class="headerlink" title="2. 痛点二，至今还没有解决 rtmp 地址的获取"></a>2. 痛点二，至今还没有解决 rtmp 地址的获取</h3><p>找了很久没有办法解决 rtmp 地址的自动获取：</p>
+<p>路径如下</p>
+<p><a target="_blank" rel="noopener" href="http://www.douyutv.com/swf_api/room/301712?cdn=&amp;nofan=yes&amp;_t=24243097&amp;sign=3b2efb130cb25a85e621f477f95c7341">http://www.douyutv.com/swf_api/room/301712?cdn=&amp;nofan=yes&amp;_t=24243097&amp;sign=3b2efb130cb25a85e621f477f95c7341</a></p>
+<p>这一处的请求不是 XHR，也就是不是 JS 脚本通过 XMLHttpRequest 异步加载；那么，八成是 flash 通过 http 协议获取的。我估计八成执行逻辑应该是在 flash 之中。</p>
+<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>核心代码的地址为：</p>
+<p>重构版本即将出炉。</p>
+<p>还请轻拍。</p>
+<h2 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h2><p>PS: 如果有问题可以在下方留言或者发送 email 到 <a href="mailto:&#x74;&#119;&#x6f;&#99;&#x75;&#99;&#x61;&#x6f;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;">&#x74;&#119;&#x6f;&#99;&#x75;&#99;&#x61;&#x6f;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#109;</a> 给我。</p>
+<h2 id="ChangeLog"><a href="#ChangeLog" class="headerlink" title="ChangeLog"></a>ChangeLog</h2><p>2016-02-09 09:01:00 - 重写部分内容。增加 Ruby Socket 部分。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+              <a href="/tags/Wireshark/" rel="tag"># Wireshark</a>
+              <a href="/tags/%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B/" rel="tag"># 逆向工程</a>
+              <a href="/tags/%E7%88%AC%E8%99%AB/" rel="tag"># 爬虫</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/02/01/PC2MAC/" rel="prev" title="Oh My Mac!">
+      <i class="fa fa-chevron-left"></i> Oh My Mac!
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/02/15/Python%E6%96%97%E9%B1%BC%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/" rel="next" title="Python 程序员如何优雅的看斗鱼 TV">
+      Python 程序员如何优雅的看斗鱼 TV <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%96%97%E9%B1%BC%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B"><span class="nav-number">1.</span> <span class="nav-text">斗鱼弹幕助手</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#0-%E5%89%8D%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">0. 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E5%88%86%E6%9E%90%E9%98%B6%E6%AE%B5"><span class="nav-number">1.2.</span> <span class="nav-text">1. 分析阶段</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%96%97%E9%B1%BC-TV-%E5%BC%B9%E5%B9%95%E6%8A%93%E5%8F%96%E7%9A%84%E6%80%9D%E8%B7%AF%E7%A1%AE%E5%AE%9A"><span class="nav-number">1.2.1.</span> <span class="nav-text">1.1. 斗鱼 TV 弹幕抓取的思路确定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%88%BF%E9%97%B4%E4%BF%A1%E6%81%AF%E5%92%8C%E5%BC%B9%E5%B9%95%E8%AE%A4%E8%AF%81%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%8E%B7%E5%8F%96"><span class="nav-number">1.2.2.</span> <span class="nav-text">1.2. 房间信息和弹幕认证服务器获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-%E5%8F%91%E9%80%81-Socket-%E6%B6%88%E6%81%AF%E7%9A%84%E6%B5%81%E7%A8%8B%E7%AE%80%E4%BB%8B"><span class="nav-number">1.2.3.</span> <span class="nav-text">1.3. 发送 Socket 消息的流程简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%B6%88%E6%81%AF-Socket-%E6%B6%88%E6%81%AF%E6%A0%BC%E5%BC%8F%E4%BB%A5%E5%8F%8A%E5%8F%91%E9%80%81%E4%B8%80%E6%9D%A1%E6%B6%88%E6%81%AF"><span class="nav-number">1.2.4.</span> <span class="nav-text">2.1. 消息 Socket 消息格式以及发送一条消息</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B%E4%B9%8B%E6%AD%A5%E9%AA%A4%E4%B8%80"><span class="nav-number">1.2.5.</span> <span class="nav-text">2.2. 发送消息详细流程之步骤一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B%E4%B9%8B%E6%AD%A5%E9%AA%A4%E4%BA%8C"><span class="nav-number">1.2.6.</span> <span class="nav-text">2.3. 发送消息详细流程之步骤二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B%E4%B9%8B%E6%AD%A5%E9%AA%A4%E4%B8%89"><span class="nav-number">1.2.7.</span> <span class="nav-text">2.4. 发送消息详细流程之步骤三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B%E4%B9%8B%E6%AD%A5%E9%AA%A4%E5%9B%9B"><span class="nav-number">1.2.8.</span> <span class="nav-text">2.5. 发送消息详细流程之步骤四</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B%E4%B9%8B%E6%AD%A5%E9%AA%A4%E4%BA%94"><span class="nav-number">1.2.9.</span> <span class="nav-text">2.6. 发送消息详细流程之步骤五</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-%E5%8F%91%E9%80%81%E6%B6%88%E6%81%AF%E8%AF%A6%E7%BB%86%E6%B5%81%E7%A8%8B%E4%B9%8B%E6%AD%A5%E9%AA%A4%E5%85%AD"><span class="nav-number">1.2.10.</span> <span class="nav-text">2.7. 发送消息详细流程之步骤六</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%97%9B%E7%82%B9%E4%B8%80%EF%BC%8C%E5%A4%B4%E7%96%BC%E7%9A%84%E8%BF%87%E5%BA%A6%E5%B0%81%E8%A3%85"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. 痛点一，头疼的过度封装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E7%97%9B%E7%82%B9%E4%BA%8C%EF%BC%8C%E8%87%B3%E4%BB%8A%E8%BF%98%E6%B2%A1%E6%9C%89%E8%A7%A3%E5%86%B3-rtmp-%E5%9C%B0%E5%9D%80%E7%9A%84%E8%8E%B7%E5%8F%96"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. 痛点二，至今还没有解决 rtmp 地址的获取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81"><span class="nav-number">1.4.</span> <span class="nav-text">代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">1.5.</span> <span class="nav-text">参考链接</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ChangeLog"><span class="nav-number">1.6.</span> <span class="nav-text">ChangeLog</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 2014 – 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
