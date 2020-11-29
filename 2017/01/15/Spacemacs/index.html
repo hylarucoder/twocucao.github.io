@@ -1,38 +1,569 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言最开始，使用 Sublime Text 编码，后来用 Vim 混合 PyCharm 写 Python。 前几天，Github 上的 Spacemacs 已经成功的突破一万 Star, 听说几个我非常佩服的 Pythoner（比如『Python Web 开发实战』的作者董伟明） 也是非常喜欢 Spacemacs, 我就萌生了从 Vim 切换到 Spacemacs 的想法，说做就做。  注：本文所">
+<meta property="og:type" content="article">
+<meta property="og:title" content="写给 Pythoner 的 Spacemacs 入门指北">
+<meta property="og:url" content="http://twocucao.xyz/2017/01/15/Spacemacs/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="前言最开始，使用 Sublime Text 编码，后来用 Vim 混合 PyCharm 写 Python。 前几天，Github 上的 Spacemacs 已经成功的突破一万 Star, 听说几个我非常佩服的 Pythoner（比如『Python Web 开发实战』的作者董伟明） 也是非常喜欢 Spacemacs, 我就萌生了从 Vim 切换到 Spacemacs 的想法，说做就做。  注：本文所">
+<meta property="og:locale">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-d5c8171294ec9f3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-4e6026d213191939.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-45747c68366ef275.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-b2ce54f91a91e9d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-e37a81a2a399e5f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-250852ddc15bd7a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-7516130bb7fe70c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-4a2b2df1e6be0dfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-3406b060737bffa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-8ef2bac3163f166c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-b90176c2e97df7dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-86a9a546e350994c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-aec8c9f278f74600.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2017-01-15T10:40:59.000Z">
+<meta property="article:modified_time" content="2018-01-28T01:22:56.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="效率">
+<meta property="article:tag" content="IPynb">
+<meta property="article:tag" content="Linux Shell">
+<meta property="article:tag" content="沟通交流">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/52890-d5c8171294ec9f3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://twocucao.xyz/2017/01/15/Spacemacs/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>写给 Pythoner 的 Spacemacs 入门指北 | MG的编程小屋</title>
+  
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/01/15/Spacemacs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          写给 Pythoner 的 Spacemacs 入门指北
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-15 18:40:59" itemprop="dateCreated datePublished" datetime="2017-01-15T18:40:59+08:00">2017-01-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-28 09:22:56" itemprop="dateModified" datetime="2018-01-28T09:22:56+08:00">2018-01-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%88%A9%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">编程利器</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最开始，使用 Sublime Text 编码，后来用 Vim 混合 PyCharm 写 Python。</p>
+<p>前几天，Github 上的 Spacemacs 已经成功的突破一万 Star, 听说几个我非常佩服的 Pythoner（比如『Python Web 开发实战』的作者董伟明） 也是非常喜欢 Spacemacs, 我就萌生了从 Vim 切换到 Spacemacs 的想法，说做就做。</p>
+<blockquote>
+<p>注：本文所有内容基于 macOS 10.11, 软件环境为 zsh , pyenv , python3.5.2 , node5.12.0. 其他类 Unix 平台略作修改即可使用。至于 Windows 平台，建议安装 Ubuntu 虚拟机。本文也需要读者具备基本的 VIM 基本常识和 Python 常识。</p>
+</blockquote>
+<a id="more"></a>
+
+<p>迁移到一个编辑器需要找到一些操作的 Emacs 替代操作。于是我安排文章结构如下：</p>
+<ul>
+<li>[0x00. 基本软件环境安装](#0x00- 基本软件环境安装)<ul>
+<li>[0.1 zsh 与 ohmyzsh](#01-zsh- 与 -ohmyzsh)</li>
+<li>[0.2 pyenv 与 pyenv virtualenv](#02-pyenv- 与 -pyenv-virtualenv)</li>
+<li>[0.3 nvm 以及常用 npm 包](#03-nvm- 以及常用 -npm- 包)</li>
+<li>[0.4 Spacemacs 安装以及基本配置](#04-spacemacs- 安装以及基本配置)</li>
+</ul>
+</li>
+<li>[0x01. 日常的编辑](#0x01- 日常的编辑)<ul>
+<li>[1.1 文件导航](#11- 文件导航)</li>
+<li>[1.2 文件编辑](#12- 文件编辑)</li>
+<li><a href="#13-markdown-writing">1.3 Markdown Writing</a></li>
+</ul>
+</li>
+<li>[0x02. Python 编程](#0x02-python- 编程)<ul>
+<li>[2.1 代码补全](#21- 代码补全)</li>
+<li>[2.2 代码跳转](#22- 代码跳转)</li>
+<li>[2.3 pytest 测试](#23-pytest- 测试)</li>
+</ul>
+</li>
+<li><a href="#0x03-ipython-notebook">0x03. IPython Notebook</a><ul>
+<li>[3.1 IPython Notebook 基本配置](#31-ipython-notebook- 基本配置)</li>
+<li><a href="#32-emacs-ipython-notebook">3.2 Emacs IPython Notebook</a></li>
+</ul>
+</li>
+<li>[0x04. 扩展](#0x04- 扩展)</li>
+</ul>
+<p>本文只负责把读者带入 Spacemacs 的世界中，而不是涉及到 Spacemacs 的方方面面，所以此文为指北。而非详细的指南 (Guide).</p>
+<h2 id="0x00-基本软件环境安装"><a href="#0x00-基本软件环境安装" class="headerlink" title="0x00. 基本软件环境安装"></a>0x00. 基本软件环境安装</h2><h3 id="0-1-zsh-与-ohmyzsh"><a href="#0-1-zsh-与-ohmyzsh" class="headerlink" title="0.1 zsh 与 ohmyzsh"></a>0.1 zsh 与 ohmyzsh</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install zsh</span><br><span class="line">chsh -s /bin/zsh</span><br><span class="line">sh -c <span class="string">&quot;<span class="subst">$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="0-2-pyenv-与-pyenv-virtualenv"><a href="#0-2-pyenv-与-pyenv-virtualenv" class="headerlink" title="0.2 pyenv 与 pyenv virtualenv"></a>0.2 pyenv 与 pyenv virtualenv</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/yyuu/pyenv.git ~/.pyenv</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PYENV_ROOT=&quot;$HOME/.pyenv&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;export PATH=&quot;$PYENV_ROOT/bin:$PATH&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;eval &quot;$(pyenv init -)&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;eval &quot;$(pyenv virtualenv-init -)&quot;&#x27;</span> &gt;&gt; ~/.zshrc</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不喜写兼容代码，所有代码均向 3.5+ 靠拢</span></span><br><span class="line">v=3.5.2|wget http://mirrors.sohu.com/python/<span class="variable">$v</span>/Python-<span class="variable">$v</span>.tar.xz -P ~/.pyenv/cache/;pyenv install <span class="variable">$v</span></span><br><span class="line">v=3.6.0|wget http://mirrors.sohu.com/python/<span class="variable">$v</span>/Python-<span class="variable">$v</span>.tar.xz -P ~/.pyenv/cache/;pyenv install <span class="variable">$v</span></span><br><span class="line">v=2.7.11|wget http://mirrors.sohu.com/python/<span class="variable">$v</span>/Python-<span class="variable">$v</span>.tar.xz -P ~/.pyenv/cache/;pyenv install <span class="variable">$v</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置 Global Python 为 2.7.11, 备注：尽量不要把 Py3 设置为全局，否则由于 Homebrew 本身有一些依赖是依赖于 Py2 的，这样容易出现一些奇怪的问题。</span></span><br><span class="line">pyenv global 2.7.11</span><br><span class="line">pip install -i https://pypi.doubanio.com/simple requests</span><br><span class="line"><span class="comment"># 下面这个是用于安装基本的代码补全功能</span></span><br><span class="line">pip install -i https://pypi.doubanio.com/simple --upgrade <span class="string">&quot;jedi&gt;=0.9.0&quot;</span> <span class="string">&quot;json-rpc&gt;=1.8.1&quot;</span> <span class="string">&quot;service_factory&gt;=0.1.5&quot;</span> flake8 pytest autoflake hy</span><br><span class="line"></span><br><span class="line">pyenv virtualenv 3.5.2 py3-daily</span><br><span class="line">pyenv activate py3-daily</span><br><span class="line">pip install -i https://pypi.doubanio.com/simple requests</span><br><span class="line">pip install -i https://pypi.doubanio.com/simple beatutifulsoup4</span><br><span class="line">pip install -i https://pypi.doubanio.com/simple ipython[notebook]</span><br><span class="line">pip install -i https://pypi.doubanio.com/simple jupyter</span><br><span class="line"><span class="comment"># 下面这个是用于安装基本的代码补全功能</span></span><br><span class="line">pip install -i https://pypi.doubanio.com/simple --upgrade <span class="string">&quot;jedi&gt;=0.9.0&quot;</span> <span class="string">&quot;json-rpc&gt;=1.8.1&quot;</span> <span class="string">&quot;service_factory&gt;=0.1.5&quot;</span> flake8 pytest autoflake hy</span><br><span class="line">pyenv deactivate</span><br><span class="line"><span class="comment"># pyenv uninstall py3-daily</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="0-3-nvm-以及常用-npm-包"><a href="#0-3-nvm-以及常用-npm-包" class="headerlink" title="0.3 nvm 以及常用 npm 包"></a>0.3 nvm 以及常用 npm 包</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装 nvm</span></span><br><span class="line">curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash</span><br><span class="line">nvm install 5.12.0</span><br><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;\n#alias for cnpm\nalias cnpm=&quot;npm --registry=https://registry.npm.taobao.org \</span></span><br><span class="line"><span class="string">  --cache=$HOME/.npm/.cache/cnpm \</span></span><br><span class="line"><span class="string">  --disturl=https://npm.taobao.org/dist \</span></span><br><span class="line"><span class="string">  --userconfig=$HOME/.cnpmrc&quot;&#x27;</span> &gt;&gt; ~/.zshrc &amp;&amp; <span class="built_in">source</span> ~/.zshrc</span><br><span class="line">npm install -g vmd</span><br><span class="line">npm install -g gitbook-cli</span><br><span class="line">npm install -g hexo-cli</span><br><span class="line">npm install -g tern</span><br><span class="line">npm install -g js-beautify</span><br><span class="line">npm install -g js-hint</span><br></pre></td></tr></table></figure>
+
+<h3 id="0-4-Spacemacs-安装以及基本配置"><a href="#0-4-Spacemacs-安装以及基本配置" class="headerlink" title="0.4 Spacemacs 安装以及基本配置"></a>0.4 Spacemacs 安装以及基本配置</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">brew install ag</span><br><span class="line">brew install grep</span><br><span class="line">brew tap d12frosted/emacs-plus</span><br><span class="line">brew install emacs-plus</span><br><span class="line"><span class="comment"># 安装完毕之后，克隆我的配置 repo, 有一些基本的配置用于解决墙的问题。解决方案来自于子龙山人</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/syl20bnr/spacemacs ~/.emacs.d</span><br><span class="line">mv ~/.spacemacs .spacemacs.bak</span><br><span class="line">git <span class="built_in">clone</span> https://github.com/twocucao/spacemacs.d.git ~/.spacemacs.d</span><br><span class="line"><span class="comment"># 输入 emacs 进行初始化，如果你可以正常访问 Github 的话时间在半小时之内。</span></span><br><span class="line">emacs</span><br></pre></td></tr></table></figure>
+
+<p>安装 Spacemacs 过程中画面如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-d5c8171294ec9f3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="安装 Spacemacs 过程中画面"></p>
+<p>安装前，Emacs 长这个样子：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-4e6026d213191939.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="安装前"></p>
+<p>安装后，Emacs 长这个样子：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-45747c68366ef275.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="安装后.png"></p>
+<p><strong>在正式进入，请牢牢记住下面几个按键已经功能，以备不时之需</strong></p>
+<ul>
+<li>spc : 跳出命令面板</li>
+<li>spc-spc : 跳出命令列表，可运行命令，也可以查找快捷键</li>
+<li>spc-h-spc : 查找包的用途与定义</li>
+</ul>
+<p>嗯，可以谈下一话题了！</p>
+<h2 id="0x01-日常的编辑"><a href="#0x01-日常的编辑" class="headerlink" title="0x01. 日常的编辑"></a>0x01. 日常的编辑</h2><h3 id="1-1-文件导航"><a href="#1-1-文件导航" class="headerlink" title="1.1 文件导航"></a>1.1 文件导航</h3><ul>
+<li>(VIM 流）hjkloOaA zz</li>
+<li>(VIM 流）查找 * /words</li>
+<li>spc-f-j 开发 neotree</li>
+<li>spc-tab 切换到上一个 buffer</li>
+<li>spc-f-f 打开文件 spc-p-f fuzzfind 类似于 ctrlp spc-s-g-p grep 搜索项目  spc-s-a-p ag 搜索项目</li>
+</ul>
+<p>搜索项目如图 (spc-s-a-p ag 搜索项目）:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-b2ce54f91a91e9d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="按照关键字搜索项目"></p>
+<blockquote>
+<p>实在是方便至极</p>
+</blockquote>
+<h3 id="1-2-文件编辑"><a href="#1-2-文件编辑" class="headerlink" title="1.2 文件编辑"></a>1.2 文件编辑</h3><p>文件内容编辑</p>
+<ul>
+<li>(VIM 流）u 与 c-r d c 等</li>
+<li>有趣的是查找替换功能也是自带预览的。比如 :%s/foo/bar/g</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-e37a81a2a399e5f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="查找替换预览"></p>
+<p>文件本身编辑</p>
+<ul>
+<li>在 dired mode 下：copy - C , delete - D, new folder - +</li>
+<li>也可以 spc-f-t 在 neotree 下进行编辑</li>
+</ul>
+<blockquote>
+<p>除去这些和 Vim 相似的文件编辑功能之外，甚至窗口管理都和 Vim 一致了，使用 c-w+hjkl 直接跳转。<br>强烈建议在读者抽空过一遍基本的 Vimtutor</p>
+</blockquote>
+<h3 id="1-3-Markdown-Writing"><a href="#1-3-Markdown-Writing" class="headerlink" title="1.3 Markdown Writing"></a>1.3 Markdown Writing</h3><ul>
+<li>spc-spc-markdown-generate-to 回车即可生成本文的 Toc(Table Of Content)</li>
+<li>spc-b-i 打开 buffer 的 imenu（类似于 Vim 的 Tagbar 插件），enter 跳转</li>
+</ul>
+<p>搜索项目如图 (spc-b-i 开启 buffer imenu ，enter 跳转）:</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-250852ddc15bd7a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IMenu"></p>
+<h2 id="0x02-Python-编程"><a href="#0x02-Python-编程" class="headerlink" title="0x02. Python 编程"></a>0x02. Python 编程</h2><h3 id="2-1-代码补全"><a href="#2-1-代码补全" class="headerlink" title="2.1 代码补全"></a>2.1 代码补全</h3><p>当你按照前面的所有配置走一圈下来，基本上就已经可以完美的进行补全了。<br>比如，当我编辑一个 py 文件的时候，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 先激活虚拟环境</span></span><br><span class="line">pyenv activate 3.5.2/envs/py3-daily</span><br><span class="line">emacs py.py</span><br></pre></td></tr></table></figure>
+<p>如图所示，因为 requests,numpy 这种第三方库都可以完美补全，其他自然不在话下。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-7516130bb7fe70c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="代码补全"></p>
+<p>代码补全还有另一个神器，就是可以内嵌 lisp 的 Snippet 模板 – yasnippet, 由于模板功能基本上和其他编辑器相同，而使用 elisp 语言进行编写动态 Snippet 模板则需要会 elisp, 这以后有机会再学学。</p>
+<h3 id="2-2-代码跳转"><a href="#2-2-代码跳转" class="headerlink" title="2.2 代码跳转"></a>2.2 代码跳转</h3><ul>
+<li>文件代码跳转 spc-spc-helm-imenu 查看文件结构</li>
+<li>文件跳转 在 normal-mode 下，gd 即可跳转到函数定义上，但是不能跨文件跳转。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-4a2b2df1e6be0dfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="单文件使用 helm_imenu 进行浏览"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-3406b060737bffa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="使用 ag 进行代码搜索"></p>
+<h3 id="2-3-pytest-测试"><a href="#2-3-pytest-测试" class="headerlink" title="2.3 pytest 测试"></a>2.3 pytest 测试</h3><ul>
+<li>spc-m-s-py3-daily enter 选择 py3-daily 虚拟环境</li>
+<li>spc-spc-pytest-all enter 即可运行所有 pytest 测试。</li>
+</ul>
+<p>测试过程：</p>
+<p>运行测试失败，运行测试失败，使用 c-w-j 跳转到下面窗口，对红色标记处 enter, 即可跳转到出错文件行。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-8ef2bac3163f166c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="pytest 运行测试失败"></p>
+<p>修正运行测试成功，如图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-b90176c2e97df7dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="pytest 运行测试成功"></p>
+<h2 id="0x03-IPython-Notebook"><a href="#0x03-IPython-Notebook" class="headerlink" title="0x03. IPython Notebook"></a>0x03. IPython Notebook</h2><p>通常情况下我使用 IPython Notebook 都是在 Web 端，因为是 Web 端，实际上大量的 Dom 渲染对浏览器的渲染速度还是有一定的影响的，我还是比较喜欢客户端，因为客户端的快捷键可以定制，而 Web 端的快捷键实在是相当的不方便。</p>
+<p>是不是 IPython Notebook 的 web 端没有好处呢？有的，比如我可以借用外部的 JS 可视化图表对 js 进行可视化呀。</p>
+<p>比如我发在简书上的这篇技术文 <a target="_blank" rel="noopener" href="http://www.jianshu.com/p/609193efee1a">IPython Notebook 引入 ECharts 做可视化</a></p>
+<p>但，如果不需要 js 功能的话，还是用客户端舒服一些。</p>
+<h3 id="3-1-IPython-Notebook-基本配置"><a href="#3-1-IPython-Notebook-基本配置" class="headerlink" title="3.1 IPython Notebook 基本配置"></a>3.1 IPython Notebook 基本配置</h3><p>spacemacs 貌似只支持密码访问 IPython Notebook, 那么我们就生成密码。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先激活 py3-daily 环境</span></span><br><span class="line">python -c <span class="string">&quot;from notebook.auth import passwd;print(passwd())&quot;</span> | pbcopy</span><br><span class="line"><span class="comment"># 恩，于是剪切板上就有如下的字符串</span></span><br><span class="line">sha1:9bf4c48a6b83:26bc24a78a1e4aea7baa36874f5e86bafac0dbb9</span><br><span class="line"><span class="comment"># 打开 config 文件取消注释并修改 c.NotebookApp.password</span></span><br><span class="line">vim ~/.jupyter/jupyter_notebook_config.py</span><br><span class="line">c.NotebookApp.password = <span class="string">&#x27;sha1:35543659622f:f9a78f0b20132f3e04aa1d4ed4060f9fd9eb7663&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-Emacs-IPython-Notebook"><a href="#3-2-Emacs-IPython-Notebook" class="headerlink" title="3.2 Emacs IPython Notebook"></a>3.2 Emacs IPython Notebook</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 首先在终端打开 IPython Notebook</span></span><br><span class="line">ipython notebook</span><br></pre></td></tr></table></figure>
+<p>接着打开 emacs, 输入 spc-a-i-n, 默认端口，然后输入密码即可。首次登陆后还需要在输入一次 spc-a-i-n 即可看到 IPython Notebook 的主界面。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-86a9a546e350994c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="IPYNB 的主界面"></p>
+<p>光标移到 [New Notebook] 键击 enter 新建 IPython Notebook.</p>
+<p>输入如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># The %... is an iPython thing, and is not part of the Python language.</span></span><br><span class="line"><span class="comment"># In this case we&#x27;re just telling the plotting library to draw things on</span></span><br><span class="line"><span class="comment"># the notebook, instead of on a separate window.</span></span><br><span class="line">%matplotlib inline</span><br><span class="line"><span class="comment"># See all the &quot;as ...&quot; contructs? They&#x27;re just aliasing the package names.</span></span><br><span class="line"><span class="comment"># That way we can call methods like plt.plot() instead of matplotlib.pyplot.plot().</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> scipy <span class="keyword">as</span> sp</span><br><span class="line"><span class="keyword">import</span> matplotlib <span class="keyword">as</span> mpl</span><br><span class="line"><span class="keyword">import</span> matplotlib.cm <span class="keyword">as</span> cm</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">pd.set_option(<span class="string">&#x27;display.width&#x27;</span>, <span class="number">1000</span>)</span><br><span class="line">pd.set_option(<span class="string">&#x27;display.max_columns&#x27;</span>, <span class="number">100</span>)</span><br><span class="line">pd.set_option(<span class="string">&#x27;display.notebook_repr_html&#x27;</span>, <span class="literal">True</span>)</span><br><span class="line"><span class="keyword">import</span> seaborn <span class="keyword">as</span> sns</span><br><span class="line">sns.set_style(<span class="string">&quot;darkgrid&quot;</span>)</span><br><span class="line">sns.set_context(<span class="string">&quot;poster&quot;</span>)</span><br><span class="line">sns.<span class="built_in">set</span>()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Load the example flights dataset and conver to long-form</span></span><br><span class="line">flights_long = sns.load_dataset(<span class="string">&quot;flights&quot;</span>)</span><br><span class="line">flights = flights_long.pivot(<span class="string">&quot;month&quot;</span>, <span class="string">&quot;year&quot;</span>, <span class="string">&quot;passengers&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Draw a heatmap with the numeric values in each cell</span></span><br><span class="line">sns.heatmap(flights, annot=<span class="literal">True</span>, fmt=<span class="string">&quot;d&quot;</span>, linewidths=<span class="number">.5</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>shift+enter , 咣</p>
+<p>热力图就出来了</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-aec8c9f278f74600.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="热力图"></p>
+<h2 id="0x04-扩展"><a href="#0x04-扩展" class="headerlink" title="0x04. 扩展"></a>0x04. 扩展</h2><p>看完上文，就可以深入文档进行探索了。</p>
+<ul>
+<li>打开 Vim, 输入：help vimtutor 熟悉基本的 Vim 操作。</li>
+<li><a target="_blank" rel="noopener" href="https://github.com/syl20bnr/spacemacs/tree/master/layers">Spacemacs Layer 文档</a></li>
+<li><a target="_blank" rel="noopener" href="http://spacemacs.org/doc/DOCUMENTATION.html">Spacemacs 文档</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/twocucao/spacemacs.d">我的 Spacemacs 配置页面</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/emacs-china/Spacemacs-rocks">Spacemacs 达人子龙山人的教程</a></li>
+</ul>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-01-15 18:53:45</strong> 重修文字</li>
+<li><strong>2017-01-16 12:49:19</strong> 润饰文字，增加可读性，首发简书。</li>
+<li><strong>2018-01-01 12:49:19</strong> 最后弃坑并回归 Vim 与 IDE</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%88%E7%8E%87/" rel="tag"># 效率</a>
+              <a href="/tags/IPynb/" rel="tag"># IPynb</a>
+              <a href="/tags/Linux-Shell/" rel="tag"># Linux Shell</a>
+              <a href="/tags/%E6%B2%9F%E9%80%9A%E4%BA%A4%E6%B5%81/" rel="tag"># 沟通交流</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/01/14/OneQuestionToSeePythonScope/" rel="prev" title="从一个小问题来说 Python 的作用域">
+      <i class="fa fa-chevron-left"></i> 从一个小问题来说 Python 的作用域
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/" rel="next" title="『好好说话』读书笔记">
+      『好好说话』读书笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%9F%BA%E6%9C%AC%E8%BD%AF%E4%BB%B6%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="nav-number">2.</span> <span class="nav-text">0x00. 基本软件环境安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#0-1-zsh-%E4%B8%8E-ohmyzsh"><span class="nav-number">2.1.</span> <span class="nav-text">0.1 zsh 与 ohmyzsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-2-pyenv-%E4%B8%8E-pyenv-virtualenv"><span class="nav-number">2.2.</span> <span class="nav-text">0.2 pyenv 与 pyenv virtualenv</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-3-nvm-%E4%BB%A5%E5%8F%8A%E5%B8%B8%E7%94%A8-npm-%E5%8C%85"><span class="nav-number">2.3.</span> <span class="nav-text">0.3 nvm 以及常用 npm 包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0-4-Spacemacs-%E5%AE%89%E8%A3%85%E4%BB%A5%E5%8F%8A%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">2.4.</span> <span class="nav-text">0.4 Spacemacs 安装以及基本配置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E6%97%A5%E5%B8%B8%E7%9A%84%E7%BC%96%E8%BE%91"><span class="nav-number">3.</span> <span class="nav-text">0x01. 日常的编辑</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%96%87%E4%BB%B6%E5%AF%BC%E8%88%AA"><span class="nav-number">3.1.</span> <span class="nav-text">1.1 文件导航</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91"><span class="nav-number">3.2.</span> <span class="nav-text">1.2 文件编辑</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Markdown-Writing"><span class="nav-number">3.3.</span> <span class="nav-text">1.3 Markdown Writing</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Python-%E7%BC%96%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">0x02. Python 编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E4%BB%A3%E7%A0%81%E8%A1%A5%E5%85%A8"><span class="nav-number">4.1.</span> <span class="nav-text">2.1 代码补全</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E4%BB%A3%E7%A0%81%E8%B7%B3%E8%BD%AC"><span class="nav-number">4.2.</span> <span class="nav-text">2.2 代码跳转</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-pytest-%E6%B5%8B%E8%AF%95"><span class="nav-number">4.3.</span> <span class="nav-text">2.3 pytest 测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-IPython-Notebook"><span class="nav-number">5.</span> <span class="nav-text">0x03. IPython Notebook</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-IPython-Notebook-%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.</span> <span class="nav-text">3.1 IPython Notebook 基本配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Emacs-IPython-Notebook"><span class="nav-number">5.2.</span> <span class="nav-text">3.2 Emacs IPython Notebook</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-%E6%89%A9%E5%B1%95"><span class="nav-number">6.</span> <span class="nav-text">0x04. 扩展</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

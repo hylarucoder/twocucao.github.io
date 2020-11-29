@@ -1,38 +1,483 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0x00 前言PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的包管理工具 pipenv』 Kenneth Reitz 出品，必属精品。 Python 打包历史刚开始的时候，我们是这样安装包的。 123curl http:&#x2F;&#x2F;pypi.python.org&#x2F;packages&#x2F;alsdasdl&#x2F;req">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具">
+<meta property="og:url" content="http://twocucao.xyz/2018/05/22/PipEnv/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的包管理工具 pipenv』 Kenneth Reitz 出品，必属精品。 Python 打包历史刚开始的时候，我们是这样安装包的。 123curl http:&#x2F;&#x2F;pypi.python.org&#x2F;packages&#x2F;alsdasdl&#x2F;req">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-05-22T13:11:03.000Z">
+<meta property="article:modified_time" content="2018-11-13T02:23:01.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="Django">
+<meta property="article:tag" content="VueJS">
+<meta property="article:tag" content="全栈开发">
+<meta property="article:tag" content="RestAPI">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2018/05/22/PipEnv/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具 | MG的编程小屋</title>
+  
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/05/22/PipEnv/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-05-22 21:11:03" itemprop="dateCreated datePublished" datetime="2018-05-22T21:11:03+08:00">2018-05-22</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-11-13 10:23:01" itemprop="dateModified" datetime="2018-11-13T10:23:01+08:00">2018-11-13</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的包管理工具 pipenv』</p>
+<p>Kenneth Reitz 出品，必属精品。</p>
+<h3 id="Python-打包历史"><a href="#Python-打包历史" class="headerlink" title="Python 打包历史"></a>Python 打包历史</h3><p>刚开始的时候，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl http:&#x2F;&#x2F;pypi.python.org&#x2F;packages&#x2F;alsdasdl&#x2F;requests.tar.gz | tar zxf</span><br><span class="line">cd requests&#x2F;</span><br><span class="line">python setup.py install</span><br></pre></td></tr></table></figure>
+
+<p>这个问题初看起来不是问题，但是随着你安装程序的增多就知道有多么痛苦了。</p>
+<ol>
+<li>有的依赖库依赖别的库你怎么解决？比如 pandas 需要安装 numpy</li>
+<li>有的依赖库依赖 c 库怎么办？比如 LXML</li>
+<li>在 python2.6.5 下，如果我需要安装两个不同版本的 Django 开发不同的软件怎么办？难道只能动态复制文件到 site-packages 里面？</li>
+</ol>
+<p>后来，我们是这样安装包的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">easy_install requests</span><br></pre></td></tr></table></figure>
+
+<p>我们可以直接从 pypi 进行安装了。但尼玛，为什么 easy_install 安装很 easy, 但是没有 easy_uninstall?</p>
+<p>好，2010 年后，我们继续前进：</p>
+<ul>
+<li>可以通过 pip 替代 easy_install 了。</li>
+<li>可以通过 virtualenv 管理项目的依赖库了。虽然说，还是不能像 ruby gem 一样同时把多个版本的的软件装在同一个系统里。</li>
+<li>可以通过 requirements 锁依赖了。</li>
+</ul>
+<p>但，同期的其他编程语言社区分别出现了如下的包管理工具：</p>
+<ul>
+<li>node -&gt; yarn &amp;&amp; npm , 有 lockfile</li>
+<li>php -&gt; composer , 有 lockfile</li>
+<li>rust -&gt; cargo , 有 lockfile</li>
+<li>ruby -&gt; bundler , 有 lockfile</li>
+</ul>
+<p>而我大 Python 居然没跟上潮流</p>
+<ul>
+<li>python -&gt; pip &amp;&amp; virtualenv/venv , 无 lockfile</li>
+</ul>
+<blockquote>
+<p>PS: Python3.3 之后，默认可以直接使用 venv 模块，不需要再安装 virtualenv 了。但还是需要手动，并且用起来比较反直觉。</p>
+</blockquote>
+<p>关于 requirements.txt</p>
+<ul>
+<li>如果你使用 pip freeze 来形成这个文件，则不直观，完全看不出来哪个依赖库依赖哪个依赖。</li>
+<li>如果你直接手动指定你所需要的库，比如 flask 的话，似乎又有些太直观了。</li>
+</ul>
+<p>如果能有一个东西，既可以表示 freeze 的结果 (what you want)，又可以表示你需要的库 (what you need). 就好了。</p>
+<blockquote>
+<p>这当然可以考虑用两份 requirements 来解决。先安装 what you need 用来开发，然后 freeze 为 what you want 去部署。</p>
+</blockquote>
+<p>当然，铺垫了这么多 K 神肯定是来介绍他的 pipenv 的。</p>
+<p>比如说，我想查看，本项目的依赖库，直接 pipenv graph</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">coverage&#x3D;&#x3D;4.5.1</span><br><span class="line">fabric&#x3D;&#x3D;2.0.1</span><br><span class="line">  - cryptography [required: &gt;&#x3D;1.1, installed: 2.2.2]</span><br><span class="line">    - asn1crypto [required: &gt;&#x3D;0.21.0, installed: 0.24.0]</span><br><span class="line">    - cffi [required: &gt;&#x3D;1.7, installed: 1.11.5]</span><br><span class="line">      - pycparser [required: Any, installed: 2.18]</span><br><span class="line">    - idna [required: &gt;&#x3D;2.1, installed: 2.6]</span><br><span class="line">    - six [required: &gt;&#x3D;1.4.1, installed: 1.11.0]</span><br><span class="line">  - invoke [required: &lt;2.0,&gt;&#x3D;1.0, installed: 1.0.0]</span><br><span class="line">  - paramiko [required: &gt;&#x3D;2.4, installed: 2.4.1]</span><br><span class="line">    - bcrypt [required: &gt;&#x3D;3.1.3, installed: 3.1.4]</span><br><span class="line">      - cffi [required: &gt;&#x3D;1.1, installed: 1.11.5]</span><br><span class="line">        - pycparser [required: Any, installed: 2.18]</span><br><span class="line">      - six [required: &gt;&#x3D;1.4.1, installed: 1.11.0]</span><br><span class="line">    - cryptography [required: &gt;&#x3D;1.5, installed: 2.2.2]</span><br><span class="line">      - asn1crypto [required: &gt;&#x3D;0.21.0, installed: 0.24.0]</span><br><span class="line">      - cffi [required: &gt;&#x3D;1.7, installed: 1.11.5]</span><br><span class="line">        - pycparser [required: Any, installed: 2.18]</span><br><span class="line">      - idna [required: &gt;&#x3D;2.1, installed: 2.6]</span><br><span class="line">      - six [required: &gt;&#x3D;1.4.1, installed: 1.11.0]</span><br><span class="line">    - pyasn1 [required: &gt;&#x3D;0.1.7, installed: 0.4.2]</span><br><span class="line">    - pynacl [required: &gt;&#x3D;1.0.1, installed: 1.2.1]</span><br><span class="line">      - cffi [required: &gt;&#x3D;1.4.1, installed: 1.11.5]</span><br><span class="line">        - pycparser [required: Any, installed: 2.18]</span><br><span class="line">      - six [required: Any, installed: 1.11.0]</span><br><span class="line">flake8&#x3D;&#x3D;3.5.0</span><br><span class="line">  - mccabe [required: &gt;&#x3D;0.6.0,&lt;0.7.0, installed: 0.6.1]</span><br><span class="line">  - pycodestyle [required: &lt;2.4.0,&gt;&#x3D;2.0.0, installed: 2.3.1]</span><br><span class="line">  - pyflakes [required: &gt;&#x3D;1.5.0,&lt;1.7.0, installed: 1.6.0]</span><br><span class="line"># 其他省略</span><br></pre></td></tr></table></figure>
+
+<p>如何尝鲜？我最近更新到了之前写的一个库（代码写的惨不忍赌，最近准备重构，勿喷）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git clone git@github.com:twocucao&#x2F;YaPyLib.git</span><br><span class="line">cd YaPyLib&#x2F;</span><br><span class="line">brew install pipenv</span><br><span class="line">pipenv --three</span><br><span class="line">pipenv install --dev</span><br><span class="line">pipenv shell</span><br></pre></td></tr></table></figure>
+
+<p>记住几个命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pipenv --venv # 查看 venv 位置</span><br><span class="line">pipenv --python 3.6.5</span><br><span class="line">exit 退出 pipenv shell</span><br></pre></td></tr></table></figure>
+
+<p>至于其他的功能，参考官网自己摸索吧。</p>
+<h3 id="FAQ-环节"><a href="#FAQ-环节" class="headerlink" title="FAQ 环节"></a>FAQ 环节</h3><p>FAQ 环节有一个问题非常有趣，应该把 lockfile 放在 git 仓库里面吗？</p>
+<p>k 神是这么回答的 yes。 这个问题很久之前就在 issue 上回答过了</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/pypa/pipenv/issues/598">https://github.com/pypa/pipenv/issues/598</a></p>
+<p>我刚开始觉得不提交会好一些，后来觉得 track 一下也无妨。</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><blockquote>
+<p>在用 npm 和 yarn 的时候，我有这么一个想法，希望 python 圈子里面能出一个类似于包管理工具。今年 2 月份的时候把自己的项目迁移过来，发现 pipenv 用起来很挺舒服的。</p>
+</blockquote>
+<blockquote>
+<p>pipenv 是未来。火速用上吧。</p>
+</blockquote>
+<blockquote>
+<p>觉得有趣就点个赞或者关注下呗。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Django/" rel="tag"># Django</a>
+              <a href="/tags/VueJS/" rel="tag"># VueJS</a>
+              <a href="/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/" rel="tag"># 全栈开发</a>
+              <a href="/tags/RestAPI/" rel="tag"># RestAPI</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/05/16/PyConDjango/" rel="prev" title="PyCon 2018 之 Django 专题与 未来的包管理工具 pipenv">
+      <i class="fa fa-chevron-left"></i> PyCon 2018 之 Django 专题与 未来的包管理工具 pipenv
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/05/22/Fabric2/" rel="next" title="Python 自动化工具 Fabric 支持 Python3 了">
+      Python 自动化工具 Fabric 支持 Python3 了 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-%E6%89%93%E5%8C%85%E5%8E%86%E5%8F%B2"><span class="nav-number">1.1.</span> <span class="nav-text">Python 打包历史</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FAQ-%E7%8E%AF%E8%8A%82"><span class="nav-number">1.2.</span> <span class="nav-text">FAQ 环节</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%99%E5%9C%A8%E6%9C%80%E5%90%8E"><span class="nav-number">2.</span> <span class="nav-text">写在最后</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

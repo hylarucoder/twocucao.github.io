@@ -1,38 +1,480 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0x00 前言本笔记诞生于很久前零零散散记录的笔记，拿出来发布一下。 0x01 CSS 是如何工作的？HTML 是元素的标记语言。 CSS 被用来 样式和网页布局的。 样式和布局都有哪些呢？  字体 颜色 大小 内容间距 多列 动画  通过 DOM 树的节点和样式节点结合，生成渲染树，然后交给浏览器进行渲染从而使得外观发生变化。 0x02 CSS 基本语法CSS 基本语法有三个组成部分：  规则">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于 CSS 你应该知道的一切">
+<meta property="og:url" content="http://twocucao.xyz/2017/12/28/AllStuffAboutCSS/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言本笔记诞生于很久前零零散散记录的笔记，拿出来发布一下。 0x01 CSS 是如何工作的？HTML 是元素的标记语言。 CSS 被用来 样式和网页布局的。 样式和布局都有哪些呢？  字体 颜色 大小 内容间距 多列 动画  通过 DOM 树的节点和样式节点结合，生成渲染树，然后交给浏览器进行渲染从而使得外观发生变化。 0x02 CSS 基本语法CSS 基本语法有三个组成部分：  规则">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-12-28T10:41:47.000Z">
+<meta property="article:modified_time" content="2018-02-12T05:46:07.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="CSS">
+<meta property="article:tag" content="SASS">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2017/12/28/AllStuffAboutCSS/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>关于 CSS 你应该知道的一切 | MG的编程小屋</title>
+  
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/12/28/AllStuffAboutCSS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于 CSS 你应该知道的一切
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-12-28 18:41:47" itemprop="dateCreated datePublished" datetime="2017-12-28T18:41:47+08:00">2017-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-02-12 13:46:07" itemprop="dateModified" datetime="2018-02-12T13:46:07+08:00">2018-02-12</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">前端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本笔记诞生于很久前零零散散记录的笔记，拿出来发布一下。</p>
+<h2 id="0x01-CSS-是如何工作的？"><a href="#0x01-CSS-是如何工作的？" class="headerlink" title="0x01 CSS 是如何工作的？"></a>0x01 CSS 是如何工作的？</h2><p>HTML 是元素的标记语言。</p>
+<p>CSS 被用来 样式和网页布局的。</p>
+<p>样式和布局都有哪些呢？</p>
+<ul>
+<li>字体</li>
+<li>颜色</li>
+<li>大小</li>
+<li>内容间距</li>
+<li>多列</li>
+<li>动画</li>
+</ul>
+<p>通过 DOM 树的节点和样式节点结合，生成渲染树，然后交给浏览器进行渲染从而使得外观发生变化。</p>
+<h2 id="0x02-CSS-基本语法"><a href="#0x02-CSS-基本语法" class="headerlink" title="0x02 CSS 基本语法"></a>0x02 CSS 基本语法</h2><p>CSS 基本语法有三个组成部分：</p>
+<ol>
+<li>规则</li>
+<li>选择器</li>
+<li>属性</li>
+</ol>
+<h3 id="2-1-CSS-规则"><a href="#2-1-CSS-规则" class="headerlink" title="2.1 CSS 规则"></a>2.1 CSS 规则</h3><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="selector-tag">h1</span> &#123;</span><br><span class="line">    <span class="attribute">colour</span>: blue;</span><br><span class="line">    <span class="attribute">background-color</span>: yellow;</span><br><span class="line">    <span class="attribute">border</span>: <span class="number">1px</span> solid black;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// @规则</span><br><span class="line"></span><br><span class="line"><span class="keyword">@import</span></span><br><span class="line"><span class="keyword">@charset</span></span><br><span class="line"><span class="keyword">@media</span></span><br><span class="line"><span class="keyword">@font-face</span></span><br><span class="line"></span><br><span class="line">/* in shorthand like padding <span class="keyword">and</span> margin, the values are applied</span><br><span class="line">in the order top, right, bottom, left (the same order as an analog clock). There are also other</span><br><span class="line">shorthand types, for example two values, which set for example</span><br><span class="line">the padding for top/bottom, then left/right */</span><br><span class="line"><span class="attribute">padding:</span> <span class="number">10px</span> <span class="number">15px</span> <span class="number">15px</span> <span class="number">5px</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-选择器"><a href="#2-2-选择器" class="headerlink" title="2.2 选择器"></a>2.2 选择器</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; Simple selectors: Match one or more elements based on element type, class, or id.</span><br><span class="line">&#x2F;* All div elements are blue *&#x2F;</span><br><span class="line">div &#123;</span><br><span class="line">    color: blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">h1 &#123;</span><br><span class="line">    color: red;</span><br><span class="line">    text-shadow: 1px 1px 1px black;</span><br><span class="line">    background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.1));</span><br><span class="line">    padding: 3px;</span><br><span class="line">    text-align: center;</span><br><span class="line">    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5), inset -2px -2px 5px rgba(255,255,255,0.5);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Attribute selectors: Match one or more elements based on their attributes&#x2F;attribute values.</span><br><span class="line">&#x2F;* All elements with the attribute &quot;data-vegetable&quot;</span><br><span class="line">are given green text *&#x2F;</span><br><span class="line"></span><br><span class="line">[data-vegetable] &#123;</span><br><span class="line">    color: green;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* All elements with the attribute &quot;data-vegetable&quot;</span><br><span class="line">with the exact value &quot;liquid&quot; are given a golden</span><br><span class="line">background color *&#x2F;</span><br><span class="line"></span><br><span class="line">[data-vegetable&#x3D;&quot;liquid&quot;] &#123;</span><br><span class="line">    background-color: goldenrod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;* All elements with the attribute &quot;data-vegetable&quot;,</span><br><span class="line">containing the value &quot;spicy&quot;, even among others,</span><br><span class="line">are given a red text color *&#x2F;</span><br><span class="line"></span><br><span class="line">[data-vegetable~&#x3D;&quot;spicy&quot;] &#123;</span><br><span class="line">    color: red;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Pseudo-classes: Match one or more elements that exist in a certain state, such as an element that is being hovered over by the mouse pointer, or a checkbox that is currently disabled or checked, or an element that is the first child of its parent in the DOM tree.</span><br><span class="line">&#x2F;&#x2F; Pseudo-elements: Match one or more parts of content that are in a certain position in relation to an element, for example the first word of each paragraph, or generated content appearing just before an element.</span><br><span class="line"></span><br><span class="line">:active</span><br><span class="line">:any</span><br><span class="line">:checked</span><br><span class="line">:default</span><br><span class="line">:dir()</span><br><span class="line">:disabled</span><br><span class="line">:empty</span><br><span class="line">:enabled</span><br><span class="line">:first</span><br><span class="line">:first-child</span><br><span class="line">:first-of-type</span><br><span class="line">:fullscreen</span><br><span class="line">:focus</span><br><span class="line">:focus-within</span><br><span class="line">:hover</span><br><span class="line">:indeterminate</span><br><span class="line">:in-range</span><br><span class="line">:invalid</span><br><span class="line">:lang()</span><br><span class="line">:last-child</span><br><span class="line">:last-of-type</span><br><span class="line">:left</span><br><span class="line">:link</span><br><span class="line">:not()</span><br><span class="line">:nth-child()</span><br><span class="line">:nth-last-child()</span><br><span class="line">:nth-last-of-type()</span><br><span class="line">:nth-of-type()</span><br><span class="line">:only-child</span><br><span class="line">:only-of-type</span><br><span class="line">:optional</span><br><span class="line">:out-of-range</span><br><span class="line">:read-only</span><br><span class="line">:read-write</span><br><span class="line">:required</span><br><span class="line">:right</span><br><span class="line">:root</span><br><span class="line">:scope</span><br><span class="line">:target</span><br><span class="line">:valid</span><br><span class="line">:visited</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Combinators: These are not exactly selectors themselves, but ways of combining two or more selectors in useful ways for very specific selections. So for example, you could select only paragraphs that are direct descendants of divs, or paragraphs that come directly after headings.</span><br><span class="line"></span><br><span class="line">A, B	匹配 A 或 B</span><br><span class="line">A B	    匹配 A 里面的 B</span><br><span class="line">A &gt; B	匹配 A 里面的直属 B</span><br><span class="line">A + B	匹配 A 下一个兄弟节点 B</span><br><span class="line">A ~ B	匹配 A 的下一群兄弟节点 B</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F; Multiple selectors: Again, these are not separate selectors; the idea is that you can put multiple selectors on the same CSS rule, separated by commas, to apply a single set of declarations to all the elements selected by those selectors.</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-3-属性"><a href="#2-3-属性" class="headerlink" title="2.3 属性"></a>2.3 属性</h3><h4 id="Position"><a href="#Position" class="headerlink" title="Position"></a>Position</h4><p><a target="_blank" rel="noopener" href="http://cssreference.io/positioning/">http://cssreference.io/positioning/</a></p>
+<h4 id="Display"><a href="#Display" class="headerlink" title="Display"></a>Display</h4><h4 id="Box-Model"><a href="#Box-Model" class="headerlink" title="Box Model"></a>Box Model</h4><p>块级元素 (Block)<br>  新开始一行并且尽可能撑满容器，p,form,header,footer,section<br>  设置块级元素的 width 可以防止它从左到右撑满整个容器<br>行内元素 (inline)<br>  包裹一些文字，而不会打乱段落的布局，a,span<br>none<br>  script 默认 display:none,visibility:hidden 是占据空间</p>
+<p>盒模型</p>
+<p>属性</p>
+<p>三，层叠与继承</p>
+<p>既然是层叠，就要有层叠的规律</p>
+<h2 id="0x03-CSS-新语法"><a href="#0x03-CSS-新语法" class="headerlink" title="0x03 CSS 新语法"></a>0x03 CSS 新语法</h2><h3 id="3-1-Flex-Layout"><a href="#3-1-Flex-Layout" class="headerlink" title="3.1 Flex Layout"></a>3.1 Flex Layout</h3><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/philipwalton/solved-by-flexbox">https://github.com/philipwalton/solved-by-flexbox</a></li>
+</ul>
+<h3 id="3-2-Grid-Layout"><a href="#3-2-Grid-Layout" class="headerlink" title="3.2 Grid Layout"></a>3.2 Grid Layout</h3><h2 id="0x04-SCSS"><a href="#0x04-SCSS" class="headerlink" title="0x04 SCSS"></a>0x04 SCSS</h2><p>这是一种兼容 CSS 语法的新语言。主要用于提升代码的可维护性。</p>
+<p>至于其他 less 之类大同小异。只选取了功能最强大的部分进行间接。</p>
+<h3 id="4-1-OOCSS-BEM-我的实践"><a href="#4-1-OOCSS-BEM-我的实践" class="headerlink" title="4.1 OOCSS / BEM / 我的实践"></a>4.1 OOCSS / BEM / 我的实践</h3><h3 id="4-1-如何组织-SCSS-代码-—-布局篇"><a href="#4-1-如何组织-SCSS-代码-—-布局篇" class="headerlink" title="4.1 如何组织 SCSS 代码 — 布局篇"></a>4.1 如何组织 SCSS 代码 — 布局篇</h3><h3 id="4-2-如何组织-SCSS-代码-—-组件篇"><a href="#4-2-如何组织-SCSS-代码-—-组件篇" class="headerlink" title="4.2 如何组织 SCSS 代码 — 组件篇"></a>4.2 如何组织 SCSS 代码 — 组件篇</h3><h4 id="4-2-BEM"><a href="#4-2-BEM" class="headerlink" title="4.2 BEM"></a>4.2 BEM</h4><h2 id="0x05-CSS-规范"><a href="#0x05-CSS-规范" class="headerlink" title="0x05 CSS 规范"></a>0x05 CSS 规范</h2><ul>
+<li><p><a target="_blank" rel="noopener" href="https://github.com/airbnb/css">https://github.com/airbnb/css</a></p>
+</li>
+<li><p>Use soft tabs (2 spaces) for indentation</p>
+</li>
+<li><p>Prefer dashes over camelCasing in class names.</p>
+<ul>
+<li>Underscores and PascalCasing are okay if you are using BEM (see OOCSS and BEM below).</li>
+</ul>
+</li>
+<li><p>Do not use ID selectors</p>
+</li>
+<li><p>When using multiple selectors in a rule declaration, give each selector its own line.</p>
+</li>
+<li><p>Put a space before the opening brace { in rule declarations</p>
+</li>
+<li><p>In properties, put a space after, but not before, the : character.</p>
+</li>
+<li><p>Put closing braces } of rule declarations on a new line</p>
+</li>
+<li><p>Put blank lines between rule declarations</p>
+</li>
+</ul>
+<p>OOCSS 与 BEM 混用</p>
+<blockquote>
+<p>只要是可维护的好代码，并不需要拘泥于用什么风格</p>
+</blockquote>
+<h3 id="5-1-圣杯"><a href="#5-1-圣杯" class="headerlink" title="5.1 圣杯"></a>5.1 圣杯</h3><h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/picturepan2/spectre">https://github.com/picturepan2/spectre</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-12-20</strong> 初始化本文</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+              <a href="/tags/SASS/" rel="tag"># SASS</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/12/23/macOSInDepth/" rel="prev" title="macOS 的系统与软件">
+      <i class="fa fa-chevron-left"></i> macOS 的系统与软件
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/01/23/PythonCompression/" rel="next" title="Python 中的数据压缩和存档">
+      Python 中的数据压缩和存档 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-CSS-%E6%98%AF%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84%EF%BC%9F"><span class="nav-number">2.</span> <span class="nav-text">0x01 CSS 是如何工作的？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-CSS-%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95"><span class="nav-number">3.</span> <span class="nav-text">0x02 CSS 基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-CSS-%E8%A7%84%E5%88%99"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 CSS 规则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%80%89%E6%8B%A9%E5%99%A8"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 选择器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E5%B1%9E%E6%80%A7"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Position"><span class="nav-number">3.3.1.</span> <span class="nav-text">Position</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Display"><span class="nav-number">3.3.2.</span> <span class="nav-text">Display</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Box-Model"><span class="nav-number">3.3.3.</span> <span class="nav-text">Box Model</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-CSS-%E6%96%B0%E8%AF%AD%E6%B3%95"><span class="nav-number">4.</span> <span class="nav-text">0x03 CSS 新语法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-Flex-Layout"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 Flex Layout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-Grid-Layout"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 Grid Layout</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-SCSS"><span class="nav-number">5.</span> <span class="nav-text">0x04 SCSS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-OOCSS-BEM-%E6%88%91%E7%9A%84%E5%AE%9E%E8%B7%B5"><span class="nav-number">5.1.</span> <span class="nav-text">4.1 OOCSS &#x2F; BEM &#x2F; 我的实践</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87-SCSS-%E4%BB%A3%E7%A0%81-%E2%80%94-%E5%B8%83%E5%B1%80%E7%AF%87"><span class="nav-number">5.2.</span> <span class="nav-text">4.1 如何组织 SCSS 代码 — 布局篇</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E5%A6%82%E4%BD%95%E7%BB%84%E7%BB%87-SCSS-%E4%BB%A3%E7%A0%81-%E2%80%94-%E7%BB%84%E4%BB%B6%E7%AF%87"><span class="nav-number">5.3.</span> <span class="nav-text">4.2 如何组织 SCSS 代码 — 组件篇</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-BEM"><span class="nav-number">5.3.1.</span> <span class="nav-text">4.2 BEM</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-CSS-%E8%A7%84%E8%8C%83"><span class="nav-number">6.</span> <span class="nav-text">0x05 CSS 规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-%E5%9C%A3%E6%9D%AF"><span class="nav-number">6.1.</span> <span class="nav-text">5.1 圣杯</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">7.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

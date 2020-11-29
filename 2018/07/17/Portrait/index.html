@@ -1,38 +1,499 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0x00 前言本文目录0x01 风格特点小清新 安静 温暖 舒适 平缓 清新 淡雅 自然 干净 随意 青春的小故事，小情绪  色调冷色系 蓝天大海白色窗纱 青色 &#x2F; 蓝色 &#x2F; 绿色 衣服：白衬衫背景：白色窗纱曝光补偿 0x02 拍摄场景和服装搭配0x03 器材与参数设置0x04 学会用光最佳时间：日出日落前后两小时。 直射光顺光角度优点：面部充分受光，皮肤细腻，光滑，水嫩。背景细节丰富，颜色亮丽。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="人像摄影指北">
+<meta property="og:url" content="http://twocucao.xyz/2018/07/17/Portrait/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言本文目录0x01 风格特点小清新 安静 温暖 舒适 平缓 清新 淡雅 自然 干净 随意 青春的小故事，小情绪  色调冷色系 蓝天大海白色窗纱 青色 &#x2F; 蓝色 &#x2F; 绿色 衣服：白衬衫背景：白色窗纱曝光补偿 0x02 拍摄场景和服装搭配0x03 器材与参数设置0x04 学会用光最佳时间：日出日落前后两小时。 直射光顺光角度优点：面部充分受光，皮肤细腻，光滑，水嫩。背景细节丰富，颜色亮丽。">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-07-17T12:17:32.000Z">
+<meta property="article:modified_time" content="2018-09-17T15:20:17.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="摄影">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2018/07/17/Portrait/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>人像摄影指北 | MG的编程小屋</title>
+  
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/07/17/Portrait/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          人像摄影指北
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-07-17 20:17:32" itemprop="dateCreated datePublished" datetime="2018-07-17T20:17:32+08:00">2018-07-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-09-17 23:20:17" itemprop="dateModified" datetime="2018-09-17T23:20:17+08:00">2018-09-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/" itemprop="url" rel="index"><span itemprop="name">写在人生的边上</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><h3 id="本文目录"><a href="#本文目录" class="headerlink" title="本文目录"></a>本文目录</h3><h2 id="0x01-风格特点"><a href="#0x01-风格特点" class="headerlink" title="0x01 风格特点"></a>0x01 风格特点</h2><h3 id="小清新"><a href="#小清新" class="headerlink" title="小清新"></a>小清新</h3><ul>
+<li>安静</li>
+<li>温暖</li>
+<li>舒适</li>
+<li>平缓</li>
+<li>清新</li>
+<li>淡雅</li>
+<li>自然</li>
+<li>干净</li>
+<li>随意</li>
+<li>青春的小故事，小情绪</li>
+</ul>
+<h3 id="色调"><a href="#色调" class="headerlink" title="色调"></a>色调</h3><p>冷色系</p>
+<p>蓝天<br>大海<br>白色窗纱</p>
+<p>青色 / 蓝色 / 绿色</p>
+<p>衣服：白衬衫<br>背景：白色窗纱<br>曝光补偿</p>
+<h2 id="0x02-拍摄场景和服装搭配"><a href="#0x02-拍摄场景和服装搭配" class="headerlink" title="0x02 拍摄场景和服装搭配"></a>0x02 拍摄场景和服装搭配</h2><h2 id="0x03-器材与参数设置"><a href="#0x03-器材与参数设置" class="headerlink" title="0x03 器材与参数设置"></a>0x03 器材与参数设置</h2><h2 id="0x04-学会用光"><a href="#0x04-学会用光" class="headerlink" title="0x04 学会用光"></a>0x04 学会用光</h2><p>最佳时间：日出日落前后两小时。</p>
+<h3 id="直射光"><a href="#直射光" class="headerlink" title="直射光"></a>直射光</h3><h4 id="顺光角度"><a href="#顺光角度" class="headerlink" title="顺光角度"></a>顺光角度</h4><p>优点：面部充分受光，皮肤细腻，光滑，水嫩。背景细节丰富，颜色亮丽。<br>缺点：面部扁平</p>
+<h4 id="侧光角度"><a href="#侧光角度" class="headerlink" title="侧光角度"></a>侧光角度</h4><p>优点：五官非常有立体感<br>缺点：容易造成阴阳脸</p>
+<p>PS: 白种人五官立体，高鼻梁，高眉骨，眼神深邃，立体感强，而黄种人一般面部比较平，一般需要借助侧面打光的的效果。</p>
+<p>一般选择 30 度左右即可，看模特身材，要么拍摄对象偏向光源或者摄影师移动。</p>
+<h4 id="逆光角度"><a href="#逆光角度" class="headerlink" title="逆光角度"></a>逆光角度</h4><p>优点：主体的轮廓光，以及画面中的光晕。</p>
+<p>注意点：</p>
+<ul>
+<li>避免选择比较明亮的天空作为背景</li>
+<li>如果正逆光太过明亮，则选择侧逆光，或者主体部分遮挡光晕</li>
+<li>大黑脸的问题：设置相机曝光补偿 / 点测光。闪光灯，反光板，白色的墙面，书籍。</li>
+</ul>
+<h3 id="散射光"><a href="#散射光" class="headerlink" title="散射光"></a>散射光</h3><p>阴天，树荫</p>
+<p>画面比较单调，人物缺乏立体感，可以通过增加主体的颜色鲜艳度或者加上背景的一些对比（但不要喧宾夺主）</p>
+<h3 id="夜晚人造灯"><a href="#夜晚人造灯" class="headerlink" title="夜晚人造灯"></a>夜晚人造灯</h3><p>商店的微侧面灯光，加上后面的光斑</p>
+<h3 id="室内光"><a href="#室内光" class="headerlink" title="室内光"></a>室内光</h3><ol>
+<li>避免直射光。选择散射光。</li>
+<li>跳闪，反光板</li>
+</ol>
+<h3 id="其他技巧"><a href="#其他技巧" class="headerlink" title="其他技巧"></a>其他技巧</h3><ol>
+<li>让模特走动，然后观察光线，可以先拍一下，查看照片情况</li>
+<li>偏色可以考虑调整白平衡</li>
+<li>杂色过多可以调整</li>
+<li>单光源的，可以考虑墙面 / 闪光灯塑造人瘦脸胖，或者直接暴力点，拿手或者其他东西遮挡。</li>
+</ol>
+<h2 id="0x05-摆姿技巧"><a href="#0x05-摆姿技巧" class="headerlink" title="0x05 摆姿技巧"></a>0x05 摆姿技巧</h2><h2 id="0x06-取景技巧"><a href="#0x06-取景技巧" class="headerlink" title="0x06 取景技巧"></a>0x06 取景技巧</h2><h3 id="跟着光线走"><a href="#跟着光线走" class="headerlink" title="跟着光线走"></a>跟着光线走</h3><p>逆光<br>局部光</p>
+<h3 id="跟着背景走"><a href="#跟着背景走" class="headerlink" title="跟着背景走"></a>跟着背景走</h3><p>颜色单一的背景，墙面 / 卷帘门 / 复古色墙壁 / 橙色墙壁 / 蓝天 / 草坪<br>颜色单一 + 基本点缀的背景，在单一背景的基础上加上另一个单一颜色，对比强烈，但是又不喧宾夺主</p>
+<h3 id="跟着线条走"><a href="#跟着线条走" class="headerlink" title="跟着线条走"></a>跟着线条走</h3><ul>
+<li>栏杆 / 护栏<ul>
+<li>模特坐 / 靠 / 趴</li>
+</ul>
+</li>
+<li>台阶 / 窗台</li>
+<li>两排树 / 过道 / 走廊</li>
+</ul>
+<h3 id="巧用前景遮挡物"><a href="#巧用前景遮挡物" class="headerlink" title="巧用前景遮挡物"></a>巧用前景遮挡物</h3><ul>
+<li>虚化掉墙 / 栏杆 / 护栏之类的遮挡物可以引导视线</li>
+</ul>
+<h3 id="花卉绿植"><a href="#花卉绿植" class="headerlink" title="花卉绿植"></a>花卉绿植</h3><p>上下结构，也包括了构图<br>单簇，也包括了构图</p>
+<h2 id="0x08-人像后期"><a href="#0x08-人像后期" class="headerlink" title="0x08 人像后期"></a>0x08 人像后期</h2><h3 id="磨皮"><a href="#磨皮" class="headerlink" title="磨皮"></a>磨皮</h3><p>磨皮包含：</p>
+<p>去污<br>明度<br>饱和度<br>色相</p>
+<h4 id="简易磨皮-HSL-清晰度"><a href="#简易磨皮-HSL-清晰度" class="headerlink" title="简易磨皮 HSL + 清晰度"></a>简易磨皮 HSL + 清晰度</h4><p>使用场景</p>
+<p>具体操作</p>
+<ol>
+<li>降低清晰度 = 磨皮</li>
+<li>提升 HSL 橙色 明度 = 提亮皮肤</li>
+<li>降低 HSL 橙色 饱和度 = 皮肤更白</li>
+<li>微调 HSL 橙色 色相 = 皮肤更粉或者黄一些</li>
+<li>提亮 相机校准-蓝色-饱和度 = 让皮肤更加粉嫩通透</li>
+</ol>
+<h4 id="插件磨皮"><a href="#插件磨皮" class="headerlink" title="插件磨皮"></a>插件磨皮</h4><p>Portraiture</p>
+<h4 id="高反差保留磨皮"><a href="#高反差保留磨皮" class="headerlink" title="高反差保留磨皮"></a>高反差保留磨皮</h4><p>高反差保留磨皮，通过通道计算，选出皮肤中脏点污点，然后曲线提亮。</p>
+<h4 id="高低频磨皮"><a href="#高低频磨皮" class="headerlink" title="高低频磨皮"></a>高低频磨皮</h4><p>高底频 = 图层分为高频图层与低频图层，高频就是所谓的质感（头发，纹理，细节等）, 低频就是光影，也就是皮肤的明暗。在低频图层用插件磨皮或者污点修复，图层工具随意涂抹，也不会影响皮肤的纹路。</p>
+<p>复制两个图层，命名为高频和低频。</p>
+<ul>
+<li>低频启用滤镜-模糊-高斯模糊，值 =6</li>
+<li>高频启用图像-应用图像，图层 = 低频，混合 = 相加，缩放 =2</li>
+<li>高频混合模式改为线性光，然后污点去除。</li>
+</ul>
+<h4 id="中性灰磨皮"><a href="#中性灰磨皮" class="headerlink" title="中性灰磨皮"></a>中性灰磨皮</h4><h4 id="双曲线磨皮"><a href="#双曲线磨皮" class="headerlink" title="双曲线磨皮"></a>双曲线磨皮</h4><h3 id="胶片风格-VSCO"><a href="#胶片风格-VSCO" class="headerlink" title="胶片风格 VSCO"></a>胶片风格 VSCO</h3><h4 id="Modern-Films"><a href="#Modern-Films" class="headerlink" title="Modern Films"></a>Modern Films</h4><p>Modern Films is an excellent all-around pack, emulating the look of contemporary, popular film stocks. Classic, clean, and universal, this collection is well-balanced and ideal for an array of settings, from wedding photography to editorial, and everything in between.</p>
+<h4 id="Classic-Films"><a href="#Classic-Films" class="headerlink" title="Classic Films"></a>Classic Films</h4><p>Classic Films is a diverse pack of film emulations that recreates the look of many discontinued and expired film stocks. With a vintage-inspired and slightly gritty aesthetic, this collection is perfect for lifestyle, wedding, and portrait photography.</p>
+<h4 id="Instant-Films"><a href="#Instant-Films" class="headerlink" title="Instant Films"></a>Instant Films</h4><p>Instant Films features digital emulations of beautiful tones and magical tints. Classic and nostalgic, this highly-stylized collection recreates the looks of traditional instant films.</p>
+<h4 id="Slide-Films"><a href="#Slide-Films" class="headerlink" title="Slide Films"></a>Slide Films</h4><p>Slide Films features digital emulations of positive film — a slide film that produces a positive image when developed. With high contrasts and bold colors, this collection is ideal for travel, landscape, street, and fashion photography.</p>
+<h4 id="Archetype-Films"><a href="#Archetype-Films" class="headerlink" title="Archetype Films"></a>Archetype Films</h4><p>Archetype Films is a collection of mass market, consumer film emulations from the golden era of analog. With familiar fade and grit aesthetics, VSCO Film 05 captures the nostalgia of old childhood photos, and is great for portraits, weddings, and lifestyle photography.</p>
+<h4 id="Alternative-Process-Films"><a href="#Alternative-Process-Films" class="headerlink" title="Alternative Process Films"></a>Alternative Process Films</h4><p>Alternative Process Films is a well-balanced pack that includes a wide range of push and pull processed looks, which alter grain, contrast, and richness. It also includes cross processed looks, which are best suited for dramatic color effects and vibrancy. From subtle enhancements to bold stylistic editing, this collection is ideal for outdoor and lifestyle photography, modern portraiture, and sunwashed settings.</p>
+<h4 id="Eclectic-Films"><a href="#Eclectic-Films" class="headerlink" title="Eclectic Films"></a>Eclectic Films</h4><p>Eclectic Films features a wide range of looks in our largest release to date, with 18 films and over 100 presets in total. The spectrum of this collection translates to versatility in use and includes muted, vivid, tungsten-balanced, and black and white films — all of which embody an elegant and modern aesthetic. This pack is ideal for most settings and subjects, particularly portraits, night photography, and architecture.</p>
+<h3 id="小清新日系"><a href="#小清新日系" class="headerlink" title="小清新日系"></a>小清新日系</h3><h3 id="港系风格"><a href="#港系风格" class="headerlink" title="港系风格"></a>港系风格</h3><p>高对比，欠曝光，部分过曝光</p>
+<p>图层 1 高斯模糊 screen 25% 复制一层 soften light 50%</p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-07-17</strong> 初始化本文</li>
+<li><strong>2018-09-17</strong> 重修文字</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%91%84%E5%BD%B1/" rel="tag"># 摄影</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/07/10/PhotographyDevice/" rel="prev" title="摄影入门指北">
+      <i class="fa fa-chevron-left"></i> 摄影入门指北
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/07/27/ToneColor/" rel="next" title="Tone Color">
+      Tone Color <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%9B%AE%E5%BD%95"><span class="nav-number">1.1.</span> <span class="nav-text">本文目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E9%A3%8E%E6%A0%BC%E7%89%B9%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">0x01 风格特点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%B8%85%E6%96%B0"><span class="nav-number">2.1.</span> <span class="nav-text">小清新</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%89%B2%E8%B0%83"><span class="nav-number">2.2.</span> <span class="nav-text">色调</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E6%8B%8D%E6%91%84%E5%9C%BA%E6%99%AF%E5%92%8C%E6%9C%8D%E8%A3%85%E6%90%AD%E9%85%8D"><span class="nav-number">3.</span> <span class="nav-text">0x02 拍摄场景和服装搭配</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E5%99%A8%E6%9D%90%E4%B8%8E%E5%8F%82%E6%95%B0%E8%AE%BE%E7%BD%AE"><span class="nav-number">4.</span> <span class="nav-text">0x03 器材与参数设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-%E5%AD%A6%E4%BC%9A%E7%94%A8%E5%85%89"><span class="nav-number">5.</span> <span class="nav-text">0x04 学会用光</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B4%E5%B0%84%E5%85%89"><span class="nav-number">5.1.</span> <span class="nav-text">直射光</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%BA%E5%85%89%E8%A7%92%E5%BA%A6"><span class="nav-number">5.1.1.</span> <span class="nav-text">顺光角度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%A7%E5%85%89%E8%A7%92%E5%BA%A6"><span class="nav-number">5.1.2.</span> <span class="nav-text">侧光角度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%86%E5%85%89%E8%A7%92%E5%BA%A6"><span class="nav-number">5.1.3.</span> <span class="nav-text">逆光角度</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%A3%E5%B0%84%E5%85%89"><span class="nav-number">5.2.</span> <span class="nav-text">散射光</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9C%E6%99%9A%E4%BA%BA%E9%80%A0%E7%81%AF"><span class="nav-number">5.3.</span> <span class="nav-text">夜晚人造灯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%A4%E5%86%85%E5%85%89"><span class="nav-number">5.4.</span> <span class="nav-text">室内光</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E6%8A%80%E5%B7%A7"><span class="nav-number">5.5.</span> <span class="nav-text">其他技巧</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-%E6%91%86%E5%A7%BF%E6%8A%80%E5%B7%A7"><span class="nav-number">6.</span> <span class="nav-text">0x05 摆姿技巧</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-%E5%8F%96%E6%99%AF%E6%8A%80%E5%B7%A7"><span class="nav-number">7.</span> <span class="nav-text">0x06 取景技巧</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9F%E7%9D%80%E5%85%89%E7%BA%BF%E8%B5%B0"><span class="nav-number">7.1.</span> <span class="nav-text">跟着光线走</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9F%E7%9D%80%E8%83%8C%E6%99%AF%E8%B5%B0"><span class="nav-number">7.2.</span> <span class="nav-text">跟着背景走</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%9F%E7%9D%80%E7%BA%BF%E6%9D%A1%E8%B5%B0"><span class="nav-number">7.3.</span> <span class="nav-text">跟着线条走</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B7%A7%E7%94%A8%E5%89%8D%E6%99%AF%E9%81%AE%E6%8C%A1%E7%89%A9"><span class="nav-number">7.4.</span> <span class="nav-text">巧用前景遮挡物</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8A%B1%E5%8D%89%E7%BB%BF%E6%A4%8D"><span class="nav-number">7.5.</span> <span class="nav-text">花卉绿植</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x08-%E4%BA%BA%E5%83%8F%E5%90%8E%E6%9C%9F"><span class="nav-number">8.</span> <span class="nav-text">0x08 人像后期</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%A3%A8%E7%9A%AE"><span class="nav-number">8.1.</span> <span class="nav-text">磨皮</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E6%98%93%E7%A3%A8%E7%9A%AE-HSL-%E6%B8%85%E6%99%B0%E5%BA%A6"><span class="nav-number">8.1.1.</span> <span class="nav-text">简易磨皮 HSL + 清晰度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%92%E4%BB%B6%E7%A3%A8%E7%9A%AE"><span class="nav-number">8.1.2.</span> <span class="nav-text">插件磨皮</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E5%8F%8D%E5%B7%AE%E4%BF%9D%E7%95%99%E7%A3%A8%E7%9A%AE"><span class="nav-number">8.1.3.</span> <span class="nav-text">高反差保留磨皮</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%AB%98%E4%BD%8E%E9%A2%91%E7%A3%A8%E7%9A%AE"><span class="nav-number">8.1.4.</span> <span class="nav-text">高低频磨皮</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%AD%E6%80%A7%E7%81%B0%E7%A3%A8%E7%9A%AE"><span class="nav-number">8.1.5.</span> <span class="nav-text">中性灰磨皮</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%8C%E6%9B%B2%E7%BA%BF%E7%A3%A8%E7%9A%AE"><span class="nav-number">8.1.6.</span> <span class="nav-text">双曲线磨皮</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%83%B6%E7%89%87%E9%A3%8E%E6%A0%BC-VSCO"><span class="nav-number">8.2.</span> <span class="nav-text">胶片风格 VSCO</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Modern-Films"><span class="nav-number">8.2.1.</span> <span class="nav-text">Modern Films</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Classic-Films"><span class="nav-number">8.2.2.</span> <span class="nav-text">Classic Films</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Instant-Films"><span class="nav-number">8.2.3.</span> <span class="nav-text">Instant Films</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Slide-Films"><span class="nav-number">8.2.4.</span> <span class="nav-text">Slide Films</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Archetype-Films"><span class="nav-number">8.2.5.</span> <span class="nav-text">Archetype Films</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Alternative-Process-Films"><span class="nav-number">8.2.6.</span> <span class="nav-text">Alternative Process Films</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Eclectic-Films"><span class="nav-number">8.2.7.</span> <span class="nav-text">Eclectic Films</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%8F%E6%B8%85%E6%96%B0%E6%97%A5%E7%B3%BB"><span class="nav-number">8.3.</span> <span class="nav-text">小清新日系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B8%AF%E7%B3%BB%E9%A3%8E%E6%A0%BC"><span class="nav-number">8.4.</span> <span class="nav-text">港系风格</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

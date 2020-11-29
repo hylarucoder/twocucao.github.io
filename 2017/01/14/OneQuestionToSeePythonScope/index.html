@@ -1,38 +1,469 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="备注，这种动态设置 module 里的方法不推荐  前言整理工具字符类的时候，想借助正则表达式来实现一部分的文字判断抽取等操作。 比如实现：  判断文字是否为 UUID 判断文字是否包含 UUID 抽取文字是中第一个 UUID 抽取文字是中所有 UUID">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从一个小问题来说 Python 的作用域">
+<meta property="og:url" content="http://twocucao.xyz/2017/01/14/OneQuestionToSeePythonScope/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="备注，这种动态设置 module 里的方法不推荐  前言整理工具字符类的时候，想借助正则表达式来实现一部分的文字判断抽取等操作。 比如实现：  判断文字是否为 UUID 判断文字是否包含 UUID 抽取文字是中第一个 UUID 抽取文字是中所有 UUID">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-01-14T12:48:31.000Z">
+<meta property="article:modified_time" content="2018-01-30T08:06:24.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="Metaprogramming">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2017/01/14/OneQuestionToSeePythonScope/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>从一个小问题来说 Python 的作用域 | MG的编程小屋</title>
+  
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/01/14/OneQuestionToSeePythonScope/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          从一个小问题来说 Python 的作用域
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2017-01-14 20:48:31" itemprop="dateCreated datePublished" datetime="2017-01-14T20:48:31+08:00">2017-01-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-30 16:06:24" itemprop="dateModified" datetime="2018-01-30T16:06:24+08:00">2018-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">Python 黑魔法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>备注，这种动态设置 module 里的方法不推荐</p>
+</blockquote>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>整理工具字符类的时候，想借助正则表达式来实现一部分的文字判断抽取等操作。</p>
+<p>比如实现：</p>
+<ul>
+<li>判断文字是否为 UUID</li>
+<li>判断文字是否包含 UUID</li>
+<li>抽取文字是中第一个 UUID</li>
+<li>抽取文字是中所有 UUID</li>
+</ul>
+<a id="more"></a>
+
+<h3 id="一个暴力的实现方法"><a href="#一个暴力的实现方法" class="headerlink" title="一个暴力的实现方法"></a>一个暴力的实现方法</h3><p>如果正则表达式比较少，就只一个 UUID，我们就不需要思考什么，我们分别编写四个函数：</p>
+<ul>
+<li>is_uuid(_str)</li>
+<li>has_uuid(_str)</li>
+<li>extract_first_uuid(_str)</li>
+<li>extract_all_uuid(_str)</li>
+</ul>
+<blockquote>
+<p>没错，过早优化是万恶之源</p>
+</blockquote>
+<p>但很显然，手动方法显得很弱智，当我需要编写判断 QQ 号的时候，我又必须编写四个函数：</p>
+<ul>
+<li>is_qq_num(_str)</li>
+<li>has_qq_num(_str)</li>
+<li>extract_first_qq_num(_str)</li>
+<li>extract_all_qq_num(_str)</li>
+</ul>
+<p>然而：</p>
+<ul>
+<li>如果，我还需要判断手机号、日期、时间等等，这手动复制粘贴的过程就比较痛苦了。</li>
+<li>如果，我去要添加一个方法，给 QQ 号码，uuid 等打码 那就必须要给所有的 uuid, 手机，邮箱都添加一个 dama_xxx(_str) 方法</li>
+</ul>
+<p>有没有好一点的解决方法呢？</p>
+<!-- more -->
+
+<h3 id="两个方法"><a href="#两个方法" class="headerlink" title="两个方法"></a>两个方法</h3><p>第一种，比如把函数修改为：</p>
+<ul>
+<li>is(_str,QQ_NUM_PATTEN)</li>
+<li>has(_str,QQ_NUM_PATTEN)</li>
+<li>extract_first(_str,QQ_NUM_PATTEN)</li>
+<li>extract_all(_str,QQ_NUM_PATTEN)</li>
+</ul>
+<p>第二种，Python 中动态添加工具方法，我个人比较喜欢这种：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一个优雅的错误实现方式</span></span><br><span class="line"><span class="keyword">for</span> regex, regex_pattern <span class="keyword">in</span> REGEXES.items():</span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">has_regex_func</span>(<span class="params">_str</span>):</span></span><br><span class="line">        <span class="keyword">return</span> has_pattern(_str, regex_pattern)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">is_regex_func</span>(<span class="params">_str</span>):</span></span><br><span class="line">        <span class="keyword">return</span> match_pattern(_str, regex_pattern)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">extract_first_regex_func</span>(<span class="params">_str</span>):</span></span><br><span class="line">        <span class="keyword">return</span> find_first_matched_pattern(_str, regex_pattern)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">extract_all_regex_func</span>(<span class="params">_str</span>):</span></span><br><span class="line">        <span class="keyword">return</span> find_all_matched_pattern(_str, regex_pattern)</span><br><span class="line"></span><br><span class="line">    <span class="built_in">setattr</span>(sys.modules[__name__], <span class="string">&#x27;has_&#123;regex_suffix&#125;&#x27;</span>.<span class="built_in">format</span>(regex_suffix=regex), has_regex_func)</span><br><span class="line">    <span class="built_in">setattr</span>(sys.modules[__name__], <span class="string">&#x27;is_&#123;regex_suffix&#125;&#x27;</span>.<span class="built_in">format</span>(regex_suffix=regex), is_regex_func)</span><br><span class="line">    <span class="built_in">setattr</span>(sys.modules[__name__], <span class="string">&#x27;extract_first_&#123;regex_suffix&#125;&#x27;</span>.<span class="built_in">format</span>(regex_suffix=regex), extract_first_regex_func)</span><br><span class="line">    <span class="built_in">setattr</span>(sys.modules[__name__], <span class="string">&#x27;extract_all_&#123;regex_suffix&#125;&#x27;</span>.<span class="built_in">format</span>(regex_suffix=regex), extract_all_regex_func)</span><br></pre></td></tr></table></figure>
+
+<p>于是我添加了测试方法：</p>
+<blockquote>
+<p>一个不对稍微有些复杂的逻辑的程序进行测试的程序员不是一个称职的老司机。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">@pytest.mark.parametrize(&#39;test_input,expected&#39;, [</span><br><span class="line">    (&quot;321323199509234453&quot;, False),</span><br><span class="line">    (&quot;000528-332222&quot;, False),</span><br><span class="line">    (&quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;, True),</span><br><span class="line">])</span><br><span class="line">def test_is_uuid(test_input, expected):</span><br><span class="line">    assert is_uuid(test_input) &#x3D;&#x3D; expected</span><br><span class="line"></span><br><span class="line">@pytest.mark.parametrize(&#39;test_input,expected&#39;, [</span><br><span class="line">    (&quot;321323199509234453&quot;, False),</span><br><span class="line">    (&quot;000528-332222&quot;, False),</span><br><span class="line">    (&quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;, True),</span><br><span class="line">])</span><br><span class="line">def test_has_uuid(test_input, expected):</span><br><span class="line">    assert has_uuid(test_input) &#x3D;&#x3D; expected</span><br><span class="line"></span><br><span class="line">@pytest.mark.parametrize(&#39;test_input,expected&#39;, [</span><br><span class="line">    (&quot;321323199509234453&quot;, None),</span><br><span class="line">    (&quot;000528-332222&quot;, None),</span><br><span class="line">    (&quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;, &quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;),</span><br><span class="line">])</span><br><span class="line">def test_extract_first_uuid(test_input, expected):</span><br><span class="line">    assert extract_first_uuid(test_input) &#x3D;&#x3D; expected</span><br><span class="line"></span><br><span class="line">@pytest.mark.parametrize(&#39;test_input,expected&#39;, [</span><br><span class="line">    (&quot;321323199509234453&quot;, None),</span><br><span class="line">    (&quot;000528-332222&quot;, None),</span><br><span class="line">    (</span><br><span class="line">            &quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;,</span><br><span class="line">            [&#39;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&#39;, &#39;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&#39;,</span><br><span class="line">             &#39;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&#39;, &#39;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&#39;]),</span><br><span class="line">    (</span><br><span class="line">            &quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4   521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4   521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4   aslakdj 521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;,</span><br><span class="line">            [&#39;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&#39;, &#39;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&#39;,</span><br><span class="line">             &#39;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&#39;, &#39;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&#39;]),</span><br><span class="line">])</span><br><span class="line">def test_extract_all_uuid(test_input, expected):</span><br><span class="line">    assert extract_all_uuid(test_input) &#x3D;&#x3D; expected</span><br></pre></td></tr></table></figure>
+
+<p>测试未通过：</p>
+<p>怎么查看代码本身都没有什么逻辑问题，那么问题出在哪里？</p>
+<p>对程序植入一些 print 代码来 Debug 一下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">for regex, regex_pattern in REGEXES.items():</span><br><span class="line">    def has_regex_func(_str, regex_pattern&#x3D;regex_pattern):</span><br><span class="line">        # 当函数被调用之后，打印 regex_pattern 查看对应的字符串</span><br><span class="line">        print(regex_pattern)</span><br><span class="line">        return has_pattern(_str, regex_pattern)</span><br><span class="line"></span><br><span class="line">    def is_regex_func(_str, regex_pattern&#x3D;regex_pattern):</span><br><span class="line">        return match_pattern(_str, regex_pattern)</span><br><span class="line"></span><br><span class="line">    def extract_first_regex_func(_str, regex_pattern&#x3D;regex_pattern):</span><br><span class="line">        return find_first_matched_pattern(_str, regex_pattern)</span><br><span class="line"></span><br><span class="line">    def extract_all_regex_func(_str, regex_pattern&#x3D;regex_pattern):</span><br><span class="line">        return find_all_matched_pattern(_str, regex_pattern)</span><br><span class="line"></span><br><span class="line">    # 查看是否为同一个函数</span><br><span class="line">    print(id(has_regex_func))</span><br><span class="line"></span><br><span class="line">    setattr(sys.modules[__name__], &#39;has_&#123;regex_suffix&#125;&#39;.format(regex_suffix&#x3D;regex), has_regex_func)</span><br><span class="line">    setattr(sys.modules[__name__], &#39;is_&#123;regex_suffix&#125;&#39;.format(regex_suffix&#x3D;regex), is_regex_func)</span><br><span class="line">    setattr(sys.modules[__name__], &#39;extract_first_&#123;regex_suffix&#125;&#39;.format(regex_suffix&#x3D;regex), extract_first_regex_func)</span><br><span class="line">    setattr(sys.modules[__name__], &#39;extract_all_&#123;regex_suffix&#125;&#39;.format(regex_suffix&#x3D;regex), extract_all_regex_func)</span><br></pre></td></tr></table></figure>
+
+<p>于是发现问题，所有打印出来的 regex_pattern 都是一致的。也就是，不管是 has_uuid 还是 has_qq_num 还是其他，最后 regex_pattern 都是我在字典中实现的</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Metaprogramming/" rel="tag"># Metaprogramming</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/01/05/PostgreSQLCheatSheet/" rel="prev" title="PostgreSQL CheatSheet">
+      <i class="fa fa-chevron-left"></i> PostgreSQL CheatSheet
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/01/15/Spacemacs/" rel="next" title="写给 Pythoner 的 Spacemacs 入门指北">
+      写给 Pythoner 的 Spacemacs 入门指北 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E4%B8%AA%E6%9A%B4%E5%8A%9B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="nav-number">1.1.</span> <span class="nav-text">一个暴力的实现方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E4%B8%AA%E6%96%B9%E6%B3%95"><span class="nav-number">1.2.</span> <span class="nav-text">两个方法</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

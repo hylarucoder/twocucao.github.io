@@ -1,38 +1,549 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0x00 前言系列文章先暂时停更一下。今天换换口味。 久闻 Flask 是众多 Pythonist 喜欢的框架。这次借着换工作的机会熟悉一下 Flask  本文先分享我阅读代码的一些小经验 接着通过最简单的一个 WSGI APP 开始，带着如何设计一个 Web 框架这个问题，先头脑风暴，从而脑补（而不是实现）出一个 Web 框架的基本要素。 从源码角度理解，Flask 从启动到接受第一个请求、返回">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flask 源码初步解读">
+<meta property="og:url" content="http://twocucao.xyz/2018/03/09/Flask%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言系列文章先暂时停更一下。今天换换口味。 久闻 Flask 是众多 Pythonist 喜欢的框架。这次借着换工作的机会熟悉一下 Flask  本文先分享我阅读代码的一些小经验 接着通过最简单的一个 WSGI APP 开始，带着如何设计一个 Web 框架这个问题，先头脑风暴，从而脑补（而不是实现）出一个 Web 框架的基本要素。 从源码角度理解，Flask 从启动到接受第一个请求、返回">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-03-09T08:27:03.000Z">
+<meta property="article:modified_time" content="2018-04-15T11:43:33.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="VueJS">
+<meta property="article:tag" content="全栈开发">
+<meta property="article:tag" content="RestAPI">
+<meta property="article:tag" content="Flask">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2018/03/09/Flask%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>Flask 源码初步解读 | MG的编程小屋</title>
+  
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/03/09/Flask%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Flask 源码初步解读
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-03-09 16:27:03" itemprop="dateCreated datePublished" datetime="2018-03-09T16:27:03+08:00">2018-03-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-04-15 19:43:33" itemprop="dateModified" datetime="2018-04-15T19:43:33+08:00">2018-04-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>系列文章先暂时停更一下。今天换换口味。</p>
+<p>久闻 Flask 是众多 Pythonist 喜欢的框架。这次借着换工作的机会熟悉一下 Flask</p>
+<ol>
+<li>本文先分享我阅读代码的一些小经验</li>
+<li>接着通过最简单的一个 WSGI APP 开始，带着<strong>如何设计一个 Web 框架</strong>这个问题，先头脑风暴，从而脑补（而不是实现）出一个 Web 框架的基本要素。</li>
+<li>从源码角度理解，Flask 从启动到接受第一个请求、返回第一个响应期间都发生了什么。</li>
+<li>最后交代一些自己在这个过程中的一些突发的想法。</li>
+</ol>
+<blockquote>
+<p>将解读 Flask 的源码放在一篇文章里，势必会造成广度有余而深度不足。所以本想定位于 Flask 源码初步解读。</p>
+</blockquote>
+<h2 id="0x01-阅读-Flask-代码的一种较好的姿势"><a href="#0x01-阅读-Flask-代码的一种较好的姿势" class="headerlink" title="0x01 阅读 Flask 代码的一种较好的姿势"></a>0x01 阅读 Flask 代码的一种较好的姿势</h2><p>之前在 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28509408/answer/299763091">https://www.zhihu.com/question/28509408/answer/299763091</a> 分享过自己一点阅读代码的粗浅的经验，是以阅读一个 Django 的应用为案例的。这里借着读 Flask 本身分享一下我的看法。</p>
+<p>读源码，是一个技术活。一是忌讳要想读懂全部，另一个忌讳是以为自己能一下子毫无障碍的读懂全部代码。</p>
+<ol start="0">
+<li>建议 0 : 看源码的时候，<strong>务必务必带着问题去读</strong>。每一次阅读其实都是在尝试回答或小或大的问题（当然，读书看文章莫不如是）。</li>
+<li>建议 1 : 先读现成的文档，不要上来就对着代码一通瞎看。</li>
+<li>建议 2 : 所谓『横看成岭侧成峰，远近高低都不同』 你需要从不同的角度来读源码。</li>
+<li>建议 3 : 抓大放小，该略读就略读（比如知道 Nginx 的大致作用就好，做优化请求响应的时候再翻看文档），该精读则精读（具体一个关键的功能）。</li>
+</ol>
+<blockquote>
+<p>好，坐好，预备，开车。</p>
+</blockquote>
+<h2 id="0x02-问题-1-如何设计一个-Web-框架"><a href="#0x02-问题-1-如何设计一个-Web-框架" class="headerlink" title="0x02 问题 1: 如何设计一个 Web 框架"></a>0x02 问题 1: 如何设计一个 Web 框架</h2><h3 id="头脑风暴"><a href="#头脑风暴" class="headerlink" title="头脑风暴"></a>头脑风暴</h3><p>Flask 是一个微 Web 框架，换而言之，代码量少的 Web 框架。当然，其实 Flask 框架是一个微框架，但『常规的 Flask 应用』本身的代码加起来一点都不比『Django 应用』少。这个地方我们后面会讲到。</p>
+<p>在阅读 Flask 相关代码的之前，先头脑风暴一下：</p>
+<blockquote>
+<p>如何设计一个 Web 框架？</p>
+</blockquote>
+<p>当心中对这个问题有一定的了解之后，读 Flask 代码会更好。</p>
+<p>首先，Web 框架是为了提升 Web 开发的。(XX 框架是为了提升 XX 开发的）, 这种提升可能会是 开发体验 / 性能。</p>
+<p>我们来看看那个 Python 世界最基础的 wsgi app 相关代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span>(<span class="params">environ, start_response</span>):</span></span><br><span class="line">    start_response(<span class="string">&#x27;200 OK&#x27;</span>, [(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/plain&#x27;</span>)])</span><br><span class="line">    <span class="keyword">return</span> [<span class="string">&#x27;Hello World!&#x27;</span>]</span><br></pre></td></tr></table></figure>
+
+<p>在之前的文章，我也借 Django 的 DRF 提到过这个极简的代码。</p>
+<p>但这个简单的 webapp，显然是啥玩意都不够用的。比如说：</p>
+<ul>
+<li>没有路由，我访问啥玩意都是 hello world。</li>
+<li>单线程 IO 阻塞模型基本上啥都不能干。你比如说，启动这个 webapp 的时候在 return 数据之前直接 sleep 十秒，然后请求都进不来。</li>
+<li>没有数据存取，连个数据库链接 CURDE 啥玩意都没有</li>
+<li>environ 太过于底层，如果是判断 headers 啥的太麻烦，要是像 django 里面一样能拿到一个 request 对象返回一个 response 对象就好了。</li>
+<li>没有模板语言</li>
+<li>还有其他能够提升开发体验的东西，比如自带 http server 代码热加载之类。</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">application</span>(<span class="params">environ, start_response</span>):</span></span><br><span class="line">    <span class="comment"># 直接 thread local 支持多个请求。</span></span><br><span class="line">    <span class="comment"># 依据 environ 判断路由</span></span><br><span class="line">    <span class="comment"># 依据 路由 执行相关 view 层方法</span></span><br><span class="line">    <span class="comment"># 在相关 view 层方法内执行相关逻辑</span></span><br><span class="line">    start_response(<span class="string">&#x27;200 OK&#x27;</span>, [(<span class="string">&#x27;Content-Type&#x27;</span>, <span class="string">&#x27;text/plain&#x27;</span>)])</span><br><span class="line">    <span class="comment"># 返回对应响应</span></span><br><span class="line">    <span class="keyword">return</span> response</span><br></pre></td></tr></table></figure>
+
+<p>当然，思路是这么个思路，这个思路也确实非常的命令式，非常的面向过程。</p>
+<p>至于我们如何把这个面向过程的思路变成面向对象的设计与实现，则需要更加细致的思考这些问题。</p>
+<ol>
+<li>能不能把 request 和 response 封装一下？方便在 view 里面处理？</li>
+<li>能不能有个 URLDisparch 之类的东西，帮你解决 url 和 view 的 mapping 问题。或者路由能不能直接搞成 装饰器类型的比如 @router(“/“) 直接放在 view 层的 function 上。</li>
+<li>能不能有个方便对数据库进行 CURDE 的东西？比如 ORM/ODM</li>
+<li>这玩意会不会线程不安全，假如我想每一个请求都有单独的变量集合的话，线程怎么管理？</li>
+<li>……</li>
+</ol>
+<h3 id="设计-Web-框架"><a href="#设计-Web-框架" class="headerlink" title="设计 Web 框架"></a>设计 Web 框架</h3><p>利用 Flask 作者的另一个库 werkzeug 的案例中有这么一个东西。</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/pallets/werkzeug/blob/master/examples/shortly/shortly.py">https://github.com/pallets/werkzeug/blob/master/examples/shortly/shortly.py</a></p>
+<p>几百行代码就不贴在这里了。仔细看看还是挺有趣的。 这个可以算作另一个超简的 Webapp 了。</p>
+<p>Flask 算作在这个基础上进行一定的扩展而成。</p>
+<p>看完上面这个就可以出去吹牛逼可以自己写一个极简 Web 框架了。</p>
+<p>那么，你可能有疑问，为何有了 Flask 之后，是否需要看这个更底层的 Werkzeug 的库，当然，有必要咯，Python 世界除了老牌的比较流行的 Django/Flask, 还有一个新星，叫做 APIStar</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/encode/apistar">https://github.com/encode/apistar</a></p>
+<h2 id="0x02-问题-2-请求流程是怎么样的"><a href="#0x02-问题-2-请求流程是怎么样的" class="headerlink" title="0x02 问题 2: 请求流程是怎么样的"></a>0x02 问题 2: 请求流程是怎么样的</h2><p>我们就拿这个 flask 的极简案例，进行<strong>首次</strong>阅读 Flask 代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># hello.py</span></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask</span><br><span class="line"></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/&#x27;</span></span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">hello</span>():</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">&#x27;Hello, World!&#x27;</span></span><br><span class="line"></span><br><span class="line">$ FLASK_APP=hello.py flask run</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>从请求到响应的整个流程，Flask 的是怎么处理请求的？</p>
+</blockquote>
+<h3 id="2-1-服务器是怎么起来的"><a href="#2-1-服务器是怎么起来的" class="headerlink" title="2.1 服务器是怎么起来的"></a>2.1 服务器是怎么起来的</h3><p>首先 flask run 之后，发生了什么？</p>
+<p>先初始化环境变量，然后导入 dotenv 文件，然后执行 run_command 方法，找到 hello.py 然后导入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#cli.py#run_command 方法</span></span><br><span class="line">app = DispatchingApp(info.load_app, use_eager_loading=eager_loading)</span><br><span class="line"><span class="comment"># 上一行代表着其实我们每次在本地 flask run 的时候，起的服务并不是 flask_app, 而是被 DispatchingApp 包装了一层的 flask app</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> werkzeug.serving <span class="keyword">import</span> run_simple</span><br><span class="line">run_simple(host, port, app, use_reloader=reload, use_debugger=debugger,</span><br><span class="line">            threaded=with_threads, ssl_context=cert)</span><br></pre></td></tr></table></figure>
+
+<p>进行这层包装之后，就可以显示 WERKZEUG 的所谓在浏览器中的 报错信息了。</p>
+<p>通常开发时这里的 run_simple 最后会调用 run_with_reloader , 每当程序退出的时候，reloader 就依照策略重新跑一次 reload 一次。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_with_reloader</span>(<span class="params">main_func, extra_files=<span class="literal">None</span>, interval=<span class="number">1</span>,</span></span></span><br><span class="line"><span class="function"><span class="params">                      reloader_type=<span class="string">&#x27;auto&#x27;</span></span>):</span></span><br><span class="line">    <span class="string">&quot;&quot;&quot;Run the given function in an independent python interpreter.&quot;&quot;&quot;</span></span><br><span class="line">    <span class="keyword">import</span> signal</span><br><span class="line">    reloader = reloader_loops[reloader_type](extra_files, interval)</span><br><span class="line">    signal.signal(signal.SIGTERM, <span class="keyword">lambda</span> *args: sys.exit(<span class="number">0</span>))</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">if</span> os.environ.get(<span class="string">&#x27;WERKZEUG_RUN_MAIN&#x27;</span>) == <span class="string">&#x27;true&#x27;</span>:</span><br><span class="line">            t = threading.Thread(target=main_func, args=())</span><br><span class="line">            t.setDaemon(<span class="literal">True</span>)</span><br><span class="line">            t.start()</span><br><span class="line">            reloader.run()</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            sys.exit(reloader.restart_with_reloader())</span><br><span class="line">    <span class="keyword">except</span> KeyboardInterrupt:</span><br><span class="line">        <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>好，服务起来了。</p>
+<h3 id="2-2-请求-响应的流程"><a href="#2-2-请求-响应的流程" class="headerlink" title="2.2 请求-响应的流程"></a>2.2 请求-响应的流程</h3><p>我们先看 Flask 类里面的比较关键的两个方法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Flask</span>(<span class="params">_PackageBoundObject</span>):</span></span><br><span class="line">    <span class="comment"># 一些方法 ......</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">full_dispatch_request</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="comment"># 主要是执行一些方法，最后返回响应</span></span><br><span class="line">        self.try_trigger_before_first_request_functions()</span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            request_started.send(self)</span><br><span class="line">            rv = self.preprocess_request()</span><br><span class="line">            <span class="keyword">if</span> rv <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">                rv = self.dispatch_request()</span><br><span class="line">        <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">            rv = self.handle_user_exception(e)</span><br><span class="line">        <span class="comment"># ??? TODO</span></span><br><span class="line">        <span class="keyword">return</span> self.finalize_request(rv)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 这里是我们熟悉的 environ, 和 start_response</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">wsgi_app</span>(<span class="params">self, environ, start_response</span>):</span></span><br><span class="line">        <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">        :param environ: a WSGI environment</span></span><br><span class="line"><span class="string">        :param start_response: a callable accepting a status code,</span></span><br><span class="line"><span class="string">                               a list of headers and an optional</span></span><br><span class="line"><span class="string">                               exception context to start the response</span></span><br><span class="line"><span class="string">        &quot;&quot;&quot;</span></span><br><span class="line">        <span class="comment"># 在这里对 environ 进行封装，创建请求上下文</span></span><br><span class="line">        ctx = self.request_context(environ)</span><br><span class="line">        error = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">try</span>:</span><br><span class="line">            <span class="keyword">try</span>:</span><br><span class="line">                <span class="comment"># 这里将请求上下文压入 _request_ctx_stack</span></span><br><span class="line">                ctx.push()</span><br><span class="line">                response = self.full_dispatch_request()</span><br><span class="line">            <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">                error = e</span><br><span class="line">                response = self.handle_exception(e)</span><br><span class="line">            <span class="keyword">except</span>:</span><br><span class="line">                error = sys.exc_info()[<span class="number">1</span>]</span><br><span class="line">                <span class="keyword">raise</span></span><br><span class="line">            <span class="keyword">return</span> response(environ, start_response)</span><br><span class="line">        <span class="keyword">finally</span>:</span><br><span class="line">            <span class="keyword">if</span> self.should_ignore_error(error):</span><br><span class="line">                error = <span class="literal">None</span></span><br><span class="line">            <span class="comment"># 这里将创建的请求上下文从中 _request_ctx_stack pop 出来</span></span><br><span class="line">            ctx.auto_pop(error)</span><br></pre></td></tr></table></figure>
+
+<p>从 wsgi_app 泪看，就可以看到我们之前在当时在开脑洞时候看到的。</p>
+<ol>
+<li>把 request 和 response 封装一下？方便在 view 里面处理？</li>
+<li>有个 URLDisparch 之类的东西，帮你解决 url 和 view 的 mapping 问题。</li>
+</ol>
+<p>话说回来？</p>
+<blockquote>
+<p>这个 ctx 是啥？<br>当然，flask 不带 ORM, 这我们也就不研究了。</p>
+</blockquote>
+<p>– TODO: 在这里需要重构一下</p>
+<p>不过话说回来 请求上下文的容器 request_ctx_stack 到底是啥？</p>
+<blockquote>
+<p>另一种本地数据存储方式。</p>
+</blockquote>
+<p>在多线程的情况下，每一个请求都会创建一个线程，从这个请求被发起到销毁，我想拥有单独的变量（修改这个变量不会影响到其他变量），比如 sessions 之类。</p>
+<p>显然，在多线程的情况下，以上的需求完全可以通过 threadlocal 来实现。</p>
+<p>翻了 werkzeug 的文档，找到了原因：</p>
+<blockquote>
+<p>因为 python 里面的并发模型并不只有多线程一种。比如 greenlets, 每一个请求，都在一个线程里面。</p>
+</blockquote>
+<h2 id="0x02-问题-2-Flask-中-Context-机制"><a href="#0x02-问题-2-Flask-中-Context-机制" class="headerlink" title="0x02 问题 2: Flask 中 Context 机制"></a>0x02 问题 2: Flask 中 Context 机制</h2><p>在 Django 完成一个 View 层的逻辑是这样的，Django 封装好了请求，请求经过 middleware 的处理，最后调用 login 函数，并且传入 request 方便 view 函数进行处理。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span>(<span class="params">request</span>):</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        error = someerror</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;login.html&#x27;</span>, error=error)</span><br></pre></td></tr></table></figure>
+
+<p>在 Flask 完成一个 View 层的逻辑是这样的</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/login&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span>():</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        error = someerror</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;login.html&#x27;</span>, error=error)</span><br></pre></td></tr></table></figure>
+
+<p>假如我是一个爱问问题的年轻人，这里肯定会有疑惑：</p>
+<blockquote>
+<p>从外部 import 过来，那就是利用了 python 自带的 import 单例模式。 那么线程和线程之间拿到的肯定是同一个 request 呀。但 Django 里面每个 request 都是不一样的，否则一些很基础功能的比如已经认证的用户就无法拿到了。</p>
+</blockquote>
+<p>我已经不是那个爱问问题的年轻人，因为年纪已经不小了。逃…</p>
+<p>显然，每一次在 view 层引用的 request 肯定不是同一个 request , 那么，这是如何做到的呢？比如用 ThreadLocal , ThreadLocal 通过每个线程不同的 ID 拿到的本地变量，于是我们查看一下对应的实现。 这个 request 来自于 global.py , 使用了一个 werkzeug.local 里面的 LocalProxy</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> functools <span class="keyword">import</span> partial</span><br><span class="line"><span class="keyword">from</span> werkzeug.local <span class="keyword">import</span> LocalStack, LocalProxy</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_lookup_req_object</span>(<span class="params">name</span>):</span></span><br><span class="line">    top = _request_ctx_stack.top</span><br><span class="line">    <span class="keyword">if</span> top <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">raise</span> RuntimeError(_request_ctx_err_msg)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">getattr</span>(top, name)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_lookup_app_object</span>(<span class="params">name</span>):</span></span><br><span class="line">    top = _app_ctx_stack.top</span><br><span class="line">    <span class="keyword">if</span> top <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">raise</span> RuntimeError(_app_ctx_err_msg)</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">getattr</span>(top, name)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_find_app</span>():</span></span><br><span class="line">    top = _app_ctx_stack.top</span><br><span class="line">    <span class="keyword">if</span> top <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">        <span class="keyword">raise</span> RuntimeError(_app_ctx_err_msg)</span><br><span class="line">    <span class="keyword">return</span> top.app</span><br><span class="line"></span><br><span class="line"><span class="comment"># context locals</span></span><br><span class="line">_request_ctx_stack = LocalStack()</span><br><span class="line">_app_ctx_stack = LocalStack()</span><br><span class="line">current_app = LocalProxy(_find_app)</span><br><span class="line"><span class="comment"># 这就是我们需要的注意的地方，LocalProxy</span></span><br><span class="line">request = LocalProxy(partial(_lookup_req_object, <span class="string">&#x27;request&#x27;</span>))</span><br><span class="line">session = LocalProxy(partial(_lookup_req_object, <span class="string">&#x27;session&#x27;</span>))</span><br><span class="line">g = LocalProxy(partial(_lookup_app_object, <span class="string">&#x27;g&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>看到这里一阵蛋疼，貌似没有 threadlocal ？再次查看相关实现最后还是定位到了如何区分不同的 request 的核心代码。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># since each thread has its own greenlet we can just use those as identifiers</span></span><br><span class="line"><span class="comment"># for the context.  If greenlets are not available we fall back to the</span></span><br><span class="line"><span class="comment"># current thread ident depending on where it is.</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="keyword">from</span> greenlet <span class="keyword">import</span> getcurrent <span class="keyword">as</span> get_ident</span><br><span class="line">    <span class="comment"># greenlet 的代码是 C, 时间长没看 C 代码了，看了半天没看明白</span></span><br><span class="line">    <span class="comment"># 翻了文档返回当前的 greenlet, 也就是返回调用此函数的 greenlet</span></span><br><span class="line"><span class="keyword">except</span> ImportError:</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        <span class="keyword">from</span> thread <span class="keyword">import</span> get_ident</span><br><span class="line">    <span class="keyword">except</span> ImportError:</span><br><span class="line">        <span class="keyword">from</span> _thread <span class="keyword">import</span> get_ident</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Local</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    __slots__ = (<span class="string">&#x27;__storage__&#x27;</span>, <span class="string">&#x27;__ident_func__&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        <span class="built_in">object</span>.__setattr__(self, <span class="string">&#x27;__storage__&#x27;</span>, &#123;&#125;)</span><br><span class="line">        <span class="comment"># 这里传递的 ident 就可以直接</span></span><br><span class="line">        <span class="built_in">object</span>.__setattr__(self, <span class="string">&#x27;__ident_func__&#x27;</span>, get_ident)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LocalStack</span>:</span></span><br><span class="line">    <span class="comment"># 用 local 实现的栈</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LocalProxy</span>:</span></span><br><span class="line">    <span class="comment"># 一个 local 的代理器</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__getattr__</span>(<span class="params">self, name</span>):</span></span><br><span class="line">    <span class="keyword">if</span> name == <span class="string">&#x27;__members__&#x27;</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">dir</span>(self._get_current_object())</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">getattr</span>(self._get_current_object(), name)</span><br></pre></td></tr></table></figure>
+
+<p>即：</p>
+<ol>
+<li>当 Flask 以多线程模型运行的时候，则使用的是 threadlocal 方式</li>
+<li>当 Flask 以 greenlet 的模型运行的时候，则使用的是 greenlet 区分不同</li>
+</ol>
+<p>接下来回头看一下处理 request 的逻辑</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> request</span><br><span class="line"><span class="meta">@app.route(<span class="params"><span class="string">&#x27;/login&#x27;</span>, methods=[<span class="string">&#x27;POST&#x27;</span>, <span class="string">&#x27;GET&#x27;</span>]</span>)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">login</span>():</span></span><br><span class="line">    <span class="comment"># 这个 request 哪里来？</span></span><br><span class="line">    <span class="keyword">if</span> request.method == <span class="string">&#x27;POST&#x27;</span>:</span><br><span class="line">        error = someerror</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;login.html&#x27;</span>, error=error)</span><br></pre></td></tr></table></figure>
+
+<p>于是，我们就知道了，当引用 request 这个 LocalProxy 的时候，引用的确实是同一个名称为 request 变量，并且这个变量也确实是 LocalProxy 的实例</p>
+<blockquote>
+<p>但是当使用 request.method 的时候，LocalProxy 重载了 取到的则是另一个『请求对象』的 method.</p>
+</blockquote>
+<p>于是拿到当前请求的信息。</p>
+<p>当然，其实我们也可以依据利用这个技巧写一个 currentuser 的 ProxyLocal, 然后在每个 view 层里面使用 user.has_something 进行操作。</p>
+<h2 id="0x03-问题-3-Flask-中官方的机制"><a href="#0x03-问题-3-Flask-中官方的机制" class="headerlink" title="0x03 问题 3: Flask 中官方的机制"></a>0x03 问题 3: Flask 中官方的机制</h2><h2 id="0x04-问题-3-Flask-中是如何做到优雅扩展的"><a href="#0x04-问题-3-Flask-中是如何做到优雅扩展的" class="headerlink" title="0x04 问题 3: Flask 中是如何做到优雅扩展的"></a>0x04 问题 3: Flask 中是如何做到优雅扩展的</h2><h2 id="0x05-其他问题"><a href="#0x05-其他问题" class="headerlink" title="0x05 其他问题"></a>0x05 其他问题</h2><h3 id="Flask-应用"><a href="#Flask-应用" class="headerlink" title="Flask 应用"></a>Flask 应用</h3><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-03-09</strong> 重修文字</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/VueJS/" rel="tag"># VueJS</a>
+              <a href="/tags/%E5%85%A8%E6%A0%88%E5%BC%80%E5%8F%91/" rel="tag"># 全栈开发</a>
+              <a href="/tags/RestAPI/" rel="tag"># RestAPI</a>
+              <a href="/tags/Flask/" rel="tag"># Flask</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/03/04/YaDjangoBlog%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%AF%87/" rel="prev" title="YaDjangoBlog 之前后端分离篇">
+      <i class="fa fa-chevron-left"></i> YaDjangoBlog 之前后端分离篇
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/03/09/Flask%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%E7%AC%94%E8%AE%B0/" rel="next" title="Flask 文档阅读笔记">
+      Flask 文档阅读笔记 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E9%98%85%E8%AF%BB-Flask-%E4%BB%A3%E7%A0%81%E7%9A%84%E4%B8%80%E7%A7%8D%E8%BE%83%E5%A5%BD%E7%9A%84%E5%A7%BF%E5%8A%BF"><span class="nav-number">2.</span> <span class="nav-text">0x01 阅读 Flask 代码的一种较好的姿势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E9%97%AE%E9%A2%98-1-%E5%A6%82%E4%BD%95%E8%AE%BE%E8%AE%A1%E4%B8%80%E4%B8%AA-Web-%E6%A1%86%E6%9E%B6"><span class="nav-number">3.</span> <span class="nav-text">0x02 问题 1: 如何设计一个 Web 框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%B4%E8%84%91%E9%A3%8E%E6%9A%B4"><span class="nav-number">3.1.</span> <span class="nav-text">头脑风暴</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E8%AE%A1-Web-%E6%A1%86%E6%9E%B6"><span class="nav-number">3.2.</span> <span class="nav-text">设计 Web 框架</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E9%97%AE%E9%A2%98-2-%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B%E6%98%AF%E6%80%8E%E4%B9%88%E6%A0%B7%E7%9A%84"><span class="nav-number">4.</span> <span class="nav-text">0x02 问题 2: 请求流程是怎么样的</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%98%AF%E6%80%8E%E4%B9%88%E8%B5%B7%E6%9D%A5%E7%9A%84"><span class="nav-number">4.1.</span> <span class="nav-text">2.1 服务器是怎么起来的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E8%AF%B7%E6%B1%82-%E5%93%8D%E5%BA%94%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">4.2.</span> <span class="nav-text">2.2 请求-响应的流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E9%97%AE%E9%A2%98-2-Flask-%E4%B8%AD-Context-%E6%9C%BA%E5%88%B6"><span class="nav-number">5.</span> <span class="nav-text">0x02 问题 2: Flask 中 Context 机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E9%97%AE%E9%A2%98-3-Flask-%E4%B8%AD%E5%AE%98%E6%96%B9%E7%9A%84%E6%9C%BA%E5%88%B6"><span class="nav-number">6.</span> <span class="nav-text">0x03 问题 3: Flask 中官方的机制</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-%E9%97%AE%E9%A2%98-3-Flask-%E4%B8%AD%E6%98%AF%E5%A6%82%E4%BD%95%E5%81%9A%E5%88%B0%E4%BC%98%E9%9B%85%E6%89%A9%E5%B1%95%E7%9A%84"><span class="nav-number">7.</span> <span class="nav-text">0x04 问题 3: Flask 中是如何做到优雅扩展的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-%E5%85%B6%E4%BB%96%E9%97%AE%E9%A2%98"><span class="nav-number">8.</span> <span class="nav-text">0x05 其他问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flask-%E5%BA%94%E7%94%A8"><span class="nav-number">8.1.</span> <span class="nav-text">Flask 应用</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

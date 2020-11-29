@@ -1,38 +1,530 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0x00 前言本文编写于 2018 年初，于 2019 四月进行修订，也是笔者对 Celery 的系统梳理。 在我的文章如何保证 Django 项目的数据一致性中，提到了这么一个解决超卖的方案。  在 Redis 里面直接生成 200 个订单号 然后用户来一个取走一个订单号码 通过 Celery 削峰 排队走异步任务 最后通过数据表的 uniq 约束来防止下单超过 200 个。  https:&#x2F;&#x2F;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Celery 快速入门指北">
+<meta property="og:url" content="http://twocucao.xyz/2018/02/20/CeleryCheatSheet/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言本文编写于 2018 年初，于 2019 四月进行修订，也是笔者对 Celery 的系统梳理。 在我的文章如何保证 Django 项目的数据一致性中，提到了这么一个解决超卖的方案。  在 Redis 里面直接生成 200 个订单号 然后用户来一个取走一个订单号码 通过 Celery 削峰 排队走异步任务 最后通过数据表的 uniq 约束来防止下单超过 200 个。  https:&#x2F;&#x2F;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-02-20T02:25:39.000Z">
+<meta property="article:modified_time" content="2019-04-11T03:51:34.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="CheatSheet">
+<meta property="article:tag" content="Redis">
+<meta property="article:tag" content="RabbitMQ">
+<meta property="article:tag" content="消息队列">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2018/02/20/CeleryCheatSheet/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>Celery 快速入门指北 | MG的编程小屋</title>
+  
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/02/20/CeleryCheatSheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Celery 快速入门指北
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-02-20 10:25:39" itemprop="dateCreated datePublished" datetime="2018-02-20T10:25:39+08:00">2018-02-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-04-11 11:51:34" itemprop="dateModified" datetime="2019-04-11T11:51:34+08:00">2019-04-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E5%8F%B0%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">后台组件</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文编写于 2018 年初，于 2019 四月进行修订，也是笔者对 Celery 的系统梳理。</p>
+<p>在我的文章如何保证 Django 项目的数据一致性中，提到了这么一个解决超卖的方案。</p>
+<ol>
+<li>在 Redis 里面直接生成 200 个订单号</li>
+<li>然后用户来一个取走一个订单号码</li>
+<li>通过 Celery 削峰 排队走异步任务</li>
+<li>最后通过数据表的 uniq 约束来防止下单超过 200 个。</li>
+</ol>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/57668068">https://zhuanlan.zhihu.com/p/57668068</a></p>
+<p>有朋友和我讲，你这个方法是有问题的，走异步任务容易并发量太大，容易把数据库打爆。</p>
+<p>其实是可以的，Celery 可以对 Worker 的 Task 限流 (ratelimit)。</p>
+<h2 id="0x01-Celery"><a href="#0x01-Celery" class="headerlink" title="0x01 Celery"></a>0x01 Celery</h2><h3 id="为什么需要-Celery"><a href="#为什么需要-Celery" class="headerlink" title="为什么需要 Celery"></a>为什么需要 Celery</h3><p>在日常开发的时候，常常有一些『任务』需要处理。</p>
+<ol>
+<li>为了提升系统的响应速度，比如发送短信 / 发送邮箱，这类的『任务』可以走异步。</li>
+<li>为了在某个时间执行耗时操作，比如统计用户的文章 / 点赞 / 活跃度。</li>
+<li>为了削减峰值，比如秒杀系统的削峰走异步</li>
+<li>为了业务代码解耦，比如当我在知乎上更新文章，可能就会触发『推荐系统』,『文章管理系统』,『用户通知系统』</li>
+</ol>
+<p>不用 Celery 的话，其实上面的业务也是能做的。 比如 1 中，可以直接启一个线程来做。比如 2 完全可以 Crontab 做一个定时任务。</p>
+<p>那为什么要用 Celery 呢？</p>
+<ol>
+<li>把目光聚焦在 Task 的分发上面。而非线程，Deamon 之类细节的处理。</li>
+<li>方便，简单，易维护，高可用。</li>
+<li>便于监控。</li>
+<li>扩展性好。</li>
+</ol>
+<p>基本上满足了你九成的需求。</p>
+<h2 id="0x02-Celery-快速开始"><a href="#0x02-Celery-快速开始" class="headerlink" title="0x02 Celery 快速开始"></a>0x02 Celery 快速开始</h2><p>本文的讨论基于 Broker 为 RabbitMQ, Result Backend 为 Redis,  Django 的 Web 应用，叫做 djoo</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo rabbitmqctl add_user djoo djoo</span><br><span class="line">sudo rabbitmqctl add_vhost djoo</span><br><span class="line">sudo rabbitmqctl set_user_tags djoo djoo</span><br><span class="line">sudo rabbitmqctl set_permissions -p djoo djoo &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CELERY_BROKER_URL &#x3D; &#39;amqp:&#x2F;&#x2F;djoo:djoo@localhost:5672&#x2F;djoo&#39;</span><br><span class="line"></span><br><span class="line">CELERY_RESULT_BACKEND &#x3D; &quot;redis:&#x2F;&#x2F;&#123;host&#125;:&#123;port&#125;&#x2F;1&quot;.format(</span><br><span class="line">    host&#x3D;os.getenv(&quot;REDIS_HOST&quot;, &quot;localhost&quot;), port&#x3D;os.getenv(&quot;REDIS_PORT&quot;, &quot;6379&quot;)</span><br><span class="line">)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>泛读文档之后，需要搞清楚几个概念。</p>
+<ul>
+<li>Broker: 携带 Task 的消息中间件，是发送消息和接收消息的解决方案，比如 RabbitMQ</li>
+<li>Result Backend: Task 执行结果。</li>
+<li>Application: Celery 的实例</li>
+<li>Worker: 执行任务者</li>
+<li>Beat: 或叫做 Schedule, 一般用于执行定时任务。</li>
+<li>Task: 任务</li>
+</ul>
+<h2 id="0x03-Celery-Guide"><a href="#0x03-Celery-Guide" class="headerlink" title="0x03 Celery Guide"></a>0x03 Celery Guide</h2><h3 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h3><p>Application 可以针对整个 Celery 实例进行配置，比如配置时区，重写 Application 里的基类</p>
+<h3 id="Tasks"><a href="#Tasks" class="headerlink" title="Tasks"></a>Tasks</h3><p>Task 是一个 Class, 并且可以从任意 Callable 的对象创建。</p>
+<p>Task Message 除非被 Acked, 否则不会从队列中移除。</p>
+<blockquote>
+<p>NOTE: 那什么时候算是 Acked?</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@app.task(name&#x3D;&quot;xsum&quot;)</span><br><span class="line">def xsum(numbers):</span><br><span class="line">    return sum(numbers)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>Tasks</li>
+<li>Calling Tasks</li>
+<li>Canvas: Designing Work-flows</li>
+<li>Workers Guide</li>
+<li>Daemonization</li>
+<li>Periodic Tasks</li>
+<li>Routing Tasks</li>
+<li>Monitoring and Management Guide</li>
+<li>Security</li>
+<li>Optimizing</li>
+<li>Debugging</li>
+<li>Concurrency</li>
+<li>Signals</li>
+<li>Testing with Celery</li>
+<li>Extensions and Bootsteps</li>
+<li>Configuration and defaults</li>
+</ul>
+<h3 id="Application-1"><a href="#Application-1" class="headerlink" title="Application"></a>Application</h3><h3 id="Tasks-1"><a href="#Tasks-1" class="headerlink" title="Tasks"></a>Tasks</h3><h3 id="Calling-Tasks"><a href="#Calling-Tasks" class="headerlink" title="Calling Tasks"></a>Calling Tasks</h3><h3 id="Canvas-Designing-Work-flows"><a href="#Canvas-Designing-Work-flows" class="headerlink" title="Canvas: Designing Work-flows"></a>Canvas: Designing Work-flows</h3><h3 id="Workers-Guide"><a href="#Workers-Guide" class="headerlink" title="Workers Guide"></a>Workers Guide</h3><h3 id="Daemonization"><a href="#Daemonization" class="headerlink" title="Daemonization"></a>Daemonization</h3><h3 id="Periodic-Tasks"><a href="#Periodic-Tasks" class="headerlink" title="Periodic Tasks"></a>Periodic Tasks</h3><h3 id="Routing-Tasks"><a href="#Routing-Tasks" class="headerlink" title="Routing Tasks"></a>Routing Tasks</h3><h3 id="Monitoring-and-Management-Guide"><a href="#Monitoring-and-Management-Guide" class="headerlink" title="Monitoring and Management Guide"></a>Monitoring and Management Guide</h3><h3 id="Security"><a href="#Security" class="headerlink" title="Security"></a>Security</h3><h3 id="Optimizing"><a href="#Optimizing" class="headerlink" title="Optimizing"></a>Optimizing</h3><h3 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h3><h3 id="Concurrency"><a href="#Concurrency" class="headerlink" title="Concurrency"></a>Concurrency</h3><h3 id="Signals"><a href="#Signals" class="headerlink" title="Signals"></a>Signals</h3><h3 id="Testing-with-Celery"><a href="#Testing-with-Celery" class="headerlink" title="Testing with Celery"></a>Testing with Celery</h3><h3 id="Extensions-and-Bootsteps"><a href="#Extensions-and-Bootsteps" class="headerlink" title="Extensions and Bootsteps"></a>Extensions and Bootsteps</h3><h3 id="Configuration-and-defaults"><a href="#Configuration-and-defaults" class="headerlink" title="Configuration and defaults"></a>Configuration and defaults</h3><h2 id="0x03-RabbitMQ"><a href="#0x03-RabbitMQ" class="headerlink" title="0x03 RabbitMQ"></a>0x03 RabbitMQ</h2><p>发布者的消息经过交换机，分发到不同的队列，最后由接收方进行处理。</p>
+<p>那么问题来了，交换机都是用来干嘛的</p>
+<ul>
+<li>Direct 单播路由：扔一条消息到一个队列中，依照 routingkey 投递</li>
+<li>Topic  多播路由：发给某几类队列（通知）.</li>
+<li>Fanout 广播路由：发给全部绑定在该路由上面的队列。</li>
+<li>Headers</li>
+</ul>
+<ol>
+<li>应用解耦。（平台无关，语言无关）</li>
+</ol>
+<p>比如说，但项目足够大的时候，更新一个活动，可能需要更新用户的一些状态，可能要更新一波统计数据，可能要记录一批日志。这个时候原来的代码可能这么写：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">update_activity()</span><br><span class="line">update_user()</span><br><span class="line">update_user_cache()</span><br><span class="line">update_stats()</span><br><span class="line">record_user_log()</span><br></pre></td></tr></table></figure>
+
+<p>现在代码就可能这么写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">send_task_update_activity()</span><br><span class="line">send_task_update_user()</span><br><span class="line">send_task_update_user_cache()</span><br><span class="line">send_task_update_stats()</span><br><span class="line">send_task_record_user_log()</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>异步通信。（减轻请求峰值）</li>
+</ol>
+<p>原本一个 webapp 不做异步的话，也能搞定，但做了异步之后，可以大幅度提升吞吐量和响应时间。</p>
+<ol start="3">
+<li>数据持久化。（不丢失消息）</li>
+<li>送达保证。(ack late)</li>
+</ol>
+<h3 id="简单步骤"><a href="#简单步骤" class="headerlink" title="简单步骤"></a>简单步骤</h3><ol>
+<li>定义 app, 指定 broker 和 backend</li>
+<li>定义 tasks</li>
+<li>指定 worker</li>
+<li>调用 Task , 调用后返回 AsyncResult 实例，</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">add.delay(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">add.apply_async((<span class="number">2</span>, <span class="number">2</span>))</span><br><span class="line">add.apply_async((<span class="number">2</span>, <span class="number">2</span>), queue=<span class="string">&#x27;lopri&#x27;</span>, countdown=<span class="number">10</span>)</span><br><span class="line">add.signature((<span class="number">2</span>, <span class="number">2</span>), countdown=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">res = add.delay(<span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">res.get(timeout=<span class="number">1</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h4 id="Groups"><a href="#Groups" class="headerlink" title="Groups"></a>Groups</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 并行</span><br><span class="line">group(add.s(i, i) for i in xrange(10))().get()</span><br><span class="line"># [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]</span><br><span class="line"># partial group</span><br><span class="line">g &#x3D; group(add.s(i) for i in xrange(10))</span><br><span class="line">g(10).get()</span><br></pre></td></tr></table></figure>
+
+<h4 id="Chains"><a href="#Chains" class="headerlink" title="Chains"></a>Chains</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chain(add.s(4, 4) | mul.s(8))().get()</span><br><span class="line">(add.s(4, 4) | mul.s(8))().get()</span><br><span class="line"># partial chain</span><br><span class="line">g &#x3D; chain(add.s(4) | mul.s(8))</span><br><span class="line">g(4).get()</span><br></pre></td></tr></table></figure>
+
+<h4 id="Chords"><a href="#Chords" class="headerlink" title="Chords"></a>Chords</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chord((add.s(i, i) <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">10</span>)), xsum.s())().get()</span><br><span class="line">(group(add.s(i, i) <span class="keyword">for</span> i <span class="keyword">in</span> xrange(<span class="number">10</span>)) | xsum.s())().get()</span><br><span class="line"><span class="comment"># eg : upload_document.s(file) | group(apply_filter.s() for filter in filters)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="0x07-踩坑集"><a href="#0x07-踩坑集" class="headerlink" title="0x07 踩坑集"></a>0x07 踩坑集</h2><ul>
+<li>序列问题</li>
+</ul>
+<h2 id="0xEE-参考链接"><a href="#0xEE-参考链接" class="headerlink" title="0xEE 参考链接"></a>0xEE 参考链接</h2><hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-20</strong> 初始化</li>
+<li><strong>2019-04-04</strong> 重修文字</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CheatSheet/" rel="tag"># CheatSheet</a>
+              <a href="/tags/Redis/" rel="tag"># Redis</a>
+              <a href="/tags/RabbitMQ/" rel="tag"># RabbitMQ</a>
+              <a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/" rel="tag"># 消息队列</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/02/10/ElasticSearchCheatSheet/" rel="prev" title="ElasticSearch CheatSheet">
+      <i class="fa fa-chevron-left"></i> ElasticSearch CheatSheet
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/02/21/FullStackDjangoDevOps/" rel="next" title="2018 年不容错过的 Django 全栈项目">
+      2018 年不容错过的 Django 全栈项目 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-Celery"><span class="nav-number">2.</span> <span class="nav-text">0x01 Celery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-Celery"><span class="nav-number">2.1.</span> <span class="nav-text">为什么需要 Celery</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-Celery-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="nav-number">3.</span> <span class="nav-text">0x02 Celery 快速开始</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-Celery-Guide"><span class="nav-number">4.</span> <span class="nav-text">0x03 Celery Guide</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Application"><span class="nav-number">4.1.</span> <span class="nav-text">Application</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tasks"><span class="nav-number">4.2.</span> <span class="nav-text">Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Application-1"><span class="nav-number">4.3.</span> <span class="nav-text">Application</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Tasks-1"><span class="nav-number">4.4.</span> <span class="nav-text">Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Calling-Tasks"><span class="nav-number">4.5.</span> <span class="nav-text">Calling Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canvas-Designing-Work-flows"><span class="nav-number">4.6.</span> <span class="nav-text">Canvas: Designing Work-flows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Workers-Guide"><span class="nav-number">4.7.</span> <span class="nav-text">Workers Guide</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Daemonization"><span class="nav-number">4.8.</span> <span class="nav-text">Daemonization</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Periodic-Tasks"><span class="nav-number">4.9.</span> <span class="nav-text">Periodic Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Routing-Tasks"><span class="nav-number">4.10.</span> <span class="nav-text">Routing Tasks</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Monitoring-and-Management-Guide"><span class="nav-number">4.11.</span> <span class="nav-text">Monitoring and Management Guide</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Security"><span class="nav-number">4.12.</span> <span class="nav-text">Security</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Optimizing"><span class="nav-number">4.13.</span> <span class="nav-text">Optimizing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Debugging"><span class="nav-number">4.14.</span> <span class="nav-text">Debugging</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Concurrency"><span class="nav-number">4.15.</span> <span class="nav-text">Concurrency</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Signals"><span class="nav-number">4.16.</span> <span class="nav-text">Signals</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Testing-with-Celery"><span class="nav-number">4.17.</span> <span class="nav-text">Testing with Celery</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Extensions-and-Bootsteps"><span class="nav-number">4.18.</span> <span class="nav-text">Extensions and Bootsteps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Configuration-and-defaults"><span class="nav-number">4.19.</span> <span class="nav-text">Configuration and defaults</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-RabbitMQ"><span class="nav-number">5.</span> <span class="nav-text">0x03 RabbitMQ</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E6%AD%A5%E9%AA%A4"><span class="nav-number">5.1.</span> <span class="nav-text">简单步骤</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Groups"><span class="nav-number">5.1.1.</span> <span class="nav-text">Groups</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Chains"><span class="nav-number">5.1.2.</span> <span class="nav-text">Chains</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Chords"><span class="nav-number">5.1.3.</span> <span class="nav-text">Chords</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-%E8%B8%A9%E5%9D%91%E9%9B%86"><span class="nav-number">6.</span> <span class="nav-text">0x07 踩坑集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-number">7.</span> <span class="nav-text">0xEE 参考链接</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

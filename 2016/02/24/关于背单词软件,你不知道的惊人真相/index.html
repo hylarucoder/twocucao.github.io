@@ -1,38 +1,567 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0x00 前言 你想知道背单词软件有大概多少人注册第一天都没有背完嘛？ 你想知道背单词软件这么火，这么多人在使用，真的有多少人真的在背诵嘛？  别急，Python 程序员用数据给你说话。 文章目录如下：  0x00 前言 0x01 问题的提出和任务的分解 0x02 任务一，信息爬取 ox03 任务二，清理和存储 0x04 任务三，分析 0x05 任务四，结论 0x06 整个流程的不足和反思。 0x">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于背单词软件，你不知道的惊人真相">
+<meta property="og:url" content="http://twocucao.xyz/2016/02/24/%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6,%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言 你想知道背单词软件有大概多少人注册第一天都没有背完嘛？ 你想知道背单词软件这么火，这么多人在使用，真的有多少人真的在背诵嘛？  别急，Python 程序员用数据给你说话。 文章目录如下：  0x00 前言 0x01 问题的提出和任务的分解 0x02 任务一，信息爬取 ox03 任务二，清理和存储 0x04 任务三，分析 0x05 任务四，结论 0x06 整个流程的不足和反思。 0x">
+<meta property="og:locale">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-700e3adc4e88dd4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-d43f053706de8b37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-532a24af7f6a4c0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-a1adbb9a925128a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-6e0b3c72b5c02c13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/52890-2cf944cc1c837507.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="article:published_time" content="2016-02-24T10:50:23.000Z">
+<meta property="article:modified_time" content="2018-01-27T17:39:44.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="数据分析">
+<meta property="article:tag" content="数据可视化">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/52890-700e3adc4e88dd4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+<link rel="canonical" href="http://twocucao.xyz/2016/02/24/%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6,%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>关于背单词软件，你不知道的惊人真相 | MG的编程小屋</title>
+  
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/02/24/%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6,%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          关于背单词软件，你不知道的惊人真相
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-02-24 18:50:23" itemprop="dateCreated datePublished" datetime="2016-02-24T18:50:23+08:00">2016-02-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-28 01:39:44" itemprop="dateModified" datetime="2018-01-28T01:39:44+08:00">2018-01-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%88%91%E7%9A%84%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/" itemprop="url" rel="index"><span itemprop="name">我的开源项目</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><ul>
+<li>你想知道背单词软件有大概多少人注册第一天都没有背完嘛？</li>
+<li>你想知道背单词软件这么火，这么多人在使用，真的有多少人真的在背诵嘛？</li>
+</ul>
+<p>别急，Python 程序员用数据给你说话。</p>
+<p>文章目录如下：</p>
+<ul>
+<li>0x00 前言</li>
+<li>0x01 问题的提出和任务的分解</li>
+<li>0x02 任务一，信息爬取</li>
+<li>ox03 任务二，清理和存储</li>
+<li>0x04 任务三，分析</li>
+<li>0x05 任务四，结论</li>
+<li>0x06 整个流程的不足和反思。</li>
+<li>0x07 代码。</li>
+</ul>
+<h2 id="0x01-问题的提出和任务的分解"><a href="#0x01-问题的提出和任务的分解" class="headerlink" title="0x01 问题的提出和任务的分解"></a>0x01 问题的提出和任务的分解</h2><p>前两天，就在一个雷电交加的夜晚，我躺在床上，草草的看了一篇英文文章，突然想到一个非常有意思的问题：</p>
+<blockquote>
+<p>是不是大部分的人做事真的不能坚持呢？比如，背单词。</p>
+</blockquote>
+<p>好，那我就看看到底有多少人是坚持不下来的？</p>
+<p>那么，我们的问题就变成了这样子：</p>
+<ul>
+<li>有多少人是在坚持或者曾经坚持过背单词呢？（假设 100 天以上算的上是背单词的话）</li>
+<li>有多少梦想，毁于不能坚持？</li>
+<li>背单词的人们学习的量，是不是符合正太分布呢？</li>
+</ul>
+<p>于是我选中了业内的标杆扇贝软件作为分析的对象。抽取其中的大约 1/30 的用户的公开数据，也就是游客用户都可以看得到的数据，进行抽样调查。</p>
+<p> 调查的具体内容如下：</p>
+<ul>
+<li>打卡最高 / 成长值最高 / 学习单词数量最高</li>
+<li>平均每个人打卡次数 / 成长值 / 学习单词数量</li>
+<li>打卡 / 成长值 / 学习单词数量的分布（也就是已经坚持了多少天了）</li>
+</ul>
+<p>那么，我的任务也就可以分解如下：</p>
+<ul>
+<li>爬取数据<ul>
+<li>使用 Python2 的 Scrapy 进行爬站</li>
+</ul>
+</li>
+<li>清理数据<ul>
+<li>sql 语句和 pandas 运算</li>
+</ul>
+</li>
+<li>分析数据<ul>
+<li>pandas + seaborn + ipython book</li>
+</ul>
+</li>
+<li>得出结论</li>
+</ul>
+<h2 id="0x02-任务一，信息爬取，清理和存储"><a href="#0x02-任务一，信息爬取，清理和存储" class="headerlink" title="0x02 任务一，信息爬取，清理和存储"></a>0x02 任务一，信息爬取，清理和存储</h2><p>每个用户的信息都在这里：</p>
+<p><a target="_blank" rel="noopener" href="http://www.shanbay.com/bdc/review/progress/2">http://www.shanbay.com/bdc/review/progress/2</a></p>
+<p>使用 beautifulsoup4 进行解析即可。其他部分参考代码。</p>
+<p>扇贝的工程师反爬虫做的还不错，主要有两点：</p>
+<ul>
+<li>访问数量超标，封禁 IP 半个小时。对应的方法就是代理服务器.（代码中已经删除代理服务器，所以，如果你运行不了代码，那你应该知道怎么做了.)</li>
+<li>cookie 如果不禁用很快就无法爬取。对应的方法就是禁用 Cookie.</li>
+</ul>
+<h2 id="0x03-任务二，清理和存储"><a href="#0x03-任务二，清理和存储" class="headerlink" title="0x03 任务二，清理和存储"></a>0x03 任务二，清理和存储</h2><p>对于数据库，使用 Postgresql 存储就好了。也没有什么大问题。参考代码。有问题在评论下面问。</p>
+<p>通常情况下在存入数据库的时候需要进行数据的净化，不处理也没有什么大问题。</p>
+<h2 id="0x04-任务三，分析"><a href="#0x04-任务三，分析" class="headerlink" title="0x04 任务三，分析"></a>0x04 任务三，分析</h2><p>分析阶段，使用 IPython notebook. 通常情况下，我们使用的是 Anaconda 里面的 Python3 版本 . 可以到这里下载，注意，mac 和 ubuntu 下载的是命令行版本。</p>
+<p><a target="_blank" rel="noopener" href="https://www.continuum.io/downloads">https://www.continuum.io/downloads</a></p>
+<p>安装完毕以后，重启终端。环境变量生效。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#直接安装 seaborn</span></span><br><span class="line">pip install seaborn</span><br></pre></td></tr></table></figure>
+
+<p>切换到指定目录然后敲入命令 ipython notebook 打开浏览器进行编辑。</p>
+<p>至于怎么使用，请看代码。</p>
+<h2 id="0x05-任务三，结论"><a href="#0x05-任务三，结论" class="headerlink" title="0x05 任务三，结论"></a>0x05 任务三，结论</h2><p>在这里省去部分的分析过程直接贴出结论。</p>
+<p>总共抓取 1111111 张网页，成功获取 610888 个用户的信息。</p>
+<p>于是得出结论如下：</p>
+<p><strong>扇贝之最：</strong></p>
+<ul>
+<li>最高打卡天数：chainyu 1830 天</li>
+<li>最高成长值：Lerystal 成长值 28767</li>
+<li>最高单词数量：chenmaoboss 单词量 38313</li>
+</ul>
+<p><strong>平均到每一个人身上</strong></p>
+<ul>
+<li>平均每人打卡天数：14.18, 而超过成长平均值的人数为 71342, 占总抽样人数的，额，11.69%</li>
+<li>平均成长值：121.79, 而超过平均成长的人数为 13351, 占总抽样人数的，额，11.42%</li>
+<li>平均学习单词数量：78.92, 而背超过平均单词的人数为 13351, 占总抽样人数的，额，2.19%（注意，真的是 2% 左右）</li>
+</ul>
+<p><strong>那么，我们来看看打卡，成长值，单词数量的，分布吧.</strong></p>
+<p>第一个，所有人的打卡数量直方图。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-700e3adc4e88dd4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这是所有人的打卡数量直方图"></p>
+<p>简直惨不忍睹。</p>
+<p>第二个，非零用户的打卡数量直方图。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-d43f053706de8b37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="非零用户的打卡数量的直方图"></p>
+<p>这真是一段悲伤的故事。由于坚持不了几天的用户实在是太多，简直就是反比例函数嘛，导致图像严重畸形。那么，我们只能分段了看用户打卡天数在 0<del>20,20</del>100,100<del>500,500</del>2000 范围的分布图了。</p>
+<p>分别如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-532a24af7f6a4c0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0~20"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-a1adbb9a925128a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20~100"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-6e0b3c72b5c02c13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="100~500"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-2cf944cc1c837507.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="500~2000"></p>
+<p>其他成长值的各种分布也是如此，在此就不贴出来了。</p>
+<p>正如你所看到的，我再来总结一下，</p>
+<p>在抽样中，</p>
+<ol>
+<li>英语梦死在前 0 天的有 416351 人，占总比 68.15%;</li>
+<li>英语梦死在前 1 天的有 466761 人，占总比 76.40%;</li>
+<li>英语梦死在前 2 天的有 484535 人，占总比 79.31%;</li>
+<li>英语梦死在前 5 天的有 510230 人，占总比 83.52%;</li>
+<li>英语梦死在前 10 天的有 531219 人，占总比 86.95%;</li>
+<li>英语梦死在前 20 天的有 551557 人，占总比 90.28%;</li>
+<li>英语梦死在前 50 天的有 575975 人，占总比的 94.28%;</li>
+<li>英语梦死在前 100 天的有 590700 人，占总比 96.69%;</li>
+<li>英语梦死在前 200 天的有 575975 人，占总比 98.36%;</li>
+<li>英语梦死在前 263 天的有 600875 人，占总比 98.81%;</li>
+</ol>
+<p>你可以大致感受到残酷的现实，几乎没有多少人可以坚持到 200 天以后。</p>
+<p>但是，你还需要注意到的事情是：</p>
+<blockquote>
+<p>抽样的来源是 ID 为 1~1111111 之间的 60W 成员</p>
+</blockquote>
+<p>众所周知的事情是：</p>
+<ul>
+<li>早期的用户往往质量相对会高一些。而且，注册的 ID 越大，证明注册时间距离现在越近。获得 200 天的几率也就低了不少。</li>
+</ul>
+<blockquote>
+<p>那么，这样的话，英语梦死在 200 天之前的人数比例还会大上不少。</p>
+</blockquote>
+<p>回到文章开始：</p>
+<p>问：背单词软件有大概多少人注册第一天都没有背完嘛？<br>答：68.15%</p>
+<p>问：有多少人是在坚持或者曾经坚持过背单词呢？（假设 100 天以上算的上是背单词的话）<br>答：保守估计，不足 3.4%</p>
+<p>问：有多少梦想，毁于不能坚持？<br>答：不妨干了这碗鸡汤，歌唱青春一去不复返。</p>
+<p>问：背单词的人们学习的量，是不是符合正太分布呢？<br>答：不是，简直就是反比例函数。</p>
+<p>抛出一个结论：</p>
+<blockquote>
+<p>以绝大部分人努力之低，根本就用不着拼天赋。</p>
+</blockquote>
+<p>赠给你我，共勉。</p>
+<h2 id="0x06-整个流程的不足和反思。"><a href="#0x06-整个流程的不足和反思。" class="headerlink" title="0x06 整个流程的不足和反思。"></a>0x06 整个流程的不足和反思。</h2><p>扇贝的工程师反爬虫做的还不错，主要有两点：</p>
+<ul>
+<li>访问数量超标，封禁 IP 半个小时。对应的方法就是代理服务器。</li>
+<li>cookie 如果不禁用很快就无法爬取。对应的方法就是禁用 Cookie.</li>
+</ul>
+<p>爬虫框架使用 Scrapy, 这样就免去了大量的繁琐的线程调度问题，直接写获取信息的逻辑代码，以及存储信息的逻辑代码就好了。</p>
+<p>在编写爬虫的过程中，有一些经验：</p>
+<ul>
+<li>在爬虫开启以后，由于我暴力的关闭，导致还是有不少的 item 没有完成请求处理和存储。</li>
+<li>我在处理异常的时候忘了应当把失败的 item 存放放在文件中，方便我第二次补充，这样的话就不会丢失一部分的用户信息了。</li>
+<li>代理服务器需要自己写脚本进行测试，否则你可能有很多很多的请求都会超时（毕竟很多代理服务器还是很不靠谱的）.</li>
+</ul>
+<p>我的分析数据能力并不是很强，仅仅是从 CS109 里面偷学了一点点，然后使用 Seaborn 画图，但是这整个过程中还是觉得自己分析不过来，不是写不出代码，而是不清楚使用什么样的数据模型进行分析更好。</p>
+<h2 id="0x07-代码"><a href="#0x07-代码" class="headerlink" title="0x07 代码"></a>0x07 代码</h2><p>代码放在了 Github 上面，咳咳，注意，没有把代理服务器放进去。如果你跑一下会发现只能半小时抓取 300+ 页面，这不是我的问题，是你没有把代理服务器填好。代码比较粗糙，还请轻拍。</p>
+<p>代码的地址为：</p>
+<p><a target="_blank" rel="noopener" href="https://github.com/twocucao/DataScience/">https://github.com/twocucao/DataScience/</a></p>
+<p>仓库里包含了抓取网站的代码和分析数据的 IPython Notebook, 自己阅读吧。</p>
+<p>如果喜欢本文，就点个喜欢吧。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag"># 数据分析</a>
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%8F%AF%E8%A7%86%E5%8C%96/" rel="tag"># 数据可视化</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/02/21/UnKnownCheatSheet/" rel="prev" title="Unknown Cheatsheet">
+      <i class="fa fa-chevron-left"></i> Unknown Cheatsheet
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/03/15/%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AAPy%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/" rel="next" title="如何发布一个 Python 命令行工具">
+      如何发布一个 Python 命令行工具 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8F%90%E5%87%BA%E5%92%8C%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%88%86%E8%A7%A3"><span class="nav-number">2.</span> <span class="nav-text">0x01 问题的提出和任务的分解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E4%BB%BB%E5%8A%A1%E4%B8%80%EF%BC%8C%E4%BF%A1%E6%81%AF%E7%88%AC%E5%8F%96%EF%BC%8C%E6%B8%85%E7%90%86%E5%92%8C%E5%AD%98%E5%82%A8"><span class="nav-number">3.</span> <span class="nav-text">0x02 任务一，信息爬取，清理和存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x03-%E4%BB%BB%E5%8A%A1%E4%BA%8C%EF%BC%8C%E6%B8%85%E7%90%86%E5%92%8C%E5%AD%98%E5%82%A8"><span class="nav-number">4.</span> <span class="nav-text">0x03 任务二，清理和存储</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x04-%E4%BB%BB%E5%8A%A1%E4%B8%89%EF%BC%8C%E5%88%86%E6%9E%90"><span class="nav-number">5.</span> <span class="nav-text">0x04 任务三，分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x05-%E4%BB%BB%E5%8A%A1%E4%B8%89%EF%BC%8C%E7%BB%93%E8%AE%BA"><span class="nav-number">6.</span> <span class="nav-text">0x05 任务三，结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x06-%E6%95%B4%E4%B8%AA%E6%B5%81%E7%A8%8B%E7%9A%84%E4%B8%8D%E8%B6%B3%E5%92%8C%E5%8F%8D%E6%80%9D%E3%80%82"><span class="nav-number">7.</span> <span class="nav-text">0x06 整个流程的不足和反思。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x07-%E4%BB%A3%E7%A0%81"><span class="nav-number">8.</span> <span class="nav-text">0x07 代码</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

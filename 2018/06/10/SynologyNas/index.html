@@ -1,38 +1,487 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0x00 前言百度云的人工智障总是误删我的文件，于是开始寻找其他存储方案。决定入手一台 NAS. 组装机 &#x2F; 品牌机视具体情况，笔者缺乏足够的精力去折腾，如果精力足够，我还是很倾向于自己组装一台 nas 的。不过，现在年纪大了，还是老老实实买个品牌的 NAS 好了，折腾大抵是年轻人的事情。 为啥买群晖？因为看到很多喜欢折腾的人都安装黑群晖，所以直接买了个白群晖。 本文目录1234567891011">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Synology 群晖 NAS 入门指北">
+<meta property="og:url" content="http://twocucao.xyz/2018/06/10/SynologyNas/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言百度云的人工智障总是误删我的文件，于是开始寻找其他存储方案。决定入手一台 NAS. 组装机 &#x2F; 品牌机视具体情况，笔者缺乏足够的精力去折腾，如果精力足够，我还是很倾向于自己组装一台 nas 的。不过，现在年纪大了，还是老老实实买个品牌的 NAS 好了，折腾大抵是年轻人的事情。 为啥买群晖？因为看到很多喜欢折腾的人都安装黑群晖，所以直接买了个白群晖。 本文目录1234567891011">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-06-10T03:52:36.000Z">
+<meta property="article:modified_time" content="2018-06-17T00:22:27.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="Nas">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2018/06/10/SynologyNas/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>Synology 群晖 NAS 入门指北 | MG的编程小屋</title>
+  
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2018/06/10/SynologyNas/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Synology 群晖 NAS 入门指北
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2018-06-10 11:52:36" itemprop="dateCreated datePublished" datetime="2018-06-10T11:52:36+08:00">2018-06-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-06-17 08:22:27" itemprop="dateModified" datetime="2018-06-17T08:22:27+08:00">2018-06-17</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>百度云的人工智障总是误删我的文件，于是开始寻找其他存储方案。决定入手一台 NAS.</p>
+<h3 id="组装机-品牌机"><a href="#组装机-品牌机" class="headerlink" title="组装机 / 品牌机"></a>组装机 / 品牌机</h3><p>视具体情况，笔者缺乏足够的精力去折腾，如果精力足够，我还是很倾向于自己组装一台 nas 的。不过，现在年纪大了，还是老老实实买个品牌的 NAS 好了，折腾大抵是年轻人的事情。</p>
+<p>为啥买群晖？因为看到很多喜欢折腾的人都安装黑群晖，所以直接买了个白群晖。</p>
+<h3 id="本文目录"><a href="#本文目录" class="headerlink" title="本文目录"></a>本文目录</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">▼ 0x00 前言 : section</span><br><span class="line">    组装机 &#x2F; 品牌机 : section</span><br><span class="line">  ▼ 0x01 安装 &#x2F; 配置 : section</span><br><span class="line">      STEP-0 设备 : section</span><br><span class="line">      STEP-1 组装 : section</span><br><span class="line">      STEP-2 组网 : section</span><br><span class="line">      STEP-3 安装系统 : section</span><br><span class="line">  ▼ 0x02 一些私人化的需求 : section</span><br><span class="line">      2.1 内网 NAS 使用 : section</span><br><span class="line">      2.2 外网 NAS 使用 : section</span><br><span class="line">    ▼ 2.3 与百度云结合 : section</span><br><span class="line">        如何同步数据 : section</span><br><span class="line">      2.3 Time Machine : section</span><br><span class="line">    0xEE 结论 : section</span><br></pre></td></tr></table></figure>
+
+<h2 id="0x01-安装-配置"><a href="#0x01-安装-配置" class="headerlink" title="0x01 安装 / 配置"></a>0x01 安装 / 配置</h2><h3 id="STEP-0-设备"><a href="#STEP-0-设备" class="headerlink" title="STEP-0 设备"></a>STEP-0 设备</h3><ul>
+<li>路由器一台</li>
+<li>网线一根</li>
+<li>Synology 一台，笔者使用的是 DS218j 2 盘位 NAS （这款家用基本上够用了）</li>
+<li>硬盘两个，推荐 WD 的红盘或者希捷的狼盘。</li>
+</ul>
+<h3 id="STEP-1-组装"><a href="#STEP-1-组装" class="headerlink" title="STEP-1 组装"></a>STEP-1 组装</h3><p>把硬盘安装在 nas 里需要三个步骤</p>
+<ol>
+<li>打开 nas 外壳</li>
+<li>把硬盘塞进去</li>
+<li>把盒子盖上</li>
+</ol>
+<h3 id="STEP-2-组网"><a href="#STEP-2-组网" class="headerlink" title="STEP-2 组网"></a>STEP-2 组网</h3><ol>
+<li>如果你的路由器可以直连宽带接口的话，则直接连接。</li>
+<li>如果你的路由器上一级有个路由器的话，可以使用桥接模式，把这台路由器连到上一台路由器上。</li>
+</ol>
+<p>nas 建议直接用网线连接到路由器上。</p>
+<p>那么，现在你的手机 / 笔记本 / 平板等等放到该局域网中。</p>
+<blockquote>
+<p>PS: 为什么需要这么做？因为所有环境放在一个局域网内的话，安全性和速度较好。</p>
+</blockquote>
+<h3 id="STEP-3-安装系统"><a href="#STEP-3-安装系统" class="headerlink" title="STEP-3 安装系统"></a>STEP-3 安装系统</h3><p>打开群晖机器开关，在同一局域网内的访问</p>
+<p><a target="_blank" rel="noopener" href="http://find.synology.com/">http://find.synology.com/</a></p>
+<p>然后按照要求进行注册登陆</p>
+<p>期间需要注册群晖的账号，以及本台机器的用户名和密码。</p>
+<h2 id="0x02-一些私人化的需求"><a href="#0x02-一些私人化的需求" class="headerlink" title="0x02 一些私人化的需求"></a>0x02 一些私人化的需求</h2><h3 id="2-1-内网-NAS-使用"><a href="#2-1-内网-NAS-使用" class="headerlink" title="2.1 内网 NAS 使用"></a>2.1 内网 NAS 使用</h3><p>笔者使用的是 Mac 电脑，在 Finder 中直接链接服务器，输入 smb://mynas 即可访问。剩下的操作基本上和本地磁盘使用起来没有什么大的差别。</p>
+<p>对于手机和平板，安装群晖对应的 Drive 即可。</p>
+<h3 id="2-2-外网-NAS-使用"><a href="#2-2-外网-NAS-使用" class="headerlink" title="2.2 外网 NAS 使用"></a>2.2 外网 NAS 使用</h3><p>外网可以直接使用群晖的账号登录群晖的官网，接着控制这台群晖的机器进行下载。但速度不够。</p>
+<p>使用下来感觉效果并不好。建议阅读下一章和百度云配合使用。</p>
+<h3 id="2-3-与百度云结合"><a href="#2-3-与百度云结合" class="headerlink" title="2.3 与百度云结合"></a>2.3 与百度云结合</h3><p>百度云这个东西让人又爱又恨。</p>
+<ul>
+<li>爱的是，容量不错，部分热门资源的下载速度也可。</li>
+<li>恨的是，老是莫名其妙删掉我的文件。冷门资源那下载速度真的是….</li>
+</ul>
+<p>而现在，现在我的文件就分为两种：</p>
+<ul>
+<li>一种是合规的不可丢失的文件</li>
+<li>一种是合规的可丢失的文件</li>
+</ul>
+<p>像我这样贯彻社会主义核心价值观的人，所有文件都是合法合规的。接受文件的审查倒也能接受，但人工智障老是误删我的合法文件这尼玛给我工作生活带来困扰啊。</p>
+<p>所以，</p>
+<ul>
+<li>对于丢失零容忍的文件可以考虑放在 Nas 中。</li>
+<li>对于丢失可容忍的文件可以考虑放在百度云中。</li>
+<li>对于日常使用的文档可以放在百度云中。</li>
+</ul>
+<h4 id="如何同步数据"><a href="#如何同步数据" class="headerlink" title="如何同步数据"></a>如何同步数据</h4><p>鉴于百度云开放了应用接口，群晖的 Nas 也可以实现百度云同步数据到 Nas 上。</p>
+<p>安装 CloudSync 选择第三方供应商。百度云，完成授权。</p>
+<p>设置双向同步到 DMS 的某个文件夹下。比如，笔者同步百度云的文件到本地 DSM /CloudDrive/BaiduPan/ 即完成最基本的设置了。</p>
+<p><strong>如何同步本地数据到云端呢？</strong></p>
+<p>然后随便复制一个文件到该文件夹下，然后在百度云的 Web 端的『我的应用数据 /Cloud Sync 』 文件夹下就可以看到资源了。</p>
+<p><strong>那么，如何同步云端的数据到本地呢？</strong></p>
+<p>把云端的数据（文件 / 文件夹）拖动到 『我的应用数据 /Cloud Sync 』里即可。</p>
+<p>像一些非私密性的文件，扔百度云就好了。</p>
+<p>这个 Nas 就相当于一个远程的拥有高容量的弱鸡服务器，可以用来跑跑一些下载任务之类。</p>
+<h3 id="2-3-Time-Machine"><a href="#2-3-Time-Machine" class="headerlink" title="2.3 Time Machine"></a>2.3 Time Machine</h3><p>Nas 另一个吸引我的地方就是可以 Time Machine 进行备份了。步骤大致如下。</p>
+<ol>
+<li>『共享文件夹』里面新建文件夹 Time Machine</li>
+<li>『文件服务』中开启 SMB/AFP 服务，在高级设置中启用 Bonjour , 启用 SMB/AFP 的 TimeMachine 播送，指定为 Time Machine 文件夹</li>
+<li>『用户管理』里新建用户 TimeMachine, 容量限制一下，建议 1TB 即可。</li>
+<li>打开 Mac 电脑，选择磁盘，然后开始备份。</li>
+</ol>
+<p>PS: 但我这边初次备份 TM 的时候，需要备份 300+GB 的文件，速度确实堪忧。和直接外接接口连接硬盘完全没法比。但慢慢备份下来，其实速度也能接受。</p>
+<h2 id="0xEE-结论"><a href="#0xEE-结论" class="headerlink" title="0xEE 结论"></a>0xEE 结论</h2><p>NAS 解决了我的几个痛点。</p>
+<ul>
+<li>跨平台共享文件</li>
+<li>文件集中化管理</li>
+<li>硬盘容量大</li>
+<li>私密性较好</li>
+<li>不会有人工智障来删我东西</li>
+<li>速度在可接受范围内。我在用 LR 修图的时候只是稍微比本地的慢一点。</li>
+</ul>
+<p>不过似乎还有一些其他的功能可以继续发掘一下。以后有机会再分享一下。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Nas/" rel="tag"># Nas</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/06/06/CPython/" rel="prev" title="CPython 源码初步阅读笔记">
+      <i class="fa fa-chevron-left"></i> CPython 源码初步阅读笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/06/29/PythonBugWithZipfile/" rel="next" title="记一个有趣的 Python ZipInfo 的副作用">
+      记一个有趣的 Python ZipInfo 的副作用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E8%A3%85%E6%9C%BA-%E5%93%81%E7%89%8C%E6%9C%BA"><span class="nav-number">1.1.</span> <span class="nav-text">组装机 &#x2F; 品牌机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%AC%E6%96%87%E7%9B%AE%E5%BD%95"><span class="nav-number">1.2.</span> <span class="nav-text">本文目录</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E5%AE%89%E8%A3%85-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.</span> <span class="nav-text">0x01 安装 &#x2F; 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#STEP-0-%E8%AE%BE%E5%A4%87"><span class="nav-number">2.1.</span> <span class="nav-text">STEP-0 设备</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STEP-1-%E7%BB%84%E8%A3%85"><span class="nav-number">2.2.</span> <span class="nav-text">STEP-1 组装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STEP-2-%E7%BB%84%E7%BD%91"><span class="nav-number">2.3.</span> <span class="nav-text">STEP-2 组网</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#STEP-3-%E5%AE%89%E8%A3%85%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.4.</span> <span class="nav-text">STEP-3 安装系统</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-%E4%B8%80%E4%BA%9B%E7%A7%81%E4%BA%BA%E5%8C%96%E7%9A%84%E9%9C%80%E6%B1%82"><span class="nav-number">3.</span> <span class="nav-text">0x02 一些私人化的需求</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%86%85%E7%BD%91-NAS-%E4%BD%BF%E7%94%A8"><span class="nav-number">3.1.</span> <span class="nav-text">2.1 内网 NAS 使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E5%A4%96%E7%BD%91-NAS-%E4%BD%BF%E7%94%A8"><span class="nav-number">3.2.</span> <span class="nav-text">2.2 外网 NAS 使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E4%B8%8E%E7%99%BE%E5%BA%A6%E4%BA%91%E7%BB%93%E5%90%88"><span class="nav-number">3.3.</span> <span class="nav-text">2.3 与百度云结合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%90%8C%E6%AD%A5%E6%95%B0%E6%8D%AE"><span class="nav-number">3.3.1.</span> <span class="nav-text">如何同步数据</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-Time-Machine"><span class="nav-number">3.4.</span> <span class="nav-text">2.3 Time Machine</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0xEE-%E7%BB%93%E8%AE%BA"><span class="nav-number">4.</span> <span class="nav-text">0xEE 结论</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

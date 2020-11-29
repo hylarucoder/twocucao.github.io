@@ -1,38 +1,530 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block title %}{{ page.title }} | {{ config.title }}{% endblock %}
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-{% block page_class %}page-post-detail{% endblock %}
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中的文本处理相关思路。 本文的目录为：  正则处理相关 HTML&#x2F;XML 处理相关 Python 中的文本处理  0x01 正则处理相关1.1. 正则表达式正则是个很奇葩的名字，为什么叫做正则表达式呢，首先是个表达式，其次，这是一种叫做正则 (regular expression, rational expression)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Text Processing CheatSheet">
+<meta property="og:url" content="http://twocucao.xyz/2016/12/03/TextProcessingCheatsheet/index.html">
+<meta property="og:site_name" content="MG的编程小屋">
+<meta property="og:description" content="0x00 前言本文为 Cheatsheet 类型文章，用于记录我在日常编程中的文本处理相关思路。 本文的目录为：  正则处理相关 HTML&#x2F;XML 处理相关 Python 中的文本处理  0x01 正则处理相关1.1. 正则表达式正则是个很奇葩的名字，为什么叫做正则表达式呢，首先是个表达式，其次，这是一种叫做正则 (regular expression, rational expression)">
+<meta property="og:locale">
+<meta property="article:published_time" content="2016-12-03T10:41:47.000Z">
+<meta property="article:modified_time" content="2018-01-28T01:18:30.000Z">
+<meta property="article:author" content="Micheal Gardner">
+<meta property="article:tag" content="编程工具">
+<meta property="article:tag" content="CheatSheet">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://twocucao.xyz/2016/12/03/TextProcessingCheatsheet/">
 
 
-{% block content %}
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+  <title>Text Processing CheatSheet | MG的编程小屋</title>
+  
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MG的编程小屋</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/12/03/TextProcessingCheatsheet/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Micheal Gardner">
+      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MG的编程小屋">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Text Processing CheatSheet
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2016-12-03 18:41:47" itemprop="dateCreated datePublished" datetime="2016-12-03T18:41:47+08:00">2016-12-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2018-01-28 09:18:30" itemprop="dateModified" datetime="2018-01-28T09:18:30+08:00">2018-01-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">In</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">Python 黑魔法</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中的文本处理相关思路。</p>
+<p>本文的目录为：</p>
+<ul>
+<li>正则处理相关</li>
+<li>HTML/XML 处理相关</li>
+<li>Python 中的文本处理</li>
+</ul>
+<h2 id="0x01-正则处理相关"><a href="#0x01-正则处理相关" class="headerlink" title="0x01 正则处理相关"></a>0x01 正则处理相关</h2><h3 id="1-1-正则表达式"><a href="#1-1-正则表达式" class="headerlink" title="1.1. 正则表达式"></a>1.1. 正则表达式</h3><p>正则是个很奇葩的名字，为什么叫做正则表达式呢，首先是个表达式，其次，这是一种叫做正则 (regular expression, rational expression) 的表达式。<br>名称为什么叫做 regular 呢，因为它基于 regular language. 而 regular language 是一种 formal language. 得，现在又开始是编译原理相关概念了。为了逃避概念，通过用途来简单定义正则表达式。</p>
+<p>简而言之，就是一种用于字符串搜索的模式。或者就是一种领域专用编程语言。</p>
+<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Regular_expression">https://en.wikipedia.org/wiki/Regular_expression</a></p>
+<h3 id="1-2-Python-中正则表达式语法"><a href="#1-2-Python-中正则表达式语法" class="headerlink" title="1.2. Python 中正则表达式语法"></a>1.2. Python 中正则表达式语法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 元字符</span></span><br><span class="line">. ^ $ * + ? &#123; &#125; [ ] \ | ( )</span><br><span class="line"></span><br><span class="line">* <span class="comment"># 速记，天上一个星星都没有，0 到多个。</span></span><br><span class="line">+ <span class="comment"># 一加手机..... 1 到多个。</span></span><br><span class="line">? # 有还是没有 即 0 or 1</span><br><span class="line">*? # 没有疑问就是贪婪，有疑问就是非贪婪</span><br><span class="line">+?</span><br><span class="line">??</span><br><span class="line"></span><br><span class="line">&#123;m&#125; <span class="comment"># m 份</span></span><br><span class="line">&#123;m,n&#125; <span class="comment"># 优先匹配 a&#123;2,&#125;b 优先匹配 aaaab 中 aaaab</span></span><br><span class="line">&#123;m,n&#125;? # 优先匹配 a&#123;2,&#125;b 优先匹配 aaaab 中 aab</span><br><span class="line"></span><br><span class="line">[] <span class="comment"># [a\-z] == [az-]</span></span><br><span class="line"><span class="comment"># 1. [\w] [\S]</span></span><br><span class="line"><span class="comment"># 2. [^5]</span></span><br><span class="line"><span class="comment"># 3. [akm$]  在 [] 中 $ 并不具备元字符特点</span></span><br><span class="line"></span><br><span class="line">PattenA | PattenB</span><br><span class="line">(...) <span class="comment"># 捕获 , 引用可以使用、1 , 但是还有一种扩展语法</span></span><br><span class="line"></span><br><span class="line">(?...) # 扩展</span><br><span class="line"><span class="comment"># - (?aiLmsux)</span></span><br><span class="line"><span class="comment"># - (?:...) 不捕获</span></span><br><span class="line"><span class="comment"># - (?P&lt;quote&gt;...) 正则内引用 (?P=quote);python 内获取 m.group(&#x27;quote&#x27;) ,m.end(&#x27;quote&#x27;);re.sub 内 repl 参数为、g&lt;quote&gt; \g&lt;1&gt; \1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h3 id="1-3-Python-中使用正则的方法"><a href="#1-3-Python-中使用正则的方法" class="headerlink" title="1.3. Python 中使用正则的方法"></a>1.3. Python 中使用正则的方法</h3><h4 id="1-3-1-re-模块的用法"><a href="#1-3-1-re-模块的用法" class="headerlink" title="1.3.1. re 模块的用法"></a>1.3.1. re 模块的用法</h4><ul>
+<li>sub 替换</li>
+<li>match / fullmatch 匹配</li>
+<li>search 搜索</li>
+<li>split 分片</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.split(<span class="string">&#x27;(\W+)&#x27;</span>, <span class="string">&#x27;...words, words...&#x27;</span>)</span><br><span class="line"><span class="comment"># [&#x27;&#x27;, &#x27;...&#x27;, &#x27;words&#x27;, &#x27;, &#x27;, &#x27;words&#x27;, &#x27;...&#x27;, &#x27;&#x27;]</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>match 为匹配起始字符 / fullmatch 为全部字符 / search 为搜索</p>
+</blockquote>
+<h4 id="1-3-2-match-object-的用法"><a href="#1-3-2-match-object-的用法" class="headerlink" title="1.3.2. match object 的用法"></a>1.3.2. match object 的用法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">m.group(<span class="number">0</span>)</span><br><span class="line">m.group(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m = re.match(<span class="string">r&quot;(?P&lt;first_name&gt;\w+) (?P&lt;last_name&gt;\w+)&quot;</span>, <span class="string">&quot;Malcolm Reynolds&quot;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m.group(<span class="string">&#x27;first_name&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;Malcolm&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m.group(<span class="string">&#x27;last_name&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;Reynolds&#x27;</span></span><br><span class="line">m.start() <span class="comment"># 起始</span></span><br><span class="line">m.end()   <span class="comment"># 结尾</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="1-4-正则表达式性能"><a href="#1-4-正则表达式性能" class="headerlink" title="1.4. 正则表达式性能"></a>1.4. 正则表达式性能</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译优于不编译</span></span><br><span class="line">prog = re.<span class="built_in">compile</span>(pattern)</span><br><span class="line">result = prog.match(string)</span><br><span class="line">re.match(pattern,string)</span><br></pre></td></tr></table></figure>
+<h2 id="0x02-HTML-XML-处理相关"><a href="#0x02-HTML-XML-处理相关" class="headerlink" title="0x02 HTML/XML 处理相关"></a>0x02 HTML/XML 处理相关</h2><h3 id="2-1-Beautifulsoup-处理-HTML"><a href="#2-1-Beautifulsoup-处理-HTML" class="headerlink" title="2.1. Beautifulsoup 处理 HTML"></a>2.1. Beautifulsoup 处理 HTML</h3><p>解析往往伴随着各种各样奇葩的不奇葩的，诡异的不诡异的网页数据抽取，这个过程中，我们常使用两个库来解决问题，一个库叫做 lxml, 另一个库叫做 BeautifulSoup.</p>
+<p>beautifulsoup 可是让我们通过直接手动编写遍历 dom 树的方法来快速遍历 dom 树从而获得数据。相比自己写解析器而言，可以算得上非常的节省时间了。</p>
+<p>只要能手动遍历 dom 树，基本上所有的数据都是可以获取的。痛点就是手动编写遍历 Dom 树并且完成测试的时间可能长一些。</p>
+<p>但是开发效率就比较低了。</p>
+<p>举个例子：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;lal&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span> <span class="attr">itemprop</span>=<span class="string">&quot;street-address&quot;</span> <span class="attr">title</span>=<span class="string">&quot;浦东南路八佰伴西面&quot;</span>&gt;</span></span><br><span class="line">       地址：浦东南路八佰伴西面</span><br><span class="line">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span> <span class="attr">itemprop</span>=<span class="string">&quot;street-address&quot;</span> <span class="attr">title</span>=<span class="string">&quot;浦东南路&quot;</span>&gt;</span></span><br><span class="line">       名称：xxxx</span><br><span class="line">    &lt;/div &gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>我想要地址属性，如果是 beautifulsoup, 则我们需要先定位到 id 为 lal 的 div 元素。然后获取每个元素的 text 部分，然后使用 if 判断地址属性，然后提取 text.</p>
+<p><strong>但是如果用 xpath, 则可以把对元素的简单定位简单判断直接写在 xpath 表达式。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sel.xpath(<span class="string">&#x27;//div[@id=&quot;lal&quot;]/*[contains(text(),&quot;地址&quot;)]/text()&#x27;</span>).extract_first()</span><br><span class="line"><span class="comment"># 如果还需要添加筛选名称，则可是使用</span></span><br><span class="line">sel.xpath(<span class="string">&#x27;//div[@id=&quot;lal&quot;]/*[contains(text(),&quot;名称&quot;)]/text()&#x27;</span>).extract_first()</span><br></pre></td></tr></table></figure>
+<p>这样可以极大的提升开发效率。</p>
+<p>页面的结构越复杂，则 xpath 带来的开发效率越高。</p>
+<h3 id="2-2-XPath-处理-HTML"><a href="#2-2-XPath-处理-HTML" class="headerlink" title="2.2. XPath 处理 HTML"></a>2.2. XPath 处理 HTML</h3><h4 id="2-2-1-概念"><a href="#2-2-1-概念" class="headerlink" title="2.2.1. 概念"></a>2.2.1. 概念</h4><p>XPath 是一种通过路径表达式定位 XML 文档内容的语法。<br>由于内置了大量的表达式函数，可以通过极少的代码完成定位。<br>有七种<strong>节点类型</strong>:</p>
+<ul>
+<li>element</li>
+<li>attribute</li>
+<li>text</li>
+<li>namespace</li>
+<li>processing-instruction</li>
+<li>comment</li>
+<li>document nodes</li>
+</ul>
+<p>有五种<strong>节点间关系</strong>:</p>
+<ul>
+<li>父节点 Parent</li>
+<li>子节点 Children</li>
+<li>兄弟节点 Siblings</li>
+<li>先祖节点，即父与父父节点。Ancestors</li>
+<li>后代节点，即子与子子节点。Descendants</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>语法</th>
+<th>描述</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>nodename</td>
+<td>节点名称</td>
+<td>a</td>
+</tr>
+<tr>
+<td>/</td>
+<td>根节点</td>
+<td>/</td>
+</tr>
+<tr>
+<td>//</td>
+<td>匹配所有</td>
+<td>bookstore//book</td>
+</tr>
+<tr>
+<td>.</td>
+<td>当前节点</td>
+<td></td>
+</tr>
+<tr>
+<td>..</td>
+<td>父节点</td>
+<td>a/../a/..</td>
+</tr>
+<tr>
+<td>@</td>
+<td>属性</td>
+<td>a/@href</td>
+</tr>
+<tr>
+<td>[]</td>
+<td>谓语</td>
+<td>book[1] , book[last()-1]</td>
+</tr>
+<tr>
+<td>func()</td>
+<td>表达式函数</td>
+<td>postion()</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">response.xpath(<span class="string">&quot;//*[@id=\&quot;landlb_B04_04\&quot;]/span[2]/a[contains(@href,&#x27;market&#x27;)]&quot;</span>)</span><br><span class="line">response.xpath(<span class="string">&quot;//*[@id=\&quot;landlb_B04_04\&quot;]/span[2]/a[not(@class)]&quot;</span>)</span><br><span class="line">response.xpath(<span class="string">&quot;//ul/li/b[contains(text(),&#x27;什么玩意&#x27;)]/following-sibling::span/text()&quot;</span>)</span><br><span class="line">response.xpath(<span class="string">&quot;//div[@class=&#x27;address&#x27;]/text()[preceding::span[@class=&#x27;item&#x27; and contains(text(),&#x27;地址：&#x27;)]]&quot;</span>)</span><br><span class="line">response.xpath(<span class="string">&quot;//ul/li/b[contains(text(),&#x27;什么玩意：&#x27;)]/following-sibling::a/text()&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//*[contains(text(),<span class="string">&#x27;ABC&#x27;</span>)]</span><br><span class="line"><span class="comment"># http://stackoverflow.com/questions/3655549/xpath-containstext-some-string-doesnt-work-when-used-with-node-with-more/3655588#3655588</span></span><br><span class="line"></span><br><span class="line">&lt;div class=<span class="string">&quot;atag btag&quot;</span> /&gt;</span><br><span class="line">//div[contains(@class, <span class="string">&#x27;atag&#x27;</span>) and contains(@class ,<span class="string">&#x27;btag&#x27;</span>)]</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-2-2-lxml-parsel"><a href="#2-2-2-lxml-parsel" class="headerlink" title="2.2.2. lxml parsel"></a>2.2.2. lxml parsel</h4><p>这两个库是 Python 中常用的解析表达式， parsel 依赖于 lxml , 安装完 lxml 后直接安装即可。</p>
+<h4 id="2-2-3-lxml-的番外"><a href="#2-2-3-lxml-的番外" class="headerlink" title="2.2.3. lxml 的番外"></a>2.2.3. lxml 的番外</h4><p>众所周知，Mac 的 Homebrew 很方便，每一次遇到需要下载编译的组件的时候，只需要执行 brew install xxx, 很快就可以使用了。</p>
+<p>但 homebrew 安装的软件都是最新的，这很容易导致部分软件由于版本更新带来的兼容性问题。</p>
+<p>这不，最近在 Mac 上进行开发的时候每次调用初始化 lxml 的时候总是无法进行解析，最后经过排查发现问题是 lxml 在编译的时候使用的 libxml 2.9.4 但是 使用的版本为 2.9.2 , 于是每当我使用 lxml 的时候，就会报错。</p>
+<p>不得已，找到 lxml 的 F&amp;Q 部分发现提 issue 之前需要先查看依赖版本。</p>
+<p>于是进入 IPython 排查。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;Python&#x27;</span>, sys.version_info))</span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;lxml.etree&#x27;</span>, etree.LXML_VERSION))</span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;libxml used&#x27;</span>, etree.LIBXML_VERSION))</span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;libxml compiled&#x27;</span>, etree.LIBXML_COMPILED_VERSION))</span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;libxslt used&#x27;</span>, etree.LIBXSLT_VERSION))</span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;libxslt compiled&#x27;</span>, etree.LIBXSLT_COMPILED_VERSION))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Python : sys.version_info(major=3, minor=5, micro=1, releaselevel=&#x27;final&#x27;, serial=0)</span></span><br><span class="line"><span class="comment"># lxml.etree : (3, 6, 2, 0)</span></span><br><span class="line"><span class="comment"># libxml used : (2, 9, 2)</span></span><br><span class="line"><span class="comment"># libxml compiled : (2, 9, 4) # 注意问题出在这里。</span></span><br><span class="line"><span class="comment"># libxslt used : (1, 1, 28)</span></span><br><span class="line"><span class="comment"># libxslt compiled : (1, 1, 28)</span></span><br></pre></td></tr></table></figure>
+
+<p>于是使用 pip 强制进行安装升级。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STATIC_DEPS&#x3D;true pip install -i http:&#x2F;&#x2F;pypi.douban.com&#x2F;simple&#x2F; –trusted-host pypi.douban.com lxml –ignore-installed –no-cache-dir –upgrade -vvv</span><br></pre></td></tr></table></figure>
+<p>安装完毕即可。</p>
+<h3 id="2-3-标准库处理-HTML"><a href="#2-3-标准库处理-HTML" class="headerlink" title="2.3. 标准库处理 HTML"></a>2.3. 标准库处理 HTML</h3>
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E7%BC%96%E7%A8%8B%E5%B7%A5%E5%85%B7/" rel="tag"># 编程工具</a>
+              <a href="/tags/CheatSheet/" rel="tag"># CheatSheet</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/11/25/PythonistAwesomeList/" rel="prev" title="Python 爬虫工程师的武器库">
+      <i class="fa fa-chevron-left"></i> Python 爬虫工程师的武器库
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/12/09/MongoCheatSheet/" rel="next" title="MongoDB Cheatsheet">
+      MongoDB Cheatsheet <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#0x00-%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">0x00 前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x01-%E6%AD%A3%E5%88%99%E5%A4%84%E7%90%86%E7%9B%B8%E5%85%B3"><span class="nav-number">2.</span> <span class="nav-text">0x01 正则处理相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">2.1.</span> <span class="nav-text">1.1. 正则表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-Python-%E4%B8%AD%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E8%AF%AD%E6%B3%95"><span class="nav-number">2.2.</span> <span class="nav-text">1.2. Python 中正则表达式语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Python-%E4%B8%AD%E4%BD%BF%E7%94%A8%E6%AD%A3%E5%88%99%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">2.3.</span> <span class="nav-text">1.3. Python 中使用正则的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-1-re-%E6%A8%A1%E5%9D%97%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">2.3.1.</span> <span class="nav-text">1.3.1. re 模块的用法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-2-match-object-%E7%9A%84%E7%94%A8%E6%B3%95"><span class="nav-number">2.3.2.</span> <span class="nav-text">1.3.2. match object 的用法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%80%A7%E8%83%BD"><span class="nav-number">3.</span> <span class="nav-text">1.4. 正则表达式性能</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#0x02-HTML-XML-%E5%A4%84%E7%90%86%E7%9B%B8%E5%85%B3"><span class="nav-number">4.</span> <span class="nav-text">0x02 HTML&#x2F;XML 处理相关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-Beautifulsoup-%E5%A4%84%E7%90%86-HTML"><span class="nav-number">4.1.</span> <span class="nav-text">2.1. Beautifulsoup 处理 HTML</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-XPath-%E5%A4%84%E7%90%86-HTML"><span class="nav-number">4.2.</span> <span class="nav-text">2.2. XPath 处理 HTML</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-1-%E6%A6%82%E5%BF%B5"><span class="nav-number">4.2.1.</span> <span class="nav-text">2.2.1. 概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-2-lxml-parsel"><span class="nav-number">4.2.2.</span> <span class="nav-text">2.2.2. lxml parsel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-3-lxml-%E7%9A%84%E7%95%AA%E5%A4%96"><span class="nav-number">4.2.3.</span> <span class="nav-text">2.2.3. lxml 的番外</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-%E6%A0%87%E5%87%86%E5%BA%93%E5%A4%84%E7%90%86-HTML"><span class="nav-number">4.3.</span> <span class="nav-text">2.3. 标准库处理 HTML</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
+  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">93</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">96</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
