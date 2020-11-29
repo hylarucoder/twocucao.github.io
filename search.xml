@@ -12006,4 +12006,80 @@ STORE_FAST(var_num) : Stores TOS into the local co_varnames[var_num].</code></pr
         <tag>算法与数据结构</tag>
       </tags>
   </entry>
+  <entry>
+    <title>开源认证基础服务</title>
+    <url>/2020/11/29/_ory/</url>
+    <content><![CDATA[<h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>随着业务的增长，往往需要统一体系内的服务的账户。<br>经过一番调研，决定尝试一下 ory 的开源认证基础服务</p>
+<h2 id="0x01-ORY-尝试解决问题？"><a href="#0x01-ORY-尝试解决问题？" class="headerlink" title="0x01 ORY 尝试解决问题？"></a>0x01 ORY 尝试解决问题？</h2><p>ORY 提供了四个主要项目，每个项目着力于解决一个边界清晰的认证 / 鉴权问题</p>
+<ul>
+<li>ORY Kratos 提供了用户认证服务</li>
+<li>ORY Hydra 提供了 OAuth 2.0 &amp; OpenID Connect provider.</li>
+<li>ORY Keto 提供了 访问控制</li>
+<li>ORY Oathkeeper 提供了认证访问代理</li>
+</ul>
+<h2 id="0x02-用户认证服务-Kratos"><a href="#0x02-用户认证服务-Kratos" class="headerlink" title="0x02 用户认证服务 Kratos"></a>0x02 用户认证服务 Kratos</h2><h3 id="常见方案"><a href="#常见方案" class="headerlink" title="常见方案"></a>常见方案</h3><ol>
+<li>方案 1, 选择全栈式解决方案 - 比如 Java 社区的 JGroups</li>
+<li>方案 2, 选择 IDaas - 比如 Login With Apple, Google</li>
+<li>方案 3, 选择自己来 - 比如 Java 社区的 JGroups</li>
+</ol>
+<p>三种方案各有利弊</p>
+<ol>
+<li><p>全栈式解决方案上手极快，但</p>
+<ul>
+<li>扩展性不强</li>
+<li>绑定 Java 技术栈</li>
+<li>数据模型固定</li>
+<li>登陆流程固定<br>  - 更新迭代慢</li>
+</ul>
+</li>
+<li><p>Login With Google 虽然方便，但是并没有解决如下的问题<br>  - 更新 Profile</p>
+<ul>
+<li>添加第二个恢复邮箱</li>
+<li>2FA</li>
+<li>存储管理 Sessions<br>  - 全局登出</li>
+</ul>
+</li>
+<li><p>自己来，需要处理事情也挺多</p>
+</li>
+</ol>
+<p>  - 方案二遇到的问题，一个不会少<br>  - 加密算法<br>    - 流程可能较为复杂，比如先用邮箱注册，然后用 Sign Up Using Google, 或者先用 Sign Up Google, 然后使用邮箱登陆。(PS: 我国的登陆姿势就更多了）</p>
+<p>是不是某种方案是最好的呢？其实未必<br>就我个人经验来说，</p>
+<ul>
+<li>第一种方案比较适合稳定的，技术栈相同的团队使用。如果对原先应用进行少量裁剪就可以使用，其实未尝不可。</li>
+<li>第二种方案如果登陆入口仅是 Login With Google, 并且内网服务数量就几个，也不需要做全局登出，那么其实做起来比较省事。我工作过的一个公司就喜欢这么干。</li>
+<li>第三种方案虽然处理的问题看起来比较多，但是社区现有的 Building Block 已经比较多了。如果流程没有特别复杂，一手打造的非常容易往自己的项目发展情况发展。</li>
+</ul>
+<h3 id="Kratos-的方案"><a href="#Kratos-的方案" class="headerlink" title="Kratos 的方案"></a>Kratos 的方案</h3><p>Kratos 提供了如下的解决方案</p>
+<ul>
+<li>登陆与注册</li>
+<li>track sesison/devices</li>
+<li>MFA/2FA</li>
+<li>账户验证</li>
+<li>账户恢复</li>
+<li>Profile &amp; Account Management</li>
+<li>管理后台接口 API</li>
+<li>消费 OAuth2 and OpenID Connect</li>
+</ul>
+<h2 id="0x03-Ory-Hydra"><a href="#0x03-Ory-Hydra" class="headerlink" title="0x03 Ory Hydra"></a>0x03 Ory Hydra</h2><blockquote>
+<p>You May Not Need It</p>
+</blockquote>
+<ul>
+<li>Provider OAuth2 and OpenID Connect via <a href="https://github.com/ory/hydra">https://github.com/ory/hydra</a></li>
+</ul>
+<h2 id="0x03-Ory-Keto"><a href="#0x03-Ory-Keto" class="headerlink" title="0x03 Ory Keto"></a>0x03 Ory Keto</h2><p>权限系统一般放在按照产品需求，最好跟着产品走。而不是随随便便提取出来做一个权限系统。</p>
+<blockquote>
+<p>You May Not Need It</p>
+</blockquote>
+<h2 id="0x04-Ory-Oathkeeper"><a href="#0x04-Ory-Oathkeeper" class="headerlink" title="0x04 Ory Oathkeeper"></a>0x04 Ory Oathkeeper</h2><p>同样，如果你不是有做 zero trust</p>
+<blockquote>
+<p>You May Not Need It</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>Go</category>
+      </categories>
+      <tags>
+        <tag>后端开发</tag>
+      </tags>
+  </entry>
 </search>
