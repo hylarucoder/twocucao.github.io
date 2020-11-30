@@ -1,0 +1,124 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Django - 分类 - 海拉鲁编程客</title>
+        <link>http://twocucao.xyz/categories/django/</link>
+        <description>Django - 分类 - 海拉鲁编程客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Wed, 16 May 2018 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/django/" rel="self" type="application/rss+xml" /><item>
+    <title>PyCon 2018 之 Django 专题</title>
+    <link>http://twocucao.xyz/posts/20180516_pycondjango/</link>
+    <pubDate>Wed, 16 May 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180516_pycondjango/</guid>
+    <description><![CDATA[0x00 前言 PyCon 2018 有很多精彩的演讲，今天的文章里，挑出 Django 的几篇演讲大致讲讲。
+ 注意：为什么是大致讲讲呢？因为即便是你看了我的这篇文章，依然需要多下点功夫自己去看演讲，自己去查资料，自己去消化。我的这篇文章只不过是我看演讲查资料慢慢消化过程中的产物而已。
+ 0x01 演讲 1 - Taking Django Async 本演讲其实就是为了推广 Django 的新库。django-channels
+这个库从 2015 年首发，现在已经经过了三年的进程。应该算是相对成熟了。
+这个库有什么不走寻常路的地方吗？答案是有的：
+ 使得 Django 增加了异步协议，比如说 WebSocket 协议 使得 Django 可运行后台任务。  作为 v2 版本的核心开发，作者必然是要吐槽一下 v1 版本，然后推荐一下 v2 版本。
+v1 版本的架构设计是这样的。
+核心开发给出了这样的评价：
+ 在 Python2.7 的时候，就只能这么搞了。 需要维护的东西太多 没有 asyncio support 搬砖时候一不小心容易砸到脚   TODO : 补充一些其他的缺点
+ 异步与同步接口耦合
+作者认为此并非长久之计。
+v2 时候，
+重写 75% 的代码
+异步与同步接口分离
+这么设计的话，需要解决接下来的一个问题，同步转异步，异步转同步。
+比如，我访问 view, 实际上是 async 转 sync, 然后才能调用 django 相关的方法，接着返回响应内容的时候，我还需要 sync 转 async.]]></description>
+</item><item>
+    <title>DjangoORM CheatSheet</title>
+    <link>http://twocucao.xyz/posts/20180428_djangoormcheatsheet/</link>
+    <pubDate>Sat, 28 Apr 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180428_djangoormcheatsheet/</guid>
+    <description><![CDATA[本文是《Python ORM 三部曲的第二部 - Django ORM 的用法 / 原理 / 优化》
+上一部的地址为《Python ORM 三部曲的第一部 - Python ORM 的三种实现模式》
+本文基于最新 Django 版本
+ 模型定义 Create/Update/Delete 各种查询 / 链式调用 / F 表达式 / Window 函数 /Lazy Loading / Eager Loading Join DEBUG 和 Profile 技巧  本文是《Python ORM 三部曲的第一部 - Python 的三种数据源架构模式》
+本文适用于：
+ 好奇 or 喜欢折腾的程序员 想深入了解 ORM 的程序员  本文将解决你以下的疑惑：
+ 能不能不用 ORM? ORM 为什么在某些场景下会胜于写 SQL 不同的 ORM 实现机制会带来什么差异？  0x00 前言 新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。]]></description>
+</item><item>
+    <title>YaDjangoBlog 之 前端 VueJS 篇</title>
+    <link>http://twocucao.xyz/posts/20180224_yadjangoblog%E4%B9%8B%E5%89%8D%E7%AB%AFvuejs%E7%AF%87/</link>
+    <pubDate>Sun, 25 Feb 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180224_yadjangoblog%E4%B9%8B%E5%89%8D%E7%AB%AFvuejs%E7%AF%87/</guid>
+    <description><![CDATA[0x00 前言 本文是 Django 全栈开发教程的第四篇
+目录在这里，已经更新的文章如下
+ Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 &ndash; 目录篇 Django 全栈开发教程 - YaDjangoBlog 的开发环境配置  本文需要完成三件事情：
+ 第一件事情，介绍为什么选择 VueJS？ 第二件事情，介绍 Vue 项目的一些注意点。 第三件事情，蜻蜓点水搬的带大家过一编，YaDjangoBlog 前端的项目结构，静态资源管理，路由以及组件。  0x01 为什么是 VueJS 国产框架 + 语法简洁是我入坑 VueJS 初衷。
+后来却是 Vue 的丰富的生态和简洁的语法吸引了继续用下去。
+这里要感谢为 VueJS 持续贡献代码的人，从 Vue 本身，到 VueCLI, 到 Router, 到 VueX, 如果没有那么多人为之贡献代码，可能今天这一小节就变成了，『为什么是 React 了』逃。
+Vue 自称为 Vue 渐进式 JavaScript 框架。
+什么是渐进式？
+就是你可以逐步按照 Vue 的方式逐渐引入一些 Vue 的组件到项目中。没有必要上来就是 Vue 全家桶，依据场景逐步引入。]]></description>
+</item><item>
+    <title>YaDjangoBlog 的前后端设计</title>
+    <link>http://twocucao.xyz/posts/20180224_yadjangoblog%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%9D%E6%AD%A5%E8%AE%BE%E8%AE%A1/</link>
+    <pubDate>Sat, 24 Feb 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180224_yadjangoblog%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%9D%E6%AD%A5%E8%AE%BE%E8%AE%A1/</guid>
+    <description><![CDATA[0x00 前言 本文是 Django 全栈开发教程的第二篇
+目录在这里，已经更新的文章如下
+ Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 &ndash; 目录篇 Django 全栈开发教程 - YaDjangoBlog 的开发环境配置  本文需要完成两件事情：
+ 第一件事情，回答一个问题：为什么要选择博客系统作为教程而不是别的？ 第二件事情，简单说说 YaDjangoBlog 的前后端设计。  0x01 为什么是博客系统 在目录评论区，有个读者问：
+为什么选择博客系统？而不是别的系统？
+一言以蔽之：因为合适。
+为什么说合适？
+ 第一点：代码量相对合适，业务逻辑大家都很清楚，博客系统说简单也简单，说复杂也复杂，待会我们就可以谈到。简单的例子反而是入门和深入了解 Django 技术栈（而不是设计一个优秀的程序）的最佳案例。 第二点：言简意赅，知识点覆盖全面，注意，我们要学习的 Django 技术栈，Django 技术栈，Django 技术栈。不是学高可用架构设计，不是超级复杂系统的设计，不是业务逻辑设计。 第三点：日常开发都是见招拆招，依据业务逻辑来，作为开发者，总不能直接把公司的业务代码上传的 Github 上吧？  不妨想想，其实写个博客系统压根就不需要这么麻烦的使用各种组件来给自己的博客系统贴金。那么，我为何还是要『为赋新词强说愁』呢？
+答案是『醉翁之意不在酒，在乎山水之间』。通过这个简单的博客，来带大家过一遍 Django 技术栈，具体能学的多好，看个人努力。
+当然，借此也吐槽一下，有的人认为，博客系统简单，不就是 Blog / Category / Tag / Comment，有啥可练手的？
+其实不然，设计一个博客系统完全可以按照复杂系统的高标准来设计，举例来说：
+ ORM 设计：如果我想把 Category/Tags/Comment 变成通用的，即可以对 Blog 进行分类 / 标签 / 评论，对新建的 Product 模型 也可以进行分类 / 标签 / 评论。 数据库设计：Category 可能有三到四级子分类怎么办？ Comment 支持评论区互相回复评论。这里的不但要通用，还要用树形结构实现放在一张表里面。 全文搜索：Blog 的 content 字段是长文对吧？这个总不能每次搜索都是 like 查询吧？Elasticsearch 怎么搞。 缓存和定时任务：PV 和 UV 量总不能每次访问都更新一次数据库吧？为什么不用 Redis 呢？用上了 Redis, 为什么不加上定时任务呢帮忙把 PV/UV 以及点赞数量啥的定期更新到数据库中？ Celery ：定时任务为啥不用神器 Celery 呢？ 其他问题：如何对某个接口进行 profile?]]></description>
+</item><item>
+    <title>YaDjangoBlog 之前后端分离篇</title>
+    <link>http://twocucao.xyz/posts/20180223_yadjangoblog%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%AF%87/</link>
+    <pubDate>Fri, 23 Feb 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180223_yadjangoblog%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%AF%87/</guid>
+    <description><![CDATA[0x00 前言 本文是 Django 全栈开发教程的第三篇 YaDjangoBlog 之前后端分离
+目录在这里，已经更新的文章如下
+ Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 &ndash; 目录篇 Django 全栈开发教程 - YaDjangoBlog 的开发环境配置 Django 全栈开发教程 - YaDjangoBlog 的前后端设计  本文需要成四件事情：
+ 第一件事情，解读 DjangoRestFramework, 通过简单的例子来引入用 DRF 的必要性，并且简单介绍 DRF 的 CBV 实现。 第二件事情，简单介绍 DRF 在本项目 YaDjangoBlog 中的使用 第三件事情，简单聊聊 RESTFULAPI 规范，并给出最佳实践参考。 第四件事情，简单解读一下 Django 处理请求流程代码。  PS: 为了打字方便，下面的：
+ DRF 指的是 DjangoRestFramework CBV 指的是 Class Based View FBV 指的是 Function Based View   坐稳了，开车了。]]></description>
+</item><item>
+    <title>YaDjangoBlog 开发环境配置</title>
+    <link>http://twocucao.xyz/posts/20180222_yadjangoblog%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</link>
+    <pubDate>Thu, 22 Feb 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180222_yadjangoblog%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</guid>
+    <description><![CDATA[0x00 前言 本文是 Django 全栈开发教程的第一篇，上一篇是第零篇，目录会随时更新，地址在这里 2018 年不容错过的 Django 全栈项目 https://zhuanlan.zhihu.com/p/33903527
+ 为什么是第零篇，因为程序员从零计数呀。笑~~
+ 本文需要完成两件事情：
+ 配置基本的开发环境 让代码先运行一下  如果你使用的 macOS, 那么可以跟着下文一步一步走。如果是 linux/window 用户，可能稍微需要在配置环境上多花点时间。
+ 本文默认你至少会在 iTerm2 下面使用基本的 bash 命令与 git , 如果使用的 ohmyzsh 就更好了。 建议先参考请查看我之前的文章里面的配置环境 如何优雅地使用 macOS https://zhuanlan.zhihu.com/p/29892969
+ 0x01 Python 开发环境配置 本小节的目的就是配置好基本的 python 开发环境
+使用了神器 pyenv
+ BTW: 为什么不直接用 pipenv ? 因为网络不通畅，如若不然，pipenv 比 pyenv 更适合用来做 python 依赖包管理。
+ # 新开终端 git clone https://github.com/yyuu/pyenv.git ~/.pyenv git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv echo &#39;export PYENV_ROOT=&#34;$HOME/.]]></description>
+</item><item>
+    <title>2018 年不容错过的 Django 全栈项目</title>
+    <link>http://twocucao.xyz/posts/20180221_fullstackdjangodevops/</link>
+    <pubDate>Wed, 21 Feb 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180221_fullstackdjangodevops/</guid>
+    <description><![CDATA[0x00 前言  写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。
+ 这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。
+为什么写这系列的文章呢？目的总的来说有两个：
+ 一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。 二是希望借由这个持续更新的过程让自己更加深入理解 Django 技术栈 Django / DjangoRestFramework / Docker / Vue.JS / Celery / PostgreSQL / Redis / RabbitMQ  为什么说这个项目你不容错过？
+ 新！新！新！保持最新的软件开发版本，E.G: Django 2.0 + Vue.JS 2.5 + PostgreSQL 10 + Celery 4.1.0 Django 框架：Django 及其 强大的生态圈 后端组件：PostgreSQL RabbitMQ Redis Ngnix 前端技术：单页应用 前后端分离 (VueJS+Webpack+DjangoRestFramework), 自动化部署 Django 社区最佳实践：从配置 / 开发 / 测试 / 部署 全干工程师 (Full Stuff Engineer) 的最新的 DevOps 思考成果。 基本覆盖了进阶 Django 开发所需要的各种组件与操作。 只需要适当的调整，本项目就可以成为你新开项目的最佳脚手架。  本系列文章的面向读者：]]></description>
+</item><item>
+    <title>Unknown Cheatsheet</title>
+    <link>http://twocucao.xyz/posts/20180220_unknowncheatsheet/</link>
+    <pubDate>Tue, 20 Feb 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180220_unknowncheatsheet/</guid>
+    <description><![CDATA[0x00 前言  写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。
+ 这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。目的总的来说有两个：
+ 一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。 二是希望借由这个持续更新的过程让自己更加深入理解 Django 技术栈 Django / DjangoRestFramework / Docker / Vue.JS / Celery / PostgreSQL / Redis / RabbitMQ   生命苦短，我用 Python
+ 为什么说这个项目你不容错过？
+ 新！新！新！保持最新的软件开发版本，E.G: Django 2.0 + Vue.JS 2.5 + PostgreSQL 10 + Celery 4.1.0 Django 框架：Django 及其 强大的生态圈 后端组件：PostgreSQL RabbitMQ Redis Ngnix 前端技术：单页应用 前后端分离 (VueJS+Webpack+DjangoRestFramework), 自动化部署 Django 社区最佳实践：从配置 / 开发 / 测试 / 部署 全干工程师 (Full Stuff Engineer) 的最新的 DevOps 思考成果。 基本覆盖了进阶 Django 开发所需要的各种组件与操作。 只需要适当的调整，本项目就可以成为你新开项目的最佳脚手架。  本系列文章的面向读者：]]></description>
+</item></channel>
+</rss>

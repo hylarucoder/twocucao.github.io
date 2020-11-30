@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>一个基于 TensorFlow 的图片分类器 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="一个基于 TensorFlow 的图片分类器" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20170529_%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Etensorflow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/" />
+<meta property="article:published_time" content="2017-05-29T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="一个基于 TensorFlow 的图片分类器"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20170529_%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Etensorflow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/" /><link rel="prev" href="http://twocucao.xyz/posts/20170527_vscodecheatsheet/" /><link rel="next" href="http://twocucao.xyz/posts/20170603_pandascheatsheet/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "一个基于 TensorFlow 的图片分类器",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20170529_%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Etensorflow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8\/"
+        },"genre": "posts","keywords": "Python","wordcount":  398 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20170529_%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Etensorflow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8\/","datePublished": "2017-05-29T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">一个基于 TensorFlow 的图片分类器</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"><i class="far fa-folder fa-fw"></i>数据分析</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-05-29">2017-05-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 398 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-准备训练数据和测试数据">0x01 准备训练数据和测试数据</a>
+      <ul>
+        <li><a href="#11-抓取图片">1.1 抓取图片</a></li>
+        <li><a href="#12-归类训练数据">1.2 归类训练数据</a></li>
+        <li><a href="#13-找出对应的头像">1.3 找出对应的头像</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-tensorflow-环境配置">0x02 TensorFlow 环境配置</a>
+      <ul>
+        <li><a href="#21-docker-的安装和镜像加速">2.1 Docker 的安装和镜像加速</a></li>
+        <li><a href="#22-构建镜像文件并且构建镜像">2.2 构建镜像文件并且构建镜像</a></li>
+        <li><a href="#23-测试-tensorflow-容器">2.3 测试 Tensorflow 容器</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x03-开始训练">0x03 开始训练</a></li>
+    <li><a href="#0x04-对图片进行分类">0x04 对图片进行分类</a>
+      <ul>
+        <li><a href="#41-开始分类">4.1 开始分类</a></li>
+        <li><a href="#42-对分类结果进行评估">4.2 对分类结果进行评估</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x05-文章回顾">0x05 文章回顾</a></li>
+    <li><a href="#0x06-参考链接">0x06 参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00 前言</h2>
+<blockquote>
+<p>备注：本文训练效果太差，所以直接太监了。</p>
+</blockquote>
+<p>这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。
+所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。
+本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。</p>
+<p>本文的目的是：</p>
+<blockquote>
+<p>通过 TensorFlow 训练一个小型的分类器，用这个分类器通过照片识别出明星的姓名。</p>
+</blockquote>
+<p>即我们要训练一个小 AI, 这个小 AI 能分辨欢乐颂里面的五美：</p>
+<ul>
+<li>乔欣</li>
+<li>刘涛</li>
+<li>王子文</li>
+<li>杨紫</li>
+<li>蒋欣</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>注意：本文主要在 MacOS 上进行测试。
+本文的目录结构如下：</p>
+<ul>
+<li>准备训练数据和测试数据</li>
+<li>TensorFlow 环境配置</li>
+<li>开始训练图片</li>
+<li>对图片进行分类</li>
+<li>文章回顾</li>
+<li>参考链接</li>
+</ul>
+<p>首先克隆我的 Repo,（我的 Repo 在这里）[https://github.com/twocucao/the-machine] .</p>
+<p>仓库结构大致如下</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">├── README.md
+├── compose
+│   └── tensorflow
+│       ├── Dockerfile
+│       └── Dockerfile-dev
+├── config
+├── doc
+├── image_classifier
+│   ├── __init__.py
+│   ├── label_dir.py
+│   ├── label_image.py
+│   ├── retrain.py
+│   └── train.sh
+└── bootstrap.sh
+</code></pre></div><h2 id="0x01-准备训练数据和测试数据">0x01 准备训练数据和测试数据</h2>
+<p>准备训练数据，数据从哪里来呢？从百度来。我们从百度抓取大约 5 组图片，每组图片大约 1000 张图片，并且从每组里面留下 900 组作为训练数据，抽出 100 作为测试数据。</p>
+<h3 id="11-抓取图片">1.1 抓取图片</h3>
+<p>抓取代码放在代码仓库中，比较简单，下载即可用。</p>
+<p>在 crawl_baidu_images.py 中填入五美的姓名，运行脚本即可。
+脚本会请求百度图片的图片，然后下载下来，程序跑完会有如下的图片数据。
+好，抓取图片我们就完成了。</p>
+<h3 id="12-归类训练数据">1.2 归类训练数据</h3>
+<p>归类训练数据，其实就是把刚刚下载下来的图片，分类为五美，也就是把刘涛的照片放到刘涛文件夹中。看一下现在的文件夹，似乎已经分类完毕了，是不是这样呢？显然不是，因为：</p>
+<ul>
+<li>下载下来的图片貌似 JPG 结尾的图片，但是文件内容是不是 JPEG 的格式就不好说了，也可 GIF 也可能是 PNG.</li>
+<li>当你搜索刘涛的时候，百度图片给出的不仅仅是刘涛。也可能有胡歌《琅琊榜》, 也可能有胡军《天龙八部》</li>
+</ul>
+<p>所以下面需要做的是：</p>
+<ol>
+<li>移除非 JPG 的文件格式</li>
+<li>人工确 (jian) 定 (huang) 文件夹中的图片。</li>
+</ol>
+<p>在做上面这两步之前，我们先新建文件夹 image_classifier_train ( 笔者放在 /Users/twocucao/Codes/Repos/image_classifier_train ), 注意，这个文件夹不要放在代码下面，把五美的文件夹放到这个文件夹下面的 data 文件夹下。并且用拼音命名。</p>
+<p>如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png"
+        data-srcset="http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png, http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png 1.5x, http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png 2x"
+        data-sizes="auto"
+        alt="http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png"
+        title="http://oriw7hkjj.bkt.clouddn.com/WX20170529-160220@2x.png" /></p>
+<p>我们先移除非 JPEG 的图片。如果是 mac 系统需要先安装 jpeginfo , brew install jpeginfo 即可。
+进入 /Users/twocucao/Codes/Repos/image_classifier_train 执行下面脚本 <strong>去除非 JPG 的图片</strong></p>
+<pre><code>find . -iname &quot;*.jpg&quot; -exec jpeginfo -c {} \; | grep -E &quot;WARNING|ERROR&quot; &gt; need_delete.sh
+cat need_delete.sh | awk '{print $1}' | xargs rm
+rm need_delete.sh
+</code></pre><p>好了接下来，我们需要到每一个文件夹下进行人工<del>鉴黄</del>检验图片是不是五美，比如，到 liutao 文件夹下检查，删除图片基本上没有清晰面容的照片。
+为了速度，我们把图片转成缩略图大致看一下，去除明显不是五美的照片，我们进行下一步的筛选。</p>
+<h3 id="13-找出对应的头像">1.3 找出对应的头像</h3>
+<p>我们需要从图片库中选出五美的头像来</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pyenv global system
+
+brew reinstall boost-python --with-python3 --without-python
+conda install -c menpo <span class="nv">dlib</span><span class="o">=</span>19.4
+</code></pre></div><h2 id="0x02-tensorflow-环境配置">0x02 TensorFlow 环境配置</h2>
+<h3 id="21-docker-的安装和镜像加速">2.1 Docker 的安装和镜像加速</h3>
+<p>本文需要使用 Docker 作为环境配置，也正是因为如此，我们可以在很快的时间内搭建起来 tensorflow 的运行环境。目测，Docker 也是未来几年内搭建环境分发环境的首选。
+Docker 下载不必多说，需要补充一句的是，我们可以在阿里云账户上使用一个 registry 对 Docker 镜像进行加速。
+在阿里云的容器界面获取加速链接填到 docker 里面即可。如图。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://oriw7hkjj.bkt.clouddn.com/WX20170529-162953@2x.png"
+        data-srcset="http://oriw7hkjj.bkt.clouddn.com/WX20170529-162953@2x.png, http://oriw7hkjj.bkt.clouddn.com/WX20170529-162953@2x.png 1.5x, http://oriw7hkjj.bkt.clouddn.com/WX20170529-162953@2x.png 2x"
+        data-sizes="auto"
+        alt="http://oriw7hkjj.bkt.clouddn.com/WX20170529-162953@2x.png"
+        title="http://oriw7hkjj.bkt.clouddn.com/WX20170529-162953@2x.png" /></p>
+<h3 id="22-构建镜像文件并且构建镜像">2.2 构建镜像文件并且构建镜像</h3>
+<p>建议在执行构建镜像之前，务必先完成本文的第二小节的图片准备。然后执行下面的命令，将镜像文件构建成镜像。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /Users/twocucao/Codes/Repos/the-machine
+docker build -f compose/tensorflow/Dockerfile-dev -t twocucao/tensorflow .
+</code></pre></div><p>该行命令使用 compose/tensorflow/Dockerfile-dev 作为 Dockerfile 文件，构建镜像名称为 twocucao/tensorflow , 传入的 context 为 当前路径。</p>
+<h3 id="23-测试-tensorflow-容器">2.3 测试 Tensorflow 容器</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">docker run -it twocucao/tensorflow /bin/bash
+<span class="nb">echo</span> <span class="s1">&#39;hello tensorflow&#39;</span>
+</code></pre></div><p>如果运行正常，则一切正常。可以进行下一步骤了。</p>
+<h2 id="0x03-开始训练">0x03 开始训练</h2>
+<p>执行命令开始训练。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">./train.sh /Users/twocucao/Codes/Repos/image_classifier_train
+</code></pre></div><p>我设置的训练次数为 20000, 在我的本子上基本两个小时，可能时间有些长，没有耐心的童鞋可以吧训练次数调整低一些。然后重新构建镜像。</p>
+<blockquote>
+<p>那么，当 TensorFlow 在训练的时候，我们要谈些什么？</p>
+</blockquote>
+<p>Google 开源了 Inception 模型，这个模型从 ImageNet 的上千个分类的图片训练而来，而我们所做的工作，便是在此基础上做最后的增量训练。然而，我们只用来区分女明星，似乎这个 Inception 的模型有点大材小用？好，训练结束之后我们查看一下文件夹 /Users/twocucao/Codes/Repos/image_classifier_train 下，</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">├── bottlenecks
+│   ├── jiangxin
+│   ├── liutao
+│   ├── qiaoxin
+│   ├── wangziwen
+│   └── yangzi
+├── data
+│   ├── jiangxin
+│   ├── liutao
+│   ├── qiaoxin
+│   ├── wangziwen
+│   └── yangzi
+├── inception
+│   ├── LICENSE
+│   ├── classify_image_graph_def.pb
+│   ├── cropped_panda.jpg
+│   ├── imagenet_2012_challenge_label_map_proto.pbtxt
+│   ├── imagenet_synset_to_human_label_map.txt
+│   └── inception-2015-12-05.tgz
+├── retrained_graph.pb
+├── retrained_labels.txt
+└── test_data
+    ├── src
+    └── target
+</code></pre></div><p>Bottlenecks 文件夹为我们将每一张 JPG 转成矩阵的文本
+Inception 为 Google 开源的模型文件。
+retrained_graph.pb 为训练出来的图的模型文件。
+retrained_labels.txt 为标签。</p>
+<p>如下图不断刷出的一坨坨的文字是什么呢？</p>
+<ul>
+<li>时间 , 无需多说</li>
+<li>当前训练次数</li>
+<li>Train accuracy = 87.0%</li>
+<li>Cross entropy = 0.499145</li>
+<li>Validation accuracy = 52.0% (N=100)</li>
+</ul>
+<p>看到 Train accuracy &raquo; Validation accuracy 估计是模型过度拟合了，嗯，看来这个模型还是有点问题的。</p>
+<h2 id="0x04-对图片进行分类">0x04 对图片进行分类</h2>
+<h3 id="41-开始分类">4.1 开始分类</h3>
+<h3 id="42-对分类结果进行评估">4.2 对分类结果进行评估</h3>
+<h2 id="0x05-文章回顾">0x05 文章回顾</h2>
+<h2 id="0x06-参考链接">0x06 参考链接</h2>
+<ul>
+<li><a href="https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html">https://codelabs.developers.google.com/codelabs/tensorflow-for-poets/index.html</a></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20170527_vscodecheatsheet/" class="prev" rel="prev" title="VSCode CheatSheet"><i class="fas fa-angle-left fa-fw"></i>VSCode CheatSheet</a>
+            <a href="/posts/20170603_pandascheatsheet/" class="next" rel="next" title="Pandas CheatSheet">Pandas CheatSheet<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

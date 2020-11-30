@@ -1,0 +1,20 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>Web 开发 - 分类 - 海拉鲁编程客</title>
+        <link>http://twocucao.xyz/categories/web-%E5%BC%80%E5%8F%91/</link>
+        <description>Web 开发 - 分类 - 海拉鲁编程客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Sat, 21 Jul 2018 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/web-%E5%BC%80%E5%8F%91/" rel="self" type="application/rss+xml" /><item>
+    <title>GraphQL CheetSheet</title>
+    <link>http://twocucao.xyz/posts/20180721_graphqlcheatsheet/</link>
+    <pubDate>Sat, 21 Jul 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180721_graphqlcheatsheet/</guid>
+    <description><![CDATA[0x00 前言 不定期更新。
+0x01 开接口这件小事情 开接口，究竟什么样的接口才是一个好接口？
+ 刚开始的时候，后台开接口都是比较随便，本着方便，快速的方式一个一个接口的开。 后来呢？觉得接口开出来没有最佳实践，所以有人提出 Restful 的开接口姿势。 Swagger, DjangorestFramework, 以及 Apistar 便是这种最佳实践的代表性项目 再后来呢？Facebook 又搞了套自己的开接口姿势叫做 GraphQL, graphene-python , graphene-js , apollo-client , apollo-server 便是这种最佳实践的代表性项目  开接口注意点  尽量做到代码即文档。 便于前端调试。 分页处理。 API 版本管理。 额外的语义。 校验。 权限。  不管是 Restful 的实现，还是 GraphQL 的实现，在 1/2/5 上面做的非常优秀了。
+拿 Restful 的实现 DjangoRestframework 来说，直接可以在 ApiView 的注释里面写 Markdown 语法，兼容 payload 和 form 表单调试。内置 Serializer 进行序列化和校验。
+DRF 还是一个功能非常全面的框架。 PS: 如果你是不折腾的 Django 用户，DRF 绝对让你欲罢不能。
+开接口不能解决的问题  业务逻辑的沟通问题]]></description>
+</item></channel>
+</rss>

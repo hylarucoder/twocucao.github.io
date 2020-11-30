@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>使用 Python 监控 Mac 一天的运行（上） - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="使用 Python 监控 Mac 一天的运行（上）" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20160415_macpythonmonitorpart1/" />
+<meta property="article:published_time" content="2016-04-15T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="使用 Python 监控 Mac 一天的运行（上）"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20160415_macpythonmonitorpart1/" /><link rel="prev" href="http://twocucao.xyz/posts/20160402_macremotecontrol/" /><link rel="next" href="http://twocucao.xyz/posts/20160701_maccheatsheet/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "使用 Python 监控 Mac 一天的运行（上）",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20160415_macpythonmonitorpart1\/"
+        },"genre": "posts","keywords": "macOS","wordcount":  219 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20160415_macpythonmonitorpart1\/","datePublished": "2016-04-15T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">使用 Python 监控 Mac 一天的运行（上）</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2016-04-15">2016-04-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 219 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#任务分解">任务分解</a></li>
+    <li><a href="#本文结构">本文结构</a></li>
+    <li><a href="#为什么需要定时任务">为什么需要定时任务？</a></li>
+    <li><a href="#mac-上面如何进行定时任务">Mac 上面如何进行定时任务。</a></li>
+    <li><a href="#疑问和解答">疑问和解答</a></li>
+    <li><a href="#扩展阅读精选优质资料">扩展阅读（精选优质资料）</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="前言">前言</h2>
+<p>一不小心写成上下两篇了。真是有些过意不去。毕竟，写的太多就少了一部分读者（少了一部分赞额）.</p>
+<p>之所以拆成上下两篇，主要是因为在研究的过程中越发感到在一篇中强行植入那么多的东西，自己的文章结构组织起来有些困难，对读者来说，也是不容易理解。那倒不如拆分成两部分。</p>
+<h2 id="任务分解">任务分解</h2>
+<p>我的需求如此简单，统计 Mac 上面一天的运行情况，然后在每天的下午六点把统计的情况汇总通过 Email 发送给我。</p>
+<!-- raw HTML omitted -->
+<p>用更加具体来说，就是，</p>
+<blockquote>
+<p>隔一段时间使用 Python 脚本，统计当前电脑的运行情况，CPU, 内存，硬盘，网络使用状况，然后在每天的下午六点通过 Email 把统计情况汇总，并且必须要有监控图，并通过 Email 发送给我的邮箱。</p>
+</blockquote>
+<p>初看这玩意是挺简单的，但是自己动手写了以后就知道，其实还是稍微有些费时间的。</p>
+<p>比如：</p>
+<ul>
+<li>linux 下面定时执行一个脚本只需要 crontab 或者 at 以下就好了.mac 上是是什么？怎么运行一个任务？</li>
+<li>统计的数据存哪儿？用什么存？</li>
+<li>表格绘图怎么画出来？</li>
+<li>Email 怎么发送，如果要发送好看一点点的 Email 怎么办？</li>
+</ul>
+<p>既然那么多，那就分成两篇，一篇用来介绍 Mac 上面的定时任务（简单，短文）, 另一篇用 Python 来监控 Mac 电脑，并持久化监控数据，绘图，汇总，发送 email.(稍微复杂一点，带图长文）</p>
+<ul>
+<li>上篇讲在 Mac 上如何让一个脚本定时运行。</li>
+<li>下篇讲如何写一个 Python 监控脚本。</li>
+</ul>
+<h2 id="本文结构">本文结构</h2>
+<ul>
+<li>前言</li>
+<li>本文结构</li>
+<li>为什么需要定时任务？</li>
+<li>Mac 上面如何进行定时任务。</li>
+<li>疑问和解答</li>
+<li>扩展阅读</li>
+</ul>
+<h2 id="为什么需要定时任务">为什么需要定时任务？</h2>
+<p>所谓的定时任务，分为两种：</p>
+<ol>
+<li>指定时间执行的程序</li>
+<li>每隔一段时间执行的程序</li>
+</ol>
+<p>执行的内容，通常情况下和要做什么事情有关，但是从内容上，分为两种：</p>
+<ol>
+<li>任务之间的数据没有什么关联的</li>
+</ol>
+<ul>
+<li>比如，你想去抓一些数据（迅雷会员账号）但是懒得自己动手，于是就写了一个小脚本，放在每天早上的 8 点钟，去抓来账号。</li>
+</ul>
+<ol start="2">
+<li>任务之间的数据有关联的，甚至某种程度上可以绘制图像。</li>
+</ol>
+<ul>
+<li>比如，下一篇要说的使用 Python 监控自己的电脑情况，e.g: 流量。隔一段时间就查看一下自己的电脑运行情况，把情况存下来。甚至，在某个时间点，把结果汇总发给某个人。</li>
+</ul>
+<h2 id="mac-上面如何进行定时任务">Mac 上面如何进行定时任务。</h2>
+<ul>
+<li>首先，你要写一个任务。</li>
+<li>其次，让这个任务定时执行。</li>
+</ul>
+<p>好，简单的写一个任务 get_time.sh.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="cp">#!/bin/bash
+</span><span class="cp"></span>date &gt;&gt; /Users/twocucao/Downloads/dates.txt
+</code></pre></div><p>接着加上可执行。</p>
+<pre><code>chmod a+x get_time.sh
+</code></pre><p>那么，怎么让 Mac 通过 launchd 隔一段时间就执行脚本呢？</p>
+<p>创建一个特殊的 xml 文件叫做 com.twocucao.apple.getdates.plist, 给你所要运行的命令建立一个进程。</p>
+<div class="highlight"><pre class="chroma"><code class="language-xml" data-lang="xml"><span class="cp">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+<span class="cp">&lt;!DOCTYPE plist PUBLIC &#34;-//Apple//DTD PLIST 1.0//EN&#34; &#34;http://www.apple.com/DTDs/PropertyList-1.0.dtd&#34;&gt;</span>
+<span class="nt">&lt;plist</span> <span class="na">version=</span><span class="s">&#34;1.0&#34;</span><span class="nt">&gt;</span>
+<span class="nt">&lt;dict&gt;</span>
+    <span class="nt">&lt;key&gt;</span>Label<span class="nt">&lt;/key&gt;</span>
+    <span class="nt">&lt;string&gt;</span>com.twocucao.apple.getdates<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;key&gt;</span>ProgramArguments<span class="nt">&lt;/key&gt;</span>
+    <span class="nt">&lt;array&gt;</span>
+        <span class="nt">&lt;string&gt;</span>/Users/twocucao/OhMyCode/Bash/get_time.sh<span class="nt">&lt;/string&gt;</span>
+    <span class="nt">&lt;/array&gt;</span>
+    <span class="nt">&lt;key&gt;</span>StartInterval<span class="nt">&lt;/key&gt;</span>
+    <span class="nt">&lt;integer&gt;</span>10<span class="nt">&lt;/integer&gt;</span>
+<span class="nt">&lt;/dict&gt;</span>
+<span class="nt">&lt;/plist&gt;</span>
+</code></pre></div><p>对于这个 com.twocucao.apple.getdates 随你命名的，保证唯一就好。通常情况下选择反转域名（和 Java 编程类似）, 其他的，依照你的脚本位置和间隔时间修改。</p>
+<p>拷贝到 LaunchDaemons, 加载定时工作，然后检查是否加载成功</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">cp com.twocucao.apple.getdates.plist /Library/LaunchDaemons
+launchctl load -w /Library/LaunchDaemons/com.twocucao.apple.getdates.plist
+<span class="c1">#列出定时任务，并且筛选一下。确认是否加载成功。</span>
+launchctl list <span class="p">|</span> grep twocucao
+</code></pre></div><p>由于这个脚本实在是太弱智了仅仅是为了演示，所以，记得把他给卸载，删除</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">launchctl unload -w /Library/LaunchDaemons/com.twocucao.apple.getdates.plist
+rm /Library/LaunchDaemons/com.twocucao.apple.getdates.plist
+</code></pre></div><h2 id="疑问和解答">疑问和解答</h2>
+<ul>
+<li>问：为什么要把脚本的配置放在 /Library/LaunchAgents 呢？</li>
+<li>答：当然，你可以拷贝到其他的地方，
+<ul>
+<li>如果你的需求是该用户登录时候执行的话，那么拷贝到：~/Library/LaunchAgents, 这叫做 User Agents.</li>
+<li>如果你的需求是该用户登录时候执行的话，那么拷贝到：/Library/LaunchAgents, 这叫做 Global Agents</li>
+<li>如果你的需求是让 Root 用户或者指定用户登录时候执行的话，那么拷贝到：/Library/LaunchDaemons , 这叫做 Global Daemons</li>
+<li>如果你的需求是用户登录执行，那么拷贝到：/System/Library/LaunchAgents ,System Agents</li>
+<li>如果你的需求是让 Root 用户或者指定用户登录时候执行的话，那么拷贝到：/System/Library/LaunchDaemons, 这叫做 System Daemons.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>user-agents 是级别最低，其他所需权限依次递增。</p>
+</blockquote>
+<ul>
+<li>
+<p>问：怎么检查任务执行结果？</p>
+</li>
+<li>
+<p>答：tail -f /Users/twocucao/Downloads/dates.txt</p>
+</li>
+<li>
+<p>问：如何确定 launchd 存在这个任务</p>
+</li>
+<li>
+<p>答：launchctl list</p>
+</li>
+<li>
+<p>问：既然是隔一段时间就能执行脚本，那么，我可以先用简单的 shell 脚本，配置好相关执行信息，让他定时执行，接着修改 shell 脚本执行新的逻辑么？</p>
+</li>
+<li>
+<p>答：可以。</p>
+</li>
+<li>
+<p>问：bash 命令监控多么方便，为何下一篇要使用 Python 作为监控工具。</p>
+</li>
+<li>
+<p>答：shell 命令编写代码不直观，编写效率低.Python 有很好的第三方库可以使用。</p>
+</li>
+</ul>
+<h2 id="扩展阅读精选优质资料">扩展阅读（精选优质资料）</h2>
+<ol>
+<li>一个关于 Linux 命令的各种奇技的网站 <a href="http://www.commandlinefu.com/commands/browse">http://www.commandlinefu.com/commands/browse</a></li>
+<li>Linux 工具快速教程 <a href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/index.html">http://linuxtools-rst.readthedocs.org/zh_CN/latest/index.html</a></li>
+<li>关于 launchd 的参考链接，</li>
+</ol>
+<ul>
+<li><a href="http://launchd.info/">http://launchd.info/</a> <a href="http://www.splinter.com.au/using-launchd-to-run-a-script-every-5-mins-on/">http://www.splinter.com.au/using-launchd-to-run-a-script-every-5-mins-on/</a></li>
+<li><a href="https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html">https://developer.apple.com/library/mac/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/CreatingLaunchdJobs.html</a></li>
+<li><a href="http://linuxtools-rst.readthedocs.org/zh_CN/latest/index.html">http://linuxtools-rst.readthedocs.org/zh_CN/latest/index.html</a></li>
+</ul>
+<ol start="4">
+<li>命令行的艺术  <a href="https://github.com/jlevy/the-art-of-command-line">https://github.com/jlevy/the-art-of-command-line</a></li>
+</ol>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2016-12-05</strong> 重新排版。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/macos/">macOS</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20160402_macremotecontrol/" class="prev" rel="prev" title="Mac 远程控制"><i class="fas fa-angle-left fa-fw"></i>Mac 远程控制</a>
+            <a href="/posts/20160701_maccheatsheet/" class="next" rel="next" title="macOS Cheatsheet">macOS Cheatsheet<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

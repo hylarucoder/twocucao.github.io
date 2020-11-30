@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Chorthotkey 发布 - 海拉鲁编程客</title><meta name="Description" content="Get Busy is My New Hugo Site"><meta property="og:title" content="Chorthotkey 发布" />
+<meta property="og:description" content="概要介绍
+经过长时间的电脑的使用，我渐渐的喜欢上了 Autohotkey 这个神器，喜欢 Python 是因为 Python 强大与高效，喜欢 AHK 则是太方便了。
+长时间的使用，毕竟也积攒了一些脚本，加上对很多脚本的收集以及修改，勉强算得上是一个入门的 AHK 菜鸟了。
+AHK 的优点可以对快捷键进行编程，对一个经常使用电脑自动化处理一些事情的人说，非常之方便，但缺点，太多，效率低，语法乱，数据结构乱。让我写一段文字处理简直就让我非常难受。" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20150222_chorthotkey%E5%8F%91%E5%B8%83/" />
+<meta property="article:published_time" content="2015-02-22T20:10:10+08:00" />
+<meta property="article:modified_time" content="2015-10-25T20:10:10+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Chorthotkey 发布"/>
+<meta name="twitter:description" content="概要介绍
+经过长时间的电脑的使用，我渐渐的喜欢上了 Autohotkey 这个神器，喜欢 Python 是因为 Python 强大与高效，喜欢 AHK 则是太方便了。
+长时间的使用，毕竟也积攒了一些脚本，加上对很多脚本的收集以及修改，勉强算得上是一个入门的 AHK 菜鸟了。
+AHK 的优点可以对快捷键进行编程，对一个经常使用电脑自动化处理一些事情的人说，非常之方便，但缺点，太多，效率低，语法乱，数据结构乱。让我写一段文字处理简直就让我非常难受。"/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20150222_chorthotkey%E5%8F%91%E5%B8%83/" /><link rel="prev" href="http://twocucao.xyz/posts/20150227_%E7%BC%96%E8%BE%91%E5%99%A8sublime/" /><link rel="next" href="http://twocucao.xyz/posts/20150504_googletips/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Chorthotkey 发布",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20150222_chorthotkey%E5%8F%91%E5%B8%83\/"
+        },"genre": "posts","keywords": "Windows","wordcount":  385 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20150222_chorthotkey%E5%8F%91%E5%B8%83\/","datePublished": "2015-02-22T20:10:10+08:00","dateModified": "2015-10-25T20:10:10+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Chorthotkey 发布</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"><i class="far fa-folder fa-fw"></i>开源项目</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2015-02-22">2015-02-22</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 385 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#概要介绍">概要介绍</a></li>
+    <li><a href="#设计思路">设计思路</a>
+      <ul>
+        <li><a href="#1-程序类----涉及运行程序或者一些常用的小功能">1. 程序类 &ndash; 涉及运行程序，或者一些常用的小功能</a></li>
+        <li><a href="#2-键盘鼠标操作">2. 键盘鼠标操作</a></li>
+        <li><a href="#3-文件类操作">3. 文件类操作</a></li>
+        <li><a href="#4-文本类操作">4. 文本类操作</a></li>
+        <li><a href="#5-命令类操作">5. 命令类操作</a></li>
+        <li><a href="#6-其他操作">6. 其他操作</a></li>
+      </ul>
+    </li>
+    <li><a href="#三剑客地址">三剑客地址</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="概要介绍">概要介绍</h2>
+<p>经过长时间的电脑的使用，我渐渐的喜欢上了 Autohotkey 这个神器，喜欢 Python 是因为 Python 强大与高效，喜欢 AHK 则是太方便了。</p>
+<p>长时间的使用，毕竟也积攒了一些脚本，加上对很多脚本的收集以及修改，勉强算得上是一个入门的 AHK 菜鸟了。</p>
+<p>AHK 的优点可以对快捷键进行编程，对一个经常使用电脑自动化处理一些事情的人说，非常之方便，但缺点，太多，效率低，语法乱，数据结构乱。让我写一段文字处理简直就让我非常难受。</p>
+<p>但为了取长补短，我仅仅使用其中的对快捷键编程的功能，加上收集来的别人的一些函数。修改集成，然后做一个顺手的 AHK 脚本，名字就叫做 Chorthotkey。</p>
+<blockquote>
+<p>开源，协议选择 Mit 协议。简而言之也就是你改了名字版权就是你的了。</p>
+</blockquote>
+<p>我在编写这篇文章的时候，也在重构并进行 V0.4 版本的完善。</p>
+<p>什么时候使用 AHK 脚本呢。</p>
+<blockquote>
+<p>当繁杂的功能可以批量完成的时候。</p>
+</blockquote>
+<p>换而言之，当这个功能不值得用另一个大的专业性比较强的软件代替的时候，或者对快捷键进行编程的时候。</p>
+<ul>
+<li>先说第一点：当我想使用一个功能的时候，比如快速打开一个网页，或者进行文字上的简单处理，这个时候没有必要单独下载一个软件进行处理，这个在 AHK 中就是简单的几行代码就可以搞定。比如打开网站直接 Run <a href="http://www.baidu.com">www.baidu.com</a> AHK 就会直接调用相关浏览器打开 baidu. 这么简单的东西没有必要单独下载一个软件进行管理。</li>
+<li>再说第二点：当我想着对快捷键进行编程调用进行自动化处理东西的时候，或者编写一套自己的热键用来打游戏或者其他的一些编辑用途等等，都可以。理论上来说，AHK 几乎是只有想不到没有做不到的。</li>
+</ul>
+<p>那么，AHK 不能替代什么东西？</p>
+<p>在文件管理方面，尽管你可以自己编写很多的快捷键，但你没有办法超越 TotalCMD，没有办法超越 Listary 或者 Everything，所以，你编写的东西只需要辅助你使用这些东西就好了。</p>
+<p>在文本编辑方面，你始终无法超越 sublime text 3，无法超越 vi，无法超越 Emacs，你只需要辅助你使用这些工具即可。</p>
+<p>其他专业软件同理。</p>
+<p>既然说了 AHK 那么多的不足和缺憾，但是 AHK 在我的脚本语言中依然傲立第二名，就是因为它擅长的快捷键编程。</p>
+<p>好了，废话这么多，总该说点干货了。</p>
+<p>我认为 Autohotkey 用好这三个脚本即可：</p>
+<ul>
+<li>Candy 一个非常强大的第三方弹出菜单 amii 编写。</li>
+<li>ChortHotKey 一个我编写的工具</li>
+<li>vimd 无所不在的 vim 党编写的软件。</li>
+</ul>
+<p>好吧，我无耻的把三个工具放在一起了。虽然 Candy 和 vimdesktop 在使用上面甩 Chorthotkey 几条街，但是，我乐意把他们放在一起，怎么滴？</p>
+<h2 id="设计思路">设计思路</h2>
+<p>AHK 的操作按照是否聪明分为两种：</p>
+<ol>
+<li>第一种叫做非上下文的操作</li>
+<li>第二种叫做上下文操作</li>
+</ol>
+<p>AHK 操作按照使用场景分为：</p>
+<ol>
+<li>直接操作</li>
+<li>选中操作</li>
+</ol>
+<p>AHK 按照操作目标分为</p>
+<ol>
+<li>程序类操作</li>
+<li>键盘类操作</li>
+<li>文件类操作</li>
+<li>文本类操作</li>
+<li>命令类操作</li>
+<li>其他操作</li>
+</ol>
+<p>选取一个角度对 Chorthotkey 描述 &mdash; 按照操作目标</p>
+<p>PS：浏览器建议 chrome</p>
+<h3 id="1-程序类----涉及运行程序或者一些常用的小功能">1. 程序类 &ndash; 涉及运行程序，或者一些常用的小功能</h3>
+<p>我的所有程序都是使用配置好的环境变量 D:\Sysconfig 其中的快捷方式搞定的。比如 win+r 输入 qq 然后回车自动打开 QQ。这个并不使用 AHK。因为没有必要增加大量的热键来增加自己的记忆负担。
+但是使用频率非常高的必须设置快捷键。</p>
+<p>程序类快捷键我主要使用的是 Win 按键，AHK 中用 # 来表示</p>
+<pre><code class="language-autohotkey" data-lang="autohotkey"> #a 到有道官网查找单词翻译，并且保存到桌面上一个文本文档中。
+ #b 选中某段文字进行解析，如果里面有网址则访问网址，否则使用百度进行搜索
+ #g 选中某段文字进行解析，如果里面有网址则访问网址，否则使用 Google 进行搜索
+ #f 打开 everything 进行搜索
+ #e 替换原有的资源管理器，打开 TotalCMD
+ #q 打开 QQ
+ #v open with vim
+ #s open with sublime text
+
+官方的操作
+
+ #c Windows8 什么鸟菜单
+ #x win8 快捷菜单
+ #r 运行，比较方便
+ #1-9 数字，建议把几个（四个之内，超过四个你的手可能就跟不上操作了）可能有变化的软件放在 pin 在 taskbar 上面。
+</code></pre><h3 id="2-键盘鼠标操作">2. 键盘鼠标操作</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">alt+f4 按住左键再按住右键输出
+
+CAPSLOCK 超级导航
+CAPSLOCK 输出 ESC
+SHIFT <span class="p">&amp;</span> CAPSLOCK 调用 Candy
+下面内容属于组合键的另一个按键
+hjkl 前下上右
+a 行尾进行编辑
+o 下一行进行编辑
+
+n ctrl+delete
+m delete
+, backspace
+. ctrl+backspace
+
+<span class="m">5</span> 打开 coding workspace
+<span class="m">6</span> 打开未整理文件
+<span class="m">7</span> 打开 Onedirve
+<span class="m">8</span> 打开同步文件夹
+<span class="m">9</span> 打开娱乐文件
+<span class="m">0</span> 打开 sysconfig
+</code></pre></div><h3 id="3-文件类操作">3. 文件类操作</h3>
+<p>选中的文件夹在 TC 中打开，其余操作全部在 TC 中解决
+由于我使用了 Capslock 的导航功能，这时候的 capslock hjkl 完全可以当作左下上右使用。
+vim+tc，可以使用 vim desktop 进行超级强化。我一直对 TOTALCMD 的快捷键设计抱有不满和一丝丝的畏惧，但是这个软件把 TC 的快捷键常用快捷键精简到了令人发指的地步。</p>
+<blockquote>
+<p>I love TC plus AHK</p>
+</blockquote>
+<h3 id="4-文本类操作">4. 文本类操作</h3>
+<p>candy 操作，保存，发送等等，凡是 Ctrl + c 飘落的地方，就一定会有 candy 的存在（火影忍者既视感）。请在我另一篇 Blog 中看看我是怎么使用 Candy 的。</p>
+<h3 id="5-命令类操作">5. 命令类操作</h3>
+<p>这里面存放的是 AHK 的命令。其实就是使用 ahk 调用 python 脚本执行之类的东西。起到一个胶水的作用。</p>
+<h3 id="6-其他操作">6. 其他操作</h3>
+<p>热字符串输入其实和代码的 Snippet 比较相近。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">用的特别频繁的
+//date <span class="m">20150223</span>
+/dd
+//time 08:52:33
+/tt
+//lastupdate 最后修改时间 2015-02-23 08:52:33
+/ll
+//mail twocucao@gmail.com
+/mm
+//anouncement  声明 lalalalalallalalalallalalalla
+/aa
+
+常用的
+//motto 我挥舞着纸笔和键盘，发誓要把这个世界写个明白。
+
+常用打开 Vim 的文字模板使用
+/hexo  打开 gvim，粘贴进去对应的模板。
+
+比如我输入
+//hexo
+那么就会 Copy 我之前定义的文字，然后存放在我的剪切板中。（时间是动态的）
+接着脚本打开 gvim，你要做的就是把文字粘贴进去就可以进行 HEXO 的编写了。
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">title</span><span class="p">:</span> <span class="err">标题</span>
+<span class="n">date</span><span class="p">:</span><span class="mi">2015</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">23</span> <span class="mi">10</span><span class="p">:</span><span class="mi">16</span><span class="p">:</span><span class="mi">30</span>
+<span class="n">tags</span><span class="p">:</span> <span class="err">感悟</span>
+<span class="n">category</span><span class="p">:</span> <span class="err">『生活，感悟』</span>
+<span class="o">---</span>
+
+<span class="err">正文</span>
+<span class="o">&lt;</span><span class="err">!</span><span class="o">--</span> <span class="n">more</span> <span class="o">--&gt;</span>
+<span class="err">其他</span>
+
+<span class="err">博客文章原创声明：</span>
+<span class="err">本博文章如果没有声明为整理或者转载，均为本人原创。非商业可以任意转载分享。但是编写的代码如果没有特别声明，虽然我建议保留原作者出处，但是代码皆为</span> <span class="n">mit</span> <span class="err">协议，也就是修改了名字也算是你的版权，开源世界嘛，我就喜欢那些可以拿来直接使用的东西，贯彻最纯粹的免费自由，但是求求你，改掉名字等等信息再说是版权是你的啊。</span>
+
+<span class="err">!</span><span class="p">[</span><span class="err">关于本人</span><span class="p">](</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">twocucao</span><span class="o">.</span><span class="n">xyz</span><span class="o">/</span><span class="n">about</span><span class="o">/</span><span class="p">),</span>
+<span class="err">点击链接就可以以</span> <span class="n">web</span> <span class="err">幻灯片的方式看到我的介绍。</span>
+
+<span class="err">我的</span> <span class="n">Github</span> <span class="err">地址：</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">twocucao</span>  <span class="err">（尽管东西不多，但是欢迎来</span> <span class="n">Star</span> <span class="err">和</span> <span class="n">Fork</span><span class="err">，就算你们来这里提前</span> <span class="n">Star</span> <span class="n">Folk</span> <span class="err">了）</span>
+<span class="err">简书地址：</span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="o">.</span><span class="n">jianshu</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">users</span><span class="o">/</span><span class="mi">9</span><span class="n">a7e0b9da317</span><span class="o">/</span><span class="n">latest_articles</span> <span class="err">（不常更新，而且几乎没有技术文章的讲解）</span>
+<span class="err">联系方式：</span><span class="n">twocucao</span><span class="nd">@gmail.com</span>
+<span class="err">本人才疏学浅，是一个水平比较菜的程序员，如果行文之间发现任何错误，欢迎指正，特别欢迎技术上的指正。</span>
+</code></pre></div><h2 id="三剑客地址">三剑客地址</h2>
+<ul>
+<li>Chorthotkey <a href="https://github.com/twocucao/ChortHotKey">https://github.com/twocucao/ChortHotKey</a></li>
+<li>Candy <a href="https://github.com/aamii/Candy">https://github.com/aamii/Candy</a></li>
+<li>VimDesktop <a href="https://github.com/victorwoo/vimdesktop">https://github.com/victorwoo/vimdesktop</a></li>
+</ul>
+<p>如果你想了解关于 ahk 的世界，请到这里来看：</p>
+<ul>
+<li>
+<p><a href="http://xbeta.info/autohotkey-guide-2.htm" target="_blank" rel="noopener noreffer">善用佳软的 ahk 地址</a></p>
+</li>
+<li>
+<p><a href="http://zhuanlan.zhihu.com/autohotkey" target="_blank" rel="noopener noreffer">A 大在知乎的系列专题</a></p>
+</li>
+<li>
+<p><a href="https://github.com/twocucao/ChortHotKey" target="_blank" rel="noopener noreffer">我的 AUTOHOTKEY 脚本使用我的脚本来上手速度会快很多）</a></p>
+</li>
+<li>
+<p><a href="https://github.com/twocucao/AwesomeAutohotkeyL" target="_blank" rel="noopener noreffer">AWESOME AUTOHOTKEY_L 这里仅仅是关于 AHKL 的资源。</a></p>
+</li>
+<li>
+<p><a href="http://www.ahk8.com/" target="_blank" rel="noopener noreffer">AHK 论坛</a></p>
+</li>
+<li>
+<p>欢迎加入 AUTOHOTKEY 的官方群 3222783 这里的大神喜欢解答有挑战性的问题，很多 AHK 的脚本都在这里。</p>
+</li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li>2016-11-23 已经于 2015-12 月份转投苹果平台，从此不想念 Windows. 除了 Windows 上面的 Autohotkey / Everything / TotalCMD</li>
+</ul></div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2015-10-25</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/windows/">Windows</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20150227_%E7%BC%96%E8%BE%91%E5%99%A8sublime/" class="prev" rel="prev" title="Sublime"><i class="fas fa-angle-left fa-fw"></i>Sublime</a>
+            <a href="/posts/20150504_googletips/" class="next" rel="next" title="Google Tips">Google Tips<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

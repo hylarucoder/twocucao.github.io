@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>YaDjangoBlog 之前后端分离篇 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="YaDjangoBlog 之前后端分离篇" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20180223_yadjangoblog%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%AF%87/" />
+<meta property="article:published_time" content="2018-02-23T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="YaDjangoBlog 之前后端分离篇"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20180223_yadjangoblog%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%AF%87/" /><link rel="prev" href="http://twocucao.xyz/posts/20180222_yadjangoblog%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><link rel="next" href="http://twocucao.xyz/posts/20180224_yadjangoblog%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%9D%E6%AD%A5%E8%AE%BE%E8%AE%A1/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "YaDjangoBlog 之前后端分离篇",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20180223_yadjangoblog%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%AF%87\/"
+        },"genre": "posts","keywords": "Django","wordcount":  1286 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20180223_yadjangoblog%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E7%AF%87\/","datePublished": "2018-02-23T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">YaDjangoBlog 之前后端分离篇</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/django/"><i class="far fa-folder fa-fw"></i>Django</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-02-23">2018-02-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1286 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 7 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-djangorestframework-解读">0x01 DjangorestFramework 解读</a>
+      <ul>
+        <li><a href="#为什么要用-drf-呢">为什么要用 DRF 呢？</a></li>
+        <li><a href="#不使用-drf-应该如何写-webapi-做呢">不使用 DRF 应该如何写 WebAPI 做呢？</a></li>
+        <li><a href="#drf-处理请求的流程">DRF 处理请求的流程</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-djangorestframework-的使用案例">0x02 DjangorestFramework 的使用案例</a>
+      <ul>
+        <li><a href="#如何开-webapi-接口">如何开 WebAPI 接口</a></li>
+        <li><a href="#前端如何使用-webapi-接口">前端如何使用 WebAPI 接口</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x03-restful-api-设计">0x03 RESTFUL API 设计</a>
+      <ul>
+        <li><a href="#关于请求">关于请求</a></li>
+        <li><a href="#关于响应">关于响应</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x04-django-的处理请求流程代码解读">0x04 Django 的处理请求流程代码解读</a></li>
+    <li><a href="#0xee-参考链接">0xEE. 参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00 前言</h2>
+<p>本文是 Django 全栈开发教程的第三篇 YaDjangoBlog 之前后端分离</p>
+<p>目录在这里，已经更新的文章如下</p>
+<ul>
+<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 &ndash; 目录篇</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的前后端设计</li>
+</ul>
+<p><strong>本文需要成四件事情：</strong></p>
+<ul>
+<li>第一件事情，解读 DjangoRestFramework, 通过简单的例子来引入用 DRF 的必要性，并且简单介绍 DRF 的 CBV 实现。</li>
+<li>第二件事情，简单介绍 DRF 在本项目 YaDjangoBlog 中的使用</li>
+<li>第三件事情，简单聊聊 RESTFULAPI 规范，并给出最佳实践参考。</li>
+<li>第四件事情，简单解读一下 Django 处理请求流程代码。</li>
+</ul>
+<p>PS: 为了打字方便，下面的：</p>
+<ul>
+<li>DRF 指的是 DjangoRestFramework</li>
+<li>CBV 指的是 Class Based View</li>
+<li>FBV 指的是 Function Based View</li>
+</ul>
+<blockquote>
+<p>坐稳了，开车了。</p>
+</blockquote>
+<h2 id="0x01-djangorestframework-解读">0x01 DjangorestFramework 解读</h2>
+<h3 id="为什么要用-drf-呢">为什么要用 DRF 呢？</h3>
+<p>使用一个库的原因，无非就是为了：</p>
+<ol>
+<li>节省开发者自己造轮子的时间。</li>
+<li>有利于代码的可维护性 / 或者程序的健壮性。</li>
+</ol>
+<p>具体落实到 DRF, 有哪些具体的优点呢？</p>
+<ol>
+<li>可直接浏览调试的界面。让前端调试起来欲罢不能的功能。</li>
+<li>用 DRF 的方式快速批量开接口</li>
+<li>分页、序列化、校验、登录、权限、Web 附加文档、限流，高度的可扩展性。哪里不爽扩展哪里，so easy</li>
+<li>算的上是 Django 社区最好的 RESTFUL 框架的轮子了。</li>
+<li>完善的社区支持，比如 guardian/django-filter 等等结合。</li>
+</ol>
+<h3 id="不使用-drf-应该如何写-webapi-做呢">不使用 DRF 应该如何写 WebAPI 做呢？</h3>
+<p>我们先看看，不使用 DRF 的时代，API 是如何编写的。</p>
+<p>这里我们用 function based view 来简单说明。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 最简单版本</span>
+<span class="k">def</span> <span class="nf">simple_hello</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">({</span>
+        <span class="s2">&#34;这就是 key&#34;</span><span class="p">:</span> <span class="s2">&#34;这就是 value&#34;</span><span class="p">,</span>
+        <span class="s2">&#34;时间&#34;</span><span class="p">:</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="p">})</span>
+</code></pre></div><p>刚开始学 DRF 的时候，我也有这种疑惑，这有必要需要一个 RESTFULAPI 的框架嘛？捋起袖子，JSON API 甩起来开咯。</p>
+<p>之所以得出这个结论，是因为这个例子实在是过于简单。</p>
+<p>当涉及到一定复杂程度的 API 的时候，问题就来了：</p>
+<ol>
+<li>权限是否需要区分？</li>
+<li>分页需不需要做？</li>
+<li>前端人员提交 Form 表单时，只能通过命令行或者是 POSTMAN 之类的工具提交参数，这会不会带来不便？后端人员写这些表单的各个字段，也是很手酸的事情。</li>
+<li>拼接字典或者是字符串倒也还好，能不能有个序列器帮我直接序列化这模型，并且如果模型和模型之间有联系，最好也可以帮我完成模型和模型之间的关联。</li>
+<li>Profile API 应该如何做？</li>
+</ol>
+<p>这都是我们需要考虑的。</p>
+<p>如果不用 DRF, 而是由后端程序员直接写这些代码的话，也不是不行。</p>
+<ol>
+<li>对于第一点，可以直接在 fbv 上面加装饰器。</li>
+<li>对于第二点，分页的时候可以直接将逻辑写在 fbv 里面。</li>
+<li>前端 er 直接使用 PostMan 之类的工具就好了。</li>
+<li>序列化，可以借助内置的序列化方法。</li>
+<li>Profile 可以在提交参数的时候，附加一个参数比如 debug, 渲染的时候，将使用 HTML 里面内置一个 JSON 字符串的方式渲染出来。这样的话，就可以使用 Django Debug Tools 进行 Profile 了。</li>
+</ol>
+<p>很显然，这是个系统性的活。 假如接下来还要考虑限流、RESTFULAPI 的设计，这就相当蛋疼了。</p>
+<p>显然，我们的 FBV 就会是这样：</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nd">@a_authority</span>
+<span class="k">def</span> <span class="nf">complex_hello</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="n">getParams</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+    <span class="o">.....</span>
+    <span class="n">query_results</span> <span class="o">=</span> <span class="n">SomeModels</span><span class="o">.</span><span class="n">some_query</span><span class="p">()</span>
+    <span class="o">.....</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">SomeModelsSerial</span><span class="p">(</span><span class="n">query_results</span><span class="p">)</span>
+    <span class="o">.....</span>
+    <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</code></pre></div><p>看起来似乎是有规律可循的，既然有规律可循，就能封装一下，减轻负担。FBV 已经这样了，显然只能每次都要硬编码这些取参数，查询，序列化。当然，如果用生成器也能简化一部分函数代码。yield 实现方法太丑还是弃用吧。</p>
+<p>我们试试 CBV 看看如何。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 继承并重写方法</span>
+<span class="kn">from</span> <span class="nn">django.views.generic</span> <span class="kn">import</span> <span class="n">View</span>
+<span class="k">class</span> <span class="nc">APIView</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="n">query_results</span> <span class="o">=</span> <span class="n">SomeModels</span><span class="o">.</span><span class="n">some_query</span><span class="p">()</span>
+        <span class="o">.....</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">SomeModelsSerial</span><span class="p">(</span><span class="n">query_results</span><span class="p">)</span>
+        <span class="o">.....</span>
+        <span class="k">return</span> <span class="n">results</span>
+
+    <span class="k">def</span> <span class="nf">post</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">request</span><span class="p">):</span>
+        <span class="n">query_results</span> <span class="o">=</span> <span class="n">SomeModels</span><span class="o">.</span><span class="n">some_query</span><span class="p">()</span>
+        <span class="o">.....</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">SomeModelsSerial</span><span class="p">(</span><span class="n">query_results</span><span class="p">)</span>
+        <span class="o">.....</span>
+        <span class="k">return</span> <span class="n">results</span>
+
+    <span class="o">.....</span>
+
+    <span class="c1"># 这里相当于 view 函数</span>
+    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># 这里处理正式处理之前的逻辑，比如权限判断。</span>
+        <span class="c1"># 如果是 GET 方法，则调用</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># 这里处理正式处理之后的逻辑，比如统计 list 的 total 值，加上时间戳</span>
+        <span class="k">return</span> <span class="n">JsonResponse</span><span class="p">(</span><span class="n">results</span><span class="p">)</span>
+</code></pre></div><p>于是，除了使用 FBV 进行硬编码之外，还可以使用 CBV 的基类 进行扩展定制。</p>
+<p>我们思考一下：</p>
+<ol>
+<li>假如我想渲染某个模型的 JSON 列表，就可以定制一个 ListViewAPI 出来。如果需要一个 DetailViewAPI, 就定制一个 DetailViewAPI 出来。</li>
+<li>我们再声明一些 Permission 类，序列化类，模型，然后在 dispatch 中直接使用这些东西的话，就只需要在 get 和 post 里面编写一些最核心的逻辑了。</li>
+<li>甚至，指定了分页器和查询，都完全不需要再 get 和 post 里面写代码。</li>
+</ol>
+<p>恭喜你，读到这里，你已经可以写一个极简的 DRF 出来了。</p>
+<p>但写成 DRF 这种量级的程序，还需要做很多很多事情。</p>
+<h3 id="drf-处理请求的流程">DRF 处理请求的流程</h3>
+<p>要知道 DRF 的处理请求的流程，就要先知道 Django 的处理请求流程。</p>
+<p>宏观来看</p>
+<ol>
+<li>请求先经过 MiddleWare , 接着判断 urlconf （默认为 ROOT_URLCONF),</li>
+<li>匹配 URL, 将请求上下文 dispatch 到具体的 view.</li>
+<li>处理完毕，经过 MiddleWare</li>
+</ol>
+<p><a href="https://docs.djangoproject.com/en/2.0/topics/http/urls/">https://docs.djangoproject.com/en/2.0/topics/http/urls/</a></p>
+<p>在本文的结尾的时候，我也将带大家从源码角度过一下，涉及到这个流程的相关的源码。这里先跳过。</p>
+<p>那么，DRF 是如何处理一个请求的呢？我们忽略路由之类的东西，直接看对应的 CBV 的源码</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">APIView</span><span class="p">(</span><span class="n">View</span><span class="p">):</span>
+
+    <span class="n">renderer_classes</span> <span class="o">=</span> <span class="n">api_settings</span><span class="o">.</span><span class="n">DEFAULT_RENDERER_CLASSES</span>
+    <span class="n">parser_classes</span> <span class="o">=</span> <span class="n">api_settings</span><span class="o">.</span><span class="n">DEFAULT_PARSER_CLASSES</span>
+    <span class="n">authentication_classes</span> <span class="o">=</span> <span class="n">api_settings</span><span class="o">.</span><span class="n">DEFAULT_AUTHENTICATION_CLASSES</span>
+    <span class="n">throttle_classes</span> <span class="o">=</span> <span class="n">api_settings</span><span class="o">.</span><span class="n">DEFAULT_THROTTLE_CLASSES</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="n">api_settings</span><span class="o">.</span><span class="n">DEFAULT_PERMISSION_CLASSES</span>
+    <span class="n">content_negotiation_class</span> <span class="o">=</span> <span class="n">api_settings</span><span class="o">.</span><span class="n">DEFAULT_CONTENT_NEGOTIATION_CLASS</span>
+    <span class="n">metadata_class</span> <span class="o">=</span> <span class="n">api_settings</span><span class="o">.</span><span class="n">DEFAULT_METADATA_CLASS</span>
+    <span class="n">versioning_class</span> <span class="o">=</span> <span class="n">api_settings</span><span class="o">.</span><span class="n">DEFAULT_VERSIONING_CLASS</span>
+
+    <span class="c1"># ...... 其他方法</span>
+
+    <span class="c1"># Dispatch methods</span>
+
+    <span class="k">def</span> <span class="nf">initialize_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        Returns the initial request object.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">parser_context</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_parser_context</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">Request</span><span class="p">(</span>
+            <span class="n">request</span><span class="p">,</span>
+            <span class="n">parsers</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_parsers</span><span class="p">(),</span>
+            <span class="n">authenticators</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_authenticators</span><span class="p">(),</span>
+            <span class="n">negotiator</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_content_negotiator</span><span class="p">(),</span>
+            <span class="n">parser_context</span><span class="o">=</span><span class="n">parser_context</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">initial</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        Runs anything that needs to occur prior to calling the method handler.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">format_kwarg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_format_suffix</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># Perform content negotiation and store the accepted info on the request</span>
+        <span class="n">neg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perform_content_negotiation</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">accepted_renderer</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">accepted_media_type</span> <span class="o">=</span> <span class="n">neg</span>
+
+        <span class="c1"># Determine the API version, if versioning is in use.</span>
+        <span class="n">version</span><span class="p">,</span> <span class="n">scheme</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">determine_version</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">version</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">versioning_scheme</span> <span class="o">=</span> <span class="n">version</span><span class="p">,</span> <span class="n">scheme</span>
+
+        <span class="c1"># Ensure that the incoming request is permitted</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">perform_authentication</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_permissions</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">check_throttles</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="c1"># Note: Views are made CSRF exempt from within `as_view` as to prevent</span>
+    <span class="c1"># accidental removal of this exemption in cases where `dispatch` needs to</span>
+    <span class="c1"># be overridden.</span>
+    <span class="k">def</span> <span class="nf">dispatch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        `.dispatch()` is pretty much the same as Django&#39;s regular dispatch,
+</span><span class="s2">        but with extra hooks for startup, finalize, and exception handling.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">args</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">kwargs</span> <span class="o">=</span> <span class="n">kwargs</span>
+        <span class="c1"># 这里需要注意</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initialize_request</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">request</span> <span class="o">=</span> <span class="n">request</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">headers</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">default_response_headers</span>  <span class="c1"># deprecate?</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># 这里需要注意</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initial</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+            <span class="c1"># Get the appropriate handler method</span>
+            <span class="k">if</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">http_method_names</span><span class="p">:</span>
+                <span class="n">handler</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span>
+                                  <span class="bp">self</span><span class="o">.</span><span class="n">http_method_not_allowed</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">handler</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">http_method_not_allowed</span>
+
+            <span class="n">response</span> <span class="o">=</span> <span class="n">handler</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+            <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_exception</span><span class="p">(</span><span class="n">exc</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">finalize_response</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">response</span>
+</code></pre></div><p>可以看出，当请求到达 dispatch 的时候，DRF 添加了一些钩子函数，用于开始 / 结束 / 错误控制。</p>
+<ol>
+<li>在 initialize_request 的时候，对 request 进行封装，添加上 parser / auth / negoriator / parser context</li>
+<li>接着在 initial 方法里面校验了版本，进行了认证和鉴权，检查了限流</li>
+</ol>
+<p>一看，其实与我们之前想封装 APIView 的想法不谋而合，而我们只是想想，DRF 是详细实现。</p>
+<h2 id="0x02-djangorestframework-的使用案例">0x02 DjangorestFramework 的使用案例</h2>
+<h3 id="如何开-webapi-接口">如何开 WebAPI 接口</h3>
+<p>回到我们的 yadjangoblog 上面来。这个时候我们想开一个博文列表 API:</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 1. 定义序列器，用于序列化查询的每一条。</span>
+<span class="k">class</span> <span class="nc">BlogPostListSerializer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="n">category</span> <span class="o">=</span> <span class="n">BlogCategorySerializer</span><span class="p">(</span><span class="n">read_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">tags</span> <span class="o">=</span> <span class="n">BlogTagSerializer</span><span class="p">(</span><span class="n">many</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">read_only</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">CharField</span><span class="p">()</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">serializers</span><span class="o">.</span><span class="n">IntegerField</span><span class="p">()</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">BlogPost</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;char_num&#39;</span><span class="p">,</span> <span class="s1">&#39;vote_num&#39;</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="s1">&#39;tags&#39;</span><span class="p">,</span> <span class="s1">&#39;publish_date&#39;</span><span class="p">)</span>
+
+<span class="c1"># 2. 定义过滤器，可以通过过滤器进行查询</span>
+<span class="k">class</span> <span class="nc">BlogPostFilter</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">FilterSet</span><span class="p">):</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">CharFilter</span><span class="p">(</span><span class="n">lookup_expr</span><span class="o">=</span><span class="s1">&#39;contains&#39;</span><span class="p">)</span>
+    <span class="n">having_tags</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">Filter</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;tags&#34;</span><span class="p">,</span> <span class="n">lookup_expr</span><span class="o">=</span><span class="s1">&#39;in&#39;</span><span class="p">)</span>
+
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">BlogPost</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;char_num&#39;</span><span class="p">,</span> <span class="s1">&#39;category&#39;</span><span class="p">,</span> <span class="s1">&#39;tags&#39;</span><span class="p">)</span>
+
+<span class="c1"># 3. 指定其他设置，具体大家看源码就好了。</span>
+<span class="k">class</span> <span class="nc">BlogPostListAPIView</span><span class="p">(</span><span class="n">generics</span><span class="o">.</span><span class="n">ListAPIView</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    依照 category , tags , 时间 （年 / 月 / 日  年 / 月 年）
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">queryset</span> <span class="o">=</span> <span class="n">BlogPost</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+    <span class="n">serializer_class</span> <span class="o">=</span> <span class="n">BlogPostListSerializer</span>
+    <span class="n">filter_backends</span> <span class="o">=</span> <span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">DjangoFilterBackend</span><span class="p">,</span> <span class="n">OrderingFilter</span><span class="p">,)</span>
+    <span class="n">filter_class</span> <span class="o">=</span> <span class="n">BlogPostFilter</span>
+    <span class="n">ordering_fields</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;publish_date&#39;</span><span class="p">,)</span>
+    <span class="n">ordering</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;publish_date&#39;</span><span class="p">,)</span>
+    <span class="n">permission_classes</span> <span class="o">=</span> <span class="p">(</span><span class="n">permissions</span><span class="o">.</span><span class="n">AllowAny</span><span class="p">,)</span>
+    <span class="n">pagination_class</span> <span class="o">=</span> <span class="n">SmallResultsSetPagination</span>
+</code></pre></div><dl>
+<dt>在指定上面的操作之后，一个接口就快速的开出来了。</dt>
+<dd>
+<p>TODO 插入一张图</p>
+</dd>
+</dl>
+<p>当然，DRF 认认真真通读一遍的话，还是可以给自己节省不少时间的。</p>
+<p>这是开接口，似乎，还少了什么，比如 Restful API.</p>
+<h3 id="前端如何使用-webapi-接口">前端如何使用 WebAPI 接口</h3>
+<p>什么是 CORS 可以参考阮一峰的文章 <a href="http://www.ruanyifeng.com/blog/2016/04/cors.html">http://www.ruanyifeng.com/blog/2016/04/cors.html</a></p>
+<p>在调试的时候，我们肯定是使用 ajax / fetch 方式请求。这就会遇到一个问题：</p>
+<ul>
+<li>跨域</li>
+</ul>
+<p>解决方式也很简单，服务端只要服务器实现了 CORS 接口，就可以跨源通信。</p>
+<p>安装 django-cors-headers, 并在 settings 中开启 CORS_ORIGIN_ALLOW_ALL = True 即可。</p>
+<p>这里参考了临书的解决方案，要感谢 @临书 , 附上参考地址 <a href="https://zhuanlan.zhihu.com/p/24893786">https://zhuanlan.zhihu.com/p/24893786</a></p>
+<p>对于本项目而言，使用了 axios 请求库，直接 get 即可。详细看前端代码即可。</p>
+<h2 id="0x03-restful-api-设计">0x03 RESTFUL API 设计</h2>
+<p>开发过程中，尽量靠近 RESTFUL API 的设计，而不是照搬。</p>
+<p>举个其他领域的例子，有的人表述美就只有：</p>
+<ul>
+<li>已撸</li>
+</ul>
+<p>但是不同的美各有各的模样：</p>
+<ul>
+<li>手如柔荑，肤如凝脂，领如蝤蛴，齿如瓠犀，螓首蛾眉，巧笑倩兮，美目盼兮。</li>
+</ul>
+<p>同样，放在 RESFUL 的时候确实也出现了这种情况：</p>
+<p>几乎所有的业务逻辑最后会落实到数据表的 CURDE, 但是所有业务逻辑并不能完全使用 CRUDE 描述。</p>
+<p>我们看下面的例子</p>
+<h3 id="关于请求">关于请求</h3>
+<p>举个例子，RESTFUL 适合纯粹 CURDE 的设计风格。</p>
+<p>比如，新增博客，更新博客，查询博客，删除博客，查看是否含有博客</p>
+<p>但语义在某些场景下表述不足， 比如，设计订单的时候，</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">URL: /api/v1/user/some_user/orders
+你查看订单集合，这个好理解。get 方法
+你新增订单，这个好理解。put 方法
+URL: /api/v1/user/some_user/order/xxxxxxx
+你删除订单，这个好理解。delete 方法
+你获取订单，这个好理解。get 方法
+你修改订单，这个好理解。post 方法
+
+但修改订单，有的时候可能会比较复杂，有可能是取消订单，有可能是评价订单，有可能是其他。而 RESTFUL 表达这种情况就有些语义不足了。
+</code></pre></div><p>当然，个人经验是，字段越多，越难靠近 RESTFUL 规范</p>
+<p>这个时候，就需要设计者做好 RESTFULAPI 的设计与语义化的平衡了。</p>
+<h3 id="关于响应">关于响应</h3>
+<p>关于响应设计，主要有两点需要注意：</p>
+<ul>
+<li>状态码 (HTTP 状态码，也业务逻辑通用状态码）</li>
+<li>响应内容 包含 业务逻辑通用状态码，剩下的视具体情况而定。</li>
+</ul>
+<p>HTTP 状态码用于标记资源情况，比如：</p>
+<pre><code>200 表示获取资源
+404 表示 NOT FOUND
+</code></pre><p>但有时候也存在语义表达不足问题，一般前后端也会约定一个通用的状态码</p>
+<pre><code>通用状态码 错误信息 含义 HTTP 状态码
+999	    unknow_v2_error	未知错误	400
+1000	need_permission	需要权限	403
+1001	uri_not_found	资源不存在	404
+1002	missing_args	参数不全	400
+1003	image_too_large	上传的图片太大	400
+....
+</code></pre><p>至于响应内容，一般都是见招拆招的。建议查看文章末尾的 Douban 的相关 API 规范来提升姿势。</p>
+<h2 id="0x04-django-的处理请求流程代码解读">0x04 Django 的处理请求流程代码解读</h2>
+<p>这小节属于一时兴起写的番外篇。和本文主体内容没啥必要的关联。不感兴趣的可以直接跳转到文章末尾点赞哈。</p>
+<p>WSGI 全称叫做 web 服务器网关接口，通常情况下，gunicorn 或者 uwsgi 接收来自 nginx 转发来的请求之后，向 web app 提供了环境信息（叫请求上下文会不会好些）以及一个 callback. 这样的话，web app 就可以接收这个环境信息，处理完毕，通过回调函数处理请求，并返回响应。一个极简的 webapp 如下：</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;Simplest possible application object&#34;&#34;&#34;</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="s1">&#39;Hello, World!</span><span class="se">\n</span><span class="s1">&#39;</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="s1">&#39;200 OK&#39;</span>
+    <span class="n">response_headers</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">(</span><span class="s1">&#39;Content-type&#39;</span><span class="p">,</span><span class="s1">&#39;text/plain&#39;</span><span class="p">),</span>
+        <span class="p">(</span><span class="s1">&#39;Content-Length&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)))</span>
+    <span class="p">]</span>
+    <span class="n">start_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">response_headers</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">iter</span><span class="p">([</span><span class="n">data</span><span class="p">])</span>
+</code></pre></div><p>现在我们看看 django 中是如何处理请求的。首先查看相关的 wsgi.py</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># wsgi.py</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">django.core.wsgi</span> <span class="kn">import</span> <span class="n">get_wsgi_application</span>
+<span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s2">&#34;DJANGO_SETTINGS_MODULE&#34;</span><span class="p">,</span> <span class="s2">&#34;config.settings&#34;</span><span class="p">)</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">get_wsgi_application</span><span class="p">()</span>
+
+<span class="c1"># 接着查看 get_wsgi_application</span>
+<span class="kn">import</span> <span class="nn">django</span>
+<span class="kn">from</span> <span class="nn">django.core.handlers.wsgi</span> <span class="kn">import</span> <span class="n">WSGIHandler</span>
+
+<span class="k">def</span> <span class="nf">get_wsgi_application</span><span class="p">():</span>
+    <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">    The public interface to Django&#39;s WSGI support. Return a WSGI callable.
+</span><span class="s2">
+</span><span class="s2">    Avoids making django.core.handlers.WSGIHandler a public API, in case the
+</span><span class="s2">    internal WSGI implementation changes or moves in the future.
+</span><span class="s2">    &#34;&#34;&#34;</span>
+    <span class="n">django</span><span class="o">.</span><span class="n">setup</span><span class="p">(</span><span class="n">set_prefix</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">WSGIHandler</span><span class="p">()</span>
+
+<span class="c1"># 于是自然而言的看到了 WSGIHandler</span>
+<span class="k">class</span> <span class="nc">WSGIHandler</span><span class="p">(</span><span class="n">base</span><span class="o">.</span><span class="n">BaseHandler</span><span class="p">):</span>
+    <span class="n">request_class</span> <span class="o">=</span> <span class="n">WSGIRequest</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load_middleware</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">environ</span><span class="p">,</span> <span class="n">start_response</span><span class="p">):</span>
+        <span class="c1"># 有木有看到 environ 和 start_response ?? 这就是极简 web app 中的 webapp 核心方法。</span>
+        <span class="n">set_script_prefix</span><span class="p">(</span><span class="n">get_script_name</span><span class="p">(</span><span class="n">environ</span><span class="p">))</span>
+        <span class="n">signals</span><span class="o">.</span><span class="n">request_started</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">sender</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span> <span class="n">environ</span><span class="o">=</span><span class="n">environ</span><span class="p">)</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">request_class</span><span class="p">(</span><span class="n">environ</span><span class="p">)</span>
+        <span class="c1"># 注意这一行，有请求处理逻辑 具体要见下面代码</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_response</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="c1"># ......</span>
+        <span class="k">return</span> <span class="n">response</span>
+</code></pre></div><p>嗯，看到了子类，就要看看基类</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">BaseHandler</span><span class="p">:</span>
+    <span class="n">_request_middleware</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">_view_middleware</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">_template_response_middleware</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">_response_middleware</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">_exception_middleware</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="n">_middleware_chain</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="k">def</span> <span class="nf">load_middleware</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        注册 MiddleWare, 并赋值 _middleware_chain 方法，使之调用的时候可以先按照顺序从 setting 的 middleware 里面处理 requests
+</span><span class="s2">        并在处理 request 的最后调用 私有方法 _get_response
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_request_middleware</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_view_middleware</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_template_response_middleware</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_response_middleware</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_exception_middleware</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="n">handler</span> <span class="o">=</span> <span class="n">convert_exception_to_response</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_response</span><span class="p">)</span>
+        <span class="c1"># 注意，这里面是倒着来的 代码中越在前面，实际运行的时候处理就越在后面</span>
+        <span class="k">for</span> <span class="n">middleware_path</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">MIDDLEWARE</span><span class="p">):</span>
+            <span class="c1"># 依次添加 view middleware / template middleware / exception middleware</span>
+            <span class="n">middleware</span> <span class="o">=</span> <span class="n">import_string</span><span class="p">(</span><span class="n">middleware_path</span><span class="p">)</span>
+            <span class="n">mw_instance</span> <span class="o">=</span> <span class="n">middleware</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+            <span class="n">handler</span> <span class="o">=</span> <span class="n">convert_exception_to_response</span><span class="p">(</span><span class="n">mw_instance</span><span class="p">)</span>
+
+        <span class="c1"># We only assign to this when initialization is complete as it is used</span>
+        <span class="c1"># as a flag for initialization being complete.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_middleware_chain</span> <span class="o">=</span> <span class="n">handler</span>
+
+    <span class="o">.....</span>
+
+    <span class="k">def</span> <span class="nf">get_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;Return an HttpResponse object for the given HttpRequest.&#34;&#34;&#34;</span>
+        <span class="c1"># Setup default url resolver for this thread</span>
+        <span class="n">set_urlconf</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">ROOT_URLCONF</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_middleware_chain</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="c1"># ......</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">def</span> <span class="nf">_get_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">        Resolve and call the view, then apply view, exception, and
+</span><span class="s2">        template_response middleware. This method is everything that happens
+</span><span class="s2">        inside the request/response middleware.
+</span><span class="s2">        &#34;&#34;&#34;</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="bp">None</span>
+
+        <span class="c1"># 1. 接着判断 urlconf （默认为 ROOT_URLCONF), 可以通过 middleware 进行设置</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="s1">&#39;urlconf&#39;</span><span class="p">):</span>
+            <span class="n">urlconf</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">urlconf</span>
+            <span class="n">set_urlconf</span><span class="p">(</span><span class="n">urlconf</span><span class="p">)</span>
+            <span class="n">resolver</span> <span class="o">=</span> <span class="n">get_resolver</span><span class="p">(</span><span class="n">urlconf</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">resolver</span> <span class="o">=</span> <span class="n">get_resolver</span><span class="p">()</span>
+
+        <span class="n">resolver_match</span> <span class="o">=</span> <span class="n">resolver</span><span class="o">.</span><span class="n">resolve</span><span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">path_info</span><span class="p">)</span>
+        <span class="n">callback</span><span class="p">,</span> <span class="n">callback_args</span><span class="p">,</span> <span class="n">callback_kwargs</span> <span class="o">=</span> <span class="n">resolver_match</span>
+        <span class="n">request</span><span class="o">.</span><span class="n">resolver_match</span> <span class="o">=</span> <span class="n">resolver_match</span>
+
+        <span class="c1"># Apply view middleware....</span>
+        <span class="c1"># 注意，这个就是 view 函数</span>
+        <span class="n">wrapped_callback</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">make_view_atomic</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">wrapped_callback</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="o">*</span><span class="n">callback_args</span><span class="p">,</span> <span class="o">**</span><span class="n">callback_kwargs</span><span class="p">)</span>
+        <span class="c1"># Complain if the view returned None (a common error).</span>
+        <span class="k">return</span> <span class="n">response</span>
+
+    <span class="k">def</span> <span class="nf">process_exception_by_middleware</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exception</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="c1"># ......</span>
+</code></pre></div><p>上面代码比较表达的意思比较简单，值得注意的地方我都加了注释。</p>
+<p>需要特别注意的就是 middleware_chain 这个属性（实际上是一个方法）, 正是这个方法使得注册的 middleware （在 load_middleware 方法里）可以在 fbv 或者 cbv 处理 request 之前，通过对 request 进行处理。</p>
+<h2 id="0xee-参考链接">0xEE. 参考链接</h2>
+<p>还犹豫啥，Django 前后端分离最佳实践，点赞后，快上车吧</p>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog">https://github.com/twocucao/YaDjangoBlog</a></li>
+<li>扩展阅读之 douban restful api 设计  <a href="https://developers.douban.com/wiki/?title=api_v2">https://developers.douban.com/wiki/?title=api_v2</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-22</strong> 开启本文</li>
+<li><strong>2018-03-04</strong> 重修文字</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/django/">Django</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20180222_yadjangoblog%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="prev" rel="prev" title="YaDjangoBlog 开发环境配置"><i class="fas fa-angle-left fa-fw"></i>YaDjangoBlog 开发环境配置</a>
+            <a href="/posts/20180224_yadjangoblog%E7%9A%84%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%9D%E6%AD%A5%E8%AE%BE%E8%AE%A1/" class="next" rel="next" title="YaDjangoBlog 的前后端设计">YaDjangoBlog 的前后端设计<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

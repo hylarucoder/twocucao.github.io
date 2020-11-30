@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>2018 年不容错过的 Django 全栈项目 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="2018 年不容错过的 Django 全栈项目" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20180221_fullstackdjangodevops/" />
+<meta property="article:published_time" content="2018-02-21T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="2018 年不容错过的 Django 全栈项目"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20180221_fullstackdjangodevops/" /><link rel="prev" href="http://twocucao.xyz/posts/20180220_unknowncheatsheet/" /><link rel="next" href="http://twocucao.xyz/posts/20180222_yadjangoblog%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "2018 年不容错过的 Django 全栈项目",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20180221_fullstackdjangodevops\/"
+        },"genre": "posts","keywords": "Python, Django, YaDjangoBlog","wordcount":  323 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20180221_fullstackdjangodevops\/","datePublished": "2018-02-21T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">2018 年不容错过的 Django 全栈项目</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/django/"><i class="far fa-folder fa-fw"></i>Django</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-02-21">2018-02-21</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 323 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-项目介绍">0x01 项目介绍</a>
+      <ul>
+        <li><a href="#11-项目地址">1.1 项目地址</a></li>
+        <li><a href="#12-项目技术栈">1.2 项目技术栈</a></li>
+        <li><a href="#13-特别感谢">1.3 特别感谢</a></li>
+        <li><a href="#14-项目截图">1.4 项目截图</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-系列教程目录">0x02 系列教程目录</a>
+      <ul>
+        <li><a href="#21-教程注意项">2.1 教程注意项</a></li>
+        <li><a href="#22-教程目录">2.2 教程目录</a></li>
+      </ul>
+    </li>
+    <li><a href="#0xee-参考链接">0xEE. 参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00 前言</h2>
+<blockquote>
+<p>写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。</p>
+</blockquote>
+<p>这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。</p>
+<p>为什么写这系列的文章呢？目的总的来说有两个：</p>
+<ol>
+<li>一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。</li>
+<li>二是希望借由这个持续更新的过程让自己更加深入理解 Django 技术栈 Django / DjangoRestFramework / Docker / Vue.JS / Celery / PostgreSQL / Redis / RabbitMQ</li>
+</ol>
+<p>为什么说这个项目你不容错过？</p>
+<ul>
+<li>新！新！新！保持最新的软件开发版本，E.G: Django 2.0 + Vue.JS 2.5 + PostgreSQL 10 + Celery 4.1.0</li>
+<li>Django 框架：Django 及其 强大的生态圈</li>
+<li>后端组件：PostgreSQL RabbitMQ Redis Ngnix</li>
+<li>前端技术：单页应用 前后端分离 (VueJS+Webpack+DjangoRestFramework), 自动化部署</li>
+<li>Django 社区最佳实践：从配置 / 开发 / 测试 / 部署 <strong>全干</strong>工程师 (Full Stuff Engineer) 的最新的 DevOps 思考成果。</li>
+<li>基本覆盖了进阶 Django 开发所需要的各种组件与操作。</li>
+<li>只需要适当的调整，本项目就可以成为你新开项目的最佳脚手架。</li>
+</ul>
+<p>本系列文章的面向读者：</p>
+<ul>
+<li>目标是 DevOps 的 Pythonist</li>
+<li>爱瞎几把折腾的 Pythonist</li>
+<li>前后端分离的实践者</li>
+</ul>
+<blockquote>
+<p>生命苦短，赶快上车</p>
+</blockquote>
+<blockquote>
+<p>Life is Short , I Use Python</p>
+</blockquote>
+<h2 id="0x01-项目介绍">0x01 项目介绍</h2>
+<p>YaDjangoBlog 是另一个关于博客的轮子，但是其野心并不在于仅仅多造一个博客系统，还有通过本项目做 Django 全栈开发的最佳实践。</p>
+<h3 id="11-项目地址">1.1 项目地址</h3>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<h3 id="12-项目技术栈">1.2 项目技术栈</h3>
+<ul>
+<li>开发与部署环境为 Docker</li>
+<li>Python 3.5.2</li>
+<li>前端 Vue + Webpack + ES2015 + axios</li>
+<li>后端 <a href="https://github.com/django/django" target="_blank" rel="noopener noreffer">Django 2.0</a> + <a href="https://github.com/tomchristie/django-rest-framework/" target="_blank" rel="noopener noreffer">DjangoRestFramework</a> + Celery</li>
+<li>自动化部署选用工具 Ansible 以及 Docker</li>
+<li>后端组件
+<ul>
+<li>ElasticSearch 用于搜索和推荐</li>
+<li>PostgreSQL 用于数据持久化</li>
+<li>Redis 用于 Session / 和缓存</li>
+<li>RabbitMQ 分布式队列 / 定时任务</li>
+<li>Nginx 用于反向代理</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-特别感谢">1.3 特别感谢</h3>
+<ul>
+<li>ansible django stack: <a href="https://github.com/jcalazan/ansible-django-stack">https://github.com/jcalazan/ansible-django-stack</a></li>
+<li>cookiecutter-django: <a href="https://github.com/pydanny/cookiecutter-django">https://github.com/pydanny/cookiecutter-django</a></li>
+<li>djangopackages: <a href="https://github.com/djangopackages/djangopackages">https://github.com/djangopackages/djangopackages</a></li>
+<li>董伟明 关于 ElasticSearch 的几篇文章 <a href="http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/">http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/</a></li>
+<li>各个组件的开发者们
+<ul>
+<li>ElasticSearch</li>
+<li>PostgreSQL</li>
+<li>Redis</li>
+<li>RabbitMQ</li>
+<li>Nginx</li>
+<li>Docker</li>
+</ul>
+</li>
+</ul>
+<h3 id="14-项目截图">1.4 项目截图</h3>
+<p>好，讲了半天有的没的，还是贴点图吧，毕竟我不是 Markdown 程序员</p>
+<blockquote>
+<p>我们先看看能看得见的前端页面</p>
+</blockquote>
+<p>主页</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&amp;h=1822&amp;f=png&amp;s=1504757"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&amp;h=1822&amp;f=png&amp;s=1504757, https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&amp;h=1822&amp;f=png&amp;s=1504757 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&amp;h=1822&amp;f=png&amp;s=1504757 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&amp;h=1822&amp;f=png&amp;s=1504757"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&amp;h=1822&amp;f=png&amp;s=1504757" /></p>
+<p>博客详情</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&amp;h=1846&amp;f=png&amp;s=1021166"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&amp;h=1846&amp;f=png&amp;s=1021166, https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&amp;h=1846&amp;f=png&amp;s=1021166 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&amp;h=1846&amp;f=png&amp;s=1021166 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&amp;h=1846&amp;f=png&amp;s=1021166"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&amp;h=1846&amp;f=png&amp;s=1021166" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&amp;h=1804&amp;f=png&amp;s=1016132"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&amp;h=1804&amp;f=png&amp;s=1016132, https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&amp;h=1804&amp;f=png&amp;s=1016132 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&amp;h=1804&amp;f=png&amp;s=1016132 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&amp;h=1804&amp;f=png&amp;s=1016132"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&amp;h=1804&amp;f=png&amp;s=1016132" /></p>
+<p>这是一个很普通的 Archive 页面</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&amp;h=1818&amp;f=png&amp;s=425859"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&amp;h=1818&amp;f=png&amp;s=425859, https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&amp;h=1818&amp;f=png&amp;s=425859 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&amp;h=1818&amp;f=png&amp;s=425859 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&amp;h=1818&amp;f=png&amp;s=425859"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&amp;h=1818&amp;f=png&amp;s=425859" /></p>
+<p>这是以 Elasticsearch 为支持的 搜索功能</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&amp;h=1840&amp;f=png&amp;s=1582839"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&amp;h=1840&amp;f=png&amp;s=1582839, https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&amp;h=1840&amp;f=png&amp;s=1582839 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&amp;h=1840&amp;f=png&amp;s=1582839 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&amp;h=1840&amp;f=png&amp;s=1582839"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&amp;h=1840&amp;f=png&amp;s=1582839" /></p>
+<p>Django 自带后台</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&amp;h=1768&amp;f=png&amp;s=365303"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&amp;h=1768&amp;f=png&amp;s=365303, https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&amp;h=1768&amp;f=png&amp;s=365303 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&amp;h=1768&amp;f=png&amp;s=365303 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&amp;h=1768&amp;f=png&amp;s=365303"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&amp;h=1768&amp;f=png&amp;s=365303" /></p>
+<p>前后端分离怎么能少的了 rest api 的实现与便捷的前端调试？</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&amp;h=1840&amp;f=png&amp;s=486772"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&amp;h=1840&amp;f=png&amp;s=486772, https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&amp;h=1840&amp;f=png&amp;s=486772 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&amp;h=1840&amp;f=png&amp;s=486772 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&amp;h=1840&amp;f=png&amp;s=486772"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&amp;h=1840&amp;f=png&amp;s=486772" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a, https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a" /></p>
+<p>Django Debug Tools 帮你迅速调优接口</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&amp;h=1838&amp;f=png&amp;s=735083"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&amp;h=1838&amp;f=png&amp;s=735083, https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&amp;h=1838&amp;f=png&amp;s=735083 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&amp;h=1838&amp;f=png&amp;s=735083 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&amp;h=1838&amp;f=png&amp;s=735083"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&amp;h=1838&amp;f=png&amp;s=735083" /></p>
+<blockquote>
+<p>我们再先看看能看得见的开发界面</p>
+</blockquote>
+<p>在终端执行 tmuxinator start yavueblog 就可以自动运行所有任务</p>
+<p>前端运行状态</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&amp;h=2054&amp;f=png&amp;s=539522"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&amp;h=2054&amp;f=png&amp;s=539522, https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&amp;h=2054&amp;f=png&amp;s=539522 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&amp;h=2054&amp;f=png&amp;s=539522 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&amp;h=2054&amp;f=png&amp;s=539522"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&amp;h=2054&amp;f=png&amp;s=539522" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&amp;h=2054&amp;f=png&amp;s=2446065"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&amp;h=2054&amp;f=png&amp;s=2446065, https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&amp;h=2054&amp;f=png&amp;s=2446065 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&amp;h=2054&amp;f=png&amp;s=2446065 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&amp;h=2054&amp;f=png&amp;s=2446065"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&amp;h=2054&amp;f=png&amp;s=2446065" /></p>
+<p>后端运行状态
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&amp;h=2054&amp;f=png&amp;s=3296514"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&amp;h=2054&amp;f=png&amp;s=3296514, https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&amp;h=2054&amp;f=png&amp;s=3296514 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&amp;h=2054&amp;f=png&amp;s=3296514 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&amp;h=2054&amp;f=png&amp;s=3296514"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&amp;h=2054&amp;f=png&amp;s=3296514" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&amp;h=2054&amp;f=png&amp;s=2720324"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&amp;h=2054&amp;f=png&amp;s=2720324, https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&amp;h=2054&amp;f=png&amp;s=2720324 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&amp;h=2054&amp;f=png&amp;s=2720324 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&amp;h=2054&amp;f=png&amp;s=2720324"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&amp;h=2054&amp;f=png&amp;s=2720324" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&amp;h=2054&amp;f=png&amp;s=3932296"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&amp;h=2054&amp;f=png&amp;s=3932296, https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&amp;h=2054&amp;f=png&amp;s=3932296 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&amp;h=2054&amp;f=png&amp;s=3932296 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&amp;h=2054&amp;f=png&amp;s=3932296"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&amp;h=2054&amp;f=png&amp;s=3932296" /></p>
+<p>当然，你可以直接用客户端连接到对应的服务商检查组件的运行状态</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&amp;h=1430&amp;f=png&amp;s=640103"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&amp;h=1430&amp;f=png&amp;s=640103, https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&amp;h=1430&amp;f=png&amp;s=640103 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&amp;h=1430&amp;f=png&amp;s=640103 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&amp;h=1430&amp;f=png&amp;s=640103"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&amp;h=1430&amp;f=png&amp;s=640103" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&amp;h=1126&amp;f=png&amp;s=532337"
+        data-srcset="https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&amp;h=1126&amp;f=png&amp;s=532337, https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&amp;h=1126&amp;f=png&amp;s=532337 1.5x, https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&amp;h=1126&amp;f=png&amp;s=532337 2x"
+        data-sizes="auto"
+        alt="https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&amp;h=1126&amp;f=png&amp;s=532337"
+        title="https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&amp;h=1126&amp;f=png&amp;s=532337" /></p>
+<h2 id="0x02-系列教程目录">0x02 系列教程目录</h2>
+<h3 id="21-教程注意项">2.1 教程注意项</h3>
+<ol>
+<li>本文的开发环境配置仅仅限于 macOS 上，如果读者使用的是 Windows / 可能需要自己搞定环境的配置。不过笔者使用了 Docker 进行环境配置，应该配置环境会省事很多。</li>
+<li>在阅读本教程，请读者至少跟着 Django 官方的教程跟着走一遍。不要零基础一通瞎搞。</li>
+<li>如果在使用过程中出现问题，请在 ISSUE 提供尽可能多的信息，将问题描述清楚。</li>
+</ol>
+<p>本系列教程并不按照一步一步增加代码的方式写教程。</p>
+<p>我先带着大家搭建好整个项目框架，然后从不同的视角开介绍这个项目，比如：</p>
+<ol>
+<li>某个模块的 models 是如何设计的？有哪些卧槽居然可以这么用的写代码方式。</li>
+<li>Django User 如何做扩展？同样在 Django 的生态圈里面，哪些场景有哪些值得围观的包，比如 guardian</li>
+<li>Restful API 应该如何写，Django 里面的 Rest API 应该如何写？会有哪些生产效率 guangguangguang 提升上去的使用方法？权限怎么做？限流怎么搞？</li>
+<li>Py.test TDD 测试驱动开发了解一下？</li>
+<li>使用 Tmux 等合理工具的优雅的单终端多开。</li>
+</ol>
+<h3 id="22-教程目录">2.2 教程目录</h3>
+<ul>
+<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 &ndash; 目录篇</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件配置</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的前后端初步设计</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端初步实现</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的前端实现 YaVueBlog</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Redis</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 PostgreSQL</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Elasticsearch</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 RabbitMQ</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的生产环境部署</li>
+</ul>
+<h2 id="0xee-参考链接">0xEE. 参考链接</h2>
+<p>还犹豫啥，快上车吧</p>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-21</strong> 重修文字</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/django/">Django</a>,&nbsp;<a href="/tags/yadjangoblog/">YaDjangoBlog</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20180220_unknowncheatsheet/" class="prev" rel="prev" title="Unknown Cheatsheet"><i class="fas fa-angle-left fa-fw"></i>Unknown Cheatsheet</a>
+            <a href="/posts/20180222_yadjangoblog%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/" class="next" rel="next" title="YaDjangoBlog 开发环境配置">YaDjangoBlog 开发环境配置<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

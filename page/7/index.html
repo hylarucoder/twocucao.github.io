@@ -1,1322 +1,256 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
-
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MG的编程小屋">
-<meta property="og:url" content="http://twocucao.xyz/page/7/index.html">
-<meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-<meta property="og:locale">
-<meta property="article:author" content="Micheal Gardner">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://twocucao.xyz/page/7/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-Hans'
-  };
-</script>
-
-  <title>MG的编程小屋</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">MG的编程小屋</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-        <li class="menu-item menu-item-schedule">
-
-    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
-            
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/" class="post-title-link" itemprop="url">『好好说话』读书笔记</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-01-27 18:40:59" itemprop="dateCreated datePublished" datetime="2017-01-27T18:40:59+08:00">2017-01-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-01-28 09:23:33" itemprop="dateModified" datetime="2018-01-28T09:23:33+08:00">2018-01-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/" itemprop="url" rel="index"><span itemprop="name">写在人生的边上</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。</p>
-<p>于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了。现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文。本文是我的公开的笔记，私人的笔记就不分享了。</p>
-<p>好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。</p>
-<blockquote>
-<p>真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。</p>
-</blockquote>
-<p>世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/01/27/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/01/15/Spacemacs/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/01/15/Spacemacs/" class="post-title-link" itemprop="url">写给 Pythoner 的 Spacemacs 入门指北</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-01-15 18:40:59" itemprop="dateCreated datePublished" datetime="2017-01-15T18:40:59+08:00">2017-01-15</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-01-28 09:22:56" itemprop="dateModified" datetime="2018-01-28T09:22:56+08:00">2018-01-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%88%A9%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">编程利器</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最开始，使用 Sublime Text 编码，后来用 Vim 混合 PyCharm 写 Python。</p>
-<p>前几天，Github 上的 Spacemacs 已经成功的突破一万 Star, 听说几个我非常佩服的 Pythoner（比如『Python Web 开发实战』的作者董伟明） 也是非常喜欢 Spacemacs, 我就萌生了从 Vim 切换到 Spacemacs 的想法，说做就做。</p>
-<blockquote>
-<p>注：本文所有内容基于 macOS 10.11, 软件环境为 zsh , pyenv , python3.5.2 , node5.12.0. 其他类 Unix 平台略作修改即可使用。至于 Windows 平台，建议安装 Ubuntu 虚拟机。本文也需要读者具备基本的 VIM 基本常识和 Python 常识。</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/01/15/Spacemacs/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/01/14/OneQuestionToSeePythonScope/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/01/14/OneQuestionToSeePythonScope/" class="post-title-link" itemprop="url">从一个小问题来说 Python 的作用域</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-01-14 20:48:31" itemprop="dateCreated datePublished" datetime="2017-01-14T20:48:31+08:00">2017-01-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-01-30 16:06:24" itemprop="dateModified" datetime="2018-01-30T16:06:24+08:00">2018-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">Python 黑魔法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>备注，这种动态设置 module 里的方法不推荐</p>
-</blockquote>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>整理工具字符类的时候，想借助正则表达式来实现一部分的文字判断抽取等操作。</p>
-<p>比如实现：</p>
-<ul>
-<li>判断文字是否为 UUID</li>
-<li>判断文字是否包含 UUID</li>
-<li>抽取文字是中第一个 UUID</li>
-<li>抽取文字是中所有 UUID</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/01/14/OneQuestionToSeePythonScope/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2017/01/05/PostgreSQLCheatSheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2017/01/05/PostgreSQLCheatSheet/" class="post-title-link" itemprop="url">PostgreSQL CheatSheet</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2017-01-05 20:48:31" itemprop="dateCreated datePublished" datetime="2017-01-05T20:48:31+08:00">2017-01-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-11-16 19:03:12" itemprop="dateModified" datetime="2018-11-16T19:03:12+08:00">2018-11-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%90%8E%E5%8F%B0%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">后台组件</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。</p>
-<p>PostGIS 相关的资料参考文章 <a href="/2016/10/05/UbuntuCheatsheet/">Geo Processing With Python</a></p>
-<ul>
-<li>安装与基本配置</li>
-<li>PostgreSQL 配套工具</li>
-<li>PostgreSQL SQL 常用代码片段</li>
-<li>Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )</li>
-</ul>
-<p>不定期更新。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/01/05/PostgreSQLCheatSheet/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/12/21/LeetCodePythonSolution/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/12/21/LeetCodePythonSolution/" class="post-title-link" itemprop="url">LeetCode Python 解法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-12-21 22:35:30" itemprop="dateCreated datePublished" datetime="2016-12-21T22:35:30+08:00">2016-12-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-01-28 09:20:27" itemprop="dateModified" datetime="2018-01-28T09:20:27+08:00">2018-01-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">Python 黑魔法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>刷刷简单的算法问题，顺手提升一下编程的裸写代码的能力。</p>
-<p>本文为 LeetCode 的 Easy 算法的解法集合。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/12/21/LeetCodePythonSolution/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/12/11/RedisCheatSheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/12/11/RedisCheatSheet/" class="post-title-link" itemprop="url">Redis Cheatsheet</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-12-11 18:41:47" itemprop="dateCreated datePublished" datetime="2016-12-11T18:41:47+08:00">2016-12-11</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-11-30 11:28:02" itemprop="dateModified" datetime="2018-11-30T11:28:02+08:00">2018-11-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%90%8E%E5%8F%B0%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">后台组件</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。</p>
-<ul>
-<li>Redis Shell</li>
-<li>Redis 配套工具</li>
-<li>Redis-Py</li>
-<li>常见问题</li>
-<li>踩坑记录</li>
-</ul>
-<p>不定期更新。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/12/11/RedisCheatSheet/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/12/10/CheatSheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/12/10/CheatSheet/" class="post-title-link" itemprop="url">Cheatsheet 集合篇</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-12-10 18:41:47" itemprop="dateCreated datePublished" datetime="2016-12-10T18:41:47+08:00">2016-12-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-01-28 09:18:57" itemprop="dateModified" datetime="2018-01-28T09:18:57+08:00">2018-01-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%BC%96%E7%A8%8B%E5%88%A9%E5%99%A8/" itemprop="url" rel="index"><span itemprop="name">编程利器</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00. 前言"></a>0x00. 前言</h2><p>本文为 Cheatsheet 类型文章的集合。</p>
-<p>编码最重要的是思路。</p>
-<blockquote>
-<p>做什么不是呢？</p>
-</blockquote>
-<ul>
-<li>有人问：你想那么多不累吗？</li>
-<li>答：比起出乱子，想多当然是最省事的方式。</li>
-</ul>
-<p>截止今日已经更新 7 篇 CheatSheet 文章，打算不断完善它们。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/12/10/CheatSheet/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/12/09/MongoCheatSheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/12/09/MongoCheatSheet/" class="post-title-link" itemprop="url">MongoDB Cheatsheet</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-12-09 18:41:47" itemprop="dateCreated datePublished" datetime="2016-12-09T18:41:47+08:00">2016-12-09</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-01-28 09:18:49" itemprop="dateModified" datetime="2018-01-28T09:18:49+08:00">2018-01-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%90%8E%E5%8F%B0%E7%BB%84%E4%BB%B6/" itemprop="url" rel="index"><span itemprop="name">后台组件</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。</p>
-<ul>
-<li>Mongo Shell</li>
-<li>Mongo 配套工具</li>
-<li>Python API</li>
-</ul>
-<p>不定期更新。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/12/09/MongoCheatSheet/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/12/03/TextProcessingCheatsheet/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/12/03/TextProcessingCheatsheet/" class="post-title-link" itemprop="url">Text Processing CheatSheet</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-12-03 18:41:47" itemprop="dateCreated datePublished" datetime="2016-12-03T18:41:47+08:00">2016-12-03</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-01-28 09:18:30" itemprop="dateModified" datetime="2018-01-28T09:18:30+08:00">2018-01-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">Python 黑魔法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="0x00-前言"><a href="#0x00-前言" class="headerlink" title="0x00 前言"></a>0x00 前言</h2><p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中的文本处理相关思路。</p>
-<p>本文的目录为：</p>
-<ul>
-<li>正则处理相关</li>
-<li>HTML/XML 处理相关</li>
-<li>Python 中的文本处理</li>
-</ul>
-<h2 id="0x01-正则处理相关"><a href="#0x01-正则处理相关" class="headerlink" title="0x01 正则处理相关"></a>0x01 正则处理相关</h2><h3 id="1-1-正则表达式"><a href="#1-1-正则表达式" class="headerlink" title="1.1. 正则表达式"></a>1.1. 正则表达式</h3><p>正则是个很奇葩的名字，为什么叫做正则表达式呢，首先是个表达式，其次，这是一种叫做正则 (regular expression, rational expression) 的表达式。<br>名称为什么叫做 regular 呢，因为它基于 regular language. 而 regular language 是一种 formal language. 得，现在又开始是编译原理相关概念了。为了逃避概念，通过用途来简单定义正则表达式。</p>
-<p>简而言之，就是一种用于字符串搜索的模式。或者就是一种领域专用编程语言。</p>
-<p><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Regular_expression">https://en.wikipedia.org/wiki/Regular_expression</a></p>
-<h3 id="1-2-Python-中正则表达式语法"><a href="#1-2-Python-中正则表达式语法" class="headerlink" title="1.2. Python 中正则表达式语法"></a>1.2. Python 中正则表达式语法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 元字符</span></span><br><span class="line">. ^ $ * + ? &#123; &#125; [ ] \ | ( )</span><br><span class="line"></span><br><span class="line">* <span class="comment"># 速记，天上一个星星都没有，0 到多个。</span></span><br><span class="line">+ <span class="comment"># 一加手机..... 1 到多个。</span></span><br><span class="line">? # 有还是没有 即 0 or 1</span><br><span class="line">*? # 没有疑问就是贪婪，有疑问就是非贪婪</span><br><span class="line">+?</span><br><span class="line">??</span><br><span class="line"></span><br><span class="line">&#123;m&#125; <span class="comment"># m 份</span></span><br><span class="line">&#123;m,n&#125; <span class="comment"># 优先匹配 a&#123;2,&#125;b 优先匹配 aaaab 中 aaaab</span></span><br><span class="line">&#123;m,n&#125;? # 优先匹配 a&#123;2,&#125;b 优先匹配 aaaab 中 aab</span><br><span class="line"></span><br><span class="line">[] <span class="comment"># [a\-z] == [az-]</span></span><br><span class="line"><span class="comment"># 1. [\w] [\S]</span></span><br><span class="line"><span class="comment"># 2. [^5]</span></span><br><span class="line"><span class="comment"># 3. [akm$]  在 [] 中 $ 并不具备元字符特点</span></span><br><span class="line"></span><br><span class="line">PattenA | PattenB</span><br><span class="line">(...) <span class="comment"># 捕获 , 引用可以使用、1 , 但是还有一种扩展语法</span></span><br><span class="line"></span><br><span class="line">(?...) # 扩展</span><br><span class="line"><span class="comment"># - (?aiLmsux)</span></span><br><span class="line"><span class="comment"># - (?:...) 不捕获</span></span><br><span class="line"><span class="comment"># - (?P&lt;quote&gt;...) 正则内引用 (?P=quote);python 内获取 m.group(&#x27;quote&#x27;) ,m.end(&#x27;quote&#x27;);re.sub 内 repl 参数为、g&lt;quote&gt; \g&lt;1&gt; \1</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h3 id="1-3-Python-中使用正则的方法"><a href="#1-3-Python-中使用正则的方法" class="headerlink" title="1.3. Python 中使用正则的方法"></a>1.3. Python 中使用正则的方法</h3><h4 id="1-3-1-re-模块的用法"><a href="#1-3-1-re-模块的用法" class="headerlink" title="1.3.1. re 模块的用法"></a>1.3.1. re 模块的用法</h4><ul>
-<li>sub 替换</li>
-<li>match / fullmatch 匹配</li>
-<li>search 搜索</li>
-<li>split 分片</li>
-</ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">re.split(<span class="string">&#x27;(\W+)&#x27;</span>, <span class="string">&#x27;...words, words...&#x27;</span>)</span><br><span class="line"><span class="comment"># [&#x27;&#x27;, &#x27;...&#x27;, &#x27;words&#x27;, &#x27;, &#x27;, &#x27;words&#x27;, &#x27;...&#x27;, &#x27;&#x27;]</span></span><br></pre></td></tr></table></figure>
-
-<blockquote>
-<p>match 为匹配起始字符 / fullmatch 为全部字符 / search 为搜索</p>
-</blockquote>
-<h4 id="1-3-2-match-object-的用法"><a href="#1-3-2-match-object-的用法" class="headerlink" title="1.3.2. match object 的用法"></a>1.3.2. match object 的用法</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">m.group(<span class="number">0</span>)</span><br><span class="line">m.group(<span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m = re.match(<span class="string">r&quot;(?P&lt;first_name&gt;\w+) (?P&lt;last_name&gt;\w+)&quot;</span>, <span class="string">&quot;Malcolm Reynolds&quot;</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m.group(<span class="string">&#x27;first_name&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;Malcolm&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>m.group(<span class="string">&#x27;last_name&#x27;</span>)</span><br><span class="line"><span class="string">&#x27;Reynolds&#x27;</span></span><br><span class="line">m.start() <span class="comment"># 起始</span></span><br><span class="line">m.end()   <span class="comment"># 结尾</span></span><br></pre></td></tr></table></figure>
-
-<h2 id="1-4-正则表达式性能"><a href="#1-4-正则表达式性能" class="headerlink" title="1.4. 正则表达式性能"></a>1.4. 正则表达式性能</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 编译优于不编译</span></span><br><span class="line">prog = re.<span class="built_in">compile</span>(pattern)</span><br><span class="line">result = prog.match(string)</span><br><span class="line">re.match(pattern,string)</span><br></pre></td></tr></table></figure>
-<h2 id="0x02-HTML-XML-处理相关"><a href="#0x02-HTML-XML-处理相关" class="headerlink" title="0x02 HTML/XML 处理相关"></a>0x02 HTML/XML 处理相关</h2><h3 id="2-1-Beautifulsoup-处理-HTML"><a href="#2-1-Beautifulsoup-处理-HTML" class="headerlink" title="2.1. Beautifulsoup 处理 HTML"></a>2.1. Beautifulsoup 处理 HTML</h3><p>解析往往伴随着各种各样奇葩的不奇葩的，诡异的不诡异的网页数据抽取，这个过程中，我们常使用两个库来解决问题，一个库叫做 lxml, 另一个库叫做 BeautifulSoup.</p>
-<p>beautifulsoup 可是让我们通过直接手动编写遍历 dom 树的方法来快速遍历 dom 树从而获得数据。相比自己写解析器而言，可以算得上非常的节省时间了。</p>
-<p>只要能手动遍历 dom 树，基本上所有的数据都是可以获取的。痛点就是手动编写遍历 Dom 树并且完成测试的时间可能长一些。</p>
-<p>但是开发效率就比较低了。</p>
-<p>举个例子：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;lal&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span> <span class="attr">itemprop</span>=<span class="string">&quot;street-address&quot;</span> <span class="attr">title</span>=<span class="string">&quot;浦东南路八佰伴西面&quot;</span>&gt;</span></span><br><span class="line">       地址：浦东南路八佰伴西面</span><br><span class="line">    <span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span> <span class="attr">itemprop</span>=<span class="string">&quot;street-address&quot;</span> <span class="attr">title</span>=<span class="string">&quot;浦东南路&quot;</span>&gt;</span></span><br><span class="line">       名称：xxxx</span><br><span class="line">    &lt;/div &gt;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>我想要地址属性，如果是 beautifulsoup, 则我们需要先定位到 id 为 lal 的 div 元素。然后获取每个元素的 text 部分，然后使用 if 判断地址属性，然后提取 text.</p>
-<p><strong>但是如果用 xpath, 则可以把对元素的简单定位简单判断直接写在 xpath 表达式。</strong></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sel.xpath(<span class="string">&#x27;//div[@id=&quot;lal&quot;]/*[contains(text(),&quot;地址&quot;)]/text()&#x27;</span>).extract_first()</span><br><span class="line"><span class="comment"># 如果还需要添加筛选名称，则可是使用</span></span><br><span class="line">sel.xpath(<span class="string">&#x27;//div[@id=&quot;lal&quot;]/*[contains(text(),&quot;名称&quot;)]/text()&#x27;</span>).extract_first()</span><br></pre></td></tr></table></figure>
-<p>这样可以极大的提升开发效率。</p>
-<p>页面的结构越复杂，则 xpath 带来的开发效率越高。</p>
-<h3 id="2-2-XPath-处理-HTML"><a href="#2-2-XPath-处理-HTML" class="headerlink" title="2.2. XPath 处理 HTML"></a>2.2. XPath 处理 HTML</h3><h4 id="2-2-1-概念"><a href="#2-2-1-概念" class="headerlink" title="2.2.1. 概念"></a>2.2.1. 概念</h4><p>XPath 是一种通过路径表达式定位 XML 文档内容的语法。<br>由于内置了大量的表达式函数，可以通过极少的代码完成定位。<br>有七种<strong>节点类型</strong>:</p>
-<ul>
-<li>element</li>
-<li>attribute</li>
-<li>text</li>
-<li>namespace</li>
-<li>processing-instruction</li>
-<li>comment</li>
-<li>document nodes</li>
-</ul>
-<p>有五种<strong>节点间关系</strong>:</p>
-<ul>
-<li>父节点 Parent</li>
-<li>子节点 Children</li>
-<li>兄弟节点 Siblings</li>
-<li>先祖节点，即父与父父节点。Ancestors</li>
-<li>后代节点，即子与子子节点。Descendants</li>
-</ul>
-<table>
-<thead>
-<tr>
-<th>语法</th>
-<th>描述</th>
-<th>例子</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>nodename</td>
-<td>节点名称</td>
-<td>a</td>
-</tr>
-<tr>
-<td>/</td>
-<td>根节点</td>
-<td>/</td>
-</tr>
-<tr>
-<td>//</td>
-<td>匹配所有</td>
-<td>bookstore//book</td>
-</tr>
-<tr>
-<td>.</td>
-<td>当前节点</td>
-<td></td>
-</tr>
-<tr>
-<td>..</td>
-<td>父节点</td>
-<td>a/../a/..</td>
-</tr>
-<tr>
-<td>@</td>
-<td>属性</td>
-<td>a/@href</td>
-</tr>
-<tr>
-<td>[]</td>
-<td>谓语</td>
-<td>book[1] , book[last()-1]</td>
-</tr>
-<tr>
-<td>func()</td>
-<td>表达式函数</td>
-<td>postion()</td>
-</tr>
-</tbody></table>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">response.xpath(<span class="string">&quot;//*[@id=\&quot;landlb_B04_04\&quot;]/span[2]/a[contains(@href,&#x27;market&#x27;)]&quot;</span>)</span><br><span class="line">response.xpath(<span class="string">&quot;//*[@id=\&quot;landlb_B04_04\&quot;]/span[2]/a[not(@class)]&quot;</span>)</span><br><span class="line">response.xpath(<span class="string">&quot;//ul/li/b[contains(text(),&#x27;什么玩意&#x27;)]/following-sibling::span/text()&quot;</span>)</span><br><span class="line">response.xpath(<span class="string">&quot;//div[@class=&#x27;address&#x27;]/text()[preceding::span[@class=&#x27;item&#x27; and contains(text(),&#x27;地址：&#x27;)]]&quot;</span>)</span><br><span class="line">response.xpath(<span class="string">&quot;//ul/li/b[contains(text(),&#x27;什么玩意：&#x27;)]/following-sibling::a/text()&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//*[contains(text(),<span class="string">&#x27;ABC&#x27;</span>)]</span><br><span class="line"><span class="comment"># http://stackoverflow.com/questions/3655549/xpath-containstext-some-string-doesnt-work-when-used-with-node-with-more/3655588#3655588</span></span><br><span class="line"></span><br><span class="line">&lt;div class=<span class="string">&quot;atag btag&quot;</span> /&gt;</span><br><span class="line">//div[contains(@class, <span class="string">&#x27;atag&#x27;</span>) and contains(@class ,<span class="string">&#x27;btag&#x27;</span>)]</span><br></pre></td></tr></table></figure>
-
-<h4 id="2-2-2-lxml-parsel"><a href="#2-2-2-lxml-parsel" class="headerlink" title="2.2.2. lxml parsel"></a>2.2.2. lxml parsel</h4><p>这两个库是 Python 中常用的解析表达式， parsel 依赖于 lxml , 安装完 lxml 后直接安装即可。</p>
-<h4 id="2-2-3-lxml-的番外"><a href="#2-2-3-lxml-的番外" class="headerlink" title="2.2.3. lxml 的番外"></a>2.2.3. lxml 的番外</h4><p>众所周知，Mac 的 Homebrew 很方便，每一次遇到需要下载编译的组件的时候，只需要执行 brew install xxx, 很快就可以使用了。</p>
-<p>但 homebrew 安装的软件都是最新的，这很容易导致部分软件由于版本更新带来的兼容性问题。</p>
-<p>这不，最近在 Mac 上进行开发的时候每次调用初始化 lxml 的时候总是无法进行解析，最后经过排查发现问题是 lxml 在编译的时候使用的 libxml 2.9.4 但是 使用的版本为 2.9.2 , 于是每当我使用 lxml 的时候，就会报错。</p>
-<p>不得已，找到 lxml 的 F&amp;Q 部分发现提 issue 之前需要先查看依赖版本。</p>
-<p>于是进入 IPython 排查。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">from</span> lxml <span class="keyword">import</span> etree</span><br><span class="line"></span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;Python&#x27;</span>, sys.version_info))</span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;lxml.etree&#x27;</span>, etree.LXML_VERSION))</span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;libxml used&#x27;</span>, etree.LIBXML_VERSION))</span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;libxml compiled&#x27;</span>, etree.LIBXML_COMPILED_VERSION))</span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;libxslt used&#x27;</span>, etree.LIBXSLT_VERSION))</span><br><span class="line">print(<span class="string">&quot;%-20s: %s&quot;</span> % (<span class="string">&#x27;libxslt compiled&#x27;</span>, etree.LIBXSLT_COMPILED_VERSION))</span><br><span class="line"></span><br><span class="line"><span class="comment"># Python : sys.version_info(major=3, minor=5, micro=1, releaselevel=&#x27;final&#x27;, serial=0)</span></span><br><span class="line"><span class="comment"># lxml.etree : (3, 6, 2, 0)</span></span><br><span class="line"><span class="comment"># libxml used : (2, 9, 2)</span></span><br><span class="line"><span class="comment"># libxml compiled : (2, 9, 4) # 注意问题出在这里。</span></span><br><span class="line"><span class="comment"># libxslt used : (1, 1, 28)</span></span><br><span class="line"><span class="comment"># libxslt compiled : (1, 1, 28)</span></span><br></pre></td></tr></table></figure>
-
-<p>于是使用 pip 强制进行安装升级。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">STATIC_DEPS&#x3D;true pip install -i http:&#x2F;&#x2F;pypi.douban.com&#x2F;simple&#x2F; –trusted-host pypi.douban.com lxml –ignore-installed –no-cache-dir –upgrade -vvv</span><br></pre></td></tr></table></figure>
-<p>安装完毕即可。</p>
-<h3 id="2-3-标准库处理-HTML"><a href="#2-3-标准库处理-HTML" class="headerlink" title="2.3. 标准库处理 HTML"></a>2.3. 标准库处理 HTML</h3>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2016/11/25/PythonistAwesomeList/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2016/11/25/PythonistAwesomeList/" class="post-title-link" itemprop="url">Python 爬虫工程师的武器库</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2016-11-25 19:53:47" itemprop="dateCreated datePublished" datetime="2016-11-25T19:53:47+08:00">2016-11-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-01-28 09:18:19" itemprop="dateModified" datetime="2018-01-28T09:18:19+08:00">2018-01-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python-%E9%BB%91%E9%AD%94%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">Python 黑魔法</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>从大三接触 Python 到现在几乎已经有两年的接触经验了，除去中间有一年左右接私活写写 Android 和 Lamp 之外，有 Python 实际项目开发经验也算是 9 个多月，也稍微算得上是一个入门级别的 Python 程序员了。</p>
-<p>网上不乏一些不错的 Awesome list, 但是说实话，这种类型的清单某些程度上不就相当于推荐自己没有看过的书单？</p>
-<p>而我对自己的 Awesome List 是有要求的。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2016/11/25/PythonistAwesomeList/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
+<html lang="zh-cn">
+    <head>
+	<meta name="generator" content="Hugo 0.79.0" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>海拉鲁编程客</title><meta name="Description" content="Get Busy is My New Hugo Site"><meta property="og:title" content="海拉鲁编程客" />
+<meta property="og:description" content="Get Busy is My New Hugo Site" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://twocucao.xyz/" />
+<meta property="og:updated_time" content="2020-11-30T18:16:34+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="海拉鲁编程客"/>
+<meta name="twitter:description" content="Get Busy is My New Hugo Site"/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/" /><link rel="alternate" href="/index.xml" type="application/rss+xml" title="海拉鲁编程客">
+    <link rel="feed" href="/index.xml" type="application/rss+xml" title="海拉鲁编程客"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "http:\/\/twocucao.xyz\/","inLanguage": "zh-cn","author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "Get Busy is My New Hugo Site","name": "海拉鲁编程客"
     }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
         </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
-  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">93</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">15</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">96</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
     </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2014 – 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
 </div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
-  </div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="page home" posts><div class="home-profile"><div class="home-avatar"><a href="/categories/" title="分类"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://avatars0.githubusercontent.com/u/5625783"
+        data-srcset="https://avatars0.githubusercontent.com/u/5625783, https://avatars0.githubusercontent.com/u/5625783 1.5x, https://avatars0.githubusercontent.com/u/5625783 2x"
+        data-sizes="auto"
+        alt="https://avatars0.githubusercontent.com/u/5625783"
+        title="https://avatars0.githubusercontent.com/u/5625783" /></a></div><h1 class="home-title">海拉鲁编程客</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20170408_thinkinginpython/">Thinking In Python Language</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-04-08">2017-04-08</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x01 前言  Python 简略笔记
+ 本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。
+0x00 简介 1. 为什么是 Python 选 Python, 很大程度上是因为 Python 的快速开发。
+当然，快速开发（这里的开发包含部署）这个词也往往会被误解。什么叫做快速？我用一个 CMS 框架快速搭建出一个网站这是否叫做快速？
+ 每一次部署的时候，如果使用 Java 或者是 Go, 部署的时候直接 maven 编译打包，接着把 War 包直接上传到 Tomcat 就结束了。而用 Python 则需要各种虚拟环境，各种稀里哗啦的配置。这种情况下是哪一种快速呢？  Python 有什么好处呢？
+ 写代码效率高 生态圈好  写代码效率高，这指的是写 Python 代码，而不是运行时。
+生态圈好，Web 开发用 Django/Flask , 数据抓取用 Requests , 数据分析清洗用 Pandas, 机器学习。
+2. 工具链 4. 文档 5. 社区 6. 书籍 0x01 基本概念  程序 = 算法 + 数据结构</div><div class="post-footer">
+        <a href="/posts/20170408_thinkinginpython/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20170417_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_fluentpython/">『Fluent Python』读书笔记</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-04-07">2017-04-07</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>读书笔记</a></span></div><div class="content">前言 Fluent Python 适用于中级 Pythoner。
+ 以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。
+ 本文目录 本书结构  P1. Prologue  C01. The Python Data Model   P2. Data Structure  C02. An Array of Sequences  Overview of Built-in Sequences List Comprehensions and Generator Expressions Tuples Are Not Just Immutable Lists Slicing Using plus and star with Sequences Augmented Assignment with Sequences list.sort and the sorted Built-In Function Managing Ordered Sequences with bisect When a List Is Not the Answer Summary Further Reading   C03.</div><div class="post-footer">
+        <a href="/posts/20170417_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_fluentpython/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20170201_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/">『好好说话』读书笔记</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-02-01">2017-02-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>读书笔记</a></span></div><div class="content">当时看到奇葩说这个节目就深深的喜欢上了这群打辩论的顶级高手们。
+于是，当这些奇葩的辩论王者们出了『好好说话』的语音教程的时候，就非常开心的入手了。现在出了纸质书，像我这种不是特别聪明的人自然是要好好的拿来研究一番，于是诞生了本文。本文是我的公开的笔记，私人的笔记就不分享了。
+好好说话有语音版和文字版。建议购买。很多技能都不重要，早一点学迟一点学基本上都没有问题，但是说话是为数不多的，不学就非常可惜的早学可以少走很多麻烦的。
+ 真心建议买正版，为优秀的知识付费是追求上进的人的基本素质。
+ 世界上需要交智商税的东西真的特别多，但是说话这种东西一般情况下交的智商税的特别的高：
+就像在书籍第一章开头所说，说话之伤都是暗伤。
+ 能意识到你问题所在的，通常都不会告诉你。心大点的，察人之过笑而不言，但是私下里知道你这个人不靠谱，以后有重要的事不能指望你，就会疏远你；心稍微小点的，不跟你计较，但是客客气气找个别的由头举了你；等而下之的人的，甚至会一边给你穿小鞋一边装大度，让你死都没有四个明白。
+ 回想起我前 25 年的很多糟糕的言行，现在想想，当时总归是可以有更优解的。
+但仔细一想，似乎寻常人总会去踩这些坑，吃过很多教训，才能明白。
+说话是权利的游戏 五维话术：演讲，沟通，说服，谈判，辩论。
+ 演讲 A &ndash; 权力的形成（吸引，聚焦，引导） 沟通 B &ndash; 权力的流动（避免冲突与协调转向） 说服 C &ndash; 权力在对方（无权的一方要改变有权的一方） 谈判 D &ndash; 权力在双方（双方要合作，才能解决问题） 辩论 E &ndash; 权力在他方（双方无权决定胜负，通常由中立第三方裁决）  这里面的纬度，并不是每一个场景下就对应某一纬度的，比如说，当你在沟通的时候，有的时候就也需要说服，有的时候又需要辩论，甚至谈判。
+所以，每一场复杂的说话场景实际上是在不断的变化当中，甚至可以用矢量 (A,B,C,D,E,T) 其中 T 表示的是 Times 次数。即以 A 为演讲值，MAX 为 10,MIN 为 0 的情况下，第 T 次演讲的说法应该为 (A,B,C,D,E), 比如 (2,3,4,9,0) 表示此次对话应该着重于谈判.P20 有一个非常有趣的说明叫做色有三原，光分七彩。
+温和的的沟通，可能蕴含着辩论的机锋和谈判的策略； 娓娓道来的说服可能需要演讲的华彩的沟通的诀窍。
+而好好说话的工作流就是
+S1. 倾听 For 收集信息 S2. 判断 For 权力棍术 S3.</div><div class="post-footer">
+        <a href="/posts/20170201_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A5%BD%E5%A5%BD%E8%AF%B4%E8%AF%9D/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E4%B9%A6%E5%8D%95/">书单</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20170201_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/">『如何阅读一本书』读书笔记</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-01-27">2017-01-27</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>读书笔记</a></span></div><div class="content">前言 选择了这本书进行精读是有原因的：
+ 在一个需要大量阅读的时代里，读东西更加有策略。
+ 记得大约是初三的考试比赛，监考老师发了卷子，我们这些人拿到卷子捋起袖子就是写，而监考老师说了一句话：
+ 先看看卷子，然后再写，不要上来就做题。
+ 虽然那次考试并不算理想，最大的收获应该就是这句话。
+ 通过&rsquo;先预估，然后再做&rsquo;的意识，我应该是少走了一些弯路的。至少工作效率稍微提升了一些。
+ 但，有了这个先预估一下，然后再做的意识可以减少很多问题，然而并不能更好解决的问题。因为意识这玩意，不是方法，不是策略。知道考虑火候，不懂得把握火候照样做不出好菜。
+对应到我看这本书的目的，即是，当需要我能在捋起袖子干之前，找到一个更好的策略，对读书，有一个更好的方法。而不是仅仅是埋下头一通看。
+也是为了给自己更好的啃源码，看文档激发一些更好的灵感。
+这是从非专业领域里面找灵感的一种方式，即所谓：汝果欲学诗，工夫在诗外。
+本文目录 Table of Contents
+ - 本文目录 《如何阅读一本书》目录简评 问与答  [CQ1: 本书整体讲了什么？](#cq1- 本书整体讲了什么) [SQ1: 较好的阅读一本书的步骤](#sq1- 较好的阅读一本书的步骤)  [确定要补充那些知识 / 技能体系](#确定要补充那些知识 &ndash; 技能体系) [筛选书籍阶段 : 过滤不适合的书](#筛选书籍阶段 &ndash; 过滤不适合的书) [检视阅读阶段 : 判断一本书的质量](#检视阅读阶段 &ndash; 判断一本书的质量)  [检视阅读阶段 STEP1 : 大体定位这本书。](#检视阅读阶段 -step1&ndash; 大体定位这本书) [检视阅读阶段 STEP2 :](#检视阅读阶段 -step2-) 检视阅读的一些误区： [分析阅读阶段 : 全方位吃透这本书](#分析阅读阶段 &ndash; 全方位吃透这本书)  分析阅读第一阶段：找出一本书在谈写什么的规则 分析阅读第二阶段：诠释一本书的内容的规则。 分析阅读第三阶段：评论一本书的规则   [主题阅读阶段 : 纳入自己的知识体系](#主题阅读阶段 &ndash; 纳入自己的知识体系)     [SQ2: 上面关于阅读一本书的步骤是适用于所有书，即使通用的步骤吗？](#sq2- 上面关于阅读一本书的步骤是适用于所有书即使通用的步骤吗)  分析阅读之如何阅读实用型的书 分析阅读之如何阅读历史书   [SQ3: 关于读书的有哪些误区](#sq3- 关于读书的有哪些误区)  速读 随便翻翻 陷入细枝末节   [EQ1: 为什么要重新学习如何阅读书籍的策略与方法](#eq1- 为什么要重新学习如何阅读书籍的策略与方法)   相关链接  《如何阅读一本书》目录简评 本书的翻译版书籍的目录如下：</div><div class="post-footer">
+        <a href="/posts/20170201_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E5%A6%82%E4%BD%95%E9%98%85%E8%AF%BB%E4%B8%80%E6%9C%AC%E4%B9%A6/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E4%B9%A6%E5%8D%95/">书单</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20170127_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E4%B8%8E%E6%97%B6%E9%97%B4%E5%81%9A%E6%9C%8B%E5%8F%8B/">『把时间当做朋友』读书笔记</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-01-27">2017-01-27</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>读书笔记</a></span></div><div class="content">前言 我大一的时候看到的这本书的第一版。转眼大四毕业半年了。
+这本书对我有很大积极的作用，大一时候很庆幸读到这本书籍，当时一读这本书，就像一个溺水的人抓到了一个水面上的一根稻草，以为『明白一个道理，于是突然间就主角光环加深，从此走向人生巅峰』。当时可能是因为年轻气盛见识少，待我见识稍稍多了那么一点点之后，也就逐渐可以对成功学类的鸡汤脱敏。这里的脱敏指的是可以减少过度情绪化的理解，从句子中逐渐剥离感性的煽情的句子，慢慢的从稍稍理性的一些角度进行理解。
+这本书放在公网上，并不需要购买即可免费查看，但，值得一提的是，第三版在排版上下足了功夫。阅读体验很好。推荐购买纸质书。
+我是一个认为『术』重于『道』的人。『道』意味着对『术』进行抽象总结，并且艺术化的语言进行诠释，这个过程难保没有信息的损失。
+这本书在四年后看的今天，依然读出了很多不一样的味道，这种惊喜恰如第一次读到这本书的时候那般惊奇。
+ 四年前，我看了这本书，相信自己的积累终究会有一天有所回报。
+ 现在想想，很多李老师说的道理也有道理本身的局限性，道理一旦脱离于扎根这些道理的土壤，就显得很没有道理，李笑来提到：
+ 速成绝无可能 交换才是硬道理 完美永不存在 未知永远存在 现状永远无法摆脱  这些话的正确性在于如何定义速成，如何定义交换，如何定义完美，如何定义未知，如何定义摆脱现状。放在李老师列举的几个例子来说是成立的，但是放在其他的例子里面则是不成立的。
+比如说，『速成绝无可能』：
+ 拿我自己举例子，我本身已经学会了几门编程语言，再学另一门编程语言，那仅仅是多看几天编程手册的事情。几天学会一门编程语言这叫不叫速成呢？一两天学会另一个数据库这叫不叫速成呢？有的人可是要花好几周呢？你会说，这并不见得，你这是主场，你这是在同一个领域里面学习。这种情况不应该叫做速成。那，举个其他的例子，写代码这个过程涉及到大量的推导和不断的修正自己的方法，这让我学一门新的编程类技术或者非编程类技术的过程中有很强的 common sense, 这个过程也是事半功倍的，那这算不算速成呢？
+ 在本书中，对于『时间管理』, 这个词本来就不是管理时间的流动的，而是管理自己对于时间的开销。可，李老师反倒说：时间本来就不服从于每个人的管理，你只能选择和时间做朋友。
+ 可，我只想对我的时间开销进行合理安排.我没有控制时间的想法呀!
+ 当然，瑕不掩瑜，我认为这本书除了重要的内容是那些『术』而非那些『道』. 没有人不懂道，也没有人不懂道理，只是道理本身具备相当大的局限性罢了。
+目录 通常情况下，看一本『自我成长』类书籍，看他的目录就能了解这本书的讲解思路。
+困境 - 醒悟 - 现实 - 管理 - 学习 - 思考 - 交流 - 应用 - 积累
+几天读下来，私以为最有价值的部分为管理 - 学习 - 思考 - 交流这四个章节，这四个章节多看几遍，其他大略看看便好。
+以下便是我的一些零散的笔记。
+第 0 章：困境 首先是发现时间不够用（问题）, 接着是尝试改变但却时间压力导致自己即勤奋又懒惰（慌乱）显得『用战术上的勤劳掩盖战略上的懒惰』, 我们尝试去管理时间，但是却无法管理好时间，于是李老师提出『我们无法管理时间，只能管理自己』，怎么管理自己？李老师给出的答案是『必须要看清楚、想明白『问题出在自己身上』, 而解决就只能靠积累』。
+ 番外：为什么是第 0 章呢？因为程序员从零计数，而李笑来老师是一个 Geek 范十足的人。而且，概述放在第 0 章，我觉得也蛮有意义的。</div><div class="post-footer">
+        <a href="/posts/20170127_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E4%B8%8E%E6%97%B6%E9%97%B4%E5%81%9A%E6%9C%8B%E5%8F%8B/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E4%B9%A6%E5%8D%95/">书单</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20170115_spacemacs/">写给 Pythoner 的 Spacemacs 入门指北</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-01-15">2017-01-15</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">前言 最开始，使用 Sublime Text 编码，后来用 Vim 混合 PyCharm 写 Python。
+前几天，Github 上的 Spacemacs 已经成功的突破一万 Star, 听说几个我非常佩服的 Pythoner（比如『Python Web 开发实战』的作者董伟明） 也是非常喜欢 Spacemacs, 我就萌生了从 Vim 切换到 Spacemacs 的想法，说做就做。
+ 注：本文所有内容基于 macOS 10.11, 软件环境为 zsh , pyenv , python3.5.2 , node5.12.0. 其他类 Unix 平台略作修改即可使用。至于 Windows 平台，建议安装 Ubuntu 虚拟机。本文也需要读者具备基本的 VIM 基本常识和 Python 常识。
+ 迁移到一个编辑器需要找到一些操作的 Emacs 替代操作。于是我安排文章结构如下：
+ [0x00. 基本软件环境安装](#0x00- 基本软件环境安装)  [0.1 zsh 与 ohmyzsh](#01-zsh- 与 -ohmyzsh) [0.2 pyenv 与 pyenv virtualenv](#02-pyenv- 与 -pyenv-virtualenv) [0.</div><div class="post-footer">
+        <a href="/posts/20170115_spacemacs/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/">编辑器</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20170114_pythonscope/">从一个小问题来说 Python 的作用域</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-01-14">2017-01-14</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">备注，这种动态设置 module 里的方法不推荐
+ 前言 整理工具字符类的时候，想借助正则表达式来实现一部分的文字判断抽取等操作。
+比如实现：
+ 判断文字是否为 UUID 判断文字是否包含 UUID 抽取文字是中第一个 UUID 抽取文字是中所有 UUID  一个暴力的实现方法 如果正则表达式比较少，就只一个 UUID，我们就不需要思考什么，我们分别编写四个函数：
+ is_uuid(_str) has_uuid(_str) extract_first_uuid(_str) extract_all_uuid(_str)   没错，过早优化是万恶之源
+ 但很显然，手动方法显得很弱智，当我需要编写判断 QQ 号的时候，我又必须编写四个函数：
+ is_qq_num(_str) has_qq_num(_str) extract_first_qq_num(_str) extract_all_qq_num(_str)  然而：
+ 如果，我还需要判断手机号、日期、时间等等，这手动复制粘贴的过程就比较痛苦了。 如果，我去要添加一个方法，给 QQ 号码，uuid 等打码 那就必须要给所有的 uuid, 手机，邮箱都添加一个 dama_xxx(_str) 方法  有没有好一点的解决方法呢？
+两个方法 第一种，比如把函数修改为：
+ is(_str,QQ_NUM_PATTEN) has(_str,QQ_NUM_PATTEN) extract_first(_str,QQ_NUM_PATTEN) extract_all(_str,QQ_NUM_PATTEN)  第二种，Python 中动态添加工具方法，我个人比较喜欢这种：
+# 一个优雅的错误实现方式 for regex, regex_pattern in REGEXES.items(): def has_regex_func(_str): return has_pattern(_str, regex_pattern) def is_regex_func(_str): return match_pattern(_str, regex_pattern) def extract_first_regex_func(_str): return find_first_matched_pattern(_str, regex_pattern) def extract_all_regex_func(_str): return find_all_matched_pattern(_str, regex_pattern) setattr(sys.</div><div class="post-footer">
+        <a href="/posts/20170114_pythonscope/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20170105_postgresqlcheatsheet/">PostgreSQL CheatSheat</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-01-05">2017-01-05</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/devops/"><i class="far fa-folder fa-fw"></i>DevOps</a></span></div><div class="content">0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。
+PostGIS 相关的资料参考文章 Geo Processing With Python
+ 安装与基本配置 PostgreSQL 配套工具 PostgreSQL SQL 常用代码片段 Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )  不定期更新。
+0x01 安装，配置，基本 shell 命令 安装 配置 基本 Shell 命令 # 开启关闭 pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop pg_ctl -D /usr/local/var/postgres start pg_ctl -D /usr/local/var/postgres stop -s -m fast 数据的导入导出 pg_dump -C -Fp -f dump.</div><div class="post-footer">
+        <a href="/posts/20170105_postgresqlcheatsheet/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/postgresql/">PostgreSQL</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20161221_leetcodepythonsolution/">LeetCode Python Solution</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2016-12-21">2016-12-21</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">前言 刷刷简单的算法问题，顺手提升一下编程的裸写代码的能力。
+本文为 LeetCode 的 Easy 算法的解法集合。
+Easy 集合 1. Two Sum 29.4% # 尝试：暴力解决 # 结果：超时 class Solution(object): def twoSum(self, nums, target): &#34;&#34;&#34; :type nums: List[int] :type target: int :rtype: List[int] &#34;&#34;&#34; begin = 0 end = 0 for i in range(len(nums)): for j in range(i,len(nums)): if i != j and target == nums[i] + nums[j]: return [i,j] # 尝试：字典也就是 HashMap 解决 # 结果：读题不准确，数组不行 class Solution(object): def twoSum(self, nums, target): &#34;&#34;&#34; :type nums: List[int] :type target: int :rtype: List[int] &#34;&#34;&#34; nums_dict = {} for i,num in enumerate(nums): nums_dict[num] = i for num in nums: item_num_1st = nums_dict.</div><div class="post-footer">
+        <a href="/posts/20161221_leetcodepythonsolution/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/windows/">Windows</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20161211_redischeatsheet/">Redis Cheatsheet</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2016-12-11">2016-12-11</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/devops/"><i class="far fa-folder fa-fw"></i>DevOps</a></span></div><div class="content">0x00. 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。
+ Redis Shell Redis 配套工具 Redis-Py 常见问题 踩坑记录  不定期更新。
+0x01 Redis Shell  RedisClient 通过网络或者 Dash 查看文档 Redis 官方自带工具  0x02 Redis 使用场景  记录点赞数 hash 记录最近帖子列表 便于快速显示 zset 记录帖子的点赞人，和去重 zset 相关内容。list 计数器，用于分配 ID  分布式锁 基本用法就是
+set lock:upgdatenewprofile true ex 5 nx TODO: 搞事情 del lock:upgdatenewprofile 但是呢？这个逻辑还是有问题的，比如第一个线程的搞事情的时间大于 5s, 那么第二个线程就会加个锁，然后第一个线程释放掉锁。
+于是第三个线程一看，哟，没锁，就开始搞事情。
+这种情况可以使用可重入锁.（但可重入锁本身就会增加代码的复杂度）
+延时队列 brpop blpop blocking 本身也会爆异常，所以，也要处理好异常。
+0x03 Redis-Py 基本类型与其操作  string hash set zset 有序集合  set/get mget name1,name2,name3 mset name1 value1 name2 value2 expire name1 5 setex name1 5 value1 # 队列 rpush queue item1 item2 item3 llen queue lpop queue # 栈 rpush stack item1 item2 item3 llen stack rpop stack 慢操作</div><div class="post-footer">
+        <a href="/posts/20161211_redischeatsheet/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/postgresql/">PostgreSQL</a></div></div>
+</article>
+<ul class="pagination"><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/">1</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link" aria-hidden="true">&hellip;</span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/5/">5</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/6/">6</a>
+                    </span>
+                </li><li class="page-item active">
+                    <span class="page-link">
+                        <a href="/page/7/">7</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/8/">8</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/9/">9</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/10/">10</a>
+                    </span>
+                </li></ul></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
 
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-</body>
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"data":{"id-1":"人生天地间，忽如编程客"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

@@ -1,0 +1,129 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>海拉鲁编程客</title>
+        <link>http://twocucao.xyz/</link>
+        <description>Get Busy is My New Hugo Site</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Mon, 30 Nov 2020 18:19:17 &#43;0800</lastBuildDate>
+            <atom:link href="http://twocucao.xyz/index.xml" rel="self" type="application/rss+xml" />
+        <item>
+    <title>Modern Shell</title>
+    <link>http://twocucao.xyz/posts/20201201_modern_shell/</link>
+    <pubDate>Mon, 30 Nov 2020 18:19:17 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20201201_modern_shell/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://user-images.githubusercontent.com/5625783/100601457-8efe8a80-333d-11eb-803e-861352bd1715.jpg" referrerpolicy="no-referrer">
+            </div>0x01 更好的替代品 find -&gt; fd {}: A placeholder token that will be replaced with the path of the search result (documents/images/party.jpg). {.}: Like {}, but without the file extension (documents/images/party). {/}: A placeholder that will be replaced by the basename of the search result (party.jpg). {//}: Uses the parent of the discovered path (documents/images). {/.}: Uses the basename, with the extension removed (party). # Convert all jpg files to png files: fd -e jpg -x convert {} {.]]></description>
+</item><item>
+    <title>Python Type Hint</title>
+    <link>http://twocucao.xyz/posts/20201201_pythontypehint/</link>
+    <pubDate>Mon, 30 Nov 2020 18:16:34 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20201201_pythontypehint/</guid>
+    <description><![CDATA[0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第一篇文章。
+本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
+本文目录如下：
+▼ 0x00 前言 : section ▼ 0x01 Gradual Typing : section 静态类型 VS 动态类型 : section Gradual Typing = 静态类型 + 动态类型 : section ▼ 0x02 Python Typing 实战 - MyPY : section MyPy : section 快速入门 : section ▼ 0x03 常见问题 : section 如何忽略 mypy 警告 : section 循环导入 : section 0x04 Typing Anotation 项目最佳实践 : section ▼ 0xEE 参考 : section PEP : section 扩展文章 : section  当我刚知道 Python 要添加类型的时候，我的内心是拒绝的。]]></description>
+</item><item>
+    <title>Python Profiling/Tracing Tools</title>
+    <link>http://twocucao.xyz/posts/20201201_pythonprofiling/</link>
+    <pubDate>Mon, 30 Nov 2020 18:14:14 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20201201_pythonprofiling/</guid>
+    <description><![CDATA[Profiling 定位与优化耗时、内存使用、CPU 使用 Tracing 用于追踪内存布局  0x00 前言 本篇讨论的是优化
+当我们在谈优化的的时候，首先要背诵下面三个口诀
+优化口诀 1: 先做对，布监控，再做好。 优化口诀 2: 过早优化是万恶之源。 优化口诀 3: 去优化那些需要优化的地方。  可以参考之前的文章 https://zhuanlan.zhihu.com/p/58754459
+本文讨论的是基于现有代码的诊断。也顺带讨论了无侵入线上 trace 的原理和技巧
+优化分为两种：
+ 侵入性诊断 侵入性诊断  0x01 侵入性诊断 基础工具  print logging timeit  Profile vs cProfile cProfile overhead 较高，
+import cProfile import re cProfile.run(&#39;re.compile(&#34;foo|bar&#34;)&#39;) 197 function calls (192 primitive calls) in 0.002 seconds Ordered by: standard name ncalls tottime percall cumtime percall filename:lineno(function) 1 0.]]></description>
+</item><item>
+    <title>开源认证基础服务</title>
+    <link>http://twocucao.xyz/posts/20201130_ory/</link>
+    <pubDate>Mon, 30 Nov 2020 18:03:01 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20201130_ory/</guid>
+    <description><![CDATA[<div class="featured-image">
+                <img src="https://user-images.githubusercontent.com/5625783/100601457-8efe8a80-333d-11eb-803e-861352bd1715.jpg" referrerpolicy="no-referrer">
+            </div>0x00 前言 随着业务的增长，往往需要统一体系内的服务的账户。
+经过一番调研，决定尝试一下 ory 的开源认证基础服务
+0x01 ORY 尝试解决问题？ ORY 提供了四个主要项目，每个项目着力于解决一个边界清晰的认证 / 鉴权问题
+ ORY Kratos 提供了用户认证服务 ORY Hydra 提供了 OAuth 2.0 &amp; OpenID Connect provider. ORY Keto 提供了 访问控制 ORY Oathkeeper 提供了认证访问代理  0x02 用户认证服务 Kratos 常见方案  方案 1, 选择全栈式解决方案 - 比如 Java 社区的 JGroups 方案 2, 选择 IDaas - 比如 Login With Apple, Google 方案 3, 选择自己来 - 比如 Java 社区的 JGroups  三种方案各有利弊
+ 全栈式解决方案上手极快，但  扩展性不强 绑定 Java 技术栈 数据模型固定 登陆流程固定     更新迭代慢  Login With Google 虽然方便，但是并没有解决如下的问题   更新 Profile  添加第二个恢复邮箱 2FA 存储管理 Sessions   全局登出  自己来，需要处理事情也挺多   方案二遇到的问题，一个不会少 加密算法  流程可能较为复杂，比如先用邮箱注册，然后用 Sign Up Using Google, 或者先用 Sign Up Google, 然后使用邮箱登陆。(PS: 我国的登陆姿势就更多了）    是不是某种方案是最好的呢？其实未必]]></description>
+</item><item>
+    <title>一文解决你的 Python ORM 选择困难症</title>
+    <link>http://twocucao.xyz/posts/20190412_pythonorm/</link>
+    <pubDate>Fri, 12 Apr 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190412_pythonorm/</guid>
+    <description><![CDATA[0x00 前言 Python 圈内三大 ORM SQLAlchemy VS Django ORM VS Peewee
+ SQLAlchemy 复杂程度最高，同时，这也意味着 SQLAlchemy 可以做更多的事情。使用 DataMapper 方式实现 Django ORM 个人最喜欢，使用 ActiveRecord 实现 如果不是因为现在 Flask 项目已经是用了 SQLAlchemy , 否则的话我甚至会考虑将 Django ORM 配置到 Flask 项目中。当然，也有蛋疼的 SqlAlchemy 使用者已经移植给 django 配置了 SQLAlchemy 的库。 Peewee 没用过，不好评论。以后有机会试试。  0x01 如何访问数据库 那，既然已经可以访问数据库，本着『如无必要，勿增实体』的原则，为什么要不辞劳苦的用个库呢？
+0x02 数据库抽象的两种理论 理论一：Active Record 理论二：Data Mapper 0x03 数据库抽象的两种实现 实现一：Django ORM 实现二：Sqlalchemy 0x04 工具的强弱 https://www.thoughtfulcode.com/orm-active-record-vs-data-mapper/
+2.0 SQLAlchemy VS DjangoORM ORM 通常有 DataMapper 实现和 ActiveRecord 实现两种。]]></description>
+</item><item>
+    <title>如何优雅的使用 Windows 10</title>
+    <link>http://twocucao.xyz/posts/20190413_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/</link>
+    <pubDate>Wed, 03 Apr 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190413_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/</guid>
+    <description><![CDATA[0x00 前言 最近入手了 SP6, 于是把 2015 年写的这篇文章修订为 2019 版
+ 笔者已过了爱折腾的年纪，仅从提升工作效率方面来说。
+ 背景：
+Pythonista &amp;&amp; Nodejs 工作机 MBP 2017 款机器 生活机 Surface Pro 6, 轻办公，有时也用来调试 Windows 上的程序。  本文目录
+▼ 0x00 前言 : section 0x01 文件整理 : section ▼ 0x02 自带功能 : section 2.1 快捷键 : section 2.2 触摸板 : section 2.3 Win+R -- 运行 : section ▼ 0x03 必备软件 : section 3.1 文件管理 : section 3.2 资讯浏览 : section 3.]]></description>
+</item><item>
+    <title>秒杀系统的一些注意点</title>
+    <link>http://twocucao.xyz/posts/20190210_%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9/</link>
+    <pubDate>Sun, 10 Feb 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190210_%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9/</guid>
+    <description><![CDATA[0x00 前言 秒杀常见问题 01 卖超问题 假设有 20 个商品要卖，1W 个请求打过来。
+ SQL 加上数量判断，防止数量超掉  应用层的检查，并发量上来，肯定要加行级锁，开销比较大。
+redis 集合预先缓存好相关的数量，然后从 redis 上进行应用层的数量检查。  然后走异步队列。
+因为对于数据库来说，我只要 20 个请求即可，redis 起到了一个阻挡多余的请求穿透到 DB 中的作用。
+即便如此，redis 依然可能会出现一些意外的情况，比如为负数，这个时候多打进去几个请求，变成 24 个，这个时候 MQ 的作用就出来了。排好队伍。
+唯一索引  数据库层的检查，可以从根本上防止问题
+02 缓存问题  page 级别的缓存，由于 wsgi 协议本身在 flask 中返回的就是文本，所以，当作文本处理即可 obj 级别的缓存  能走内存的走内存，能走 redis 就走 redis, 能通过 mq 削减峰值的就走 mq, 能走 mongodb 的走 mongodb, 最后是数据库。
+03 安全  验证码 接口防刷限流 秒杀接口隐藏  04 分布式锁  不加锁，并发起来资源浪费 加锁，然而，线路抖动会导致不能及时释放锁 加过期锁，或者加带有时间的锁，然后重新获取锁。 redisson 封装好的方法  06 减少数据库访问时间  首先考虑在 where 和 order by 设计的列上建立索引 索引越多，插入越慢，这个要做好平衡 避免过长的事务级操作，提高并发能力  其他的可以参考 MySQL 的一些优化原则，油管上很多。]]></description>
+</item><item>
+    <title>旅拍 Vlog CheatSheet</title>
+    <link>http://twocucao.xyz/posts/20181223_vlogcheatsheet/</link>
+    <pubDate>Mon, 10 Dec 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20181223_vlogcheatsheet/</guid>
+    <description><![CDATA[0x00 前言 最近剪辑了几个 Vlog, 借着这个机会复盘一下几次从拍摄到出片的流程。
+0x01 拍摄准备 目前笔者的拍摄装备如下：
+主力拍摄器材：
+ Sony A6500  辅助拍摄器材：
+ GoPro Hero 7 Black  相机的设备还氛围 + 三块电池 + 充电宝
+ 辅助 IPhone 8P 充电宝  0x02 工作流 可以找司机询问最佳的视角
+0xEE 参考  ChangeLog:
+ 2018-11-25 初始化本文  ]]></description>
+</item><item>
+    <title>用 Type Anotation 提升你的 Python 代码健壮性</title>
+    <link>http://twocucao.xyz/posts/20181210_pythontypeanotation/</link>
+    <pubDate>Mon, 10 Dec 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20181210_pythontypeanotation/</guid>
+    <description><![CDATA[0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第一篇文章。
+本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
+本文目录如下：
+▼ 0x00 前言 : section ▼ 0x01 Gradual Typing : section 静态类型 VS 动态类型 : section Gradual Typing = 静态类型 + 动态类型 : section ▼ 0x02 Python Typing 实战 - MyPY : section MyPy : section 快速入门 : section ▼ 0x03 常见问题 : section 如何忽略 mypy 警告 : section 循环导入 : section 0x04 Typing Anotation 项目最佳实践 : section ▼ 0xEE 参考 : section PEP : section 扩展文章 : section 当我刚知道 Python 要添加类型的时候，我的内心是拒绝的。]]></description>
+</item><item>
+    <title>Final Cut Pro X CheatSheat</title>
+    <link>http://twocucao.xyz/posts/20181125_finalcutprox/</link>
+    <pubDate>Sun, 25 Nov 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20181125_finalcutprox/</guid>
+    <description><![CDATA[0x00 前言 本文诞生于用 Final Cut Pro X 剪了几次视频之后的复盘总结
+部分内容来自于
+ Final Cut Pro X 10.1 非线性编辑高级教程 Final Cut Pro X 影视包装剪辑完全自学教程  0x01 剪辑流程 所有的剪辑流程都是想法的具体实现，这意味着在剪辑之前，需要做好前期准备
+1. 确定大致思路 2. 调好参数摄影  然后
+ 素材导入 片段整理 前期剪辑 精剪 分享  0x01 前期准备 本文复盘的是古墓丽影暗影假预告片剪辑。
+热血的预告片通常具有如下的特征：
+ 有一条主线，但不剧透，通常这个主线往往是有人在说话，引出了整个故事 霸气磅礴的背景音乐 频繁而不冗余的镜头切换 踩节奏踩的非常精准  0x02 素材导入  建立 Library 游戏 建立 Event 古墓丽影暗影，导入游戏视频 建立 Project 古墓丽影暗影盗梦空间预告片  素材导入没什么好说的，因为 PS4 里录制成什么样子，就是什么样子。
+开启转码和分析的话，可以分析出更多的片段类型。
+注意点  建议开启『创建优化的媒体』 看存储情况如果存储不是很足的话，开启『创建优化的代理文件』  尽量将素材管理的任务交给 FCPX 来做，所以，如果可能的话，直接拷贝进资料库最好。]]></description>
+</item></channel>
+</rss>

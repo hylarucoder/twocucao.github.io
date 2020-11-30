@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Python 程序员如何优雅的看斗鱼 TV - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="Python 程序员如何优雅的看斗鱼 TV" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20160215_python%E6%96%97%E9%B1%BC%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/" />
+<meta property="article:published_time" content="2016-02-15T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python 程序员如何优雅的看斗鱼 TV"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20160215_python%E6%96%97%E9%B1%BC%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/" /><link rel="prev" href="http://twocucao.xyz/posts/20160204_%E6%96%97%E9%B1%BCtv%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/" /><link rel="next" href="http://twocucao.xyz/posts/20160224_%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Python 程序员如何优雅的看斗鱼 TV",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20160215_python%E6%96%97%E9%B1%BC%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B\/"
+        },"genre": "posts","keywords": "Python","wordcount":  146 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20160215_python%E6%96%97%E9%B1%BC%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B\/","datePublished": "2016-02-15T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Python 程序员如何优雅的看斗鱼 TV</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2016-02-15">2016-02-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 146 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-演示效果">0x01 演示效果</a></li>
+    <li><a href="#0xee-代码地址">0xEE 代码地址</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00 前言</h2>
+<p>过年的一段时间抽空研究写了一些关于斗鱼 TV 的弹幕的获取。分别使用 Python 和 Ruby 写了弹幕获取的客户端。</p>
+<p>文章地址为：</p>
+<p>Python 版本：
+<a href="http://www.jianshu.com/p/2e0d14978ae9">http://www.jianshu.com/p/2e0d14978ae9</a></p>
+<p>Ruby 版本附加原理讲解：
+<a href="http://www.jianshu.com/p/ef0225b6bb0e">http://www.jianshu.com/p/ef0225b6bb0e</a></p>
+<p>文章末尾写到了我有一个痛点 &ndash;rtmp 直播视频无法获取，后来在网友 <a href="http://www.jianshu.com/users/0675b42ac3ba" target="_blank" rel="noopener noreffer">往事侞湮</a>] 的友善提醒下，终于 Get 到了。</p>
+<p>于是，稍微完善了一下，我就发布了第一个命令行版本的斗鱼 TV 浏览弹幕小助手。</p>
+<p>如果你是 MacOSX 的用户，你只需要</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">brew install mplayer
+pip3 install danmu.fm
+<span class="c1"># danmu.fm -q 1 -v 1 [url]</span>
+<span class="c1"># 比如</span>
+danmu.fm -q <span class="m">2</span> -v <span class="m">1</span> http://www.douyutv.com/16789
+<span class="c1"># -q 参数 0 为不调用 mplayer 进行播放，1 为使用 mplayer 进行普清视频的播放，2 为使用 mplayer 进行高清视频的播放，3 为使用 mplayer 进行超清视频的播放</span>
+</code></pre></div><p>如果你是 Ubuntu 用户，你只需要</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">sudo apt-get install mplayer
+pip3 install danmu.fm
+<span class="c1"># danmu.fm  -v 1 [url]</span>
+<span class="c1"># 比如</span>
+danmu.fm  -v <span class="m">1</span> -q http://www.douyutv.com/16789
+<span class="c1">#ubuntu 上 mplayer 播放器可以正常播放</span>
+</code></pre></div><p>如果你是 Win 用户，</p>
+<blockquote>
+<p>唉，windows 上面糟糕的编码问题。那单纯来看字幕的话也不是不可以的。只是我暂时没有对 Win 进行兼容。还是换 Linux 吧。</p>
+</blockquote>
+<h2 id="0x01-演示效果">0x01 演示效果</h2>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-396d6451c68d2a83.gif?imageMogr2/auto-orient/strip"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-396d6451c68d2a83.gif?imageMogr2/auto-orient/strip, http://upload-images.jianshu.io/upload_images/52890-396d6451c68d2a83.gif?imageMogr2/auto-orient/strip 1.5x, http://upload-images.jianshu.io/upload_images/52890-396d6451c68d2a83.gif?imageMogr2/auto-orient/strip 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-396d6451c68d2a83.gif?imageMogr2/auto-orient/strip"
+        title="1123.gif" /></p>
+<h2 id="0xee-代码地址">0xEE 代码地址</h2>
+<p><a href="https://github.com/twocucao/danmu.fm">https://github.com/twocucao/danmu.fm</a></p>
+<p>如果喜欢，请点个喜欢或者 star 一下</p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li>**Update 20160609 : ** 更新 Python 客户端，修复由于斗鱼网页版面修改带来的小问题，直接开启海量弹幕模式（请大家不要问我为什么端午节这一天为什么闲着没事更新代码，这个真的和情人节是同一个原因）.</li>
+<li>**Update 20160220 : **更新 Python 客户端，增加直播视频的 Live 获取，以及 Mac 平台下面的 Mplayer 的视频播放。代码均放在 Github 上面。<a href="//link.zhihu.com/?target=https%3A//github.com/twocucao/danmu.fm" target="_blank" rel="noopener noreffer">GitHub - twocucao/danmu.fm: douyutv danmu 斗鱼 TV 弹幕助手**</a></li>
+<li>**Update 20160214 : <strong>更新 Python 和 Ruby 客户端（请大家不要问我为什么情人节这一天为什么闲着没事更新代码）</strong></li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20160204_%E6%96%97%E9%B1%BCtv%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/" class="prev" rel="prev" title="斗鱼 TV 弹幕助手"><i class="fas fa-angle-left fa-fw"></i>斗鱼 TV 弹幕助手</a>
+            <a href="/posts/20160224_%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8/" class="next" rel="next" title="关于背单词软件，你不知道的惊人真相">关于背单词软件，你不知道的惊人真相<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

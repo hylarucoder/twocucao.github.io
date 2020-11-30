@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>GeoProcessing In Python - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="GeoProcessing In Python" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20170711_geoprocessingwithpython/" />
+<meta property="article:published_time" content="2017-07-11T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="GeoProcessing In Python"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20170711_geoprocessingwithpython/" /><link rel="prev" href="http://twocucao.xyz/posts/20170704_rethinkinginjavascript/" /><link rel="next" href="http://twocucao.xyz/posts/20170717_%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%9A%84%E5%B8%B8%E8%AF%86%E7%AC%94%E8%AE%B0/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "GeoProcessing In Python",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20170711_geoprocessingwithpython\/"
+        },"genre": "posts","keywords": "Python","wordcount":  391 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20170711_geoprocessingwithpython\/","datePublished": "2017-07-11T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">GeoProcessing In Python</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"><i class="far fa-folder fa-fw"></i>数据分析</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-07-11">2017-07-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 391 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言">0x00. 前言</a></li>
+    <li><a href="#0x01-基本概念">0x01 基本概念</a>
+      <ul>
+        <li><a href="#11-vertor-vs-raster">1.1. Vertor VS Raster</a></li>
+        <li><a href="#12-vertor-相关类型与坐标系">1.2. Vertor 相关类型与坐标系</a></li>
+        <li><a href="#13-raster-相关类型">1.3. Raster 相关类型</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-vertor-分析">0x02. Vertor 分析</a></li>
+    <li><a href="#0x03-raster-分析">0x03. Raster 分析</a>
+      <ul>
+        <li><a href="#31-教程">3.1. 教程</a></li>
+        <li><a href="#32-教程">3.2. 教程</a></li>
+        <li><a href="#33-教程笔记">3.3. 教程笔记</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x04-vertor-与-raster">0x04. Vertor 与 Raster</a>
+      <ul>
+        <li><a href="#基础版本">基础版本</a></li>
+        <li><a href="#中级概念">中级概念</a></li>
+        <li><a href="#postgis-metatable">PostGIS MetaTable</a></li>
+        <li><a href="#postgis-常用函数">PostGIS 常用函数</a></li>
+        <li><a href="#snippets">Snippets</a></li>
+      </ul>
+    </li>
+    <li><a href="#0xee-参考链接">0xEE 参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00. 前言</h2>
+<p>16 年 12 月研究 GIS 相关资料用于处理 GIS 相关问题，完成基本 GIS 功能。
+最新需要进阶相关内容用于更好的处理相关数据。</p>
+<ul>
+<li>书籍：
+<ul>
+<li>Geoprocessing With Python</li>
+<li>PostGIS In Action 2rd</li>
+</ul>
+</li>
+<li>框架：
+<ul>
+<li>前端 Leaflets D3</li>
+<li>后端 GeoDjango</li>
+</ul>
+</li>
+<li>其他零零碎碎的资料</li>
+</ul>
+<p>特此记录。</p>
+<!-- raw HTML omitted -->
+<p>本文目录</p>
+<ul>
+<li>基本概念</li>
+<li>Vertor VS Raster</li>
+<li>Vertor 相关类型与坐标系</li>
+<li>Raster 相关类型</li>
+<li>其他类型</li>
+<li>GIS 开发的生态圈以及常用技术栈</li>
+<li>Vertor 分析</li>
+<li>Raster 分析</li>
+<li>Vertor 与 Raster</li>
+</ul>
+<h2 id="0x01-基本概念">0x01 基本概念</h2>
+<h3 id="11-vertor-vs-raster">1.1. Vertor VS Raster</h3>
+<ul>
+<li>Vector : 基本单元为 Point : points, lines, and polygons 以及其组合，适用于矢量图，地形边界，路线等。</li>
+<li>Raster : 基本单元为 Pixel : 2d/3d 包含数值的数组，适用于连续性数据，不仅仅适用于图片。</li>
+</ul>
+<h3 id="12-vertor-相关类型与坐标系">1.2. Vertor 相关类型与坐标系</h3>
+<h4 id="121-国内常见的几种坐标系">1.2.1. 国内常见的几种坐标系</h4>
+<p>国内由于特殊的国情，国际标准也要向国家标准靠齐。比如各个不同的坐标系上坐标的换算。</p>
+<p>我们都知道一个坐标 (x,y) 可以表示为经纬度，甚至放在坐标系上，我们可以这么运算两点 (x1,y1) , (x2,y2) 之间的距离</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># z 表示比例系数</span>
+<span class="n">distance</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">x1</span><span class="o">-</span><span class="n">x2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">y1</span><span class="o">-</span><span class="n">y2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">z</span>
+</code></pre></div><p>在近距离的时候的确是可以这么做的比如计算村里小芳和隔壁老王家的距离。当距离过大的时候，比如计算上海 A 区和 B 区的两个写字楼的距离的时候，则有相当大的误差。</p>
+<p>那么问题来了：</p>
+<p><del>挖掘技术哪家强</del></p>
+<p>啊不是，是<strong>国内有哪些常用坐标标准呢？又是如何计算的呢？</strong></p>
+<ul>
+<li>
+<ol>
+<li>GPS WGS-84 国际标准（原始）</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>GCJ-02 国内标准（原始数据混淆）</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>其他坐标比如 BD-09（原始数据混淆再混淆）</li>
+</ol>
+</li>
+</ul>
+<p>对于小公司而言，我们是没有任何方法来通过 BD-09 以及 GCJ-02 这种坐标系进行运算的：</p>
+<p>因为坐标点非线性偏移核心计算方法掌握在 GCJ-02 / BD-09 的公司里面，比如 Google 中国，高德地图，百度地图，腾讯地图。所以，为了研究，则必须要有<strong>能够对坐标进行运算的算法</strong>, 那这个东西有没有呢？答案是肯定的，因为国外使用的 WGS-84 标准，并且，计算坐标的算法早就开源。</p>
+<p>那么，我们的思路就确定下来了。</p>
+<ol>
+<li>各种地图的经纬度坐标比如 BD-09 或 GCJ-02 标转换成 WGS-84 坐标。</li>
+<li>使用开源 GIS 软件进行对 WGS-84 进行运算。</li>
+</ol>
+<p>感谢诸多在 GIS 运算上开源的中国先辈，我们轻而易举的获取到了坐标之间相互转化的方法：</p>
+<p><a href="https://github.com/wandergis/coordTransform_py">https://github.com/wandergis/coordTransform_py</a></p>
+<h4 id="122-形状">1.2.2. 形状</h4>
+<p>坐标系，我们可以简单的理解为一个笛卡尔坐标系（虽然这么说很不准确，但已经足够形象了）</p>
+<p>于是对于二维的数据，GIS 的分析就可以理解为对于点，线段，多边形自身以及他们之间的关系的分析。</p>
+<h3 id="13-raster-相关类型">1.3. Raster 相关类型</h3>
+<p>raster 的 digital elevation model(DEM), 即每一个像素值包含一个 elevation value</p>
+<p>GDAL/OGR</p>
+<!-- raw HTML omitted -->
+<h2 id="0x02-vertor-分析">0x02. Vertor 分析</h2>
+<h2 id="0x03-raster-分析">0x03. Raster 分析</h2>
+<h3 id="31-教程">3.1. 教程</h3>
+<h3 id="32-教程">3.2. 教程</h3>
+<h3 id="33-教程笔记">3.3. 教程笔记</h3>
+<h2 id="0x04-vertor-与-raster">0x04. Vertor 与 Raster</h2>
+<h3 id="基础版本">基础版本</h3>
+<ul>
+<li>
+<p>Point</p>
+</li>
+<li>
+<p>LineString</p>
+</li>
+<li>
+<p>Polygon</p>
+</li>
+<li>
+<p>MultiPoint</p>
+</li>
+<li>
+<p>MultiLineString</p>
+</li>
+<li>
+<p>MultiPolygon</p>
+</li>
+</ul>
+<h3 id="中级概念">中级概念</h3>
+<ul>
+<li>Raster / Tile (Bands 是什么鬼）</li>
+</ul>
+<h3 id="postgis-metatable">PostGIS MetaTable</h3>
+<ul>
+<li>spatial_ref_sys</li>
+<li>geography_columns</li>
+<li>geometry_columns</li>
+<li>raster_columns</li>
+<li>raster_overviews</li>
+</ul>
+<h3 id="postgis-常用函数">PostGIS 常用函数</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="n">ST_AsText</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span> <span class="err">用于查看</span> <span class="n">WKT</span>
+<span class="n">ST_GeometryType</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="k">type</span> <span class="k">of</span> <span class="n">the</span> <span class="n">geometry</span>
+<span class="n">ST_NDims</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="nb">number</span> <span class="k">of</span> <span class="n">dimensions</span> <span class="k">of</span> <span class="n">the</span> <span class="n">geometry</span>
+<span class="n">ST_SRID</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="n">spatial</span> <span class="n">reference</span> <span class="n">identifier</span> <span class="nb">number</span> <span class="k">of</span> <span class="n">the</span> <span class="n">geometry</span>
+<span class="n">ST_X</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="n">X</span> <span class="n">ordinate</span> <span class="p">,</span> <span class="err">如果作用在</span> <span class="n">Point</span> <span class="err">上，则返回经度</span>
+<span class="n">ST_Y</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="n">Y</span> <span class="n">ordinate</span> <span class="p">,</span> <span class="err">如果作用在</span> <span class="n">Point</span> <span class="err">上，则返回纬度</span>
+
+<span class="n">ST_Length</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="k">length</span> <span class="k">of</span> <span class="n">the</span> <span class="n">linestring</span>
+<span class="n">ST_StartPoint</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="k">first</span> <span class="n">coordinate</span> <span class="k">as</span> <span class="n">a</span> <span class="n">point</span>
+<span class="n">ST_EndPoint</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="k">last</span> <span class="n">coordinate</span> <span class="k">as</span> <span class="n">a</span> <span class="n">point</span>
+<span class="n">ST_NPoints</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="nb">number</span> <span class="k">of</span> <span class="n">coordinates</span> <span class="k">in</span> <span class="n">the</span> <span class="n">linestring</span>
+
+<span class="n">ST_Area</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="n">area</span> <span class="k">of</span> <span class="n">the</span> <span class="n">polygons</span>
+<span class="n">ST_NRings</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="nb">number</span> <span class="k">of</span> <span class="n">rings</span> <span class="p">(</span><span class="n">usually</span> <span class="mi">1</span><span class="p">,</span> <span class="k">more</span> <span class="k">of</span> <span class="n">there</span> <span class="k">are</span> <span class="n">holes</span><span class="p">)</span>
+<span class="n">ST_ExteriorRing</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="k">outer</span> <span class="n">ring</span> <span class="k">as</span> <span class="n">a</span> <span class="n">linestring</span>
+<span class="n">ST_InteriorRingN</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="k">returns</span> <span class="n">a</span> <span class="n">specified</span> <span class="n">interior</span> <span class="n">ring</span> <span class="k">as</span> <span class="n">a</span> <span class="n">linestring</span>
+<span class="n">ST_Perimeter</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="k">length</span> <span class="k">of</span> <span class="k">all</span> <span class="n">the</span> <span class="n">rings</span>
+
+<span class="n">ST_NumGeometries</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="nb">number</span> <span class="k">of</span> <span class="n">parts</span> <span class="k">in</span> <span class="n">the</span> <span class="n">collection</span>
+<span class="n">ST_GeometryN</span><span class="p">(</span><span class="n">geometry</span><span class="p">,</span><span class="n">n</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="n">specified</span> <span class="n">part</span>
+<span class="n">ST_Area</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="n">total</span> <span class="n">area</span> <span class="k">of</span> <span class="k">all</span> <span class="n">polygonal</span> <span class="n">parts</span>
+<span class="n">ST_Length</span><span class="p">(</span><span class="n">geometry</span><span class="p">)</span> <span class="k">returns</span> <span class="n">the</span> <span class="n">total</span> <span class="k">length</span> <span class="k">of</span> <span class="k">all</span> <span class="n">linear</span> <span class="n">parts</span>
+</code></pre></div><h3 id="snippets">Snippets</h3>
+<pre><code>-- 合并多个区域并返回 multipoly
+UPDATE areas as A
+SET &quot;Boundary&quot; = ST_Multi(st_union(ARRAY(SELECT geom FROM county_boundary_region WHERE gid in ( 'foo_id','bar_id)')
+)))
+WHERE A.&quot;ID&quot; = 'xxxxxx'
+</code></pre><h2 id="0xee-参考链接">0xEE 参考链接</h2>
+<ol>
+<li><a href="http://gis.stackexchange.com/questions/6681/what-are-the-pros-and-cons-of-postgis-geography-and-geometry-types">http://gis.stackexchange.com/questions/6681/what-are-the-pros-and-cons-of-postgis-geography-and-geometry-types</a></li>
+<li>Geo Processing with Python</li>
+</ol>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-07-11</strong> 重修文字</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20170704_rethinkinginjavascript/" class="prev" rel="prev" title="Rethinking In JavaScript"><i class="fas fa-angle-left fa-fw"></i>Rethinking In JavaScript</a>
+            <a href="/posts/20170717_%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%9A%84%E5%B8%B8%E8%AF%86%E7%AC%94%E8%AE%B0/" class="next" rel="next" title="数据科学的常识笔记">数据科学的常识笔记<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

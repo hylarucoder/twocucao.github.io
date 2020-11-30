@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Mac 远程控制 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="Mac 远程控制" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20160402_macremotecontrol/" />
+<meta property="article:published_time" content="2016-04-02T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mac 远程控制"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20160402_macremotecontrol/" /><link rel="prev" href="http://twocucao.xyz/posts/20160315_%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AApy%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/" /><link rel="next" href="http://twocucao.xyz/posts/20160415_macpythonmonitorpart1/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Mac 远程控制",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20160402_macremotecontrol\/"
+        },"genre": "posts","keywords": "macOS","wordcount":  110 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20160402_macremotecontrol\/","datePublished": "2016-04-02T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Mac 远程控制</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2016-04-02">2016-04-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 110 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 1 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-事情开始变化了">0x01 事情开始变化了</a></li>
+    <li><a href="#0x02-那怎么该如何是好">0x02 那怎么该如何是好？</a>
+      <ul>
+        <li><a href="#21-在家里配置-ssh-到公司的电脑上需要哪些方法呢">2.1 在家里配置 ssh 到公司的电脑上需要哪些方法呢？</a></li>
+        <li><a href="#22-那么远程控制软件怎么样呢">2.2 那么远程控制软件怎么样呢？</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x03-结论">0x03 结论</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00 前言</h2>
+<p>前段时间一直在抓取一个站点，这个站点非常难爬取，原因如下：</p>
+<ul>
+<li>第一点，网站 Ajax 超级多。</li>
+<li>第二点，所有的 API 都是 js 加密后才能访问。</li>
+<li>第三点，这也是最最要命的一点，访问特别特别不稳定。有的时候加载时间特别长，70 秒请求一个 API 这点我会告诉你吗？动不动就 404 not found 我能和你说？</li>
+</ul>
+<p>当然，这些都难不倒我，我最后挑选了 Phantomjs, 编写 Js 调用脚本，从命令行调用程序，将抓取结果输出到标准输出流中，接着获取使用 beautifulsoup 进行基本的解析。剩下的就是入库了。</p>
+<p>这里的技术点也是蛮多的，以后有机会就介绍一下.（汗，因为毕业设计这回事情实在是耽误了不少梳理博文的时间，攒了不少开了个头的文章，但自己又不忍心把不好的文章放出来污染大众视野.)</p>
+<!-- raw HTML omitted -->
+<h2 id="0x01-事情开始变化了">0x01 事情开始变化了</h2>
+<p>程序在运行了很长一段时间之后，有一定几率崩溃。再次开启的时候，有一些需要人工检查的参数，用 supervisor 并不是很方便。</p>
+<h2 id="0x02-那怎么该如何是好">0x02 那怎么该如何是好？</h2>
+<p>公司的电脑上写了每个小时将自己的抓取情况发送给我的邮箱，但是糟心的问题是，一旦我在家中，程序崩溃了，我也就只能浪费掉我那接近半天的抓取时间了。我必须要远程控制公司的电脑。怎么办呢？</p>
+<ul>
+<li>第一种，使用 ssh, 这样我在家里就可以远程控制公司的电脑了。</li>
+<li>第二种，使用远程控制软件。</li>
+</ul>
+<p>我首先想到的是使用 ssh, 因为这个比较常用，用起来会习惯一些。</p>
+<h3 id="21-在家里配置-ssh-到公司的电脑上需要哪些方法呢">2.1 在家里配置 ssh 到公司的电脑上需要哪些方法呢？</h3>
+<p><strong>请注意：</strong></p>
+<blockquote>
+<p><strong>ssh 无法穿透路由器</strong></p>
+</blockquote>
+<p>什么意思？很简单，对于你在家里这个外网来说，你只能&quot;看到&quot;公司在公网的这台路由器，无法看到经过 NAT 转换的公司内网的服务器。</p>
+<p>于是，我们可以得出远程方法如下：</p>
+<ul>
+<li>
+<p>公司路由器的公网地址固定，那么可以在路由器上直接做一个端口映射，将路由器的 ip 的 22 端口（也可以是其他端口）映射到公司局域网内部的一台机器。这样你就可以直接 ssh 公司的路由器，但最终访问的就是你的 mac 或者 linux 机器了。</p>
+</li>
+<li>
+<p>那如果公司的路由器是拨号上网的呢（比如我现在待得这个小公司，使用的是电信宽带光纤拨号上网）? 很简单，通常情况下你需要及时获取公司公网的 ip 地址。所以，你只需要在你的公司电脑上写个脚本定时把公网的 ip 地址发给你的邮箱里就好了。</p>
+</li>
+<li>
+<p>在操作的时候，直接使用 tmux 或者 screen 就可以查看这些耗时软件的运行情况了。</p>
+</li>
+</ul>
+<p>但，我最后没有使用这个方案呢？因为电信把路由器的高级功能给阉割掉了，端口映射做不了。并且，由于公司的路由器均为普通网线口，并非光纤接口，唯一有光纤接口的就仅仅只有电信的路由器。</p>
+<p>虽然 ssh 很方便，可是打电话找电信太麻烦，于是这个方案被我否定了。</p>
+<h3 id="22-那么远程控制软件怎么样呢">2.2 那么远程控制软件怎么样呢？</h3>
+<p>经过不断的搜索，我发现了一款非常棒的穿透力特别强远程操作又相对稳定的软件。可能你也听说过这款软件 teamviewer.</p>
+<p>前段时间也用这个软件给学弟们操作搭建部署环境的时候用到的，非常好用。比 qq 的远程协助稳定多了。</p>
+<p>并且，可以通过注册账号，直接把机器分配给账号。</p>
+<p>然后直接登录账号进行连接就好了。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-7b8cb37a1b402612.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-7b8cb37a1b402612.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-7b8cb37a1b402612.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-7b8cb37a1b402612.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-7b8cb37a1b402612.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="操作界面.png" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-2d3817fd19ffef66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-2d3817fd19ffef66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-2d3817fd19ffef66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-2d3817fd19ffef66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-2d3817fd19ffef66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="远程状态" /></p>
+<p>╮(╯▽╰)╭所以，我就可以安安心心在家里阅读抓取情况的邮件，当邮件抓取数量出现异常的时候，我就直接开远程过去查看了，修整软件就好了。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-2c036e6f181cc4cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-2c036e6f181cc4cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-2c036e6f181cc4cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-2c036e6f181cc4cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-2c036e6f181cc4cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="写爬虫的感觉就像皇上批阅折子一样" /></p>
+<h2 id="0x03-结论">0x03 结论</h2>
+<p>当然，其实最好的方式还是通过 ssh 配合 tmux 进行管理，但是如果你没有路由器的操作权限（不能做端口映射）, 或者像我一样公司的上网环境比较坑（电信路由器）的话，teamviewer 也算是图形界面中优雅的远控方式。并且，可以使用 windows 控制 mac, 也可使用 mac 控制 windows, 这点实在让人非常心动。</p>
+<blockquote>
+<p>后续：其实可以用路由器做两次端口转发的，当时没有想到这个两层端口转发。</p>
+</blockquote>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-03-14</strong> 重修文字，修正部分错误的说法</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/macos/">macOS</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20160315_%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AApy%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/" class="prev" rel="prev" title="如何发布一个 Python 命令行工具"><i class="fas fa-angle-left fa-fw"></i>如何发布一个 Python 命令行工具</a>
+            <a href="/posts/20160415_macpythonmonitorpart1/" class="next" rel="next" title="使用 Python 监控 Mac 一天的运行（上）">使用 Python 监控 Mac 一天的运行（上）<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

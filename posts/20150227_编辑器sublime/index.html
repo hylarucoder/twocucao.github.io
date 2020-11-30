@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Sublime - 海拉鲁编程客</title><meta name="Description" content="Get Busy is My New Hugo Site"><meta property="og:title" content="Sublime" />
+<meta property="og:description" content="这个 Sublime 究竟好在哪里？
+ 方便的 Vim 模式。 各种语言特性支持。 强大的社区支持。插件教程，balbalbala 长的好看，而且能干。  最佳实践 下载安装（建议便携版本） http://www.sublimetext.com/3
+安装 Package Control 用于管理插件 步骤：view showconsole 输入下面代码
+import urllib.request,os,hashlib; h = &#39;eb2297e1a458f27d836c04bb0cbaf282&#39; &#43; &#39;d0e7a3098092775ccb37ca9d6b2e4b7d&#39;; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#39;http://packagecontrol.io/&#39; &#43; pf.replace(&#39; &#39;, &#39;%20&#39;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#39;Error validating download (got %sinstead of %s), please try manual install&#39; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#39;wb&#39; )." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20150227_%E7%BC%96%E8%BE%91%E5%99%A8sublime/" />
+<meta property="article:published_time" content="2014-10-25T20:10:10+08:00" />
+<meta property="article:modified_time" content="2014-10-25T20:10:10+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Sublime"/>
+<meta name="twitter:description" content="这个 Sublime 究竟好在哪里？
+ 方便的 Vim 模式。 各种语言特性支持。 强大的社区支持。插件教程，balbalbala 长的好看，而且能干。  最佳实践 下载安装（建议便携版本） http://www.sublimetext.com/3
+安装 Package Control 用于管理插件 步骤：view showconsole 输入下面代码
+import urllib.request,os,hashlib; h = &#39;eb2297e1a458f27d836c04bb0cbaf282&#39; &#43; &#39;d0e7a3098092775ccb37ca9d6b2e4b7d&#39;; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#39;http://packagecontrol.io/&#39; &#43; pf.replace(&#39; &#39;, &#39;%20&#39;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#39;Error validating download (got %sinstead of %s), please try manual install&#39; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#39;wb&#39; )."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20150227_%E7%BC%96%E8%BE%91%E5%99%A8sublime/" /><link rel="prev" href="http://twocucao.xyz/posts/20141025_%E5%AD%99%E6%82%9F%E7%A9%BA%E5%92%8C%E8%87%B3%E5%B0%8A%E5%AE%9D/" /><link rel="next" href="http://twocucao.xyz/posts/20150222_chorthotkey%E5%8F%91%E5%B8%83/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Sublime",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20150227_%E7%BC%96%E8%BE%91%E5%99%A8sublime\/"
+        },"genre": "posts","keywords": "编辑器","wordcount":  278 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20150227_%E7%BC%96%E8%BE%91%E5%99%A8sublime\/","datePublished": "2014-10-25T20:10:10+08:00","dateModified": "2014-10-25T20:10:10+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Sublime</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2014-10-25">2014-10-25</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 278 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#最佳实践">最佳实践</a>
+      <ul>
+        <li><a href="#下载安装建议便携版本">下载安装（建议便携版本）</a></li>
+        <li><a href="#安装-package-control--用于管理插件">安装 Package Control  用于管理插件</a></li>
+      </ul>
+    </li>
+    <li><a href="#基本使用方法之编辑功能">基本使用方法之编辑功能</a>
+      <ul>
+        <li><a href="#命令面板">命令面板</a></li>
+        <li><a href="#go-to-anything">Go to Anything</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论一">结论一</a></li>
+    <li><a href="#深入研究其中的编辑功能">深入研究其中的编辑功能</a></li>
+    <li><a href="#结论二确实强大但是">结论二，确实强大。但是&hellip;</a></li>
+    <li><a href="#插件让-sublime-长出逆风飞翔的翅膀">插件，让 sublime 长出逆风飞翔的翅膀。</a>
+      <ul>
+        <li><a href="#用-vim-强化编辑功能">用 Vim 强化编辑功能。</a></li>
+        <li><a href="#能不能好看一点">能不能好看一点？</a></li>
+        <li><a href="#新建文件可以方便一点吗">新建文件可以方便一点吗？</a></li>
+        <li><a href="#侧边栏好像右键菜单好少能不能再给力一点啊">侧边栏好像右键菜单好少，能不能再给力一点啊</a></li>
+        <li><a href="#只能补全功能不够用能不能再给力一点啊">只能补全功能不够用，能不能再给力一点啊</a></li>
+        <li><a href="#我有强迫症对齐功能不够强大能不能再给力一点啊">我有强迫症，对齐功能不够强大，能不能再给力一点啊</a></li>
+        <li><a href="#写注释可以方便一些就像-intellij-idea-那样写注释吗">写注释可以方便一些，就像 Intellij IDEA 那样写注释吗？</a></li>
+        <li><a href="#前端工程师要那些插件吗">前端工程师要那些插件吗？</a></li>
+        <li><a href="#我平时用-markdown-写-blog-有什么比较方便的东西吗">我平时用 markdown 写 BLOG, 有什么比较方便的东西吗？</a></li>
+      </ul>
+    </li>
+    <li><a href="#结论三老师真的很好用啊但是">结论三，老师真的很好用啊。但是&hellip;</a></li>
+    <li><a href="#其他链接">其他链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>这个 Sublime 究竟好在哪里？</p>
+<ul>
+<li>方便的 Vim 模式。</li>
+<li>各种语言特性支持。</li>
+<li>强大的社区支持。插件教程，balbalbala</li>
+<li>长的好看，而且能干。</li>
+</ul>
+<h2 id="最佳实践">最佳实践</h2>
+<h3 id="下载安装建议便携版本">下载安装（建议便携版本）</h3>
+<p><a href="http://www.sublimetext.com/3">http://www.sublimetext.com/3</a></p>
+<h3 id="安装-package-control--用于管理插件">安装 Package Control  用于管理插件</h3>
+<p>步骤：view showconsole 输入下面代码</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">urllib.request</span><span class="o">,</span><span class="nn">os</span><span class="o">,</span><span class="nn">hashlib</span><span class="p">;</span> <span class="n">h</span> <span class="o">=</span> <span class="s1">&#39;eb2297e1a458f27d836c04bb0cbaf282&#39;</span> <span class="o">+</span> <span class="s1">&#39;d0e7a3098092775ccb37ca9d6b2e4b7d&#39;</span><span class="p">;</span> <span class="n">pf</span> <span class="o">=</span> <span class="s1">&#39;Package Control.sublime-package&#39;</span><span class="p">;</span> <span class="n">ipp</span> <span class="o">=</span> <span class="n">sublime</span><span class="o">.</span><span class="n">installed_packages_path</span><span class="p">();</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">install_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">build_opener</span><span class="p">(</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">ProxyHandler</span><span class="p">())</span> <span class="p">);</span> <span class="n">by</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span> <span class="s1">&#39;http://packagecontrol.io/&#39;</span> <span class="o">+</span> <span class="n">pf</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">,</span> <span class="s1">&#39;%20&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">();</span> <span class="n">dh</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">by</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">();</span> <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Error validating download (got </span><span class="si">%s</span><span class="s1"> instead of </span><span class="si">%s</span><span class="s1">), please try manual install&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">dh</span><span class="p">,</span> <span class="n">h</span><span class="p">))</span> <span class="k">if</span> <span class="n">dh</span> <span class="o">!=</span> <span class="n">h</span> <span class="k">else</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span> <span class="n">ipp</span><span class="p">,</span> <span class="n">pf</span><span class="p">),</span> <span class="s1">&#39;wb&#39;</span> <span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">by</span><span class="p">)</span>
+</code></pre></div><p>重启，然后你就可以正常使用 Package Control 了</p>
+<h2 id="基本使用方法之编辑功能">基本使用方法之编辑功能</h2>
+<h3 id="命令面板">命令面板</h3>
+<p>^+p</p>
+<p>ctrl+shift+p 打开的是命令面板
+命令面板主要内容分为四块。</p>
+<ul>
+<li>设置</li>
+<li>改变语法</li>
+<li>来自插件的命令</li>
+</ul>
+<h3 id="go-to-anything">Go to Anything</h3>
+<p>^p  打开的是切换面板
+直接输入文件名可以切换文件
+可以直接预览
+输入 @ 可以查看按照 Header 查看 (Markdown 语法）, 代码中按照函数来查找
+输入 # 可以查看变量</p>
+<h4 id="同一页面搜索">同一页面搜索</h4>
+<p>^r</p>
+<h4 id="整个项目搜索">整个项目搜索</h4>
+<p>ctrl + shift + r</p>
+<h4 id="toggle-sidebar">Toggle Sidebar</h4>
+<p>ctrl+k Ctrl+b</p>
+<h4 id="切换面板">切换面板</h4>
+<p>alt + shift + 1 to 4</p>
+<h4 id="直达某行">直达某行</h4>
+<p>ctrl+g</p>
+<h4 id="移动行">移动行</h4>
+<p>ctrl+shift+ 上下左右。</p>
+<h2 id="结论一">结论一</h2>
+<p>嘿嘿，这样看上去你基本的编辑任务都是可以比较出色完成的吧？
+好，我们依然可以看出来，这款编辑器的的确确足够日常编辑使用了，但是，还是并不代表有一定的优越性啊？</p>
+<p>你说，老师，能不能再给力一点啊？
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg"
+        data-srcset="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg, http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg 1.5x, http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg 2x"
+        data-sizes="auto"
+        alt="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg"
+        title="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg" /></p>
+<h2 id="深入研究其中的编辑功能">深入研究其中的编辑功能</h2>
+<p>把上面的一些功能进行系统性梳理。
+已经有前辈完成了，我就直接贴上他的地址了。</p>
+<p><a href="http://feliving.github.io/Sublime-Text-3-Documentation/index.html">http://feliving.github.io/Sublime-Text-3-Documentation/index.html</a></p>
+<h2 id="结论二确实强大但是">结论二，确实强大。但是&hellip;</h2>
+<p>你说，老师，能不能再给力一点啊？
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg"
+        data-srcset="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg, http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg 1.5x, http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg 2x"
+        data-sizes="auto"
+        alt="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg"
+        title="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg" />
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.</p>
+<p>当然可以！!</p>
+<h2 id="插件让-sublime-长出逆风飞翔的翅膀">插件，让 sublime 长出逆风飞翔的翅膀。</h2>
+<p>sublime 的功能已经是比较强大了。可是还有什么地方可以优化的吗？
+加上插件，可以增强已经有的功能，可以扩展越来没有的功能。下面请看好！</p>
+<h3 id="用-vim-强化编辑功能">用 Vim 强化编辑功能。</h3>
+<p>在编辑强化方面，Sublime 自带了一个非常好用的模式，叫做 Vintage mode
+这个模式有一点点的小问题，就是不方便，我们不妨使用另一个小插件来替换它。</p>
+<p><a href="https://github.com/guillermooo/Vintageous">https://github.com/guillermooo/Vintageous</a></p>
+<p>ctrl+shift+p 输入 install 输入{enter} 输入 Vintageous{Enter}</p>
+<p>安装完毕，你就可以在 Sublime 上面比较方便的使用 vim 编辑方式了。</p>
+<h3 id="能不能好看一点">能不能好看一点？</h3>
+<p>Of course!</p>
+<p>来来来，戳这里戳这里</p>
+<p><a href="https://scotch.io/bar-talk/the-complete-visual-guide-to-sublime-text-3-themes-color-schemes-and-cool-features">https://scotch.io/bar-talk/the-complete-visual-guide-to-sublime-text-3-themes-color-schemes-and-cool-features</a></p>
+<h3 id="新建文件可以方便一点吗">新建文件可以方便一点吗？</h3>
+<p>可以，AdvancedNewFile
+你只需要 ctrl+alt+n 就可以使用这个插件。</p>
+<p>输入文件名可以直接在当前目录下新建。
+你也可以使用相对路径比如  ../  或者 ../_drafts/AndroidShow
+是不是非常方便？</p>
+<h3 id="侧边栏好像右键菜单好少能不能再给力一点啊">侧边栏好像右键菜单好少，能不能再给力一点啊</h3>
+<p>有，SidebarEnhancement</p>
+<h3 id="只能补全功能不够用能不能再给力一点啊">只能补全功能不够用，能不能再给力一点啊</h3>
+<p>好，SublimeCodeIntel</p>
+<h3 id="我有强迫症对齐功能不够强大能不能再给力一点啊">我有强迫症，对齐功能不够强大，能不能再给力一点啊</h3>
+<p>好，ALignment</p>
+<h3 id="写注释可以方便一些就像-intellij-idea-那样写注释吗">写注释可以方便一些，就像 Intellij IDEA 那样写注释吗？</h3>
+<p>可以 Doc Blockr</p>
+<h3 id="前端工程师要那些插件吗">前端工程师要那些插件吗？</h3>
+<p>Emmet
+HTML-CSS-JS
+等等</p>
+<h3 id="我平时用-markdown-写-blog-有什么比较方便的东西吗">我平时用 markdown 写 BLOG, 有什么比较方便的东西吗？</h3>
+<p>markdown</p>
+<ul>
+<li>extended</li>
+<li>preview</li>
+<li>light</li>
+<li>toc</li>
+</ul>
+<h2 id="结论三老师真的很好用啊但是">结论三，老师真的很好用啊。但是&hellip;</h2>
+<p>你说，老师，能不能再给力一点啊？
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg"
+        data-srcset="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg, http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg 1.5x, http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg 2x"
+        data-sizes="auto"
+        alt="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg"
+        title="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg" />
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;..
+&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;&hellip;.</p>
+<p>特码的，你是来编程的还是来配置编辑器的啊！
+等你有需求了再去寻找更好的配置方案 OK?</p>
+<h2 id="其他链接">其他链接</h2>
+<p>这个 BLog 分享了不少关于 Sublime 的干货
+<a href="https://scotch.io/">https://scotch.io/</a></p>
+<p>这个视频链接讲解了一些关于 Sublime 的一些小知识。
+<a href="http://www.imooc.com/learn/40">http://www.imooc.com/learn/40</a></p>
+<p>sublime 非官方资源
+<a href="http://docs.sublimetext.info/en/latest/index.html">http://docs.sublimetext.info/en/latest/index.html</a></p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2016-12-05</strong> 重修文字，已转投 Vim. sublime 作为非主力编辑器。</li>
+<li><strong>2016 中期</strong> 重修文字，声明已转投 Vim. sublime 作为非主力编辑器。</li>
+<li><strong>2017 前期</strong> 重修文字，声明已转投 Spacemacs.</li>
+<li><strong>2020 后期</strong> 重修文字，重回 Vim.</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2014-10-25</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/">编辑器</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20141025_%E5%AD%99%E6%82%9F%E7%A9%BA%E5%92%8C%E8%87%B3%E5%B0%8A%E5%AE%9D/" class="prev" rel="prev" title="至尊宝和孙悟空 - 『大话西游』影评"><i class="fas fa-angle-left fa-fw"></i>至尊宝和孙悟空 - 『大话西游』影评</a>
+            <a href="/posts/20150222_chorthotkey%E5%8F%91%E5%B8%83/" class="next" rel="next" title="Chorthotkey 发布">Chorthotkey 发布<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

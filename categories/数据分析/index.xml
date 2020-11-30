@@ -1,0 +1,61 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>数据分析 - 分类 - 海拉鲁编程客</title>
+        <link>http://twocucao.xyz/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/</link>
+        <description>数据分析 - 分类 - 海拉鲁编程客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Mon, 17 Jul 2017 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="self" type="application/rss+xml" /><item>
+    <title>数据科学的常识笔记</title>
+    <link>http://twocucao.xyz/posts/20170717_%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%9A%84%E5%B8%B8%E8%AF%86%E7%AC%94%E8%AE%B0/</link>
+    <pubDate>Mon, 17 Jul 2017 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20170717_%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%9A%84%E5%B8%B8%E8%AF%86%E7%AC%94%E8%AE%B0/</guid>
+    <description><![CDATA[0x00 前言 2017 年 07 月，为了解统计学和机器学习的基本常识，开了这篇文章。
+当然，仅仅是为了了解，所以也就写的随性（不严谨）一些，排版什么的也都详细推敲。想到哪里就记录到哪里。
+0x01 数据科学的含义与内容 0.1 WHAT?  To gain insights into data through computation, statistics , and visualization.
+ Josh Blumenstock 认为 数据科学家就是比计算机科学家多点统计技术，比统计学家多点计算机技术。
+Shlomo Aragmon 认为 数据科学家 = 统计学家 + 程序员 + 教练 + 讲故事者 + 艺术家
+一些准则  多数据源 懂得数据如何被采集 对数据进行权重 使用统计模型 理解相关性 像 Bayesian 一样思考，像 frequentist 一样检验 良好的沟通能力（代表什么，如何可视化，检验，理解结论）  一些挑战  数据量大 高维诅咒 数据缺失 需要避免过度拟合 (test data vs. training data)  Data Science 涉及到哪些领域呢？  Data Management Data Mining Machine Learning Business Intelligence Statistics Decision Making Theory Story Telling Perception Human Cognition  0.]]></description>
+</item><item>
+    <title>GeoProcessing In Python</title>
+    <link>http://twocucao.xyz/posts/20170711_geoprocessingwithpython/</link>
+    <pubDate>Tue, 11 Jul 2017 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20170711_geoprocessingwithpython/</guid>
+    <description><![CDATA[0x00. 前言 16 年 12 月研究 GIS 相关资料用于处理 GIS 相关问题，完成基本 GIS 功能。 最新需要进阶相关内容用于更好的处理相关数据。
+ 书籍：  Geoprocessing With Python PostGIS In Action 2rd   框架：  前端 Leaflets D3 后端 GeoDjango   其他零零碎碎的资料  特此记录。
+本文目录
+ 基本概念 Vertor VS Raster Vertor 相关类型与坐标系 Raster 相关类型 其他类型 GIS 开发的生态圈以及常用技术栈 Vertor 分析 Raster 分析 Vertor 与 Raster  0x01 基本概念 1.1. Vertor VS Raster  Vector : 基本单元为 Point : points, lines, and polygons 以及其组合，适用于矢量图，地形边界，路线等。 Raster : 基本单元为 Pixel : 2d/3d 包含数值的数组，适用于连续性数据，不仅仅适用于图片。  1.]]></description>
+</item><item>
+    <title>一个基于 TensorFlow 的图片分类器</title>
+    <link>http://twocucao.xyz/posts/20170529_%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Etensorflow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/</link>
+    <pubDate>Mon, 29 May 2017 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20170529_%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Etensorflow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/</guid>
+    <description><![CDATA[0x00 前言  备注：本文训练效果太差，所以直接太监了。
+ 这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。 所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。 本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。
+本文的目的是：
+ 通过 TensorFlow 训练一个小型的分类器，用这个分类器通过照片识别出明星的姓名。
+ 即我们要训练一个小 AI, 这个小 AI 能分辨欢乐颂里面的五美：
+ 乔欣 刘涛 王子文 杨紫 蒋欣  注意：本文主要在 MacOS 上进行测试。 本文的目录结构如下：
+ 准备训练数据和测试数据 TensorFlow 环境配置 开始训练图片 对图片进行分类 文章回顾 参考链接  首先克隆我的 Repo,（我的 Repo 在这里）[https://github.com/twocucao/the-machine] .
+仓库结构大致如下
+├── README.md ├── compose │ └── tensorflow │ ├── Dockerfile │ └── Dockerfile-dev ├── config ├── doc ├── image_classifier │ ├── __init__.]]></description>
+</item><item>
+    <title>关于背单词软件，你不知道的惊人真相</title>
+    <link>http://twocucao.xyz/posts/20160224_%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8/</link>
+    <pubDate>Wed, 24 Feb 2016 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20160224_%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8/</guid>
+    <description><![CDATA[0x00 前言  你想知道背单词软件有大概多少人注册第一天都没有背完嘛？ 你想知道背单词软件这么火，这么多人在使用，真的有多少人真的在背诵嘛？  别急，Python 程序员用数据给你说话。
+文章目录如下：
+ 0x00 前言 0x01 问题的提出和任务的分解 0x02 任务一，信息爬取 ox03 任务二，清理和存储 0x04 任务三，分析 0x05 任务四，结论 0x06 整个流程的不足和反思。 0x07 代码。  0x01 问题的提出和任务的分解 前两天，就在一个雷电交加的夜晚，我躺在床上，草草的看了一篇英文文章，突然想到一个非常有意思的问题：
+ 是不是大部分的人做事真的不能坚持呢？比如，背单词。
+ 好，那我就看看到底有多少人是坚持不下来的？
+那么，我们的问题就变成了这样子：
+ 有多少人是在坚持或者曾经坚持过背单词呢？（假设 100 天以上算的上是背单词的话） 有多少梦想，毁于不能坚持？ 背单词的人们学习的量，是不是符合正太分布呢？  于是我选中了业内的标杆扇贝软件作为分析的对象。抽取其中的大约 1/30 的用户的公开数据，也就是游客用户都可以看得到的数据，进行抽样调查。
+调查的具体内容如下：
+ 打卡最高 / 成长值最高 / 学习单词数量最高 平均每个人打卡次数 / 成长值 / 学习单词数量 打卡 / 成长值 / 学习单词数量的分布（也就是已经坚持了多少天了）  那么，我的任务也就可以分解如下：
+ 爬取数据  使用 Python2 的 Scrapy 进行爬站   清理数据  sql 语句和 pandas 运算   分析数据  pandas + seaborn + ipython book   得出结论  0x02 任务一，信息爬取，清理和存储 每个用户的信息都在这里：]]></description>
+</item></channel>
+</rss>

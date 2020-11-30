@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>PyCon 2018 之 Django 专题 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="PyCon 2018 之 Django 专题" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20180516_pycondjango/" />
+<meta property="article:published_time" content="2018-05-16T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="PyCon 2018 之 Django 专题"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20180516_pycondjango/" /><link rel="prev" href="http://twocucao.xyz/posts/20180428_djangoormcheatsheet/" /><link rel="next" href="http://twocucao.xyz/posts/20180523_fabric2/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "PyCon 2018 之 Django 专题",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20180516_pycondjango\/"
+        },"genre": "posts","keywords": "Python, Django","wordcount":  592 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20180516_pycondjango\/","datePublished": "2018-05-16T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">PyCon 2018 之 Django 专题</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/django/"><i class="far fa-folder fa-fw"></i>Django</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-05-16">2018-05-16</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 592 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-演讲-1---taking-django-async">0x01 演讲 1 - Taking Django Async</a>
+      <ul>
+        <li><a href="#wsgi-如何运行-async">WSGI 如何运行 async</a></li>
+        <li><a href="#asgi-如何运行-a">ASGI 如何运行 A</a></li>
+        <li><a href="#这对-django-意味着什么">这对 Django 意味着什么？</a></li>
+        <li><a href="#如何保持兼容性">如何保持兼容性</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-演讲-2---beyond-django-basic">0x02 演讲 2 - Beyond Django Basic</a></li>
+    <li><a href="#0x03-演讲-3---introduction-to-tdd-with-django--intermediate-testing-with-django">0x03 演讲 3 - Introduction to TDD with Django &amp;&amp; Intermediate testing with Django</a></li>
+    <li><a href="#0x04-演讲-4---api-driven-django">0x04 演讲 4 - API-Driven Django</a></li>
+    <li><a href="#0x05-演讲-5---pipenv-未来的-python-包管理工具">0x05 演讲 5 - pipenv 未来的 Python 包管理工具</a>
+      <ul>
+        <li><a href="#python-打包历史">Python 打包历史</a></li>
+      </ul>
+    </li>
+    <li><a href="#0xee-参考链接">0xEE 参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00 前言</h2>
+<p>PyCon 2018 有很多精彩的演讲，今天的文章里，挑出 Django 的几篇演讲大致讲讲。</p>
+<blockquote>
+<p>注意：为什么是大致讲讲呢？因为即便是你看了我的这篇文章，依然需要多下点功夫自己去看演讲，自己去查资料，自己去消化。我的这篇文章只不过是我看演讲查资料慢慢消化过程中的产物而已。</p>
+</blockquote>
+<h2 id="0x01-演讲-1---taking-django-async">0x01 演讲 1 - Taking Django Async</h2>
+<p>本演讲其实就是为了推广 Django 的新库。django-channels</p>
+<p>这个库从 2015 年首发，现在已经经过了三年的进程。应该算是相对成熟了。</p>
+<p>这个库有什么不走寻常路的地方吗？答案是有的：</p>
+<ol>
+<li>使得 Django 增加了异步协议，比如说 WebSocket 协议</li>
+<li>使得 Django 可运行后台任务。</li>
+</ol>
+<p>作为 v2 版本的核心开发，作者必然是要吐槽一下 v1 版本，然后推荐一下 v2 版本。</p>
+<p>v1 版本的架构设计是这样的。</p>
+<p>核心开发给出了这样的评价：</p>
+<ol>
+<li>在 Python2.7 的时候，就只能这么搞了。</li>
+<li>需要维护的东西太多</li>
+<li>没有 asyncio support</li>
+<li>搬砖时候一不小心容易砸到脚</li>
+</ol>
+<blockquote>
+<p>TODO : 补充一些其他的缺点</p>
+</blockquote>
+<p>异步与同步接口耦合</p>
+<p>作者认为此并非长久之计。</p>
+<p>v2 时候，</p>
+<p>重写 75% 的代码</p>
+<p>异步与同步接口分离</p>
+<p>这么设计的话，需要解决接下来的一个问题，同步转异步，异步转同步。</p>
+<p>比如，我访问 view, 实际上是 async 转 sync, 然后才能调用 django 相关的方法，接着返回响应内容的时候，我还需要 sync 转 async.
+再比如，我使用 websocket, 访问一条数据，但 ORM 是 sync 的方法，我还是要 async 转 sync 再转 async</p>
+<p>这个 async 和 sync 的相互转换应该怎么做呢？</p>
+<p>于是，两个适配方法就诞生了：</p>
+<ul>
+<li>sync_to_async : 接收一个 async 的 function, 使之 awaitable, 然后使之在后台线程里运行。</li>
+<li>async_to_sync : 接收一个 awaitable 的 coroutine , 使之转化成一个同步的 function, 该 function 暂停你调用的当前的线程，跳转到包含 eventloop 的主线程执行完毕，然后跳转回来。</li>
+</ul>
+<p><a href="https://www.aeracode.org/2018/02/19/python-async-simplified/">https://www.aeracode.org/2018/02/19/python-async-simplified/</a></p>
+<h3 id="wsgi-如何运行-async">WSGI 如何运行 async</h3>
+<h3 id="asgi-如何运行-a">ASGI 如何运行 A</h3>
+<h3 id="这对-django-意味着什么">这对 Django 意味着什么？</h3>
+<h3 id="如何保持兼容性">如何保持兼容性</h3>
+<h2 id="0x02-演讲-2---beyond-django-basic">0x02 演讲 2 - Beyond Django Basic</h2>
+<p>作为一名有一定经验的 Django 开发者，用快进的方式看完了这个演讲。毕竟，我已经不是 Django 新手了。</p>
+<blockquote>
+<p>毕竟这篇演讲只是给那些学完 tutorial 的人</p>
+</blockquote>
+<p>想深入了解 Django, 多刷几遍文档比什么都好。</p>
+<p>嗯，就不介绍了。</p>
+<h2 id="0x03-演讲-3---introduction-to-tdd-with-django--intermediate-testing-with-django">0x03 演讲 3 - Introduction to TDD with Django &amp;&amp; Intermediate testing with Django</h2>
+<p>本演讲主要内容是 TDD 测试和 Mock 的技巧。</p>
+<p>建议熟手直接看演讲者的书吧，本视频本人仅仅匆匆倍速看了一遍，估计并没有超出他的书的范围。</p>
+<p>简单介绍了以下内容</p>
+<ul>
+<li>单元测试和功能性测试</li>
+<li>通过 Selenium browser 进行自动化测试</li>
+<li>unittest 标准库</li>
+<li>Django models, views and templates</li>
+<li>测试前后端代码</li>
+<li>基于测试的重构</li>
+<li>TDD workflow</li>
+</ul>
+<p>地址如下</p>
+<p><a href="https://www.obeythetestinggoat.com/book/praise.harry.html">https://www.obeythetestinggoat.com/book/praise.harry.html</a></p>
+<p>说说个人对测试和 TDD 测试的基本态度，我觉得测试是好事，适当的测试是可以提升代码质量和程序稳定性的。</p>
+<p>说测试会降低开发速度的，八成是没有善用测试。如果测试拖慢了你的开发速度，只能说明没有进行合适的测试，比如对一些无关紧要的功能进行测试。</p>
+<p>但，这篇演讲和配套资料很好，不过有些美中不足。 这里基本上都还在用 Django 的 MTV 这一套。</p>
+<blockquote>
+<p>我反正是不用这一套了。这个年头流行 SPA 呀。</p>
+</blockquote>
+<p>所以，我们这篇演讲指的关注的内容就变成如下内容了。</p>
+<ul>
+<li>单元测试和功能性测试</li>
+<li>unittest 标准库</li>
+<li>Django models</li>
+<li>基于测试的重构</li>
+<li>TDD workflow</li>
+</ul>
+<p>而且，对于 API 的测试，现在基本上流行 POSTMAN</p>
+<p>用 POSTMAN 的优点就在于可以把参数缓存下来下次接着用。有个小技巧就是从 chrome 拷贝一下 curl 到 postman 中。非常好用。</p>
+<p>既然流行 SPA, 那么本次有没有介绍开 API 的利器呢？</p>
+<h2 id="0x04-演讲-4---api-driven-django">0x04 演讲 4 - API-Driven Django</h2>
+<p>嗯，Django + django-rest-framework 实在是开 WebAPI 的神器。</p>
+<p>这篇演讲，算是普及了一下常识。并没有想象当中的深入。</p>
+<p>想用 Django 和 DjangoRestFramework 搞事情的，可以过来看我这篇文章。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/33903527">https://zhuanlan.zhihu.com/p/33903527</a></p>
+<blockquote>
+<p>需要注意的是，本次 PyCon 中有很多人已经用上了 pipenv 了。</p>
+</blockquote>
+<h2 id="0x05-演讲-5---pipenv-未来的-python-包管理工具">0x05 演讲 5 - pipenv 未来的 Python 包管理工具</h2>
+<p>Kenneth Reitz 出品，必属精品。</p>
+<h3 id="python-打包历史">Python 打包历史</h3>
+<p>刚开始，我们是这样安装包的。</p>
+<pre><code>curl http://pypi.python.org/packages/alsdasdl/requests.tar.gz | tar zxf
+cd requests/
+python setup.py install
+</code></pre><p>这个问题初看起来不是问题，但是随着你安装程序的增多就知道有多么痛苦了。</p>
+<ol>
+<li>有的依赖库依赖别的库你怎么解决？比如 pandas 需要安装 numpy</li>
+<li>有的依赖库依赖 c 库怎么办？比如 LXML</li>
+<li>在 python2.6.5 下，如果我需要安装两个不同版本的 Django 开发不同的软件怎么办？难道只能动态复制文件到 site-packages 里面？</li>
+</ol>
+<p>后来，我们是这样安装包的。</p>
+<pre><code>easy_install requests
+</code></pre><p>我们可以直接从 pypi 进行安装了。但尼玛，为什么 easy_install 安装很 easy, 但是没有 easy_uninstall?</p>
+<p>好，2010 年后，我们继续前进：</p>
+<ul>
+<li>可以通过 pip 替代 easy_install 了。</li>
+<li>可以通过 virtualenv 管理项目的依赖库了。虽然说，还是不能像 ruby gem 一样同时把多个版本的的软件装在同一个系统里。</li>
+<li>可以通过 requirements 锁依赖了。</li>
+</ul>
+<p>但，其他编程语言社区分别出现了如下的包管理工具：</p>
+<ul>
+<li>node -&gt; yarn &amp;&amp; npm , 有 lockfile</li>
+<li>php -&gt; composer , 有 lockfile</li>
+<li>rust -&gt; cargo , 有 lockfile</li>
+<li>ruby -&gt; bundler , 有 lockfile</li>
+</ul>
+<p>而生命苦短一方居然</p>
+<ul>
+<li>python -&gt; pip &amp;&amp; virtualenv/venv , 无 lockfile</li>
+</ul>
+<blockquote>
+<p>PS: Python3.3 之后，默认可以直接使用 venv 模块，不需要再安装 virtualenv 了。但还是需要手动，并且用起来比较反直觉。</p>
+</blockquote>
+<p>关于 requirements.txt</p>
+<ul>
+<li>如果你使用 pip freeze 来形成这个文件，则不直观，完全看不出来哪个依赖库依赖哪个依赖。</li>
+<li>如果你直接手动指定你所需要的库，比如 flask 的话，似乎又有些太直观了。</li>
+</ul>
+<p>如果能有一个东西，既可以表示 freeze 的结果 (what you want)，又可以表示你需要的库 (what you need). 就好了。</p>
+<blockquote>
+<p>这当然可以考虑用两份 requirements 来解决。先安装 what you need 用来开发，然后 freeze 为 what you want 去部署。</p>
+</blockquote>
+<p>当然，铺垫了这么多 K 神肯定是来介绍他的 pipenv 的。</p>
+<p>比如说，我想查看，本项目的依赖库，直接 pipenv graph</p>
+<pre><code>coverage==4.5.1
+fabric==2.0.1
+  - cryptography [required: &gt;=1.1, installed: 2.2.2]
+    - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]
+    - cffi [required: &gt;=1.7, installed: 1.11.5]
+      - pycparser [required: Any, installed: 2.18]
+    - idna [required: &gt;=2.1, installed: 2.6]
+    - six [required: &gt;=1.4.1, installed: 1.11.0]
+  - invoke [required: &lt;2.0,&gt;=1.0, installed: 1.0.0]
+  - paramiko [required: &gt;=2.4, installed: 2.4.1]
+    - bcrypt [required: &gt;=3.1.3, installed: 3.1.4]
+      - cffi [required: &gt;=1.1, installed: 1.11.5]
+        - pycparser [required: Any, installed: 2.18]
+      - six [required: &gt;=1.4.1, installed: 1.11.0]
+    - cryptography [required: &gt;=1.5, installed: 2.2.2]
+      - asn1crypto [required: &gt;=0.21.0, installed: 0.24.0]
+      - cffi [required: &gt;=1.7, installed: 1.11.5]
+        - pycparser [required: Any, installed: 2.18]
+      - idna [required: &gt;=2.1, installed: 2.6]
+      - six [required: &gt;=1.4.1, installed: 1.11.0]
+    - pyasn1 [required: &gt;=0.1.7, installed: 0.4.2]
+    - pynacl [required: &gt;=1.0.1, installed: 1.2.1]
+      - cffi [required: &gt;=1.4.1, installed: 1.11.5]
+        - pycparser [required: Any, installed: 2.18]
+      - six [required: Any, installed: 1.11.0]
+flake8==3.5.0
+  - mccabe [required: &gt;=0.6.0,&lt;0.7.0, installed: 0.6.1]
+  - pycodestyle [required: &lt;2.4.0,&gt;=2.0.0, installed: 2.3.1]
+  - pyflakes [required: &gt;=1.5.0,&lt;1.7.0, installed: 1.6.0]
+# 其他省略
+</code></pre><p>如何尝鲜？我最近更新到了之前写的一个库（代码写的惨不忍赌，最近准备重构）</p>
+<pre><code>git clone git@github.com:twocucao/YaPyLib.git
+cd YaPyLib/
+brew install pipenv
+pipenv --three
+pipenv install --dev
+pipenv shell
+</code></pre><p>至于其他的功能，参考官网自己摸索吧。</p>
+<blockquote>
+<p>在用 npm 和 yarn 的时候，我有这么一个想法，希望 python 圈子里面能出一个类似于包管理工具。今年 2 月份的时候把自己的项目迁移过来，发现 pipenv 用起来很挺舒服的。</p>
+</blockquote>
+<blockquote>
+<p>pipenv 是未来。火速用上吧。</p>
+</blockquote>
+<h2 id="0xee-参考链接">0xEE 参考链接</h2>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-03-09</strong> 重修文字</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/django/">Django</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20180428_djangoormcheatsheet/" class="prev" rel="prev" title="DjangoORM CheatSheet"><i class="fas fa-angle-left fa-fw"></i>DjangoORM CheatSheet</a>
+            <a href="/posts/20180523_fabric2/" class="next" rel="next" title="Python 自动化工具 Fabric 支持 Python3">Python 自动化工具 Fabric 支持 Python3<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

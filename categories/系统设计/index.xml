@@ -1,0 +1,37 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>系统设计 - 分类 - 海拉鲁编程客</title>
+        <link>http://twocucao.xyz/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
+        <description>系统设计 - 分类 - 海拉鲁编程客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Sun, 10 Feb 2019 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" rel="self" type="application/rss+xml" /><item>
+    <title>秒杀系统的一些注意点</title>
+    <link>http://twocucao.xyz/posts/20190210_%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9/</link>
+    <pubDate>Sun, 10 Feb 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190210_%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9/</guid>
+    <description><![CDATA[0x00 前言 秒杀常见问题 01 卖超问题 假设有 20 个商品要卖，1W 个请求打过来。
+ SQL 加上数量判断，防止数量超掉  应用层的检查，并发量上来，肯定要加行级锁，开销比较大。
+redis 集合预先缓存好相关的数量，然后从 redis 上进行应用层的数量检查。  然后走异步队列。
+因为对于数据库来说，我只要 20 个请求即可，redis 起到了一个阻挡多余的请求穿透到 DB 中的作用。
+即便如此，redis 依然可能会出现一些意外的情况，比如为负数，这个时候多打进去几个请求，变成 24 个，这个时候 MQ 的作用就出来了。排好队伍。
+唯一索引  数据库层的检查，可以从根本上防止问题
+02 缓存问题  page 级别的缓存，由于 wsgi 协议本身在 flask 中返回的就是文本，所以，当作文本处理即可 obj 级别的缓存  能走内存的走内存，能走 redis 就走 redis, 能通过 mq 削减峰值的就走 mq, 能走 mongodb 的走 mongodb, 最后是数据库。
+03 安全  验证码 接口防刷限流 秒杀接口隐藏  04 分布式锁  不加锁，并发起来资源浪费 加锁，然而，线路抖动会导致不能及时释放锁 加过期锁，或者加带有时间的锁，然后重新获取锁。 redisson 封装好的方法  06 减少数据库访问时间  首先考虑在 where 和 order by 设计的列上建立索引 索引越多，插入越慢，这个要做好平衡 避免过长的事务级操作，提高并发能力  其他的可以参考 MySQL 的一些优化原则，油管上很多。]]></description>
+</item><item>
+    <title>Thinking In Web Developing</title>
+    <link>http://twocucao.xyz/posts/20180904_%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</link>
+    <pubDate>Tue, 04 Sep 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180904_%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/</guid>
+    <description><![CDATA[0x00 前言 0x02 前端 CDN 代理服务器分布式网络，它从靠近用户的位置提供内容
+更新方式 推送 PUSH
+当服务器内容发生变动，推送 CDN 接受新的内容。
+ 更新最快 流量最小化 存储最大化  拉取 PULL
+当用户请求该资源的时候，从服务器拉取资源。
+ 更新有延迟 存储最小化  缺点  CDN 成本可能会很高 TTL 过期之前更新内容，CDN 缓存内容可能会过时  0x02 后端组件 负载均衡器 负载均衡起到了一个均衡负载的作用
+ 防止请求进入运行情况糟糕的服务器。 防止资源过载。 帮助消除单一故障点。  额外的功能：
+ SSL 终结：解密传入的请求，并加密服务器响应。  工作-备用 / 双工作
+选 Worker  Random Round Robin Least Busy Sticky session / Cookie By request paramters  路由流量  随机 最少负载 Session/Cookie 轮询调度或加权轮询调度 四层负载均衡 七层负载均衡  反向代理  安全性：隐藏后端服务器信息 可扩展性和灵活性：客户端只能看到服务器，服务端 本地终结 SSL 会话： 压缩： 缓存： 静态内容：  0x08 Http Server Model Master 主进程监听不同的进程信号，并且作出反馈。]]></description>
+</item></channel>
+</rss>

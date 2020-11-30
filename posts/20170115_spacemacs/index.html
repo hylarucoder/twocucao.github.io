@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>写给 Pythoner 的 Spacemacs 入门指北 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="写给 Pythoner 的 Spacemacs 入门指北" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20170115_spacemacs/" />
+<meta property="article:published_time" content="2017-01-15T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="写给 Pythoner 的 Spacemacs 入门指北"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20170115_spacemacs/" /><link rel="prev" href="http://twocucao.xyz/posts/20170114_pythonscope/" /><link rel="next" href="http://twocucao.xyz/posts/20170127_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E4%B8%8E%E6%97%B6%E9%97%B4%E5%81%9A%E6%9C%8B%E5%8F%8B/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "写给 Pythoner 的 Spacemacs 入门指北",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20170115_spacemacs\/"
+        },"genre": "posts","keywords": "编辑器","wordcount":  830 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20170115_spacemacs\/","datePublished": "2017-01-15T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">写给 Pythoner 的 Spacemacs 入门指北</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-01-15">2017-01-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 830 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#0x00-基本软件环境安装">0x00. 基本软件环境安装</a>
+      <ul>
+        <li><a href="#01-zsh-与-ohmyzsh">0.1 zsh 与 ohmyzsh</a></li>
+        <li><a href="#02-pyenv-与-pyenv-virtualenv">0.2 pyenv 与 pyenv virtualenv</a></li>
+        <li><a href="#03-nvm-以及常用-npm-包">0.3 nvm 以及常用 npm 包</a></li>
+        <li><a href="#04-spacemacs-安装以及基本配置">0.4 Spacemacs 安装以及基本配置</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x01-日常的编辑">0x01. 日常的编辑</a>
+      <ul>
+        <li><a href="#11-文件导航">1.1 文件导航</a></li>
+        <li><a href="#12-文件编辑">1.2 文件编辑</a></li>
+        <li><a href="#13-markdown-writing">1.3 Markdown Writing</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-python-编程">0x02. Python 编程</a>
+      <ul>
+        <li><a href="#21-代码补全">2.1 代码补全</a></li>
+        <li><a href="#22-代码跳转">2.2 代码跳转</a></li>
+        <li><a href="#23-pytest-测试">2.3 pytest 测试</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x03-ipython-notebook">0x03. IPython Notebook</a>
+      <ul>
+        <li><a href="#31-ipython-notebook-基本配置">3.1 IPython Notebook 基本配置</a></li>
+        <li><a href="#32-emacs-ipython-notebook">3.2 Emacs IPython Notebook</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x04-扩展">0x04. 扩展</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="前言">前言</h2>
+<p>最开始，使用 Sublime Text 编码，后来用 Vim 混合 PyCharm 写 Python。</p>
+<p>前几天，Github 上的 Spacemacs 已经成功的突破一万 Star, 听说几个我非常佩服的 Pythoner（比如『Python Web 开发实战』的作者董伟明） 也是非常喜欢 Spacemacs, 我就萌生了从 Vim 切换到 Spacemacs 的想法，说做就做。</p>
+<blockquote>
+<p>注：本文所有内容基于 macOS 10.11, 软件环境为 zsh , pyenv , python3.5.2 , node5.12.0. 其他类 Unix 平台略作修改即可使用。至于 Windows 平台，建议安装 Ubuntu 虚拟机。本文也需要读者具备基本的 VIM 基本常识和 Python 常识。</p>
+</blockquote>
+<!-- raw HTML omitted -->
+<p>迁移到一个编辑器需要找到一些操作的 Emacs 替代操作。于是我安排文章结构如下：</p>
+<ul>
+<li>[0x00. 基本软件环境安装](#0x00- 基本软件环境安装)
+<ul>
+<li>[0.1 zsh 与 ohmyzsh](#01-zsh- 与 -ohmyzsh)</li>
+<li>[0.2 pyenv 与 pyenv virtualenv](#02-pyenv- 与 -pyenv-virtualenv)</li>
+<li>[0.3 nvm 以及常用 npm 包](#03-nvm- 以及常用 -npm- 包)</li>
+<li>[0.4 Spacemacs 安装以及基本配置](#04-spacemacs- 安装以及基本配置)</li>
+</ul>
+</li>
+<li>[0x01. 日常的编辑](#0x01- 日常的编辑)
+<ul>
+<li>[1.1 文件导航](#11- 文件导航)</li>
+<li>[1.2 文件编辑](#12- 文件编辑)</li>
+<li><a href="#13-markdown-writing" rel="">1.3 Markdown Writing</a></li>
+</ul>
+</li>
+<li>[0x02. Python 编程](#0x02-python- 编程)
+<ul>
+<li>[2.1 代码补全](#21- 代码补全)</li>
+<li>[2.2 代码跳转](#22- 代码跳转)</li>
+<li>[2.3 pytest 测试](#23-pytest- 测试)</li>
+</ul>
+</li>
+<li><a href="#0x03-ipython-notebook" rel="">0x03. IPython Notebook</a>
+<ul>
+<li>[3.1 IPython Notebook 基本配置](#31-ipython-notebook- 基本配置)</li>
+<li><a href="#32-emacs-ipython-notebook" rel="">3.2 Emacs IPython Notebook</a></li>
+</ul>
+</li>
+<li>[0x04. 扩展](#0x04- 扩展)</li>
+</ul>
+<p>本文只负责把读者带入 Spacemacs 的世界中，而不是涉及到 Spacemacs 的方方面面，所以此文为指北。而非详细的指南 (Guide).</p>
+<h2 id="0x00-基本软件环境安装">0x00. 基本软件环境安装</h2>
+<h3 id="01-zsh-与-ohmyzsh">0.1 zsh 与 ohmyzsh</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">brew install zsh
+chsh -s /bin/zsh
+sh -c <span class="s2">&#34;</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh<span class="k">)</span><span class="s2">&#34;</span>
+</code></pre></div><h3 id="02-pyenv-与-pyenv-virtualenv">0.2 pyenv 与 pyenv virtualenv</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">git clone https://github.com/yyuu/pyenv.git ~/.pyenv
+git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+<span class="nb">echo</span> <span class="s1">&#39;export PYENV_ROOT=&#34;$HOME/.pyenv&#34;&#39;</span> &gt;&gt; ~/.zshrc
+<span class="nb">echo</span> <span class="s1">&#39;export PATH=&#34;$PYENV_ROOT/bin:$PATH&#34;&#39;</span> &gt;&gt; ~/.zshrc
+<span class="nb">echo</span> <span class="s1">&#39;eval &#34;$(pyenv init -)&#34;&#39;</span> &gt;&gt; ~/.zshrc
+<span class="nb">echo</span> <span class="s1">&#39;eval &#34;$(pyenv virtualenv-init -)&#34;&#39;</span> &gt;&gt; ~/.zshrc
+
+<span class="c1"># 不喜写兼容代码，所有代码均向 3.5+ 靠拢</span>
+<span class="nv">v</span><span class="o">=</span>3.5.2<span class="p">|</span>wget http://mirrors.sohu.com/python/<span class="nv">$v</span>/Python-<span class="nv">$v</span>.tar.xz -P ~/.pyenv/cache/<span class="p">;</span>pyenv install <span class="nv">$v</span>
+<span class="nv">v</span><span class="o">=</span>3.6.0<span class="p">|</span>wget http://mirrors.sohu.com/python/<span class="nv">$v</span>/Python-<span class="nv">$v</span>.tar.xz -P ~/.pyenv/cache/<span class="p">;</span>pyenv install <span class="nv">$v</span>
+<span class="nv">v</span><span class="o">=</span>2.7.11<span class="p">|</span>wget http://mirrors.sohu.com/python/<span class="nv">$v</span>/Python-<span class="nv">$v</span>.tar.xz -P ~/.pyenv/cache/<span class="p">;</span>pyenv install <span class="nv">$v</span>
+
+<span class="c1"># 设置 Global Python 为 2.7.11, 备注：尽量不要把 Py3 设置为全局，否则由于 Homebrew 本身有一些依赖是依赖于 Py2 的，这样容易出现一些奇怪的问题。</span>
+pyenv global 2.7.11
+pip install -i https://pypi.doubanio.com/simple requests
+<span class="c1"># 下面这个是用于安装基本的代码补全功能</span>
+pip install -i https://pypi.doubanio.com/simple --upgrade <span class="s2">&#34;jedi&gt;=0.9.0&#34;</span> <span class="s2">&#34;json-rpc&gt;=1.8.1&#34;</span> <span class="s2">&#34;service_factory&gt;=0.1.5&#34;</span> flake8 pytest autoflake hy
+
+pyenv virtualenv 3.5.2 py3-daily
+pyenv activate py3-daily
+pip install -i https://pypi.doubanio.com/simple requests
+pip install -i https://pypi.doubanio.com/simple beatutifulsoup4
+pip install -i https://pypi.doubanio.com/simple ipython<span class="o">[</span>notebook<span class="o">]</span>
+pip install -i https://pypi.doubanio.com/simple jupyter
+<span class="c1"># 下面这个是用于安装基本的代码补全功能</span>
+pip install -i https://pypi.doubanio.com/simple --upgrade <span class="s2">&#34;jedi&gt;=0.9.0&#34;</span> <span class="s2">&#34;json-rpc&gt;=1.8.1&#34;</span> <span class="s2">&#34;service_factory&gt;=0.1.5&#34;</span> flake8 pytest autoflake hy
+pyenv deactivate
+<span class="c1"># pyenv uninstall py3-daily</span>
+
+</code></pre></div><h3 id="03-nvm-以及常用-npm-包">0.3 nvm 以及常用 npm 包</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 安装 nvm</span>
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh <span class="p">|</span> bash
+nvm install 5.12.0
+<span class="nb">echo</span> <span class="s1">&#39;\n#alias for cnpm\nalias cnpm=&#34;npm --registry=https://registry.npm.taobao.org \
+</span><span class="s1">  --cache=$HOME/.npm/.cache/cnpm \
+</span><span class="s1">  --disturl=https://npm.taobao.org/dist \
+</span><span class="s1">  --userconfig=$HOME/.cnpmrc&#34;&#39;</span> &gt;&gt; ~/.zshrc <span class="o">&amp;&amp;</span> <span class="nb">source</span> ~/.zshrc
+npm install -g vmd
+npm install -g gitbook-cli
+npm install -g hexo-cli
+npm install -g tern
+npm install -g js-beautify
+npm install -g js-hint
+</code></pre></div><h3 id="04-spacemacs-安装以及基本配置">0.4 Spacemacs 安装以及基本配置</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">brew install ag
+brew install grep
+brew tap d12frosted/emacs-plus
+brew install emacs-plus
+<span class="c1"># 安装完毕之后，克隆我的配置 repo, 有一些基本的配置用于解决墙的问题。解决方案来自于子龙山人</span>
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+mv ~/.spacemacs .spacemacs.bak
+git clone https://github.com/twocucao/spacemacs.d.git ~/.spacemacs.d
+<span class="c1"># 输入 emacs 进行初始化，如果你可以正常访问 Github 的话时间在半小时之内。</span>
+emacs
+</code></pre></div><p>安装 Spacemacs 过程中画面如下：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-d5c8171294ec9f3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-d5c8171294ec9f3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-d5c8171294ec9f3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-d5c8171294ec9f3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-d5c8171294ec9f3d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="安装 Spacemacs 过程中画面" /></p>
+<p>安装前，Emacs 长这个样子：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-4e6026d213191939.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-4e6026d213191939.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-4e6026d213191939.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-4e6026d213191939.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-4e6026d213191939.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="安装前" /></p>
+<p>安装后，Emacs 长这个样子：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-45747c68366ef275.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-45747c68366ef275.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-45747c68366ef275.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-45747c68366ef275.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-45747c68366ef275.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="安装后.png" /></p>
+<p><strong>在正式进入，请牢牢记住下面几个按键已经功能，以备不时之需</strong></p>
+<ul>
+<li>spc : 跳出命令面板</li>
+<li>spc-spc : 跳出命令列表，可运行命令，也可以查找快捷键</li>
+<li>spc-h-spc : 查找包的用途与定义</li>
+</ul>
+<p>嗯，可以谈下一话题了！</p>
+<h2 id="0x01-日常的编辑">0x01. 日常的编辑</h2>
+<h3 id="11-文件导航">1.1 文件导航</h3>
+<ul>
+<li>(VIM 流）hjkloOaA zz</li>
+<li>(VIM 流）查找 * /words</li>
+<li>spc-f-j 开发 neotree</li>
+<li>spc-tab 切换到上一个 buffer</li>
+<li>spc-f-f 打开文件 spc-p-f fuzzfind 类似于 ctrlp spc-s-g-p grep 搜索项目  spc-s-a-p ag 搜索项目</li>
+</ul>
+<p>搜索项目如图 (spc-s-a-p ag 搜索项目）:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-b2ce54f91a91e9d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-b2ce54f91a91e9d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-b2ce54f91a91e9d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-b2ce54f91a91e9d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-b2ce54f91a91e9d2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="按照关键字搜索项目" /></p>
+<blockquote>
+<p>实在是方便至极</p>
+</blockquote>
+<h3 id="12-文件编辑">1.2 文件编辑</h3>
+<p>文件内容编辑</p>
+<ul>
+<li>(VIM 流）u 与 c-r d c 等</li>
+<li>有趣的是查找替换功能也是自带预览的。比如 :%s/foo/bar/g</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-e37a81a2a399e5f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-e37a81a2a399e5f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-e37a81a2a399e5f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-e37a81a2a399e5f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-e37a81a2a399e5f3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="查找替换预览" /></p>
+<p>文件本身编辑</p>
+<ul>
+<li>在 dired mode 下：copy - C , delete - D, new folder - +</li>
+<li>也可以 spc-f-t 在 neotree 下进行编辑</li>
+</ul>
+<blockquote>
+<p>除去这些和 Vim 相似的文件编辑功能之外，甚至窗口管理都和 Vim 一致了，使用 c-w+hjkl 直接跳转。
+强烈建议在读者抽空过一遍基本的 Vimtutor</p>
+</blockquote>
+<h3 id="13-markdown-writing">1.3 Markdown Writing</h3>
+<ul>
+<li>spc-spc-markdown-generate-to 回车即可生成本文的 Toc(Table Of Content)</li>
+<li>spc-b-i 打开 buffer 的 imenu（类似于 Vim 的 Tagbar 插件），enter 跳转</li>
+</ul>
+<p>搜索项目如图 (spc-b-i 开启 buffer imenu ，enter 跳转）:</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-250852ddc15bd7a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-250852ddc15bd7a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-250852ddc15bd7a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-250852ddc15bd7a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-250852ddc15bd7a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="IMenu" /></p>
+<h2 id="0x02-python-编程">0x02. Python 编程</h2>
+<h3 id="21-代码补全">2.1 代码补全</h3>
+<p>当你按照前面的所有配置走一圈下来，基本上就已经可以完美的进行补全了。
+比如，当我编辑一个 py 文件的时候，</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 先激活虚拟环境</span>
+pyenv activate 3.5.2/envs/py3-daily
+emacs py.py
+</code></pre></div><p>如图所示，因为 requests,numpy 这种第三方库都可以完美补全，其他自然不在话下。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-7516130bb7fe70c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-7516130bb7fe70c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-7516130bb7fe70c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-7516130bb7fe70c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-7516130bb7fe70c7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="代码补全" /></p>
+<p>代码补全还有另一个神器，就是可以内嵌 lisp 的 Snippet 模板 &ndash; yasnippet, 由于模板功能基本上和其他编辑器相同，而使用 elisp 语言进行编写动态 Snippet 模板则需要会 elisp, 这以后有机会再学学。</p>
+<h3 id="22-代码跳转">2.2 代码跳转</h3>
+<ul>
+<li>文件代码跳转 spc-spc-helm-imenu 查看文件结构</li>
+<li>文件跳转 在 normal-mode 下，gd 即可跳转到函数定义上，但是不能跨文件跳转。</li>
+</ul>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-4a2b2df1e6be0dfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-4a2b2df1e6be0dfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-4a2b2df1e6be0dfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-4a2b2df1e6be0dfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-4a2b2df1e6be0dfd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="单文件使用 helm_imenu 进行浏览" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-3406b060737bffa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-3406b060737bffa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-3406b060737bffa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-3406b060737bffa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-3406b060737bffa3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="使用 ag 进行代码搜索" /></p>
+<h3 id="23-pytest-测试">2.3 pytest 测试</h3>
+<ul>
+<li>spc-m-s-py3-daily enter 选择 py3-daily 虚拟环境</li>
+<li>spc-spc-pytest-all enter 即可运行所有 pytest 测试。</li>
+</ul>
+<p>测试过程：</p>
+<p>运行测试失败，运行测试失败，使用 c-w-j 跳转到下面窗口，对红色标记处 enter, 即可跳转到出错文件行。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-8ef2bac3163f166c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-8ef2bac3163f166c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-8ef2bac3163f166c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-8ef2bac3163f166c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-8ef2bac3163f166c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="pytest 运行测试失败" /></p>
+<p>修正运行测试成功，如图：</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-b90176c2e97df7dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-b90176c2e97df7dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-b90176c2e97df7dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-b90176c2e97df7dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-b90176c2e97df7dc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="pytest 运行测试成功" /></p>
+<h2 id="0x03-ipython-notebook">0x03. IPython Notebook</h2>
+<p>通常情况下我使用 IPython Notebook 都是在 Web 端，因为是 Web 端，实际上大量的 Dom 渲染对浏览器的渲染速度还是有一定的影响的，我还是比较喜欢客户端，因为客户端的快捷键可以定制，而 Web 端的快捷键实在是相当的不方便。</p>
+<p>是不是 IPython Notebook 的 web 端没有好处呢？有的，比如我可以借用外部的 JS 可视化图表对 js 进行可视化呀。</p>
+<p>比如我发在简书上的这篇技术文 <a href="http://www.jianshu.com/p/609193efee1a" target="_blank" rel="noopener noreffer">IPython Notebook 引入 ECharts 做可视化</a></p>
+<p>但，如果不需要 js 功能的话，还是用客户端舒服一些。</p>
+<h3 id="31-ipython-notebook-基本配置">3.1 IPython Notebook 基本配置</h3>
+<p>spacemacs 貌似只支持密码访问 IPython Notebook, 那么我们就生成密码。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 首先激活 py3-daily 环境</span>
+python -c <span class="s2">&#34;from notebook.auth import passwd;print(passwd())&#34;</span> <span class="p">|</span> pbcopy
+<span class="c1"># 恩，于是剪切板上就有如下的字符串</span>
+sha1:9bf4c48a6b83:26bc24a78a1e4aea7baa36874f5e86bafac0dbb9
+<span class="c1"># 打开 config 文件取消注释并修改 c.NotebookApp.password</span>
+vim ~/.jupyter/jupyter_notebook_config.py
+c.NotebookApp.password <span class="o">=</span> <span class="s1">&#39;sha1:35543659622f:f9a78f0b20132f3e04aa1d4ed4060f9fd9eb7663&#39;</span>
+</code></pre></div><h3 id="32-emacs-ipython-notebook">3.2 Emacs IPython Notebook</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 首先在终端打开 IPython Notebook</span>
+ipython notebook
+</code></pre></div><p>接着打开 emacs, 输入 spc-a-i-n, 默认端口，然后输入密码即可。首次登陆后还需要在输入一次 spc-a-i-n 即可看到 IPython Notebook 的主界面。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-86a9a546e350994c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-86a9a546e350994c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-86a9a546e350994c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-86a9a546e350994c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-86a9a546e350994c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="IPYNB 的主界面" /></p>
+<p>光标移到 [New Notebook] 键击 enter 新建 IPython Notebook.</p>
+<p>输入如下代码：</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># The %... is an iPython thing, and is not part of the Python language.</span>
+<span class="c1"># In this case we&#39;re just telling the plotting library to draw things on</span>
+<span class="c1"># the notebook, instead of on a separate window.</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="c1"># See all the &#34;as ...&#34; contructs? They&#39;re just aliasing the package names.</span>
+<span class="c1"># That way we can call methods like plt.plot() instead of matplotlib.pyplot.plot().</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">scipy</span> <span class="kn">as</span> <span class="nn">sp</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.cm</span> <span class="kn">as</span> <span class="nn">cm</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.width&#39;</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.notebook_repr_html&#39;</span><span class="p">,</span> <span class="bp">True</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="kn">as</span> <span class="nn">sns</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="s2">&#34;darkgrid&#34;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set_context</span><span class="p">(</span><span class="s2">&#34;poster&#34;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">set</span><span class="p">()</span>
+
+<span class="c1"># Load the example flights dataset and conver to long-form</span>
+<span class="n">flights_long</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&#34;flights&#34;</span><span class="p">)</span>
+<span class="n">flights</span> <span class="o">=</span> <span class="n">flights_long</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&#34;month&#34;</span><span class="p">,</span> <span class="s2">&#34;year&#34;</span><span class="p">,</span> <span class="s2">&#34;passengers&#34;</span><span class="p">)</span>
+
+<span class="c1"># Draw a heatmap with the numeric values in each cell</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">flights</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&#34;d&#34;</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=.</span><span class="mi">5</span><span class="p">)</span>
+
+</code></pre></div><p>shift+enter , 咣</p>
+<p>热力图就出来了</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-aec8c9f278f74600.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-aec8c9f278f74600.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-aec8c9f278f74600.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-aec8c9f278f74600.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-aec8c9f278f74600.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="热力图" /></p>
+<h2 id="0x04-扩展">0x04. 扩展</h2>
+<p>看完上文，就可以深入文档进行探索了。</p>
+<ul>
+<li>打开 Vim, 输入：help vimtutor 熟悉基本的 Vim 操作。</li>
+<li><a href="https://github.com/syl20bnr/spacemacs/tree/master/layers" target="_blank" rel="noopener noreffer">Spacemacs Layer 文档</a></li>
+<li><a href="http://spacemacs.org/doc/DOCUMENTATION.html" target="_blank" rel="noopener noreffer">Spacemacs 文档</a></li>
+<li><a href="https://github.com/twocucao/spacemacs.d" target="_blank" rel="noopener noreffer">我的 Spacemacs 配置页面</a></li>
+<li><a href="https://github.com/emacs-china/Spacemacs-rocks" target="_blank" rel="noopener noreffer">Spacemacs 达人子龙山人的教程</a></li>
+</ul>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-01-15 18:53:45</strong> 重修文字</li>
+<li><strong>2017-01-16 12:49:19</strong> 润饰文字，增加可读性，首发简书。</li>
+<li><strong>2018-01-01 12:49:19</strong> 最后弃坑并回归 Vim 与 IDE</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/">编辑器</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20170114_pythonscope/" class="prev" rel="prev" title="从一个小问题来说 Python 的作用域"><i class="fas fa-angle-left fa-fw"></i>从一个小问题来说 Python 的作用域</a>
+            <a href="/posts/20170127_%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0_%E4%B8%8E%E6%97%B6%E9%97%B4%E5%81%9A%E6%9C%8B%E5%8F%8B/" class="next" rel="next" title="『把时间当做朋友』读书笔记">『把时间当做朋友』读书笔记<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

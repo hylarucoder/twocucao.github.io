@@ -1,596 +1,181 @@
 <!DOCTYPE html>
-<html lang="zh-Hans">
-<head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
-<meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 5.2.0">
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
-  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+<html lang="zh-cn">
+    <head>
+	<meta name="generator" content="Hugo 0.79.0" />
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>海拉鲁编程客</title><meta name="Description" content="Get Busy is My New Hugo Site"><meta property="og:title" content="海拉鲁编程客" />
+<meta property="og:description" content="Get Busy is My New Hugo Site" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="http://twocucao.xyz/" />
+<meta property="og:updated_time" content="2020-11-30T18:16:34+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="海拉鲁编程客"/>
+<meta name="twitter:description" content="Get Busy is My New Hugo Site"/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/" /><link rel="alternate" href="/index.xml" type="application/rss+xml" title="海拉鲁编程客">
+    <link rel="feed" href="/index.xml" type="application/rss+xml" title="海拉鲁编程客"><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "WebSite",
+        "url": "http:\/\/twocucao.xyz\/","inLanguage": "zh-cn","author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "Get Busy is My New Hugo Site","name": "海拉鲁编程客"
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
 
-<link rel="stylesheet" href="/css/main.css">
-
-
-<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
-
-<script id="hexo-configurations">
-    var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"twocucao.xyz","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
-  </script>
-
-  <meta name="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MG的编程小屋">
-<meta property="og:url" content="http://twocucao.xyz/page/10/index.html">
-<meta property="og:site_name" content="MG的编程小屋">
-<meta property="og:description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-<meta property="og:locale">
-<meta property="article:author" content="Micheal Gardner">
-<meta name="twitter:card" content="summary">
-
-<link rel="canonical" href="http://twocucao.xyz/page/10/">
-
-
-<script id="page-configurations">
-  // https://hexo.io/docs/variables.html
-  CONFIG.page = {
-    sidebar: "",
-    isHome : true,
-    isPost : false,
-    lang   : 'zh-Hans'
-  };
-</script>
-
-  <title>MG的编程小屋</title>
-  
-
-
-
-
-
-
-  <noscript>
-  <style>
-  .use-motion .brand,
-  .use-motion .menu-item,
-  .sidebar-inner,
-  .use-motion .post-block,
-  .use-motion .pagination,
-  .use-motion .comments,
-  .use-motion .post-header,
-  .use-motion .post-body,
-  .use-motion .collection-header { opacity: initial; }
-
-  .use-motion .site-title,
-  .use-motion .site-subtitle {
-    opacity: initial;
-    top: initial;
-  }
-
-  .use-motion .logo-line-before i { left: initial; }
-  .use-motion .logo-line-after i { right: initial; }
-  </style>
-</noscript>
-
-<!-- hexo injector head_end start -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><link rel="alternate" href="/atom.xml" title="MG的编程小屋" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
-
-<body itemscope itemtype="http://schema.org/WebPage">
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container use-motion">
-    <div class="headband"></div>
-
-    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-brand-container">
-  <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
-      <span class="toggle-line toggle-line-first"></span>
-      <span class="toggle-line toggle-line-middle"></span>
-      <span class="toggle-line toggle-line-last"></span>
-    </div>
-  </div>
-
-  <div class="site-meta">
-
-    <a href="/" class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">MG的编程小屋</h1>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-      <p class="site-subtitle" itemprop="description">Get Busy Living, Or Get Busy Dying</p>
-  </div>
-
-  <div class="site-nav-right">
-    <div class="toggle popup-trigger">
-    </div>
-  </div>
-</div>
-
-
-
-
-<nav class="site-nav">
-  <ul id="menu" class="main-menu menu">
-        <li class="menu-item menu-item-home">
-
-    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
-
-  </li>
-        <li class="menu-item menu-item-about">
-
-    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a>
-
-  </li>
-        <li class="menu-item menu-item-tags">
-
-    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a>
-
-  </li>
-        <li class="menu-item menu-item-categories">
-
-    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a>
-
-  </li>
-        <li class="menu-item menu-item-archives">
-
-    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
-
-  </li>
-        <li class="menu-item menu-item-schedule">
-
-    <a href="/schedule/" rel="section"><i class="fa fa-calendar fa-fw"></i>Schedule</a>
-
-  </li>
-        <li class="menu-item menu-item-sitemap">
-
-    <a href="/sitemap.xml" rel="section"><i class="fa fa-sitemap fa-fw"></i>Sitemap</a>
-
-  </li>
-  </ul>
-</nav>
-
-
-
-
-</div>
-    </header>
-
-    
-  <div class="back-to-top">
-    <i class="fa fa-arrow-up"></i>
-    <span>0%</span>
-  </div>
-
-
-    <main class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          
-
-          <div class="content index posts-expand">
-            
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2015/02/22/Chorthotkey%E5%8F%91%E5%B8%83/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2015/02/22/Chorthotkey%E5%8F%91%E5%B8%83/" class="post-title-link" itemprop="url">Chorthotkey 发布</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2015-02-22 23:57:51" itemprop="dateCreated datePublished" datetime="2015-02-22T23:57:51+08:00">2015-02-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2017-12-19 13:09:58" itemprop="dateModified" datetime="2017-12-19T13:09:58+08:00">2017-12-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/" itemprop="url" rel="index"><span itemprop="name">善用佳软</span></a>
-                </span>
-            </span>
-
-          
-
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
         </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="概要介绍"><a href="#概要介绍" class="headerlink" title="概要介绍"></a>概要介绍</h2><p>经过长时间的电脑的使用，我渐渐的喜欢上了 Autohotkey 这个神器，喜欢 Python 是因为 Python 强大与高效，喜欢 AHK 则是太方便了。</p>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="page home" posts><div class="home-profile"><div class="home-avatar"><a href="/categories/" title="分类"><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://avatars0.githubusercontent.com/u/5625783"
+        data-srcset="https://avatars0.githubusercontent.com/u/5625783, https://avatars0.githubusercontent.com/u/5625783 1.5x, https://avatars0.githubusercontent.com/u/5625783 2x"
+        data-sizes="auto"
+        alt="https://avatars0.githubusercontent.com/u/5625783"
+        title="https://avatars0.githubusercontent.com/u/5625783" /></a></div><h1 class="home-title">海拉鲁编程客</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20150504_googletips/">Google Tips</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2015-05-04">2015-05-04</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">0x01 Google 搜索引擎技巧 intitle: 古文观止 site: pan.baidu.com + or link:http://www.reanren.com inurl &#34;&#34; 『长城防*墙』 0x02 Baidu 搜索引擎技巧 site:  ChangeLog:
+ 2016-12-22 几乎重修文字，修改标题为 搜索引擎的一些技巧。  </div><div class="post-footer">
+        <a href="/posts/20150504_googletips/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/google/">Google</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20150222_chorthotkey%E5%8F%91%E5%B8%83/">Chorthotkey 发布</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2015-02-22">2015-02-22</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/"><i class="far fa-folder fa-fw"></i>开源项目</a></span></div><div class="content"><h2 id="概要介绍">概要介绍</h2>
+<p>经过长时间的电脑的使用，我渐渐的喜欢上了 Autohotkey 这个神器，喜欢 Python 是因为 Python 强大与高效，喜欢 AHK 则是太方便了。</p>
 <p>长时间的使用，毕竟也积攒了一些脚本，加上对很多脚本的收集以及修改，勉强算得上是一个入门的 AHK 菜鸟了。</p>
-<p>AHK 的优点可以对快捷键进行编程，对一个经常使用电脑自动化处理一些事情的人说，非常之方便，但缺点，太多，效率低，语法乱，数据结构乱。让我写一段文字处理简直就让我非常难受。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2015/02/22/Chorthotkey%E5%8F%91%E5%B8%83/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2014/10/25/%E5%AD%99%E6%82%9F%E7%A9%BA%E5%92%8C%E8%87%B3%E5%B0%8A%E5%AE%9D/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/10/25/%E5%AD%99%E6%82%9F%E7%A9%BA%E5%92%8C%E8%87%B3%E5%B0%8A%E5%AE%9D/" class="post-title-link" itemprop="url">至尊宝和孙悟空 - 『大话西游』影评</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-10-25 21:30:39" itemprop="dateCreated datePublished" datetime="2014-10-25T21:30:39+08:00">2014-10-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-01-30 17:02:16" itemprop="dateModified" datetime="2018-01-30T17:02:16+08:00">2018-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/" itemprop="url" rel="index"><span itemprop="name">写在人生的边上</span></a>
-                </span>
-            </span>
-
-          
-
+<p>AHK 的优点可以对快捷键进行编程，对一个经常使用电脑自动化处理一些事情的人说，非常之方便，但缺点，太多，效率低，语法乱，数据结构乱。让我写一段文字处理简直就让我非常难受。</p></div><div class="post-footer">
+        <a href="/posts/20150222_chorthotkey%E5%8F%91%E5%B8%83/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/windows/">Windows</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20150227_%E7%BC%96%E8%BE%91%E5%99%A8sublime/">Sublime</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2014-10-25">2014-10-25</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">这个 Sublime 究竟好在哪里？
+ 方便的 Vim 模式。 各种语言特性支持。 强大的社区支持。插件教程，balbalbala 长的好看，而且能干。  最佳实践 下载安装（建议便携版本） http://www.sublimetext.com/3
+安装 Package Control 用于管理插件 步骤：view showconsole 输入下面代码
+import urllib.request,os,hashlib; h = &#39;eb2297e1a458f27d836c04bb0cbaf282&#39; + &#39;d0e7a3098092775ccb37ca9d6b2e4b7d&#39;; pf = &#39;Package Control.sublime-package&#39;; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( &#39;http://packagecontrol.io/&#39; + pf.replace(&#39; &#39;, &#39;%20&#39;)).read(); dh = hashlib.sha256(by).hexdigest(); print(&#39;Error validating download (got %sinstead of %s), please try manual install&#39; % (dh, h)) if dh != h else open(os.path.join( ipp, pf), &#39;wb&#39; ).</div><div class="post-footer">
+        <a href="/posts/20150227_%E7%BC%96%E8%BE%91%E5%99%A8sublime/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/">编辑器</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20141025_%E5%AD%99%E6%82%9F%E7%A9%BA%E5%92%8C%E8%87%B3%E5%B0%8A%E5%AE%9D/">至尊宝和孙悟空 - 『大话西游』影评</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2014-10-25">2014-10-25</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"><i class="far fa-folder fa-fw"></i>碎碎念</a></span></div><div class="content">有才的人往往是很有个性的，甚至个性难以驾驭，生活这么枯燥无味，天天做着同样的事情，吃饭，打怪，看着猪队友坑自己，还要听肉眼凡胎唐僧的绵延不绝的滔滔口水。
+这样的生活有什么意思呢？我可是当年踏碎凌霄，放肆桀骜的齐天大圣孙悟空啊！
+于是，孙悟空打伤了紫霞仙子，把师傅送给牛魔王，抢走了月光宝盒。
+孙悟空是想逃走，想逃避这样的一份普度众生的伟大职业。众生与我何干？我只管红尘潇潇洒洒便好。
+那时候的孙悟空，放荡不羁爱自由，哪想着有一天会跌倒在观音和如来的手下。也不会想到，这个平时废话一大篇的唐僧居然用生命给自己换回了一个救赎的机会。
+可是他的命运从转生成至尊宝那一天起，就已经刻在了命运之轮上。注定逃不了的。
+五百年后，转世悟空至尊宝在五岳山第四边 101 号 B One 做着一份非常光辉的职业——山贼。偏偏蜘蛛精春三十娘来了，偏偏白骨精白晶晶来了，菩提老祖来了，牛魔王来了。甚至，这个时候，至尊宝以为自己爱上了那个爱上了孙猴子的白骨精。
+ 只怪好景不长，该来的总是逃不掉。
+ 冥冥之中，一切早就按照命运之轮运行，为了拯救心上人白晶晶，至尊宝阴差阳错回到了 500 年前，却和紫霞仙子相识。为了回到五百年后，至尊宝不惜欺骗紫霞仙子，说上一段一万年的承诺。
+紫霞爱上了至尊宝，却落入了牛魔王的手中，至尊宝回到山洞，却意外的发现自己爱上的人是紫霞。却不是白晶晶。
+ 『我一定是太想念晶晶了！』 『是啊，昏倒的时候叫了晶晶这个名字 98 次！』 『晶晶是我娘子！』 『还有一个名字叫做紫霞的你叫了 784 次，784 次&hellip;. 这个紫霞一定欠了你很多钱！』   爱情这东西总是后知后觉的，不是么？
+ 因为对白晶晶有责任感，至尊宝用月光宝盒想救白晶晶，却意外邂逅真爱紫霞。
+为了打败牛魔王，救回紫霞，就要成为孙悟空，但如果成为不了孙悟空，将永远失去紫霞。
+白晶晶和蜘蛛精再次闯进洞来，杀了至尊宝。死掉以后的至尊宝大彻大悟——为了化解人世间的仇恨，背负起该有的责任，救回紫霞，去取西经。
+带上紧箍圈，获得强大的力量却再也不能有人世间的半点情欲。
+唐僧对这孙悟空说：『你终于能够重返正途了，阿弥陀佛.』
+而最终，紫霞死去了。
+小的时候看《大话西游》的时候，可谓是单纯到只能解读笑点。 现在看《大话西游》的时候，总是看着看着，就开始有些伤怀。其实众生依旧皆苦，剧中的至尊宝好歹是受过精神压力后戴上紧箍儿，瞬间开挂一般一夫当关万夫莫开。现实中想要去守护一些东西，还要经过漫长的修炼。
+『等你明白了舍生取义的道理，你自然会回来和我唱这首歌的』 唐僧仿佛看穿了一切，又仿佛和之前一样对自己认为的道理令人发指的相信。
+紧箍咒，圈住至尊宝昔日的梦想与爱情，圈住棱角分明的个性。至尊宝终究成为了悟空。
+天边的你，漂泊在云海。
+ 月溅星河 长路漫漫 风烟残尽 独影阑珊 谁叫我身手不凡 谁让我爱恨两难 到后来 肝肠寸断  女孩问：『那个人样子好怪。』 男孩笑道：『我也看到了，他好像一条狗。』
+UPDATE:
+ 刘镇伟导演出了大话三，我觉得依旧是一个不错的番外，在我心里并不能算是续集。经典的续集总是难续的。   ChangeLog:
+ 2014-10-25 完成初稿 2016-12-03 重修文字  </div><div class="post-footer">
+        <a href="/posts/20141025_%E5%AD%99%E6%82%9F%E7%A9%BA%E5%92%8C%E8%87%B3%E5%B0%8A%E5%AE%9D/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a>,&nbsp;<a href="/tags/%E5%BD%B1%E8%AF%84/">影评</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20141016_%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/">写在人生的边上</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2014-10-16">2014-10-16</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"><i class="far fa-folder fa-fw"></i>碎碎念</a></span></div><div class="content">钱钟书先生有一本书叫做《写在人生的边上》。
+读罢，由于缺乏足够的文学涵养，记性差，并没有对这本书留下非常深刻的印象。
+除了这本书的书名。
+当然，后来钱先生出了另一本书，叫做『人生边上的边上』, 那又是另一番意味了。
+古人总是在书籍的边上写下一些东西，此为批注，便好像是在书上留下了自己的痕迹。
+写下到此一游的风范，从古时候那孙猴子在如来的掌中留下一泡尿，到现在某些低素质游客随手乱刻乱画，可谓是一大特色，但细细想来这可能是老祖宗留下的传统。
+在茫茫然中度过自己的一生，就好像草草写下一本书籍，还来不及写下什么优质的内容，就已经就已经从一本书的扉页翻到了尾页。
+同样的剧情，同样的套路，只是人换了，而已。
+可人总是想留下什么东西，总想向自己或者是他人证明，『我是独特的，是唯一的』。不是吗？
+比如在纸墨世界里留下一本书籍，或者是在比特世界里留下自己的博客。用这些文字，在一个已知的世界里，写一些已经知道的或者是不知道的世界，那多有趣。
+如果说人这种动物的一生仅仅用一本书就可以包容的话，那么我想，在我的故事的结尾，我可以看到我的人生的那本书，以及写在书本边上的那些批注，甚至写批注上的批注。这样，总归是让自己的一生，多了一些有趣的意义。
+ 写东西，也是为了获得并且保持更加精确的思考。
+ 此为我写这些文字的原因，也是我重新开始写这些文字的原因。
+ ChangeLog:
+ 2015-02-20 增加图片 2016-11-23 重新润饰文字 2017-03-08 增加几句新感慨  </div><div class="post-footer">
+        <a href="/posts/20141016_%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a></div></div>
+</article>
+<ul class="pagination"><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/">1</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link" aria-hidden="true">&hellip;</span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/8/">8</a>
+                    </span>
+                </li><li class="page-item ">
+                    <span class="page-link">
+                        <a href="/page/9/">9</a>
+                    </span>
+                </li><li class="page-item active">
+                    <span class="page-link">
+                        <a href="/page/10/">10</a>
+                    </span>
+                </li></ul></div></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
         </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>有才的人往往是很有个性的，甚至个性难以驾驭，生活这么枯燥无味，天天做着同样的事情，吃饭，打怪，看着猪队友坑自己，还要听肉眼凡胎唐僧的绵延不绝的滔滔口水。</p>
-<p>这样的生活有什么意思呢？我可是当年踏碎凌霄，放肆桀骜的齐天大圣孙悟空啊！</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2014/10/25/%E5%AD%99%E6%82%9F%E7%A9%BA%E5%92%8C%E8%87%B3%E5%B0%8A%E5%AE%9D/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://twocucao.xyz/2014/10/16/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Micheal Gardner">
-      <meta itemprop="description" content="Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="MG的编程小屋">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2014/10/16/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/" class="post-title-link" itemprop="url">写在人生的边上</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">Posted on</span>
-
-              <time title="Created: 2014-10-16 21:07:51" itemprop="dateCreated datePublished" datetime="2014-10-16T21:07:51+08:00">2014-10-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2018-01-30 16:47:00" itemprop="dateModified" datetime="2018-01-30T16:47:00+08:00">2018-01-30</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">In</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/" itemprop="url" rel="index"><span itemprop="name">写在人生的边上</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="写在人生的边上"><a href="#写在人生的边上" class="headerlink" title="写在人生的边上"></a>写在人生的边上</h2><p>钱钟书先生有一本书叫做《写在人生的边上》。</p>
-<p>读罢，由于缺乏足够的文学涵养，记性差，并没有对这本书留下非常深刻的印象。</p>
-<p>除了这本书的书名。</p>
-<p>当然，后来钱先生出了另一本书，叫做『人生边上的边上』, 那又是另一番意味了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2014/10/16/%E5%86%99%E5%9C%A8%E4%BA%BA%E7%94%9F%E7%9A%84%E8%BE%B9%E4%B8%8A/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
-  </nav>
-
-
-
-          </div>
-          
-
-<script>
-  window.addEventListener('tabs:register', () => {
-    let { activeClass } = CONFIG.comments;
-    if (CONFIG.comments.storage) {
-      activeClass = localStorage.getItem('comments_active') || activeClass;
-    }
-    if (activeClass) {
-      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
-      if (activeTab) {
-        activeTab.click();
-      }
-    }
-  });
-  if (CONFIG.comments.storage) {
-    window.addEventListener('tabs:click', event => {
-      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
-      let commentClass = event.target.classList[1];
-      localStorage.setItem('comments_active', commentClass);
-    });
-  }
-</script>
-
-        </div>
-          
-  
-  <div class="toggle sidebar-toggle">
-    <span class="toggle-line toggle-line-first"></span>
-    <span class="toggle-line toggle-line-middle"></span>
-    <span class="toggle-line toggle-line-last"></span>
-  </div>
-
-  <aside class="sidebar">
-    <div class="sidebar-inner">
-
-      <ul class="sidebar-nav motion-element">
-        <li class="sidebar-nav-toc">
-          Table of Contents
-        </li>
-        <li class="sidebar-nav-overview">
-          Overview
-        </li>
-      </ul>
-
-      <!--noindex-->
-      <div class="post-toc-wrap sidebar-panel">
-      </div>
-      <!--/noindex-->
-
-      <div class="site-overview-wrap sidebar-panel">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <p class="site-author-name" itemprop="name">Micheal Gardner</p>
-  <div class="site-description" itemprop="description">Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.</div>
-</div>
-<div class="site-state-wrap motion-element">
-  <nav class="site-state">
-      <div class="site-state-item site-state-posts">
-          <a href="/archives/">
-        
-          <span class="site-state-item-count">93</span>
-          <span class="site-state-item-name">posts</span>
-        </a>
-      </div>
-      <div class="site-state-item site-state-categories">
-            <a href="/categories/">
-          
-        <span class="site-state-item-count">15</span>
-        <span class="site-state-item-name">categories</span></a>
-      </div>
-      <div class="site-state-item site-state-tags">
-            <a href="/tags/">
-          
-        <span class="site-state-item-count">96</span>
-        <span class="site-state-item-name">tags</span></a>
-      </div>
-  </nav>
-</div>
-
-
-
-      </div>
-
-    </div>
-  </aside>
-  <div id="sidebar-dimmer"></div>
-
-
-      </div>
-    </main>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        
-
-        
-
-<div class="copyright">
-  
-  &copy; 2014 – 
-  <span itemprop="copyrightYear">2020</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Micheal Gardner</span>
-</div>
-  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a>
-  </div>
-
-        
-
-
-
-
-
-
-
-
-      </div>
-    </footer>
-  </div>
-
-  
-  <script src="/lib/anime.min.js"></script>
-  <script src="/lib/velocity/velocity.min.js"></script>
-  <script src="/lib/velocity/velocity.ui.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
-<script src="/js/motion.js"></script>
-
-
-<script src="/js/schemes/pisces.js"></script>
-
-
-<script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  
-
-  
-
-</body>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript" src="/lib/typeit/typeit.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"data":{"id-1":"人生天地间，忽如编程客"},"typeit":{"cursorChar":null,"cursorSpeed":null,"data":{"id-1":["id-1"]},"duration":null,"speed":null}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
 </html>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>从一个小问题来说 Python 的作用域 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="从一个小问题来说 Python 的作用域" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20170114_pythonscope/" />
+<meta property="article:published_time" content="2017-01-14T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="从一个小问题来说 Python 的作用域"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20170114_pythonscope/" /><link rel="prev" href="http://twocucao.xyz/posts/20170105_postgresqlcheatsheet/" /><link rel="next" href="http://twocucao.xyz/posts/20170115_spacemacs/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "从一个小问题来说 Python 的作用域",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20170114_pythonscope\/"
+        },"genre": "posts","keywords": "Python","wordcount":  233 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20170114_pythonscope\/","datePublished": "2017-01-14T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">从一个小问题来说 Python 的作用域</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-01-14">2017-01-14</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 233 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a>
+      <ul>
+        <li><a href="#一个暴力的实现方法">一个暴力的实现方法</a></li>
+        <li><a href="#两个方法">两个方法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><blockquote>
+<p>备注，这种动态设置 module 里的方法不推荐</p>
+</blockquote>
+<h2 id="前言">前言</h2>
+<p>整理工具字符类的时候，想借助正则表达式来实现一部分的文字判断抽取等操作。</p>
+<p>比如实现：</p>
+<ul>
+<li>判断文字是否为 UUID</li>
+<li>判断文字是否包含 UUID</li>
+<li>抽取文字是中第一个 UUID</li>
+<li>抽取文字是中所有 UUID</li>
+</ul>
+<!-- raw HTML omitted -->
+<h3 id="一个暴力的实现方法">一个暴力的实现方法</h3>
+<p>如果正则表达式比较少，就只一个 UUID，我们就不需要思考什么，我们分别编写四个函数：</p>
+<ul>
+<li>is_uuid(_str)</li>
+<li>has_uuid(_str)</li>
+<li>extract_first_uuid(_str)</li>
+<li>extract_all_uuid(_str)</li>
+</ul>
+<blockquote>
+<p>没错，过早优化是万恶之源</p>
+</blockquote>
+<p>但很显然，手动方法显得很弱智，当我需要编写判断 QQ 号的时候，我又必须编写四个函数：</p>
+<ul>
+<li>is_qq_num(_str)</li>
+<li>has_qq_num(_str)</li>
+<li>extract_first_qq_num(_str)</li>
+<li>extract_all_qq_num(_str)</li>
+</ul>
+<p>然而：</p>
+<ul>
+<li>如果，我还需要判断手机号、日期、时间等等，这手动复制粘贴的过程就比较痛苦了。</li>
+<li>如果，我去要添加一个方法，给 QQ 号码，uuid 等打码 那就必须要给所有的 uuid, 手机，邮箱都添加一个 dama_xxx(_str) 方法</li>
+</ul>
+<p>有没有好一点的解决方法呢？</p>
+<!-- raw HTML omitted -->
+<h3 id="两个方法">两个方法</h3>
+<p>第一种，比如把函数修改为：</p>
+<ul>
+<li>is(_str,QQ_NUM_PATTEN)</li>
+<li>has(_str,QQ_NUM_PATTEN)</li>
+<li>extract_first(_str,QQ_NUM_PATTEN)</li>
+<li>extract_all(_str,QQ_NUM_PATTEN)</li>
+</ul>
+<p>第二种，Python 中动态添加工具方法，我个人比较喜欢这种：</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 一个优雅的错误实现方式</span>
+<span class="k">for</span> <span class="n">regex</span><span class="p">,</span> <span class="n">regex_pattern</span> <span class="ow">in</span> <span class="n">REGEXES</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">def</span> <span class="nf">has_regex_func</span><span class="p">(</span><span class="n">_str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">has_pattern</span><span class="p">(</span><span class="n">_str</span><span class="p">,</span> <span class="n">regex_pattern</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">is_regex_func</span><span class="p">(</span><span class="n">_str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">match_pattern</span><span class="p">(</span><span class="n">_str</span><span class="p">,</span> <span class="n">regex_pattern</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">extract_first_regex_func</span><span class="p">(</span><span class="n">_str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">find_first_matched_pattern</span><span class="p">(</span><span class="n">_str</span><span class="p">,</span> <span class="n">regex_pattern</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">extract_all_regex_func</span><span class="p">(</span><span class="n">_str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">find_all_matched_pattern</span><span class="p">(</span><span class="n">_str</span><span class="p">,</span> <span class="n">regex_pattern</span><span class="p">)</span>
+
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">],</span> <span class="s1">&#39;has_{regex_suffix}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">regex_suffix</span><span class="o">=</span><span class="n">regex</span><span class="p">),</span> <span class="n">has_regex_func</span><span class="p">)</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">],</span> <span class="s1">&#39;is_{regex_suffix}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">regex_suffix</span><span class="o">=</span><span class="n">regex</span><span class="p">),</span> <span class="n">is_regex_func</span><span class="p">)</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">],</span> <span class="s1">&#39;extract_first_{regex_suffix}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">regex_suffix</span><span class="o">=</span><span class="n">regex</span><span class="p">),</span> <span class="n">extract_first_regex_func</span><span class="p">)</span>
+    <span class="nb">setattr</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">[</span><span class="vm">__name__</span><span class="p">],</span> <span class="s1">&#39;extract_all_{regex_suffix}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">regex_suffix</span><span class="o">=</span><span class="n">regex</span><span class="p">),</span> <span class="n">extract_all_regex_func</span><span class="p">)</span>
+</code></pre></div><p>于是我添加了测试方法：</p>
+<blockquote>
+<p>一个不对稍微有些复杂的逻辑的程序进行测试的程序员不是一个称职的老司机。</p>
+</blockquote>
+<pre><code>@pytest.mark.parametrize('test_input,expected', [
+    (&quot;321323199509234453&quot;, False),
+    (&quot;000528-332222&quot;, False),
+    (&quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;, True),
+])
+def test_is_uuid(test_input, expected):
+    assert is_uuid(test_input) == expected
+
+@pytest.mark.parametrize('test_input,expected', [
+    (&quot;321323199509234453&quot;, False),
+    (&quot;000528-332222&quot;, False),
+    (&quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;, True),
+])
+def test_has_uuid(test_input, expected):
+    assert has_uuid(test_input) == expected
+
+@pytest.mark.parametrize('test_input,expected', [
+    (&quot;321323199509234453&quot;, None),
+    (&quot;000528-332222&quot;, None),
+    (&quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;, &quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;),
+])
+def test_extract_first_uuid(test_input, expected):
+    assert extract_first_uuid(test_input) == expected
+
+@pytest.mark.parametrize('test_input,expected', [
+    (&quot;321323199509234453&quot;, None),
+    (&quot;000528-332222&quot;, None),
+    (
+            &quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;,
+            ['521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4', '521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4',
+             '521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4', '521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4']),
+    (
+            &quot;521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4   521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4   521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4   aslakdj 521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4&quot;,
+            ['521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4', '521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4',
+             '521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4', '521e7bb0-d8d5-4f49-a5c2-fee1aaf9e8c4']),
+])
+def test_extract_all_uuid(test_input, expected):
+    assert extract_all_uuid(test_input) == expected
+</code></pre><p>测试未通过：</p>
+<p>怎么查看代码本身都没有什么逻辑问题，那么问题出在哪里？</p>
+<p>对程序植入一些 print 代码来 Debug 一下：</p>
+<pre><code>for regex, regex_pattern in REGEXES.items():
+    def has_regex_func(_str, regex_pattern=regex_pattern):
+        # 当函数被调用之后，打印 regex_pattern 查看对应的字符串
+        print(regex_pattern)
+        return has_pattern(_str, regex_pattern)
+
+    def is_regex_func(_str, regex_pattern=regex_pattern):
+        return match_pattern(_str, regex_pattern)
+
+    def extract_first_regex_func(_str, regex_pattern=regex_pattern):
+        return find_first_matched_pattern(_str, regex_pattern)
+
+    def extract_all_regex_func(_str, regex_pattern=regex_pattern):
+        return find_all_matched_pattern(_str, regex_pattern)
+
+    # 查看是否为同一个函数
+    print(id(has_regex_func))
+
+    setattr(sys.modules[__name__], 'has_{regex_suffix}'.format(regex_suffix=regex), has_regex_func)
+    setattr(sys.modules[__name__], 'is_{regex_suffix}'.format(regex_suffix=regex), is_regex_func)
+    setattr(sys.modules[__name__], 'extract_first_{regex_suffix}'.format(regex_suffix=regex), extract_first_regex_func)
+    setattr(sys.modules[__name__], 'extract_all_{regex_suffix}'.format(regex_suffix=regex), extract_all_regex_func)
+</code></pre><p>于是发现问题，所有打印出来的 regex_pattern 都是一致的。也就是，不管是 has_uuid 还是 has_qq_num 还是其他，最后 regex_pattern 都是我在字典中实现的</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20170105_postgresqlcheatsheet/" class="prev" rel="prev" title="PostgreSQL CheatSheat"><i class="fas fa-angle-left fa-fw"></i>PostgreSQL CheatSheat</a>
+            <a href="/posts/20170115_spacemacs/" class="next" rel="next" title="写给 Pythoner 的 Spacemacs 入门指北">写给 Pythoner 的 Spacemacs 入门指北<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

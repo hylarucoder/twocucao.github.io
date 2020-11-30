@@ -1,0 +1,54 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>技术未分类 - 分类 - 海拉鲁编程客</title>
+        <link>http://twocucao.xyz/categories/%E6%8A%80%E6%9C%AF%E6%9C%AA%E5%88%86%E7%B1%BB/</link>
+        <description>技术未分类 - 分类 - 海拉鲁编程客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Sat, 08 Sep 2018 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/%E6%8A%80%E6%9C%AF%E6%9C%AA%E5%88%86%E7%B1%BB/" rel="self" type="application/rss+xml" /><item>
+    <title>Thinking In Programming Language</title>
+    <link>http://twocucao.xyz/posts/20180908_thinkinginprogramminglanguage/</link>
+    <pubDate>Sat, 08 Sep 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180908_thinkinginprogramminglanguage/</guid>
+    <description><![CDATA[0x00 前言 笔者对于涉猎的语言都是草草了解，深入不敢谈。能用罢了。
+即便是用过几种语言，得出的经验依然是片面的。
+很多人得出一些结论，往往是样本就一个。比如说一个只用过 PHP 的人叫嚣 PHP 是最好的语言。
+所以，我得出的结论，不过是一家之言罢了。
+本文文章就是总结一下，我使用的一些语言的经验，我整理出一个大致的框架，方便我以后切换到其他编程语言可以更顺滑一些。
+0x01 语言胡论 在我看来，一个人说他会且只精通一门编程语言是很让我不能理解的事情，在我看来，什么编程语言框架上手两三天就能去写，但是这严格意义上应该叫做能用，和精通相差甚远。那是不是说写的时间长的人经验就老道了呢？也不见得。下棋下了一辈子是烂棋篓子的人比比皆是。
+那我认为什么样子的人才是懂写代码的人。
+拥有良好的组织代码的能力的人。  恩，组织代码的能力，一个文件排布混乱的人，不太可能写出整齐严谨的代码，当然，人也可能是复杂的，比如，这个人写的代码挺好，但是生活住处一团糟。
+当然这是题外话了，依个人经验而言，学习任何一个复杂的系统，也需要像组织一个东西一样，系统性的学习。
+系统化的东西往往像《如何阅读一本书》里面描述一本书的复杂架构那样。
+没有一种物质或产品是绝对简单的。所有的东西都是复杂的组合体。当你看一个整体组成复杂的东西的时候，如果只看它如何呈现一体的面貌，那是还没有掌握精髓，你还必须要明白它怎样呈现多个的面貌，但不是各自为政、互不相干的多个面貌，而是互相融合成有机体的多个面貌。如果组成的各个部分没有有机的关联，仅仅是一个集合体罢了。 这就像是一堆砖头跟一栋又砖头建造起来的房子是有区别的。而单一的房子与建造的房子也不相同。一本书就像是一栋单一的房子。一栋大厦，拥有许多房间，每层楼都有房间，有不同的尺寸和形状，不同的外观，不同的用途，这些房间是独立的，分离的，每个房间都有自己的架构和装潢设计，但却不是完全独立与分离的，这些房间使用普通门 / 拱门 / 走廊 / 楼梯串联起来的，即建筑师错位的动线架构，因为这些架构师彼此联结的，因此每一个部分在整体的使用功能上要贡献出自己的力量。否则这栋房子便是不适合居住的。  独一无二 有的人认为所有的编程语言都是一样的。
+依我看，所有的编程语言都是有特点的，也是有优缺点的。
+举一个我朋友的爱说的很粗俗的例子：
+虽然说关了灯全都一个样，但是每一个女孩子都有是独一无二的存在。  编程语言也是一样。
+ 有的偏向于运行效率，有的偏向于开发效率。 有的据说是让人编程时候感到快乐 (ruby)，有的说你生命苦短，为什么不用 Python。 有的偏向于 Web 开发 (PHP)，有的偏向于并发操作 有的是 Windows 上面自动化的小白工具 (Autohotkey) 有的是据说是一次编译，到处运行 (Java) 有的是亲妈平台万金油 (C#), 当然，最近也在亲妈的带领下往其他方向前进了。  编程语言往往是上面这些因素的取舍。
+ 你要运行效率，往往开发效率就会打折。 你要开发效率，往往就需要堆更多的机器来提升性能。 你要充分利用某个平台，往往就没有极高兼容性。 你要编程语言帮你处理掉不需要考虑的问题，有的程序员就站出来了，你是不相信我控制 内存的能力么？  有的语言生态好，比如 对于我定位于全栈工程师（其实是全干工程师）的程序员来说：
+文能写虫爬数据 武能后端写网站 进能数据搞 AI 退能机器跑运维]]></description>
+</item><item>
+    <title>Cheatsheet 集合篇</title>
+    <link>http://twocucao.xyz/posts/20161210_cheatsheet/</link>
+    <pubDate>Sat, 10 Dec 2016 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20161210_cheatsheet/</guid>
+    <description><![CDATA[0x00. 前言 本文为 Cheatsheet 类型文章的集合。
+编码最重要的是思路。
+ 做什么不是呢？
+  有人问：你想那么多不累吗？ 答：比起出乱子，想多当然是最省事的方式。  截止今日已经更新 7 篇 CheatSheet 文章，打算不断完善它们。
+0x01. 目录   Ubuntu CheatSheet
+  Mac CheatSheet
+  Vim CheatSheet
+  VSCode CheatSheet
+  Shell CheatSheet
+  Pandas CheatSheet
+  XPath CheatSheet
+  Docker CheatSheet
+  MySQL CheatSheet
+  PostgreSQL CheatSheet
+  Mongo CheatSheet
+  Redis CheatSheet
+  ]]></description>
+</item></channel>
+</rss>

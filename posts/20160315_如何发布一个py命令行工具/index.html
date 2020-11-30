@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>如何发布一个 Python 命令行工具 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="如何发布一个 Python 命令行工具" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20160315_%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AApy%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/" />
+<meta property="article:published_time" content="2016-03-15T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何发布一个 Python 命令行工具"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20160315_%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AApy%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7/" /><link rel="prev" href="http://twocucao.xyz/posts/20160224_%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8/" /><link rel="next" href="http://twocucao.xyz/posts/20160402_macremotecontrol/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "如何发布一个 Python 命令行工具",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20160315_%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AApy%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7\/"
+        },"genre": "posts","keywords": "Python","wordcount":  445 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20160315_%E5%A6%82%E4%BD%95%E5%8F%91%E5%B8%83%E4%B8%80%E4%B8%AApy%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7\/","datePublished": "2016-03-15T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">如何发布一个 Python 命令行工具</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2016-03-15">2016-03-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 445 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#本文简介">本文简介</a></li>
+    <li><a href="#如何分解这个发布任务">如何分解这个发布任务？</a></li>
+    <li><a href="#1-写好一个-python-命令行工具">1. 写好一个 Python 命令行工具</a>
+      <ul>
+        <li><a href="#11python-的如何编写一个简单的命令行">1.1.Python 的如何编写一个简单的命令行</a></li>
+        <li><a href="#12-如何组织代码结构">1.2. 如何组织代码结构。</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-发布">2. 发布</a>
+      <ul>
+        <li><a href="#21-注册-pypi-账户">2.1. 注册 pypi 账户</a></li>
+        <li><a href="#22-注册在账户下面注册-python-包">2.2. 注册在账户下面注册 Python 包</a></li>
+        <li><a href="#23-上传打包好的-python-命令行工具">2.3. 上传<strong>打包</strong>好的 Python 命令行工具。</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-完善">3. 完善</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="本文简介">本文简介</h2>
+<p>上次写的一个终端里面斗鱼 TV 弹幕 Python 版本和 Ruby 版本，并且发布到 PIP 和 RubyGems 上面。在发布 PIP 包的时候，居然 Google 不到一篇可以非常好的讲解这个流程的文章。于是整理这篇文章，并且方便后来自己检索，并且方便他人找资料。</p>
+<p>自推荐下依照本文定制的命令行工具 danmu.fm 的 github 地址：</p>
+<p><a href="https://github.com/twocucao/danmu.fm">https://github.com/twocucao/danmu.fm</a></p>
+<p>本文的目的也是非常简单：</p>
+<blockquote>
+<p>**写一个 Python 命令行工具，并且发布到 PIP 上面.**并且在这个过程中给出我自己的一些思考。</p>
+</blockquote>
+<!-- raw HTML omitted -->
+<h2 id="如何分解这个发布任务">如何分解这个发布任务？</h2>
+<p>只需要进行如下的两个步骤便可以：</p>
+<ul>
+<li>
+<ol>
+<li>写好一个 Python 命令行工具。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>发布它。</li>
+</ol>
+</li>
+</ul>
+<p>当然，这样不够细致。再细分一下。</p>
+<ul>
+<li>
+<ol>
+<li>写好一个 Python 命令行工具</li>
+</ol>
+<ul>
+<li>1.1. 命令行的特点，以及 Python 的如何编写命令行</li>
+<li>1.2. 如何组织代码结构。</li>
+</ul>
+</li>
+<li>
+<ol start="2">
+<li>发布</li>
+</ol>
+</li>
+<li>2.1. 注册 pypi 账户
+<ul>
+<li>2.2. 注册在账户下面注册 Python 包</li>
+<li>2.3. 上传<strong>打包</strong>好的 Python 命令行工具。</li>
+</ul>
+</li>
+<li>
+<ol start="3">
+<li>完善代码</li>
+</ol>
+</li>
+</ul>
+<h2 id="1-写好一个-python-命令行工具">1. 写好一个 Python 命令行工具</h2>
+<p>写好一个命令行工具首先要知道命令行工具是什么？</p>
+<blockquote>
+<p>在我看来，命令行工具就是一种完成某种类型的任务的终端程序。</p>
+</blockquote>
+<p>也就是基本上没有什么用户界面的程序。</p>
+<p>由于基本上没有什么用户界面，所以导致单个命令行的交互能力及其低下。但这种低下的交互性对于一些固定工作而言，简直就是最灵活的工具。只需要输入一些命令便可以完成某种类型的工作。实在是方便的很。</p>
+<p>所以，某种程度上，终端程序低交互的缺点反而成了优点。</p>
+<h3 id="11python-的如何编写一个简单的命令行">1.1.Python 的如何编写一个简单的命令行</h3>
+<p>对于 Python 和命令行交互，我们很容易想出一个比较方便的方案。</p>
+<p>sys.argv 就是这样的嘛！</p>
+<p>我们很容易这样写代码。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> python testargv.py thisisaargv1
+</code></pre></div><p>甚至我们也可以这样写命令行，</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> python testargv.py thisisaargv1 -d -f <span class="m">0</span>
+</code></pre></div><p>那么，这样写的后果就是，不方便解析出（不是不能，是不方便） -d -f 0 以及 thisisaargv1.</p>
+<p>不信的话，你解析一个下面场景的命令行试试，</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 用户可能这样输入</span>
+danmu.fm http://www.douyutv.com/xiaocang -q <span class="m">1</span> -v <span class="m">2</span>
+danmu.fm -q <span class="m">1</span> -v <span class="m">2</span> http://www.douyutv.com/xiaocang
+<span class="c1"># 当然，肯定还有漏写啦，等等，你得需要转类型，增加各种 blablabla 的描述吧，添加默认的参数值吧。</span>
+</code></pre></div><p>于是 Python 就提供了一个非常好用的模块可以使用。叫做 argparse.</p>
+<p>上面的描述就变成了这个样子</p>
+<div class="highlight"><pre class="chroma"><code class="language-Python" data-lang="Python"><span class="kn">import</span> <span class="nn">argparse</span>
+
+<span class="n">APP_DESC</span><span class="o">=</span><span class="s2">&#34;&#34;&#34;
+</span><span class="s2">这就是描述
+</span><span class="s2">&#34;&#34;&#34;</span>
+<span class="k">print</span><span class="p">(</span><span class="n">APP_DESC</span><span class="p">)</span>
+<span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;--help&#39;</span><span class="p">)</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-q&#39;</span><span class="p">,</span><span class="s1">&#39;--quality&#39;</span><span class="p">,</span><span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">help</span><span class="o">=</span><span class="s2">&#34;download video quality : 1 for the standard-definition; 3 for the super-definition&#34;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-v&#39;</span><span class="p">,</span><span class="s1">&#39;--verbose&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">help</span><span class="o">=</span><span class="s2">&#34;print more debuging information&#34;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-s&#39;</span><span class="p">,</span><span class="s1">&#39;--store&#39;</span><span class="p">,</span><span class="n">help</span><span class="o">=</span><span class="s2">&#34;保存流媒体文件到指定位置&#34;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-c&#39;</span><span class="p">,</span><span class="s1">&#39;--config&#39;</span><span class="p">,</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">help</span><span class="o">=</span><span class="s2">&#34;读取~/.danmu.fm 配置，请~/.danmu.fm 指定数据库&#34;</span><span class="p">)</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;url&#39;</span><span class="p">,</span><span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;URL&#39;</span><span class="p">,</span><span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;+&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&#34;zhubo page URL (http://www.douyutv.com/*/)&#34;</span><span class="p">)</span>
+<span class="n">args</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
+<span class="c1"># 获取对应参数只需要 args.quality,args.url 之类。</span>
+<span class="n">url</span> <span class="o">=</span> <span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">url</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+<span class="c1">#其他执行逻辑</span>
+</code></pre></div><p>保存为 danmu.py</p>
+<p>这样就可以执行命令</p>
+<pre><code>python danmu.py http://www.douyutv.com/xiaocang -q 1 -v 2
+</code></pre><p>通过 args 就可以获取参数，然后进行终端程序的参数初始化。</p>
+<p>可是这和我们的要求还是不同嘛，我们不想多写 Python XXX, 我们想直接 XXX. 就像这样。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">danmu.fm -q <span class="m">1</span> -v <span class="m">2</span> http://www.douyutv.com/xiaocang
+</code></pre></div><p>不急，下面就是了。</p>
+<h3 id="12-如何组织代码结构">1.2. 如何组织代码结构。</h3>
+<p>于是，现在就要开始组织代码结构了。</p>
+<p>我们在最终的代码目录大概是这样的。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">danmu.fm
+├── README.md
+├── danmufm
+│   ├── __init__.py
+│   ├── client
+│   │   ├── __init__.py
+│   │   ├── __init__.pyc
+│   │   ├── douyu_client.py
+│   │   └── douyu_danmu_client.py
+│   ├── danmu.py
+│   ├── misc
+│   │   ├── __init__.py
+│   │   ├── color_printer.py
+│   │   ├── downloaders.py
+│   │   └── player.py
+│   └── model
+│       ├── __init__.py
+│       └── douyu_msg.py
+├── docs
+├── setup.cfg
+├── setup.py
+├── sh.py
+└── tests
+</code></pre></div><p>这就是我上次写的 danmu.fm 的代码目录。</p>
+<p>聪明的你这时候你注意到了：</p>
+<ol>
+<li>主要的程序不是放在根目录下面，而是放在第二目录 danmufm 下面。
+2.setup.cfg 是什么鬼东西
+3.setup.py 是什么鬼东西</li>
+</ol>
+<p>对于上面几点，我们分别进行解释</p>
+<p>###1.2.1 为什么主要程序在第二目录下</p>
+<p>为了把主要的程序分离出来，放在第二目录下面，这样的待会打包以后多出很多文件夹就不会对源码造成干扰。</p>
+<p>当然，由于把程序放在了第二目录下面，所以，脚本里面的 from import 语句应该使用相对路径导入。</p>
+<p>相对路径导入的的时候需要注意运行的时候使用如下命令</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">python3 -m danmufm.danmu <span class="o">[</span>xxxx<span class="o">]</span>
+</code></pre></div><p>###1.2.2 setup.cfg</p>
+<p>填写如下内容即可。</p>
+<pre><code>[metadata]
+description-file = README.md
+</code></pre><p>然后去写 Markdown 的 Readme 就好了。</p>
+<p>###1.2.3 setup.py</p>
+<p>这个是重头戏了。</p>
+<p>setup 这个 py 文件就是打包配置文件。对这个程序是谁的，有什么依赖，入口是什么，等等等等的配置。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python">
+<span class="c1">#-*- encoding: UTF-8 -*-</span>
+<span class="kn">from</span> <span class="nn">setuptools</span> <span class="kn">import</span> <span class="n">setup</span><span class="p">,</span> <span class="n">find_packages</span>
+<span class="s2">&#34;&#34;&#34;
+</span><span class="s2">打包的用的 setup 必须引入，
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="n">VERSION</span> <span class="o">=</span> <span class="s1">&#39;0.1.1&#39;</span>
+
+<span class="n">setup</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;danmu.fm&#39;</span><span class="p">,</span>
+      <span class="n">version</span><span class="o">=</span><span class="n">VERSION</span><span class="p">,</span>
+      <span class="n">description</span><span class="o">=</span><span class="s2">&#34;a tiny and smart cli player of douyutv,ximalayad,anmu based on Python&#34;</span><span class="p">,</span>
+      <span class="n">long_description</span><span class="o">=</span><span class="s1">&#39;just enjoy&#39;</span><span class="p">,</span>
+      <span class="n">classifiers</span><span class="o">=</span><span class="p">[],</span> <span class="c1"># Get strings from http://pypi.python.org/pypi?%3Aaction=list_classifiers</span>
+      <span class="n">keywords</span><span class="o">=</span><span class="s1">&#39;python douyu danmu danmu.fm terminal&#39;</span><span class="p">,</span>
+      <span class="n">author</span><span class="o">=</span><span class="s1">&#39;twocucao&#39;</span><span class="p">,</span>
+      <span class="n">author_email</span><span class="o">=</span><span class="s1">&#39;twocucao@gmail.com&#39;</span><span class="p">,</span>
+      <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://github.com/twocucao/doumu.fm&#39;</span><span class="p">,</span>
+      <span class="n">license</span><span class="o">=</span><span class="s1">&#39;MIT&#39;</span><span class="p">,</span>
+      <span class="n">packages</span><span class="o">=</span><span class="n">find_packages</span><span class="p">(),</span>
+      <span class="n">include_package_data</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+      <span class="n">zip_safe</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+      <span class="n">install_requires</span><span class="o">=</span><span class="p">[</span>
+        <span class="s1">&#39;requests&#39;</span><span class="p">,</span>
+      <span class="p">],</span>
+      <span class="n">entry_points</span><span class="o">=</span><span class="p">{</span>
+        <span class="s1">&#39;console_scripts&#39;</span><span class="p">:[</span>
+            <span class="s1">&#39;danmu.fm = danmufm.danmu:main&#39;</span>
+        <span class="p">]</span>
+      <span class="p">},</span>
+<span class="p">)</span>
+
+</code></pre></div><p>官方有 distutils 这个包管理器工具，设置也非常的简单，只是，它不支持 entry_points 属性，由于无法使用 entry_point, 也就无法通过命令来跳转到指定模块运行程序，这也就意味着，官方工具不方便写成命令行。还是 setuptools 好。</p>
+<p>上面需要注意的就是 install_requires 可以添加依赖。其他的你猜都可以猜出来是做什么的。自己去看代码，我就不多说了。</p>
+<h2 id="2-发布">2. 发布</h2>
+<p>所谓的发布，就是将打包好的程序的某个版本发布到某个仓库中。</p>
+<h3 id="21-注册-pypi-账户">2.1. 注册 pypi 账户</h3>
+<p>到这个上面注册账号：
+<a href="https://pypi.python.org/pypi">https://pypi.python.org/pypi</a></p>
+<h3 id="22-注册在账户下面注册-python-包">2.2. 注册在账户下面注册 Python 包</h3>
+<p>进入对应项目根文件，然后执行</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">python3 setup.py register
+</code></pre></div><p>这一步程序会让你输入刚刚注册的账号和密码，然后注册该包。注册该包以后，你就有了一个小仓库。可以存放不同版本的 danmu.fm.</p>
+<p>注册的仓库是可以在这个地址看到的，
+<a href="https://pypi.python.org/pypi?%3Aaction=pkg_edit&amp;name=danmu.fm">https://pypi.python.org/pypi?%3Aaction=pkg_edit&amp;name=danmu.fm</a></p>
+<h3 id="23-上传打包好的-python-命令行工具">2.3. 上传<strong>打包</strong>好的 Python 命令行工具。</h3>
+<p>这里需要借助一个小工具，twine.twine 是一个更加安全方便上传打包好的代码的工具。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip3 install twine
+</code></pre></div><p>接着开始打包，打包成两个版本，一个是不需要 build 的版本，另一个是需要 build 的版本（顺带吐槽下，这两个诡异的命名）.</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">python setup.py sdist bdist_wheel
+</code></pre></div><p>于是剩下来的就显而易见了，上传 build 完毕的程序到仓库中。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">twine upload dist/danmu.fm-0.1.2*
+</code></pre></div><p>于是，安装一下，测试是否成功</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip3 install danmu.fm --upgrade
+</code></pre></div><p>命令行的工具是这样使用的。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">danmu.fm -q <span class="m">2</span> -v <span class="m">1</span> http://www.douyutv.com/16789
+</code></pre></div><h2 id="3-完善">3. 完善</h2>
+<p>不断的完善代码，然后打包终端程序发布到仓库给别人用，这就是整个的 PIP 打包发布流程。</p>
+<ul>
+<li>这个时候，你可能需要使用版本控制软件。</li>
+<li>你可能需要增多的代码的测试。</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20160224_%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8/" class="prev" rel="prev" title="关于背单词软件，你不知道的惊人真相"><i class="fas fa-angle-left fa-fw"></i>关于背单词软件，你不知道的惊人真相</a>
+            <a href="/posts/20160402_macremotecontrol/" class="next" rel="next" title="Mac 远程控制">Mac 远程控制<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

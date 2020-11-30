@@ -1,0 +1,102 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>DevOps - 分类 - 海拉鲁编程客</title>
+        <link>http://twocucao.xyz/categories/devops/</link>
+        <description>DevOps - 分类 - 海拉鲁编程客</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Wed, 23 May 2018 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/devops/" rel="self" type="application/rss+xml" /><item>
+    <title>Python 自动化工具 Fabric 支持 Python3</title>
+    <link>http://twocucao.xyz/posts/20180523_fabric2/</link>
+    <pubDate>Wed, 23 May 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180523_fabric2/</guid>
+    <description><![CDATA[0x00 前言 当大家还在纠结 Python2 与 Python3 的时候，我其实早就入了 python3 的门了。
+后来
+ 我总算学会了如何去爱。 我喜欢的工具陆陆续续支持了 Python3 Scrapy 支持了 Python3 Ansible 支持了 Python3  只有 Fabric 这个工具，死撑着没有支持 Python3 的的迹象。
+2018-05-08 的时候，Fabric 悄悄升级了 2.0 版本。
+而就在前两天，我升级网站的时候，突然发现 fabric (1.14 版本） 不能用了。
+查了一下版本，发现 fabric 更新到了 2.0 版本，支持了 python3.4
+在发现这个问题之后，火速刷了一波官方文档，把手头 Fabric 1.14 版本的脚本做了一些升级。
+从 V1 到 V2 Fabric v2 基于 invoke 和 paramiko 两个库构建而成。
+ invoke 库提供了 subprocess command execution 和 command-line paramiko 提供了 ssh 协议实现  在这两者的基础上，做了一些扩展。]]></description>
+</item><item>
+    <title>Docker CheatSheet</title>
+    <link>http://twocucao.xyz/posts/20180210_dockercheatsheet/</link>
+    <pubDate>Sat, 10 Feb 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180210_dockercheatsheet/</guid>
+    <description><![CDATA[0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。
+ Docker 相关概念 Docker 配套工具 Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化 Docker 踩坑记录  不定期更新。
+0x01 Docker 相关概念 1.1 Docker 是什么？ 在认知 Docker 这种相对而言比较新概念的时候，只要从以往的经验中拿出一个词语来概括新词汇即可。
+于是，我们便可以这么理解：
+ Docker 是一种比虚拟机轻量的用来存放职责比较单一的应用的容器。
+ 也就是三点：
+ 比虚拟机轻量 用来存放职责单一的应用 容器  显然这是一种理解，而不是一种定义。
+1.2 Docker 是用来做什么的？ 新技术本质是什么？工具也。 每一个新的技术都是为了提升效率才被创造出来，那么，究竟 Docker 可以从哪些方面提升我们的效率呢？
+我们知道开发一个有些规模的网站的话，需要严格遵守如下的开发流程：
+ 编码 测试 集成到系统中 部署  但如果人员比较多，则会出现问题，有的人喜欢用 MacOS, 有的人喜欢用 Ubuntu, 开发测试环境怎么统一呢？如果开发人员明明使用的是某个版本的 PostgreSQL, 用了最新的功能，但是测试和运维用的就是老版本的功能怎么办？
+部署环境也会有问题，比如，开发部突然想使用更高版本的软件，比如突然需要更多的 Django 应用来负担海量请求的怎么办？Hadoop 不够用怎么办？]]></description>
+</item><item>
+    <title>ElasticSearch CheatSheet</title>
+    <link>http://twocucao.xyz/posts/20180210_elasticsearchcheatsheet/</link>
+    <pubDate>Sat, 10 Feb 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180210_elasticsearchcheatsheet/</guid>
+    <description><![CDATA[0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。
+ 最早使用 ElasticSearch 是两年前了。最近准备用 Django 写一个全栈式的应用，借用强大的 ES 来做搜索。
+ 这是我在写程序之余写这篇笔记的原因。最近因为换工作的事情耽误了教程更新，就把这篇笔记放出来吧。不定期更新。
+官网介绍 ElasticSearch 不仅仅是全文搜索，也可以结构化搜索（这里用结构化查询会更准确一些），处理人类语言，地理位置，以及关系。
+然而，我在项目使用过程中还是主要用到了全文搜索以及推荐。
+不用其他的主要原因是因为 ES 尺有所短寸有所长：
+ geo 处理方面 postgis 完全就是神一般的存在。为什么还要用 ES 呢？ 关系型数据库的核心不就是处理关系？复杂的关系肯定还是放在关系数据库里面。   highlighted search search-as-you-type did-you-mean suggestions  我对 ElasticSearch 在后台组件里的作用在于搜索与推荐：
+ 整站的搜索功能   全文搜索  推荐   依据某几个维度的数据进行排序  知乎的文章居然不支持 toc, 实在是太蛋疼了。
+文章目录如下
+ ▼ 0x00 前言 : section ▼ 0x01 安装，配置，基本 shell 命令 : section 1.]]></description>
+</item><item>
+    <title>PostgreSQL CheatSheat</title>
+    <link>http://twocucao.xyz/posts/20170105_postgresqlcheatsheet/</link>
+    <pubDate>Thu, 05 Jan 2017 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20170105_postgresqlcheatsheet/</guid>
+    <description><![CDATA[0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 PostgreSQL 相关和命令。
+PostGIS 相关的资料参考文章 Geo Processing With Python
+ 安装与基本配置 PostgreSQL 配套工具 PostgreSQL SQL 常用代码片段 Python Driver : psycopg2 , 与两个 ORM ( Django ORM / SQLAlchemy )  不定期更新。
+0x01 安装，配置，基本 shell 命令 安装 配置 基本 Shell 命令 # 开启关闭 pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log stop pg_ctl -D /usr/local/var/postgres start pg_ctl -D /usr/local/var/postgres stop -s -m fast 数据的导入导出 pg_dump -C -Fp -f dump.]]></description>
+</item><item>
+    <title>Redis Cheatsheet</title>
+    <link>http://twocucao.xyz/posts/20161211_redischeatsheet/</link>
+    <pubDate>Sun, 11 Dec 2016 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20161211_redischeatsheet/</guid>
+    <description><![CDATA[0x00. 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。
+ Redis Shell Redis 配套工具 Redis-Py 常见问题 踩坑记录  不定期更新。
+0x01 Redis Shell  RedisClient 通过网络或者 Dash 查看文档 Redis 官方自带工具  0x02 Redis 使用场景  记录点赞数 hash 记录最近帖子列表 便于快速显示 zset 记录帖子的点赞人，和去重 zset 相关内容。list 计数器，用于分配 ID  分布式锁 基本用法就是
+set lock:upgdatenewprofile true ex 5 nx TODO: 搞事情 del lock:upgdatenewprofile 但是呢？这个逻辑还是有问题的，比如第一个线程的搞事情的时间大于 5s, 那么第二个线程就会加个锁，然后第一个线程释放掉锁。
+于是第三个线程一看，哟，没锁，就开始搞事情。
+这种情况可以使用可重入锁.（但可重入锁本身就会增加代码的复杂度）
+延时队列 brpop blpop blocking 本身也会爆异常，所以，也要处理好异常。
+0x03 Redis-Py 基本类型与其操作  string hash set zset 有序集合  set/get mget name1,name2,name3 mset name1 value1 name2 value2 expire name1 5 setex name1 5 value1 # 队列 rpush queue item1 item2 item3 llen queue lpop queue # 栈 rpush stack item1 item2 item3 llen stack rpop stack 慢操作]]></description>
+</item><item>
+    <title>MongoDB Cheatsheet</title>
+    <link>http://twocucao.xyz/posts/20161209_mongocheatsheet/</link>
+    <pubDate>Fri, 09 Dec 2016 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20161209_mongocheatsheet/</guid>
+    <description><![CDATA[前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MongoDB 相关命令。
+ Mongo Shell Mongo 配套工具 Python API  不定期更新。
+安装 # MacOS 安装 brew install mongodb brew services start mongodb # Ubuntu Server 16.04 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927 echo &#34;deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.2 multiverse&#34; | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list apt-get update -y apt-get install -y mongodb-org service mongod start 配置 IP 地址 MongoDB 配套工具  RoboMongo 通过网络或者 Dash 查看文档 Mongo 官方自带工具  MongoDB Shell 基本查询 db.]]></description>
+</item><item>
+    <title>MySQL CheatSheat</title>
+    <link>http://twocucao.xyz/posts/20160912_mysqlcheatsheet/</link>
+    <pubDate>Fri, 02 Sep 2016 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20160912_mysqlcheatsheet/</guid>
+    <description><![CDATA[0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MySQL 相关命令。主要包含：
+ MySQL Shell, 其实就是 SQL 命令。 MySQL 配套工具 Python API  不定期更新。
+0x01 安装，配置，基本 shell 命令 字符编码  UTF-8 , Please
+ 真的很讨厌那些用 GBK 的程序员啊！
+# 注意，下面的设置 MySQL 是无法保存 emoji 的 / [mysql] default-character-set=utf8 [mysqld] collation-server = utf8_general_ci init-connect=&#39;SET NAMES utf8&#39; character-set-server = utf8 然后在 mysql console 执行：
+show variables like &#34;%character%&#34;;show variables like &#34;%collation%&#34;; 如下即可
+0x02 MySQL 配套工具  JetBrain 的 Datagrip 作为 编写大段 SQL 语句的 IDE 通过网络或者 Dash 查看文档 强烈推荐 mycli 作为正常情况下的 MySQL 命令的替代品。 MySQL 官方自带工具  只挑选几个重要的，常用的说一说。]]></description>
+</item></channel>
+</rss>

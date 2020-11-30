@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>MySQL CheatSheat - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="MySQL CheatSheat" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20160912_mysqlcheatsheet/" />
+<meta property="article:published_time" content="2016-09-02T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MySQL CheatSheat"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20160912_mysqlcheatsheet/" /><link rel="prev" href="http://twocucao.xyz/posts/20160715_macpythonmonitorpart2/" /><link rel="next" href="http://twocucao.xyz/posts/20160923_ipynb%E5%92%8Cecharts/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "MySQL CheatSheat",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20160912_mysqlcheatsheet\/"
+        },"genre": "posts","keywords": "MySQL","wordcount":  604 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20160912_mysqlcheatsheet\/","datePublished": "2016-09-02T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">MySQL CheatSheat</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/devops/"><i class="far fa-folder fa-fw"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2016-09-02">2016-09-02</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 604 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-安装配置基本-shell-命令">0x01 安装，配置，基本 shell 命令</a>
+      <ul>
+        <li><a href="#字符编码">字符编码</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-mysql-配套工具">0x02 MySQL 配套工具</a></li>
+    <li><a href="#0x03-mysql-常用代码">0x03 MySQL 常用代码</a></li>
+    <li><a href="#0x04-常用代码片段">0x04 常用代码片段</a>
+      <ul>
+        <li><a href="#1-数据清洗常用脚本">1. 数据清洗常用脚本</a></li>
+        <li><a href="#2-用户管理常用脚本">2. 用户管理常用脚本</a></li>
+        <li><a href="#3-备份迁移常用脚本">3. 备份迁移常用脚本</a></li>
+        <li><a href="#4-性能优化常用脚本">4. 性能优化常用脚本</a></li>
+        <li><a href="#6-远程连接">6. 远程连接</a></li>
+        <li><a href="#5-其他脚本">5. 其他脚本</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x05-性能优化切入点">0x05 性能优化切入点</a>
+      <ul>
+        <li><a href="#优化应用层面的查询">优化应用层面的查询</a></li>
+        <li><a href="#优化数据库的-sql-查询">优化数据库的 SQL 查询</a></li>
+        <li><a href="#数据存储结构">数据存储结构</a></li>
+        <li><a href="#硬件优化">硬件优化</a></li>
+        <li><a href="#配置优化">配置优化</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x06-常见问题">0x06 常见问题</a>
+      <ul>
+        <li><a href="#密码忘了怎么办">密码忘了怎么办？</a></li>
+      </ul>
+    </li>
+    <li><a href="#0xee-参考链接">0xEE 参考链接</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00 前言</h2>
+<p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 MySQL 相关命令。主要包含：</p>
+<ul>
+<li>MySQL Shell, 其实就是 SQL 命令。</li>
+<li>MySQL 配套工具</li>
+<li>Python API</li>
+</ul>
+<p>不定期更新。</p>
+<!-- raw HTML omitted -->
+<h2 id="0x01-安装配置基本-shell-命令">0x01 安装，配置，基本 shell 命令</h2>
+<h3 id="字符编码">字符编码</h3>
+<blockquote>
+<p>UTF-8 , Please</p>
+</blockquote>
+<p>真的很讨厌那些用 GBK 的程序员啊！</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 注意，下面的设置 MySQL 是无法保存 emoji 的 /</span>
+<span class="o">[</span>mysql<span class="o">]</span>
+default-character-set<span class="o">=</span>utf8
+
+<span class="o">[</span>mysqld<span class="o">]</span>
+collation-server <span class="o">=</span> utf8_general_ci
+init-connect<span class="o">=</span><span class="s1">&#39;SET NAMES utf8&#39;</span>
+character-set-server <span class="o">=</span> utf8
+</code></pre></div><p>然后在 mysql console 执行：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">show variables like <span class="s2">&#34;%character%&#34;</span><span class="p">;</span>show variables like <span class="s2">&#34;%collation%&#34;</span><span class="p">;</span>
+</code></pre></div><p>如下即可</p>
+<h2 id="0x02-mysql-配套工具">0x02 MySQL 配套工具</h2>
+<ul>
+<li>JetBrain 的 Datagrip 作为 编写大段 SQL 语句的 IDE</li>
+<li>通过网络或者 Dash 查看文档</li>
+<li>强烈推荐 mycli 作为正常情况下的 MySQL 命令的替代品。</li>
+<li>MySQL 官方自带工具</li>
+</ul>
+<p>只挑选几个重要的，常用的说一说。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 启动 MYSQL</span>
+
+<span class="c1"># 常规 mysql</span>
+mysql -u username -p password
+<span class="c1">## 命令的用户名和密码最好与命令合在一起</span>
+mysqlshow -uroot -psomepass some_db<span class="p">;</span>
+<span class="c1"># 导入数据</span>
+mysql -u username -p password &lt; filename
+<span class="c1"># 优雅的导入数据，可以查看进度条的 Hacks</span>
+pv -i <span class="m">1</span> -p -t -e /Users/twocucao/Codes/update_new_date.sql <span class="p">|</span> mysql -uadmin -p123456 -h 192.168.2.254 --port<span class="o">=</span><span class="m">3306</span> some_db
+<span class="c1"># 导出数据</span>
+mysqldump -u username -p password database <span class="o">[</span>tables<span class="o">]</span> &gt; filename
+mysqldump database table_bame --where<span class="o">=</span><span class="s2">&#34;date_column BETWEEN &#39;2012-07-01 00:00:00&#39; and &#39;2012-12-01 00:00:00&#39;&#34;</span>
+
+<span class="c1"># ref : http://dev.mysql.com/doc/refman/5.7/en/mysqldump.html#option_mysqldump_where</span>
+</code></pre></div><h2 id="0x03-mysql-常用代码">0x03 MySQL 常用代码</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">SHOW DATABASES<span class="p">;</span>
+CREATE DATABASE database<span class="p">;</span>
+USE database<span class="p">;</span>
+SHOW TABLES<span class="p">;</span>
+DESCRIBE table<span class="p">;</span>
+SHOW COLUMN FROM table<span class="p">;</span>
+DROP DATEBASE<span class="p">;</span>
+</code></pre></div><h2 id="0x04-常用代码片段">0x04 常用代码片段</h2>
+<h3 id="1-数据清洗常用脚本">1. 数据清洗常用脚本</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql"><span class="c1">-- 少量去重
+</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">everyday_info_temp</span> <span class="k">AS</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span>  <span class="n">everyday_info</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">id</span><span class="p">,</span><span class="nb">date</span><span class="p">,</span><span class="n">numbers</span><span class="p">;</span>
+<span class="c1">-- 大量去重
+</span><span class="c1"></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">everyday_info_temp</span> <span class="k">AS</span> <span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span>  <span class="n">everyday_info</span> <span class="k">GROUP</span> <span class="k">BY</span> <span class="n">id</span><span class="p">,</span><span class="nb">date</span><span class="p">,</span><span class="n">numbers</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="k">null</span><span class="p">;</span>
+</code></pre></div><p><a href="http://stackoverflow.com/questions/16568228/how-to-transpose-mysql-table-rows-into-columns">http://stackoverflow.com/questions/16568228/how-to-transpose-mysql-table-rows-into-columns</a></p>
+<pre><code>  SELECT @max := MAX(ID)+ 1 FROM ABC;
+
+  PREPARE stmt FROM 'ALTER TABLE ABC AUTO_INCREMENT = ?';
+  EXECUTE stmt USING @max;
+
+  DEALLOCATE PREPARE stmt;
+</code></pre><p>mysql&gt; delete from shophtml;
+Query OK, 117141 rows affected (4 min 2.92 sec)
+TRUNCATE shophtml;</p>
+<h3 id="2-用户管理常用脚本">2. 用户管理常用脚本</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">SELECT User FROM mysql.user<span class="p">;</span>
+</code></pre></div><h3 id="3-备份迁移常用脚本">3. 备份迁移常用脚本</h3>
+<pre><code>#! /bin/bash
+
+TIMESTAMP=$(date +&quot;%F&quot;)
+BACKUP_DIR=&quot;/mnt/$TIMESTAMP&quot;
+MYSQL_USER=&quot;root&quot;
+MYSQL=/usr/bin/mysql
+MYSQL_PASSWORD=&quot;password&quot;
+MYSQLDUMP=/usr/bin/mysqldump
+DATABASE=&quot;cyjoycity&quot;
+
+mkdir -p &quot;$BACKUP_DIR/mysql&quot;
+
+for t in $($MYSQL -NBA -u $MYSQL_USER -p$MYSQL_PASSWORD -D $DATABASE -e 'show tables')
+do
+    echo &quot;DUMPING TABLE: $DB.$t&quot;
+    $MYSQLDUMP --force --opt --user=$MYSQL_USER -p$MYSQL_PASSWORD $DATABASE $t | gzip &gt; &quot;$BACKUP_DIR/mysql/$t.sql.gz&quot;
+done
+
+</code></pre><h3 id="4-性能优化常用脚本">4. 性能优化常用脚本</h3>
+<p>SHOW FULL PROCESSLIST;</p>
+<h3 id="6-远程连接">6. 远程连接</h3>
+<div class="highlight"><pre class="chroma"><code class="language-mysql" data-lang="mysql">
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">mysql</span><span class="o">/</span><span class="n">my</span><span class="p">.</span><span class="n">cnf</span>
+
+<span class="c1"># bind-address = 127.0.0.1
+</span><span class="c1"></span>
+<span class="k">GRANT</span> <span class="k">ALL</span> <span class="k">PRIVILEGES</span> <span class="k">ON</span> <span class="o">*</span><span class="p">.</span><span class="o">*</span> <span class="k">TO</span> <span class="s1">&#39;root&#39;</span><span class="o">@</span><span class="s1">&#39;%&#39;</span> <span class="k">IDENTIFIED</span> <span class="k">BY</span> <span class="s1">&#39;password&#39;</span> <span class="k">WITH</span> <span class="k">GRANT</span> <span class="k">OPTION</span><span class="p">;</span>
+<span class="k">FLUSH</span> <span class="k">PRIVILEGES</span><span class="p">;</span>
+</code></pre></div><h3 id="5-其他脚本">5. 其他脚本</h3>
+<div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql">
+<span class="o">#</span> <span class="mi">6</span><span class="p">.</span> <span class="err">随机选择</span> <span class="mi">10</span> <span class="err">组记录</span>
+<span class="c1">-- 慢速
+</span><span class="c1"></span><span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="k">Table_Name</span> <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">RAND</span><span class="p">()</span> <span class="k">LIMIT</span> <span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">;</span>
+
+<span class="c1">-- 快速
+</span><span class="c1"></span><span class="k">SELECT</span> <span class="n">name</span>
+  <span class="k">FROM</span> <span class="n">random</span> <span class="k">AS</span> <span class="n">r1</span> <span class="k">JOIN</span>
+       <span class="p">(</span><span class="k">SELECT</span> <span class="n">CEIL</span><span class="p">(</span><span class="n">RAND</span><span class="p">()</span> <span class="o">*</span>
+                     <span class="p">(</span><span class="k">SELECT</span> <span class="k">MAX</span><span class="p">(</span><span class="n">id</span><span class="p">)</span>
+                        <span class="k">FROM</span> <span class="n">random</span><span class="p">))</span> <span class="k">AS</span> <span class="n">id</span><span class="p">)</span>
+        <span class="k">AS</span> <span class="n">r2</span>
+ <span class="k">WHERE</span> <span class="n">r1</span><span class="p">.</span><span class="n">id</span> <span class="o">&gt;=</span> <span class="n">r2</span><span class="p">.</span><span class="n">id</span>
+ <span class="k">ORDER</span> <span class="k">BY</span> <span class="n">r1</span><span class="p">.</span><span class="n">id</span> <span class="k">ASC</span>
+ <span class="k">LIMIT</span> <span class="mi">1</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-sql" data-lang="sql">
+<span class="o">#</span> <span class="mi">1</span><span class="p">.</span> <span class="err">查询时间</span>
+<span class="k">select</span> <span class="n">date_format</span><span class="p">(</span><span class="n">create_time</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="k">day</span> <span class="k">from</span> <span class="k">table_name</span>
+<span class="k">select</span> <span class="n">from_unixtime</span><span class="p">(</span><span class="n">create_time</span><span class="p">,</span> <span class="s1">&#39;%Y-%m-%d&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="k">day</span> <span class="k">from</span> <span class="k">table_name</span>
+
+<span class="o">#</span> <span class="mi">2</span><span class="p">.</span> <span class="k">CASE</span> <span class="k">WHEN</span> <span class="err">案例</span>
+
+<span class="o">##</span> <span class="mi">2</span><span class="p">.</span><span class="mi">1</span> <span class="err">返回同一列多个结果</span>
+
+<span class="o">##</span> <span class="mi">2</span><span class="p">.</span><span class="mi">2</span> <span class="err">行列值颠倒</span>
+
+<span class="o">#</span> <span class="mi">3</span><span class="p">.</span> <span class="err">替换某字段内容</span>
+<span class="k">update</span> <span class="k">table_name</span> <span class="k">set</span> <span class="n">content</span> <span class="o">=</span> <span class="k">REPLACE</span><span class="p">(</span><span class="n">content</span><span class="p">,</span> <span class="s1">&#39;aaa&#39;</span><span class="p">,</span> <span class="s1">&#39;bbb&#39;</span><span class="p">)</span>  <span class="k">where</span> <span class="p">(</span><span class="n">content</span> <span class="k">like</span> <span class="s1">&#39;%aaa%&#39;</span><span class="p">)</span>
+
+<span class="o">#</span> <span class="mi">4</span><span class="p">.</span> <span class="err">获取表中某字段包含某字符串的数据</span>
+<span class="k">SELECT</span> <span class="o">*</span> <span class="k">FROM</span> <span class="o">`</span><span class="err">表名</span><span class="o">`</span> <span class="k">WHERE</span> <span class="n">LOCATE</span><span class="p">(</span><span class="s1">&#39;关键字&#39;</span><span class="p">,</span> <span class="err">字段名）</span>
+
+<span class="o">#</span> <span class="mi">5</span><span class="p">.</span> <span class="err">字符串处理</span>
+<span class="k">SELECT</span> <span class="k">SUBSTRING</span><span class="err">（字段名，</span><span class="mi">1</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="k">FROM</span> <span class="err">表名</span>
+
+<span class="o">#</span> <span class="mi">6</span><span class="p">.</span> <span class="err">求解数字的连续范围</span>
+
+<span class="k">select</span> <span class="k">min</span><span class="p">(</span><span class="nb">number</span><span class="p">)</span> <span class="n">start_range</span><span class="p">,</span><span class="k">max</span><span class="p">(</span><span class="nb">number</span><span class="p">)</span> <span class="n">end_range</span>
+<span class="k">from</span>
+<span class="p">(</span>
+    <span class="k">select</span> <span class="nb">number</span><span class="p">,</span><span class="n">rn</span><span class="p">,</span><span class="nb">number</span><span class="o">-</span><span class="n">rn</span> <span class="n">diff</span> <span class="k">from</span>
+    <span class="p">(</span>
+        <span class="k">select</span> <span class="nb">number</span><span class="p">,</span><span class="o">@</span><span class="nb">number</span><span class="p">:</span><span class="o">=@</span><span class="nb">number</span><span class="o">+</span><span class="mi">1</span> <span class="n">rn</span> <span class="k">from</span> <span class="n">test_number</span><span class="p">,(</span><span class="k">select</span> <span class="o">@</span><span class="nb">number</span><span class="p">:</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">as</span> <span class="nb">number</span>
+    <span class="p">)</span> <span class="n">b</span>
+<span class="p">)</span> <span class="k">c</span> <span class="k">group</span> <span class="k">by</span> <span class="n">diff</span><span class="p">;</span>
+
+</code></pre></div><h2 id="0x05-性能优化切入点">0x05 性能优化切入点</h2>
+<p>应用的切入点也比较简单和暴力：</p>
+<ol>
+<li>优化应用层面的查询。</li>
+<li>优化数据库的 SQL 查询。</li>
+<li>优化数据库的存储结构。</li>
+<li>优化单个数据库服务器的性能。</li>
+<li>遵循『机多运算大』的原则，上几台机器。</li>
+<li>更好的机器，即加内存条，上好的 CPU。</li>
+</ol>
+<p>优化前三点，则需要理解取数据的客户端从发送 SQL 语句到接受数据之间都发生了什么？流程如下：</p>
+<ol>
+<li>开启连接</li>
+<li>发送查询给服务器</li>
+<li>分析查询</li>
+<li>执行查询</li>
+<li>传输数据</li>
+<li>关闭连接</li>
+</ol>
+<h3 id="优化应用层面的查询">优化应用层面的查询</h3>
+<p>在同样工作量的情况下不断的减少数据库的连接，将多个动作放在一起使用 TRANSACTION 可以显著提高速度。</p>
+<ol>
+<li>对于 OLTP 类型的数据库设计的数据库，一些耗时查询往往是可以在应用层面查询进行优化的，比如在手写代码应用级缓存，借助外部组件 (redis) 应用内缓存。</li>
+<li>对于一些有性能要求的场景，不要使用 select * from xxx 这种查询，服务器到客户端传输也是需要时间的，而是要选择需要的字段。</li>
+<li>如果有必要，不要在循环内部进行数据库查询，而是直接取出来放在内存中进行运算。学过的算法与数据结构用起来！!</li>
+</ol>
+<h3 id="优化数据库的-sql-查询">优化数据库的 SQL 查询</h3>
+<p>如同前文所见，到了 SQL 命令这层切入点能够优化的地方只有步骤 4.</p>
+<p>对于查找，效率取决于：</p>
+<ol>
+<li>取记录数量</li>
+<li>搜索到这些记录的时间。</li>
+</ol>
+<p>对于插入，执行查询则插入记录和更新索引两个部分，也是插入的瓶颈所在：</p>
+<ol>
+<li>插入记录 速度取决于记录数量，记录大小</li>
+<li>更新索引 速度取决于索引数量。</li>
+</ol>
+<p>对于更新，执行查询则有查找，更新记录和更新索引两个部分，也是更新的瓶颈所在：</p>
+<ol>
+<li>查找 需要参考查找</li>
+<li>更新记录 速度取决于记录数量，记录大小</li>
+<li>更新索引 速度取决于更新索引字段的数量。</li>
+</ol>
+<p>对于删除，执行查询则有查找，删除记录和删除索引两个部分，也是删除的瓶颈所在：</p>
+<ol>
+<li>查找 需要参考查找</li>
+<li>删除记录 速度取决于记录数量，记录大小</li>
+<li>更新索引 速度取决于更新索引字段的数量。</li>
+</ol>
+<h4 id="查询的优化">查询的优化</h4>
+<h4 id="索引的代价">索引的代价</h4>
+<blockquote>
+<p>在计算机这个神奇的世界里面，没有一个算法与数据结构的挑选是没有代价的。便于查询，则不便于插入更新。</p>
+</blockquote>
+<p>有的人把索引比作字典。说字典的索引页面就好像是数据表中的索引。</p>
+<p>这个比方很贴切，可以用在索引的比方上，也可以用在索引的代价上。</p>
+<ul>
+<li>一个没有索引的页面，即是一个只有页码，编号的字典。当我们查询一个新字的时候，只能从第一页翻到结尾，效率很低。</li>
+<li>一个有一个索引的页面，即是一个有页码，编号，拼音索引的字典。当我们查询一个新字的时候，先查询索引，然后从索引查页码，于是很快找到字。当我们<strong>增加 / 删除 / 更新</strong>一个字之后，还需要更新拼音索引。</li>
+<li>一个有多个索引的页面，即是一个有页码，编号，拼音索引和部首索引以及其他索引的字典。当我们<strong>增加 / 删除 / 更新</strong>一个字之后，还需要更新拼音索引，部首索引等等索引。</li>
+</ul>
+<blockquote>
+<p><strong>计算机世界就是这样，没有完美的算法，也没有完美的模型。</strong></p>
+</blockquote>
+<h3 id="数据存储结构">数据存储结构</h3>
+<h3 id="硬件优化">硬件优化</h3>
+<p>留空，这个可能比较接近运维或者 DBA 的工作</p>
+<h3 id="配置优化">配置优化</h3>
+<p>留空，这个可能比较接近运维或者 DBA 的工作</p>
+<h2 id="0x06-常见问题">0x06 常见问题</h2>
+<h3 id="密码忘了怎么办">密码忘了怎么办？</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">/etc/init.d/mysql stop
+mysqld_safe --skip-grant-tables <span class="p">&amp;</span>
+<span class="c1"># 在另一个终端 输入 mysql 进入终端</span>
+在另一端执行 SQL 命令
+UPDATE mysql.user SET <span class="nv">password</span><span class="o">=</span>PASSWORD<span class="o">(</span><span class="s1">&#39;nouveau&#39;</span><span class="o">)</span> WHERE <span class="nv">user</span><span class="o">=</span><span class="s1">&#39;root&#39;</span><span class="p">;</span>
+<span class="c1">## Kill mysqld_safe from the terminal, using Control + \</span>
+/etc/init.d/mysql start
+</code></pre></div><h2 id="0xee-参考链接">0xEE 参考链接</h2>
+<p>关于 SQL 与数据库的有趣解释</p>
+<ol>
+<li><a href="http://stackoverflow.com/questions/38549/what-is-the-difference-between-inner-join-and-outer-join" target="_blank" rel="noopener noreffer">Inner Join 和 Outer Join</a></li>
+<li><a href="http://stackoverflow.com/questions/60174/how-can-i-prevent-sql-injection-in-php" target="_blank" rel="noopener noreffer">如何防止 SQL 注入</a></li>
+<li><a href="http://stackoverflow.com/questions/1108/how-does-database-indexing-work" target="_blank" rel="noopener noreffer">索引是怎么工作的</a></li>
+<li><a href="https://gold.xitu.io/post/584e7b298d6d81005456eb53" target="_blank" rel="noopener noreffer">Mysql 常用 SQL 语句集锦（本文部分 SQL 语句取自此博文）</a></li>
+</ol>
+<p><a href="http://stackoverflow.com/questions/194852/concatenate-many-rows-into-a-single-text-string">http://stackoverflow.com/questions/194852/concatenate-many-rows-into-a-single-text-string</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/mysql/">MySQL</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20160715_macpythonmonitorpart2/" class="prev" rel="prev" title="Python Monitor Mac Part 01"><i class="fas fa-angle-left fa-fw"></i>Python Monitor Mac Part 01</a>
+            <a href="/posts/20160923_ipynb%E5%92%8Cecharts/" class="next" rel="next" title="IPython Notebook 引入 ECharts 做可视化">IPython Notebook 引入 ECharts 做可视化<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

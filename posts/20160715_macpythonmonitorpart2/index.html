@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Python Monitor Mac Part 01 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="Python Monitor Mac Part 01" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20160715_macpythonmonitorpart2/" />
+<meta property="article:published_time" content="2016-07-15T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Python Monitor Mac Part 01"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20160715_macpythonmonitorpart2/" /><link rel="prev" href="http://twocucao.xyz/posts/20160701_maccheatsheet/" /><link rel="next" href="http://twocucao.xyz/posts/20160912_mysqlcheatsheet/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Python Monitor Mac Part 01",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20160715_macpythonmonitorpart2\/"
+        },"genre": "posts","keywords": "macOS","wordcount":  579 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20160715_macpythonmonitorpart2\/","datePublished": "2016-07-15T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Python Monitor Mac Part 01</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2016-07-15">2016-07-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 579 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#前言">前言</a></li>
+    <li><a href="#目标确定与任务分解">目标确定与任务分解</a></li>
+    <li><a href="#python-获取计算机运行信息">Python 获取计算机运行信息</a></li>
+    <li><a href="#rrdtool-保存计算机运行信息">RRDTool 保存计算机运行信息</a>
+      <ul>
+        <li><a href="#为什么是-rrdtool-而不是-sqlite">为什么是 RRDTool 而不是 sqlite</a></li>
+        <li><a href="#rrd-怎么保存信息">RRD 怎么保存信息</a></li>
+        <li><a href="#rrd-怎么保存计算机运行信息">RRD 怎么保存计算机运行信息</a></li>
+      </ul>
+    </li>
+    <li><a href="#汇总并发送-email">汇总并发送 Email</a></li>
+    <li><a href="#思考与不足">思考与不足</a></li>
+    <li><a href="#代码">代码</a></li>
+    <li><a href="#参考资料">参考资料</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="前言">前言</h2>
+<p>如果有不清楚本文介绍的是什么的？请移步
+（使用 Python 监控 Mac 一天的运行 - 上）[http://www.jianshu.com/p/9ebb527e93a0]</p>
+<p>任务回顾一下：</p>
+<blockquote>
+<p>隔一段时间使用 Python 脚本，统计当前电脑的运行情况，CPU, 内存，硬盘，网络使用状况，然后在每天的下午六点通过 Email 把统计情况汇总，并且必须要有监控图，并通过 Email 发送给我的邮箱。</p>
+</blockquote>
+<p>好了，这篇文章，我们讲解的是具体的 Python 脚本完成这些任务。因为代码可能稍微复杂一点点，老规矩，讲解思路和必要注意点，其他的请参阅代码。</p>
+<h2 id="目标确定与任务分解">目标确定与任务分解</h2>
+<p>目标就如同上面两段所写。</p>
+<p>那么把任务分解一下：</p>
+<ul>
+<li>首先，你得知道如何获取计算机的运行信息。</li>
+<li>其次，你得知道如何把这些数据保存下来（不保存怎么分析）.</li>
+<li>接着，你得知道如何分析并制图。</li>
+<li>最后，你得知道如何发送邮件。</li>
+</ul>
+<p>好了，本文的目录也就应运而生了。</p>
+<ul>
+<li>前言</li>
+<li>目标确定和任务分解</li>
+<li>Python 获取计算机运行信息</li>
+<li>RRDTool 保存计算机运行信息
+<ul>
+<li>为什么是 RRDTool 而不是 sqlite
+-RRD 怎么保存信息
+-RRD 怎么保存计算机运行信息</li>
+</ul>
+</li>
+<li>RRDTool 制图功能</li>
+<li>汇总并发送 Email</li>
+<li>思考与不足</li>
+<li>代码</li>
+</ul>
+<h2 id="python-获取计算机运行信息">Python 获取计算机运行信息</h2>
+<p>我们知道有很多 shell 命令可以获取当前时间点，或者当前时间段的计算机各种情况，但是呢，我们只需要某个时间点的计算机的运行情况，Python 中有一个比较好的神器叫做 psutil, 果断安装之。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip3 install psutil
+</code></pre></div><p>运行如下脚本，你就可以看出来你的电脑运行的当前状况了。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="ch">#!/usr/bin/env python3</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="kn">import</span> <span class="nn">platform</span>
+<span class="kn">import</span> <span class="nn">rrdtool</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlopen</span><span class="p">,</span><span class="n">URLError</span>
+<span class="kn">import</span> <span class="nn">socket</span>
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="kn">import</span> <span class="nn">psutil</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="n">now</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%Y%m</span><span class="si">%d</span><span class="s2">%H%M%S&#34;</span><span class="p">))</span>
+<span class="n">today</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%Y%m</span><span class="si">%d</span><span class="s2">&#34;</span><span class="p">))</span>
+
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">format</span><span class="o">=</span><span class="s2">&#34;</span><span class="si">%(asctime)s</span><span class="s2"> - </span><span class="se">\
+</span><span class="se"></span><span class="s2">[</span><span class="si">%(process)d</span><span class="s2">]</span><span class="si">%(filename)s</span><span class="s2">:</span><span class="si">%(lineno)d</span><span class="s2"> - </span><span class="si">%(levelname)s</span><span class="s2">: </span><span class="si">%(message)s</span><span class="s2">&#34;</span><span class="p">,</span>
+    <span class="n">datefmt</span><span class="o">=</span><span class="s1">&#39;%Y-%m-</span><span class="si">%d</span><span class="s1"> %H:%I:%S&#39;</span><span class="p">,</span>
+    <span class="n">filename</span><span class="o">=</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">expanduser</span><span class="p">(</span><span class="s1">&#39;~/OhMyCode/PyTools/logs/&#39;</span><span class="o">+</span><span class="n">today</span><span class="o">+</span><span class="s1">&#39;.log&#39;</span><span class="p">),</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span>
+<span class="p">)</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;monitor_my_mac&#39;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,):</span>
+    <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&#34;at least Python3.0 is required!!&#34;</span><span class="p">)</span>
+<span class="n">APP_DESC</span> <span class="o">=</span> <span class="s2">&#34;&#34;&#34;
+</span><span class="s2">
+</span><span class="s2">                ---- A Terminal Tools For Monitoring Mac Daily
+</span><span class="s2">
+</span><span class="s2">@author Micheal Gardner (twocucao@gmail.com)
+</span><span class="s2">                                last_update 2016-02-28
+</span><span class="s2">&#34;&#34;&#34;</span>
+
+<span class="k">def</span> <span class="nf">linux_distribution</span><span class="p">():</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">platform</span><span class="o">.</span><span class="n">linux_distribution</span><span class="p">()</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&#34;N/A&#34;</span>
+
+<span class="k">def</span> <span class="nf">check_connectivity</span><span class="p">(</span><span class="n">reference</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34;检查是否连接到网络&#34;&#34;&#34;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">urlopen</span><span class="p">(</span><span class="n">reference</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">True</span>
+    <span class="k">except</span> <span class="n">URLError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">def</span> <span class="nf">secs2str</span><span class="p">(</span><span class="n">secs</span><span class="p">):</span>
+    <span class="s2">&#34;&#34;&#34; 将秒转化为字符串 &#34;&#34;&#34;</span>
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">secs</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&#34;&#34;</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&#34;%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M:%S&#34;</span><span class="p">,</span><span class="n">time</span><span class="o">.</span><span class="n">localtime</span><span class="p">(</span><span class="n">secs</span><span class="p">)))</span>
+
+<span class="k">def</span> <span class="nf">fetch_all_info</span><span class="p">():</span>
+    <span class="n">network_connectivity</span> <span class="o">=</span> <span class="n">check_connectivity</span><span class="p">(</span><span class="s2">&#34;http://119.75.218.70&#34;</span><span class="p">)</span>
+
+    <span class="n">public_ip_addr</span> <span class="o">=</span> <span class="n">urlopen</span><span class="p">(</span><span class="s1">&#39;http://ip.42.pl/raw&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&#34;utf-8&#34;</span><span class="p">)</span>
+
+    <span class="c1">#=============&gt;操作系统信息&lt;==============#</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;========&gt;MACHINE&lt;==========&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">getpass</span><span class="o">.</span><span class="n">getuser</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">uname</span><span class="p">())</span>
+    <span class="c1"># print(os.uname())</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;&#34;&#34;Python version: </span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    dist: </span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    linux_distribution: </span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    system: </span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    machine: </span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    platform: </span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    uname: </span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    version: </span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    mac_ver: </span><span class="si">%s</span><span class="s2">
+</span><span class="s2">    &#34;&#34;&#34;</span> <span class="o">%</span> <span class="p">(</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">version</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span>
+    <span class="nb">str</span><span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">dist</span><span class="p">()),</span>
+    <span class="n">linux_distribution</span><span class="p">(),</span>
+    <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">(),</span>
+    <span class="n">platform</span><span class="o">.</span><span class="n">machine</span><span class="p">(),</span>
+    <span class="n">platform</span><span class="o">.</span><span class="n">platform</span><span class="p">(),</span>
+    <span class="n">platform</span><span class="o">.</span><span class="n">uname</span><span class="p">(),</span>
+    <span class="n">platform</span><span class="o">.</span><span class="n">version</span><span class="p">(),</span>
+    <span class="n">platform</span><span class="o">.</span><span class="n">mac_ver</span><span class="p">(),</span>
+    <span class="p">))</span>
+
+    <span class="n">os_boot_time</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">boot_time</span><span class="p">()</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;Boottime: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">os_boot_time</span><span class="p">)</span> <span class="o">+</span><span class="s2">&#34;-&gt;&#34;</span><span class="o">+</span><span class="n">secs2str</span><span class="p">(</span><span class="n">os_boot_time</span><span class="p">)</span>  <span class="p">)</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;========&gt;CPU&lt;==========&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_times</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_count</span><span class="p">(</span><span class="n">logical</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_times_percent</span><span class="p">())</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;========&gt;MEM&lt;==========&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">virtual_memory</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">swap_memory</span><span class="p">())</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;========&gt;DISK&lt;==========&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">disk_partitions</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">disk_usage</span><span class="p">(</span><span class="s2">&#34;/&#34;</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">disk_io_counters</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">disk_io_counters</span><span class="p">(</span><span class="n">perdisk</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;========&gt;NET&lt;==========&#34;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">net_io_counters</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">net_io_counters</span><span class="p">(</span><span class="n">pernic</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">users</span><span class="p">())</span>
+
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;hostname:&#34;</span> <span class="o">+</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">())</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;internal ip address: &#34;</span> <span class="o">+</span> <span class="n">socket</span><span class="o">.</span><span class="n">gethostbyname</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">gethostname</span><span class="p">()))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;connected to internet?: &#34;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">network_connectivity</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&#34;public ip: &#34;</span> <span class="o">+</span> <span class="n">public_ip_addr</span> <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">APP_DESC</span><span class="p">)</span>
+    <span class="n">fetch_all_info</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div><p>好的，下面我就想把这些数据保存下来。</p>
+<h2 id="rrdtool-保存计算机运行信息">RRDTool 保存计算机运行信息</h2>
+<p>对于 RRDTool, 引自 RRDTool 的官网</p>
+<blockquote>
+<p>RRDtool is the OpenSource industry standard, high performance data logging and graphing system for time series data. RRDtool can be easily integrated in shell scripts, perl, python, ruby, lua or tcl applications.</p>
+</blockquote>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-b79e26953467d4a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-b79e26953467d4a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-b79e26953467d4a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-b79e26953467d4a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-b79e26953467d4a4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="stream-pop.png" /></p>
+<blockquote>
+<p><strong>注意：</strong>    如果你看不懂下面关于 RRDTool 的相关内容，请立即反复参考下面的链接，大致留下 rrd 的印象。注意，<strong>是反复，是反复，是反复</strong>, 重要的事情听说要说三遍的。</p>
+</blockquote>
+<p><a href="http://oss.oetiker.ch/rrdtool/tut/rrdtutorial.en.html">http://oss.oetiker.ch/rrdtool/tut/rrdtutorial.en.html</a></p>
+<p>wait,wait,don&rsquo;t tell me, 你怎么使用这个什么 RRDTool, 这又是什么东西？既然你一天只存储一点点的东西，为什么不使用 sqlite?</p>
+<h3 id="为什么是-rrdtool-而不是-sqlite">为什么是 RRDTool 而不是 sqlite</h3>
+<p>答案很简单，因为我们采用的是监控，采用 sqlite 不是说不可以，只是 sqlite 在监控领域不是很专业。那为什么不够专业呢？</p>
+<blockquote>
+<p>因为在这个场景下，仅仅有存储数据的功能是不够的。</p>
+</blockquote>
+<blockquote>
+<p>还需要根据监控的场景，进行各种绘图功能。</p>
+</blockquote>
+<ul>
+<li>如果使用 sqlite, 还要安装各种 python 绘图，运算库 (seaborn,numpy,pandas 等）进行统计绘图，那样就不够轻量级了。</li>
+<li>而 rrdtool 作为运维监控的常用工具，则成为首选数据库。</li>
+</ul>
+<h3 id="rrd-怎么保存信息">RRD 怎么保存信息</h3>
+<p>既然，这是一种叫做数据库的东西，那么，最好的学习方式就是和在实战中练习并且和之前学过的同类型数据进行对比。</p>
+<p>那好，我们要回想一下，在学习过的关系型数据库里面，我们是怎么进行数据的怎删改查的。</p>
+<p>首先，对于关系型数据库，DBA 创建数据库并指派给某些权限用户，接着由 DB 用户创建表，表中需要各种数据的定义数据类型，最后插入数据，并且进行大量的 curd.</p>
+<p>在 sqlite 这种依靠单个文件作为存储介质的关系型数据库，则是由 DB 用户创建表，表中需要各种数据的定义数据类型，最后依赖 SQL 语句插入数据，并且进行大量的 curd.（注：没有谈到事务不代表事务不重要）</p>
+<p>rrdtool 也是这个道理。它也是依靠单文件作为存储介质的一种 rrd 数据库的实现。先看下面的实例：</p>
+<p>这个实例来自于官网的 tutorial : <a href="http://oss.oetiker.ch/rrdtool/tut/rrdtutorial.en.html">http://oss.oetiker.ch/rrdtool/tut/rrdtutorial.en.html</a></p>
+<p>仔细阅读官方教程，我们大致可以得出以下结论。</p>
+<p>对于创建数据库：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rrdtool create test.rrd             <span class="se">\
+</span><span class="se"></span>        --start <span class="m">920804400</span>          <span class="se">\
+</span><span class="se"></span>        DS:speed:COUNTER:600:0:U   <span class="se">\
+</span><span class="se"></span>        RRA:AVERAGE:0.5:1:24       <span class="se">\
+</span><span class="se"></span>        RRA:AVERAGE:0.5:6:10
+</code></pre></div><ul>
+<li>创建一个数据库文件，文件名为 test,</li>
+<li>开始时间为 unix 时间戳 920804400 ,</li>
+<li>存储的行车速度（额，其实这里我觉得用行车路程表示比较好）</li>
+<li>用两个 rra 用来保存&quot;当保存行车路程的时候，经过计算的值&quot;.</li>
+<li>一个 databese 是一个 rrd 文件，一个 rrd 文件中存储多个 rra（类似于关系型数据库中，一个数据库里面有多张表）, 但是这里的&quot;表&quot;是用来存储不同的时间间隔的数据，所有的数据来源由创建数据库的时候指定的，(rr 代表 round robin,a 代表 achive)</li>
+<li>第一个 RRA 存储的是平均值（也可以存储 MAX 和 MIN),CDP 中的 PDP 超过一半的时候，则 CDP 标记为 UNKNOWNA（这里咱默认 0.5 就好）, 每隔 1 X 300 秒的时候，存一次平均值，存 24 次。</li>
+</ul>
+<p>对于更新数据：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"> rrdtool update test.rrd 920804700:12345 920805000:12357 920805300:12363
+ rrdtool update test.rrd 920805600:12363 920805900:12363 920806200:12373
+ rrdtool update test.rrd 920806500:12383 920806800:12393 920807100:12399
+ rrdtool update test.rrd 920807400:12405 920807700:12411 920808000:12415
+ rrdtool update test.rrd 920808300:12420 920808600:12422 920808900:12423
+</code></pre></div><p>你可能有疑惑：官网里面的 speed 指的不是速度么，怎么会用来代表路程.（回顾一下：路程 = 时间 X 速度）, 官网的教程插入数据的时候，使用的是某个时间点已经行驶的路程。说实话，我也觉得很疑惑。
+请注意：它更新的数据都是累加的 (COUNTOR), 也就是说，</p>
+<p>对于绘图：</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rrdtool graph speed.png                                 <span class="se">\
+</span><span class="se"></span>    --start <span class="m">920804400</span> --end <span class="m">920808000</span>               <span class="se">\
+</span><span class="se"></span>    DEF:myspeed<span class="o">=</span>test.rrd:speed:AVERAGE              <span class="se">\
+</span><span class="se"></span>    LINE2:myspeed#FF0000
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rrdtool graph speed2.png                           <span class="se">\
+</span><span class="se"></span>    --start <span class="m">920804400</span> --end <span class="m">920808000</span>               <span class="se">\
+</span><span class="se"></span>    --vertical-label m/s                            <span class="se">\
+</span><span class="se"></span>    DEF:myspeed<span class="o">=</span>test.rrd:speed:AVERAGE              <span class="se">\
+</span><span class="se"></span>    CDEF:realspeed<span class="o">=</span>myspeed,1000,<span class="se">\*</span>                  <span class="se">\
+</span><span class="se"></span>    LINE2:realspeed#FF0000
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rrdtool graph speed3.png                             <span class="se">\
+</span><span class="se"></span>    --start <span class="m">920804400</span> --end <span class="m">920808000</span>               <span class="se">\
+</span><span class="se"></span>    --vertical-label km/h                           <span class="se">\
+</span><span class="se"></span>    DEF:myspeed<span class="o">=</span>test.rrd:speed:AVERAGE              <span class="se">\
+</span><span class="se"></span>    <span class="s2">&#34;CDEF:kmh=myspeed,3600,*&#34;</span>                       <span class="se">\
+</span><span class="se"></span>    CDEF:fast<span class="o">=</span>kmh,100,GT,kmh,0,IF                   <span class="se">\
+</span><span class="se"></span>    CDEF:good<span class="o">=</span>kmh,100,GT,0,kmh,IF                   <span class="se">\
+</span><span class="se"></span>    HRULE:100#0000FF:<span class="s2">&#34;Maximum allowed&#34;</span>              <span class="se">\
+</span><span class="se"></span>    AREA:good#00FF00:<span class="s2">&#34;Good speed&#34;</span>                   <span class="se">\
+</span><span class="se"></span>    AREA:fast#FF0000:<span class="s2">&#34;Too fast&#34;</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">rrdtool graph speed4.png                           <span class="se">\
+</span><span class="se"></span>      --start <span class="m">920804400</span> --end <span class="m">920808000</span>               <span class="se">\
+</span><span class="se"></span>      --vertical-label km/h                           <span class="se">\
+</span><span class="se"></span>      DEF:myspeed<span class="o">=</span>test.rrd:speed:AVERAGE              <span class="se">\
+</span><span class="se"></span>      CDEF:nonans<span class="o">=</span>myspeed,UN,0,myspeed,IF             <span class="se">\
+</span><span class="se"></span>      CDEF:kmh<span class="o">=</span>nonans,3600,*                          <span class="se">\
+</span><span class="se"></span>      CDEF:fast<span class="o">=</span>kmh,100,GT,100,0,IF                   <span class="se">\
+</span><span class="se"></span>      CDEF:over<span class="o">=</span>kmh,100,GT,kmh,100,-,0,IF             <span class="se">\
+</span><span class="se"></span>      CDEF:good<span class="o">=</span>kmh,100,GT,0,kmh,IF                   <span class="se">\
+</span><span class="se"></span>      HRULE:100#0000FF:<span class="s2">&#34;Maximum allowed&#34;</span>              <span class="se">\
+</span><span class="se"></span>      AREA:good#00FF00:<span class="s2">&#34;Good speed&#34;</span>                   <span class="se">\
+</span><span class="se"></span>      AREA:fast#550000:<span class="s2">&#34;Too fast&#34;</span>                     <span class="se">\
+</span><span class="se"></span>      STACK:over#FF0000:<span class="s2">&#34;Over speed&#34;</span>
+</code></pre></div><p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-e7979c928d1bf4ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-e7979c928d1bf4ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-e7979c928d1bf4ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-e7979c928d1bf4ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-e7979c928d1bf4ec.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="speed.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-92c75ac53eedd2bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-92c75ac53eedd2bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-92c75ac53eedd2bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-92c75ac53eedd2bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-92c75ac53eedd2bc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="speed2.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-061e0e0c91521d9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-061e0e0c91521d9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-061e0e0c91521d9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-061e0e0c91521d9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-061e0e0c91521d9b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="speed3.png" />
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="http://upload-images.jianshu.io/upload_images/52890-59100ed39a3b8588.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        data-srcset="http://upload-images.jianshu.io/upload_images/52890-59100ed39a3b8588.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240, http://upload-images.jianshu.io/upload_images/52890-59100ed39a3b8588.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 1.5x, http://upload-images.jianshu.io/upload_images/52890-59100ed39a3b8588.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240 2x"
+        data-sizes="auto"
+        alt="http://upload-images.jianshu.io/upload_images/52890-59100ed39a3b8588.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"
+        title="speed4.png" /></p>
+<h3 id="rrd-怎么保存计算机运行信息">RRD 怎么保存计算机运行信息</h3>
+<p>在这里，仅仅使用带宽的统计作为演示案例（案例来自使用 Python 自动化运维这本书）.</p>
+<h4 id="创建数据库">创建数据库</h4>
+<h4 id="更新数据库">更新数据库</h4>
+<h4 id="rrdtool-制图">RRDTool 制图</h4>
+<h2 id="汇总并发送-email">汇总并发送 Email</h2>
+<h2 id="思考与不足">思考与不足</h2>
+<h2 id="代码">代码</h2>
+<p>代码地址为：</p>
+<h2 id="参考资料">参考资料</h2>
+<p><a href="https://github.com/yorkoliu/pyauto/blob/master/%E7%AC%AC%E4%B8%89%E7%AB%A0/rrdtool/graph.py">https://github.com/yorkoliu/pyauto/blob/master/%E7%AC%AC%E4%B8%89%E7%AB%A0/rrdtool/graph.py</a></p>
+<p><a href="http://stackoverflow.com/questions/21784641/installation-issue-with-matplotlib-python">http://stackoverflow.com/questions/21784641/installation-issue-with-matplotlib-python</a></p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-03-14</strong> 本文已经彻底烂尾了，哈哈哈</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/macos/">macOS</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20160701_maccheatsheet/" class="prev" rel="prev" title="macOS Cheatsheet"><i class="fas fa-angle-left fa-fw"></i>macOS Cheatsheet</a>
+            <a href="/posts/20160912_mysqlcheatsheet/" class="next" rel="next" title="MySQL CheatSheat">MySQL CheatSheat<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

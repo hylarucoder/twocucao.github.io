@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Git CheatSheet - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="Git CheatSheet" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20170615_gitcheatsheet/" />
+<meta property="article:published_time" content="2017-06-15T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git CheatSheet"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20170615_gitcheatsheet/" /><link rel="prev" href="http://twocucao.xyz/posts/20170623_vimcheatsheet/" /><link rel="next" href="http://twocucao.xyz/posts/20170704_rethinkinginjavascript/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Git CheatSheet",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20170615_gitcheatsheet\/"
+        },"genre": "posts","keywords": "Git","wordcount":  710 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20170615_gitcheatsheet\/","datePublished": "2017-06-15T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Git CheatSheet</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2017-06-15">2017-06-15</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 710 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-git-命令范论">0x01 Git 命令范论</a>
+      <ul>
+        <li><a href="#11-基础命令">1.1 基础命令</a></li>
+        <li><a href="#12-合作命令">1.2 合作命令</a></li>
+        <li><a href="#13-综合个体">1.3 综合个体</a></li>
+        <li><a href="#14-仓库管理">1.4 仓库管理</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-git-hacks">0x02 Git Hacks</a></li>
+    <li><a href="#0x03-git-和-我的-workflow">0x03 Git 和 我的 Workflow</a></li>
+    <li><a href="#0xee-扩展阅读">0xEE 扩展阅读</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00 前言</h2>
+<p>Git 是一种分布式版本管理工具。</p>
+<h2 id="0x01-git-命令范论">0x01 Git 命令范论</h2>
+<ol>
+<li>基础命令 （本地修改类）</li>
+<li>合作命令 （本地与仓库类）</li>
+<li>综合命令</li>
+<li>管理命令</li>
+</ol>
+<p>前两种命令是入门 Git 的程序员都必须要会的。</p>
+<p>而队伍里的技术管理人员必须要会前三。</p>
+<h3 id="11-基础命令">1.1 基础命令</h3>
+<ul>
+<li>git-init(1) to create a new repository.</li>
+<li>git-log(1) to see what happened.</li>
+<li>git-checkout(1) and git-branch(1) to switch branches.</li>
+<li>git-add(1) to manage the index file.</li>
+<li>git-diff(1) and git-status(1) to see what you are in the middle of doing.</li>
+<li>git-commit(1) to advance the current branch.</li>
+<li>git-reset(1) and git-checkout(1) (with pathname parameters) to undo changes.</li>
+<li>git-merge(1) to merge between local branches.</li>
+<li>git-rebase(1) to maintain topic branches.</li>
+<li>git-tag(1) to mark a known point.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">$ tar zxf frotz.tar.gz
+$ <span class="nb">cd</span> frotz
+$ git init
+$ git add . <span class="o">(</span>1<span class="o">)</span>
+$ git commit -m <span class="s2">&#34;import of frotz source tree.&#34;</span>
+$ git tag v2.43 <span class="o">(</span>2<span class="o">)</span>
+
+$ git checkout -b alsa-audio <span class="o">(</span>1<span class="o">)</span>
+$ edit/compile/test
+$ git checkout -- curses/ux_audio_oss.c <span class="o">(</span>2<span class="o">)</span> <span class="c1"># 恢复文件</span>
+$ git add curses/ux_audio_alsa.c <span class="o">(</span>3<span class="o">)</span>
+$ edit/compile/test
+$ git diff HEAD <span class="o">(</span>4<span class="o">)</span> <span class="c1"># 查看提交了哪些修改</span>
+$ git commit -a -s <span class="o">(</span>5<span class="o">)</span> <span class="c1"># 提交所有</span>
+$ edit/compile/test
+$ git diff HEAD^ <span class="o">(</span>6<span class="o">)</span> <span class="c1"># 查看所有变化，包含之前的 commit</span>
+$ git commit -a --amend <span class="o">(</span>7<span class="o">)</span> <span class="c1"># 修订前一个 commit, 把所有的新变化提交到</span>
+$ git checkout master <span class="o">(</span>8<span class="o">)</span>
+$ git merge alsa-audio <span class="o">(</span>9<span class="o">)</span>
+$ git log --since<span class="o">=</span><span class="s1">&#39;3 days ago&#39;</span> <span class="o">(</span>10<span class="o">)</span>
+$ git log v2.43.. curses/ <span class="o">(</span>11<span class="o">)</span>
+</code></pre></div><h3 id="12-合作命令">1.2 合作命令</h3>
+<ul>
+<li>git-clone(1) from the upstream to prime your local repository.</li>
+<li>git-pull(1) and git-fetch(1) from &ldquo;origin&rdquo; to keep up-to-date with the upstream.</li>
+<li>git-push(1) to shared repository, if you adopt CVS style shared repository workflow.</li>
+<li>git-format-patch(1) to prepare e-mail submission, if you adopt Linux kernel-style public forum workflow.</li>
+<li>git-send-email(1) to send your e-mail submission without corruption by your MUA.</li>
+<li>git-request-pull(1) to create a summary of changes for your upstream to pull.</li>
+</ul>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1">## clone 修改 提交</span>
+$ git clone git://git.kernel.org/pub/scm/.../torvalds/linux-2.6 my2.6
+$ <span class="nb">cd</span> my2.6
+$ git checkout -b mine master <span class="o">(</span>1<span class="o">)</span>
+$ edit/compile/test<span class="p">;</span> git commit -a -s <span class="o">(</span>2<span class="o">)</span>
+$ git format-patch master <span class="o">(</span>3<span class="o">)</span>
+$ git send-email --to<span class="o">=</span><span class="s2">&#34;person &lt;email@example.com&gt;&#34;</span> 00*.patch <span class="o">(</span>4<span class="o">)</span>
+$ git checkout master <span class="o">(</span>5<span class="o">)</span>
+$ git pull <span class="o">(</span>6<span class="o">)</span>
+$ git log -p ORIG_HEAD.. arch/i386 include/asm-i386 <span class="o">(</span>7<span class="o">)</span> <span class="c1"># 查看感兴趣的部分</span>
+$ git ls-remote --heads http://git.kernel.org/.../jgarzik/libata-dev.git <span class="o">(</span>8<span class="o">)</span> <span class="c1"># 查看分支</span>
+$ git pull git://git.kernel.org/pub/.../jgarzik/libata-dev.git ALL <span class="o">(</span>9<span class="o">)</span> <span class="c1"># 从一个特地</span>
+$ git reset --hard ORIG_HEAD <span class="o">(</span>10<span class="o">)</span> <span class="c1"># 撤销 pull</span>
+$ git gc <span class="o">(</span>11<span class="o">)</span> <span class="c1"># garbage collect leftover objects from reverted pull</span>
+<span class="c1"># 推送到其他 repo</span>
+
+satellite$ git clone mothership:frotz frotz <span class="o">(</span>1<span class="o">)</span>
+satellite$ <span class="nb">cd</span> frotz
+satellite$ git config --get-regexp <span class="s1">&#39;^(remote|branch)\.&#39;</span> <span class="o">(</span>2<span class="o">)</span>
+remote.origin.url mothership:frotz
+remote.origin.fetch refs/heads/*:refs/remotes/origin/*
+branch.master.remote origin
+branch.master.merge refs/heads/master
+satellite$ git config remote.origin.push <span class="se">\
+</span><span class="se"></span>            +refs/heads/*:refs/remotes/satellite/* <span class="o">(</span>3<span class="o">)</span>
+satellite$ edit/compile/test/commit
+satellite$ git push origin <span class="o">(</span>4<span class="o">)</span>
+
+mothership$ <span class="nb">cd</span> frotz
+mothership$ git checkout master
+mothership$ git merge satellite/master <span class="o">(</span>5<span class="o">)</span>
+
+           1. mothership machine has a frotz repository under your home directory<span class="p">;</span> clone from it to start a repository on the satellite machine.
+           2. clone sets these configuration variables by default. It arranges git pull to fetch and store the branches of mothership machine to <span class="nb">local</span> remotes/origin/* remote-tracking
+           branches.
+           3. arrange git push to push all <span class="nb">local</span> branches to their corresponding branch of the mothership machine.
+           4. push will stash all our work away on remotes/satellite/* remote-tracking branches on the mothership machine. You could use this as a back-up method. Likewise, you can
+           pretend that mothership <span class="s2">&#34;fetched&#34;</span> from you <span class="o">(</span>useful when access is one sided<span class="o">)</span>.
+           5. on mothership machine, merge the work <span class="k">done</span> on the satellite machine into the master branch.
+
+       Branch off of a specific tag.
+
+               $ git checkout -b private2.6.14 v2.6.14 <span class="o">(</span>1<span class="o">)</span>
+               $ edit/compile/test<span class="p">;</span> git commit -a
+               $ git checkout master
+               $ git cherry-pick v2.6.14..private2.6.14 <span class="o">(</span>2<span class="o">)</span>
+
+           1. create a private branch based on a well known <span class="o">(</span>but somewhat behind<span class="o">)</span> tag.
+           2. forward port all changes in private2.6.14 branch to master branch without a formal <span class="s2">&#34;merging&#34;</span>. Or longhand git format-patch -k -m --stdout v2.6.14..private2.6.14 <span class="p">|</span> git am -3
+           -k
+
+</code></pre></div><h3 id="13-综合个体">1.3 综合个体</h3>
+<h3 id="14-仓库管理">1.4 仓库管理</h3>
+<p>安装完毕之后，cmd-s-p shell command install</p>
+<h2 id="0x02-git-hacks">0x02 Git Hacks</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 搜索代码的变化</span>
+git log -S<span class="s1">&#39;&lt;a term in the source&gt;&#39;</span>
+<span class="c1"># 放弃本地修改，与远程同步</span>
+git fetch origin <span class="o">&amp;&amp;</span> git reset --hard origin/master <span class="o">&amp;&amp;</span> git clean -f -d
+<span class="c1"># 列出所有冲突文件</span>
+git diff --name-only --diff-filter<span class="o">=</span>U
+
+<span class="c1"># 手贱错误提交，但是没有 push</span>
+git commit -m <span class="s2">&#34;Something terribly misguided&#34;</span>              <span class="o">(</span>1<span class="o">)</span>
+git reset HEAD~                                           <span class="o">(</span>2<span class="o">)</span>
+<span class="c1"># edit needing changed files</span>
+git add needing changed files                             <span class="o">(</span>4<span class="o">)</span>
+git commit -c ORIG_HEAD                                   <span class="o">(</span>5<span class="o">)</span>
+
+<span class="c1"># Delete all changes in the Git repository, but leave unstaged things</span>
+git checkout .
+<span class="c1"># Delete all changes in the Git repository, including untracked files</span>
+git clean -f
+
+</code></pre></div><h2 id="0x03-git-和-我的-workflow">0x03 Git 和 我的 Workflow</h2>
+<p>一切工具都是为思路服务。</p>
+<h2 id="0xee-扩展阅读">0xEE 扩展阅读</h2>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/git/">Git</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20170623_vimcheatsheet/" class="prev" rel="prev" title="CVim"><i class="fas fa-angle-left fa-fw"></i>CVim</a>
+            <a href="/posts/20170704_rethinkinginjavascript/" class="next" rel="next" title="Rethinking In JavaScript">Rethinking In JavaScript<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

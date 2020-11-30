@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>写给 Pythonista 的 Golang 入门指北 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="写给 Pythonista 的 Golang 入门指北" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20180829_golang/" />
+<meta property="article:published_time" content="2018-08-29T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="写给 Pythonista 的 Golang 入门指北"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20180829_golang/" /><link rel="prev" href="http://twocucao.xyz/posts/20180801_vueprojecttalking/" /><link rel="next" href="http://twocucao.xyz/posts/20180904_%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "写给 Pythonista 的 Golang 入门指北",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20180829_golang\/"
+        },"genre": "posts","keywords": "Golang, CheatSheat","wordcount":  557 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20180829_golang\/","datePublished": "2018-08-29T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">写给 Pythonista 的 Golang 入门指北</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/golang/"><i class="far fa-folder fa-fw"></i>Golang</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-08-29">2018-08-29</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 557 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-安装">0x01 安装</a></li>
+    <li><a href="#0x01-基本概念">0x01 基本概念</a>
+      <ul>
+        <li><a href="#工具链">工具链</a></li>
+        <li><a href="#文档">文档</a></li>
+        <li><a href="#社区">社区</a></li>
+        <li><a href="#书籍">书籍</a></li>
+        <li><a href="#内置简单类型">内置简单类型</a></li>
+        <li><a href="#内置复杂类型">内置复杂类型</a></li>
+        <li><a href="#对象">对象</a></li>
+        <li><a href="#字符串">字符串</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-中级概念">0x02 中级概念</a>
+      <ul>
+        <li><a href="#函数">函数</a></li>
+        <li><a href="#模块">模块</a></li>
+        <li><a href="#面向对象">面向对象</a></li>
+        <li><a href="#错误--调试测试">错误 / 调试测试</a></li>
+        <li><a href="#io-编程">IO 编程</a></li>
+        <li><a href="#进程和线程">进程和线程</a></li>
+        <li><a href="#正则表达式">正则表达式</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x03-高级技巧">0x03 高级技巧</a></li>
+    <li><a href="#0x04-标准库">0x04 标准库</a>
+      <ul>
+        <li><a href="#常用内建模块">常用内建模块</a></li>
+        <li><a href="#系统化模块">系统化模块</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x05-第三方库">0x05 第三方库</a></li>
+    <li><a href="#0x06-代码质量">0x06 代码质量</a>
+      <ul>
+        <li><a href="#正确性">正确性</a></li>
+        <li><a href="#可维护性">可维护性</a></li>
+        <li><a href="#可读性">可读性</a></li>
+        <li><a href="#安全性">安全性</a></li>
+        <li><a href="#性能">性能</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x07-常用命令">0x07 常用命令</a></li>
+    <li><a href="#0xee-文章更新">0xEE 文章更新</a></li>
+  </ul>
+
+  <ul>
+    <li><a href="#模块-01go-语言实践---runtime">模块 01：Go 语言实践 - Runtime</a>
+      <ul>
+        <li><a href="#goroutine-的调度原理">Goroutine 的调度原理</a></li>
+        <li><a href="#内存模型">内存模型</a></li>
+        <li><a href="#gc垃圾回收的原理">GC（垃圾回收）的原理</a></li>
+        <li><a href="#channel-的消息通讯原理">channel 的消息通讯原理</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块-02go-语言实践---并行编程">模块 02：Go 语言实践 - 并行编程</a>
+      <ul>
+        <li><a href="#memory-model">Memory Model</a></li>
+        <li><a href="#并发特性并发编程模式">并发特性并发编程模式</a></li>
+        <li><a href="#context-的原理并掌握其使用方法">Context 的原理并掌握其使用方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块-03go-语言实践---网络编程">模块 03：Go 语言实践 - 网络编程</a>
+      <ul>
+        <li><a href="#golang-tcp-网络编程">Golang TCP 网络编程</a></li>
+        <li><a href="#golang-http-网络编程">Golang HTTP 网络编程</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块-04go-语言实践---异常处理">模块 04：Go 语言实践 - 异常处理</a>
+      <ul>
+        <li><a href="#error-的处理方法">error 的处理方法</a></li>
+        <li><a href="#业务错误的处理方法">业务错误的处理方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块-05go-工程化实践">模块 05：Go 工程化实践</a>
+      <ul>
+        <li><a href="#良好的项目目录组织原则和规范">良好的项目目录组织原则和规范</a></li>
+        <li><a href="#api-的设计方法和规范">API 的设计方法和规范</a></li>
+        <li><a href="#package-的管理和设计方法">Package 的管理和设计方法</a></li>
+        <li><a href="#单元测试">单元测试</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块-06go-架构实践---分布式架构前端负载均衡">模块 06：Go 架构实践 - 分布式架构（前端负载均衡）</a>
+      <ul>
+        <li><a href="#高可用-dns-的最佳实践">高可用 DNS 的最佳实践</a></li>
+        <li><a href="#cdn-的架构和应用场景">CDN 的架构和应用场景</a></li>
+        <li><a href="#深入理解-47-层负载均衡的原理">深入理解 4/7 层负载均衡的原理</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块-07go-架构实践---分布式架构数据分片">模块 07：Go 架构实践 - 分布式架构（数据分片）</a>
+      <ul>
+        <li><a href="#数据-sharding-的设计原则">数据 Sharding 的设计原则</a></li>
+        <li><a href="#了解-hash-分片的算法和演进历史">了解 Hash 分片的算法和演进历史</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块-08go-架构实践---微服务微服务概览与治理">模块 08：Go 架构实践 - 微服务（微服务概览与治理）</a>
+      <ul>
+        <li><a href="#微服务的演进历史及优缺点">微服务的演进历史及优缺点</a></li>
+        <li><a href="#微服务的设计方法">微服务的设计方法</a></li>
+        <li><a href="#微服务中-rpc-的底层原理">微服务中 RPC 的底层原理</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块-09go-架构实践---微服务可用性设计">模块 09：Go 架构实践 - 微服务（可用性设计）</a>
+      <ul>
+        <li><a href="#可用性设计的最佳实践">可用性设计的最佳实践</a></li>
+        <li><a href="#可用性设计的几大关键点隔离超时控制过载保护限流容错--重试">可用性设计的几大关键点：隔离、超时控制、过载保护、限流、容错 &amp; 重试</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块-10go-架构实践---中间件日志指标链路追踪">模块 10：Go 架构实践 - 中间件（日志、指标、链路追踪）</a>
+      <ul>
+        <li><a href="#日志收集">日志收集</a></li>
+        <li><a href="#监控指标体系">监控指标体系</a></li>
+        <li><a href="#分布式链路追踪">分布式链路追踪</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块-11go-架构实践---中间件缓存数据库">模块 11：Go 架构实践 - 中间件（缓存、数据库）</a>
+      <ul>
+        <li><a href="#redismemcache-的原理和实战技巧">Redis、Memcache 的原理和实战技巧</a></li>
+        <li><a href="#mysql-的常用设计和优化方法">MySQL 的常用设计和优化方法</a></li>
+      </ul>
+    </li>
+    <li><a href="#模块-12go-架构实践---中间件消息队列服务发现">模块 12：Go 架构实践 - 中间件（消息队列、服务发现）</a>
+      <ul>
+        <li><a href="#深入理解消息队列的原理掌握基于消息队列的架构设计方法">深入理解消息队列的原理，掌握基于消息队列的架构设计方法</a></li>
+        <li><a href="#服务发现原理选型策略以及服务发现实现的微服务多租户架构">服务发现原理、选型策略，以及服务发现实现的微服务多租户架构</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>原计划是去年 8 月份入 Golang 大法的，然后开一篇帖子进行写个入门指北来着。这一拖就拖到了今年。</p>
+<p>同样是快速上手教程，这篇文章和其他的文章的不同点在于，完全假设你是 Pythonista 的入门。</p>
+<h2 id="0x00-前言">0x00 前言</h2>
+<h2 id="0x01-安装">0x01 安装</h2>
+<p>Golang 安装</p>
+<pre><code># 如果你是在 mac 上，建议先安装下面的 SDK 以防不测
+open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
+# 安装 golang
+brew install golang
+# 配置环境变量
+echo $GOPATH # /Users/twocucao/Codes/ReposGo
+
+cd /Users/twocucao/Codes/ReposPublic/
+
+mkcd thanos # mkdir &amp;&amp; cd
+go mod init github.com/twocucao/thanos
+git remote add origin git@github.com:twocucao/thanos.git
+</code></pre><p>接下来，需要解决卡 golang.org 的网络问题。</p>
+<pre><code>export GOPROXY=https://goproxy.io
+go get -v -u github.com/hqpko/go-mod-tidy
+go mod tidy
+</code></pre><p>接下来就是随便找一些带有依赖库的代码。放到该文件夹下面。</p>
+<p>你也可以直接从这里 <a href="https://github.com/twocucao/thanos.git">https://github.com/twocucao/thanos.git</a> 拉取代码</p>
+<h2 id="0x01-基本概念">0x01 基本概念</h2>
+<h3 id="工具链">工具链</h3>
+<h3 id="文档">文档</h3>
+<h3 id="社区">社区</h3>
+<h3 id="书籍">书籍</h3>
+<h3 id="内置简单类型">内置简单类型</h3>
+<p>对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</p>
+<ul>
+<li>数字类型</li>
+<li>布尔类型</li>
+<li>字符串类型</li>
+<li>数组 / 列表</li>
+<li>字典</li>
+</ul>
+<h3 id="内置复杂类型">内置复杂类型</h3>
+<ul>
+<li>集合结构 : 串</li>
+<li>线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，<strong>栈，队列</strong>)</li>
+<li>树形结构 : 树（二叉树，B+ 树，红黑树）</li>
+<li>图形结构 : 图</li>
+</ul>
+<h3 id="对象">对象</h3>
+<h3 id="字符串">字符串</h3>
+<h2 id="0x02-中级概念">0x02 中级概念</h2>
+<h3 id="函数">函数</h3>
+<h4 id="作用域">作用域</h4>
+<h3 id="模块">模块</h3>
+<p>模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。</p>
+<p>这里的模块指的是一个包下的函数。</p>
+<h3 id="面向对象">面向对象</h3>
+<p>面向对象有三大概念：</p>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h3 id="错误--调试测试">错误 / 调试测试</h3>
+<p>异常处理实际上可以考验一个程序员编写代码的健壮性。</p>
+<p>事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。</p>
+<h3 id="io-编程">IO 编程</h3>
+<h3 id="进程和线程">进程和线程</h3>
+<h4 id="多线程">多线程</h4>
+<blockquote>
+<p>Go 多线程约等于并发。</p>
+</blockquote>
+<h4 id="多进程">多进程</h4>
+<h5 id="协同式多任务处理">协同式多任务处理</h5>
+<p>如果有两个线程，同时进行 IO 请求，当其中一个线程连接之后，立即会<strong>主动让出 GIL</strong>, 其他线程就可以运行。</p>
+<blockquote>
+<p>当 N 个线程在网络 I/O 堵塞，或等待重新获取 GIL，而一个线程运行 Python。</p>
+</blockquote>
+<p>让出之后还要执行代码呀，所以要有个收回 GIL 的动作。</p>
+<h5 id="抢占式多任务处理">抢占式多任务处理</h5>
+<h5 id="线程安全">线程安全</h5>
+<p>原子操作：sort 之类不需要
+非原子操作：n=n+2 的字节码分为 加载 n , 加载 2 , 相加，存储 n, 四个步骤，由于不是原子性，很可能被由于 15 ms 而被打断。</p>
+<p>当然，懒人一向是 : <strong>优先级不决加括号，线程不决加 lock</strong></p>
+<p>对于 Java, 程序员努力在尽可能短的时间内加锁存取共享数据，减轻线程的争夺，实现最大并行。但 Python 中，线程无法并行运行，细粒度的锁就没有了优势。</p>
+<h3 id="正则表达式">正则表达式</h3>
+<h2 id="0x03-高级技巧">0x03 高级技巧</h2>
+<h2 id="0x04-标准库">0x04 标准库</h2>
+<h3 id="常用内建模块">常用内建模块</h3>
+<h3 id="系统化模块">系统化模块</h3>
+<h2 id="0x05-第三方库">0x05 第三方库</h2>
+<ul>
+<li>Requests : API 人性化</li>
+</ul>
+<h2 id="0x06-代码质量">0x06 代码质量</h2>
+<h3 id="正确性">正确性</h3>
+<h3 id="可维护性">可维护性</h3>
+<h3 id="可读性">可读性</h3>
+<h3 id="安全性">安全性</h3>
+<h3 id="性能">性能</h3>
+<h2 id="0x07-常用命令">0x07 常用命令</h2>
+<pre><code>go build
+go install -v
+go clean
+go fmt
+go get
+go test
+go tool fix . # 修复老代码到新版本
+go tool vet directory|files
+go tool yacc -o gopher.go -p parser gopher.y
+godoc -http=:8080
+go version 查看 go 当前的版本
+go env 查看当前 go 的环境变量
+go list 列出当前全部安装的 package
+go run 编译并运行 Go 程序
+</code></pre><h2 id="0xee-文章更新">0xEE 文章更新</h2>
+<pre><code># 如果你是在 mac 上，建议先安装下面的 SDK 以防不测
+open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg
+
+</code></pre><h1 id="golang">Golang</h1>
+<h2 id="模块-01go-语言实践---runtime">模块 01：Go 语言实践 - Runtime</h2>
+<h3 id="goroutine-的调度原理">Goroutine 的调度原理</h3>
+<ul>
+<li>Goroutine 和线程的区别</li>
+<li>Goroutine 的实现、GPM 调度模型、调度状态及流转、调度原理、协作式抢占以及和网络库的协作</li>
+</ul>
+<p><a href="https://www.jianshu.com/p/105719434c29">https://www.jianshu.com/p/105719434c29</a></p>
+<p><a href="https://zboya.github.io/post/go_scheduler/">https://zboya.github.io/post/go_scheduler/</a></p>
+<p><a href="https://studygolang.com/articles/16407">https://studygolang.com/articles/16407</a></p>
+<h3 id="内存模型">内存模型</h3>
+<p>Go 的内存分配机制
+Go 内存分配的内部结构和分配机制</p>
+<p><a href="https://deepu.tech/memory-management-in-golang/">https://deepu.tech/memory-management-in-golang/</a></p>
+<p><a href="https://medium.com/a-journey-with-go/go-memory-management-and-allocation-a7396d430f44">https://medium.com/a-journey-with-go/go-memory-management-and-allocation-a7396d430f44</a></p>
+<h3 id="gc垃圾回收的原理">GC（垃圾回收）的原理</h3>
+<p>GC 三色标记算法</p>
+<p><a href="https://blog.golang.org/ismmkeynote">https://blog.golang.org/ismmkeynote</a></p>
+<p>GC 介绍、三色标记的实现原理、GC 的流程以及 GC 的一些优化方案</p>
+<h3 id="channel-的消息通讯原理">channel 的消息通讯原理</h3>
+<p>channel 的底层实现
+channel 的通讯机制、环形队列的结构、调度和唤醒的原理</p>
+<p><a href="https://stackoverflow.com/questions/19621149/how-are-go-channels-implemented">https://stackoverflow.com/questions/19621149/how-are-go-channels-implemented</a></p>
+<h2 id="模块-02go-语言实践---并行编程">模块 02：Go 语言实践 - 并行编程</h2>
+<h3 id="memory-model">Memory Model</h3>
+<p>Go 中内存模型和同步语义</p>
+<p><a href="https://zhuanlan.zhihu.com/p/110032965">https://zhuanlan.zhihu.com/p/110032965</a>
+<a href="https://golang.org/ref/mem">https://golang.org/ref/mem</a>
+<a href="https://golang.org/doc/">https://golang.org/doc/</a></p>
+<p>内存模型：Happens Before、同步语义、channel 通讯、锁</p>
+<h3 id="并发特性并发编程模式">并发特性并发编程模式</h3>
+<p><a href="https://blog.golang.org/pipelines">https://blog.golang.org/pipelines</a></p>
+<p>Timeout、Pipeline、Cancellation、Fanout、errgroup 等模式
+利用 channel 完成并行开发的设计模式，包含超时控制、管道、扇出、errgroup 并发
+无法熟练使用基于 channel 通讯方式的并行编程模式</p>
+<h3 id="context-的原理并掌握其使用方法">Context 的原理并掌握其使用方法</h3>
+<p>Context 传播式传递有什么意义
+使用 Go 标准库 Context 的原理和最佳实践，包含超时控制、元数据传递、生命周期控制</p>
+<p><a href="https://blog.golang.org/context">https://blog.golang.org/context</a>
+<a href="https://levelup.gitconnected.com/context-in-golang-98908f042a57">https://levelup.gitconnected.com/context-in-golang-98908f042a57</a></p>
+<h2 id="模块-03go-语言实践---网络编程">模块 03：Go 语言实践 - 网络编程</h2>
+<h3 id="golang-tcp-网络编程">Golang TCP 网络编程</h3>
+<p>Go 实现高性能的 TCP Server</p>
+<p>goim 项目了解 Go 语言中 TCP Server 的基础库和性能优化方案</p>
+<h3 id="golang-http-网络编程">Golang HTTP 网络编程</h3>
+<p>HTTP 框架选型
+针对业务需求对 HTTP 框架做针对性的扩展
+结合 gin 项目了解 Go 语言中的 HTTP Server 的基础库和框架</p>
+<h2 id="模块-04go-语言实践---异常处理">模块 04：Go 语言实践 - 异常处理</h2>
+<h3 id="error-的处理方法">error 的处理方法</h3>
+<h3 id="业务错误的处理方法">业务错误的处理方法</h3>
+<p>error 的处理复杂，不会正确使用
+业务错误定义和 error 整合难度较高</p>
+<p>Go 语言中的 error 处理实践：检查错误、定义错误、追加上下文
+Go 项目中的业务错误码如何结合 error 的最佳实践</p>
+<h2 id="模块-05go-工程化实践">模块 05：Go 工程化实践</h2>
+<h3 id="良好的项目目录组织原则和规范">良好的项目目录组织原则和规范</h3>
+<h3 id="api-的设计方法和规范">API 的设计方法和规范</h3>
+<h3 id="package-的管理和设计方法">Package 的管理和设计方法</h3>
+<h3 id="单元测试">单元测试</h3>
+<ol>
+<li>
+<p>Go 项目的标准化管理</p>
+</li>
+<li>
+<p>设计 API</p>
+</li>
+<li>
+<p>包管理</p>
+</li>
+<li>
+<p>良好的 Go 项目中的分层目录结构组织和代码规范</p>
+</li>
+<li>
+<p>Go 项目中 API 的设计原则和方法：定义、状态和业务错误码处理</p>
+</li>
+<li>
+<p>Go 项目中包的设计和最佳实践、go mod 的使用</p>
+</li>
+<li>
+<p>go test 工具链的使用方法、单元测试的最佳实践以及 Mock 技术</p>
+</li>
+</ol>
+<h2 id="模块-06go-架构实践---分布式架构前端负载均衡">模块 06：Go 架构实践 - 分布式架构（前端负载均衡）</h2>
+<h3 id="高可用-dns-的最佳实践">高可用 DNS 的最佳实践</h3>
+<h3 id="cdn-的架构和应用场景">CDN 的架构和应用场景</h3>
+<h3 id="深入理解-47-层负载均衡的原理">深入理解 4/7 层负载均衡的原理</h3>
+<p>在线服务的全链路视野
+应用服务上层的负载均衡</p>
+<p>DNS 的原理、防劫持的方法、HTTPDNS + IP 长连接
+CDN 的系统架构、应用领域以及保证数据一致性的方法
+LVS、Nginx 4/7 层负载均衡的原理和实践</p>
+<h2 id="模块-07go-架构实践---分布式架构数据分片">模块 07：Go 架构实践 - 分布式架构（数据分片）</h2>
+<h3 id="数据-sharding-的设计原则">数据 Sharding 的设计原则</h3>
+<h3 id="了解-hash-分片的算法和演进历史">了解 Hash 分片的算法和演进历史</h3>
+<p>Sharding 的应用场景，不会合理使用
+Hash 算法的使用场景</p>
+<p>数据分片设计，如：分库分表、多活的 Shard 设计等等
+分片算法的 Hash 实现和演进：Hash 求余、一致性 Hash、有界负载一致性 Hash、节点映射</p>
+<h2 id="模块-08go-架构实践---微服务微服务概览与治理">模块 08：Go 架构实践 - 微服务（微服务概览与治理）</h2>
+<h3 id="微服务的演进历史及优缺点">微服务的演进历史及优缺点</h3>
+<h3 id="微服务的设计方法">微服务的设计方法</h3>
+<h3 id="微服务中-rpc-的底层原理">微服务中 RPC 的底层原理</h3>
+<p>微服务的服务角色：API Gateway、BFF 还是 Service？
+微服务拆分
+RPC 的原理，不知道如何进行微服务 RPC 框架的选型</p>
+<p>微服务的原理、概念，以及微服务的实现细节
+API Gateway、BFF、Service 等概念精讲
+微服务通讯 RPC 框架的细节和选型</p>
+<h2 id="模块-09go-架构实践---微服务可用性设计">模块 09：Go 架构实践 - 微服务（可用性设计）</h2>
+<h3 id="可用性设计的最佳实践">可用性设计的最佳实践</h3>
+<h3 id="可用性设计的几大关键点隔离超时控制过载保护限流容错--重试">可用性设计的几大关键点：隔离、超时控制、过载保护、限流、容错 &amp; 重试</h3>
+<p>如何设计高可用的分布式服务
+何提升服务自愈能力</p>
+<p>微服务的隔离实现，以及架构设计中的隔离实现
+进程内超时控制和跨进程超时控制
+程序自保护避免过载，抛弃一定的流量完成自适应限流
+单机限流、多租户场景的分布式限流
+节点故障的容错逻辑、重试容错的策略和设计</p>
+<h2 id="模块-10go-架构实践---中间件日志指标链路追踪">模块 10：Go 架构实践 - 中间件（日志、指标、链路追踪）</h2>
+<h3 id="日志收集">日志收集</h3>
+<h3 id="监控指标体系">监控指标体系</h3>
+<h3 id="分布式链路追踪">分布式链路追踪</h3>
+<p>如何解决微服务的可观测性难题
+怎么做微服务的可视化和标准化
+出故障后，难以对微服务进行问题诊断</p>
+<p>实现一个可以集中收集所有微服务实例的日志，并能统一查看和检索的日志采集架构
+指标监控、使用 Prometheus 解决监控可视化、指标采集
+微服务中的跨服务性能问题诊断，结合 Jaeger 实现分布式链路追踪</p>
+<h2 id="模块-11go-架构实践---中间件缓存数据库">模块 11：Go 架构实践 - 中间件（缓存、数据库）</h2>
+<h3 id="redismemcache-的原理和实战技巧">Redis、Memcache 的原理和实战技巧</h3>
+<h3 id="mysql-的常用设计和优化方法">MySQL 的常用设计和优化方法</h3>
+<ol>
+<li>
+<p>解决缓存的一致性问题</p>
+</li>
+<li>
+<p>怎样合理地设计 MySQL 的表</p>
+</li>
+<li>
+<p>Redis、Memcache 的应用场景、最佳实践，以及缓存的一致性设计</p>
+</li>
+<li>
+<p>MySQL 的表设计、常用优化手段，以及如何解决分布式事务</p>
+</li>
+</ol>
+<h2 id="模块-12go-架构实践---中间件消息队列服务发现">模块 12：Go 架构实践 - 中间件（消息队列、服务发现）</h2>
+<h3 id="深入理解消息队列的原理掌握基于消息队列的架构设计方法">深入理解消息队列的原理，掌握基于消息队列的架构设计方法</h3>
+<h3 id="服务发现原理选型策略以及服务发现实现的微服务多租户架构">服务发现原理、选型策略，以及服务发现实现的微服务多租户架构</h3>
+<ol>
+<li>
+<p>消息解耦的架构设计</p>
+</li>
+<li>
+<p>如何实现服务发现对平滑发布的支持</p>
+</li>
+<li>
+<p>怎样利用多租户实现多测试环境</p>
+</li>
+<li>
+<p>Kafka 的实现原理、异步消息系统的架构设计</p>
+</li>
+<li>
+<p>RPC 服务发现、动态地址的选型和实现原理，以及基于服务发现的平滑重启和多租户架构</p>
+</li>
+</ol>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-08-22</strong> 初始化接口</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/golang/">Golang</a>,&nbsp;<a href="/tags/cheatsheat/">CheatSheat</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20180801_vueprojecttalking/" class="prev" rel="prev" title="Vue 项目漫谈 2018 版"><i class="fas fa-angle-left fa-fw"></i>Vue 项目漫谈 2018 版</a>
+            <a href="/posts/20180904_%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/" class="next" rel="next" title="Thinking In Web Developing">Thinking In Web Developing<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

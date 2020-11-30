@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>Docker CheatSheet - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="Docker CheatSheet" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20180210_dockercheatsheet/" />
+<meta property="article:published_time" content="2018-02-10T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Docker CheatSheet"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20180210_dockercheatsheet/" /><link rel="prev" href="http://twocucao.xyz/posts/20180210_elasticsearchcheatsheet/" /><link rel="next" href="http://twocucao.xyz/posts/20180220_unknowncheatsheet/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "Docker CheatSheet",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20180210_dockercheatsheet\/"
+        },"genre": "posts","keywords": "CheatSheet","wordcount":  810 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20180210_dockercheatsheet\/","datePublished": "2018-02-10T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">Docker CheatSheet</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/devops/"><i class="far fa-folder fa-fw"></i>DevOps</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2018-02-10">2018-02-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 810 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-docker-相关概念">0x01 Docker 相关概念</a>
+      <ul>
+        <li><a href="#11-docker-是什么">1.1 Docker 是什么？</a></li>
+        <li><a href="#12-docker-是用来做什么的">1.2 Docker 是用来做什么的？</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-docker-初始配置">0x02 Docker 初始配置</a></li>
+    <li><a href="#0x03-django-技术栈-docker-化">0x03 Django 技术栈 Docker 化</a>
+      <ul>
+        <li><a href="#31-开发时">3.1 开发时</a></li>
+        <li><a href="#32-具体开发">3.2 具体开发</a></li>
+        <li><a href="#33-部署时">3.3 部署时</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x04-docker-踩坑记录">0x04 Docker 踩坑记录</a>
+      <ul>
+        <li><a href="#41-postgresql-的初始化">4.1 PostgreSQL 的初始化</a></li>
+        <li><a href="#42-清空所有-image">4.2 清空所有 Image</a></li>
+        <li><a href="#43-时区">4.3 时区</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00 前言</h2>
+<p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。</p>
+<ul>
+<li>Docker 相关概念</li>
+<li>Docker 配套工具</li>
+<li>Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化</li>
+<li>Docker 踩坑记录</li>
+</ul>
+<p>不定期更新。</p>
+<!-- raw HTML omitted -->
+<h2 id="0x01-docker-相关概念">0x01 Docker 相关概念</h2>
+<h3 id="11-docker-是什么">1.1 Docker 是什么？</h3>
+<p>在认知 Docker 这种相对而言比较新概念的时候，只要从以往的经验中拿出一个词语来概括新词汇即可。</p>
+<p>于是，我们便可以这么理解：</p>
+<blockquote>
+<p>Docker 是一种比虚拟机轻量的用来存放职责比较单一的应用的容器。</p>
+</blockquote>
+<p>也就是三点：</p>
+<ul>
+<li>比虚拟机轻量</li>
+<li>用来存放职责单一的应用</li>
+<li>容器</li>
+</ul>
+<p>显然这是一种理解，而不是一种定义。</p>
+<h3 id="12-docker-是用来做什么的">1.2 Docker 是用来做什么的？</h3>
+<p>新技术本质是什么？工具也。
+每一个新的技术都是为了提升效率才被创造出来，那么，究竟 Docker 可以从哪些方面提升我们的效率呢？</p>
+<p>我们知道开发一个有些规模的网站的话，需要严格遵守如下的开发流程：</p>
+<ul>
+<li>编码</li>
+<li>测试</li>
+<li>集成到系统中</li>
+<li>部署</li>
+</ul>
+<p>但如果人员比较多，则会出现问题，有的人喜欢用 MacOS, 有的人喜欢用 Ubuntu, 开发测试环境怎么统一呢？如果开发人员明明使用的是某个版本的 PostgreSQL, 用了最新的功能，但是测试和运维用的就是老版本的功能怎么办？</p>
+<p>部署环境也会有问题，比如，开发部突然想使用更高版本的软件，比如突然需要更多的 Django 应用来负担海量请求的怎么办？Hadoop 不够用怎么办？</p>
+<p>当然，思路很简单，开发的时候使用虚拟机，拷贝给大家一起用，部署的时候多创建一些机器，然后上 Ansible 远程操控。即可。</p>
+<p>并不是不行，但是 Docker 由于更加轻量，操作粒度更加细腻，我可以销毁镜像，上传镜像，定制镜像，很轻松调整镜像包并且安装挂载文件。</p>
+<h2 id="0x02-docker-初始配置">0x02 Docker 初始配置</h2>
+<pre><code>docker-machine create --driver=virtualbox default
+docker-machine ls
+eval &quot;$(docker-machine env default)&quot;
+</code></pre><h2 id="0x03-django-技术栈-docker-化">0x03 Django 技术栈 Docker 化</h2>
+<p>为了理解这个过程，下面我将我 Docker 化 django 应用的流程按照一定步骤演示出来。我将我使用 Django 的部分经验搞出来，做成了一个 django-bpc ，即 django best practice。如果诸位有兴趣研究的话，拿来看看源码倒是倒是非常好。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># 演示环境为 MAC, 在此之前，务必安装好 docker for mac 以及 virualbox</span>
+<span class="c1"># xxxxxx 为 阿里云分配的容器 registry</span>
+docker-machine create --engine-registry-mirror<span class="o">=</span>https://xxxxxx.mirror.aliyuncs.com -d virtualbox default
+
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">├── AUTHORS.md
+├── HISTORY.md
+├── LICENSE
+├── MANIFEST.in
+├── Makefile
+├── README.md
+├── assets
+├── compose
+│   ├── django
+│   ├── elasticsearch
+│   ├── nginx
+│   ├── postgres
+│   ├── rabbitmq
+│   └── redis
+├── config
+│   ├── __init__.py
+│   ├── settings
+│   ├── urls.py
+│   └── wsgi.py
+├── dev.yml
+├── docker-compose.yml
+├── docs
+│   ├── Makefile
+│   ├── exts
+│   ├── make.bat
+│   ├── make_pdf.sh
+│   └── <span class="nb">source</span>
+├── manage.py
+├── pytest.ini
+├── requirements
+│   ├── base.txt
+│   ├── local.txt
+│   ├── production.txt
+│   └── test.txt
+├── scripts
+├── setup.cfg
+├── tests
+│   ├── __init__.py
+│   ├── conftest.py
+│   └── test_basics.py
+└── yadjangoblog
+    ├── __init__.py
+    ├── contrib
+    ├── static
+    ├── templates
+    ├── yaaccounts
+    ├── yaadmin
+    ├── yaapi
+    ├── yablog
+    ├── yacommon
+    └── yataskapp
+</code></pre></div><h3 id="31-开发时">3.1 开发时</h3>
+<h4 id="1-运行所需组件">1. 运行所需组件</h4>
+<p>在开发时候需要使用几个后台的组件</p>
+<ul>
+<li>PostgreSQL 用于做数据存储</li>
+<li>Redis 用于做缓存 和 Session 等等</li>
+<li>RedditMQ 用于消息队列</li>
+<li>ElasticSearch 用于做搜索与推荐</li>
+</ul>
+<p>目录中的组件基本上都在这儿了。</p>
+<pre><code>├── compose
+│   ├── django
+│   ├── elasticsearch
+│   ├── nginx
+│   ├── postgres
+│   ├── rabbitmq
+│   └── redis
+</code></pre><p>进行初步的封装和添加脚本，不直接采用官网的配置需要是因为添加一些的定制版本。</p>
+<h4 id="2-vuejs-运行环境">2. Vue.JS 运行环境</h4>
+<p>Vue.JS 使用 Vue-Cli 搭建的脚手架还是挺方便的，这个就无需 Docker 化了，需要注意的是，建议配置一下开发时候请求的 API 地址。</p>
+<p>我本人用于请求本地地址的 8080 端口，并且 8080 端口映射到 Docker 容器里面的 Django App</p>
+<h4 id="3-django-app">3. Django App</h4>
+<p>配置 Django, 我使用的是 ubuntu 16.04 基础镜像，然后安装必备的依赖。</p>
+<p>接着指定 workdir 为当前目录</p>
+<p>需要注意的是，Django App 里面需要等待 PostgreSQL 初始化完毕才能进行正常的运行接下来需要运行的命令，比如 runserver 之类的命令。</p>
+<p>entrypoint 的左右即是放在命令执行之前，这样的话，重写掉 entrypoint 文件，就可以实现上面的功能了</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 本段代码来自 cookiecutter Django</span>
+<span class="n">function</span> <span class="n">postgres_ready</span><span class="p">(){</span>
+<span class="n">python</span> <span class="o">&lt;&lt;</span> <span class="n">END</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">psycopg2</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">conn</span> <span class="o">=</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">dbname</span><span class="o">=</span><span class="s2">&#34;$POSTGRES_USER&#34;</span><span class="p">,</span> <span class="n">user</span><span class="o">=</span><span class="s2">&#34;$POSTGRES_USER&#34;</span><span class="p">,</span> <span class="n">password</span><span class="o">=</span><span class="s2">&#34;$POSTGRES_PASSWORD&#34;</span><span class="p">,</span> <span class="n">host</span><span class="o">=</span><span class="s2">&#34;postgres&#34;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">psycopg2</span><span class="o">.</span><span class="n">OperationalError</span><span class="p">:</span>
+    <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">END</span>
+<span class="p">}</span>
+
+<span class="n">until</span> <span class="n">postgres_ready</span><span class="p">;</span> <span class="n">do</span>
+  <span class="o">&gt;&amp;</span><span class="mi">2</span> <span class="n">echo</span> <span class="s2">&#34;Postgres is unavailable - sleeping&#34;</span>
+  <span class="n">sleep</span> <span class="mi">1</span>
+<span class="n">done</span>
+</code></pre></div><p>最后封装一些命令到，比如启动 Celery 之类的。</p>
+<h4 id="4-celery-运行环境">4. Celery 运行环境</h4>
+<h4 id="5-其他零散的重要配置">5. 其他零散的重要配置</h4>
+<h3 id="32-具体开发">3.2 具体开发</h3>
+<p>我编写了一整套 makefile 的命令，我会先进入项目 YaDjangoBlog , 然后执行 make ; 执行 make 之后，显示了我编写的一些便于开发测试的命令如下：</p>
+<pre><code>sep--sep-a           ========== 开发时命令 ==============
+django-build-up      build and compose up
+force_djnago_build-up django / pg / es
+django-before-up     e.g pg / es / redis
+django-runserver     runserver
+django-celerybeat    celerybeat
+django-celeryworker  celeryworker
+django-just-up       build and up
+django-manager       Enter python manage.py
+django-console       Enter Django Console
+shell                Enter Shell
+dbshell              Enter psql as yadjangoweb
+sep--sep-b           ========== 测试与代码质量 ==============
+lint                 check style with flake8
+test                 run tests quickly with the default Python
+coverage             check code coverage quickly with the default Python
+sep--sep-c           ========== 文档生成相关 ==============
+docs                 generate Sphinx HTML documentation, including API docs
+servedocs            compile the docs watching for changes
+sep--sep-d           ========== 程序发布相关 ==============
+release              package and upload a release
+dist                 builds source and wheel package
+install              install the package to the active Python's site-packages
+sep--sep-e           ========== Docker 镜像相关 ==============
+build-postgres       &gt; Postgres
+force-build-postgres &gt; Postgres
+build-ubuntu         &gt; base ubuntu
+force_build-ubuntu   &gt; base ubuntu
+build-django         &gt; base django
+force_build-django   &gt; base django
+sep--sep-f           ========== 文件清理相关 ==============
+clean                remove all build, test, coverage and Python artifacts
+clean-build          remove build artifacts
+clean-pyc            remove Python file artifacts
+clean-test           remove test and coverage artifacts
+</code></pre><h4 id="1-构建镜像">1. 构建镜像</h4>
+<p>执行 build 命令即可。</p>
+<h4 id="2-使用-tmuxinator-批量运行命令">2. 使用 Tmuxinator 批量运行命令</h4>
+<p>现在，我有这么一个需求，就是在 iterm 中开启如下的终端：</p>
+<ul>
+<li>第 1 个终端，运行的命令是 Vue.JS 的启动命令 npm run dev。</li>
+<li>第 2 个终端，有两个分屏，其一用于构建 iconfont 字体文件的命令，其二用于 Gulp 动态编译 SCSS 文件的命令。</li>
+<li>第 3 个终端，运行的命令是 Django 的 runserver 的命令。</li>
+<li>第 4 个终端，有两个分屏，一个是 Django 容器的 bash 环境，另一个是 PostgreSQL 的 命令行环境。</li>
+<li>第 5 个终端，有两个分屏，一者运行 Celery Beat，另一者则是运行 Celery Worker.</li>
+</ul>
+<blockquote>
+<p>当然，目前没有添加 redis 和 RabbitMQ 的命令行环境</p>
+</blockquote>
+<h4 id="3-使用-pycharm-进行开发">3. 使用 PyCharm 进行开发</h4>
+<h3 id="33-部署时">3.3 部署时</h3>
+<p>Docker 部署需要解决的问题，是裸机部署的 Docker 化。</p>
+<blockquote>
+<p>TODO: 目前 Docker 部署的脚本还在编写中，这部分的文字可能后期会调整</p>
+</blockquote>
+<h4 id="0-django-生产环境和开发环境之间的区别">0. Django 生产环境和开发环境之间的区别</h4>
+<p>生产环境和开发环境除了一些文字配置上的不同，还有一些不同，比如：</p>
+<ol>
+<li>新增了 uwsgi / gunicorn 作为新的 web 容器</li>
+<li>新增了 Ngnix 作为反向代理</li>
+<li>Celery Worker 数量的变化</li>
+<li>Supervisor 进程守护</li>
+</ol>
+<p>首先说第一点带来的区别，我们使用 Django 内置的 runserver 的时候，其实这个命令可以用于做生产环境的 Web 服务器。</p>
+<p>比如，只需如此 python manage.py runserver 0.0.0.0:8888</p>
+<p>可以用，但不推荐用。没什么负载量。这时候就需要 gunicorn 了。你可以理解 Gunicorn 是进阶的 runserver,</p>
+<p>可以参考：https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/gunicorn/</p>
+<p>同时，Gunicorn 可以进行颗粒度更细致的操作，但负载量不如 uwsgi, 毕竟前者 python 写的，后者是 C 写的。</p>
+<p>一般 Gunicorn 也会配上 NGNIX,</p>
+<p>简单来说，Nginx 至少可以解决下面的问题：</p>
+<ul>
+<li>匹配域名</li>
+<li>转发请求
+<ul>
+<li>设置请求头</li>
+<li>转发本地的静态文件 (static / media）</li>
+<li>映射部分请求到 gunicorn , 然后 gunicorn 开启一个线程到 Django</li>
+<li>负载均衡</li>
+</ul>
+</li>
+</ul>
+<p>需要注意的是 gunicorn 这种关键性的进程，一定要用 Supervisor 进行守护，否则挂掉了就完蛋了，</p>
+<h4 id="1-裸机部署-django-程序">1. 裸机部署 Django 程序</h4>
+<h4 id="2-docker-部署">2. Docker 部署</h4>
+<h2 id="0x04-docker-踩坑记录">0x04 Docker 踩坑记录</h2>
+<h3 id="41-postgresql-的初始化">4.1 PostgreSQL 的初始化</h3>
+<p>当 Docker 化 PostgreSQL 的时候，必须要把一些初始化脚本放在 docker-entrypoint-initdb.d 中，才能初始化，笔者在进行测试的时候多次发现无法进行初始化，究其原因，经过查找，如果没有及时删除 Volume 的话，则无论怎么初始化，或者 Build, 每一次都会挂载原来的文件夹。</p>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">ADD init_django_db.sh /docker-entrypoint-initdb.d/init_django_db.sh
+</code></pre></div><h3 id="42-清空所有-image">4.2 清空所有 Image</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="c1"># Delete all containers</span>
+docker rm <span class="k">$(</span>docker ps -a -q<span class="k">)</span>
+<span class="c1"># Delete all images</span>
+docker rmi <span class="k">$(</span>docker images -q<span class="k">)</span>
+<span class="c1"># Force delete</span>
+docker rmi <span class="k">$(</span>docker images -q<span class="k">)</span> -f
+<span class="c1"># Delete Unused Volume</span>
+docker volume prune
+</code></pre></div><h3 id="43-时区">4.3 时区</h3>
+<pre><code># Alpine
+RUN apk --no-cache add tzdata &amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone
+# Ubuntu
+RUN echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone &amp;&amp; dpkg-reconfigure -f noninteractive tzdata
+# Centos
+RUN echo &quot;Asia/shanghai&quot; &gt; /etc/timezone
+</code></pre><h1 id="0xee-参考链接">0xEE 参考链接</h1>
+<ul>
+<li><a href="https://github.com/wsargent/docker-cheat-sheet">https://github.com/wsargent/docker-cheat-sheet</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-01-20</strong> 初始化本文</li>
+</ul>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cheatsheet/">CheatSheet</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20180210_elasticsearchcheatsheet/" class="prev" rel="prev" title="ElasticSearch CheatSheet"><i class="fas fa-angle-left fa-fw"></i>ElasticSearch CheatSheet</a>
+            <a href="/posts/20180220_unknowncheatsheet/" class="next" rel="next" title="Unknown Cheatsheet">Unknown Cheatsheet<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
