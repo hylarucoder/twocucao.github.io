@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>如何写出整洁的 Python 代码 下 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="如何写出整洁的 Python 代码 下" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20190924_pycode_08_clean_code/" />
+<meta property="article:published_time" content="2019-09-24T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何写出整洁的 Python 代码 下"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20190924_pycode_08_clean_code/" /><link rel="prev" href="http://twocucao.xyz/posts/20190526_pycode_07_clean_code/" /><link rel="next" href="http://twocucao.xyz/posts/20201130_ory/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "如何写出整洁的 Python 代码 下",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20190924_pycode_08_clean_code\/"
+        },"genre": "posts","keywords": "Python","wordcount":  239 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20190924_pycode_08_clean_code\/","datePublished": "2019-09-24T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">如何写出整洁的 Python 代码 下</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-09-24">2019-09-24</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 239 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>本文是《提升你的 Python 项目代码健壮性和性能》系列的第八篇文章。</p>
+<p>第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性
+第二篇，讲的是 如何通过测试提升 Python 代码的健壮性
+第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性
+第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能
+第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统
+第六篇，为《整洁上篇》讲的是 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码
+第七篇，为《整洁中篇》讲的是 一些的编程时候的基本原则，比如，避免过深的缩进，SOLID 法则，边界
+本文是《整洁下篇》，本文的诞生，要感谢我前公司的技术主管豪蔚老师和产品主管刚哥，在上海工作这几年，总是和能优秀的人工作，确实是我幸运的地方。</p>
+<p>目录如下</p>
+<p>▼ 如何写出整洁的 Python 代码 下篇 : section
+0x00 前言 : section
+0x01 处理需求的姿势 : section
+▼ 0x02 敏捷开发 : section
+看板和晨会 : section
+敏捷的时间安排：周一到周五 : section
+人员安排 : section
+▼ 0x03 代码全局观 : section
+起个好名字 : section
+本质复杂度和偶然复杂度 : section
+0xEE 后记 : section
+0x00 前言
+这篇文章憋了很久，思考了许久，《整洁下篇》干脆就聊聊编程中，不是写代码的部分；</p>
+<p>如果说，写代码是硬技能，那么本期就是来聊软技能的。更确切的说，是复盘几年的工作经验中，我发现的一些有趣的，影响效率的事情以及我的解决方案。</p>
+<p>凡用兵之法，全国为上，破国次之；全军为上，破军次之；全旅为上，破旅次之；全卒为上，破卒次之；全伍为上，破伍次之。是故百战百胜，非善之善者也；不战而屈人之兵，善之善者也。 &mdash; 《孙子兵法·谋攻篇》
+什么叫做有效率，不战而屈人之兵，善之善者也。</p>
+<p>最整洁的代码，是少写代码，甚至不写代码。
+如何做到？</p>
+<p>几年的工作经验下来，我发现我处理的往往不是技术问题，而是大量的非技术性问题以及伴随着非技术问题带来的成倍的技术问题。</p>
+<p>因需求的变化的返工。
+因追求完美而为了不必要优化的地方而优化。
+因沟通不到位导致的加班加点。
+因缺乏单元测试导致的重构没有底气，甚至懒得重构。
+因缺乏话语权导致的被动开发。
+因考虑不周到而导致的硬着头皮加班。
+因命名不够规范，代码可维护性低下，导致后面定位问题的时间指数性上升。
+应然如此？实然如此！</p>
+<p>0x01 处理需求的姿势
+以前呢，我自以为编程水平还算不错，撸起代码来像是一道春天的闪电。但时间长了，发现技术行，但总体产出不高效。为什么呢？</p>
+<p>比如有如下的问题：</p>
+<p>问题一：战术上很勤奋，一个需求过来，我的第一反应是把这个功能『通过系统』做出来。
+问题二：没有深入和产品运营沟通，于是后期被动的应对需求的变动
+问题三：没有三思而行，做项目没有计划性，想到哪里做到哪里。
+问题一的结果：这导致了很多时候，把这个功能『通过系统』做出来了，但是其实是个伪需求。或者，是个没必要做到系统里面的需求。
+问题二的结果：导致了一些过度设计或者过于粗糙的设计。最后忙于返工，以及各种数据迁移和逻辑修改
+问题三的结果：没有做好足够的规划，『码在当下』, 没有前瞻性。
+速度再快，也要返工，唯一不变的就是变化本身。
+我想了很久，才意识到，很多时候，产品在传递需求的时候是存在很多的信息损失的。</p>
+<p>背后的原因，可能来源于产品的态度和能力上，可能是产品的上一级需求传递过来的问题，也可能是团队对待产品以及自己的错误的态度上。</p>
+<p>经验告诉我，作为对项目负责的程序员千万不要跟着产品经理的思路走。</p>
+<p>如果是新功能，一定要就要展开一番对话。</p>
+<p>问清楚为什么要做这个需求 / 变动，藏在后面的思路是什么。对于用户、对于产品有什么价值。
+和产品经理互杠，用户的具体使用场景是什么。
+看看是不是一定要放在系统里面解决。如果放在系统里面解决，那么应该怎么做。让产品方给出一个粗糙的方案。
+化简这个方案后再次和产品互杠。
+确定方案后分解安排任务。
+任务上线之后如何确定这个功能是有效果的。
+还记得上面的话么？不战而屈人之兵。</p>
+<p>要做的需求，如果产品经理不能简单清晰的描述，做出来一定是一坨。</p>
+<p>作为合格的工程师，则是必须要将不清晰、不合理的、拍脑袋的需求拒掉。所谓上梁不正下梁歪，出题人的思路是混乱的，解答者的思路肯定不会清晰到哪里去。</p>
+<p>当然，这也存在一些例外的情况，如果你到了一个工作地方，没什么话语权，认真推进事情发展也没什么暖用的地方的话，好好反思一下自己为什么在这种地方干活，然后认真修炼自己。</p>
+<p>早些年，我还以为有时间不够的情况，后来也逐渐明白，没有开发不了的任务，程序写到后面都是妥协，无非就多快好省的妥协</p>
+<p>多 - 功能的数量和完成度
+快 - 完工时间
+好 - 软件最终质量，满意程度
+省 - 成本，花多少个人力和精力
+鱼和熊掌不能得兼</p>
+<p>如果产品说『反正下周要上线』, 你砍不了『快』，就砍『好』和『省』。
+如果产品说『我要加需求』, 你砍不了『多』, 那就砍『快』和『省』
+如何去做这些妥协，则是工程师的内力。</p>
+<p>还有，如果工程师本身不得势，也没有啥话语权，也就没办法推进你的产品了。</p>
+<p>砍需求不是坏事情，树苗不也还是要经常剪去多余的枝桠来防止过度吸收养分。</p>
+<p>0x02 敏捷开发
+国内的敏捷开发一般也称为『怎么方便怎么来的作坊式开发』</p>
+<p>看板和晨会
+一般会采用以下的做法来敏捷一些</p>
+<p>使用看板来管理任务。看板上的卡片无非就是放在『需求确认』,『正在开发』,『正在测试』,『已发布』里面。
+晨会，轮流发言讲解进度。
+任务的安排往往要细分到方便追踪。</p>
+<p>举例来说，如果是简单版本的『支付商城』的功能，则会有</p>
+<p>支付模块
+商品模块
+订单模块
+物流模块
+但是，商品模块和订单模块要和前后端交互，假设后端叫做小后，前端叫做小前，H5 端和 Admin 端的统一模块不是同一时间段完成的。</p>
+<p>如果放在一起的话，则会难以追踪。会出现这个卡片属于『正在开发』或者『正在测试』的薛定谔状态。</p>
+<p>于是这么细化会更加合理一些</p>
+<p>支付模块
+商品模块 - Admin
+商品模块 - H5
+订单模块 - Admin
+订单模块 - H5
+如果是大一点的系统，则需要划分的更细致。务必不要出现薛定谔的状态卡片。</p>
+<p>一般如果看板划分的详细的话，晨会就很轻松了。</p>
+<p>敏捷的时间安排：周一到周五
+周一：一周的开始，就应该发布新版本，选择这个时间段是因为团队都在一起，出问题可以及时修复。
+周二 / 周三：复盘以下迭代过程中出现的一些问题。同时进行本周任务的开发。
+周四：产品负责人与技术负责人等相关人员规划下周的任务，并且过一遍需求评审。
+周五：在预发布环境完成本周功能的测试。留待下周进行正式版本的发布。
+人员安排
+《人月神话》这本书里面有一个观点，</p>
+<p>需要写作沟通的人员数量影响着开发成本，人数越多，沟通和交流次数越多，更正沟通不当所引起的不良结果也就越多。
+对此，我的解决方案是：</p>
+<p>减少人数。做业务的人选择全栈，从前端到后端负责。这样即便是前后端分离之后，也不会有扯皮的情况。
+做基础架构的选择专才。
+精英制度。点子最好都由几个立场上需要对产品负责的人来想。如果异想天开的人和做
+事的人不是同一个人，则往往就很麻烦。当然，也需要给予推进产品的人一定的鼓励。
+0x03 代码全局观
+我遇到过的代码问题大致分为两类</p>
+<p>给你的变量，函数，模块，类等等起个好名字的问题。
+理解本质复杂度（Essential Complexity）和偶然复杂度（Accident Complexity）的问题。
+起个好名字
+对于工程师来说，第一点非常非常重要。</p>
+<p>因为，这需要你非常理解业务逻辑并且在某个上下文中用准确的变量名来命名。代码是写给
+人看的，顺带着能在机器上运行。并且，尽量跟着业务来命名 （参考 DDD)，这点也就不再赘述了。</p>
+<p>当然，其实这也是整洁前两篇讲的东西，也就不再赘述了。</p>
+<p>本质复杂度和偶然复杂度
+第二点，这是师从我的技术主管豪蔚老师之后获取的最大经验。</p>
+<p>本质复杂度，就是不管你怎么搞，A 点到 B 点，没有捷径可走的，该踩的坑一个都逃不了。
+偶然复杂度，就是 A 点到 B 点，命名走几步就到了，但偏偏走了不少弯路。
+写程序之前，务必要做到尽可能的规避掉偶然复杂度。</p>
+<p>Less Is More
+0xEE 后记
+本文简单说了一些我知道的可以规避掉成吨的技术问题的一些非技术性技巧，本文还是不够全面，比如就没有介绍自动化的工具，没有介绍 CI, 没有用实例介绍怎么应对产品经理的不合理要求，这些就留待以后吧</p>
+<p>本想着，《整洁下》的这篇可以多写点编程技巧上的东西的。但想了半天，还是选择了从软技能方面入手。与其说是为了写好代码，倒不如说是为了好写代码。</p>
+<p>所谓汝果欲学诗，工夫在诗外。写代码之外的活，其实很重要。</p>
+<p>ChangeLog:</p>
+<p>2019-09-24 重修文字</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20190526_pycode_07_clean_code/" class="prev" rel="prev" title="如何写出整洁的 Python 代码 中"><i class="fas fa-angle-left fa-fw"></i>如何写出整洁的 Python 代码 中</a>
+            <a href="/posts/20201130_ory/" class="next" rel="next" title="开源认证基础服务">开源认证基础服务<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

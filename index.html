@@ -10,7 +10,7 @@
 <meta property="og:description" content="Get Busy is My New Hugo Site" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://twocucao.xyz/" />
-<meta property="og:updated_time" content="2020-11-30T18:16:34+08:00" />
+<meta property="og:updated_time" content="2020-11-30T18:14:14+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="海拉鲁编程客"/>
 <meta name="twitter:description" content="Get Busy is My New Hugo Site"/>
@@ -88,15 +88,6 @@
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/shell/">Shell</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20201201_pythontypehint/">Python Type Hint</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-11-30">2020-11-30</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第一篇文章。
-本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
-本文目录如下：
-▼ 0x00 前言 : section ▼ 0x01 Gradual Typing : section 静态类型 VS 动态类型 : section Gradual Typing = 静态类型 + 动态类型 : section ▼ 0x02 Python Typing 实战 - MyPY : section MyPy : section 快速入门 : section ▼ 0x03 常见问题 : section 如何忽略 mypy 警告 : section 循环导入 : section 0x04 Typing Anotation 项目最佳实践 : section ▼ 0xEE 参考 : section PEP : section 扩展文章 : section  当我刚知道 Python 要添加类型的时候，我的内心是拒绝的。</div><div class="post-footer">
-        <a href="/posts/20201201_pythontypehint/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20201201_pythonprofiling/">Python Profiling/Tracing Tools</a>
     </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2020-11-30">2020-11-30</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">Profiling 定位与优化耗时、内存使用、CPU 使用 Tracing 用于追踪内存布局  0x00 前言 本篇讨论的是优化
 当我们在谈优化的的时候，首先要背诵下面三个口诀
@@ -128,7 +119,35 @@ import cProfile import re cProfile.run(&#39;re.compile(&#34;foo|bar&#34;)&#39;) 
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/golang/">Golang</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20190412_pythonorm/">一文解决你的 Python ORM 选择困难症</a>
+        <a href="/posts/20190924_pycode_08_clean_code/">如何写出整洁的 Python 代码 下</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-09-24">2019-09-24</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第八篇文章。
+第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统 第六篇，为《整洁上篇》讲的是 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码 第七篇，为《整洁中篇》讲的是 一些的编程时候的基本原则，比如，避免过深的缩进，SOLID 法则，边界 本文是《整洁下篇》，本文的诞生，要感谢我前公司的技术主管豪蔚老师和产品主管刚哥，在上海工作这几年，总是和能优秀的人工作，确实是我幸运的地方。
+目录如下
+▼ 如何写出整洁的 Python 代码 下篇 : section 0x00 前言 : section 0x01 处理需求的姿势 : section ▼ 0x02 敏捷开发 : section 看板和晨会 : section 敏捷的时间安排：周一到周五 : section 人员安排 : section ▼ 0x03 代码全局观 : section 起个好名字 : section 本质复杂度和偶然复杂度 : section 0xEE 后记 : section 0x00 前言 这篇文章憋了很久，思考了许久，《整洁下篇》干脆就聊聊编程中，不是写代码的部分；</div><div class="post-footer">
+        <a href="/posts/20190924_pycode_08_clean_code/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20190526_pycode_07_clean_code/">如何写出整洁的 Python 代码 中</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-05-26">2019-05-26</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第七篇文章。
+ 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统 第六篇，《如何写出整洁的代码 上》 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码  目录
+▼ 如何写出整洁的 Python 代码 中 : section 0x00 前言 : section 0x01 避免过深的缩进 : section 0x02 使用异常 : section 0x03 类与 OOP : section ▼ 0x04 SOLID 设计原则 : section 单一职责 : section 开闭原则 : section 里氏替换原则 : section 接口隔离原则 : section 依赖反转原则 : section 0x05 边界和第三方库的挑选 : section 0xDD 结论 : section 0xEE 参考 : section 0x00 前言 上篇地址在这里 https://zhuanlan.</div><div class="post-footer">
+        <a href="/posts/20190526_pycode_07_clean_code/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20190525_pycode_06/">如何写出整洁的 Python 代码 上</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-05-25">2019-05-25</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第六篇文章。
+第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇, 讲的是 为你的项目快速搭建 ELKFA 日志系统 接下来的三篇，围绕另一个主题
+如何写出整洁的代码 『整洁』三篇是基于『代码整洁之道』和『架构整洁之道』的一些切身的理解和体会。
+感谢这两本书的作者 Bob 大叔。
+PPS: 某东读书 VIP 会员有不少 IT 资源类的书籍可以免费看，比如『代码整洁之道』 本文目录如下
+▼ 如何写出整洁代码 上篇 : section ▼ 0x00 前言 : section 软件系统的腐败之路 : section ▼ 0x01 讨论 : section 为什么会出现腐败的系统 : section 衡量系统的两个指标 : section 代码是写出来的吗？ : section 好代码的标准 : section ▼ 0x02 变量命名之道 : section 使用业务领域命名 : section 代码命名 : section ▼ 0x03 函数整洁之道 : section 短小精悍 : section 调用层次清晰 : section 控制参数 : section 如何写函数 : section 0x04 注释整洁之道 : section ▼ 0x05 格式整洁之道 : section 排版整齐 : section 上下文相关 : section 0xEE 参考连接 : section 0x00 前言 软件系统的腐败之路 随着项目代码行数的增加，不可避免的遇到软件架构腐败的问题。</div><div class="post-footer">
+        <a href="/posts/20190525_pycode_06/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20190412_pythonorm/">Python ORM</a>
     </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-04-12">2019-04-12</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 Python 圈内三大 ORM SQLAlchemy VS Django ORM VS Peewee
  SQLAlchemy 复杂程度最高，同时，这也意味着 SQLAlchemy 可以做更多的事情。使用 DataMapper 方式实现 Django ORM 个人最喜欢，使用 ActiveRecord 实现 如果不是因为现在 Flask 项目已经是用了 SQLAlchemy , 否则的话我甚至会考虑将 Django ORM 配置到 Flask 项目中。当然，也有蛋疼的 SqlAlchemy 使用者已经移植给 django 配置了 SQLAlchemy 的库。 Peewee 没用过，不好评论。以后有机会试试。  0x01 如何访问数据库 那，既然已经可以访问数据库，本着『如无必要，勿增实体』的原则，为什么要不辞劳苦的用个库呢？
 0x02 数据库抽象的两种理论 理论一：Active Record 理论二：Data Mapper 0x03 数据库抽象的两种实现 实现一：Django ORM 实现二：Sqlalchemy 0x04 工具的强弱 https://www.thoughtfulcode.com/orm-active-record-vs-data-mapper/
@@ -147,53 +166,25 @@ Pythonista &amp;&amp; Nodejs 工作机 MBP 2017 款机器 生活机 Surface Pro 
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/windows/">Windows</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20190210_%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9/">秒杀系统的一些注意点</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-02-10">2019-02-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/"><i class="far fa-folder fa-fw"></i>系统设计</a></span></div><div class="content">0x00 前言 秒杀常见问题 01 卖超问题 假设有 20 个商品要卖，1W 个请求打过来。
- SQL 加上数量判断，防止数量超掉  应用层的检查，并发量上来，肯定要加行级锁，开销比较大。
-redis 集合预先缓存好相关的数量，然后从 redis 上进行应用层的数量检查。  然后走异步队列。
-因为对于数据库来说，我只要 20 个请求即可，redis 起到了一个阻挡多余的请求穿透到 DB 中的作用。
-即便如此，redis 依然可能会出现一些意外的情况，比如为负数，这个时候多打进去几个请求，变成 24 个，这个时候 MQ 的作用就出来了。排好队伍。
-唯一索引  数据库层的检查，可以从根本上防止问题
-02 缓存问题  page 级别的缓存，由于 wsgi 协议本身在 flask 中返回的就是文本，所以，当作文本处理即可 obj 级别的缓存  能走内存的走内存，能走 redis 就走 redis, 能通过 mq 削减峰值的就走 mq, 能走 mongodb 的走 mongodb, 最后是数据库。
-03 安全  验证码 接口防刷限流 秒杀接口隐藏  04 分布式锁  不加锁，并发起来资源浪费 加锁，然而，线路抖动会导致不能及时释放锁 加过期锁，或者加带有时间的锁，然后重新获取锁。 redisson 封装好的方法  06 减少数据库访问时间  首先考虑在 where 和 order by 设计的列上建立索引 索引越多，插入越慢，这个要做好平衡 避免过长的事务级操作，提高并发能力  其他的可以参考 MySQL 的一些优化原则，油管上很多。</div><div class="post-footer">
-        <a href="/posts/20190210_%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%A7%92%E6%9D%80/">秒杀</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20181223_vlogcheatsheet/">旅拍 Vlog CheatSheet</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-12-10">2018-12-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%91%84%E5%BD%B1%E6%91%84%E5%83%8F/"><i class="far fa-folder fa-fw"></i>摄影摄像</a></span></div><div class="content">0x00 前言 最近剪辑了几个 Vlog, 借着这个机会复盘一下几次从拍摄到出片的流程。
-0x01 拍摄准备 目前笔者的拍摄装备如下：
-主力拍摄器材：
- Sony A6500  辅助拍摄器材：
- GoPro Hero 7 Black  相机的设备还氛围 + 三块电池 + 充电宝
- 辅助 IPhone 8P 充电宝  0x02 工作流 可以找司机询问最佳的视角
-0xEE 参考  ChangeLog:
- 2018-11-25 初始化本文  </div><div class="post-footer">
-        <a href="/posts/20181223_vlogcheatsheet/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vlog/">Vlog</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20181210_pythontypeanotation/">用 Type Anotation 提升你的 Python 代码健壮性</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-12-10">2018-12-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第一篇文章。
+        <a href="/posts/20190216_pycode_02/">如何通过测试提升 Python 代码的健壮性</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-23">2019-03-23</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第二篇文章。
 本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
+用 Type Annotation 提升你的 Python 代码健壮性 https://zhuanlan.zhihu.com/p/56863684 0x00 前言 本文的更多的是写给 Python 后端的程序员。
+来简单分享一下我对写测试的理解。
+在上一篇文章中，我提到了代码覆盖率，即测试的一种指标。
+本期就聊聊测试这件小事情。
 本文目录如下：
-▼ 0x00 前言 : section ▼ 0x01 Gradual Typing : section 静态类型 VS 动态类型 : section Gradual Typing = 静态类型 + 动态类型 : section ▼ 0x02 Python Typing 实战 - MyPY : section MyPy : section 快速入门 : section ▼ 0x03 常见问题 : section 如何忽略 mypy 警告 : section 循环导入 : section 0x04 Typing Anotation 项目最佳实践 : section ▼ 0xEE 参考 : section PEP : section 扩展文章 : section 当我刚知道 Python 要添加类型的时候，我的内心是拒绝的。</div><div class="post-footer">
-        <a href="/posts/20181210_pythontypeanotation/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cleancode/">CleanCode</a></div></div>
+▼ 如何通过测试提升 Python 代码的健壮性 : section 0x00 前言 : section ▼ 0x01 测试的分类 : section 后端主要关注哪些测试 : section ▼ 0x02 为什么要写测试 : section 让新手更快的了解代码 : section 让发布代码的时候更加有底气 : section 让程序更容易重构 : section 加快团队的开发速度 : section ▼ 0x03 为什么不要写测试 : section 测试不能解决的问题 : section 不适当的测试为什么是负担 : section 并不是所有地方都容易测试的 : section ▼ 0x04 写 Python 测试的一些注意事项 : section 项目的环境隔离 : section 测试的基本环境 : section 单测 / 功测 / 端对端 : section 如何处理外部服务 : section 其他 Pytest 小技巧 : section 0xEE 参考 : section 0x01 测试的分类 测试有很多种，</div><div class="post-footer">
+        <a href="/posts/20190216_pycode_02/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20181125_finalcutprox/">Final Cut Pro X CheatSheat</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-11-25">2018-11-25</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">0x00 前言 本文诞生于用 Final Cut Pro X 剪了几次视频之后的复盘总结
-部分内容来自于
- Final Cut Pro X 10.1 非线性编辑高级教程 Final Cut Pro X 影视包装剪辑完全自学教程  0x01 剪辑流程 所有的剪辑流程都是想法的具体实现，这意味着在剪辑之前，需要做好前期准备
-1. 确定大致思路 2. 调好参数摄影  然后
- 素材导入 片段整理 前期剪辑 精剪 分享  0x01 前期准备 本文复盘的是古墓丽影暗影假预告片剪辑。
-热血的预告片通常具有如下的特征：
- 有一条主线，但不剧透，通常这个主线往往是有人在说话，引出了整个故事 霸气磅礴的背景音乐 频繁而不冗余的镜头切换 踩节奏踩的非常精准  0x02 素材导入  建立 Library 游戏 建立 Event 古墓丽影暗影，导入游戏视频 建立 Project 古墓丽影暗影盗梦空间预告片  素材导入没什么好说的，因为 PS4 里录制成什么样子，就是什么样子。
-开启转码和分析的话，可以分析出更多的片段类型。
-注意点  建议开启『创建优化的媒体』 看存储情况如果存储不是很足的话，开启『创建优化的代理文件』  尽量将素材管理的任务交给 FCPX 来做，所以，如果可能的话，直接拷贝进资料库最好。</div><div class="post-footer">
-        <a href="/posts/20181125_finalcutprox/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/fcpx/">FCPX</a></div></div>
+        <a href="/posts/20190310_pycode_05/">为你的项目快速搭建 ELKFA 日志系统</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-10">2019-03-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第五篇文章。
+第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇, 即本文 讲的是日志系统ELKFA的搭建
+0x00 前言 : section  ▼ 0x01 任务 1: 分析 Nginx 日志 : section 第一步：配置 Nginx : section 第二步：拉取 Nginx 日志 : section 第三步：开启 ELFKA : section 第四步：日志探秘 : section 第五步：扩展思考，日志解决方案 : section ▼ 0x02 任务 2: 监控 Flask App 的 APM : section 第一步：开启 ELFKA : section 第二步：开启 flask app : section 第三步：APM 探秘 : section 第四步：扩展思考 : section ▼ 0x03 结论 : section 0xEE 参考链接 : section 0x00 前言 什么是 ELKFA?</div><div class="post-footer">
+        <a href="/posts/20190310_pycode_05/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article>
 <ul class="pagination"><li class="page-item active">
                     <span class="page-link">

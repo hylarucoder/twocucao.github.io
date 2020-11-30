@@ -2,26 +2,32 @@
     xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
     ><url>
-            <loc>http://twocucao.xyz/categories/</loc><lastmod>2020-11-30T18:16:34&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/categories/</loc><lastmod>2020-11-30T18:14:14&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20201201_modern_shell/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
-            <loc>http://twocucao.xyz/posts/</loc><lastmod>2020-11-30T18:16:34&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/posts/</loc><lastmod>2020-11-30T18:14:14&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/tags/shell/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
-            <loc>http://twocucao.xyz/tags/</loc><lastmod>2020-11-30T18:16:34&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/tags/</loc><lastmod>2020-11-30T18:14:14&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
-            <loc>http://twocucao.xyz/</loc><lastmod>2020-11-30T18:16:34&#43;08:00</lastmod></url><url>
-            <loc>http://twocucao.xyz/tags/python/</loc><lastmod>2020-11-30T18:16:34&#43;08:00</lastmod></url><url>
-            <loc>http://twocucao.xyz/categories/python/</loc><lastmod>2020-11-30T18:16:34&#43;08:00</lastmod></url><url>
-            <loc>http://twocucao.xyz/posts/20201201_pythontypehint/</loc><lastmod>2020-11-30T18:16:34&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/</loc><lastmod>2020-11-30T18:14:14&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/tags/python/</loc><lastmod>2020-11-30T18:14:14&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/categories/python/</loc><lastmod>2020-11-30T18:14:14&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20201201_pythonprofiling/</loc><lastmod>2020-11-30T18:14:14&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/</loc><lastmod>2020-11-30T18:14:14&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/tags/golang/</loc><lastmod>2020-11-30T18:03:01&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20201130_ory/</loc><lastmod>2020-11-30T18:03:01&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/categories/%E5%BC%80%E6%BA%90%E9%A1%B9%E7%9B%AE/</loc><lastmod>2020-11-30T18:03:01&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/posts/20190924_pycode_08_clean_code/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/posts/20190526_pycode_07_clean_code/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/posts/20190525_pycode_06/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/tags/orm/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
-            <loc>http://twocucao.xyz/tags/sqlalchemy/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20190412_pythonorm/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/tags/sqlalchemy/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/tags/windows/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20190413_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/posts/20190216_pycode_02/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/posts/20190310_pycode_05/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/posts/20190308_pycode_03/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/posts/20190309_pycode_04/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/tags/%E7%A7%92%E6%9D%80/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20190210_%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
@@ -29,7 +35,7 @@
             <loc>http://twocucao.xyz/tags/vlog/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/categories/%E6%91%84%E5%BD%B1%E6%91%84%E5%83%8F/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20181223_vlogcheatsheet/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
-            <loc>http://twocucao.xyz/posts/20181210_pythontypeanotation/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
+            <loc>http://twocucao.xyz/posts/20181210_pycode_01_type_hint/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/tags/fcpx/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20181125_finalcutprox/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20180908_thinkinginprogramminglanguage/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
@@ -99,7 +105,6 @@
             <loc>http://twocucao.xyz/posts/20171207_anotewithsmallmachineandbigdata/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20150309_%E5%9B%BE%E7%89%87%E7%88%AC%E8%99%AB/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20150418_shellcheatsheet/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
-            <loc>http://twocucao.xyz/posts/20191231_clean_python_code_02/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20150317_%E6%89%87%E8%B4%9D%E8%83%8C%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%8A%A9%E6%89%8B/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20171120_pythonclosureandscopes/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>
             <loc>http://twocucao.xyz/posts/20171007_elegantmac/</loc><lastmod>2020-01-01T16:45:40&#43;08:00</lastmod></url><url>

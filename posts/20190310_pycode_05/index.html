@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>为你的项目快速搭建 ELKFA 日志系统 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="为你的项目快速搭建 ELKFA 日志系统" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20190310_pycode_05/" />
+<meta property="article:published_time" content="2019-03-10T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="为你的项目快速搭建 ELKFA 日志系统"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20190310_pycode_05/" /><link rel="prev" href="http://twocucao.xyz/posts/20190308_pycode_03/" /><link rel="next" href="http://twocucao.xyz/posts/20190216_pycode_02/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "为你的项目快速搭建 ELKFA 日志系统",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20190310_pycode_05\/"
+        },"genre": "posts","keywords": "Python","wordcount":  524 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20190310_pycode_05\/","datePublished": "2019-03-10T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">为你的项目快速搭建 ELKFA 日志系统</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-10">2019-03-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 524 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>本文是《提升你的 Python 项目代码健壮性和性能》系列的第五篇文章。</p>
+<p>第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性
+第二篇，讲的是 如何通过测试提升 Python 代码的健壮性
+第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性
+第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能
+第五篇, 即本文 讲的是日志系统ELKFA的搭建</p>
+<pre><code>0x00 前言 : section
+</code></pre>
+<p>▼ 0x01 任务 1: 分析 Nginx 日志 : section
+第一步：配置 Nginx : section
+第二步：拉取 Nginx 日志 : section
+第三步：开启 ELFKA : section
+第四步：日志探秘 : section
+第五步：扩展思考，日志解决方案 : section
+▼ 0x02 任务 2: 监控 Flask App 的 APM : section
+第一步：开启 ELFKA : section
+第二步：开启 flask app : section
+第三步：APM 探秘 : section
+第四步：扩展思考 : section
+▼ 0x03 结论 : section
+0xEE 参考链接 : section
+0x00 前言
+什么是 ELKFA?</p>
+<p>这五个字母分别代表着五个开源软件</p>
+<p>E - ElasticSearch
+L - Logstash
+K - Kibana
+F - FileBeat
+A - APM-Server
+利用这五个软件的组合，我们可以在比较短的时间打造两个系统：</p>
+<p>日志系统，分析 Nginx 日志，Gunicorn 日志，Flask 日志，Django 日志
+APM 系统，解决两个问题
+2.1 Metric 分析：Flask 是否正常运行，接口请求信息定期发送到 APMServer 这边，方便我观察服务是否正常，接口和业务逻辑的执行的时间是否在预期范围内。
+2.2 Trouble Shooting: 如果程序报了异常，我想把需要报的异常堆栈信息打出。方便我快速的 Trouble Shooting
+0x01 任务 1: 分析 Nginx 日志
+Nginx 众所周知，Nginx 日志是个宝库，所以本文选取了 Nginx 作为日志分析的案例。</p>
+<p>对于 Nginx 日志，可以采用 FileBeat 上传到 Logstash, 由 Logstash 对文件进行解析，并存储到 ElasticSearch</p>
+<p>然后从 Kibana 进行分析。</p>
+<p>第一步：配置 Nginx
+首先，让 Nginx 的配置输出的日志符合某种模式，方便软件进行解析。</p>
+<p>log_format  main  &lsquo;$remote_addr - $remote_user [$time_local] &ldquo;$request&rdquo; '
+&lsquo;$status $body_bytes_sent &ldquo;$http_referer&rdquo; '
+&lsquo;&quot;$http_user_agent&quot; &ldquo;$http_x_forwarded_for&rdquo;';</p>
+<p>access_log /var/log/nginx/access.log main;
+然后重启 nginx</p>
+<p>第二步：拉取 Nginx 日志
+一天后，从 Nginx 服务器上拉一下 access.log 放到</p>
+<p>elastic-labs/logs/prod/nginx 下</p>
+<p>第三步：开启 ELFKA
+git clone <a href="mailto:git@github.com">git@github.com</a>:twocucao/elastic-labs.git
+cd elastic-labs
+docker-compose up
+啥? 不会搭Docker? 见文末
+啥? 不知道ElasticSearch 怎么用? 见文末
+如果运行正常，终端应该是这样的</p>
+<p>打开 kibana 进行观察</p>
+<p>http://localhost:5601/</p>
+<p>第四步：日志探秘
+默认情况下，每一天的 Nginx 日志会在 ES 里创建一个 Index, 所以，你需要用 Index Pattern 来进行统计</p>
+<p>来看看我们可以得到哪些内容</p>
+<p>用户 IP 以及通过 GeoIP 得到的大致地理位置。
+OS 的类型 (Win/Mac/Linux/IOS/Android)
+客户端的类型，浏览器 / 小程序 / 客户端
+访问的接口，类型，频率
+访问服务的频率
+还有很多其他可以深挖的地方，比如通过用户访问的次序推断用户的使用姿势和思考方式等等
+对于第六点，有些人可能有些疑惑，这也能？</p>
+<p>当然咯，假设用户在搜索引擎里面，先搜索了『美女』, 然后搜索了『雪白』, 然后又搜索了『白-洁』, 那基本上这个人搜索的三个词就具备一定的关联性，想搜索的这个雪白就不是『雪白』的意思
+而是你懂的。
+第五步：扩展思考，日志解决方案
+上面四个步骤是为了解决分析 Nginx 日志的问题</p>
+<p>一条日志从打印出来，到能在 Kibana 进行分析，需要经过如下的步骤：</p>
+<p>按照某种日志格式写到文件里，然后被 FileBeat 接收，FB 判断为『 Nginx 模块的日志之后』上传到 Logstash
+Logstash 按照一个端口一个类型的方式接受该类型的日志。通过 filters 和插件进行匹配和修改，比如 grok 的 pattern 来匹配每一条日志（类似于正则匹配）, 抽出需要独立成字段的部分。比如通过 geoip 进行地址匹配，比如对字段进行 convert
+输出匹配结果到 ElasticSearch
+Kibana 通过更加边界的工具来查询 ElasticSearch
+如果你想要自定义日志获得更加完美的解决方案，那就需要对这几个流程进行进行细化。</p>
+<p>比如你想通过 Flask 的日志来达到更好的用户操作定位。这就需要读者自行依照自己的理解来 hack 了</p>
+<p>0x02 任务 2: 监控 Flask App 的 APM
+第一步：开启 ELFKA
+同任务一的启动方式</p>
+<p>第二步：开启 flask app
+pip3 install poetry # 比 pip / pipenv 更好的依赖管理和构建工具
+poetry install -vvv
+poetry shell
+flask run
+写一个简单的管理和依赖工具</p>
+<p>from flask import Flask
+from elasticapm.contrib.flask import ElasticAPM</p>
+<p>app = Flask(<strong>name</strong>)</p>
+<p>app.config[&ldquo;ELASTIC_APM&rdquo;] = {
+&ldquo;SERVICE_NAME&rdquo;: &ldquo;dev-flask&rdquo;,
+&lsquo;SECRET_TOKEN&rsquo;: &lsquo;&rsquo;,
+}
+apm = ElasticAPM(app)</p>
+<p>@app.route(&quot;/&quot;)
+def hello():
+return &ldquo;Hello, World!&rdquo;</p>
+<p>@app.route(&quot;/home&quot;)
+def home():
+return &ldquo;home!&rdquo;</p>
+<p>@app.route(&quot;/<a href="int:num">int:num</a>&quot;)
+def hello_num(num):
+import random
+if random.randint(1, 100) &gt; 95:
+raise Exception(f&quot;num&quot;) # 有接近 1/5 的概率会故意抛出异常
+return f&quot;Hello, {num}!&quot;
+随手写一个脚本 20 分钟内持续不断的访问接口</p>
+<p>SECONDS=0
+while [[ SECONDS -lt 1200 ]] ; do
+for (( i = 0; i &lt; 20; i++ )); do
+curl &ldquo;http://localhost:5000/$i&rdquo;
+curl &ldquo;http://localhost:5000/$i&rdquo;
+curl &ldquo;http://localhost:5000/$i&rdquo;
+curl &ldquo;http://localhost:5000/$i&rdquo;
+curl &ldquo;http://localhost:5000/$i&rdquo;
+curl &ldquo;http://localhost:5000/$i&rdquo;
+curl &ldquo;http://localhost:5000/$i&rdquo; &amp;
+curl &ldquo;http://localhost:5000/$i&rdquo; &amp;
+curl &ldquo;http://localhost:5000/$i&rdquo; &amp;
+curl &ldquo;http://localhost:5000/$i&rdquo; &amp;
+curl &ldquo;http://localhost:5000/$i&rdquo; &amp;
+curl &ldquo;http://localhost:5000/$i&rdquo; &amp;
+curl &ldquo;http://localhost:5000/$i&rdquo; &amp;
+curl &ldquo;http://localhost:5000/$i&rdquo; &amp;
+done
+done
+第三步：APM 探秘
+20分钟过去了，我们可以获知到什么呢？</p>
+<p>Metric 分析：Flask 是否正常运行，接口请求信息定期发送到 APMServer 这边，方便我观察服务是否正常，接口和业务逻辑的执行的时间是否在预期范围内。
+Trouble Shooting: 如果程序报了异常，我想把需要报的异常堆栈信息打出。方便我快速的 Trouble Shooting
+先设置时间为最近30分钟</p>
+<p>在这里可以看到接口的访问情况</p>
+<p>先看 Metric 分析</p>
+<p>这里可以看到接口的稳定性, 服务器的基本负载, 以及Error的出现频次.</p>
+<p>再看 Error</p>
+<p>看到这里简直泪目 这就是 ELK 版本的 Sentry 啊</p>
+<p>Time Saving &amp;&amp; 防脱发利器
+第四步：扩展思考
+从 App 被监控到能在 Kibana 进行分析，需要经过如下的步骤：</p>
+<p>在原有的 Flask App 里面进行添加 elastc-apm 的 agent (apm-client)
+agent 会定期将收集完毕的性能信息以及异常信息，发到 apm-server
+输出结果到 ElasticSearch
+Kibana 通过更加边界的工具来查询 ElasticSearch
+如果你想要自定义日志获得更加完美的解决方案，那就需要对这前两个流程进行进行细化。</p>
+<p>比如公司用 Graphql 的接口，那么，在这种情况下，自带的 contrib 下的 flask 包的路由基本就是废掉的，你需要再 Hack 一下。</p>
+<p>0x03 结论</p>
+<p>本来这篇文章打算写日志的最佳实践的, 结果在查找资料的时候发现了一篇更好的文章</p>
+<p><a href="https://zhuanlan.zhihu.com/p/27363484">https://zhuanlan.zhihu.com/p/27363484</a>
+看完之后打消了这个念头, 转而写如何使用ELK的系统落实这种日志分析系统</p>
+<p>代码见 twocucao/elastic-labs</p>
+<p>欢迎点赞/关注/star 文明三连
+0xEE 参考链接
+<a href="https://zhuanlan.zhihu.com/p/27363484">https://zhuanlan.zhihu.com/p/27363484</a>
+Photo byTan KaninthanondonUnsplash
+关于 elasticsearch 可以参考我以前的文章 Django全栈教程系列番外篇 - ElasticSearch CheatSheet
+关于 docker 的搭建 可以参考我以前的文章 Django全栈教程系列之一 - YaDjangoBlog 开发环境配置</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20190308_pycode_03/" class="prev" rel="prev" title="如何保证 Django 项目的数据一致性"><i class="fas fa-angle-left fa-fw"></i>如何保证 Django 项目的数据一致性</a>
+            <a href="/posts/20190216_pycode_02/" class="next" rel="next" title="如何通过测试提升 Python 代码的健壮性">如何通过测试提升 Python 代码的健壮性<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

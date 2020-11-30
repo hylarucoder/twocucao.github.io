@@ -5,23 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>一文解决你的 Python ORM 选择困难症 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="一文解决你的 Python ORM 选择困难症" />
+        <title>Python ORM - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="Python ORM" />
 <meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://twocucao.xyz/posts/20190412_pythonorm/" />
 <meta property="article:published_time" content="2019-04-12T21:57:40+08:00" />
 <meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="一文解决你的 Python ORM 选择困难症"/>
+<meta name="twitter:title" content="Python ORM"/>
 <meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
 <meta name="application-name" content="海拉鲁编程客">
 <meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20190412_pythonorm/" /><link rel="prev" href="http://twocucao.xyz/posts/20190413_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/" /><link rel="next" href="http://twocucao.xyz/posts/20201130_ory/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20190412_pythonorm/" /><link rel="prev" href="http://twocucao.xyz/posts/20190413_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/" /><link rel="next" href="http://twocucao.xyz/posts/20190525_pycode_06/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "一文解决你的 Python ORM 选择困难症",
+        "headline": "Python ORM",
         "inLanguage": "zh-cn",
         "mainEntityOfPage": {
             "@type": "WebPage",
@@ -74,7 +74,7 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">一文解决你的 Python ORM 选择困难症</h1><div class="post-meta">
+        </div><article class="page single"><h1 class="single-title animated flipInX">Python ORM</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div>
             <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-04-12">2019-04-12</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1681 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 8 分钟&nbsp;</div>
@@ -172,13 +172,13 @@
 <p>DjangoORM 是 ActivityRecord 模式的一种实现，在该模式下，session 并不暴露出来，即 Model 与 session 耦合。</p>
 </blockquote>
 <p>使用 Django ORM 的时候，往往是</p>
-<pre><code>b = Blog(**data)
-b.save()
-</code></pre><p>使用 SQLAlchemy 的时候，往往是</p>
-<pre><code>b = Blog(**data)
-session.add(b)
-session.session(b)
-</code></pre><p>由于 Django 帮你屏蔽了 session 的操作。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">b</span> <span class="o">=</span> <span class="n">Blog</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="n">b</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+</code></pre></div><p>使用 SQLAlchemy 的时候，往往是</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">b</span> <span class="o">=</span> <span class="n">Blog</span><span class="p">(</span><span class="o">**</span><span class="n">data</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">session</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div><p>由于 Django 帮你屏蔽了 session 的操作。</p>
 <p>在通常情况下，</p>
 <ol>
 <li>DjangoORM 使用起来更加接近 Object 的操作。</li>
@@ -187,12 +187,12 @@ session.session(b)
 <p>举个例子，</p>
 <p>一对多，Father 添加两个小孩（其中一个小孩是已经存在的）</p>
 <p>在 DjangoORM 里面， 这里更像是一个 Set 的 add 操作。</p>
-<pre><code>father.children.add(new_child,exsit_child)
-</code></pre><p>在 SQLAlchemy 里面，这里更像是一个 table 的 insert 操作。（麻蛋，你要说是一个 list 的 append 操作也行）</p>
-<pre><code>for child in (new_child,exsit_child):
-    if child in father.children:
-        father.children.append(child)
-</code></pre><blockquote>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">father</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">new_child</span><span class="p">,</span><span class="n">exsit_child</span><span class="p">)</span>
+</code></pre></div><p>在 SQLAlchemy 里面，这里更像是一个 table 的 insert 操作。（麻蛋，你要说是一个 list 的 append 操作也行）</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="p">(</span><span class="n">new_child</span><span class="p">,</span><span class="n">exsit_child</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">father</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+        <span class="n">father</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">child</span><span class="p">)</span>
+</code></pre></div><blockquote>
 <p>写 SQLAlchemy 更接近操作放在数据库里面的数据记录，而 DjangoORM 更接近操作一批放在数据库里面的对象。</p>
 </blockquote>
 <p>由于 session 的使用姿势不同，所以往往会有很多使用上面的区别。</p>
@@ -233,8 +233,8 @@ session.session(b)
 </ul>
 </li>
 </ul>
-<pre><code>Active Record, properly defined, is a design pattern where an object is represented as a record on a table in a relational database.
-</code></pre><h3 id="21-模型定义">2.1 模型定义</h3>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">Active</span> <span class="n">Record</span><span class="p">,</span> <span class="n">properly</span> <span class="n">defined</span><span class="p">,</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">design</span> <span class="n">pattern</span> <span class="n">where</span> <span class="n">an</span> <span class="nb">object</span> <span class="ow">is</span> <span class="n">represented</span> <span class="k">as</span> <span class="n">a</span> <span class="n">record</span> <span class="n">on</span> <span class="n">a</span> <span class="n">table</span> <span class="ow">in</span> <span class="n">a</span> <span class="n">relational</span> <span class="n">database</span><span class="o">.</span>
+</code></pre></div><h3 id="21-模型定义">2.1 模型定义</h3>
 <p>先看一组模型</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sqlalchemy.ext.declarative</span> <span class="kn">import</span> <span class="n">declarative_base</span>
 <span class="n">Base</span> <span class="o">=</span> <span class="n">declarative_base</span><span class="p">()</span> <span class="c1"># 模型基类</span>
@@ -263,55 +263,55 @@ session.session(b)
 <h4 id="关系">关系</h4>
 <h5 id="one-to-many">One To Many</h5>
 <p>母亲有若干个孩子，外键在孩子上。</p>
-<pre><code>class Parent(Base):
-    #...
-    children = relationship(&quot;Child&quot;, backref=&quot;parent&quot;)
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1">#...</span>
+    <span class="n">children</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&#34;Child&#34;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="s2">&#34;parent&#34;</span><span class="p">)</span>
 
-class Child(Base):
-    #...
-    parent_id = Column(Integer, ForeignKey('parent.id'))
-</code></pre><h5 id="many-to-one">Many To One</h5>
+<span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1">#...</span>
+    <span class="n">parent_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;parent.id&#39;</span><span class="p">))</span>
+</code></pre></div><h5 id="many-to-one">Many To One</h5>
 <p>多个母亲共享一个孩子，外键在母亲上。</p>
-<pre><code>class Parent(Base):
-    child_id = Column(Integer, ForeignKey('child.id'))
-    child = relationship(&quot;Child&quot;)
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">child_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;child.id&#39;</span><span class="p">))</span>
+    <span class="n">child</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&#34;Child&#34;</span><span class="p">)</span>
 
-class Child(Base):
-    # ...
-</code></pre><h5 id="one-to-one">One To One</h5>
+<span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+</code></pre></div><h5 id="one-to-one">One To One</h5>
 <p>One to One 是 One to Many 或者是 Many to One 的简化版本</p>
-<pre><code># Many To One
-class Parent(Base):
-    # ...
-    child_id = Column(Integer, ForeignKey('child.id'))
-    child = relationship(&quot;Child&quot;, backref=backref(&quot;parent&quot;, uselist=False))
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># Many To One</span>
+<span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="n">child_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;child.id&#39;</span><span class="p">))</span>
+    <span class="n">child</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&#34;Child&#34;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="n">backref</span><span class="p">(</span><span class="s2">&#34;parent&#34;</span><span class="p">,</span> <span class="n">uselist</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
 
-class Child(Base):
-    # ...
+<span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1"># ...</span>
 
-# One To Many 改 One To One
-class Parent(Base):
-    # ...
+<span class="c1"># One To Many 改 One To One</span>
+<span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1"># ...</span>
 
-class Child(Base):
-    # ...
-    parent_id = Column(Integer, ForeignKey('parent.id'))
-    parent = relationship(&quot;Parent&quot;, backref=backref(&quot;child&quot;, uselist=False))
-</code></pre><h5 id="many-to-many">Many To Many</h5>
-<pre><code>association_table = Table('association', Base.metadata,
-    Column('left_id', Integer, ForeignKey('left.id')),
-    Column('right_id', Integer, ForeignKey('right.id'))
-)
+<span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="n">parent_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;parent.id&#39;</span><span class="p">))</span>
+    <span class="n">parent</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&#34;Parent&#34;</span><span class="p">,</span> <span class="n">backref</span><span class="o">=</span><span class="n">backref</span><span class="p">(</span><span class="s2">&#34;child&#34;</span><span class="p">,</span> <span class="n">uselist</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+</code></pre></div><h5 id="many-to-many">Many To Many</h5>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">association_table</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="s1">&#39;association&#39;</span><span class="p">,</span> <span class="n">Base</span><span class="o">.</span><span class="n">metadata</span><span class="p">,</span>
+    <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;left_id&#39;</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;left.id&#39;</span><span class="p">)),</span>
+    <span class="n">Column</span><span class="p">(</span><span class="s1">&#39;right_id&#39;</span><span class="p">,</span> <span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;right.id&#39;</span><span class="p">))</span>
+<span class="p">)</span>
 
-class Parent(Base):
-    # ...
-    children = relationship(&quot;Child&quot;,
-                    secondary=association_table,
-                    backref=&quot;parents&quot;)
+<span class="k">class</span> <span class="nc">Parent</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+    <span class="n">children</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&#34;Child&#34;</span><span class="p">,</span>
+                    <span class="n">secondary</span><span class="o">=</span><span class="n">association_table</span><span class="p">,</span>
+                    <span class="n">backref</span><span class="o">=</span><span class="s2">&#34;parents&#34;</span><span class="p">)</span>
 
-class Child(Base):
-    # ...
-</code></pre><p>注意事项</p>
+<span class="k">class</span> <span class="nc">Child</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+</code></pre></div><p>注意事项</p>
 <p>执行删除 mapping 表的时候尽量这样。</p>
 <div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">myparent.children.remove<span class="o">(</span>somechild<span class="o">)</span>
 </code></pre></div><p>当你想干掉 somechild 的时候，会执行</p>
@@ -322,42 +322,42 @@ class Child(Base):
 <li>TODO</li>
 </ol>
 <h5 id="邻接列表关系">邻接列表关系</h5>
-<pre><code>class Node(Base):
-    __tablename__ = 'node'
-    id = Column(Integer, primary_key=True)
-    parent_id = Column(Integer, ForeignKey('node.id'))
-    data = Column(String(50))
-    children = relationship(&quot;Node&quot;,
-                backref=backref('parent', remote_side=[id])
-            )
-</code></pre><h5 id="relationship-详解">relationship 详解</h5>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">Node</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s1">&#39;node&#39;</span>
+    <span class="nb">id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">parent_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">Integer</span><span class="p">,</span> <span class="n">ForeignKey</span><span class="p">(</span><span class="s1">&#39;node.id&#39;</span><span class="p">))</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>
+    <span class="n">children</span> <span class="o">=</span> <span class="n">relationship</span><span class="p">(</span><span class="s2">&#34;Node&#34;</span><span class="p">,</span>
+                <span class="n">backref</span><span class="o">=</span><span class="n">backref</span><span class="p">(</span><span class="s1">&#39;parent&#39;</span><span class="p">,</span> <span class="n">remote_side</span><span class="o">=</span><span class="p">[</span><span class="nb">id</span><span class="p">])</span>
+            <span class="p">)</span>
+</code></pre></div><h5 id="relationship-详解">relationship 详解</h5>
 <h3 id="21-query">2.1 Query</h3>
 <h4 id="create">Create</h4>
-<pre><code>c1 = Child(name=&quot;苏轼&quot;)
-session.add(c1)
-session.flush()
-p = Parent(name=&quot;苏辙&quot;)
-p.best_child = c1
-for c in [c1,c2,c3,c4]:
-    p.children.append(c)
-session.add(c1)
-session.commit()
-</code></pre><h4 id="retrieve">Retrieve</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">c1</span> <span class="o">=</span> <span class="n">Child</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;苏轼&#34;</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">Parent</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&#34;苏辙&#34;</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">best_child</span> <span class="o">=</span> <span class="n">c1</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="p">[</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">c3</span><span class="p">,</span><span class="n">c4</span><span class="p">]:</span>
+    <span class="n">p</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c1</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</code></pre></div><h4 id="retrieve">Retrieve</h4>
 <p>过滤</p>
-<p>filter(**kwargs)
-filter(Singer.name == &ldquo;周杰伦&rdquo;)
-filter(Singer.name =! &ldquo;周杰棍&rdquo;)</p>
-<h5 id="跨关系跨表查询">跨关系（跨表）查询</h5>
-<p>session.query(Entry).join(Blog,Blog.entry_id == Entry.id).filter(Blog.name = &ldquo;SqlAlchemy CheatSheet&rdquo;)</p>
-<h5 id="limit--offset--分页">Limit / Offset / 分页</h5>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">filter</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="nb">filter</span><span class="p">(</span><span class="n">Singer</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&#34;周杰伦&#34;</span><span class="p">)</span>
+<span class="nb">filter</span><span class="p">(</span><span class="n">Singer</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span><span class="err">!</span> <span class="s2">&#34;周杰棍&#34;</span><span class="p">)</span>
+</code></pre></div><h5 id="跨关系跨表查询">跨关系（跨表）查询</h5>
+<pre><code>session.query(Entry).join(Blog,Blog.entry_id == Entry.id).filter(Blog.name = &quot;SqlAlchemy CheatSheet&quot;)
+</code></pre><h5 id="limit--offset--分页">Limit / Offset / 分页</h5>
 <ul>
 <li>limit()</li>
 <li>offset()</li>
 </ul>
 <h5 id="链式调用">链式调用</h5>
-<pre><code>query = session.query(Order) # query = session.query(Order)
-query = query.filter(Order.name.like(f&quot;%name%&quot;))
-</code></pre><h5 id="二进制表达式">二进制表达式</h5>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">query</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Order</span><span class="p">)</span> <span class="c1"># query = session.query(Order)</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Order</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="n">f</span><span class="s2">&#34;%name%&#34;</span><span class="p">))</span>
+</code></pre></div><h5 id="二进制表达式">二进制表达式</h5>
 <p>我们先 type 一下表达式，找到 eq 的类型</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">type</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">column_name</span> <span class="o">==</span> <span class="s1">&#39;asdf&#39;</span><span class="p">)</span> <span class="err">→</span> <span class="n">sqlalchemy</span><span class="o">.</span><span class="n">sql</span><span class="o">.</span><span class="n">elements</span><span class="o">.</span><span class="n">BinaryExpression</span>
 </code></pre></div><p>是一个二进制表达式。</p>
@@ -393,47 +393,47 @@ query = query.filter(Order.name.like(f&quot;%name%&quot;))
 <span class="c1"># MATCH</span>
 <span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;wendy&#39;</span><span class="p">))</span>
 </code></pre></div><h5 id="执行查询">执行查询</h5>
-<pre><code>all()
-first()
-one()
-one_or_none()
-scalar()
-</code></pre><p>YourModel.query.get((pk1, pk2))</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="nb">all</span><span class="p">()</span>
+<span class="n">first</span><span class="p">()</span>
+<span class="n">one</span><span class="p">()</span>
+<span class="n">one_or_none</span><span class="p">()</span>
+<span class="n">scalar</span><span class="p">()</span>
+</code></pre></div><p>YourModel.query.get((pk1, pk2))</p>
 <h5 id="比较">比较</h5>
 <blockquote>
 <p>同一个 Session 下面，取到的某一条数据对应的 objects 应该是一样的？</p>
 </blockquote>
 <h5 id="复制-实例">复制 实例</h5>
 <h5 id="其他">其他</h5>
-<pre><code># 查询的是 SomeModel 里面所有的字段 即 select *
-query = session.query(SomeModel)
-# 查询的是 SomeModel 里面部分的字段 即 select acol, bcol
-query = session.query(SomeModel.acol,SomeModel.bcol)
-# 即 select acol , bcol
-# alias
-user_alias = aliased(User, name='user_alias')
-for row in session.query(user_alias, user_alias.name).all():
-    # 即相当于 select name as name_label
-    print(row.user_alias)
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 查询的是 SomeModel 里面所有的字段 即 select *</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">SomeModel</span><span class="p">)</span>
+<span class="c1"># 查询的是 SomeModel 里面部分的字段 即 select acol, bcol</span>
+<span class="n">query</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">SomeModel</span><span class="o">.</span><span class="n">acol</span><span class="p">,</span><span class="n">SomeModel</span><span class="o">.</span><span class="n">bcol</span><span class="p">)</span>
+<span class="c1"># 即 select acol , bcol</span>
+<span class="c1"># alias</span>
+<span class="n">user_alias</span> <span class="o">=</span> <span class="n">aliased</span><span class="p">(</span><span class="n">User</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;user_alias&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">user_alias</span><span class="p">,</span> <span class="n">user_alias</span><span class="o">.</span><span class="n">name</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
+    <span class="c1"># 即相当于 select name as name_label</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">user_alias</span><span class="p">)</span>
 
-# limit 和 offset
-for u in session.query(User).order_by(User.id)[1:3]:
-    print(u)
+<span class="c1"># limit 和 offset</span>
+<span class="k">for</span> <span class="n">u</span> <span class="ow">in</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">id</span><span class="p">)[</span><span class="mi">1</span><span class="p">:</span><span class="mi">3</span><span class="p">]:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 
-# distinct
-session.query(model.Name).distinct(model.Name.value).order_by(model.Name.value)
-# order_by
-User.query.order_by(User.popularity.desc(),User.date_created.desc()).limit(10).all()
-</code></pre><h4 id="update">Update</h4>
+<span class="c1"># distinct</span>
+<span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Name</span><span class="p">)</span><span class="o">.</span><span class="n">distinct</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Name</span><span class="o">.</span><span class="n">value</span><span class="p">)</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">Name</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="c1"># order_by</span>
+<span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">popularity</span><span class="o">.</span><span class="n">desc</span><span class="p">(),</span><span class="n">User</span><span class="o">.</span><span class="n">date_created</span><span class="o">.</span><span class="n">desc</span><span class="p">())</span><span class="o">.</span><span class="n">limit</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
+</code></pre></div><h4 id="update">Update</h4>
 <p>单个 object 更新</p>
-<pre><code>blog.title = &quot;大宝天天见&quot;
-session.add(blog)
-session.commit()
-</code></pre><p>批量更新</p>
-<pre><code>session.query.filter(Blog.content.like(&quot;% 敏感词 %&quot;)).update({
-    Blog.content: &quot;依照相关 XX 无法查看&quot;
-})
-</code></pre><p>一对多的更新</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">blog</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&#34;大宝天天见&#34;</span>
+<span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">blog</span><span class="p">)</span>
+<span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</code></pre></div><p>批量更新</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Blog</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s2">&#34;% 敏感词 %&#34;</span><span class="p">))</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+    <span class="n">Blog</span><span class="o">.</span><span class="n">content</span><span class="p">:</span> <span class="s2">&#34;依照相关 XX 无法查看&#34;</span>
+<span class="p">})</span>
+</code></pre></div><p>一对多的更新</p>
 <pre><code>append
 </code></pre><h4 id="delete">Delete</h4>
 <p>query.delete()</p>
@@ -450,46 +450,46 @@ session.commit()
 <span class="c1"># &lt;Address(email_address=&#39;jack@google.com&#39;)&gt;</span>
 
 </code></pre></div><h5 id="多表-innerjoin--leftjoin">多表 InnerJoin + LeftJoin</h5>
-<pre><code>query.outerjoin(User.addresses)   # LEFT OUTER JOIN
-</code></pre><h4 id="聚集查询">聚集查询</h4>
-<pre><code>session.query(User).filter(User.name.like('%ed')).count()
-</code></pre><pre><code>from sqlalchemy import func
-session.query(Table.column, func.count(Table.column)).group_by(Table.column).all()
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">query</span><span class="o">.</span><span class="n">outerjoin</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">addresses</span><span class="p">)</span>   <span class="c1"># LEFT OUTER JOIN</span>
+</code></pre></div><h4 id="聚集查询">聚集查询</h4>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">User</span><span class="p">)</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">User</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">like</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%e</span><span class="s1">d&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">func</span>
+<span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">Table</span><span class="o">.</span><span class="n">column</span><span class="p">,</span> <span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Table</span><span class="o">.</span><span class="n">column</span><span class="p">))</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">Table</span><span class="o">.</span><span class="n">column</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 
-self.session.query(func.count(Table.column1),Table.column1, Table.column2).group_by(Table.column1, Table.column2).all()
+<span class="bp">self</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">Table</span><span class="o">.</span><span class="n">column1</span><span class="p">),</span><span class="n">Table</span><span class="o">.</span><span class="n">column1</span><span class="p">,</span> <span class="n">Table</span><span class="o">.</span><span class="n">column2</span><span class="p">)</span><span class="o">.</span><span class="n">group_by</span><span class="p">(</span><span class="n">Table</span><span class="o">.</span><span class="n">column1</span><span class="p">,</span> <span class="n">Table</span><span class="o">.</span><span class="n">column2</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 
-from sqlalchemy.sql import func
-session.query(func.avg(Rating.field2).label('average')).filter(Rating.url==url_string.netloc)
-</code></pre><h4 id="缓存机制">缓存机制</h4>
+<span class="kn">from</span> <span class="nn">sqlalchemy.sql</span> <span class="kn">import</span> <span class="n">func</span>
+<span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">func</span><span class="o">.</span><span class="n">avg</span><span class="p">(</span><span class="n">Rating</span><span class="o">.</span><span class="n">field2</span><span class="p">)</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="s1">&#39;average&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Rating</span><span class="o">.</span><span class="n">url</span><span class="o">==</span><span class="n">url_string</span><span class="o">.</span><span class="n">netloc</span><span class="p">)</span>
+</code></pre></div><h4 id="缓存机制">缓存机制</h4>
 <p>Query 对象，下文中，我会聊到这个 Query 对象。这里先跳过。</p>
 <h3 id="22-原生查询">2.2 原生查询</h3>
-<pre><code>from sqlalchemy import text
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">text</span>
 
-sql = text('select name from penguins')
-result = db.engine.execute(sql)
-names = []
-for row in result:
-    names.append(row[0])
+<span class="n">sql</span> <span class="o">=</span> <span class="n">text</span><span class="p">(</span><span class="s1">&#39;select name from penguins&#39;</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql</span><span class="p">)</span>
+<span class="n">names</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+    <span class="n">names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
-print names
+<span class="k">print</span> <span class="n">names</span>
 
-from collections import namedtuple
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">namedtuple</span>
 
-Record = namedtuple('Record', result.keys())
-records = [Record(*r) for r in result.fetchall()]
-for r in records:
-    print(r)
+<span class="n">Record</span> <span class="o">=</span> <span class="n">namedtuple</span><span class="p">(</span><span class="s1">&#39;Record&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">records</span> <span class="o">=</span> <span class="p">[</span><span class="n">Record</span><span class="p">(</span><span class="o">*</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">fetchall</span><span class="p">()]</span>
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">records</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
 
-from sqlalchemy.sql import text
+<span class="kn">from</span> <span class="nn">sqlalchemy.sql</span> <span class="kn">import</span> <span class="n">text</span>
 
-connection = engine.connect()
+<span class="n">connection</span> <span class="o">=</span> <span class="n">engine</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 
-# recommended
-cmd = 'select * from Employees where EmployeeGroup == :group'
-employeeGroup = 'Staff'
-employees = connection.execute(text(cmd), group = employeeGroup)
+<span class="c1"># recommended</span>
+<span class="n">cmd</span> <span class="o">=</span> <span class="s1">&#39;select * from Employees where EmployeeGroup == :group&#39;</span>
+<span class="n">employeeGroup</span> <span class="o">=</span> <span class="s1">&#39;Staff&#39;</span>
+<span class="n">employees</span> <span class="o">=</span> <span class="n">connection</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">text</span><span class="p">(</span><span class="n">cmd</span><span class="p">),</span> <span class="n">group</span> <span class="o">=</span> <span class="n">employeeGroup</span><span class="p">)</span>
 
-</code></pre><p>get_or_create</p>
+</code></pre></div><p>get_or_create</p>
 <div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">def</span> <span class="nf">get_or_create</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">defaults</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">instance</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">query</span><span class="p">(</span><span class="n">model</span><span class="p">)</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">instance</span><span class="p">:</span>
@@ -734,7 +734,7 @@ session.query(User).filter(User.name)
     </div>
 
     <div class="post-nav"><a href="/posts/20190413_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/" class="prev" rel="prev" title="如何优雅的使用 Windows 10"><i class="fas fa-angle-left fa-fw"></i>如何优雅的使用 Windows 10</a>
-            <a href="/posts/20201130_ory/" class="next" rel="next" title="开源认证基础服务">开源认证基础服务<i class="fas fa-angle-right fa-fw"></i></a></div>
+            <a href="/posts/20190525_pycode_06/" class="next" rel="next" title="如何写出整洁的 Python 代码 上">如何写出整洁的 Python 代码 上<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

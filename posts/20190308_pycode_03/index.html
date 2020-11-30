@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>如何保证 Django 项目的数据一致性 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="如何保证 Django 项目的数据一致性" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20190308_pycode_03/" />
+<meta property="article:published_time" content="2019-03-08T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何保证 Django 项目的数据一致性"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20190308_pycode_03/" /><link rel="prev" href="http://twocucao.xyz/posts/20190309_pycode_04/" /><link rel="next" href="http://twocucao.xyz/posts/20190310_pycode_05/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "如何保证 Django 项目的数据一致性",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20190308_pycode_03\/"
+        },"genre": "posts","keywords": "Python","wordcount":  492 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20190308_pycode_03\/","datePublished": "2019-03-08T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">如何保证 Django 项目的数据一致性</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-08">2019-03-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 492 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>0x00 前言
+本文是《提升你的 Python 项目代码健壮性和性能》系列的第三篇文章。</p>
+<p>第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性
+第二篇，讲的是如何通过测试提升 Python 代码的健壮性
+第三篇，即本文，我们来谈谈 Django 项目并发可能带来的问题以及如何保持 Django项目的数据一致性。</p>
+<p>本文目录如下：</p>
+<p>0x00 前言 : section
+▼ 0x01 背景知识 : section
+并发会带来数据不一致 : section
+▼ 0x02 Django 项目如何解决项目 : section
+悲观的方式 : section
+乐观的方式 : section
+没有银弹 : section
+0x03 解决超卖问题 : section
+▼ 0x04 番外篇 数据库隔离级别 : section
+READ-UNCOMMITTED : section
+READ-COMMITTED : section
+REPEATABLE-READ : section
+SERIALIZABLE : section
+0xEE 参考链接 : section
+本文讨论的场景如下：</p>
+<p>一个简单的秒杀系统，商品还剩 200 件。有一些用户来访问并下单。</p>
+<p>这个项目的接口的简单写法就是：</p>
+<p>@db_transaction
+def user_order_by_product(user,product):
+if product.quantity &gt; 0:
+product.quantity = product.quantity - 1
+make_order(user,product)
+product.save()
+显然，这个写法确实简洁。</p>
+<p>但问题就来了。</p>
+<p>商品会超卖, 除非你的应用没什么人访问。
+为什么呢？</p>
+<p>0x01 背景知识
+并发会带来数据不一致
+看图</p>
+<p>知道问题出在哪儿了吧？</p>
+<p>理解了？
+你确定理解了？
+你确定你真的理解了？</p>
+<p>其实是我给读者挖了一个坑，我画的这张图其实是有预设的，比如 NOTE2 处确保了 B 用户读到的是 2。</p>
+<p>如果数据库隔离级别是 read uncommitted, NOTE2 处读到的也有可能是 1 ,</p>
+<p>本文仅仅针对于 read committed 隔离级别下的 MYSQL / PostgreSQL。</p>
+<p>在上图中。</p>
+<p>一般人写程序</p>
+<p>往往不是用 Django 的 F 表达式，来实现 update balance = balance - 20 的操作。 update balance = balance - 20 where id = 1
+而是计算 出新的 balance 然后 user.balance = 80, 接着 user.save()
+这就会放大了问题
+在低并发量的情况下，这个用户手动不断的下单，下单到 200 的时候，后端准时的报卖完了。</p>
+<p>假如我现在是 20 个用户同时在下单，很可能机会出现上图的情况。</p>
+<p>出了问题要解决问题 看到问题就要想法子
+鲁迅说过，一见短袖子，立刻想到白臂膊，立刻想到全 X 体，立刻想到&hellip;.
+我也说过，提到并发，就想到锁，就想到乐观锁，就想到悲观锁。
+0x02 Django 项目如何解决项目
+有乐观的方式和悲观的方式，即所谓的乐观锁和悲观锁. 是不是有高下之分呢? 不一定.</p>
+<p>这就好比乐观和悲观本身也并不见的有高下之分. 如同有的人乐观, 并不见得一定就是乐观, 搞不好是傻乐呵, 有的人的悲观, 只是底色比较悲凉, 但内心还是积极向上的.
+本小节内容依照自己的理解厚颜无耻的援引了这篇文章的代码</p>
+<p><a href="https://medium.com/@hakibenita/how-to-manage-concurrency-in-django-models-b240fed4ee2">https://medium.com/@hakibenita/how-to-manage-concurrency-in-django-models-b240fed4ee2</a></p>
+<p>悲观的方式
+悲观的方式就是锁住某个资源，不让其他人使用（排他），直到完成工作后释放。</p>
+<p>为什么使用数据库的锁（准确来说是关系型数据库的锁）</p>
+<p>数据库非常擅长处理锁来完成数据一致性。
+数据库级别的锁可以保护其他进程修改数据。
+@classmethod
+def deposit(cls, id, amount):
+with transaction.atomic():
+account = (
+cls.objects
+.select_for_update()
+.get(id=id)
+)</p>
+<pre><code>   account.balance += amount
+   account.save()
+return account
+</code></pre>
+<p>@classmethod
+def withdraw(cls, id, amount):
+with transaction.atomic():
+account = (
+cls.objects
+.select_for_update()
+.get(id=id)
+)</p>
+<pre><code>   if account.balance &lt; amount:
+       raise errors.InsufficentFunds()
+   account.balance -= amount
+   account.save()
+</code></pre>
+<p>return account
+使用 select_for_update 锁住这个 object 直到事务结束</p>
+<p>在使用悲观锁的情况下，存钱和取钱流程如下</p>
+<p>乐观的方式
+乐观的方式就是新建一个 version column, 每次修改余额的时候，版本增 1</p>
+<p>同样我厚颜无耻的援引了 hakibenita 的代码</p>
+<p>def deposit(self, id, amount):
+updated = Account.objects.filter(
+id=self.id,
+version=self.version,
+).update(
+balance=balance + amount,
+version=self.version + 1,
+)
+return updated &gt; 0</p>
+<p>def withdraw(self, id, amount):
+if self.balance &lt; amount:
+raise errors.InsufficentFunds()</p>
+<p>updated = Account.objects.filter(
+id=self.id,
+version=self.version,
+).update(
+balance=balance - amount,
+version=self.version + 1,
+)</p>
+<p>return updated &gt; 0
+django 默认会返回修改成功的行数，于是，是不是存取成功，就看 updated 是否大于 0 了</p>
+<p>没有银弹
+计算机世界里面，多快好省的场景就不存在。一切看场景。</p>
+<p>同样在并发量大的情况下</p>
+<ol>
+<li>如果对某几行修改比较频繁，版本更新频繁，可能乐观锁的 retry 就比较浪费了。</li>
+<li>如果是对整张表的更新比较频繁，而不是频繁修改某几行。乐观锁，就比较合适了。</li>
+</ol>
+<p>乐观方式在应用层，无法阻拦数据库的操作。不会存在死锁的问题。
+悲观方式是数据库实现，他阻止数据库写操作。
+0x03 如何解决超卖问题
+把数量和已卖放到 redis 里面呢？
+交给 deamon 呢？
+用 celery 然后排个队异步任务呢？
+搞个再复杂一点点的，</p>
+<p>在 Redis 里面直接生成 200 个订单号
+然后用户来一个取走一个订单号码
+通过 Celery 削峰 排队走异步任务
+最后通过数据表的 uniq 约束来防止下单超过 200 个。
+嗯，就是这么简单。</p>
+<p>0x04 番外篇 数据库隔离级别
+提到了数据库隔离级别, 就利用上面的例子顺手讲解一下数据库隔离级别吧.</p>
+<p>READ-UNCOMMITTED</p>
+<p>READ-COMMITTED</p>
+<p>REPEATABLE-READ</p>
+<p>SERIALIZABLE
+这个就不放图了. 没啥好讲的. 性能太低&hellip;. 我是基本上没怎么使用过的</p>
+<p>性能上 RU &gt; RC &gt; RR &gt; S</p>
+<p>一般人用 RC 和 RR 会多一些, 比如我的项目里就使用了 RC , 但什么时候我可能会考虑用 RR 呢? 比如, 我想在一个Session里面选两次 最近两个月的用户数据, 但是并不希望 出现新的用户.</p>
+<p>0x05 番外篇 Django ORM
+评论区
+@灵魂对撞机
+提出了防止超卖的另一种解决方案</p>
+<p>先做订单记录，在直接sql改数量，前提库存大于0，失败一个就事务回滚，抢购失败.</p>
+<p>即如下</p>
+<p>def do_order(product):
+with transaction.atomic():
+order = make_order(product)
+# 他的思路 是 RawSQL
+# updated = sqlexecute(f&quot;update from product set quantity = quantity - 1 where id = {product.id} and quantity &gt; 0 &ldquo;)
+# 在这个基础上，其实可以写出 django orm 对应的语句
+updated = Product.objects.filter(
+id=id,
+quantity_gt=0
+).update(
+quantity=quantity - 1,
+)
+if updated == 0:
+transaction.rollback()
+面向业务设计的表，和面向数据分析的表应该是两种设计思路。orm 是实体和记录的映射，比较适合面向业务设计的表。</p>
+<p>@灵魂对撞机
+也提到表关联查询太痛苦了</p>
+<p>在我的认知里</p>
+<p>Django 本身是支持 RawSQL 查询的
+当你想要的 object 和 row 是一一对应关系的时候，ORM 写起来特别舒服</p>
+<ul>
+<li>django orm 写过滤条件是很舒服的。（抛开性能来说）</li>
+<li>针对 Object 的修改也很方便，比如商品数量减少。比如自增 update。
+这也是 orm 的不足之处，显式多表连续 join 的话过滤条件就很麻烦。</li>
+</ul>
+<p>如果需要关联查询这也应该看情况</p>
+<p>如果一般的多表连续 join 如果能使用 nested queries 的话，用 Django 写起来也是特别的舒服。（如果你不是使用 mysql 这种对 nested query 几乎无优化的数据库）</p>
+<pre><code>
+VoteActivity.objects.filter(category=obj.category, user__name_contains(&quot;王&quot;), user__city__type=&quot;一线城市&quot;) # 伪代码
+
+</code></pre><ol start="2">
+<li>或许是应该走ETL或者是把数据丢到ES或者针对查询优化的表会更加合适?</li>
+</ol>
+<p>当然, 这也就看具体的情况了.</p>
+<p>0xEE 参考链接</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20190309_pycode_04/" class="prev" rel="prev" title="这几招，让你快速提升 Python 项目的性能"><i class="fas fa-angle-left fa-fw"></i>这几招，让你快速提升 Python 项目的性能</a>
+            <a href="/posts/20190310_pycode_05/" class="next" rel="next" title="为你的项目快速搭建 ELKFA 日志系统">为你的项目快速搭建 ELKFA 日志系统<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

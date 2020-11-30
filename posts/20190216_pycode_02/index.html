@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>如何通过测试提升 Python 代码的健壮性 - 海拉鲁编程客</title><meta name="Description" content="这篇文章展示了基本的 Markdown 语法和格式."><meta property="og:title" content="如何通过测试提升 Python 代码的健壮性" />
+<meta property="og:description" content="这篇文章展示了基本的 Markdown 语法和格式." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://twocucao.xyz/posts/20190216_pycode_02/" />
+<meta property="article:published_time" content="2019-03-23T21:57:40+08:00" />
+<meta property="article:modified_time" content="2020-01-01T16:45:40+08:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="如何通过测试提升 Python 代码的健壮性"/>
+<meta name="twitter:description" content="这篇文章展示了基本的 Markdown 语法和格式."/>
+<meta name="application-name" content="海拉鲁编程客">
+<meta name="apple-mobile-web-app-title" content="海拉鲁编程客"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="http://twocucao.xyz/posts/20190216_pycode_02/" /><link rel="prev" href="http://twocucao.xyz/posts/20190310_pycode_05/" /><link rel="next" href="http://twocucao.xyz/posts/20190413_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/" /><link rel="stylesheet" href="/lib/normalize/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "如何通过测试提升 Python 代码的健壮性",
+        "inLanguage": "zh-cn",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "http:\/\/twocucao.xyz\/posts\/20190216_pycode_02\/"
+        },"genre": "posts","keywords": "Python","wordcount":  640 ,
+        "url": "http:\/\/twocucao.xyz\/posts\/20190216_pycode_02\/","datePublished": "2019-03-23T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
+            "@type": "Organization",
+            "name": "twocucao"},"author": {
+                "@type": "Person",
+                "name": "twocucao"
+            },"description": "这篇文章展示了基本的 Markdown 语法和格式."
+    }
+    </script></head>
+    <body header-desktop="" header-mobile=""><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : '' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/posts/"> 存档 </a><a class="menu-item" href="/tags/"> 标签 </a><span class="menu-item delimiter"></span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="海拉鲁编程客">海拉鲁编程客</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/posts/" title="">存档</a><a class="menu-item" href="/tags/" title="">标签</a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">如何通过测试提升 Python 代码的健壮性</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-23">2019-03-23</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 640 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><p>本文是《提升你的 Python 项目代码健壮性和性能》系列的第二篇文章。</p>
+<p>本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。</p>
+<p>用 Type Annotation 提升你的 Python 代码健壮性 <a href="https://zhuanlan.zhihu.com/p/56863684">https://zhuanlan.zhihu.com/p/56863684</a>
+0x00 前言
+本文的更多的是写给 Python 后端的程序员。</p>
+<p>来简单分享一下我对写测试的理解。</p>
+<p>在上一篇文章中，我提到了代码覆盖率，即测试的一种指标。</p>
+<p>本期就聊聊测试这件小事情。</p>
+<p>本文目录如下：</p>
+<p>▼ 如何通过测试提升 Python 代码的健壮性 : section
+0x00 前言 : section
+▼ 0x01 测试的分类 : section
+后端主要关注哪些测试 : section
+▼ 0x02 为什么要写测试 : section
+让新手更快的了解代码 : section
+让发布代码的时候更加有底气 : section
+让程序更容易重构 : section
+加快团队的开发速度 : section
+▼ 0x03 为什么不要写测试 : section
+测试不能解决的问题 : section
+不适当的测试为什么是负担 : section
+并不是所有地方都容易测试的 : section
+▼ 0x04 写 Python 测试的一些注意事项 : section
+项目的环境隔离 : section
+测试的基本环境 : section
+单测 / 功测 / 端对端 : section
+如何处理外部服务 : section
+其他 Pytest 小技巧 : section
+0xEE 参考 : section
+0x01 测试的分类
+测试有很多种，</p>
+<p>按照测试设计的方法可以分为：</p>
+<ol>
+<li>黑盒</li>
+<li>白盒</li>
+</ol>
+<p>按照测试目的：</p>
+<ol>
+<li>功能测试</li>
+</ol>
+<p>单元测试
+功能测试
+集成测试
+场景测试
+A/B 测试</p>
+<ol start="2">
+<li>
+<p>非功能测试</p>
+<p>压力测试
+安全性测试
+可访问性测试
+其他</p>
+</li>
+</ol>
+<p>回归测试
+易用性测试
+还有不少，懒得去整理了&hellip;..
+代码覆盖率顾名思义，就是测试用例覆盖运行代码的比重。</p>
+<p>后端主要关注哪些测试
+单元测试
+功能测试
+端对端测试
+性能测试
+0x02 为什么要写测试
+来讲讲测试的优点。</p>
+<p>为什么要写测试来覆盖代码。</p>
+<p>适当的测试可以让发布代码的时候更加有底气。
+适当的测试可以让新手更快的了解代码。
+适当的测试可以让程序更容易重构。
+适当的测试可以加快团队的开发速度。
+既不是不写，也不是狂写一气。看到这里你可能有些疑惑？写测试还加快速度？Are you kidding?</p>
+<p>一个一个来解释吧。</p>
+<p>举个简化版本的例子，『用户下单』到『用户收货』。</p>
+<p>用户『查询产品』
+用户『使用优惠券』下单
+用户『在线支付』。当然，用户也可以让不付款，让订单失效。或者直接取消订单。
+商家『确认发货』。
+物流公司更新运单『发货中』。
+用户『确认收货』。当然，用户也可以发起退款。
+让新手更快的了解代码
+测试用例里的数据，往往是能跑通某段代码的最佳测试数据集合。</p>
+<p>假如，有个程序员写了 『下单-在线支付-确认收货』的集成测试。作为刚接手这段代码的人。可以在最短的时间内，通过阅读测试代码从而理解整个流程。</p>
+<p>有 fixture, 新手可以在很短的时间内知道 setup 能让项目跑起来的基本数据</p>
+<p>当然，如果过多的写了测试，也会导致阅读起来比较困难。</p>
+<p>让发布代码的时候更加有底气
+写测试，是为了验证代码运行正确。</p>
+<p>一个流程，通常包含若干个子流程，子流程是对的，整个流程才是对的。</p>
+<p>如果不写测试对一些关键的流程进行全面的覆盖，则会导致</p>
+<p>修改或者新增了一个子流程，需要重新跑个流程进行人肉测试。
+如果人肉测试太费事，则一般程序员就会跳过这个步骤导致线上出问题。
+让程序更容易重构
+当你知道写测试代码有这么多优点的之后，你的第一反应是，这我都知道，但是，写测试还能加快开发速度？</p>
+<p>当然，你要知道，一个需要去维护的有价值的产品，往往需要不断的修改流程。
+一开始，PM 告诉你只需要下单买个东西，后来，要加上满减券，再后来要加上各种类型的券，然后你要对接第三方服务，接下来你要对付各种不按照你设定的流程出牌的用户&hellip;.</p>
+<p>写测试，则是通过不断的补充一些测试，实现整个流程的测试自动化。形成一套测试该项目的测试代码。流程长的令人发指，你指望全靠人肉来测试？</p>
+<p>当我修改或者新增子流程的时候，在已经构建出来的测试代码上，可以花少量的代码直接保证修改或者新增的子流程输入和输出被测试到位。
+多人合作的时候，如果 A 原先维护了一套子流程，而 B 来改了一波 A 写的子流程。在有适当的测试的情况下，基本上改出问题来，都会跑不过测试的。
+当然，前提是</p>
+<p>A 用心写了测试，而不是写了仅仅能让 A 的代码跑的过去的测试。
+是测试如果写过多的话，也会造成团队精力的分散。这下面谈到测试的缺点的时候就会知道。
+加快团队的开发速度
+虽然说，我写的是加快团队的开发速度，但实际上，也适用于个人。</p>
+<p>除非，你是写渲染页面的&hellip;. 所见即所得。无需任何测试
+0x03 为什么不要写测试
+依照软件界著名的『没有银弹』理论，说完了测试的优越性，也要来说说测试的局限性，主要有三点：</p>
+<p>测试不能解决什么问题？
+不适当的测试，往往是负担。
+并不是所有地方都容易测试的。
+测试不能解决的问题
+测试能确保代码的运行质量，但无法确保代码编写质量，也无法保证产品设计逻辑上的问题。
+也就是说</p>
+<p>代码写的烂，测试代码只能确保编写代码是可以正常运行的。并不能改善代码质量。最多给烂代码的重构提供比较好的运行保证。
+产品设计逻辑上的问题，测试代码也只能保证这个设计逻辑落地。
+当你觉得测试代码写起来比较难受的时候，你应该考虑重构一下你的程序了。
+不适当的测试为什么是负担
+人总要习惯的是：</p>
+<p>东西，学，是学不完的。未知的东西永远存在。新的事物总是在出现，老的事物也不断在演进。
+时间有限，精力有限
+放到测试上来说，测试，也是测不完的。
+写了一个 IF ELSE , 你需要测两组，多写了一个 IF ELSE, 你就要测四组。如果是一个比较复杂的流程的话，基本上全面测试就很难写完了。</p>
+<p>我的想法是:</p>
+<p>挑选关键的地方进行测试
+减少用户不必要的数据获取
+并不是所有地方都容易测试的
+并不是所有地方都容易测试的。</p>
+<p>特别依赖其他服务商的业务。比如，支付宝 / 微信的预支付。微信小程序的登陆。
+跨端的业务。
+这类业务如果做的比较深入，需要 Mock 掉很多逻辑。</p>
+<p>0x04 写 Python 测试的一些注意事项
+项目的环境隔离
+从整体项目角度，代码的运行环境应该区分 Local/Test/Stage/Prod 四种环境。</p>
+<p>本地环境：开发者电脑上的环境
+测试环境：开发者电脑上 / 持续集成上的环境，之前比较喜欢用 GitlabCI, 后来 团队上了 jenkins, 用起来也还行。
+预发布环境：预发布环境，对后端来说，通常情况下就是前端可以通过调用 API 的环境。
+生产环境：生产环境。
+之所以要做这种区分，是因为不同的环境侧重点不同。</p>
+<p>Local 环境 针对开发者设置的，这个环境的代码变更比较频繁。Web 应用 / Worker / Beat / Deamon 在本地环境中，一般报错比较多，一般我会在禁掉日志。
+Test 环境 用于执行 make lint &amp;&amp; make test，用于检查 lint 相关代码并运行测试。
+Stage 环境
+Prod 环境 和 Stage 环境就比较接近了。但也不完全一致。比如生产环境的组织或商家的一些开发资料。
+测试的基本环境
+一般起一个 Docker-Compose 文件，来快速初始化测试环境。</p>
+<p>比如 WebApp / Celery Worker / Celery Beats / Redis / RabbitMQ / MySQL 可以 make start 直接起这些服务。</p>
+<p>单测 / 功测 / 端对端
+之前说，后端需要注意下面的测试</p>
+<p>单元测试
+功能测试
+端对端测试
+性能测试
+性能测试一般可以通过监控来提前对系统在哪些地方有瓶颈。看场景，一般观察监控会更加容易预测系统的瓶颈，这个更多偏向于调优，放到后面来说吧。
+框架假设我们使用 Flask , 再假设有这么一个 BBS（我知道你想吐槽为什么又拿博客 /BBS 举例子，懒得交代过多的业务场景背景知识了，逃&hellip;）</p>
+<p>组织 Organization 发布了一个 Thread
+用户 User 在这个 Thread 进行了 Reply 『未注册的用户能看见』
+管理员 Admin 发现了 User 似乎发布了不该发布的信息。删 Reply。『未注册的用户看不见 / 所有者是能看见的』
+最后 User 进行申诉，Admin 发现其实发布的东西挺 OK 的，给予通过。『未注册的用户能看见』
+tests # 测试文件目录
+├── <strong>init</strong>.py
+├── conftest.py # 这里存放可能被子目录引用到的集合
+├── e2e # 『端对端测试』
+│   ├── <strong>init</strong>.py
+│   ├── test_viewer.py
+│   ├── test_user.py
+│   ├── test_admin.py
+│   └── test_organization.py
+├── functional # 『功能测试』
+│   ├── <strong>init</strong>.py
+│   ├── test_do_simple_reply.py
+│   ├── test_do_complex_reply.py
+│   └── test_helper.py
+├── unit # 『单元测试』
+|   ├── <strong>init</strong>.py
+|   ├── test_auth.py
+|   └── test_calc_some_thing.py
+├── test_auth_helper.py # 存放基本的用于切换身份的代码
+├── test_const.py
+└── test_factory_helper.py # 可以用来批量初始化数据
+这个流程并不算复杂，但足以写测试了。</p>
+<p>在 test_factory_helper 完成数据的基本初始化。
+在端对端测试中简单测试浏览。包含未注册用户 viewer 的访问，user/admin/org 的带有效 / 无效 / 过期登陆凭据访问
+在 unit 中测试一些和业务联系不紧密的逻辑。比如，计算时间
+在 functional 进行比较独立的测试。有的时候也会把几个功能拉起来做测试。相对独立的测试，就是新建一个 User 的 Thread, 删除 Reply, 拉起来测试就是 1/2/3/4 一个测试就完了。
+前者比较简单，后者相对而言更加靠近集成测试。各有利弊。我一般在关键流程上多做几个拉起来测试的代码。</p>
+<p>但拉起来测试要解决的问题就多了一个，即，用户登陆认证。你调用某个 Service 的时候，是以匿名用户 / 用户身份 / Admin / Org 调用的。</p>
+<p>即在调用不同的 Service 解决问题的时候，你可能需要快速的切换身份。切换完身份再速
+度切换回来。于是，test auth helper 出来了。helper 里面有个 switch as 函数，每次需
+要切换身份的时候，把 g 变量里面的登陆快照 g.user g.admin http://g.org push 到 LocalStack 栈里 (from werkzeug.local import LocalStack), 调用完 Service 再 Pop 出来。</p>
+<p>拉起来测试的效果是这样子的。</p>
+<p>def test_complex_process(org, user, admin):
+with switch_as_org(org) as org:		# 1. 组织 Organization 发布了一个 Thread
+thread = publish_thread_by_org()
+with switch_as_user(user) as user: # 2. 用户 User 在这个 Thread 进行了 Reply
+reply = reply_thread(thread)
+assert reply
+with switch_as_anonymous() as anonymous_user:
+_thread = see_thread(thread)
+assert reply in _thread.replies # 『未注册的用户能看见』
+with switch_as_admin() as admin: # 3. 管理员 Admin 发现了 User 似乎发布了不该发布的信息。删 Reply。
+delete_reply(reply)
+assert reply.deleled
+with switch_as_anonymous() as anonymous_user:『未注册的用户看不见』
+_thread = see_thread(thread)
+assert reply not in _thread.replies
+# 在这里，我的身份还是 user
+_thread = see_thread(thread)
+assert reply in _thread.replies # 『Ower 用户能看见』
+# 4. 最后 User 进行申诉，Admin 发现其实发布的东西挺 OK 的，给予通过。『未注册的用户能看见』
+作为开发者，你只需要让这个测试跑通就基本开发完毕了。在这个过程中，你也可以更好的梳理你的代码。</p>
+<p>如何处理外部服务
+在拉起来做测试的时候，假如我们多了一个流程，用户可以通过微信支付赞赏 reply, 这就不得不依赖于外部的服务。</p>
+<p>而拉起来做测试的时候，就会遇到一个非常尴尬的问题，因为我上面的接口都粒度都比较大，是赞赏这个流程里面的非常小的流程，必须要走微信的 http 请求。</p>
+<p>解决方式也很简单。 mock 掉请求微信的函数。手动调用一下支付回调函数，即可。</p>
+<p>当然，对于 http 请求，也可以使用 responses 这个神器来快速 mock 神器 requests 的 response</p>
+<p>大致的用法如下</p>
+<p>def mock_success_pay():
+def request_callback(request):
+headers = {}
+dispatch_callback(data=data)
+return 200, headers, resp_body</p>
+<pre><code>responses.add_callback(
+    responses.POST,
+    PAY_URL,
+    callback=request_callback,
+    content_type=&quot;application/json&quot;,
+)
+</code></pre>
+<p>@responses.activate
+def test_pay(user):
+mock_success_pay()
+switch_as_user(user) as u:
+order = pay_order(u)
+assert order.status == &ldquo;PAID&rdquo;
+其他 Pytest 小技巧
+有的时候 ipdb 比 pdb 用起来不止好了一点点。如何在 pytest 里用上呢？</p>
+<p>pytest -v &ndash;pdb &ndash;pdbcls=IPython.terminal.debugger:Pdb
+0xEE 参考</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-01-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/20190310_pycode_05/" class="prev" rel="prev" title="为你的项目快速搭建 ELKFA 日志系统"><i class="fas fa-angle-left fa-fw"></i>为你的项目快速搭建 ELKFA 日志系统</a>
+            <a href="/posts/20190413_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/" class="next" rel="next" title="如何优雅的使用 Windows 10">如何优雅的使用 Windows 10<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.79.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="http://twocucao.xyz" target="_blank">twocucao</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="/lib/smooth-scroll/smooth-scroll.min.js"></script><script type="text/javascript" src="/lib/lazysizes/lazysizes.min.js"></script><script type="text/javascript" src="/lib/clipboard/clipboard.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

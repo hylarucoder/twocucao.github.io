@@ -10,7 +10,7 @@
 <meta property="og:description" content="Get Busy is My New Hugo Site" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://twocucao.xyz/" />
-<meta property="og:updated_time" content="2020-11-30T18:16:34+08:00" />
+<meta property="og:updated_time" content="2020-11-30T18:14:14+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="海拉鲁编程客"/>
 <meta name="twitter:description" content="Get Busy is My New Hugo Site"/>
@@ -72,6 +72,93 @@
         data-sizes="auto"
         alt="https://avatars0.githubusercontent.com/u/5625783"
         title="https://avatars0.githubusercontent.com/u/5625783" /></a></div><h1 class="home-title">海拉鲁编程客</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20160204_%E6%96%97%E9%B1%BCtv%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/">斗鱼 TV 弹幕助手</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2016-02-04">2016-02-04</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">斗鱼弹幕助手 0. 前言 前几天闲着无聊，看到舍友们都在看斗鱼 TV，虽然我对那些网络游戏东西都不是非常感兴趣。只是我突然间想到，如果我可以获取上面的弹幕内容。不就有点意思了么？
+1. 分析阶段 如果我想要抓取网页上面的东西，无非就是两种方法
+ 使用浏览器，手工（自己点击）或者非手工（使用 JS 脚本），存取我想要的东西。 编写 HTTP 客户端（斗鱼无 HTTPS 通讯）  第一种方法是万能的，但显然是不行的， 原因如下：
+ 手动保存实在是不可行，程序员不为也。 浏览器与本地交互有限，换而言之，也就是即使我抓取了对应的弹幕，我也没有办法解决持久化的问题。 假设你选择的是 Chrome 或者 firefox 浏览器，也不是不能实现持久化，但这需要写扩展，Chrome 扩展没有写过，也不是很感兴趣。  第二种方法显然是一个正常的程序员的做法。
+写一个客户端，也就是写一个小爬虫，使用的场景：
+ 用户在终端执行命令
+ 回想一下抓取网站的方法
+四步走：请求网页（原始数据） - 提取数据（提纯数据） - 保存数据 - 分析数据
+很显然，只要解决了请求网页，其他的也就无非解析和 SQL 语句什么的。
+1.1. 斗鱼 TV 弹幕抓取的思路确定 如果是像我上面说的那么简单，也就不必再写一篇文章。毕竟，网页小爬虫没有什么技术含量。分布式爬虫才有。
+通常情况下的网页小爬虫无非要解决如下问题：
+请求，如果对方有一定策略的反爬虫，那需要反反爬虫。比如，
+ header 带上 host，带上 refer，带上其他 需要验证，那就申请用户名和密码，然后登陆 如果在登录时期有防跨站机制，那就先获取一次登录页面，然后解析出 token，带上对应的 token 然后登陆。 在程序中加入 Log，并且存到本地。防止出现各种各样的反爬虫机制 ban 掉了程序，从而方便进行下一步防反爬虫对策。  并且，由于请求响应机制的存在，通常情况下，每一个请求对应一个响应，如果出错了，要么超时，要么有状态码，所以 web 爬虫实在也相对而言比较容易些。</div><div class="post-footer">
+        <a href="/posts/20160204_%E6%96%97%E9%B1%BCtv%E5%BC%B9%E5%B9%95%E5%8A%A9%E6%89%8B/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/ruby/">Ruby</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20160201_pc2mac/">Windows 迁移到 macOS 的一些经验</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2016-02-01">2016-02-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">前言 我会想念 Windows 上面的一切，但我选择了 Mac。
+从某种程度上讲，我并不是讨厌 Windows。尽管我是一个伪装成、*nix 程序员的技术菜鸟。
+我还记得高一时候家里给我买的第一台二手电脑，那是一台烂到令人发指的破电脑，你可能见过那种俗称大屁股的电脑，512M 内存，64M 显存。我就在那一台机器上打了仙剑三通关和仙剑四的青鸾峰到寿阳城阶段，千佛寺时候家里电脑实在是烂到令人发指，于是电脑就报废了。后来，家里面换了一台电脑，128 显存，内存 2g 的联想杨天电脑。我就在这一台机器上打了仙剑四的寿阳城之后的剧情。
+正如你可以看出来的，我并不讨厌 Windows，甚至某种程度上，我非常喜欢 Windows，正是盗版时代风靡全球的 Windows 才给了我电脑的启蒙。
+喜欢 Windows 的部分原因也是因为穷，只能用盗版（我当年以为是免费，后来才知道这叫做盗版）。就像当我知道仙剑四团队因为我这样只知道免费的盗版人群解散了以后，心痛不已。自此以后，如果经济上可以，我一定会买正版。倒也不是为了买给别人看，这只是代表我对软件开发者的最崇高的敬意。也是弥补我因为无知犯下的错误的愧疚感。
+Windows 对我来说就是启蒙老师。
+但 Windows 的种种环境配置，日常使用和我*inux 的技术栈完全不兼容了。从 XP 到 Vista 再到 7 再到 8 再到 10，这种情况依旧没有发生什么本质的变化。这样的我不得不选择模拟、nix 工具，虚拟机或者双系统。但，模拟的nix 实在太难用，虚拟机里面的系统用起来根本操作根本就不丝滑，双系统一会切换到 Win，一会切换到 Ubuntu 这种情况简直让我非常的抓狂。*nux 的环境又不能不要，可 Win 的桌面软件实在是难以割舍。
+于是，一个切换到 OSX 的想法在我的脑海中不断的浮现。但是正如你所知道的一个很现实的情况：
+ 没钱，也不愿意给父母添麻烦。
+ 但
+ 幽灵，一个想买 MacBook Pro 的想法，像幽灵一样，在脑海中不断的浮现。
+ 直到前几天才攒够足够的钱买了一台二手 mbp 改装一下 SSD。作为丐帮 Mac 第一新人，进入了 MAC 的世界里。
+对，我受够了 Windows 里面各种奇葩的问题，也受够了 Ubuntu 等 Linux 系统的糟糕的桌面体验。</div><div class="post-footer">
+        <a href="/posts/20160201_pc2mac/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/macos/">macOS</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20151231_%E4%B9%A6%E5%8D%95/">书单</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2015-12-31">2015-12-31</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"><i class="far fa-folder fa-fw"></i>读书笔记</a></span></div><div class="content">前言 记下一些看过的和没有看过的书籍。
+标记如下：
+ [o] 看过，并且留有读书笔记 没看过，或者准备再看一次 [-] 正在看  技术类 其实程序员的编程类知识的获取大多来源于官网的 api docment 以及 guide, 但也并不完全如此。
+有的官网的 tutorial 写的不够入门，guide 写的缺乏案例，api document 写的相当及简略。
+ 很多时候，还是需要去阅读源码的。
+ 但下面的一些书籍，或多或少让我觉得应该和官网结合起来看。
+Web 与爬虫  鸟哥的私房菜 两本 Python Cookbook Python 算法教程 Python 可视化编程 Python Web 开发实战 Python For Data Analysis Flask Web 开发 MySQL 技术内幕 : SQL 编程 MySQL 技术内幕 : InnoDB 技术内幕 深入浅出 MySQL SQL 反模式 Linux 集群和自动化运维 Practical Vim Javascript 语言精髓与编程实践 Javascript 高级程序设计 Javascript 设计模式与开发实践 Javascript 设计模式 高性能 Javascript  基本功  深入理解计算机系统 计算机网络 设计模式 重构 算法（第四版）  科技与人文  MacTalk 人生元编程  非技术类 未分类  异类 眨眼之间 引爆点 逆转 大开眼界  励志鸡汤  技巧：如何用一年的时间获得十年的经验  思考与写作  学会独立思考 清醒思考的艺术 厚黑学 如何阅读一本书 我的笔记 把时间当作朋友 我的笔记 正解：从写作文到写作 小说课 精进：如何成为一个很厉害的人 Beyond Feelings 公正：该如何做是好？  沟通与交流  好好说话 我的笔记 沟通的艺术（插图修订第 14 版） : 看入人里，看出人外 非暴力沟通 所谓情商高，就是会说话 演讲的力量 : 如何让公众表达变成影响力 谈话的力量 高难度谈话 沟通圣经 : 听说读写全方位沟通技巧（修订第 5 版） 关键对话 : 如何高效能沟通（原书第 2 版） 谈判是什么 沃顿商学院最受欢迎的谈判课 遇谁都能聊得开 : 92 个技巧让你的谈话充满魅力 沃顿商学院最受欢迎的谈判课  小说 ** 金庸 **</div><div class="post-footer">
+        <a href="/posts/20151231_%E4%B9%A6%E5%8D%95/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E4%B9%A6%E5%8D%95/">书单</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20150919_%E5%8D%9A%E4%BA%BA%E4%BC%A0%E5%BD%B1%E8%AF%84/">『博人传』影评</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2015-09-19">2015-09-19</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"><i class="far fa-folder fa-fw"></i>碎碎念</a></span></div><div class="content">全国最大忍者村火影忍者村倒闭了！！！
+博人传影评内无剧透。
+故事发生在鸣人当上火影之后。天天忙于公务，一直没有时间陪自己的孩子。
+也是在这时，世界的科技日新月异，转眼间木叶的电脑技术已经杰出到世人无法理解的地步。
+宇智波童参考这查克拉的结构，结合中国功夫中的内功，外功，亦欲以究天人之际，通古今之变，终于在 SCI 上发表论文《查克拉的数学原理和中国周易的必然联系》，该论文深刻阐述了查克拉的本质，查克拉由两个东西构成，一个叫做阴，另一个叫做阳，而所有人的查克拉都可以都可以通过一定量的排序组合变成不同属性的查克拉。
+宇智波童在此基础上提出了查克拉论，并建立不同属性的查克拉与两极四象五行之间的联系。他还写到，在人发出忍术的时候，首先将自己的体内的阴阳进行排序，接着转为两极能，接着再添加方向编码，变为四象能，附加自身的体质就可以转为具象的查克拉能。也就是，人们看到的查克拉，本质上就是『阴阳组合』四象』体质』。阴阳组合的长度代表一组忍术的强度，四象也就是四个方向，组合的越好，忍术就越灵活，而体质方面，像鸣人那样的风一样的男子，使用的就是风遁，像佐助那样的脾气火爆，做事比较雷人的使用的就是火遁和雷遁，像鹿丸那样聪明的，经常求别人心里阴影面积的人，使用的就是影子系术。既然查克拉是通过阴阳编码而成，那么，就可以对自己忍术的查克拉进行充分的抽样研究，从而不断优化自己忍术的编码。通过优化自己忍术的编码，就可以通过少量的查克拉调用比较强大的忍术方法。
+论文发表的第二年，宇智波童发明了一种卷轴纸，这种卷轴纸张的正面在查克拉的激发下可以留下痕迹，而且不同的忍术留下的痕迹也是不相同，除非摔在地上破碎，否则几乎痕迹不会发生变化。于是宇智波童在这张纸上将自己的忍术口遁 - 一本正经胡说八道之术 通过查克拉留在了卷轴纸上。并将此种类型的纸张命名为磁卷轴。磁卷轴在背面接触查克拉的同时会释放忍术。也就是通与激发卷轴痕迹同等查克拉的时候，释放忍术。
+第三年，宇智波童对卷轴进行大幅度改造，卷轴已经具有极小的体积，极大的容量了，并且造出了世界上第一个磁性忍术卷轴 3D 解释器。
+就如同你看到的，只需要你把卷轴放进去。解释器就会对卷轴进行解释。可是释放多种不同类型的忍术。对这些都不需要和与激发卷轴痕迹同等查克拉，我们在解释阶段做了大量的优化，比如，为了提高执行速度，我们引入了 just-in-time 技术，由于忍术 = 『 『 『阴阳组合』四象』体质』，大幅度提升阴阳组合构成就可以无敌于战场，我们引入了压缩技术，通过大量的压缩算法，把自然能源压缩到卷轴中，基本上，使用者只需使用极少的查克拉就可以释放极大的忍术。
+如同你所看到的，只需一点点，卷轴，就可以有无限的能量。
+木叶忍者村开发出这种技术以后，把技术的步骤放到 NinjutsuHub 上，于是，世界忍者纷纷加入到这种磁性忍术卷轴 3D 解释器的开发商，当然，正如你所知道的，在遥远的东方某国在技术公开以后第二天就有不要脸的忍术公司发表文章说他们自主研发了一套磁性忍术卷轴 3D 技术。
+磁性忍术卷轴 3D 解释器风靡全国之后，木叶忍者村的忍者渐渐也不需要会什么忍术的人了。人才日渐凋零。火影漩涡鸣人不堪重负。逃离木叶。于是，宇智波童携带着一流的技术和人才，流浪到遥远的东方。
+突然的出现，
+在街角的咖啡店，
+也带着笑脸，
+用大喇叭大声吼道：
+木叶忍村，木叶忍村，全球最牛忍者村，木叶忍者村倒闭啦，王八蛋火影吃喝嫖赌欠下三点五个亿的赌债，带着他的老婆佐助逃跑了，我们没有办法，拿着忍术抵现金，原来五影才能使用的忍术，无需背口诀，无需结印，不开刀，无痛苦，第一天买装备，第二天无痛打怪，全场清仓大甩卖，统统只要三十元，统统只要三十元，统统只要三十元。
+PS：鸣人和佐助终于在一起了。
+ ChangeLog:
+ 2017-03-19 重修文字，祝贺鸣人君和雏田君终成眷属  </div><div class="post-footer">
+        <a href="/posts/20150919_%E5%8D%9A%E4%BA%BA%E4%BC%A0%E5%BD%B1%E8%AF%84/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E9%9A%8F%E7%AC%94/">随笔</a>,&nbsp;<a href="/tags/%E5%BD%B1%E8%AF%84/">影评</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20150614_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/">如何优雅的使用 Windows 10</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2015-06-14">2015-06-14</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">0x00. 前言 刚开始 Win10 发布没有多久的时候我就写了这篇回答，放在知乎上，后来又搬运到 jianshu 上，现在搬运到自己的博客上，也算是落叶归根。
+ 已经过了折腾的年龄，答案仅仅从提升效率方面来说，是否优雅就看诸位的审美了。
+ 本文目录
+ 文件夹与文件一定要分类命名好。 Win10 自带功能怎样提升效率。   2.1 快捷键 2.2 触摸板手势 2.3 Win+R  非 Windows 自带的必备的提升效率，节省时间的软件。   3.1 文档，图片，文本，以及通用文件管理器 3.2 Everything is OK 3.3 Chrome （Google 出品，必属精品） 3.4 阅读方面 calibre ， 欧路词典 3.5 笔记软件 xmind，wiznote 3.6 播放器 3.7 其他想到再补充 4. 不写点代码优化一下工作流程，你都不好意思说自己逼格高。 4.1 autohotkey  0x01. 文件命名  文件夹与文件一定要分类命名好
+ 贴上我的几张图来看一下我的文件夹命名：
+一级文件夹如下： 二级文件夹如下： 三级或者三级以上文件夹
+文件命名规范（因为涉及到后面使用 Everything，所以我们的命名尽量追求便于搜索）
+举个例子，对于读书笔记 ：读书笔记、_设计模式、_20150303_v2.1.xmind
+对于照片这种文件比较多的，优先命名文件夹，其次按照地址人物日期命名，比如：大明湖胖、_夏雨荷、_20150101</div><div class="post-footer">
+        <a href="/posts/20150614_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/windows/">Windows</a></div></div>
+</article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20150504_googletips/">Google Tips</a>
     </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2015-05-04">2015-05-04</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">0x01 Google 搜索引擎技巧 intitle: 古文观止 site: pan.baidu.com + or link:http://www.reanren.com inurl &#34;&#34; 『长城防*墙』 0x02 Baidu 搜索引擎技巧 site:  ChangeLog:

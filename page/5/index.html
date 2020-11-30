@@ -10,7 +10,7 @@
 <meta property="og:description" content="Get Busy is My New Hugo Site" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://twocucao.xyz/" />
-<meta property="og:updated_time" content="2020-11-30T18:16:34+08:00" />
+<meta property="og:updated_time" content="2020-11-30T18:14:14+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="海拉鲁编程客"/>
 <meta name="twitter:description" content="Get Busy is My New Hugo Site"/>
@@ -73,6 +73,81 @@
         alt="https://avatars0.githubusercontent.com/u/5625783"
         title="https://avatars0.githubusercontent.com/u/5625783" /></a></div><h1 class="home-title">海拉鲁编程客</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20180210_elasticsearchcheatsheet/">ElasticSearch CheatSheet</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-10">2018-02-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/devops/"><i class="far fa-folder fa-fw"></i>DevOps</a></span></div><div class="content">0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 ElasticSearch 相关和命令。
+ 最早使用 ElasticSearch 是两年前了。最近准备用 Django 写一个全栈式的应用，借用强大的 ES 来做搜索。
+ 这是我在写程序之余写这篇笔记的原因。最近因为换工作的事情耽误了教程更新，就把这篇笔记放出来吧。不定期更新。
+官网介绍 ElasticSearch 不仅仅是全文搜索，也可以结构化搜索（这里用结构化查询会更准确一些），处理人类语言，地理位置，以及关系。
+然而，我在项目使用过程中还是主要用到了全文搜索以及推荐。
+不用其他的主要原因是因为 ES 尺有所短寸有所长：
+ geo 处理方面 postgis 完全就是神一般的存在。为什么还要用 ES 呢？ 关系型数据库的核心不就是处理关系？复杂的关系肯定还是放在关系数据库里面。   highlighted search search-as-you-type did-you-mean suggestions  我对 ElasticSearch 在后台组件里的作用在于搜索与推荐：
+ 整站的搜索功能   全文搜索  推荐   依据某几个维度的数据进行排序  知乎的文章居然不支持 toc, 实在是太蛋疼了。
+文章目录如下
+ ▼ 0x00 前言 : section ▼ 0x01 安装，配置，基本 shell 命令 : section 1.</div><div class="post-footer">
+        <a href="/posts/20180210_elasticsearchcheatsheet/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/pandas/">Pandas</a>,&nbsp;<a href="/tags/numpy/">Numpy</a>,&nbsp;<a href="/tags/cheatsheet/">CheatSheet</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20180203_numpycheatsheet/">NumPy CheatSheet</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-03">2018-02-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Numpy 相关语句。
+主要包含：
+Numpy 库 0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Numpy 相关语句。
+对于数据分析应用而言，最应该关注：
+ 用于数据整理和清理、子集构造和过滤、转换等快速的矢量化数组运算。 常用的数组算法，如排序、唯一化、集合运算等。 高效的描述统计和数据聚合 / 摘要运算。 用于异构数据集的合并 / 连接运算的数据对齐和关系型数据运算。 将条件逻辑表述为数组表达式（而不是带有 if-else-if 分支的循环） 数据的分组运算（聚合、转换、函数应用等）。   学习 Numpy 本质上是为了更好的使用 Pandas
+ 0x01 ndarray 1.1 数据类型 1.2 创建 ndarray 1.3 数组和标量之间的运算 当我们把数组当做矢量的时候。
+ 两个大小相同的矢量将运算到元素级 矢量和标量将作用与每一个元素 不同大小的矢量之间的运算叫做广播  1.4 索引和切片 1.4.1 一般索引和一般切片 对于一维数组的话，如果没有显式 copy 则会修改原来的值。
+切片语法与 Python 相近
+1.4.2 切片型索引 a[:2,1:] a[2,1:] 1.4.3 布尔型索引 参考 pandas 语法</div><div class="post-footer">
+        <a href="/posts/20180203_numpycheatsheet/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cheatsheet/">CheatSheet</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20180220_celerycheatsheet/">Celery 快速入门指北</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-02">2018-02-02</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 本文编写于 2018 年初，于 2019 四月进行修订，也是笔者对 Celery 的系统梳理。
+在我的文章如何保证 Django 项目的数据一致性中，提到了这么一个解决超卖的方案。
+ 在 Redis 里面直接生成 200 个订单号 然后用户来一个取走一个订单号码 通过 Celery 削峰 排队走异步任务 最后通过数据表的 uniq 约束来防止下单超过 200 个。  https://zhuanlan.zhihu.com/p/57668068
+有朋友和我讲，你这个方法是有问题的，走异步任务容易并发量太大，容易把数据库打爆。
+其实是可以的，Celery 可以对 Worker 的 Task 限流 (ratelimit)。
+0x01 Celery 为什么需要 Celery 在日常开发的时候，常常有一些『任务』需要处理。
+ 为了提升系统的响应速度，比如发送短信 / 发送邮箱，这类的『任务』可以走异步。 为了在某个时间执行耗时操作，比如统计用户的文章 / 点赞 / 活跃度。 为了削减峰值，比如秒杀系统的削峰走异步 为了业务代码解耦，比如当我在知乎上更新文章，可能就会触发『推荐系统』,『文章管理系统』,『用户通知系统』  不用 Celery 的话，其实上面的业务也是能做的。 比如 1 中，可以直接启一个线程来做。比如 2 完全可以 Crontab 做一个定时任务。
+那为什么要用 Celery 呢？
+ 把目光聚焦在 Task 的分发上面。而非线程，Deamon 之类细节的处理。 方便，简单，易维护，高可用。 便于监控。 扩展性好。  基本上满足了你九成的需求。</div><div class="post-footer">
+        <a href="/posts/20180220_celerycheatsheet/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/celery/">Celery</a>,&nbsp;<a href="/tags/%E6%B6%88%E6%81%AF%E9%98%9F%E5%88%97/">消息队列</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20180128_tmuxwithtmuxinatorworkflow/">用 tmux 与 tmuxinator 打造开发工作流</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-01-28">2018-01-28</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">0x00. 前言 本文就我最近开发的一个前后端的项目（名字叫做 yavueblog) 来简单介绍两个神器
+ 一个是 tmux 一个是 tmuxinator  我在开发这个前后端的项目的时候要开启要通过不少的命令来启动服务：
+ （前端开发）运行 npm run dev 进行开发前端页面 （前端开发）运行 npm run dev:theme , 当主题的 SCSS 发生变化的同时，编译 SCSS （前端开发）运行 npm run dev:iconfont, 当移入了新的 svg 图标的时候，自动构建出新的字体文件与 iconfont.css 。 （后端开发）运行 make dockerup 中开启 Django 应用。启动 Django 服务，PostgreSQL 数据库，Redis 等等，  我的需求如下：
+ 一键启动这些脚本，前两个任务，放在第一个终端。 后面两个任务放在第二、三个终端里。  以前的做法都是新建三个终端选项卡，然后第一个终端分两屏，然后分别到各个终端 cd 或者 autojump 到对应的目录，然后手动运行命令。
+加上运行 npm run dev:theme 的时候，我是通过 Python 的 watchdog 来实现对指定目录和指定类型文件的变化进行监听的，所以还要切换 PyEnv 自定义的 Python 的环境中。</div><div class="post-footer">
+        <a href="/posts/20180128_tmuxwithtmuxinatorworkflow/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/tmux/">Tmux</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20180123_pythoncompression/">Python 中的数据压缩和存档</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-01-23">2018-01-23</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 在一次数据分析过程中，对方扔过来 40GB 的数据 &ndash; data.tar.gz .
+我想着能不能直接用 pandas 直接读取这个文件呢？查找了一些资料，于是有了本文。
+Python 中支持如下：
+ 数据压缩算法：zlib, gzip, bzip2 and lzma 存档格式：zip 以及 tar  0x01 压缩是怎么回事？ 0x02 zlib 与 gzip gzip 依赖于 zlib
+# 读取压缩文件 import gzip with gzip.open('/home/joe/file.txt.gz', 'rb') as f: file_content = f.read() # 写入压缩文件 import gzip content = b&quot;Lots of content here&quot; with gzip.open('/home/joe/file.txt.gz', 'wb') as f: f.write(content) # 拷贝压缩文件 import gzip import shutil with open('/home/joe/file.txt', 'rb') as f_in: with gzip.</div><div class="post-footer">
+        <a href="/posts/20180123_pythoncompression/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20171228_allstuffaboutcss/">关于 CSS 你应该知道的一切</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-12-28">2017-12-28</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"><i class="far fa-folder fa-fw"></i>前端开发</a></span></div><div class="content">0x00 前言 本笔记诞生于很久前零零散散记录的笔记，拿出来发布一下。
+0x01 CSS 是如何工作的？ HTML 是元素的标记语言。
+CSS 被用来 样式和网页布局的。
+样式和布局都有哪些呢？
+ 字体 颜色 大小 内容间距 多列 动画  通过 DOM 树的节点和样式节点结合，生成渲染树，然后交给浏览器进行渲染从而使得外观发生变化。
+0x02 CSS 基本语法 CSS 基本语法有三个组成部分：
+ 规则 选择器 属性  2.1 CSS 规则 h1 { colour: blue; background-color: yellow; border: 1px solid black; } // @规则 @import @charset @media @font-face /* in shorthand like padding and margin, the values are applied in the order top, right, bottom, left (the same order as an analog clock).</div><div class="post-footer">
+        <a href="/posts/20171228_allstuffaboutcss/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/frontend/">Frontend</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20171223_macosindepth/">macOS 的系统与软件</a>
     </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-12-23">2017-12-23</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">0x00 前言 折腾了 Windows 很多年，后来出于个人开发需求转投 Mac，使用起来一直很顺手。现在也开始从顺手开始到了解更深一点的东西。
 0x01 系统安全架构 1.1 系统架构概述 非开发人员分层：
@@ -123,75 +198,6 @@
 - man - whatis / which / where - tldr 值得一提的就是 tldr, 直接可以在上面查看命令的常规使用。实在是碉堡了。</div><div class="post-footer">
         <a href="/posts/20150418_shellcheatsheet/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/shell/">Shell</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20191231_clean_python_code_02/">如何写出整洁的 Python 代码 中</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-12-01">2017-12-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第七篇文章。
- 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统 第六篇，《如何写出整洁的代码 上》 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码  目录
-▼ 如何写出整洁的 Python 代码 中 : section 0x00 前言 : section 0x01 避免过深的缩进 : section 0x02 使用异常 : section 0x03 类与 OOP : section ▼ 0x04 SOLID 设计原则 : section 单一职责 : section 开闭原则 : section 里氏替换原则 : section 接口隔离原则 : section 依赖反转原则 : section 0x05 边界和第三方库的挑选 : section 0xDD 结论 : section 0xEE 参考 : section 0x00 前言 上篇地址在这里 https://zhuanlan.</div><div class="post-footer">
-        <a href="/posts/20191231_clean_python_code_02/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20150317_%E6%89%87%E8%B4%9D%E8%83%8C%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%8A%A9%E6%89%8B/">背单词小助手</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-12-01">2017-12-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content"><h2 id="本文内容">本文内容</h2>
-<h3 id="思路">思路</h3>
-<ul>
-<li>英文单词的处理</li>
-<li>shanbay 单词本的提交</li>
-</ul>
-<h3 id="英文单词的处理">英文单词的处理</h3>
-<p>正则表达式进行提取，然后通过 Python 的自然语言处理工具 ntlk 进行单词原型的转换</p>
-<h3 id="shanbay-单词的处理">shanbay 单词的处理</h3>
-<p>由于使用了传说中的 requests，使得代码简洁程度大大提升。</p></div><div class="post-footer">
-        <a href="/posts/20150317_%E6%89%87%E8%B4%9D%E8%83%8C%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%8A%A9%E6%89%8B/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20171120_pythonclosureandscopes/">Python 中的作用域准则</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-11-20">2017-11-20</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 因为最早用的是 Java 和 C#，写 Python 的时候自然也把 Python 作用域的想的和原有的一致。
-Python 的作用域变量遵循在大部分情况下是一致的，但也有例外的情况。
-本文着通过遇到的一个作用域的小问题来说说 Python 的作用域
-0x01 作用域的几个实例 Python 的作用域变量遵循在大部分情况下与其他语言一致，但也有例外的情况。比如：
-1.1 第一个例子 作用域第一版代码如下
-a = 1 print(a, id(a)) # 打印 1 4465620064 def func1(): print(a, id(a)) func1() # 打印 1 4465620064 作用域第一版对应字节码如下
- 4 0 LOAD_GLOBAL 0 (print) 3 LOAD_GLOBAL 1 (a) 6 LOAD_GLOBAL 2 (id) 9 LOAD_GLOBAL 1 (a) 12 CALL_FUNCTION 1 (1 positional, 0 keyword pair) 15 CALL_FUNCTION 2 (2 positional, 0 keyword pair) 18 POP_TOP 19 LOAD_CONST 0 (None) 22 RETURN_VALUE  PS: 行 4 表示 代码行数 0 / 3 / 9 &hellip; 不知道是啥，我就先管他叫做条吧 是 load global PPS: 注意条 3/6 LOAD_GLOBAL 为从全局变量中加载</div><div class="post-footer">
-        <a href="/posts/20171120_pythonclosureandscopes/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20171007_elegantmac/">如何优雅地使用 macOS</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-10-07">2017-10-07</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">如何优雅的使用 macOS 0x01 macOS 系统操作 快捷键 - cmd 为 command 按键，通常情况下为所有桌面程序通用性的快捷键。 - ctrl ，通常情况下是针对程序的功能进行加强，并且此功能往往是非 cmd 类（窗口操作，选择，复制粘贴等等）操作。 - shift 按键通常用于加强操作。一般会让操作更进一步 or 相反操作。 - cmd+tab =~ alt+tab 程序之间的切换 - cmd+\` 应用内窗口切换 - cmd+h 窗口 hide - cmd+m 窗口 minimize - cmd+n 新建窗口 - cmd+o 打开 - cmd+s 保存 - cmd+shift+s 另存为 - cmd+p 打印 print - cmd+w 关闭 - cmd+q quit - cmd+a select all - cmd+i show info - cmd+n create a new folder - cmd+f search - cmd+c copy - cmd+v paste - cmd+delete 删除选中文件 - cmd+shift+delete 清空回收站 - cmd+= 放大 - cmd+- 缩小 - cmd+t 新建选项卡 - cmd+r 刷新 - cmd+shift+3 截取整个屏幕 - cmd+shift+4 截取选择区域 - cmd+shift+4+SPACE 截取选择窗口 - cmd+ 鼠标点击 -&gt; 选中不连续文件 - control+ 鼠标点击 -&gt; 相当于 win 中右键点击 - fn+left home - fn+right end - fn+up pageup - fn+down pagedown 触摸板 - 单指点击 - 单击 - 单指滑动 - 滑动鼠标光标 - 双指点击 - 相当于 Windows 的鼠标右键 - 三指点击 - 划词查找 - 双指上下滑动 - 滚动 - 双指缩放 - 与 Android 上图片缩放一致 - 双指双击 - 只能缩放 - 双指旋转 - 旋转 - 双指左右滑动 - 应用内切换网页 - 双指头从右往左 - 三指头左右滑动 - 全屏幕 App 切换 - 大拇指和食中无名缩放 - launchpad 0x02 日常软件   iTunes</div><div class="post-footer">
-        <a href="/posts/20171007_elegantmac/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/macos/">macOS</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20170915_readingvuedocuments/">VueJS 文档阅读笔记</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-09-15">2017-09-15</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"><i class="far fa-folder fa-fw"></i>前端开发</a></span></div><div class="content">0x01 Essential 1.1 The Vue Instance 当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。
- 而创建之后添加赋值新属性，则不 Reactive
- 而实例被创建之时，会自带前缀为 $ 的一系列属性和方法
-1.1.1 内置方法和属性 Instance Properties vm.$data vm.$props vm.$el vm.$options vm.$parent vm.$root vm.$children vm.$slots vm.$scopedSlots vm.$refs vm.$isServer vm.$attrs vm.$listeners
-Instance Methods / Data vm.$watch vm.$set vm.$delete
-Instance Methods / Events vm.$on vm.$once vm.$off vm.$emit
-Instance Methods / Lifecycle vm.$mount vm.$forceUpdate vm.$nextTick vm.$destroy
-1.1.2 生命周期 1.2 Template Syntax VueJS 编译 模板为 VirtualDOM render 函数，如果对 VirtualDom 非常熟悉的话，则可以使用</div><div class="post-footer">
-        <a href="/posts/20170915_readingvuedocuments/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vuejs/">VueJS</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20170804_rethinkinginpython/">ReThinking In Python</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-08-04">2017-08-04</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。
-0x01 Python 胡论 Why Python 是要用一门编程语言无非是两种原因：
- 这门技术很火，能挣钱 写起来很舒服，开发效率高  这也是我在涉猎了很多编程语言为什么选择了 Python 和 TypeScript 作为自己的主要技能树。
-Python 具备这两点，TS （更加准确的说是 JavaScript）具备前一点。
-Python 写起来真的特别舒服，语法简洁，第三方库丰富，而且也比较火。
-有什么东西比，写代码效率高、生态圈好还重要了。
-生态圈好，比如
- Web 开发用 Django/Flask 数据抓取用 Requests 数据分析清洗用 Pandas 机器学习 Tensorflow SCIPY  工具链 Pythonista 的工具集
-文档 社区 书籍 0x02 基础概念 2.1 数据类型 常量 False True None NotImplemented Elilipsis ... 布尔 布尔常量
-None False 0 0.0 0j '' () [] {} 一个对象 __bool__() = False , 如果上一个为 True 则__len__() 布尔运算符</div><div class="post-footer">
-        <a href="/posts/20170804_rethinkinginpython/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
 </article>
 <ul class="pagination"><li class="page-item ">
                     <span class="page-link">

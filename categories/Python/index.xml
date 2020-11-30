@@ -4,17 +4,7 @@
         <link>http://twocucao.xyz/categories/python/</link>
         <description>Python - 分类 - 海拉鲁编程客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
-            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Mon, 30 Nov 2020 18:16:34 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/python/" rel="self" type="application/rss+xml" /><item>
-    <title>Python Type Hint</title>
-    <link>http://twocucao.xyz/posts/20201201_pythontypehint/</link>
-    <pubDate>Mon, 30 Nov 2020 18:16:34 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20201201_pythontypehint/</guid>
-    <description><![CDATA[0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第一篇文章。
-本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
-本文目录如下：
-▼ 0x00 前言 : section ▼ 0x01 Gradual Typing : section 静态类型 VS 动态类型 : section Gradual Typing = 静态类型 + 动态类型 : section ▼ 0x02 Python Typing 实战 - MyPY : section MyPy : section 快速入门 : section ▼ 0x03 常见问题 : section 如何忽略 mypy 警告 : section 循环导入 : section 0x04 Typing Anotation 项目最佳实践 : section ▼ 0xEE 参考 : section PEP : section 扩展文章 : section  当我刚知道 Python 要添加类型的时候，我的内心是拒绝的。]]></description>
-</item><item>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Mon, 30 Nov 2020 18:14:14 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/python/" rel="self" type="application/rss+xml" /><item>
     <title>Python Profiling/Tracing Tools</title>
     <link>http://twocucao.xyz/posts/20201201_pythonprofiling/</link>
     <pubDate>Mon, 30 Nov 2020 18:14:14 &#43;0800</pubDate>
@@ -28,7 +18,38 @@
  侵入性诊断 侵入性诊断  0x01 侵入性诊断 基础工具  print logging timeit  Profile vs cProfile cProfile overhead 较高，
 import cProfile import re cProfile.run(&#39;re.compile(&#34;foo|bar&#34;)&#39;) 197 function calls (192 primitive calls) in 0.002 seconds Ordered by: standard name ncalls tottime percall cumtime percall filename:lineno(function) 1 0.]]></description>
 </item><item>
-    <title>一文解决你的 Python ORM 选择困难症</title>
+    <title>如何写出整洁的 Python 代码 下</title>
+    <link>http://twocucao.xyz/posts/20190924_pycode_08_clean_code/</link>
+    <pubDate>Tue, 24 Sep 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190924_pycode_08_clean_code/</guid>
+    <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第八篇文章。
+第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统 第六篇，为《整洁上篇》讲的是 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码 第七篇，为《整洁中篇》讲的是 一些的编程时候的基本原则，比如，避免过深的缩进，SOLID 法则，边界 本文是《整洁下篇》，本文的诞生，要感谢我前公司的技术主管豪蔚老师和产品主管刚哥，在上海工作这几年，总是和能优秀的人工作，确实是我幸运的地方。
+目录如下
+▼ 如何写出整洁的 Python 代码 下篇 : section 0x00 前言 : section 0x01 处理需求的姿势 : section ▼ 0x02 敏捷开发 : section 看板和晨会 : section 敏捷的时间安排：周一到周五 : section 人员安排 : section ▼ 0x03 代码全局观 : section 起个好名字 : section 本质复杂度和偶然复杂度 : section 0xEE 后记 : section 0x00 前言 这篇文章憋了很久，思考了许久，《整洁下篇》干脆就聊聊编程中，不是写代码的部分；]]></description>
+</item><item>
+    <title>如何写出整洁的 Python 代码 中</title>
+    <link>http://twocucao.xyz/posts/20190526_pycode_07_clean_code/</link>
+    <pubDate>Sun, 26 May 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190526_pycode_07_clean_code/</guid>
+    <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第七篇文章。
+ 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统 第六篇，《如何写出整洁的代码 上》 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码  目录
+▼ 如何写出整洁的 Python 代码 中 : section 0x00 前言 : section 0x01 避免过深的缩进 : section 0x02 使用异常 : section 0x03 类与 OOP : section ▼ 0x04 SOLID 设计原则 : section 单一职责 : section 开闭原则 : section 里氏替换原则 : section 接口隔离原则 : section 依赖反转原则 : section 0x05 边界和第三方库的挑选 : section 0xDD 结论 : section 0xEE 参考 : section 0x00 前言 上篇地址在这里 https://zhuanlan.]]></description>
+</item><item>
+    <title>如何写出整洁的 Python 代码 上</title>
+    <link>http://twocucao.xyz/posts/20190525_pycode_06/</link>
+    <pubDate>Sat, 25 May 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190525_pycode_06/</guid>
+    <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第六篇文章。
+第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇, 讲的是 为你的项目快速搭建 ELKFA 日志系统 接下来的三篇，围绕另一个主题
+如何写出整洁的代码 『整洁』三篇是基于『代码整洁之道』和『架构整洁之道』的一些切身的理解和体会。
+感谢这两本书的作者 Bob 大叔。
+PPS: 某东读书 VIP 会员有不少 IT 资源类的书籍可以免费看，比如『代码整洁之道』 本文目录如下
+▼ 如何写出整洁代码 上篇 : section ▼ 0x00 前言 : section 软件系统的腐败之路 : section ▼ 0x01 讨论 : section 为什么会出现腐败的系统 : section 衡量系统的两个指标 : section 代码是写出来的吗？ : section 好代码的标准 : section ▼ 0x02 变量命名之道 : section 使用业务领域命名 : section 代码命名 : section ▼ 0x03 函数整洁之道 : section 短小精悍 : section 调用层次清晰 : section 控制参数 : section 如何写函数 : section 0x04 注释整洁之道 : section ▼ 0x05 格式整洁之道 : section 排版整齐 : section 上下文相关 : section 0xEE 参考连接 : section 0x00 前言 软件系统的腐败之路 随着项目代码行数的增加，不可避免的遇到软件架构腐败的问题。]]></description>
+</item><item>
+    <title>Python ORM</title>
     <link>http://twocucao.xyz/posts/20190412_pythonorm/</link>
     <pubDate>Fri, 12 Apr 2019 21:57:40 &#43;0800</pubDate>
     <author>作者</author>
@@ -38,95 +59,58 @@ import cProfile import re cProfile.run(&#39;re.compile(&#34;foo|bar&#34;)&#39;) 
 0x02 数据库抽象的两种理论 理论一：Active Record 理论二：Data Mapper 0x03 数据库抽象的两种实现 实现一：Django ORM 实现二：Sqlalchemy 0x04 工具的强弱 https://www.thoughtfulcode.com/orm-active-record-vs-data-mapper/
 2.0 SQLAlchemy VS DjangoORM ORM 通常有 DataMapper 实现和 ActiveRecord 实现两种。]]></description>
 </item><item>
+    <title>如何通过测试提升 Python 代码的健壮性</title>
+    <link>http://twocucao.xyz/posts/20190216_pycode_02/</link>
+    <pubDate>Sat, 23 Mar 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190216_pycode_02/</guid>
+    <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第二篇文章。
+本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
+用 Type Annotation 提升你的 Python 代码健壮性 https://zhuanlan.zhihu.com/p/56863684 0x00 前言 本文的更多的是写给 Python 后端的程序员。
+来简单分享一下我对写测试的理解。
+在上一篇文章中，我提到了代码覆盖率，即测试的一种指标。
+本期就聊聊测试这件小事情。
+本文目录如下：
+▼ 如何通过测试提升 Python 代码的健壮性 : section 0x00 前言 : section ▼ 0x01 测试的分类 : section 后端主要关注哪些测试 : section ▼ 0x02 为什么要写测试 : section 让新手更快的了解代码 : section 让发布代码的时候更加有底气 : section 让程序更容易重构 : section 加快团队的开发速度 : section ▼ 0x03 为什么不要写测试 : section 测试不能解决的问题 : section 不适当的测试为什么是负担 : section 并不是所有地方都容易测试的 : section ▼ 0x04 写 Python 测试的一些注意事项 : section 项目的环境隔离 : section 测试的基本环境 : section 单测 / 功测 / 端对端 : section 如何处理外部服务 : section 其他 Pytest 小技巧 : section 0xEE 参考 : section 0x01 测试的分类 测试有很多种，]]></description>
+</item><item>
+    <title>为你的项目快速搭建 ELKFA 日志系统</title>
+    <link>http://twocucao.xyz/posts/20190310_pycode_05/</link>
+    <pubDate>Sun, 10 Mar 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190310_pycode_05/</guid>
+    <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第五篇文章。
+第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇, 即本文 讲的是日志系统ELKFA的搭建
+0x00 前言 : section  ▼ 0x01 任务 1: 分析 Nginx 日志 : section 第一步：配置 Nginx : section 第二步：拉取 Nginx 日志 : section 第三步：开启 ELFKA : section 第四步：日志探秘 : section 第五步：扩展思考，日志解决方案 : section ▼ 0x02 任务 2: 监控 Flask App 的 APM : section 第一步：开启 ELFKA : section 第二步：开启 flask app : section 第三步：APM 探秘 : section 第四步：扩展思考 : section ▼ 0x03 结论 : section 0xEE 参考链接 : section 0x00 前言 什么是 ELKFA?]]></description>
+</item><item>
+    <title>如何保证 Django 项目的数据一致性</title>
+    <link>http://twocucao.xyz/posts/20190308_pycode_03/</link>
+    <pubDate>Fri, 08 Mar 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190308_pycode_03/</guid>
+    <description><![CDATA[0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第三篇文章。
+第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是如何通过测试提升 Python 代码的健壮性 第三篇，即本文，我们来谈谈 Django 项目并发可能带来的问题以及如何保持 Django项目的数据一致性。
+本文目录如下：
+0x00 前言 : section ▼ 0x01 背景知识 : section 并发会带来数据不一致 : section ▼ 0x02 Django 项目如何解决项目 : section 悲观的方式 : section 乐观的方式 : section 没有银弹 : section 0x03 解决超卖问题 : section ▼ 0x04 番外篇 数据库隔离级别 : section READ-UNCOMMITTED : section READ-COMMITTED : section REPEATABLE-READ : section SERIALIZABLE : section 0xEE 参考链接 : section 本文讨论的场景如下：]]></description>
+</item><item>
+    <title>这几招，让你快速提升 Python 项目的性能</title>
+    <link>http://twocucao.xyz/posts/20190309_pycode_04/</link>
+    <pubDate>Tue, 05 Mar 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190309_pycode_04/</guid>
+    <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第四篇文章。
+第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性
+第四篇，即本文，9012 年
+当你觉得某个地方运行比较慢了，此时此刻的你，有哪些小技巧可以快速的帮 你定位性能问题。 目录如下
+▼ 这几招，让你快速提升 Python 项目的性能 : section 0x00 前言 : section ▼ 0x01 Python 优化的五件武器 : section 第一件武器 timeit : section 第二件武器 profile 与 cprofile : section 第三件武器 line profiler : section 第四件武器 memory profiler : section 第五件武器 pympler : section 其他神器 : section ▼ 0x02 优化 Web 项目 : section 提前优化 : section 做好监控 : section ▼ 0x03 性能优化建议 : section 建议 1.]]></description>
+</item><item>
     <title>用 Type Anotation 提升你的 Python 代码健壮性</title>
-    <link>http://twocucao.xyz/posts/20181210_pythontypeanotation/</link>
+    <link>http://twocucao.xyz/posts/20181210_pycode_01_type_hint/</link>
     <pubDate>Mon, 10 Dec 2018 21:57:40 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20181210_pythontypeanotation/</guid>
+    <guid>http://twocucao.xyz/posts/20181210_pycode_01_type_hint/</guid>
     <description><![CDATA[0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第一篇文章。
 本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
 本文目录如下：
 ▼ 0x00 前言 : section ▼ 0x01 Gradual Typing : section 静态类型 VS 动态类型 : section Gradual Typing = 静态类型 + 动态类型 : section ▼ 0x02 Python Typing 实战 - MyPY : section MyPy : section 快速入门 : section ▼ 0x03 常见问题 : section 如何忽略 mypy 警告 : section 循环导入 : section 0x04 Typing Anotation 项目最佳实践 : section ▼ 0xEE 参考 : section PEP : section 扩展文章 : section 当我刚知道 Python 要添加类型的时候，我的内心是拒绝的。]]></description>
-</item><item>
-    <title>CPython 源码初步阅读笔记</title>
-    <link>http://twocucao.xyz/posts/20180606_cpython/</link>
-    <pubDate>Wed, 06 Jun 2018 21:57:40 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20180606_cpython/</guid>
-    <description><![CDATA[0x00 前言 先挖坑，以后有机会填
-├── Grammar # 语法 ├── Include # C 语言头文件，如果需要自定义模块扩展 Python, 也需要这块。 ├── Modules # C 语言编写的模块，对速度要求高，比如 random ├── Objects # 内建对象 包含整数，list,dict 等。 ├── Parser # Scanner 和 parser ├── Python # 各种 Python 共享库 ├── Lib # Python 自带的所有标准库 ├── Doc # 文档 ├── Tools # 一些 Python 程序，方便扩展 Python ├── Misc # 不清楚放哪，就放这里好了 ├── PC # Windows 编译姿势 ├── PCbuild # Windows 编译姿势 ├── Mac # Mac 上编译姿势 ├── Programs ├── README.]]></description>
-</item><item>
-    <title>PyCon 2018 之 pipenv -- 未来的 Python 依赖管理工具</title>
-    <link>http://twocucao.xyz/posts/20180523_pipenv/</link>
-    <pubDate>Wed, 23 May 2018 21:57:40 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20180523_pipenv/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="https://user-images.githubusercontent.com/5625783/100601457-8efe8a80-333d-11eb-803e-861352bd1715.jpg" referrerpolicy="no-referrer">
-            </div>0x00 前言 PyCon 2018 有很多精彩的演讲，今天的文章里，介绍一下 K 神的演讲 『Python 未来的包管理工具 pipenv』
-Kenneth Reitz 出品，必属精品。
-Python 打包历史 刚开始的时候，我们是这样安装包的。
-curl http://pypi.python.org/packages/alsdasdl/requests.tar.gz | tar zxf cd requests/ python setup.py install 这个问题初看起来不是问题，但是随着你安装程序的增多就知道有多么痛苦了。
- 有的依赖库依赖别的库你怎么解决？比如 pandas 需要安装 numpy 有的依赖库依赖 c 库怎么办？比如 LXML 在 python2.6.5 下，如果我需要安装两个不同版本的 Django 开发不同的软件怎么办？难道只能动态复制文件到 site-packages 里面？  后来，我们是这样安装包的。
-easy_install requests 我们可以直接从 pypi 进行安装了。但尼玛，为什么 easy_install 安装很 easy, 但是没有 easy_uninstall?
-好，2010 年后，我们继续前进：
- 可以通过 pip 替代 easy_install 了。 可以通过 virtualenv 管理项目的依赖库了。虽然说，还是不能像 ruby gem 一样同时把多个版本的的软件装在同一个系统里。 可以通过 requirements 锁依赖了。  但，同期的其他编程语言社区分别出现了如下的包管理工具：]]></description>
-</item><item>
-    <title>NumPy CheatSheet</title>
-    <link>http://twocucao.xyz/posts/20180203_numpycheatsheet/</link>
-    <pubDate>Sat, 03 Feb 2018 21:57:40 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20180203_numpycheatsheet/</guid>
-    <description><![CDATA[0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Numpy 相关语句。
-主要包含：
-Numpy 库 0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Numpy 相关语句。
-对于数据分析应用而言，最应该关注：
- 用于数据整理和清理、子集构造和过滤、转换等快速的矢量化数组运算。 常用的数组算法，如排序、唯一化、集合运算等。 高效的描述统计和数据聚合 / 摘要运算。 用于异构数据集的合并 / 连接运算的数据对齐和关系型数据运算。 将条件逻辑表述为数组表达式（而不是带有 if-else-if 分支的循环） 数据的分组运算（聚合、转换、函数应用等）。   学习 Numpy 本质上是为了更好的使用 Pandas
- 0x01 ndarray 1.1 数据类型 1.2 创建 ndarray 1.3 数组和标量之间的运算 当我们把数组当做矢量的时候。
- 两个大小相同的矢量将运算到元素级 矢量和标量将作用与每一个元素 不同大小的矢量之间的运算叫做广播  1.4 索引和切片 1.4.1 一般索引和一般切片 对于一维数组的话，如果没有显式 copy 则会修改原来的值。
-切片语法与 Python 相近
-1.4.2 切片型索引 a[:2,1:] a[2,1:] 1.4.3 布尔型索引 参考 pandas 语法]]></description>
-</item><item>
-    <title>Celery 快速入门指北</title>
-    <link>http://twocucao.xyz/posts/20180220_celerycheatsheet/</link>
-    <pubDate>Fri, 02 Feb 2018 21:57:40 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20180220_celerycheatsheet/</guid>
-    <description><![CDATA[0x00 前言 本文编写于 2018 年初，于 2019 四月进行修订，也是笔者对 Celery 的系统梳理。
-在我的文章如何保证 Django 项目的数据一致性中，提到了这么一个解决超卖的方案。
- 在 Redis 里面直接生成 200 个订单号 然后用户来一个取走一个订单号码 通过 Celery 削峰 排队走异步任务 最后通过数据表的 uniq 约束来防止下单超过 200 个。  https://zhuanlan.zhihu.com/p/57668068
-有朋友和我讲，你这个方法是有问题的，走异步任务容易并发量太大，容易把数据库打爆。
-其实是可以的，Celery 可以对 Worker 的 Task 限流 (ratelimit)。
-0x01 Celery 为什么需要 Celery 在日常开发的时候，常常有一些『任务』需要处理。
- 为了提升系统的响应速度，比如发送短信 / 发送邮箱，这类的『任务』可以走异步。 为了在某个时间执行耗时操作，比如统计用户的文章 / 点赞 / 活跃度。 为了削减峰值，比如秒杀系统的削峰走异步 为了业务代码解耦，比如当我在知乎上更新文章，可能就会触发『推荐系统』,『文章管理系统』,『用户通知系统』  不用 Celery 的话，其实上面的业务也是能做的。 比如 1 中，可以直接启一个线程来做。比如 2 完全可以 Crontab 做一个定时任务。
-那为什么要用 Celery 呢？
- 把目光聚焦在 Task 的分发上面。而非线程，Deamon 之类细节的处理。 方便，简单，易维护，高可用。 便于监控。 扩展性好。  基本上满足了你九成的需求。]]></description>
-</item><item>
-    <title>Python 中的数据压缩和存档</title>
-    <link>http://twocucao.xyz/posts/20180123_pythoncompression/</link>
-    <pubDate>Tue, 23 Jan 2018 21:57:40 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20180123_pythoncompression/</guid>
-    <description><![CDATA[0x00 前言 在一次数据分析过程中，对方扔过来 40GB 的数据 &ndash; data.tar.gz .
-我想着能不能直接用 pandas 直接读取这个文件呢？查找了一些资料，于是有了本文。
-Python 中支持如下：
- 数据压缩算法：zlib, gzip, bzip2 and lzma 存档格式：zip 以及 tar  0x01 压缩是怎么回事？ 0x02 zlib 与 gzip gzip 依赖于 zlib
-# 读取压缩文件 import gzip with gzip.open('/home/joe/file.txt.gz', 'rb') as f: file_content = f.read() # 写入压缩文件 import gzip content = b&quot;Lots of content here&quot; with gzip.open('/home/joe/file.txt.gz', 'wb') as f: f.write(content) # 拷贝压缩文件 import gzip import shutil with open('/home/joe/file.txt', 'rb') as f_in: with gzip.]]></description>
-</item><item>
-    <title>记一次小机器的 Python 大数据分析</title>
-    <link>http://twocucao.xyz/posts/20171207_anotewithsmallmachineandbigdata/</link>
-    <pubDate>Thu, 07 Dec 2017 21:57:40 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20171207_anotewithsmallmachineandbigdata/</guid>
-    <description><![CDATA[0x00 前言 机缘巧合，最近公司突然要搞一波大量数据的分析。属于客流类的分析。
-数据量级也还算不错，经过 gzip 压缩，接近 400 个 点位的 SQL 文件 (MySQL innoDB)，大小接近 100GB 左右，原始记录数据估测在 180 亿左右。
-解压后&hellip;&hellip; 差不多一个 T 吧。
-如果是人民币玩家，自然是直接购置几十台高配置机器，做个 mysql shard 或者直接上大数据全家桶比如 hadoop 和 hive 之类，让程序员去往死里折腾吧。
- 嗯，然而对于我这种非人民币玩家，就要用单机硬扛。
- 那就硬扛呗。
-我手上的机器配置如下：
-  局域网服务器 （ Ubuntu 16.04 LTS ）
- Xeon(R) CPU E3-1225 v5 @ 3.30GHz 16G 内存 1T 硬盘    苹果电脑 2016 年 15 寸 最高配
- 1T 硬盘 i7 四核    0x01 准备数据阶段 用低配机器分析大数据的首要原则，就是不要分析大数据。]]></description>
 </item></channel>
 </rss>

@@ -10,7 +10,7 @@
 <meta property="og:description" content="Get Busy is My New Hugo Site" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://twocucao.xyz/" />
-<meta property="og:updated_time" content="2020-11-30T18:16:34+08:00" />
+<meta property="og:updated_time" content="2020-11-30T18:14:14+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="海拉鲁编程客"/>
 <meta name="twitter:description" content="Get Busy is My New Hugo Site"/>
@@ -73,6 +73,67 @@
         alt="https://avatars0.githubusercontent.com/u/5625783"
         title="https://avatars0.githubusercontent.com/u/5625783" /></a></div><h1 class="home-title">海拉鲁编程客</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20150317_%E6%89%87%E8%B4%9D%E8%83%8C%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%8A%A9%E6%89%8B/">背单词小助手</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-12-01">2017-12-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content"><h2 id="本文内容">本文内容</h2>
+<h3 id="思路">思路</h3>
+<ul>
+<li>英文单词的处理</li>
+<li>shanbay 单词本的提交</li>
+</ul>
+<h3 id="英文单词的处理">英文单词的处理</h3>
+<p>正则表达式进行提取，然后通过 Python 的自然语言处理工具 ntlk 进行单词原型的转换</p>
+<h3 id="shanbay-单词的处理">shanbay 单词的处理</h3>
+<p>由于使用了传说中的 requests，使得代码简洁程度大大提升。</p></div><div class="post-footer">
+        <a href="/posts/20150317_%E6%89%87%E8%B4%9D%E8%83%8C%E5%8D%95%E8%AF%8D%E5%B0%8F%E5%8A%A9%E6%89%8B/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20171120_pythonclosureandscopes/">Python 中的作用域准则</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-11-20">2017-11-20</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 因为最早用的是 Java 和 C#，写 Python 的时候自然也把 Python 作用域的想的和原有的一致。
+Python 的作用域变量遵循在大部分情况下是一致的，但也有例外的情况。
+本文着通过遇到的一个作用域的小问题来说说 Python 的作用域
+0x01 作用域的几个实例 Python 的作用域变量遵循在大部分情况下与其他语言一致，但也有例外的情况。比如：
+1.1 第一个例子 作用域第一版代码如下
+a = 1 print(a, id(a)) # 打印 1 4465620064 def func1(): print(a, id(a)) func1() # 打印 1 4465620064 作用域第一版对应字节码如下
+ 4 0 LOAD_GLOBAL 0 (print) 3 LOAD_GLOBAL 1 (a) 6 LOAD_GLOBAL 2 (id) 9 LOAD_GLOBAL 1 (a) 12 CALL_FUNCTION 1 (1 positional, 0 keyword pair) 15 CALL_FUNCTION 2 (2 positional, 0 keyword pair) 18 POP_TOP 19 LOAD_CONST 0 (None) 22 RETURN_VALUE  PS: 行 4 表示 代码行数 0 / 3 / 9 &hellip; 不知道是啥，我就先管他叫做条吧 是 load global PPS: 注意条 3/6 LOAD_GLOBAL 为从全局变量中加载</div><div class="post-footer">
+        <a href="/posts/20171120_pythonclosureandscopes/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20171007_elegantmac/">如何优雅地使用 macOS</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-10-07">2017-10-07</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">如何优雅的使用 macOS 0x01 macOS 系统操作 快捷键 - cmd 为 command 按键，通常情况下为所有桌面程序通用性的快捷键。 - ctrl ，通常情况下是针对程序的功能进行加强，并且此功能往往是非 cmd 类（窗口操作，选择，复制粘贴等等）操作。 - shift 按键通常用于加强操作。一般会让操作更进一步 or 相反操作。 - cmd+tab =~ alt+tab 程序之间的切换 - cmd+\` 应用内窗口切换 - cmd+h 窗口 hide - cmd+m 窗口 minimize - cmd+n 新建窗口 - cmd+o 打开 - cmd+s 保存 - cmd+shift+s 另存为 - cmd+p 打印 print - cmd+w 关闭 - cmd+q quit - cmd+a select all - cmd+i show info - cmd+n create a new folder - cmd+f search - cmd+c copy - cmd+v paste - cmd+delete 删除选中文件 - cmd+shift+delete 清空回收站 - cmd+= 放大 - cmd+- 缩小 - cmd+t 新建选项卡 - cmd+r 刷新 - cmd+shift+3 截取整个屏幕 - cmd+shift+4 截取选择区域 - cmd+shift+4+SPACE 截取选择窗口 - cmd+ 鼠标点击 -&gt; 选中不连续文件 - control+ 鼠标点击 -&gt; 相当于 win 中右键点击 - fn+left home - fn+right end - fn+up pageup - fn+down pagedown 触摸板 - 单指点击 - 单击 - 单指滑动 - 滑动鼠标光标 - 双指点击 - 相当于 Windows 的鼠标右键 - 三指点击 - 划词查找 - 双指上下滑动 - 滚动 - 双指缩放 - 与 Android 上图片缩放一致 - 双指双击 - 只能缩放 - 双指旋转 - 旋转 - 双指左右滑动 - 应用内切换网页 - 双指头从右往左 - 三指头左右滑动 - 全屏幕 App 切换 - 大拇指和食中无名缩放 - launchpad 0x02 日常软件   iTunes</div><div class="post-footer">
+        <a href="/posts/20171007_elegantmac/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/macos/">macOS</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20170915_readingvuedocuments/">VueJS 文档阅读笔记</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-09-15">2017-09-15</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"><i class="far fa-folder fa-fw"></i>前端开发</a></span></div><div class="content">0x01 Essential 1.1 The Vue Instance 当 Vue 实例被创建时，添加所有在 Data 对象中的属性到 Reactivity System 中。
+ 而创建之后添加赋值新属性，则不 Reactive
+ 而实例被创建之时，会自带前缀为 $ 的一系列属性和方法
+1.1.1 内置方法和属性 Instance Properties vm.$data vm.$props vm.$el vm.$options vm.$parent vm.$root vm.$children vm.$slots vm.$scopedSlots vm.$refs vm.$isServer vm.$attrs vm.$listeners
+Instance Methods / Data vm.$watch vm.$set vm.$delete
+Instance Methods / Events vm.$on vm.$once vm.$off vm.$emit
+Instance Methods / Lifecycle vm.$mount vm.$forceUpdate vm.$nextTick vm.$destroy
+1.1.2 生命周期 1.2 Template Syntax VueJS 编译 模板为 VirtualDOM render 函数，如果对 VirtualDom 非常熟悉的话，则可以使用</div><div class="post-footer">
+        <a href="/posts/20170915_readingvuedocuments/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vuejs/">VueJS</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20170804_rethinkinginpython/">ReThinking In Python</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-08-04">2017-08-04</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。
+0x01 Python 胡论 Why Python 是要用一门编程语言无非是两种原因：
+ 这门技术很火，能挣钱 写起来很舒服，开发效率高  这也是我在涉猎了很多编程语言为什么选择了 Python 和 TypeScript 作为自己的主要技能树。
+Python 具备这两点，TS （更加准确的说是 JavaScript）具备前一点。
+Python 写起来真的特别舒服，语法简洁，第三方库丰富，而且也比较火。
+有什么东西比，写代码效率高、生态圈好还重要了。
+生态圈好，比如
+ Web 开发用 Django/Flask 数据抓取用 Requests 数据分析清洗用 Pandas 机器学习 Tensorflow SCIPY  工具链 Pythonista 的工具集
+文档 社区 书籍 0x02 基础概念 2.1 数据类型 常量 False True None NotImplemented Elilipsis ... 布尔 布尔常量
+None False 0 0.0 0j '' () [] {} 一个对象 __bool__() = False , 如果上一个为 True 则__len__() 布尔运算符</div><div class="post-footer">
+        <a href="/posts/20170804_rethinkinginpython/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20170726_reactcheatsheet/">React CheatSheet</a>
     </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-07-26">2017-07-26</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"><i class="far fa-folder fa-fw"></i>前端开发</a></span></div><div class="content">0x00. 前言  备注：由于目前没有上 React 的打算，本文暂时太监
  之前一直使用 VueJS 进行开发，心血来潮想换换口味，于是就借着自己的一个开源的项目尝试一下 ReactJS , 代码分为两部分，如下：
@@ -129,66 +190,6 @@ Shlomo Aragmon 认为 数据科学家 = 统计学家 + 程序员 + 教练 + 讲�
 1.1 基础命令  git-init(1) to create a new repository. git-log(1) to see what happened. git-checkout(1) and git-branch(1) to switch branches. git-add(1) to manage the index file. git-diff(1) and git-status(1) to see what you are in the middle of doing. git-commit(1) to advance the current branch. git-reset(1) and git-checkout(1) (with pathname parameters) to undo changes.</div><div class="post-footer">
         <a href="/posts/20170615_gitcheatsheet/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/git/">Git</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20170623_vimcheatsheet/">CVim</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-06-03">2017-06-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">0x00 什么是 CVim 呢？ CVim 基于 NeoVim 0.5+ , 整理 cvim 的配置，将大部分从 vimscript 迁移到 lua 中
- only tested on neovim 0.5
- 优势  Vim, Not Vim like 更现代的编辑界面  开始页面 via. vim-startify 菜单栏 via. QuickUI 上下文菜单 via. QuickUI Context Menu 文件栏 via. LuaTree Tag 栏 via. Vista 更好的 Finder via. telescope  ctrl + p 文件搜索   侧边栏 via  vim-signature vim-signify     全文搜索  Enhenced Basic Keys  j/k via accelerated f/F/t/T via sneak   Enhenced Select  缩进选择     更现代化的编辑，如 For TypeScript/Python/Golang FullStack Engineer  Python Golang TypeScript    劣势  self used, use it with your own caution</div><div class="post-footer">
-        <a href="/posts/20170623_vimcheatsheet/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/">编辑器</a>,&nbsp;<a href="/tags/vim/">Vim</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20170603_pandascheatsheet/">Pandas CheatSheet</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-06-03">2017-06-03</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Pandas 相关语句。
-主要包含：
- Pandas 中 Series 的一些常见操作和技巧 Pandas 中 Dateframe 的一些常见操作和技巧 Python 里的可视化技巧 Pandas 使用过程中的一些细节  不定期更新。
- SQL 是一种面向集合的处理工具 / 语言 Pandas 是一种面向数组的处理工具
-  而一般处理 pandas 的数据往往以二维表的形式存在。所以，可以类比为更加强大的 SQL 语言。
- 而依据 Pandas 的作者之言，牛逼的 Pandas 使用者必须要精通 numpy; 当然，关于 Numpy, 留待之后开一篇文章做笔记好了。
-0x01 Series 相关 Series 接近于 ndarray 的用法，区别仅仅在于会带上 label 而已
- 关于 ndarray, 请参考 我的另一篇文章 Numpy Cheatsheet
- 0x02 DataFrame 相关 2.1 对象创建 # 1.</div><div class="post-footer">
-        <a href="/posts/20170603_pandascheatsheet/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20170529_%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Etensorflow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/">一个基于 TensorFlow 的图片分类器</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-05-29">2017-05-29</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/"><i class="far fa-folder fa-fw"></i>数据分析</a></span></div><div class="content">0x00 前言  备注：本文训练效果太差，所以直接太监了。
- 这年头，不会写爬虫不会写网站，那基本上不能算是一个 Python 程序员，但是 2017 年的 Google IO 之后，作为一个 Pythonist 你不会点数据分析和机器学习，也不好见人了。 所以，本文教你在什么机器学习概念都不懂的情况下，做出一个基于 TensorFlow 的图片分类功能，入个门。仅此而已。 本文的代码和文章内容主要源于我在 Github 上无意间翻到的一个 Repo, 链接地址，我所做的功夫就是在这基础上将代码改为了 Python 3 / TensorFlow 1.1.0 的环境，将这个流程梳理一下，不算是代码的生产者最多搬运工，仅此而已。
-本文的目的是：
- 通过 TensorFlow 训练一个小型的分类器，用这个分类器通过照片识别出明星的姓名。
- 即我们要训练一个小 AI, 这个小 AI 能分辨欢乐颂里面的五美：
- 乔欣 刘涛 王子文 杨紫 蒋欣  注意：本文主要在 MacOS 上进行测试。 本文的目录结构如下：
- 准备训练数据和测试数据 TensorFlow 环境配置 开始训练图片 对图片进行分类 文章回顾 参考链接  首先克隆我的 Repo,（我的 Repo 在这里）[https://github.com/twocucao/the-machine] .
-仓库结构大致如下
-├── README.md ├── compose │ └── tensorflow │ ├── Dockerfile │ └── Dockerfile-dev ├── config ├── doc ├── image_classifier │ ├── __init__.</div><div class="post-footer">
-        <a href="/posts/20170529_%E4%B8%80%E4%B8%AA%E5%9F%BA%E4%BA%8Etensorflow%E7%9A%84%E5%88%86%E7%B1%BB%E5%99%A8/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20170527_vscodecheatsheet/">VSCode CheatSheet</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-05-27">2017-05-27</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%96%84%E7%94%A8%E4%BD%B3%E8%BD%AF/"><i class="far fa-folder fa-fw"></i>善用佳软</a></span></div><div class="content">0x00 前言 本文为 Cheatsheet 类型文章，用于记录我使用 VSCode 的一些开发小技巧。
-不定期更新。
-VSCode 是一种编辑器，这显然是一句废话。
-这个问题应该是，我为什么要使用 VSCode 作为主力编辑器。有人说：微软出品一定是精品。这个理由很软粉，但是不能打动我更换编辑器的欲望。
-使用编辑器自然是求其轻量，高效的文字处理，以及编程的相关环境的支持，以及跨平台和可扩展性。
- 轻量是求其打开速度快，编辑不卡顿。这一点，用 Vim , Emacs , Sublime Text 完全都可以。 高效的文字处理是因为满足日常编写文字和代码的需求。 编程相关环境的支持是因为作为一个学习东西很杂乱的人来说，最痛苦的事情就在于 IDE 常常来不及给一些新技术予以足够的支持，比如说 Docker, 比如说 ansible。 跨平台和可扩展性 跨平台是必须的，可扩展性则是从插件资源和编写插件的难度考虑。  本文的目录结构如下：
- VSCode 常用命令  0x01 VSCode 相关配置 安装完毕之后，cmd-s-p shell command install
-0x02 VSCode 常用命令  Command Palette : cmd-s-p cmd-p : cmd-p 显示状态 : cmd-s-m 下一个错误 : F8 / shift-F8 **** : c-s-p **** : c-s-p **** : c-s-p **** : c-s-p **** : c-s-p **** : c-s-p **** : c-s-p  0x03 VS 扩展相关 0x04 </div><div class="post-footer">
-        <a href="/posts/20170527_vscodecheatsheet/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E7%BC%96%E8%BE%91%E5%99%A8/">编辑器</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20170501_ohmynewmac/">MacBook Pro 15.4 Multi-Touch Bar</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2017-05-01">2017-05-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%A2%8E%E7%A2%8E%E5%BF%B5/"><i class="far fa-folder fa-fw"></i>碎碎念</a></span></div><div class="content">前言 一个月前换了这台新电脑 MacBook Pro 15.4 Multi-Touch Bar (Core i7/16GB/512GB)，感觉每天打字都很舒服，也算是实现了一个梦寐以求的小目标吧。
-在此之前，用我的前任有下面几款：
- 大一时候从网吧买的 400 块钱的台式机 大一时候从淘宝买的 700 块钱的笔记本 大二上学期买的 1200 块钱的笔记本 大三上学期买的 3200 块钱的笔记本，后来花了 2000 块升级了一下下 大四上学期买的 5000 块的二手 MacBook Pro  后来手贱买了降噪耳机，机械键盘，手机，pad , 花的都是自己的钱。
-能把一手烂牌打出不错的结果，这才是让人自豪的事情啊！
-晚安，以及劳动节快乐。
-更新 2017-05-01: 初始化本文</div><div class="post-footer">
-        <a href="/posts/20170501_ohmynewmac/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/macos/">macOS</a></div></div>
 </article>
 <ul class="pagination"><li class="page-item ">
                     <span class="page-link">
