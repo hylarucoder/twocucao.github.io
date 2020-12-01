@@ -74,22 +74,23 @@
         title="https://avatars0.githubusercontent.com/u/5625783" /></a></div><h1 class="home-title">海拉鲁编程客</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20190308_pycode_03/">如何保证 Django 项目的数据一致性</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-08">2019-03-08</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第三篇文章。
-第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是如何通过测试提升 Python 代码的健壮性 第三篇，即本文，我们来谈谈 Django 项目并发可能带来的问题以及如何保持 Django项目的数据一致性。
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-08">2019-03-08</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div><div class="content">0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第三篇文章。
+ 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是如何通过测试提升 Python 代码的健壮性  第三篇，即本文，我们来谈谈 Django 项目并发可能带来的问题以及如何保持 Django 项目的数据一致性。
 本文目录如下：
 0x00 前言 : section ▼ 0x01 背景知识 : section 并发会带来数据不一致 : section ▼ 0x02 Django 项目如何解决项目 : section 悲观的方式 : section 乐观的方式 : section 没有银弹 : section 0x03 解决超卖问题 : section ▼ 0x04 番外篇 数据库隔离级别 : section READ-UNCOMMITTED : section READ-COMMITTED : section REPEATABLE-READ : section SERIALIZABLE : section 0xEE 参考链接 : section 本文讨论的场景如下：</div><div class="post-footer">
         <a href="/posts/20190308_pycode_03/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">系列文章</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20190309_pycode_04/">这几招，让你快速提升 Python 项目的性能</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-05">2019-03-05</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第四篇文章。
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-05">2019-03-05</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第四篇文章。
 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性
 第四篇，即本文，9012 年
-当你觉得某个地方运行比较慢了，此时此刻的你，有哪些小技巧可以快速的帮 你定位性能问题。 目录如下
+ 当你觉得某个地方运行比较慢了，此时此刻的你，有哪些小技巧可以快速的帮 你定位性能问题。
+ 目录如下
 ▼ 这几招，让你快速提升 Python 项目的性能 : section 0x00 前言 : section ▼ 0x01 Python 优化的五件武器 : section 第一件武器 timeit : section 第二件武器 profile 与 cprofile : section 第三件武器 line profiler : section 第四件武器 memory profiler : section 第五件武器 pympler : section 其他神器 : section ▼ 0x02 优化 Web 项目 : section 提前优化 : section 做好监控 : section ▼ 0x03 性能优化建议 : section 建议 1.</div><div class="post-footer">
         <a href="/posts/20190309_pycode_04/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></div></div>
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">系列文章</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20190210_%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9/">秒杀系统的一些注意点</a>
@@ -118,13 +119,28 @@ redis 集合预先缓存好相关的数量，然后从 redis 上进行应用层�
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vlog/">Vlog</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20181210_pycode_01_type_hint/">用 Type Anotation 提升你的 Python 代码健壮性</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-12-10">2018-12-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div><div class="content">0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第一篇文章。
-本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
-本文目录如下：
-▼ 0x00 前言 : section ▼ 0x01 Gradual Typing : section 静态类型 VS 动态类型 : section Gradual Typing = 静态类型 + 动态类型 : section ▼ 0x02 Python Typing 实战 - MyPY : section MyPy : section 快速入门 : section ▼ 0x03 常见问题 : section 如何忽略 mypy 警告 : section 循环导入 : section 0x04 Typing Anotation 项目最佳实践 : section ▼ 0xEE 参考 : section PEP : section 扩展文章 : section 当我刚知道 Python 要添加类型的时候，我的内心是拒绝的。</div><div class="post-footer">
-        <a href="/posts/20181210_pycode_01_type_hint/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cleancode/">CleanCode</a></div></div>
+        <a href="/posts/20181210_pycode_01/">用 Type Anotation 提升你的 Python 代码健壮性</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-12-10">2018-12-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div><div class="content">0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第一篇文章。
+当我刚知道 Python 要添加类型的时候，我的内心是拒绝的。
+Why, Why, Why? 就是因为不喜欢类型，也不喜欢特别动态的语言。
+但是，尝试了俩个疗程之后，腰也不疼了，腿也不疼了，走起路来都有劲了
+ 嗯，真香。
+ 0x01 Why Type Annotation 人们常说
+ 动态类型一时爽，代码重构火葬场。
+ 在刚写 Python 的前两年里并没有感受很深。
+直到，开始和别人协作的时候，才发现各种莫名其妙的问题。
+ 大量的使用魔法方法 flake8 分析出某个函数过于复杂 send_message 里面有不少的参数，一不小心就传参错误 None 值  动态类型给人极大的灵活性，写的时候很爽，但如果解放了双手，撸起袖子一通写，自己写起来爽了，自己重构的时候或者其他人来看代码的时候，头发就会加速掉落。
+聪明的你很容易反问，只要我们团队不犯这些错误，不就好了么？
+是的，当我们讨论 Python Annotation 的时候，往往陷入类型之争。
+我并不想讨论静态类型和动态类型孰好孰坏。
+我想讨论的是加了 Typing 极大的提升代码的健壮性。
+先从 Gradual Typing 说起吧。
+0x02 Gradual Typing 在你刚入门一门编程语言的时候，我们常常说，Java 是强类型静态语言，Python 是强类型动态语言
+从这两位诞生开始，静态类型和动态类型就一直进行旷日持久的圣战。
+然而，而现在的发展趋势是：
+ 静态类型的语言觉得自己太过静态，以至于写起来很啰嗦。于是引入了很多类型推断。 Java / Go 动态类型的语言觉得自己太过动态，以至于协作的过程中总是出现低级错误。于是引入了 Gradual Typing , Typescript / Flow / Python Type Annotation  什么是 Gradual Typing?</div><div class="post-footer">
+        <a href="/posts/20181210_pycode_01/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">系列文章</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20181125_finalcutprox/">Final Cut Pro X CheatSheat</a>

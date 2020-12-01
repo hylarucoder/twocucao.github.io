@@ -1,45 +1,10 @@
 <rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
     <channel>
-        <title>所有文章 - 海拉鲁编程客</title>
-        <link>http://twocucao.xyz/posts/</link>
-        <description>所有文章 | 海拉鲁编程客</description>
+        <title>Python 项目代码健壮性和性能 - 分类 - 海拉鲁编程客</title>
+        <link>http://twocucao.xyz/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/</link>
+        <description>Python 项目代码健壮性和性能 - 分类 - 海拉鲁编程客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
-            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Mon, 30 Nov 2020 18:19:17 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/posts/" rel="self" type="application/rss+xml" /><item>
-    <title>Modern Shell</title>
-    <link>http://twocucao.xyz/posts/20201201_modern_shell/</link>
-    <pubDate>Mon, 30 Nov 2020 18:19:17 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20201201_modern_shell/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="https://user-images.githubusercontent.com/5625783/100601457-8efe8a80-333d-11eb-803e-861352bd1715.jpg" referrerpolicy="no-referrer">
-            </div>0x01 更好的替代品 find -&gt; fd {}: A placeholder token that will be replaced with the path of the search result (documents/images/party.jpg). {.}: Like {}, but without the file extension (documents/images/party). {/}: A placeholder that will be replaced by the basename of the search result (party.jpg). {//}: Uses the parent of the discovered path (documents/images). {/.}: Uses the basename, with the extension removed (party). # Convert all jpg files to png files: fd -e jpg -x convert {} {.]]></description>
-</item><item>
-    <title>Python Profiling/Tracing Tools</title>
-    <link>http://twocucao.xyz/posts/20201201_pythonprofiling/</link>
-    <pubDate>Mon, 30 Nov 2020 18:14:14 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20201201_pythonprofiling/</guid>
-    <description><![CDATA[Profiling 定位与优化耗时、内存使用、CPU 使用 Tracing 用于追踪内存布局  0x00 前言 本篇讨论的是优化
-当我们在谈优化的的时候，首先要背诵下面三个口诀
-优化口诀 1: 先做对，布监控，再做好。 优化口诀 2: 过早优化是万恶之源。 优化口诀 3: 去优化那些需要优化的地方。  可以参考之前的文章 https://zhuanlan.zhihu.com/p/58754459
-本文讨论的是基于现有代码的诊断。也顺带讨论了无侵入线上 trace 的原理和技巧
-优化分为两种：
- 侵入性诊断 侵入性诊断  0x01 侵入性诊断 基础工具  print logging timeit  Profile vs cProfile cProfile overhead 较高，
-import cProfile import re cProfile.run(&#39;re.compile(&#34;foo|bar&#34;)&#39;) 197 function calls (192 primitive calls) in 0.002 seconds Ordered by: standard name ncalls tottime percall cumtime percall filename:lineno(function) 1 0.]]></description>
-</item><item>
-    <title>开源认证基础服务</title>
-    <link>http://twocucao.xyz/posts/20201130_ory/</link>
-    <pubDate>Mon, 30 Nov 2020 18:03:01 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20201130_ory/</guid>
-    <description><![CDATA[<div class="featured-image">
-                <img src="https://user-images.githubusercontent.com/5625783/100601457-8efe8a80-333d-11eb-803e-861352bd1715.jpg" referrerpolicy="no-referrer">
-            </div>0x00 前言 随着业务的增长，往往需要统一体系内的服务的账户。
-经过一番调研，决定尝试一下 ory 的开源认证基础服务
-0x01 ORY 尝试解决问题？ ORY 提供了四个主要项目，每个项目着力于解决一个边界清晰的认证 / 鉴权问题
- ORY Kratos 提供了用户认证服务 ORY Hydra 提供了 OAuth 2.0 &amp; OpenID Connect provider. ORY Keto 提供了 访问控制 ORY Oathkeeper 提供了认证访问代理  0x02 用户认证服务 Kratos 常见方案  方案 1, 选择全栈式解决方案 - 比如 Java 社区的 JGroups 方案 2, 选择 IDaas - 比如 Login With Apple, Google 方案 3, 选择自己来 - 比如 Java 社区的 JGroups  三种方案各有利弊
- 全栈式解决方案上手极快，但  扩展性不强 绑定 Java 技术栈 数据模型固定 登陆流程固定     更新迭代慢  Login With Google 虽然方便，但是并没有解决如下的问题   更新 Profile  添加第二个恢复邮箱 2FA 存储管理 Sessions   全局登出  自己来，需要处理事情也挺多   方案二遇到的问题，一个不会少 加密算法  流程可能较为复杂，比如先用邮箱注册，然后用 Sign Up Using Google, 或者先用 Sign Up Google, 然后使用邮箱登陆。(PS: 我国的登陆姿势就更多了）    是不是某种方案是最好的呢？其实未必]]></description>
-</item><item>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Tue, 24 Sep 2019 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/" rel="self" type="application/rss+xml" /><item>
     <title>如何写出整洁的 Python 代码 下</title>
     <link>http://twocucao.xyz/posts/20190924_pycode_08/</link>
     <pubDate>Tue, 24 Sep 2019 21:57:40 &#43;0800</pubDate>
@@ -73,27 +38,6 @@ import cProfile import re cProfile.run(&#39;re.compile(&#34;foo|bar&#34;)&#39;) 
  本文目录如下
 ▼ 如何写出整洁代码 上篇 : section ▼ 0x00 前言 : section 软件系统的腐败之路 : section ▼ 0x01 讨论 : section 为什么会出现腐败的系统 : section 衡量系统的两个指标 : section 代码是写出来的吗？ : section 好代码的标准 : section ▼ 0x02 变量命名之道 : section 使用业务领域命名 : section 代码命名 : section ▼ 0x03 函数整洁之道 : section 短小精悍 : section 调用层次清晰 : section 控制参数 : section 如何写函数 : section 0x04 注释整洁之道 : section ▼ 0x05 格式整洁之道 : section 排版整齐 : section 上下文相关 : section 0xEE 参考连接 : section 0x00 前言 软件系统的腐败之路 随着项目代码行数的增加，不可避免的遇到软件架构腐败的问题。]]></description>
 </item><item>
-    <title>Python ORM</title>
-    <link>http://twocucao.xyz/posts/20190412_pythonorm/</link>
-    <pubDate>Fri, 12 Apr 2019 21:57:40 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20190412_pythonorm/</guid>
-    <description><![CDATA[0x00 前言 Python 圈内三大 ORM SQLAlchemy VS Django ORM VS Peewee
- SQLAlchemy 复杂程度最高，同时，这也意味着 SQLAlchemy 可以做更多的事情。使用 DataMapper 方式实现 Django ORM 个人最喜欢，使用 ActiveRecord 实现 如果不是因为现在 Flask 项目已经是用了 SQLAlchemy , 否则的话我甚至会考虑将 Django ORM 配置到 Flask 项目中。当然，也有蛋疼的 SqlAlchemy 使用者已经移植给 django 配置了 SQLAlchemy 的库。 Peewee 没用过，不好评论。以后有机会试试。  0x01 如何访问数据库 那，既然已经可以访问数据库，本着『如无必要，勿增实体』的原则，为什么要不辞劳苦的用个库呢？
-0x02 数据库抽象的两种理论 理论一：Active Record 理论二：Data Mapper 0x03 数据库抽象的两种实现 实现一：Django ORM 实现二：Sqlalchemy 0x04 工具的强弱 https://www.thoughtfulcode.com/orm-active-record-vs-data-mapper/
-2.0 SQLAlchemy VS DjangoORM ORM 通常有 DataMapper 实现和 ActiveRecord 实现两种。]]></description>
-</item><item>
-    <title>如何优雅的使用 Windows 10</title>
-    <link>http://twocucao.xyz/posts/20190413_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/</link>
-    <pubDate>Wed, 03 Apr 2019 21:57:40 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20190413_%E5%A6%82%E4%BD%95%E4%BC%98%E9%9B%85%E7%9A%84%E4%BD%BF%E7%94%A8windows10/</guid>
-    <description><![CDATA[0x00 前言 最近入手了 SP6, 于是把 2015 年写的这篇文章修订为 2019 版
- 笔者已过了爱折腾的年纪，仅从提升工作效率方面来说。
- 背景：
-Pythonista &amp;&amp; Nodejs 工作机 MBP 2017 款机器 生活机 Surface Pro 6, 轻办公，有时也用来调试 Windows 上的程序。  本文目录
-▼ 0x00 前言 : section 0x01 文件整理 : section ▼ 0x02 自带功能 : section 2.1 快捷键 : section 2.2 触摸板 : section 2.3 Win+R -- 运行 : section ▼ 0x03 必备软件 : section 3.1 文件管理 : section 3.2 资讯浏览 : section 3.]]></description>
-</item><item>
     <title>如何通过测试提升 Python 代码的健壮性</title>
     <link>http://twocucao.xyz/posts/20190216_pycode_02/</link>
     <pubDate>Sat, 23 Mar 2019 21:57:40 &#43;0800</pubDate>
@@ -116,5 +60,52 @@ Pythonista &amp;&amp; Nodejs 工作机 MBP 2017 款机器 生活机 Surface Pro 
     <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第五篇文章。
  第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能  第五篇，即本文 讲的是日志系统 ELKFA 的搭建
 0x00 前言 : section ▼ 0x01 任务 1: 分析 Nginx 日志 : section 第一步：配置 Nginx : section 第二步：拉取 Nginx 日志 : section 第三步：开启 ELFKA : section 第四步：日志探秘 : section 第五步：扩展思考，日志解决方案 : section ▼ 0x02 任务 2: 监控 Flask App 的 APM : section 第一步：开启 ELFKA : section 第二步：开启 flask app : section 第三步：APM 探秘 : section 第四步：扩展思考 : section ▼ 0x03 结论 : section 0xEE 参考链接 : section 0x00 前言 什么是 ELKFA?]]></description>
+</item><item>
+    <title>如何保证 Django 项目的数据一致性</title>
+    <link>http://twocucao.xyz/posts/20190308_pycode_03/</link>
+    <pubDate>Fri, 08 Mar 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190308_pycode_03/</guid>
+    <description><![CDATA[0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第三篇文章。
+ 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是如何通过测试提升 Python 代码的健壮性  第三篇，即本文，我们来谈谈 Django 项目并发可能带来的问题以及如何保持 Django 项目的数据一致性。
+本文目录如下：
+0x00 前言 : section ▼ 0x01 背景知识 : section 并发会带来数据不一致 : section ▼ 0x02 Django 项目如何解决项目 : section 悲观的方式 : section 乐观的方式 : section 没有银弹 : section 0x03 解决超卖问题 : section ▼ 0x04 番外篇 数据库隔离级别 : section READ-UNCOMMITTED : section READ-COMMITTED : section REPEATABLE-READ : section SERIALIZABLE : section 0xEE 参考链接 : section 本文讨论的场景如下：]]></description>
+</item><item>
+    <title>这几招，让你快速提升 Python 项目的性能</title>
+    <link>http://twocucao.xyz/posts/20190309_pycode_04/</link>
+    <pubDate>Tue, 05 Mar 2019 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20190309_pycode_04/</guid>
+    <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第四篇文章。
+第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性
+第四篇，即本文，9012 年
+ 当你觉得某个地方运行比较慢了，此时此刻的你，有哪些小技巧可以快速的帮 你定位性能问题。
+ 目录如下
+▼ 这几招，让你快速提升 Python 项目的性能 : section 0x00 前言 : section ▼ 0x01 Python 优化的五件武器 : section 第一件武器 timeit : section 第二件武器 profile 与 cprofile : section 第三件武器 line profiler : section 第四件武器 memory profiler : section 第五件武器 pympler : section 其他神器 : section ▼ 0x02 优化 Web 项目 : section 提前优化 : section 做好监控 : section ▼ 0x03 性能优化建议 : section 建议 1.]]></description>
+</item><item>
+    <title>用 Type Anotation 提升你的 Python 代码健壮性</title>
+    <link>http://twocucao.xyz/posts/20181210_pycode_01/</link>
+    <pubDate>Mon, 10 Dec 2018 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20181210_pycode_01/</guid>
+    <description><![CDATA[0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第一篇文章。
+当我刚知道 Python 要添加类型的时候，我的内心是拒绝的。
+Why, Why, Why? 就是因为不喜欢类型，也不喜欢特别动态的语言。
+但是，尝试了俩个疗程之后，腰也不疼了，腿也不疼了，走起路来都有劲了
+ 嗯，真香。
+ 0x01 Why Type Annotation 人们常说
+ 动态类型一时爽，代码重构火葬场。
+ 在刚写 Python 的前两年里并没有感受很深。
+直到，开始和别人协作的时候，才发现各种莫名其妙的问题。
+ 大量的使用魔法方法 flake8 分析出某个函数过于复杂 send_message 里面有不少的参数，一不小心就传参错误 None 值  动态类型给人极大的灵活性，写的时候很爽，但如果解放了双手，撸起袖子一通写，自己写起来爽了，自己重构的时候或者其他人来看代码的时候，头发就会加速掉落。
+聪明的你很容易反问，只要我们团队不犯这些错误，不就好了么？
+是的，当我们讨论 Python Annotation 的时候，往往陷入类型之争。
+我并不想讨论静态类型和动态类型孰好孰坏。
+我想讨论的是加了 Typing 极大的提升代码的健壮性。
+先从 Gradual Typing 说起吧。
+0x02 Gradual Typing 在你刚入门一门编程语言的时候，我们常常说，Java 是强类型静态语言，Python 是强类型动态语言
+从这两位诞生开始，静态类型和动态类型就一直进行旷日持久的圣战。
+然而，而现在的发展趋势是：
+ 静态类型的语言觉得自己太过静态，以至于写起来很啰嗦。于是引入了很多类型推断。 Java / Go 动态类型的语言觉得自己太过动态，以至于协作的过程中总是出现低级错误。于是引入了 Gradual Typing , Typescript / Flow / Python Type Annotation  什么是 Gradual Typing?]]></description>
 </item></channel>
 </rss>

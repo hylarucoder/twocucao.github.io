@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/twocucao.xyz\/posts\/20190309_pycode_04\/"
-        },"genre": "posts","keywords": "Python","wordcount":  642 ,
+        },"genre": "posts","keywords": "Python, 系列文章","wordcount":  652 ,
         "url": "http:\/\/twocucao.xyz\/posts\/20190309_pycode_04\/","datePublished": "2019-03-05T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
             "@type": "Organization",
             "name": "twocucao"},"author": {
@@ -75,210 +75,308 @@
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">这几招，让你快速提升 Python 项目的性能</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python/"><i class="far fa-folder fa-fw"></i>Python</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-05">2019-03-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 642 字&nbsp;
+            <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-05">2019-03-05</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 652 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#0x00-前言"><strong>0x00 前言</strong></a></li>
+    <li><a href="#0x01-python-优化的五件武器"><strong>0x01 Python 优化的五件武器</strong></a></li>
+    <li><a href="#第一件武器-timeit">第一件武器 timeit</a></li>
+    <li><a href="#第二件武器-profile-与-cprofile">第二件武器 profile 与 cprofile</a></li>
+    <li><a href="#第三件武器-line-profiler">第三件武器 line profiler</a></li>
+    <li><a href="#第四件武器-memory-profiler">第四件武器 memory profiler</a></li>
+    <li><a href="#第五件武器-pympler">第五件武器 pympler</a></li>
+    <li><a href="#其他神器">其他神器</a></li>
+    <li><a href="#0x02-优化-web-项目"><strong>0x02 优化 Web 项目</strong></a></li>
+    <li><a href="#提前优化">提前优化</a></li>
+    <li><a href="#做好监控">做好监控</a></li>
+    <li><a href="#0x03-性能优化建议"><strong>0x03 性能优化建议</strong></a></li>
+    <li><a href="#建议-1-务必了解-python-里面的负优化常识">建议 1. 务必了解 Python 里面的负优化常识</a></li>
+    <li><a href="#建议-2-能用内置的模块就不要手动实现">建议 2. 能用内置的模块就不要手动实现</a></li>
+    <li><a href="#建议-3-能用优质的第三方库就不要手动实现">建议 3. 能用优质的第三方库就不要手动实现</a></li>
+    <li><a href="#0xdd-结论"><strong>0xDD 结论</strong></a></li>
+    <li><a href="#0xee-参考链接"><strong>0xEE 参考链接</strong></a></li>
+  </ul>
+</nav></div>
             </div><div class="content" id="content"><p>本文是《提升你的 Python 项目代码健壮性和性能》系列的第四篇文章。</p>
-<p>第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性
-第二篇，讲的是 如何通过测试提升 Python 代码的健壮性
-第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性</p>
+<p>第一篇，讲的是如何 <a href="https://zhuanlan.zhihu.com/p/56863684" target="_blank" rel="noopener noreffer">用 Type Annotation 提升你的 Python 代码健壮性</a>
+第二篇，讲的是 <a href="https://zhuanlan.zhihu.com/p/57510222" target="_blank" rel="noopener noreffer">如何通过测试提升 Python 代码的健壮性</a>
+第三篇，讲的是在一定并发量的情况下，<a href="https://zhuanlan.zhihu.com/p/57668068" target="_blank" rel="noopener noreffer">如何保证 Django 项目的数据一致性</a></p>
 <p>第四篇，即本文，9012 年</p>
-<p>当你觉得某个地方运行比较慢了，此时此刻的你，有哪些小技巧可以快速的帮
-你定位性能问题。
-目录如下</p>
-<p>▼ 这几招，让你快速提升 Python 项目的性能 : section
-0x00 前言 : section
-▼ 0x01 Python 优化的五件武器 : section
-第一件武器 timeit : section
-第二件武器 profile 与 cprofile : section
-第三件武器 line profiler : section
-第四件武器 memory profiler : section
-第五件武器 pympler : section
-其他神器 : section
-▼ 0x02 优化 Web 项目 : section
-提前优化 : section
-做好监控 : section
-▼ 0x03 性能优化建议 : section
-建议 1. 务必了解 Python 里面的负优化常识 : section
-建议 2. 能用内置的模块就不要手动实现 : section
-建议 3. 能用优质的第三方库就不要手动实现 : section
-0xDD 结论 : section
-0xEE 参考链接 : section
-0x00 前言
-本文主要目的在于介绍一些 Python 项目常规的性能优化的姿势与技巧。</p>
-<p>优化的最简单的途径就是，没用户 + 调用次数少</p>
+<blockquote>
+<p><strong>当你觉得某个地方运行比较慢了，此时此刻的你，有哪些小技巧可以快速的帮</strong>
+<strong>你定位性能问题。</strong></p>
+</blockquote>
+<p>目录如下</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">▼ 这几招，让你快速提升 Python 项目的性能 : section
+    0x00 前言 : section
+  ▼ 0x01 Python 优化的五件武器 : section
+      第一件武器 timeit : section
+      第二件武器 profile 与 cprofile : section
+      第三件武器 line profiler : section
+      第四件武器 memory profiler : section
+      第五件武器 pympler : section
+      其他神器 : section
+  ▼ 0x02 优化 Web 项目 : section
+      提前优化 : section
+      做好监控 : section
+  ▼ 0x03 性能优化建议 : section
+      建议 1. 务必了解 Python 里面的负优化常识 : section
+      建议 2. 能用内置的模块就不要手动实现 : section
+      建议 3. 能用优质的第三方库就不要手动实现 : section
+    0xDD 结论 : section
+    0xEE 参考链接 : section
+</code></pre></div><h2 id="0x00-前言"><strong>0x00 前言</strong></h2>
+<p>本文主要目的在于介绍一些 Python 项目常规的性能优化的姿势与技巧。</p>
+<p>优化的最简单的途径就是，<strong>没用户 + 调用次数少</strong></p>
 <p>嗯？但这种优化方式&hellip;&hellip; 实在是没什么好说的。</p>
-<p>优化口诀 1: 先做对，布监控，再做好。
-优化口诀 2: 过早优化是万恶之源。
-优化口诀 3: 去优化那些需要优化的地方。
-即</p>
-<p>Step 1. Get it right.
-Step 2. Test it&rsquo;s right.
-Step 3. Monitor.
-Step 4. Profile if slow.
-Step 5. Try Optimize.
-Step 6. Repeat from 2.
-有的人站出来说，我写程序就是要一步到位，把能优化的点一次性搞定。</p>
+<ul>
+<li><strong>优化口诀 1: 先做对，布监控，再做好。</strong></li>
+<li><strong>优化口诀 2: 过早优化是万恶之源。</strong></li>
+<li><strong>优化口诀 3: 去优化那些需要优化的地方。</strong></li>
+</ul>
+<p>即</p>
+<ul>
+<li>Step 1. Get it right.</li>
+<li>Step 2. Test it&rsquo;s right.</li>
+<li>Step 3. Monitor.</li>
+<li>Step 4. Profile if slow.</li>
+<li>Step 5. Try Optimize.</li>
+<li>Step 6. Repeat from 2.</li>
+</ul>
+<p>有的人站出来说，<strong>我写程序就是要一步到位，把能优化的点一次性搞定。</strong></p>
 <p>请不要听他的，因为优化是无止境的。唯快不破</p>
-<p>能一次写出优雅清晰而且性能高的代码的人，一般很少见到。毕竟需要考虑的点太多了。</p>
-<p>基于上面的认知，代码的可维护性是第一位的。</p>
-<p>写代码的首先应该是代码很清晰，非常容易维护。
-然后在没有过分降低可维护性的情况下，作出性能的优化。
-0x01 Python 优化的五件武器
-钟声响起归家的讯号，刚回到家。</p>
+<p><strong>能一次写出优雅清晰而且性能高的代码的人，一般很少见到。毕竟需要考虑的点太多了。</strong></p>
+<p>基于上面的认知，<strong>代码的可维护性是第一位的。</strong></p>
+<ul>
+<li>写代码的首先应该是代码很清晰，非常容易维护。</li>
+<li>然后在没有过分降低可维护性的情况下，作出性能的优化。</li>
+</ul>
+<h2 id="0x01-python-优化的五件武器"><strong>0x01 Python 优化的五件武器</strong></h2>
+<p>钟声响起归家的讯号，刚回到家。</p>
 <p>公司群响起加班的讯号，用户反应服务响应总是超时。</p>
 <p>你打开电脑，隐隐约约觉得是某个函数的问题。这个函数的功能比较多，调试了很久才调试通。</p>
 <p>浏览代码。大致定位了这个问题可能会在下面的几个函数中。</p>
-<p>def red_packet_calculation_algorithm():
-pass</p>
-<p>def user_stats_calculation_algorithm():
-pass</p>
-<p>def dashboard_calculation_algorithm():
-pass
-如何确定是哪个函数需要优化呢？</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">def red_packet_calculation_algorithm():
+	pass
+
+def user_stats_calculation_algorithm():
+	pass
+
+def dashboard_calculation_algorithm():
+	pass
+</code></pre></div><p><strong>如何确定是哪个函数需要优化呢？</strong></p>
 <p>很简单，到 IPython 里面执行一下就就知道了。感觉慢的就是目标函数。</p>
-<p>总觉得执行一下这个操作有点不稳定。如果有个工具，可以直接执行很多次，然后作出统计就好了。</p>
+<p><strong>总觉得执行一下这个操作有点不稳定。如果有个工具，可以直接执行很多次，然后作出统计就好了。</strong></p>
 <p>这就是 Python 代码优化第一件武器 timeit</p>
-<p>第一件武器 timeit
-通常某段代码有问题，最直接的方法就是跑一下这段代码。</p>
+<h2 id="第一件武器-timeit">第一件武器 timeit</h2>
+<p>通常某段代码有问题，最直接的方法就是跑一下这段代码。</p>
 <p>在 IPython 里执行</p>
-<h1 id="ipython">ipython</h1>
-<p>%time your-algorithm
-timeit 将代码执行多次，取均值</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text"># ipython
+%time your-algorithm
+</code></pre></div><p>timeit 将代码执行多次，取均值</p>
 <p>一般这个时候，你就可以初步定位问题所在了。</p>
-<p>比如，发现 user_stats_calculation_algorithm 在 一个 for 循环里面走了数据库查询。
-也有一些函数并不是那么容易定位。</p>
+<blockquote>
+<p><strong>比如，发现 user_stats_calculation_algorithm 在 一个 for 循环里面走了数据库查询。</strong></p>
+</blockquote>
+<p>也有一些函数并不是那么容易定位。</p>
 <p>即，通过这个 timeit 知道了某个函数执行比较慢，但那个函数 里面还有很多函数，通过肉眼观察，还是没有办法来解决呀。</p>
 <p>这个时候你想了，如果能看到哪些语句执行的次数多一些，耗时长一些，就好了。</p>
 <p>这就是 Python 代码优化第二件武器 profile 。</p>
-<p>第二件武器 profile 与 cprofile
-在 ipython 中运行</p>
+<h2 id="第二件武器-profile-与-cprofile">第二件武器 profile 与 cprofile</h2>
+<p>在 ipython 中运行</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://pic4.zhimg.com/v2-e71500556d16329b6c785611297364ab_b.jpg"
+        data-srcset="https://pic4.zhimg.com/v2-e71500556d16329b6c785611297364ab_b.jpg, https://pic4.zhimg.com/v2-e71500556d16329b6c785611297364ab_b.jpg 1.5x, https://pic4.zhimg.com/v2-e71500556d16329b6c785611297364ab_b.jpg 2x"
+        data-sizes="auto"
+        alt="https://pic4.zhimg.com/v2-e71500556d16329b6c785611297364ab_b.jpg"
+        title="https://pic4.zhimg.com/v2-e71500556d16329b6c785611297364ab_b.jpg" /></p>
 <p>这么一看，耗时操作一览无遗。</p>
 <p>语句级别的 Profile 有了，但其实，很多时候也并不能解决你的问题。</p>
-<p>如果能有这么个东西，即，能在代码旁边注释一下，执行次数和耗时就好了。</p>
+<p><strong>如果能有这么个东西，即，能在代码旁边注释一下，执行次数和耗时就好了。</strong></p>
 <p>这就是 Python 代码优化第三件武器 line profile。</p>
-<p>第三件武器 line profiler
-能在代码旁边注释，执行次数和耗时。如下</p>
-<p>Pystone(1.1) time for 50000 passes = 2.48
+<h2 id="第三件武器-line-profiler">第三件武器 line profiler</h2>
+<p>能在代码旁边注释，执行次数和耗时。如下</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">Pystone(1.1) time for 50000 passes = 2.48
 This machine benchmarks at 20161.3 pystones/second
 Wrote profile results to pystone.py.lprof
-Timer unit: 1e-06 s</p>
-<p>File: pystone.py
+Timer unit: 1e-06 s
+
+File: pystone.py
 Function: Proc2 at line 149
-Total time: 0.606656 s</p>
-<h1 id="line-------hits---------time--per-hit----time--line-contents">Line #      Hits         Time  Per Hit   % Time  Line Contents</h1>
-<p>149                                           @profile
-150                                           def Proc2(IntParIO):
-151     50000        82003      1.6     13.5      IntLoc = IntParIO + 10
-152     50000        63162      1.3     10.4      while 1:
-153     50000        69065      1.4     11.4          if Char1Glob == &lsquo;A&rsquo;:
-154     50000        66354      1.3     10.9              IntLoc = IntLoc - 1
-155     50000        67263      1.3     11.1              IntParIO = IntLoc - IntGlob
-156     50000        65494      1.3     10.8              EnumLoc = Ident1
-157     50000        68001      1.4     11.2          if EnumLoc == Ident1:
-158     50000        63739      1.3     10.5              break
-159     50000        61575      1.2     10.1      return IntParIO
-这个可谓是 Python 世界里时间性能优化的顶级工具了。</p>
-<p>第四件武器 memory profiler
-说完了时间上的优化，再说说空间上的优化。</p>
+Total time: 0.606656 s
+
+Line #      Hits         Time  Per Hit   % Time  Line Contents
+==============================================================
+   149                                           @profile
+   150                                           def Proc2(IntParIO):
+   151     50000        82003      1.6     13.5      IntLoc = IntParIO + 10
+   152     50000        63162      1.3     10.4      while 1:
+   153     50000        69065      1.4     11.4          if Char1Glob == &#39;A&#39;:
+   154     50000        66354      1.3     10.9              IntLoc = IntLoc - 1
+   155     50000        67263      1.3     11.1              IntParIO = IntLoc - IntGlob
+   156     50000        65494      1.3     10.8              EnumLoc = Ident1
+   157     50000        68001      1.4     11.2          if EnumLoc == Ident1:
+   158     50000        63739      1.3     10.5              break
+   159     50000        61575      1.2     10.1      return IntParIO
+</code></pre></div><p>这个可谓是 Python 世界里时间性能优化的顶级工具了。</p>
+<h2 id="第四件武器-memory-profiler">第四件武器 memory profiler</h2>
+<p><strong>说完了时间上的优化，再说说空间上的优化。</strong></p>
 <p>如何检查内存呢？</p>
 <p>这需要 Python 代码优化第四件武器 memory profiler。</p>
 <p>这个工具用于查看 Python 程序的内存占用情况</p>
 <p>但，知道了执行某些代码之后，内存是多少又能如何呢？</p>
 <p>不见得能定位出来是什么东西</p>
 <p>内存中这么多 objects 我上哪看去？</p>
-<p>假设内存泄漏了，我再怎么 profile, 内存都是一直泄漏的呀。</p>
+<p><strong>假设内存泄漏了，我再怎么 profile, 内存都是一直泄漏的呀。</strong></p>
 <p>总要想办法定位出是哪些类型的有问题。</p>
-<p>第五件武器 pympler
-这需要 Python 代码优化第五件武器 pympler。这是我从雨痕的《 Python学习笔记 》里看到的</p>
-<p>这个工具特别适合给当前所有的 objects 的内存占用情况做简单统计。</p>
+<h2 id="第五件武器-pympler">第五件武器 pympler</h2>
+<p>这需要 Python 代码优化第五件武器 pympler。这是我从雨痕的《 Python 学习笔记 》里看到的</p>
+<p><strong>这个工具特别适合给当前所有的 objects 的内存占用情况做简单统计。</strong></p>
 <p>之前的一次线上代码出内存泄漏，检查了自己的代码确定没有问题之后，将目光放在了第三
 方库上。</p>
 <p>但第三方库也有不少，检查半天依旧没有什么进展。</p>
-<p>from pympler import tracker</p>
-<h1 id="在多处打点并且将结果打到日志里">在多处打点，并且将结果打到日志里。</h1>
-<p>memory_tracker = tracker.SummaryTracker()
-每次打印出来的结果大致是这样子的。</p>
-<p>types |   # objects |   total size
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">from pympler import tracker
+
+# 在多处打点，并且将结果打到日志里。
+memory_tracker = tracker.SummaryTracker()
+</code></pre></div><p>每次打印出来的结果大致是这样子的。</p>
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">types |   # objects |   total size
 ================== | =========== | ============
-dict |           1 |     280    B
-list |           1 |     176    B
-_sre.SRE_Pattern |           1 |      88    B
-tuple |           1 |      80    B
-str |           0 |       7    B
-刚开始都还挺正常，运行了一段时间之后，日志中的部分涉及到 flask-sqlalchemy
-的 objects 和 total size 保持了坚挺的增长。</p>
+              dict |           1 |     280    B
+              list |           1 |     176    B
+  _sre.SRE_Pattern |           1 |      88    B
+             tuple |           1 |      80    B
+               str |           0 |       7    B
+</code></pre></div><p>刚开始都还挺正常，<strong>运行了一段时间之后，日志中的部分涉及到 flask-sqlalchemy</strong>
+<strong>的 objects 和 total size 保持了坚挺的增长。</strong></p>
 <p>最后发现 flask-sqlalchemy 如果 设置了 SQLALCHEMY_RECORD_QUERIES 为 True 的话，</p>
 <p>每次查询都会往 current_app.sqlalchemy_queries 里增加 DebugQueryTuple, 很快就内存泄漏了。</p>
-<p>queries = _app_ctx_stack.top.sqlalchemy_queries
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">queries = _app_ctx_stack.top.sqlalchemy_queries
 queries.append(_DebugQueryTuple((
-statement, parameters, context._query_start_time, _timer(),
-_calling_context(self.app_package)
+		statement, parameters, context._query_start_time, _timer(),
+		_calling_context(self.app_package)
 )))
-其他神器
-可视化调用</p>
-<p>当然, 也有一些比较方便的工具是用来查看函数的调用信息的</p>
+</code></pre></div><h2 id="其他神器">其他神器</h2>
+<p>可视化调用</p>
+<p>当然，也有一些比较方便的工具是用来查看函数的调用信息的</p>
 <p>效果大概是这样子</p>
-<p>当然, 也有其他的工具</p>
-<p><a href="https://stackoverflow.com/questions/582336/how-can-you-profile-a-python-script">https://stackoverflow.com/questions/582336/how-can-you-profile-a-python-script</a></p>
-<p>0x02 优化 Web 项目
-提前优化
-在使用 Django 项目的时候，我必须要安装的第三方库就是 djangodebugtools</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://pic1.zhimg.com/v2-58d927fe1a204ec13df79ef255749830_b.jpg"
+        data-srcset="https://pic1.zhimg.com/v2-58d927fe1a204ec13df79ef255749830_b.jpg, https://pic1.zhimg.com/v2-58d927fe1a204ec13df79ef255749830_b.jpg 1.5x, https://pic1.zhimg.com/v2-58d927fe1a204ec13df79ef255749830_b.jpg 2x"
+        data-sizes="auto"
+        alt="https://pic1.zhimg.com/v2-58d927fe1a204ec13df79ef255749830_b.jpg"
+        title="https://pic1.zhimg.com/v2-58d927fe1a204ec13df79ef255749830_b.jpg" /></p>
+<p>当然，也有其他的工具</p>
+<p><a href="https://link.zhihu.com/?target=https%3A//stackoverflow.com/questions/582336/how-can-you-profile-a-python-script" target="_blank" rel="noopener noreffer">https://stackoverflow.com/questions/582336/how-can-you-profile-a-python-script</a></p>
+<h2 id="0x02-优化-web-项目"><strong>0x02 优化 Web 项目</strong></h2>
+<h2 id="提前优化">提前优化</h2>
+<p>在使用 Django 项目的时候，我必须要安装的第三方库就是 djangodebugtools</p>
 <p>这个工具用起来有多舒服呢？</p>
 <p>可以直接 Profile SQL 语句</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://pic2.zhimg.com/v2-84e70f363b220d0560191d53338e6961_b.jpg"
+        data-srcset="https://pic2.zhimg.com/v2-84e70f363b220d0560191d53338e6961_b.jpg, https://pic2.zhimg.com/v2-84e70f363b220d0560191d53338e6961_b.jpg 1.5x, https://pic2.zhimg.com/v2-84e70f363b220d0560191d53338e6961_b.jpg 2x"
+        data-sizes="auto"
+        alt="https://pic2.zhimg.com/v2-84e70f363b220d0560191d53338e6961_b.jpg"
+        title="https://pic2.zhimg.com/v2-84e70f363b220d0560191d53338e6961_b.jpg" /></p>
 <p>甚至可以直接 explain sql 以及 查看缓存情况</p>
-<p>做好监控
-如何监控，监控什么指标？这属于日志的范畴了。</p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://pic3.zhimg.com/v2-fbfd51e4936fe23a158f41840cd22f36_b.jpg"
+        data-srcset="https://pic3.zhimg.com/v2-fbfd51e4936fe23a158f41840cd22f36_b.jpg, https://pic3.zhimg.com/v2-fbfd51e4936fe23a158f41840cd22f36_b.jpg 1.5x, https://pic3.zhimg.com/v2-fbfd51e4936fe23a158f41840cd22f36_b.jpg 2x"
+        data-sizes="auto"
+        alt="https://pic3.zhimg.com/v2-fbfd51e4936fe23a158f41840cd22f36_b.jpg"
+        title="https://pic3.zhimg.com/v2-fbfd51e4936fe23a158f41840cd22f36_b.jpg" /></p>
+<p><img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://pic1.zhimg.com/v2-6dc91c81ed6a76c02493b152e4ae8a3c_b.jpg"
+        data-srcset="https://pic1.zhimg.com/v2-6dc91c81ed6a76c02493b152e4ae8a3c_b.jpg, https://pic1.zhimg.com/v2-6dc91c81ed6a76c02493b152e4ae8a3c_b.jpg 1.5x, https://pic1.zhimg.com/v2-6dc91c81ed6a76c02493b152e4ae8a3c_b.jpg 2x"
+        data-sizes="auto"
+        alt="https://pic1.zhimg.com/v2-6dc91c81ed6a76c02493b152e4ae8a3c_b.jpg"
+        title="https://pic1.zhimg.com/v2-6dc91c81ed6a76c02493b152e4ae8a3c_b.jpg" /></p>
+<h2 id="做好监控">做好监控</h2>
+<p>如何监控，监控什么指标？这属于日志的范畴了。</p>
 <p>日志的道术器分别是什么，这将在下一篇文章来具体介绍一下如何打日志。</p>
-<p>0x03 性能优化建议
-笔者列了一些大方向上的优化建议，具体是要靠积累。</p>
-<p>建议 1. 务必了解 Python 里面的负优化常识
-不要在 for loop 里面不断的链接 string, 用列表 +JOIN 的方式会更加合适。
-建议 2. 能用内置的模块就不要手动实现
-比如，当你想做一些字符串上的变动的时候，不防先查看一下 string / textwrap / re / difflib 里是不是满足你的要求了
-比如你操作一组比较类似的数据类型，可以考虑看下 enum / collection / itertools / array
-/ heapq 里面是不是已经满足你的要求了。
-笔者在 <a href="https://zhuanlan.zhihu.com/p/32504320">https://zhuanlan.zhihu.com/p/32504320</a> 中曾经遇到过统计的问题。</p>
+<h2 id="0x03-性能优化建议"><strong>0x03 性能优化建议</strong></h2>
+<p>笔者列了一些大方向上的优化建议，具体是要靠积累。</p>
+<h2 id="建议-1-务必了解-python-里面的负优化常识">建议 1. 务必了解 Python 里面的负优化常识</h2>
+<ol>
+<li>不要在 for loop 里面不断的链接 string, 用列表 +JOIN 的方式会更加合适。</li>
+</ol>
+<h2 id="建议-2-能用内置的模块就不要手动实现">建议 2. 能用内置的模块就不要手动实现</h2>
+<ol>
+<li>比如，当你想做一些字符串上的变动的时候，不防先查看一下 string / textwrap / re / difflib 里是不是满足你的要求了</li>
+<li>比如你操作一组比较类似的数据类型，可以考虑看下 enum / collection / itertools / array
+/ heapq 里面是不是已经满足你的要求了。</li>
+</ol>
+<p>笔者在 <a href="https://zhuanlan.zhihu.com/p/32504320" target="_blank" rel="noopener noreffer">https://zhuanlan.zhihu.com/p/32504320</a> 中曾经遇到过统计的问题。</p>
 <p>当时遇到的问题场景是</p>
 <p>有 400 组 UUID 集合，每个列表数量在 1000000 左右，列表和列表之间重复部分并不是很大。我想拿到去重之后的所有 UUID，应该怎么处理</p>
-<h1 id="版本一运行遥遥无期">版本一，运行遥遥无期</h1>
-<p>list_of_uuid_set = [ set1 , set2 &hellip; set400 ]
-all_uuid_set = reduce(lambda x: x | y, list_of_uuid_set)</p>
-<h1 id="版本二运行遥遥无期">版本二，运行遥遥无期</h1>
-<p>def merge(list1,list2):
-list1.append(list2)
-return list1</p>
-<p>list_of_uuid_list = [ list1 , list2 &hellip; list400 ]
-all_uuid_set = set(reduce(merge, list_of_uuid_list))</p>
-<h1 id="版本三5s">版本三，5s</h1>
-<p>list_of_uuid_list = [ list1 , list2 &hellip; list400 ]
+<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text"># 版本一，运行遥遥无期
+list_of_uuid_set = [ set1 , set2 ... set400 ]
+all_uuid_set = reduce(lambda x: x | y, list_of_uuid_set)
+
+# 版本二，运行遥遥无期
+
+def merge(list1,list2):
+    list1.append(list2)
+    return list1
+
+list_of_uuid_list = [ list1 , list2 ... list400 ]
+all_uuid_set = set(reduce(merge, list_of_uuid_list))
+
+# 版本三，5s
+
+list_of_uuid_list = [ list1 , list2 ... list400 ]
 all_uuid_set = set(list(itertools.chain(*list_of_uuid_list)))
-合适的数据结构和合适的算法，确实能让代码变得清晰，高效，优雅。</p>
-<p>建议 3. 能用优质的第三方库就不要手动实现
-除了一些内置的模块，</p>
-<p>一些优秀的软件所依赖的第三方包也是非常值得留意的。
-一般能上 C 库的，用于解析的依赖包性能不错，比如 LXML/Numpy 这类包
-0xDD 结论
-本文讲的是，当你觉得某个地方运行比较慢了，此时此刻的你，有哪些小技巧可以快速的帮
-你定位性能问题。
-其实还有很多悬而未决的问题：</p>
-<p>定位了问题，如何解决问题？
-如何觉察到某个地方运行比较慢呢？
-对于第一点，还是得多看多搜多练。用《亮剑》中的李云龙的话说：</p>
-<p>真正的神枪手是战场上用子弹喂出来的。打得多了，感觉就有了，眼到手就到，抬枪就有，弹弹咬肉，这就叫神枪手。
-对于第二点，就是下一篇文章需要解决的问题了。</p>
-<p>通过日志来判断。
-通过打点和结合 APMServer 来判断。
-0xEE 参考链接
-<a href="https://zhuanlan.zhihu.com/p/32504320">https://zhuanlan.zhihu.com/p/32504320</a>
-<a href="https://pynash.org/2013/03/06/timing-and-profiling/">https://pynash.org/2013/03/06/timing-and-profiling/</a>
-<a href="https://wiki.python.org/moin/P">https://wiki.python.org/moin/P</a></p>
+</code></pre></div><p>合适的数据结构和合适的算法，确实能让代码变得清晰，高效，优雅。</p>
+<h2 id="建议-3-能用优质的第三方库就不要手动实现">建议 3. 能用优质的第三方库就不要手动实现</h2>
+<p>除了一些内置的模块，</p>
+<ul>
+<li>一些优秀的软件所依赖的第三方包也是非常值得留意的。</li>
+<li>一般能上 C 库的，用于解析的依赖包性能不错，比如 LXML/Numpy 这类包</li>
+</ul>
+<h2 id="0xdd-结论"><strong>0xDD 结论</strong></h2>
+<blockquote>
+<p><strong>本文讲的是，当你觉得某个地方运行比较慢了，此时此刻的你，有哪些小技巧可以快速的帮</strong>
+<strong>你定位性能问题。</strong></p>
+</blockquote>
+<p>其实还有很多悬而未决的问题：</p>
+<ol>
+<li>定位了问题，如何解决问题？</li>
+<li>如何觉察到某个地方运行比较慢呢？</li>
+</ol>
+<p>对于第一点，还是得多看多搜多练。用《亮剑》中的李云龙的话说：</p>
+<blockquote>
+<p><strong>真正的神枪手是战场上用子弹喂出来的。打得多了，感觉就有了，眼到手就到，抬枪就有，弹弹咬肉，这就叫神枪手。</strong></p>
+</blockquote>
+<p>对于第二点，就是下一篇文章需要解决的问题了。</p>
+<ol>
+<li>通过日志来判断。</li>
+<li>通过打点和结合 APMServer 来判断。</li>
+</ol>
+<h2 id="0xee-参考链接"><strong>0xEE 参考链接</strong></h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/32504320" target="_blank" rel="noopener noreffer">https://zhuanlan.zhihu.com/p/32504320</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//pynash.org/2013/03/06/timing-and-profiling/" target="_blank" rel="noopener noreffer">https://pynash.org/2013/03/06/timing-and-profiling/</a></li>
+<li><a href="https://link.zhihu.com/?target=https%3A//wiki.python.org/moin/PythonSpeed/PerformanceTips" target="_blank" rel="noopener noreffer">https://wiki.python.org/moin/PythonSpeed/PerformanceTips</a></li>
+<li>Photo by<a href="https://link.zhihu.com/?target=https%3A//unsplash.com/photos/CPs2X8JYmS8%3Futm_source%3Dunsplash%26utm_medium%3Dreferral%26utm_content%3DcreditCopyText" target="_blank" rel="noopener noreffer">Tim van der Kuip</a>on<a href="https://link.zhihu.com/?target=https%3A//unsplash.com/t/business-work%3Futm_source%3Dunsplash%26utm_medium%3Dreferral%26utm_content%3DcreditCopyText" target="_blank" rel="noopener noreffer">Unsplash</a></li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -296,7 +394,7 @@ all_uuid_set = set(list(itertools.chain(*list_of_uuid_list)))
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">系列文章</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>

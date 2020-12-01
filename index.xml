@@ -43,20 +43,20 @@ import cProfile import re cProfile.run(&#39;re.compile(&#34;foo|bar&#34;)&#39;) 
  全栈式解决方案上手极快，但  扩展性不强 绑定 Java 技术栈 数据模型固定 登陆流程固定     更新迭代慢  Login With Google 虽然方便，但是并没有解决如下的问题   更新 Profile  添加第二个恢复邮箱 2FA 存储管理 Sessions   全局登出  自己来，需要处理事情也挺多   方案二遇到的问题，一个不会少 加密算法  流程可能较为复杂，比如先用邮箱注册，然后用 Sign Up Using Google, 或者先用 Sign Up Google, 然后使用邮箱登陆。(PS: 我国的登陆姿势就更多了）    是不是某种方案是最好的呢？其实未必]]></description>
 </item><item>
     <title>如何写出整洁的 Python 代码 下</title>
-    <link>http://twocucao.xyz/posts/20190924_pycode_08_clean_code/</link>
+    <link>http://twocucao.xyz/posts/20190924_pycode_08/</link>
     <pubDate>Tue, 24 Sep 2019 21:57:40 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20190924_pycode_08_clean_code/</guid>
+    <guid>http://twocucao.xyz/posts/20190924_pycode_08/</guid>
     <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第八篇文章。
-第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统 第六篇，为《整洁上篇》讲的是 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码 第七篇，为《整洁中篇》讲的是 一些的编程时候的基本原则，比如，避免过深的缩进，SOLID 法则，边界 本文是《整洁下篇》，本文的诞生，要感谢我前公司的技术主管豪蔚老师和产品主管刚哥，在上海工作这几年，总是和能优秀的人工作，确实是我幸运的地方。
+ 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统 第六篇，为《整洁上篇》讲的是 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码 第七篇，为《整洁中篇》讲的是 一些的编程时候的基本原则，比如，避免过深的缩进，SOLID 法则，边界  本文是《整洁下篇》，本文的诞生，要感谢我前公司的技术主管豪蔚老师和产品主管刚哥，在上海工作这几年，总是和能优秀的人工作，确实是我幸运的地方。
 目录如下
 ▼ 如何写出整洁的 Python 代码 下篇 : section 0x00 前言 : section 0x01 处理需求的姿势 : section ▼ 0x02 敏捷开发 : section 看板和晨会 : section 敏捷的时间安排：周一到周五 : section 人员安排 : section ▼ 0x03 代码全局观 : section 起个好名字 : section 本质复杂度和偶然复杂度 : section 0xEE 后记 : section 0x00 前言 这篇文章憋了很久，思考了许久，《整洁下篇》干脆就聊聊编程中，不是写代码的部分；]]></description>
 </item><item>
     <title>如何写出整洁的 Python 代码 中</title>
-    <link>http://twocucao.xyz/posts/20190526_pycode_07_clean_code/</link>
+    <link>http://twocucao.xyz/posts/20190526_pycode_07/</link>
     <pubDate>Sun, 26 May 2019 21:57:40 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20190526_pycode_07_clean_code/</guid>
+    <guid>http://twocucao.xyz/posts/20190526_pycode_07/</guid>
     <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第七篇文章。
  第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统 第六篇，《如何写出整洁的代码 上》 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码  目录
 ▼ 如何写出整洁的 Python 代码 中 : section 0x00 前言 : section 0x01 避免过深的缩进 : section 0x02 使用异常 : section 0x03 类与 OOP : section ▼ 0x04 SOLID 设计原则 : section 单一职责 : section 开闭原则 : section 里氏替换原则 : section 接口隔离原则 : section 依赖反转原则 : section 0x05 边界和第三方库的挑选 : section 0xDD 结论 : section 0xEE 参考 : section 0x00 前言 上篇地址在这里 https://zhuanlan.]]></description>
@@ -67,10 +67,12 @@ import cProfile import re cProfile.run(&#39;re.compile(&#34;foo|bar&#34;)&#39;) 
     <author>作者</author>
     <guid>http://twocucao.xyz/posts/20190525_pycode_06/</guid>
     <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第六篇文章。
-第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇, 讲的是 为你的项目快速搭建 ELKFA 日志系统 接下来的三篇，围绕另一个主题
-如何写出整洁的代码 『整洁』三篇是基于『代码整洁之道』和『架构整洁之道』的一些切身的理解和体会。
+ 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统  接下来的三篇，围绕另一个主题
+ 如何写出整洁的代码
+ 『整洁』三篇是基于**『代码整洁之道』和『架构整洁之道』**的一些切身的理解和体会。
 感谢这两本书的作者 Bob 大叔。
-PPS: 某东读书 VIP 会员有不少 IT 资源类的书籍可以免费看，比如『代码整洁之道』 本文目录如下
+ PPS: 某东读书 VIP 会员有不少 IT 资源类的书籍可以免费看，比如『代码整洁之道』
+ 本文目录如下
 ▼ 如何写出整洁代码 上篇 : section ▼ 0x00 前言 : section 软件系统的腐败之路 : section ▼ 0x01 讨论 : section 为什么会出现腐败的系统 : section 衡量系统的两个指标 : section 代码是写出来的吗？ : section 好代码的标准 : section ▼ 0x02 变量命名之道 : section 使用业务领域命名 : section 代码命名 : section ▼ 0x03 函数整洁之道 : section 短小精悍 : section 调用层次清晰 : section 控制参数 : section 如何写函数 : section 0x04 注释整洁之道 : section ▼ 0x05 格式整洁之道 : section 排版整齐 : section 上下文相关 : section 0xEE 参考连接 : section 0x00 前言 软件系统的腐败之路 随着项目代码行数的增加，不可避免的遇到软件架构腐败的问题。]]></description>
 </item><item>
     <title>Python ORM</title>
@@ -101,7 +103,7 @@ Pythonista &amp;&amp; Nodejs 工作机 MBP 2017 款机器 生活机 Surface Pro 
     <guid>http://twocucao.xyz/posts/20190216_pycode_02/</guid>
     <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第二篇文章。
 本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
-用 Type Annotation 提升你的 Python 代码健壮性 https://zhuanlan.zhihu.com/p/56863684 0x00 前言 本文的更多的是写给 Python 后端的程序员。
+ 用 Type Annotation 提升你的 Python 代码健壮性 https://zhuanlan.zhihu.com/p/56863684  0x00 前言 本文的更多的是写给 Python 后端的程序员。
 来简单分享一下我对写测试的理解。
 在上一篇文章中，我提到了代码覆盖率，即测试的一种指标。
 本期就聊聊测试这件小事情。
@@ -114,7 +116,7 @@ Pythonista &amp;&amp; Nodejs 工作机 MBP 2017 款机器 生活机 Surface Pro 
     <author>作者</author>
     <guid>http://twocucao.xyz/posts/20190310_pycode_05/</guid>
     <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第五篇文章。
-第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能 第五篇, 即本文 讲的是日志系统ELKFA的搭建
-0x00 前言 : section  ▼ 0x01 任务 1: 分析 Nginx 日志 : section 第一步：配置 Nginx : section 第二步：拉取 Nginx 日志 : section 第三步：开启 ELFKA : section 第四步：日志探秘 : section 第五步：扩展思考，日志解决方案 : section ▼ 0x02 任务 2: 监控 Flask App 的 APM : section 第一步：开启 ELFKA : section 第二步：开启 flask app : section 第三步：APM 探秘 : section 第四步：扩展思考 : section ▼ 0x03 结论 : section 0xEE 参考链接 : section 0x00 前言 什么是 ELKFA?]]></description>
+ 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能  第五篇，即本文 讲的是日志系统 ELKFA 的搭建
+0x00 前言 : section ▼ 0x01 任务 1: 分析 Nginx 日志 : section 第一步：配置 Nginx : section 第二步：拉取 Nginx 日志 : section 第三步：开启 ELFKA : section 第四步：日志探秘 : section 第五步：扩展思考，日志解决方案 : section ▼ 0x02 任务 2: 监控 Flask App 的 APM : section 第一步：开启 ELFKA : section 第二步：开启 flask app : section 第三步：APM 探秘 : section 第四步：扩展思考 : section ▼ 0x03 结论 : section 0xEE 参考链接 : section 0x00 前言 什么是 ELKFA?]]></description>
 </item></channel>
 </rss>
