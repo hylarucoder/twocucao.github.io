@@ -73,18 +73,6 @@
         alt="https://avatars0.githubusercontent.com/u/5625783"
         title="https://avatars0.githubusercontent.com/u/5625783" /></a></div><h1 class="home-title">海拉鲁编程客</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20180829_golang/">写给 Pythonista 的 Golang 入门指北</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-08-29">2018-08-29</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/golang/"><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class="content">原计划是去年 8 月份入 Golang 大法的，然后开一篇帖子进行写个入门指北来着。这一拖就拖到了今年。
-同样是快速上手教程，这篇文章和其他的文章的不同点在于，完全假设你是 Pythonista 的入门。
-0x00 前言 0x01 安装 Golang 安装
-# 如果你是在 mac 上，建议先安装下面的 SDK 以防不测 open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg # 安装 golang brew install golang # 配置环境变量 echo $GOPATH # /Users/twocucao/Codes/ReposGo cd /Users/twocucao/Codes/ReposPublic/ mkcd thanos # mkdir &amp;&amp; cd go mod init github.com/twocucao/thanos git remote add origin git@github.com:twocucao/thanos.git 接下来，需要解决卡 golang.org 的网络问题。
-export GOPROXY=https://goproxy.io go get -v -u github.com/hqpko/go-mod-tidy go mod tidy 接下来就是随便找一些带有依赖库的代码。放到该文件夹下面。
-你也可以直接从这里 https://github.com/twocucao/thanos.git 拉取代码
-0x01 基本概念 工具链 文档 社区 书籍 内置简单类型 对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</div><div class="post-footer">
-        <a href="/posts/20180829_golang/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/golang/">Golang</a>,&nbsp;<a href="/tags/cheatsheat/">CheatSheat</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20180801_vueprojecttalking/">Vue 项目漫谈 2018 版</a>
     </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-08-01">2018-08-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"><i class="far fa-folder fa-fw"></i>前端开发</a></span></div><div class="content">0x00 前言 之前草草整理过一些 Vue 的小技巧，最近温习了一遍文档，重聊一遍。
 鉴于 VueCLI 越做越臃肿，我最后还是选择了自己搭架子。
@@ -213,6 +201,18 @@ v2 时候，
         <a href="/posts/20180516_pycondjango/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/django/">Django</a></div></div>
 </article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20180428_djangoormcheatsheet/">DjangoORM CheatSheet</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-04-28">2018-04-28</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/django/"><i class="far fa-folder fa-fw"></i>Django</a></span></div><div class="content">本文是《Python ORM 三部曲的第二部 - Django ORM 的用法 / 原理 / 优化》
+上一部的地址为《Python ORM 三部曲的第一部 - Python ORM 的三种实现模式》
+本文基于最新 Django 版本
+ 模型定义 Create/Update/Delete 各种查询 / 链式调用 / F 表达式 / Window 函数 /Lazy Loading / Eager Loading Join DEBUG 和 Profile 技巧  本文是《Python ORM 三部曲的第一部 - Python 的三种数据源架构模式》
+本文适用于：
+ 好奇 or 喜欢折腾的程序员 想深入了解 ORM 的程序员  本文将解决你以下的疑惑：
+ 能不能不用 ORM? ORM 为什么在某些场景下会胜于写 SQL 不同的 ORM 实现机制会带来什么差异？  0x00 前言 新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。</div><div class="post-footer">
+        <a href="/posts/20180428_djangoormcheatsheet/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/orm/">ORM</a></div></div>
+</article>
 <ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -237,7 +237,7 @@ v2 时候，
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/11/">11</a>
+                        <a href="/page/10/">10</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

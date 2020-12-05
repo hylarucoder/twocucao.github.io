@@ -126,18 +126,18 @@ if cond1: dosomething() if cond2: dosomething() if cond3 and cond4: dosomething(
     <pubDate>Tue, 05 Mar 2019 21:57:40 &#43;0800</pubDate>
     <author>作者</author>
     <guid>http://twocucao.xyz/posts/20190309_pycode_04/</guid>
-    <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第四篇文章。
-本文讲的是
-**当你觉得某个地方运行比较慢了，此时此刻的你，有哪些小技巧可以快速的帮** **你定位性能问题。** 0x00 前言 本文主要目的在于介绍一些 Python 项目常规的性能优化的姿势与技巧。
-优化的最简单的途径就是，没用户 + 调用次数少
+    <description><![CDATA[0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第四篇文章。
+本文主要目的在于介绍一些 Python 项目常规的性能优化的姿势与技巧。
+0x01 勿要过早优化 优化的最简单的途径就是，没用户 + 调用次数少
 嗯？但这种优化方式&hellip;&hellip; 实在是没什么好说的。
  优化口诀 1: 先做对，布监控，再做好。 优化口诀 2: 过早优化是万恶之源。 优化口诀 3: 去优化那些需要优化的地方。  即
  Step 1. Get it right. Step 2. Test it&rsquo;s right. Step 3. Monitor. Step 4. Profile if slow. Step 5. Try Optimize. Step 6. Repeat from 2.  有的人站出来说，我写程序就是要一步到位，把能优化的点一次性搞定。
-请不要听他的，因为优化是无止境的。唯快不破
+请不要听他的，因为优化是无止境的。唯快不破。
 能一次写出优雅清晰而且性能高的代码的人，一般很少见到。毕竟需要考虑的点太多了。
 基于上面的认知，代码的可维护性是第一位的。
- 写代码的首先应该是代码很清晰，非常容易维护。 然后在没有过分降低可维护性的情况下，作出性能的优化。  0x01 Python 优化的五件武器 钟声响起归家的讯号，刚回到家。
-公司群响起加班的讯号，用户反应服务响应总是超时。]]></description>
+ 写代码的首先应该是代码很清晰，非常容易维护。 然后在没有过分降低可维护性的情况下，作出性能的优化。  0x02 问题与定位问题 代码运行之后，通过各种途径的反馈，最终你知道了写的代码有点问题
+这类问题一般如下
+ 耗时长 占内存 逻辑错误   PS: 其实还有其他问题，比如语法错误，业务问题（这个场景下产品这么设计容易被薅羊毛）等等这类不在讨论之列。]]></description>
 </item><item>
     <title>用 Type Anotation 提升你的 Python 代码健壮性</title>
     <link>http://twocucao.xyz/posts/20181210_pycode_01/</link>

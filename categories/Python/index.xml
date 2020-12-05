@@ -4,20 +4,7 @@
         <link>http://twocucao.xyz/categories/python/</link>
         <description>Python - 分类 - 海拉鲁编程客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
-            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Mon, 30 Nov 2020 18:14:14 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/python/" rel="self" type="application/rss+xml" /><item>
-    <title>Python Profiling/Tracing Tools</title>
-    <link>http://twocucao.xyz/posts/20201201_pythonprofiling/</link>
-    <pubDate>Mon, 30 Nov 2020 18:14:14 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20201201_pythonprofiling/</guid>
-    <description><![CDATA[Profiling 定位与优化耗时、内存使用、CPU 使用 Tracing 用于追踪内存布局  0x00 前言 本篇讨论的是优化
-当我们在谈优化的的时候，首先要背诵下面三个口诀
-优化口诀 1: 先做对，布监控，再做好。 优化口诀 2: 过早优化是万恶之源。 优化口诀 3: 去优化那些需要优化的地方。  可以参考之前的文章 https://zhuanlan.zhihu.com/p/58754459
-本文讨论的是基于现有代码的诊断。也顺带讨论了无侵入线上 trace 的原理和技巧
-优化分为两种：
- 侵入性诊断 侵入性诊断  0x01 侵入性诊断 基础工具  print logging timeit  Profile vs cProfile cProfile overhead 较高，
-import cProfile import re cProfile.run(&#39;re.compile(&#34;foo|bar&#34;)&#39;) 197 function calls (192 primitive calls) in 0.002 seconds Ordered by: standard name ncalls tottime percall cumtime percall filename:lineno(function) 1 0.]]></description>
-</item><item>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Fri, 12 Apr 2019 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/python/" rel="self" type="application/rss+xml" /><item>
     <title>Python ORM</title>
     <link>http://twocucao.xyz/posts/20190412_pythonorm/</link>
     <pubDate>Fri, 12 Apr 2019 21:57:40 &#43;0800</pubDate>
@@ -136,5 +123,18 @@ Python 中支持如下：
 <p>正则表达式进行提取，然后通过 Python 的自然语言处理工具 ntlk 进行单词原型的转换</p>
 <h3 id="shanbay-单词的处理">shanbay 单词的处理</h3>
 <p>由于使用了传说中的 requests，使得代码简洁程度大大提升。</p>]]></description>
+</item><item>
+    <title>Python 中的作用域准则</title>
+    <link>http://twocucao.xyz/posts/20171120_pythonclosureandscopes/</link>
+    <pubDate>Mon, 20 Nov 2017 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20171120_pythonclosureandscopes/</guid>
+    <description><![CDATA[0x00 前言 因为最早用的是 Java 和 C#，写 Python 的时候自然也把 Python 作用域的想的和原有的一致。
+Python 的作用域变量遵循在大部分情况下是一致的，但也有例外的情况。
+本文着通过遇到的一个作用域的小问题来说说 Python 的作用域
+0x01 作用域的几个实例 Python 的作用域变量遵循在大部分情况下与其他语言一致，但也有例外的情况。比如：
+1.1 第一个例子 作用域第一版代码如下
+a = 1 print(a, id(a)) # 打印 1 4465620064 def func1(): print(a, id(a)) func1() # 打印 1 4465620064 作用域第一版对应字节码如下
+ 4 0 LOAD_GLOBAL 0 (print) 3 LOAD_GLOBAL 1 (a) 6 LOAD_GLOBAL 2 (id) 9 LOAD_GLOBAL 1 (a) 12 CALL_FUNCTION 1 (1 positional, 0 keyword pair) 15 CALL_FUNCTION 2 (2 positional, 0 keyword pair) 18 POP_TOP 19 LOAD_CONST 0 (None) 22 RETURN_VALUE  PS: 行 4 表示 代码行数 0 / 3 / 9 &hellip; 不知道是啥，我就先管他叫做条吧 是 load global PPS: 注意条 3/6 LOAD_GLOBAL 为从全局变量中加载]]></description>
 </item></channel>
 </rss>
