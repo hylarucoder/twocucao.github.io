@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/twocucao.xyz\/posts\/20190310_pycode_05\/"
-        },"genre": "posts","keywords": "Python, 系列文章","wordcount":  535 ,
+        },"genre": "posts","keywords": "Python, 系列文章","wordcount":  448 ,
         "url": "http:\/\/twocucao.xyz\/posts\/20190310_pycode_05\/","datePublished": "2019-03-10T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
             "@type": "Organization",
             "name": "twocucao"},"author": {
@@ -76,7 +76,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">为你的项目快速搭建 ELKFA 日志系统</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-10">2019-03-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 535 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-10">2019-03-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 448 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -85,45 +85,31 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#0x00-前言"><strong>0x00 前言</strong></a></li>
-    <li><a href="#0x01-任务-1-分析-nginx-日志"><strong>0x01 任务 1: 分析 Nginx 日志</strong></a></li>
-    <li><a href="#第一步配置-nginx">第一步：配置 Nginx</a></li>
-    <li><a href="#第二步拉取-nginx-日志">第二步：拉取 Nginx 日志</a></li>
-    <li><a href="#第三步开启-elfka">第三步：开启 ELFKA</a></li>
-    <li><a href="#第四步日志探秘">第四步：日志探秘</a></li>
-    <li><a href="#第五步扩展思考日志解决方案">第五步：扩展思考，日志解决方案</a></li>
-    <li><a href="#0x02-任务-2-监控-flask-app-的-apm"><strong>0x02 任务 2: 监控 Flask App 的 APM</strong></a></li>
-    <li><a href="#第一步开启-elfka">第一步：开启 ELFKA</a></li>
-    <li><a href="#第二步开启-flask-app">第二步：开启 flask app</a></li>
-    <li><a href="#第三步apm-探秘">第三步：APM 探秘</a></li>
-    <li><a href="#第四步扩展思考">第四步：扩展思考</a></li>
-    <li><a href="#0x03-结论"><strong>0x03 结论</strong></a></li>
-    <li><a href="#0xee-参考链接"><strong>0xEE 参考链接</strong></a></li>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-任务-1-分析-nginx-日志">0x01 任务 1: 分析 Nginx 日志</a>
+      <ul>
+        <li><a href="#第一步配置-nginx">第一步：配置 Nginx</a></li>
+        <li><a href="#第二步拉取-nginx-日志">第二步：拉取 Nginx 日志</a></li>
+        <li><a href="#第三步开启-elfka">第三步：开启 ELFKA</a></li>
+        <li><a href="#第四步日志探秘">第四步：日志探秘</a></li>
+        <li><a href="#第五步扩展思考日志解决方案">第五步：扩展思考，日志解决方案</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-任务-2-监控-flask-app-的-apm">0x02 任务 2: 监控 Flask App 的 APM</a>
+      <ul>
+        <li><a href="#第一步开启-elfka">第一步：开启 ELFKA</a></li>
+        <li><a href="#第二步开启-flask-app">第二步：开启 flask app</a></li>
+        <li><a href="#第三步apm-探秘">第三步：APM 探秘</a></li>
+        <li><a href="#第四步扩展思考">第四步：扩展思考</a></li>
+      </ul>
+    </li>
+    <li><a href="#0xdd-结论">0xDD 结论</a></li>
+    <li><a href="#0xee-参考链接">0xEE 参考链接</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><p>本文是《提升你的 Python 项目代码健壮性和性能》系列的第五篇文章。</p>
-<ol>
-<li>第一篇，讲的是如何 <a href="https://zhuanlan.zhihu.com/p/56863684" target="_blank" rel="noopener noreffer">用 Type Annotation 提升你的 Python 代码健壮性</a></li>
-<li>第二篇，讲的是 <a href="https://zhuanlan.zhihu.com/p/57510222" target="_blank" rel="noopener noreffer">如何通过测试提升 Python 代码的健壮性</a></li>
-<li>第三篇，讲的是在一定并发量的情况下，<a href="https://zhuanlan.zhihu.com/p/57668068" target="_blank" rel="noopener noreffer">如何保证 Django 项目的数据一致性</a></li>
-<li>第四篇，讲的是如何定位性能问题 <a href="https://zhuanlan.zhihu.com/p/58754459" target="_blank" rel="noopener noreffer">这几招，让你快速提升 Python 项目的性能</a></li>
-</ol>
-<p>第五篇，即本文 讲的是日志系统 ELKFA 的搭建</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">    0x00 前言 : section
-  ▼ 0x01 任务 1: 分析 Nginx 日志 : section
-      第一步：配置 Nginx : section
-      第二步：拉取 Nginx 日志 : section
-      第三步：开启 ELFKA : section
-      第四步：日志探秘 : section
-      第五步：扩展思考，日志解决方案 : section
-  ▼ 0x02 任务 2: 监控 Flask App 的 APM : section
-      第一步：开启 ELFKA : section
-      第二步：开启 flask app : section
-      第三步：APM 探秘 : section
-      第四步：扩展思考 : section
-  ▼ 0x03 结论 : section
-    0xEE 参考链接 : section
-</code></pre></div><h2 id="0x00-前言"><strong>0x00 前言</strong></h2>
+<p>讲的是日志系统 ELKFA 的搭建</p>
+<h2 id="0x00-前言">0x00 前言</h2>
 <p>什么是 ELKFA?</p>
 <p>这五个字母分别代表着五个开源软件</p>
 <ul>
@@ -140,11 +126,11 @@
 2.1 Metric 分析：Flask 是否正常运行，接口请求信息定期发送到 APMServer 这边，方便我观察服务是否正常，接口和业务逻辑的执行的时间是否在预期范围内。
 2.2 Trouble Shooting: 如果程序报了异常，我想把需要报的异常堆栈信息打出。方便我快速的 Trouble Shooting</li>
 </ol>
-<h2 id="0x01-任务-1-分析-nginx-日志"><strong>0x01 任务 1: 分析 Nginx 日志</strong></h2>
+<h2 id="0x01-任务-1-分析-nginx-日志">0x01 任务 1: 分析 Nginx 日志</h2>
 <p>Nginx 众所周知，Nginx 日志是个宝库，所以本文选取了 Nginx 作为日志分析的案例。</p>
 <p>对于 Nginx 日志，可以采用 FileBeat 上传到 Logstash, 由 Logstash 对文件进行解析，并存储到 ElasticSearch</p>
 <p>然后从 Kibana 进行分析。</p>
-<h2 id="第一步配置-nginx">第一步：配置 Nginx</h2>
+<h3 id="第一步配置-nginx">第一步：配置 Nginx</h3>
 <p>首先，让 Nginx 的配置输出的日志符合某种模式，方便软件进行解析。</p>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">log_format  main  &#39;$remote_addr - $remote_user [$time_local] &#34;$request&#34; &#39;
 							&#39;$status $body_bytes_sent &#34;$http_referer&#34; &#39;
@@ -152,10 +138,10 @@
 
 access_log /var/log/nginx/access.log main;
 </code></pre></div><p>然后重启 nginx</p>
-<h2 id="第二步拉取-nginx-日志">第二步：拉取 Nginx 日志</h2>
+<h3 id="第二步拉取-nginx-日志">第二步：拉取 Nginx 日志</h3>
 <p>一天后，从 Nginx 服务器上拉一下 access.log 放到</p>
 <p>elastic-labs/logs/prod/nginx 下</p>
-<h2 id="第三步开启-elfka">第三步：开启 ELFKA</h2>
+<h3 id="第三步开启-elfka">第三步：开启 ELFKA</h3>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">git clone git@github.com:twocucao/elastic-labs.git
 cd elastic-labs
 docker-compose up
@@ -182,7 +168,7 @@ docker-compose up
         data-sizes="auto"
         alt="https://pic2.zhimg.com/v2-52689881c9e9610d37c0fb88016ed5b5_b.jpg"
         title="https://pic2.zhimg.com/v2-52689881c9e9610d37c0fb88016ed5b5_b.jpg" /></p>
-<h2 id="第四步日志探秘">第四步：日志探秘</h2>
+<h3 id="第四步日志探秘">第四步：日志探秘</h3>
 <p>默认情况下，每一天的 Nginx 日志会在 ES 里创建一个 Index, 所以，你需要用 Index Pattern 来进行统计</p>
 <p><img
         class="lazyload"
@@ -214,7 +200,7 @@ docker-compose up
 <p><strong>当然咯，假设用户在搜索引擎里面，先搜索了『美女』, 然后搜索了『雪白』, 然后又搜索了『白-洁』, 那基本上这个人搜索的三个词就具备一定的关联性，想搜索的这个雪白就不是『雪白』的意思</strong>
 <strong>而是你懂的。</strong></p>
 </blockquote>
-<h2 id="第五步扩展思考日志解决方案">第五步：扩展思考，日志解决方案</h2>
+<h3 id="第五步扩展思考日志解决方案">第五步：扩展思考，日志解决方案</h3>
 <p>上面四个步骤是为了解决分析 Nginx 日志的问题</p>
 <p>一条日志从打印出来，到能在 Kibana 进行分析，需要经过如下的步骤：</p>
 <ol>
@@ -225,61 +211,61 @@ docker-compose up
 </ol>
 <p>如果你想要自定义日志获得更加完美的解决方案，那就需要对这几个流程进行进行细化。</p>
 <p>比如你想通过 Flask 的日志来达到更好的用户操作定位。这就需要读者自行依照自己的理解来 hack 了</p>
-<h2 id="0x02-任务-2-监控-flask-app-的-apm"><strong>0x02 任务 2: 监控 Flask App 的 APM</strong></h2>
-<h2 id="第一步开启-elfka">第一步：开启 ELFKA</h2>
+<h2 id="0x02-任务-2-监控-flask-app-的-apm">0x02 任务 2: 监控 Flask App 的 APM</h2>
+<h3 id="第一步开启-elfka">第一步：开启 ELFKA</h3>
 <p>同任务一的启动方式</p>
-<h2 id="第二步开启-flask-app">第二步：开启 flask app</h2>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">pip3 install poetry # 比 pip / pipenv 更好的依赖管理和构建工具
+<h3 id="第二步开启-flask-app">第二步：开启 flask app</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">pip3 install poetry <span class="c1"># 比 pip / pipenv 更好的依赖管理和构建工具</span>
 poetry install -vvv
 poetry shell
 flask run
 </code></pre></div><p>写一个简单的管理和依赖工具</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">from flask import Flask
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">from flask import Flask
 from elasticapm.contrib.flask import ElasticAPM
 
-app = Flask(__name__)
+<span class="nv">app</span> <span class="o">=</span> Flask<span class="o">(</span>__name__<span class="o">)</span>
 
-app.config[&#34;ELASTIC_APM&#34;] = {
-    &#34;SERVICE_NAME&#34;: &#34;dev-flask&#34;,
-    &#39;SECRET_TOKEN&#39;: &#39;&#39;,
-}
-apm = ElasticAPM(app)
+app.config<span class="o">[</span><span class="s2">&#34;ELASTIC_APM&#34;</span><span class="o">]</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="s2">&#34;SERVICE_NAME&#34;</span>: <span class="s2">&#34;dev-flask&#34;</span>,
+    <span class="s1">&#39;SECRET_TOKEN&#39;</span>: <span class="s1">&#39;&#39;</span>,
+<span class="o">}</span>
+<span class="nv">apm</span> <span class="o">=</span> ElasticAPM<span class="o">(</span>app<span class="o">)</span>
 
-@app.route(&#34;/&#34;)
-def hello():
-    return &#34;Hello, World!&#34;
+@app.route<span class="o">(</span><span class="s2">&#34;/&#34;</span><span class="o">)</span>
+def hello<span class="o">()</span>:
+    <span class="k">return</span> <span class="s2">&#34;Hello, World!&#34;</span>
 
-@app.route(&#34;/home&#34;)
-def home():
-    return &#34;home!&#34;
+@app.route<span class="o">(</span><span class="s2">&#34;/home&#34;</span><span class="o">)</span>
+def home<span class="o">()</span>:
+    <span class="k">return</span> <span class="s2">&#34;home!&#34;</span>
 
-@app.route(&#34;/&lt;int:num&gt;&#34;)
-def hello_num(num):
+@app.route<span class="o">(</span><span class="s2">&#34;/&lt;int:num&gt;&#34;</span><span class="o">)</span>
+def hello_num<span class="o">(</span>num<span class="o">)</span>:
     import random
-    if random.randint(1, 100) &gt; 95:
-        raise Exception(f&#34;num&#34;) # 有接近 1/5 的概率会故意抛出异常
-    return f&#34;Hello, {num}!&#34;
+    <span class="k">if</span> random.randint<span class="o">(</span>1, 100<span class="o">)</span> &gt; 95:
+        raise Exception<span class="o">(</span>f<span class="s2">&#34;num&#34;</span><span class="o">)</span> <span class="c1"># 有接近 1/5 的概率会故意抛出异常</span>
+    <span class="k">return</span> f<span class="s2">&#34;Hello, {num}!&#34;</span>
 </code></pre></div><p>随手写一个脚本 20 分钟内持续不断的访问接口</p>
-<div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">SECONDS=0
-while [[ SECONDS -lt 1200 ]] ; do
-	for (( i = 0; i &lt; 20; i++ )); do
-		curl &#34;http://localhost:5000/$i&#34;
-		curl &#34;http://localhost:5000/$i&#34;
-		curl &#34;http://localhost:5000/$i&#34;
-		curl &#34;http://localhost:5000/$i&#34;
-		curl &#34;http://localhost:5000/$i&#34;
-		curl &#34;http://localhost:5000/$i&#34;
-		curl &#34;http://localhost:5000/$i&#34; &amp;
-		curl &#34;http://localhost:5000/$i&#34; &amp;
-		curl &#34;http://localhost:5000/$i&#34; &amp;
-		curl &#34;http://localhost:5000/$i&#34; &amp;
-		curl &#34;http://localhost:5000/$i&#34; &amp;
-		curl &#34;http://localhost:5000/$i&#34; &amp;
-		curl &#34;http://localhost:5000/$i&#34; &amp;
-		curl &#34;http://localhost:5000/$i&#34; &amp;
-	done
-done
-</code></pre></div><h2 id="第三步apm-探秘">第三步：APM 探秘</h2>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nv">SECONDS</span><span class="o">=</span><span class="m">0</span>
+<span class="k">while</span> <span class="o">[[</span> SECONDS -lt <span class="m">1200</span> <span class="o">]]</span> <span class="p">;</span> <span class="k">do</span>
+	<span class="k">for</span> <span class="o">((</span> <span class="nv">i</span> <span class="o">=</span> 0<span class="p">;</span> i &lt; 20<span class="p">;</span> i++ <span class="o">))</span><span class="p">;</span> <span class="k">do</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="p">&amp;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="p">&amp;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="p">&amp;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="p">&amp;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="p">&amp;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="p">&amp;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="p">&amp;</span>
+		curl <span class="s2">&#34;http://localhost:5000/</span><span class="nv">$i</span><span class="s2">&#34;</span> <span class="p">&amp;</span>
+	<span class="k">done</span>
+<span class="k">done</span>
+</code></pre></div><h3 id="第三步apm-探秘">第三步：APM 探秘</h3>
 <p>20 分钟过去了，我们可以获知到什么呢？</p>
 <ol>
 <li>Metric 分析：Flask 是否正常运行，接口请求信息定期发送到 APMServer 这边，方便我观察服务是否正常，接口和业务逻辑的执行的时间是否在预期范围内。</li>
@@ -326,7 +312,7 @@ done
 <blockquote>
 <p><strong>Time Saving &amp;&amp; 防脱发利器</strong></p>
 </blockquote>
-<h2 id="第四步扩展思考">第四步：扩展思考</h2>
+<h3 id="第四步扩展思考">第四步：扩展思考</h3>
 <p>从 App 被监控到能在 Kibana 进行分析，需要经过如下的步骤：</p>
 <ol>
 <li>在原有的 Flask App 里面进行添加 elastc-apm 的 agent (apm-client)</li>
@@ -336,7 +322,7 @@ done
 </ol>
 <p>如果你想要自定义日志获得更加完美的解决方案，那就需要对这前两个流程进行进行细化。</p>
 <p>比如公司用 Graphql 的接口，那么，在这种情况下，自带的 contrib 下的 flask 包的路由基本就是废掉的，你需要再 Hack 一下。</p>
-<h2 id="0x03-结论"><strong>0x03 结论</strong></h2>
+<h2 id="0xdd-结论">0xDD 结论</h2>
 <p>本来这篇文章打算写日志的最佳实践的，结果在查找资料的时候发现了一篇更好的文章</p>
 <ul>
 <li><a href="https://zhuanlan.zhihu.com/p/27363484" target="_blank" rel="noopener noreffer">https://zhuanlan.zhihu.com/p/27363484</a></li>
@@ -346,7 +332,7 @@ done
 <blockquote>
 <p><strong>欢迎点赞 / 关注 /star 文明三连</strong></p>
 </blockquote>
-<h2 id="0xee-参考链接"><strong>0xEE 参考链接</strong></h2>
+<h2 id="0xee-参考链接">0xEE 参考链接</h2>
 <ul>
 <li><a href="https://zhuanlan.zhihu.com/p/27363484" target="_blank" rel="noopener noreffer">https://zhuanlan.zhihu.com/p/27363484</a></li>
 <li>Photo by<a href="https://link.zhihu.com/?target=https%3A//unsplash.com/photos/rr8DvtQL9X8%3Futm_source%3Dunsplash%26utm_medium%3Dreferral%26utm_content%3DcreditCopyText" target="_blank" rel="noopener noreffer">Tan Kaninthanond</a>on<a href="https://link.zhihu.com/?target=https%3A//unsplash.com/%3Futm_source%3Dunsplash%26utm_medium%3Dreferral%26utm_content%3DcreditCopyText" target="_blank" rel="noopener noreffer">Unsplash</a></li>

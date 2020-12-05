@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/twocucao.xyz\/posts\/20190526_pycode_07\/"
-        },"genre": "posts","keywords": "Python, 系列文章","wordcount":  378 ,
+        },"genre": "posts","keywords": "Python, 系列文章","wordcount":  297 ,
         "url": "http:\/\/twocucao.xyz\/posts\/20190526_pycode_07\/","datePublished": "2019-05-26T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
             "@type": "Organization",
             "name": "twocucao"},"author": {
@@ -76,7 +76,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">如何写出整洁的 Python 代码 中</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-26">2019-05-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 378 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-05-26">2019-05-26</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 297 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -103,55 +103,33 @@
     <li><a href="#0xee-参考">0xEE 参考</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><p>本文是《提升你的 Python 项目代码健壮性和性能》系列的第七篇文章。</p>
-<ul>
-<li>第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性</li>
-<li>第二篇，讲的是 如何通过测试提升 Python 代码的健壮性</li>
-<li>第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性</li>
-<li>第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能</li>
-<li>第五篇，讲的是 为你的项目快速搭建 ELKFA 日志系统</li>
-<li>第六篇，《如何写出整洁的代码 上》 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码</li>
-</ul>
-<p>目录</p>
-<pre><code>▼ 如何写出整洁的 Python 代码 中 : section
-    0x00 前言 : section
-    0x01 避免过深的缩进 : section
-    0x02 使用异常 : section
-    0x03 类与 OOP : section
-  ▼ 0x04 SOLID 设计原则 : section
-      单一职责 : section
-      开闭原则 : section
-      里氏替换原则 : section
-      接口隔离原则 : section
-      依赖反转原则 : section
-    0x05 边界和第三方库的挑选 : section
-    0xDD 结论 : section
-    0xEE 参考 : section
-</code></pre><h2 id="0x00-前言">0x00 前言</h2>
-<p>上篇地址在这里 <a href="https://zhuanlan.zhihu.com/p/59510165">https://zhuanlan.zhihu.com/p/59510165</a></p>
-<p>还是通过代码上的一些小技巧和一些原则来让代码更加整齐。</p>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00 前言</h2>
+<p>本文是《提升你的 Python 项目代码健壮性和性能》系列的第七篇文章。</p>
+<p>上篇《如何写出整洁的代码 上》 从变量命名 / 函数 / 注释整洁 / 格式整洁上写出干净的代码</p>
+<p><a href="https://zhuanlan.zhihu.com/p/59510165">https://zhuanlan.zhihu.com/p/59510165</a></p>
+<p>本文还是通过代码上的一些小技巧和一些原则来让代码更加整齐。</p>
 <h2 id="0x01-避免过深的缩进">0x01 避免过深的缩进</h2>
 <p>场景，你在做一个 B2B2C 的商城系统。商家的活动需要在某些比较严格的条件下才能参与（假设有五个字段吧）。</p>
 <p>如果不动手捋一捋判断的路径，上来就动手写代码，则很容易写出如下的代码。</p>
-<pre><code>if cond1:
-	dosomething()
-	if cond2:
-		dosomething()
-		if cond3 and cond4:
-			dosomething()
-			else:
-				dosomething()
-			if condx:
-			dosomething()
-else:
-	if cond2:
-		dosomething()
-		if cond3 and cond4:
-			dosomething()
-			if condx:
-			dosomething()
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">cond1</span><span class="p">:</span>
+	<span class="n">dosomething</span><span class="p">()</span>
+	<span class="k">if</span> <span class="n">cond2</span><span class="p">:</span>
+		<span class="n">dosomething</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">cond3</span> <span class="ow">and</span> <span class="n">cond4</span><span class="p">:</span>
+			<span class="n">dosomething</span><span class="p">()</span>
+			<span class="k">else</span><span class="p">:</span>
+				<span class="n">dosomething</span><span class="p">()</span>
+			<span class="k">if</span> <span class="n">condx</span><span class="p">:</span>
+			<span class="n">dosomething</span><span class="p">()</span>
+<span class="k">else</span><span class="p">:</span>
+	<span class="k">if</span> <span class="n">cond2</span><span class="p">:</span>
+		<span class="n">dosomething</span><span class="p">()</span>
+		<span class="k">if</span> <span class="n">cond3</span> <span class="ow">and</span> <span class="n">cond4</span><span class="p">:</span>
+			<span class="n">dosomething</span><span class="p">()</span>
+			<span class="k">if</span> <span class="n">condx</span><span class="p">:</span>
+			<span class="n">dosomething</span><span class="p">()</span>
 
-</code></pre><p>想想你这个时候才判断了 5 个字段&hellip; 如果想都不想就开始写这种代码的话，就做好修改的时候崩溃吧。</p>
+</code></pre></div><p>想想你这个时候才判断了 5 个字段&hellip; 如果想都不想就开始写这种代码的话，就做好修改的时候崩溃吧。</p>
 <p>当你写出 if 超过两层缩进的时候，代码的复杂度就值得注意了。</p>
 <p>这个时候，应该火速的拿出纸和笔出来，快速的捋一捋所有的变量和情况，</p>
 <p>『以减少缩进为目标』</p>

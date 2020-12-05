@@ -328,60 +328,60 @@
         <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 </code></pre></div><p>直接看起来似乎，加不加 typing 对现在的代码改善并不是很明显嘛。</p>
 <p>我们可以给复杂类型起别名：</p>
-<pre><code>比如：
-def f() -&gt; Union[List[Dict[Tuple[int, str], Set[int]]], Tuple[str, List[str]]]:
-def b() -&gt; Union[List[Dict[Tuple[int, str], Set[int]]], Tuple[str, List[str]]]:
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="err">比如：</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]],</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
+<span class="k">def</span> <span class="nf">b</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]],</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]:</span>
 
-AliasType = Union[List[Dict[Tuple[int, str], Set[int]]], Tuple[str, List[str]]]
-def f() -&gt; AliasType:
-    ...
-def b() -&gt; AliasType:
-    ...
-</code></pre><p>看起来还行，但还是没有感觉到很明显的代码质量改善。</p>
+<span class="n">AliasType</span> <span class="o">=</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">Set</span><span class="p">[</span><span class="nb">int</span><span class="p">]]],</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]]</span>
+<span class="k">def</span> <span class="nf">f</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AliasType</span><span class="p">:</span>
+    <span class="o">...</span>
+<span class="k">def</span> <span class="nf">b</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">AliasType</span><span class="p">:</span>
+    <span class="o">...</span>
+</code></pre></div><p>看起来还行，但还是没有感觉到很明显的代码质量改善。</p>
 <p>好，再看一例，使用 ClassVar 禁止属性无法在实例上设置</p>
-<pre><code>from typing import ClassVar
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">ClassVar</span>
 
-class A:
-    x: ClassVar[int] = 0  # Class variable only
+<span class="k">class</span> <span class="nc">A</span><span class="p">:</span>
+    <span class="n">x</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Class variable only</span>
 
-A.x += 1  # OK
+<span class="n">A</span><span class="o">.</span><span class="n">x</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># OK</span>
 
-a = A()
-a.x = 1  # Error: Cannot assign to class variable &quot;x&quot; via instance
-print(a.x)  # OK -- can be read through an instance
-</code></pre><p>举个例子，flask-sqlalchemy, 可以通过 YouModel.query.get(id) 来拿到 YouModel 的实例，但 IDE 不能推断出这个实例是什么。</p>
-<pre><code># 方法一，Cast
-you_model_ins: YouModel = YouModel.query.get(id)
-# 方法二，包装一下 get 方法
+<span class="n">a</span> <span class="o">=</span> <span class="n">A</span><span class="p">()</span>
+<span class="n">a</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># Error: Cannot assign to class variable &#34;x&#34; via instance</span>
+<span class="k">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">x</span><span class="p">)</span>  <span class="c1"># OK -- can be read through an instance</span>
+</code></pre></div><p>举个例子，flask-sqlalchemy, 可以通过 YouModel.query.get(id) 来拿到 YouModel 的实例，但 IDE 不能推断出这个实例是什么。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 方法一，Cast</span>
+<span class="n">you_model_ins</span><span class="p">:</span> <span class="n">YouModel</span> <span class="o">=</span> <span class="n">YouModel</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<span class="c1"># 方法二，包装一下 get 方法</span>
 
-class YouModel(base):
-	def get(id) -&gt; &quot;YouModel&quot;: # 注意这里的字符串
-		pass
-you_model_ins = YouModel.get(id)
+<span class="k">class</span> <span class="nc">YouModel</span><span class="p">(</span><span class="n">base</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&#34;YouModel&#34;</span><span class="p">:</span> <span class="c1"># 注意这里的字符串</span>
+		<span class="k">pass</span>
+<span class="n">you_model_ins</span> <span class="o">=</span> <span class="n">YouModel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
 
-</code></pre><p>细心的读者可能看到这里的 YouModel 的返回值类型居然使用了 YouModel 的字符串，如果是 Java 的话，是可以直接写 YouModel 的。</p>
-<pre><code># 加上类型延迟求值
-from __future__ import annotations
+</code></pre></div><p>细心的读者可能看到这里的 YouModel 的返回值类型居然使用了 YouModel 的字符串，如果是 Java 的话，是可以直接写 YouModel 的。</p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="c1"># 加上类型延迟求值</span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
-class YouModel(base):
-	def get(id) -&gt; YouModel:
-		pass
-you_model_ins = YouModel.get(id)
-</code></pre><p>还有其他的用法，请参考 MyPY 的官方文档</p>
+<span class="k">class</span> <span class="nc">YouModel</span><span class="p">(</span><span class="n">base</span><span class="p">):</span>
+	<span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">YouModel</span><span class="p">:</span>
+		<span class="k">pass</span>
+<span class="n">you_model_ins</span> <span class="o">=</span> <span class="n">YouModel</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</code></pre></div><p>还有其他的用法，请参考 MyPY 的官方文档</p>
 <h2 id="0x04-常见问题">0x04 常见问题</h2>
 <h3 id="如何忽略-mypy-警告">如何忽略 mypy 警告</h3>
 <p>有的地方的代码不进行检查的话会方便很多。</p>
 <p>与 flake8 类似，在注释后面写上标志就可以忽略了。</p>
-<pre><code>youcode  # type: igonre
-</code></pre><h3 id="循环导入">循环导入</h3>
+<div class="highlight"><pre class="chroma"><code class="language-bash" data-lang="bash">youcode  <span class="c1"># type: igonre</span>
+</code></pre></div><h3 id="循环导入">循环导入</h3>
 <p>我现在有两个文件，一个是 user.py 另一个是 order.py</p>
 <p>在 user 里面有个方法需要返回 order 里面的 Order 列表，order 里面有个 order.owner 需要返回 User 实例。</p>
 <p>如果不用类型声明的话，在 user 需要 order 的时候 import 进来即可规避循环导入。</p>
 <p>在使用类型声明之后，建议在 user 里面这么写</p>
-<pre><code>if TYPE_CHECKING:
-    from project.models.order import Order # noqa
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="k">if</span> <span class="n">TYPE_CHECKING</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">project.models.order</span> <span class="kn">import</span> <span class="n">Order</span> <span class="c1"># noqa</span>
 
-</code></pre><h2 id="0x05-typing-anotation-项目最佳实践">0x05 Typing Anotation 项目最佳实践</h2>
+</code></pre></div><h2 id="0x05-typing-anotation-项目最佳实践">0x05 Typing Anotation 项目最佳实践</h2>
 <p>通过本文了解了基本的 Typing Anotation 的用法，其实效果还不够，本着对爱学习的读者老爷的负责的态度。</p>
 <p>所谓『纸上得来终觉浅，绝知此事要宫刑』, 哦不『躬行』</p>
 <p>推荐一个超级牛的大项目来让大家了解一下 typing annotation 的最佳实践。</p>

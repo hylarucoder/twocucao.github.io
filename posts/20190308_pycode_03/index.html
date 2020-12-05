@@ -26,7 +26,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "http:\/\/twocucao.xyz\/posts\/20190308_pycode_03\/"
-        },"genre": "posts","keywords": "Python, 系列文章","wordcount":  503 ,
+        },"genre": "posts","keywords": "Python, 系列文章","wordcount":  498 ,
         "url": "http:\/\/twocucao.xyz\/posts\/20190308_pycode_03\/","datePublished": "2019-03-08T21:57:40+08:00","dateModified": "2020-01-01T16:45:40+08:00","publisher": {
             "@type": "Organization",
             "name": "twocucao"},"author": {
@@ -76,7 +76,7 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">如何保证 Django 项目的数据一致性</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-08">2019-03-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 503 字&nbsp;
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2019-03-08">2019-03-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 498 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
@@ -85,24 +85,33 @@
                 </div>
                 <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
   <ul>
-    <li><a href="#0x00-前言"><strong>0x00 前言</strong></a></li>
-    <li><a href="#0x01-背景知识">0x01 背景知识</a></li>
-    <li><a href="#并发会带来数据不一致">并发会带来数据不一致</a></li>
-    <li><a href="#0x02-django-项目如何解决项目"><strong>0x02 Django 项目如何解决项目</strong></a></li>
-    <li><a href="#悲观的方式"><strong>悲观的方式</strong></a></li>
-    <li><a href="#乐观的方式">乐观的方式</a></li>
-    <li><a href="#没有银弹">没有银弹</a></li>
-    <li><a href="#0x03-如何解决超卖问题"><strong>0x03 如何解决超卖问题</strong></a></li>
-    <li><a href="#0x04-番外篇-数据库隔离级别"><strong>0x04 番外篇 数据库隔离级别</strong></a></li>
-    <li><a href="#read-uncommitted">READ-UNCOMMITTED</a></li>
-    <li><a href="#read-committed">READ-COMMITTED</a></li>
-    <li><a href="#repeatable-read">REPEATABLE-READ</a></li>
-    <li><a href="#serializable">SERIALIZABLE</a></li>
-    <li><a href="#0x05-番外篇-django-orm"><strong>0x05 番外篇 Django ORM</strong></a></li>
-    <li><a href="#0xee-参考链接"><strong>0xEE 参考链接</strong></a></li>
+    <li><a href="#0x00-前言">0x00 前言</a></li>
+    <li><a href="#0x01-背景知识">0x01 背景知识</a>
+      <ul>
+        <li><a href="#并发会带来数据不一致">并发会带来数据不一致</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x02-django-项目如何解决项目">0x02 Django 项目如何解决项目</a>
+      <ul>
+        <li><a href="#悲观的方式">悲观的方式</a></li>
+        <li><a href="#乐观的方式">乐观的方式</a></li>
+        <li><a href="#没有银弹">没有银弹</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x03-如何解决超卖问题">0x03 如何解决超卖问题</a></li>
+    <li><a href="#0x04-番外篇-数据库隔离级别">0x04 番外篇 数据库隔离级别</a>
+      <ul>
+        <li><a href="#read-uncommitted">READ-UNCOMMITTED</a></li>
+        <li><a href="#read-committed">READ-COMMITTED</a></li>
+        <li><a href="#repeatable-read">REPEATABLE-READ</a></li>
+        <li><a href="#serializable">SERIALIZABLE</a></li>
+      </ul>
+    </li>
+    <li><a href="#0x05-番外篇-django-orm">0x05 番外篇 Django ORM</a></li>
+    <li><a href="#0xee-参考链接">0xEE 参考链接</a></li>
   </ul>
 </nav></div>
-            </div><div class="content" id="content"><h2 id="0x00-前言"><strong>0x00 前言</strong></h2>
+            </div><div class="content" id="content"><h2 id="0x00-前言">0x00 前言</h2>
 <p>本文是《提升你的 Python 项目代码健壮性和性能》系列的第三篇文章。</p>
 <ul>
 <li><strong>第一篇，讲的是如何 <a href="https://zhuanlan.zhihu.com/p/56863684" target="_blank" rel="noopener noreffer">用 Type Annotation 提升你的 Python 代码健壮性</a></strong></li>
@@ -140,7 +149,7 @@ def user_order_by_product(user,product):
 </blockquote>
 <p>为什么呢？</p>
 <h2 id="0x01-背景知识">0x01 背景知识</h2>
-<h2 id="并发会带来数据不一致">并发会带来数据不一致</h2>
+<h3 id="并发会带来数据不一致">并发会带来数据不一致</h3>
 <p>看图</p>
 <p><img
         class="lazyload"
@@ -185,14 +194,14 @@ def user_order_by_product(user,product):
 <li><strong>鲁迅说过，一见短袖子，立刻想到白臂膊，立刻想到全 X 体，立刻想到&hellip;.</strong></li>
 <li><strong>我也说过，提到并发，就想到锁，就想到乐观锁，就想到悲观锁。</strong></li>
 </ul>
-<h2 id="0x02-django-项目如何解决项目"><strong>0x02 Django 项目如何解决项目</strong></h2>
+<h2 id="0x02-django-项目如何解决项目">0x02 Django 项目如何解决项目</h2>
 <p>有乐观的方式和悲观的方式，即所谓的乐观锁和悲观锁。是不是有高下之分呢、? 不一定。</p>
 <blockquote>
 <p>这就好比乐观和悲观本身也并不见的有高下之分。如同有的人乐观，并不见得一定就是乐观，搞不好是傻乐呵，有的人的悲观，只是底色比较悲凉，但内心还是积极向上的。</p>
 </blockquote>
 <p>本小节内容依照自己的理解厚颜无耻的援引了这篇文章的代码</p>
 <p><a href="https://link.zhihu.com/?target=https%3A//medium.com/%40hakibenita/how-to-manage-concurrency-in-django-models-b240fed4ee2" target="_blank" rel="noopener noreffer">https://medium.com/@hakibenita/how-to-manage-concurrency-in-django-models-b240fed4ee2</a></p>
-<h2 id="悲观的方式"><strong>悲观的方式</strong></h2>
+<h3 id="悲观的方式">悲观的方式</h3>
 <p>悲观的方式就是锁住某个资源，不让其他人使用（排他），直到完成工作后释放。</p>
 <p>为什么使用数据库的锁（准确来说是关系型数据库的锁）</p>
 <ol>
@@ -237,7 +246,7 @@ def withdraw(cls, id, amount):
         data-sizes="auto"
         alt="https://pic2.zhimg.com/v2-1c75458108c69d13bcb0d07bdacab0c5_b.jpg"
         title="https://pic2.zhimg.com/v2-1c75458108c69d13bcb0d07bdacab0c5_b.jpg" /></p>
-<h2 id="乐观的方式">乐观的方式</h2>
+<h3 id="乐观的方式">乐观的方式</h3>
 <p>乐观的方式就是新建一个 version column, 每次修改余额的时候，版本增 1</p>
 <p>同样我厚颜无耻的援引了 hakibenita 的代码</p>
 <div class="highlight"><pre class="chroma"><code class="language-text" data-lang="text">def deposit(self, id, amount):
@@ -264,7 +273,7 @@ def withdraw(self, id, amount):
 
    return updated &gt; 0
 </code></pre></div><p>django 默认会返回修改成功的行数，于是，是不是存取成功，就看 updated 是否大于 0 了</p>
-<h2 id="没有银弹">没有银弹</h2>
+<h3 id="没有银弹">没有银弹</h3>
 <p>计算机世界里面，多快好省的场景就不存在。一切看场景。</p>
 <p>同样在并发量大的情况下</p>
 <p>1. 如果对某几行修改比较频繁，版本更新频繁，可能乐观锁的 retry 就比较浪费了。
@@ -273,7 +282,7 @@ def withdraw(self, id, amount):
 <li>乐观方式在应用层，无法阻拦数据库的操作。不会存在死锁的问题。</li>
 <li>悲观方式是数据库实现，他阻止数据库写操作。</li>
 </ul>
-<h2 id="0x03-如何解决超卖问题"><strong>0x03 如何解决超卖问题</strong></h2>
+<h2 id="0x03-如何解决超卖问题">0x03 如何解决超卖问题</h2>
 <ol>
 <li>把数量和已卖放到 redis 里面呢？</li>
 <li>交给 deamon 呢？</li>
@@ -287,9 +296,9 @@ def withdraw(self, id, amount):
 <li>最后通过数据表的 uniq 约束来防止下单超过 200 个。</li>
 </ol>
 <p>嗯，就是这么简单。</p>
-<h2 id="0x04-番外篇-数据库隔离级别"><strong>0x04 番外篇 数据库隔离级别</strong></h2>
+<h2 id="0x04-番外篇-数据库隔离级别">0x04 番外篇 数据库隔离级别</h2>
 <p>提到了数据库隔离级别，就利用上面的例子顺手讲解一下数据库隔离级别吧。</p>
-<h2 id="read-uncommitted">READ-UNCOMMITTED</h2>
+<h3 id="read-uncommitted">READ-UNCOMMITTED</h3>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -298,7 +307,7 @@ def withdraw(self, id, amount):
         data-sizes="auto"
         alt="https://pic1.zhimg.com/v2-739b559c1747e1d7365187d00a7e3b78_b.jpg"
         title="https://pic1.zhimg.com/v2-739b559c1747e1d7365187d00a7e3b78_b.jpg" /></p>
-<h2 id="read-committed">READ-COMMITTED</h2>
+<h3 id="read-committed">READ-COMMITTED</h3>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -307,7 +316,7 @@ def withdraw(self, id, amount):
         data-sizes="auto"
         alt="https://pic4.zhimg.com/v2-5750ab71fb047d99465912af95a6d323_b.jpg"
         title="https://pic4.zhimg.com/v2-5750ab71fb047d99465912af95a6d323_b.jpg" /></p>
-<h2 id="repeatable-read">REPEATABLE-READ</h2>
+<h3 id="repeatable-read">REPEATABLE-READ</h3>
 <p><img
         class="lazyload"
         src="/svg/loading.min.svg"
@@ -316,11 +325,11 @@ def withdraw(self, id, amount):
         data-sizes="auto"
         alt="https://pic4.zhimg.com/v2-200ffcc69005fe5d6e37034f72c4a5f3_b.jpg"
         title="https://pic4.zhimg.com/v2-200ffcc69005fe5d6e37034f72c4a5f3_b.jpg" /></p>
-<h2 id="serializable">SERIALIZABLE</h2>
+<h3 id="serializable">SERIALIZABLE</h3>
 <p>这个就不放图了。没啥好讲的。性能太低&hellip;. 我是基本上没怎么使用过的</p>
 <p>性能上 RU &gt; RC &gt; RR &gt; S</p>
 <p>一般人用 RC 和 RR 会多一些，比如我的项目里就使用了 RC , 但什么时候我可能会考虑用 RR 呢、? 比如，我想在一个 Session 里面选两次 最近两个月的用户数据，但是并不希望 出现新的用户。</p>
-<h2 id="0x05-番外篇-django-orm"><strong>0x05 番外篇 Django ORM</strong></h2>
+<h2 id="0x05-番外篇-django-orm">0x05 番外篇 Django ORM</h2>
 <p><strong>评论区</strong></p>
 <p><a href="//www.zhihu.com/people/f4ca959f981c310af429ca25b3b4721d" target="_blank" rel="noopener noreffer">@灵魂对撞机</a></p>
 <p>提出了防止超卖的另一种解决方案</p>
@@ -357,17 +366,14 @@ def withdraw(self, id, amount):
 <ol>
 <li><strong>如果一般的多表连续 join 如果能使用 nested queries 的话，用 Django 写起来也是特别的舒服。（如果你不是使用 mysql 这种对 nested query 几乎无优化的数据库）</strong></li>
 </ol>
-<p>```</p>
-<p>VoteActivity.objects.filter(category=obj.category, user__name_contains(&ldquo;王&rdquo;), user__city__type=&ldquo;一线城市&rdquo;) # 伪代码</p>
-<p>```</p>
-<p><strong>2. 或许是应该走 ETL 或者是把数据丢到 ES 或者针对查询优化的表会更加合适、?</strong></p>
+<div class="highlight"><pre class="chroma"><code class="language-python" data-lang="python"><span class="n">VoteActivity</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span>\<span class="p">(</span><span class="n">category</span><span class="o">=</span><span class="n">obj</span><span class="o">.</span><span class="n">category</span><span class="p">,</span> <span class="n">user</span>\<span class="n">_</span>\<span class="n">_name</span>\<span class="n">_contains</span>\<span class="p">(</span><span class="s2">&#34;王&#34;</span>\<span class="p">),</span> <span class="n">user</span>\<span class="n">_</span>\<span class="n">_city</span>\<span class="n">_</span>\<span class="n">_type</span><span class="o">=</span><span class="s2">&#34;一线城市&#34;</span>\<span class="p">)</span> <span class="c1"># 伪代码</span>
+</code></pre></div><p><strong>2. 或许是应该走 ETL 或者是把数据丢到 ES 或者针对查询优化的表会更加合适、?</strong></p>
 <p>当然，这也就看具体的情况了。</p>
-<h2 id="0xee-参考链接"><strong>0xEE 参考链接</strong></h2>
+<h2 id="0xee-参考链接">0xEE 参考链接</h2>
 <ol>
 <li><a href="https://link.zhihu.com/?target=https%3A//www.cnblogs.com/huanongying/p/7021555.html" target="_blank" rel="noopener noreffer">https://www.cnblogs.com/huanongying/p/7021555.html</a></li>
 <li><a href="https://link.zhihu.com/?target=https%3A//ewencp.org/blog/django-and-mysql-isolation-levels/index.html" target="_blank" rel="noopener noreffer">Django and MySQL</a></li>
 <li><a href="https://link.zhihu.com/?target=https%3A//medium.com/%40hakibenita/how-to-manage-concurrency-in-django-models-b240fed4ee2" target="_blank" rel="noopener noreffer">https://medium.com/@hakibenita/how-to-manage-concurrency-in-django-models-b240fed4ee2</a></li>
-<li>Photo by<a href="https://link.zhihu.com/?target=https%3A//unsplash.com/photos/hZQOby6ZdIE%3Futm_source%3Dunsplash%26utm_medium%3Dreferral%26utm_content%3DcreditCopyText" target="_blank" rel="noopener noreffer">Sepp Rutz</a>on<a href="https://link.zhihu.com/?target=https%3A//unsplash.com/t/wallpapers%3Futm_source%3Dunsplash%26utm_medium%3Dreferral%26utm_content%3DcreditCopyText" target="_blank" rel="noopener noreffer">Unsplash</a></li>
 </ol>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">

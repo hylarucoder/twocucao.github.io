@@ -74,22 +74,36 @@
         title="https://avatars0.githubusercontent.com/u/5625783" /></a></div><h1 class="home-title">海拉鲁编程客</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20190216_pycode_02/">如何通过测试提升 Python 代码的健壮性</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-23">2019-03-23</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第二篇文章。
-本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
- 用 Type Annotation 提升你的 Python 代码健壮性 https://zhuanlan.zhihu.com/p/56863684  0x00 前言 本文的更多的是写给 Python 后端的程序员。
-来简单分享一下我对写测试的理解。
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-23">2019-03-23</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div><div class="content">0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第二篇文章。
+本文的测试更多专注于 Python 后端的程序员。
 在上一篇文章中，我提到了代码覆盖率，即测试的一种指标。
 本期就聊聊测试这件小事情。
-本文目录如下：
-▼ 如何通过测试提升 Python 代码的健壮性 : section 0x00 前言 : section ▼ 0x01 测试的分类 : section 后端主要关注哪些测试 : section ▼ 0x02 为什么要写测试 : section 让新手更快的了解代码 : section 让发布代码的时候更加有底气 : section 让程序更容易重构 : section 加快团队的开发速度 : section ▼ 0x03 为什么不要写测试 : section 测试不能解决的问题 : section 不适当的测试为什么是负担 : section 并不是所有地方都容易测试的 : section ▼ 0x04 写 Python 测试的一些注意事项 : section 项目的环境隔离 : section 测试的基本环境 : section 单测 / 功测 / 端对端 : section 如何处理外部服务 : section 其他 Pytest 小技巧 : section 0xEE 参考 : section 0x01 测试的分类 测试有很多种，</div><div class="post-footer">
+0x01 测试的分类 测试有很多种，
+按照测试设计的方法可以分为：
+1. 黑盒 2. 白盒
+按照测试目的：
+1. 功能测试
+单元测试 功能测试 集成测试 场景测试 A/B 测试 2. 非功能测试 压力测试 安全性测试 可访问性测试 其他
+回归测试 易用性测试 还有不少，懒得去整理了..... 代码覆盖率顾名思义，就是测试用例覆盖运行代码的比重。
+后端主要关注哪些测试  单元测试 功能测试 端对端测试 性能测试  0x02 为什么要写测试 来讲讲测试的优点。
+为什么要写测试来覆盖代码。
+ 适当的测试可以让发布代码的时候更加有底气。 适当的测试可以让新手更快的了解代码。 适当的测试可以让程序更容易重构。 适当的测试可以加快团队的开发速度。  既不是不写，也不是狂写一气。看到这里你可能有些疑惑？写测试还加快速度？Are you kidding?
+一个一个来解释吧。
+举个简化版本的例子，『用户下单』到『用户收货』。
+ 用户『查询产品』 用户『使用优惠券』下单 用户『在线支付』。当然，用户也可以让不付款，让订单失效。或者直接取消订单。 商家『确认发货』。 物流公司更新运单『发货中』。 用户『确认收货』。当然，用户也可以发起退款。  让新手更快的了解代码 测试用例里的数据，往往是能跑通某段代码的最佳测试数据集合。
+假如，有个程序员写了 『下单-在线支付-确认收货』的集成测试。作为刚接手这段代码的人。可以在最短的时间内，通过阅读测试代码从而理解整个流程。</div><div class="post-footer">
         <a href="/posts/20190216_pycode_02/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">系列文章</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20190310_pycode_05/">为你的项目快速搭建 ELKFA 日志系统</a>
     </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-10">2019-03-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第五篇文章。
- 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能  第五篇，即本文 讲的是日志系统 ELKFA 的搭建
-0x00 前言 : section ▼ 0x01 任务 1: 分析 Nginx 日志 : section 第一步：配置 Nginx : section 第二步：拉取 Nginx 日志 : section 第三步：开启 ELFKA : section 第四步：日志探秘 : section 第五步：扩展思考，日志解决方案 : section ▼ 0x02 任务 2: 监控 Flask App 的 APM : section 第一步：开启 ELFKA : section 第二步：开启 flask app : section 第三步：APM 探秘 : section 第四步：扩展思考 : section ▼ 0x03 结论 : section 0xEE 参考链接 : section 0x00 前言 什么是 ELKFA?</div><div class="post-footer">
+讲的是日志系统 ELKFA 的搭建
+0x00 前言 什么是 ELKFA?
+这五个字母分别代表着五个开源软件
+ E - ElasticSearch L - Logstash K - Kibana F - FileBeat A - APM-Server  利用这五个软件的组合，我们可以在比较短的时间打造两个系统：
+ 日志系统，分析 Nginx 日志，Gunicorn 日志，Flask 日志，Django 日志 APM 系统，解决两个问题 2.1 Metric 分析：Flask 是否正常运行，接口请求信息定期发送到 APMServer 这边，方便我观察服务是否正常，接口和业务逻辑的执行的时间是否在预期范围内。 2.2 Trouble Shooting: 如果程序报了异常，我想把需要报的异常堆栈信息打出。方便我快速的 Trouble Shooting  0x01 任务 1: 分析 Nginx 日志 Nginx 众所周知，Nginx 日志是个宝库，所以本文选取了 Nginx 作为日志分析的案例。
+对于 Nginx 日志，可以采用 FileBeat 上传到 Logstash, 由 Logstash 对文件进行解析，并存储到 ElasticSearch</div><div class="post-footer">
         <a href="/posts/20190310_pycode_05/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">系列文章</a></div></div>
 </article>
@@ -105,11 +119,17 @@
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20190309_pycode_04/">这几招，让你快速提升 Python 项目的性能</a>
     </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-05">2019-03-05</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第四篇文章。
-第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性
-第四篇，即本文，9012 年
- 当你觉得某个地方运行比较慢了，此时此刻的你，有哪些小技巧可以快速的帮 你定位性能问题。
- 目录如下
-▼ 这几招，让你快速提升 Python 项目的性能 : section 0x00 前言 : section ▼ 0x01 Python 优化的五件武器 : section 第一件武器 timeit : section 第二件武器 profile 与 cprofile : section 第三件武器 line profiler : section 第四件武器 memory profiler : section 第五件武器 pympler : section 其他神器 : section ▼ 0x02 优化 Web 项目 : section 提前优化 : section 做好监控 : section ▼ 0x03 性能优化建议 : section 建议 1.</div><div class="post-footer">
+本文讲的是
+**当你觉得某个地方运行比较慢了，此时此刻的你，有哪些小技巧可以快速的帮** **你定位性能问题。** 0x00 前言 本文主要目的在于介绍一些 Python 项目常规的性能优化的姿势与技巧。
+优化的最简单的途径就是，没用户 + 调用次数少
+嗯？但这种优化方式&hellip;&hellip; 实在是没什么好说的。
+ 优化口诀 1: 先做对，布监控，再做好。 优化口诀 2: 过早优化是万恶之源。 优化口诀 3: 去优化那些需要优化的地方。  即
+ Step 1. Get it right. Step 2. Test it&rsquo;s right. Step 3. Monitor. Step 4. Profile if slow. Step 5. Try Optimize. Step 6. Repeat from 2.  有的人站出来说，我写程序就是要一步到位，把能优化的点一次性搞定。
+请不要听他的，因为优化是无止境的。唯快不破
+能一次写出优雅清晰而且性能高的代码的人，一般很少见到。毕竟需要考虑的点太多了。
+基于上面的认知，代码的可维护性是第一位的。
+ 写代码的首先应该是代码很清晰，非常容易维护。 然后在没有过分降低可维护性的情况下，作出性能的优化。  0x01 Python 优化的五件武器 钟声响起归家的讯号，刚回到家。
+公司群响起加班的讯号，用户反应服务响应总是超时。</div><div class="post-footer">
         <a href="/posts/20190309_pycode_04/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">系列文章</a></div></div>
 </article>
