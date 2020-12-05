@@ -4,7 +4,37 @@
         <link>http://twocucao.xyz/posts/</link>
         <description>所有文章 | 海拉鲁编程客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
-            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Mon, 30 Nov 2020 18:19:17 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/posts/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Wed, 02 Dec 2020 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/posts/" rel="self" type="application/rss+xml" /><item>
+    <title>GraphQL 的一些项目经验</title>
+    <link>http://twocucao.xyz/posts/20180721_graphqlcheatsheet/</link>
+    <pubDate>Wed, 02 Dec 2020 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180721_graphqlcheatsheet/</guid>
+    <description><![CDATA[0x00 前言 本文最早行文于 2018 年中，那时 GraphQL 的生态尚未成熟，也缺乏社区总结的一些经验。
+2020 年末，复盘一下 GraphQL 的一些使用经验。
+名词约定  接口生产端 / 服务端 下面统一称「生产端」 接口消费端 / 客户端 下面统一称「消费端」  0x01 流水的技术方案，铁打的需求。 年幼时看笑傲江湖，华山派两派居然为了剑宗和气宗争个你死我活。
+觉得甚是幼稚。
+年纪渐大之后发现社会处处充满着这种荒谬的争论。
+ 剑宗 or 气宗 自然美 or 人造美 Java or Python Editor or IDE Rest or GraphQL 单体应用 or 微服务   剑招是死的，人是活的。
+ 打个比方，当讨论问题的时候，下面两个问题意义可能并不是很大。
+ 用剑宗初学者和气宗高手比，或者相反，这个完全没有多大意义？ 用剑宗初学者和气宗初学者比，有一点意义，但意义也不是很大。  GraphQL 作为挑战者，下面几个问题是很有意义的。
+GraphQL 相比于原先成熟稳定的方案，GraphQL
+ 现有方案存在哪些问题？ 新方案解决了哪些原先没有解决的问题。 新方案更低成本解决了哪些问题。 现有的痛点是否存在一些新老方案都无法解决的问题。 有无前车之鉴，有无社区最佳实践。 迁移成本和学习成本是多少。 回滚成本多少。  0x02 RESTful 的缺点 RESTful 有很多接口上最佳实践，但生搬硬套就会使得接口比较诡异。]]></description>
+</item><item>
+    <title>React Stack</title>
+    <link>http://twocucao.xyz/posts/20201202_react_stack/</link>
+    <pubDate>Wed, 02 Dec 2020 18:59:58 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20201202_react_stack/</guid>
+    <description><![CDATA[0x00 前言 16 年~20 年先后折腾过
+ vue 2 angular 4 react class component angular 4 react hooks vue 3  综合考虑了
+ 开发工具链 社区生态 跨端方案 与 Typescript 的结合程度  最后形成了较为稳定的 react 技术栈
+0x01 桌面端 https://github.com/twocucao/react-starter
+ react hooks typescript mobx css tailwindcss format with prettier lint with eslint  0x02 移动端 https://github.com/twocucao/react-starter
+0x03 小程序端 https://github.com/twocucao/react-starter-remaxjs
+https://github.com/twocucao/react-starter-taro
+ All Feature Supported By RemaxJS Type Hint - Typescript for better multi-user developing experience style management - tailwind like utils which called minimal.]]></description>
+</item><item>
     <title>Modern Shell</title>
     <link>http://twocucao.xyz/posts/20201201_modern_shell/</link>
     <pubDate>Mon, 30 Nov 2020 18:19:17 &#43;0800</pubDate>
@@ -93,28 +123,5 @@ import cProfile import re cProfile.run(&#39;re.compile(&#34;foo|bar&#34;)&#39;) 
  背景：
 Pythonista &amp;&amp; Nodejs 工作机 MBP 2017 款机器 生活机 Surface Pro 6, 轻办公，有时也用来调试 Windows 上的程序。  本文目录
 ▼ 0x00 前言 : section 0x01 文件整理 : section ▼ 0x02 自带功能 : section 2.1 快捷键 : section 2.2 触摸板 : section 2.3 Win+R -- 运行 : section ▼ 0x03 必备软件 : section 3.1 文件管理 : section 3.2 资讯浏览 : section 3.]]></description>
-</item><item>
-    <title>如何通过测试提升 Python 代码的健壮性</title>
-    <link>http://twocucao.xyz/posts/20190216_pycode_02/</link>
-    <pubDate>Sat, 23 Mar 2019 21:57:40 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20190216_pycode_02/</guid>
-    <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第二篇文章。
-本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
- 用 Type Annotation 提升你的 Python 代码健壮性 https://zhuanlan.zhihu.com/p/56863684  0x00 前言 本文的更多的是写给 Python 后端的程序员。
-来简单分享一下我对写测试的理解。
-在上一篇文章中，我提到了代码覆盖率，即测试的一种指标。
-本期就聊聊测试这件小事情。
-本文目录如下：
-▼ 如何通过测试提升 Python 代码的健壮性 : section 0x00 前言 : section ▼ 0x01 测试的分类 : section 后端主要关注哪些测试 : section ▼ 0x02 为什么要写测试 : section 让新手更快的了解代码 : section 让发布代码的时候更加有底气 : section 让程序更容易重构 : section 加快团队的开发速度 : section ▼ 0x03 为什么不要写测试 : section 测试不能解决的问题 : section 不适当的测试为什么是负担 : section 并不是所有地方都容易测试的 : section ▼ 0x04 写 Python 测试的一些注意事项 : section 项目的环境隔离 : section 测试的基本环境 : section 单测 / 功测 / 端对端 : section 如何处理外部服务 : section 其他 Pytest 小技巧 : section 0xEE 参考 : section 0x01 测试的分类 测试有很多种，]]></description>
-</item><item>
-    <title>为你的项目快速搭建 ELKFA 日志系统</title>
-    <link>http://twocucao.xyz/posts/20190310_pycode_05/</link>
-    <pubDate>Sun, 10 Mar 2019 21:57:40 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>http://twocucao.xyz/posts/20190310_pycode_05/</guid>
-    <description><![CDATA[本文是《提升你的 Python 项目代码健壮性和性能》系列的第五篇文章。
- 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能  第五篇，即本文 讲的是日志系统 ELKFA 的搭建
-0x00 前言 : section ▼ 0x01 任务 1: 分析 Nginx 日志 : section 第一步：配置 Nginx : section 第二步：拉取 Nginx 日志 : section 第三步：开启 ELFKA : section 第四步：日志探秘 : section 第五步：扩展思考，日志解决方案 : section ▼ 0x02 任务 2: 监控 Flask App 的 APM : section 第一步：开启 ELFKA : section 第二步：开启 flask app : section 第三步：APM 探秘 : section 第四步：扩展思考 : section ▼ 0x03 结论 : section 0xEE 参考链接 : section 0x00 前言 什么是 ELKFA?]]></description>
 </item></channel>
 </rss>

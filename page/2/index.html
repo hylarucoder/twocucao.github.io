@@ -10,7 +10,7 @@
 <meta property="og:description" content="Get Busy is My New Hugo Site" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://twocucao.xyz/" />
-<meta property="og:updated_time" content="2020-11-30T18:14:14+08:00" />
+<meta property="og:updated_time" content="2020-12-02T18:59:58+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="海拉鲁编程客"/>
 <meta name="twitter:description" content="Get Busy is My New Hugo Site"/>
@@ -72,6 +72,27 @@
         data-sizes="auto"
         alt="https://avatars0.githubusercontent.com/u/5625783"
         title="https://avatars0.githubusercontent.com/u/5625783" /></a></div><h1 class="home-title">海拉鲁编程客</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20190216_pycode_02/">如何通过测试提升 Python 代码的健壮性</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-23">2019-03-23</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第二篇文章。
+本系列仅仅从笔者的项目经历来讲解一些提升代码健壮性的姿势和小技巧。
+ 用 Type Annotation 提升你的 Python 代码健壮性 https://zhuanlan.zhihu.com/p/56863684  0x00 前言 本文的更多的是写给 Python 后端的程序员。
+来简单分享一下我对写测试的理解。
+在上一篇文章中，我提到了代码覆盖率，即测试的一种指标。
+本期就聊聊测试这件小事情。
+本文目录如下：
+▼ 如何通过测试提升 Python 代码的健壮性 : section 0x00 前言 : section ▼ 0x01 测试的分类 : section 后端主要关注哪些测试 : section ▼ 0x02 为什么要写测试 : section 让新手更快的了解代码 : section 让发布代码的时候更加有底气 : section 让程序更容易重构 : section 加快团队的开发速度 : section ▼ 0x03 为什么不要写测试 : section 测试不能解决的问题 : section 不适当的测试为什么是负担 : section 并不是所有地方都容易测试的 : section ▼ 0x04 写 Python 测试的一些注意事项 : section 项目的环境隔离 : section 测试的基本环境 : section 单测 / 功测 / 端对端 : section 如何处理外部服务 : section 其他 Pytest 小技巧 : section 0xEE 参考 : section 0x01 测试的分类 测试有很多种，</div><div class="post-footer">
+        <a href="/posts/20190216_pycode_02/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">系列文章</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20190310_pycode_05/">为你的项目快速搭建 ELKFA 日志系统</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-10">2019-03-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div><div class="content">本文是《提升你的 Python 项目代码健壮性和性能》系列的第五篇文章。
+ 第一篇，讲的是如何 用 Type Annotation 提升你的 Python 代码健壮性 第二篇，讲的是 如何通过测试提升 Python 代码的健壮性 第三篇，讲的是在一定并发量的情况下，如何保证 Django 项目的数据一致性 第四篇，讲的是如何定位性能问题 这几招，让你快速提升 Python 项目的性能  第五篇，即本文 讲的是日志系统 ELKFA 的搭建
+0x00 前言 : section ▼ 0x01 任务 1: 分析 Nginx 日志 : section 第一步：配置 Nginx : section 第二步：拉取 Nginx 日志 : section 第三步：开启 ELFKA : section 第四步：日志探秘 : section 第五步：扩展思考，日志解决方案 : section ▼ 0x02 任务 2: 监控 Flask App 的 APM : section 第一步：开启 ELFKA : section 第二步：开启 flask app : section 第三步：APM 探秘 : section 第四步：扩展思考 : section ▼ 0x03 结论 : section 0xEE 参考链接 : section 0x00 前言 什么是 ELKFA?</div><div class="post-footer">
+        <a href="/posts/20190310_pycode_05/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/%E7%B3%BB%E5%88%97%E6%96%87%E7%AB%A0/">系列文章</a></div></div>
+</article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20190308_pycode_03/">如何保证 Django 项目的数据一致性</a>
     </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2019-03-08">2019-03-08</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/python-%E9%A1%B9%E7%9B%AE%E4%BB%A3%E7%A0%81%E5%81%A5%E5%A3%AE%E6%80%A7%E5%92%8C%E6%80%A7%E8%83%BD/"><i class="far fa-folder fa-fw"></i>Python 项目代码健壮性和性能</a></span></div><div class="content">0x00 前言 本文是《提升你的 Python 项目代码健壮性和性能》系列的第三篇文章。
@@ -192,27 +213,6 @@ Why, Why, Why? 就是因为不喜欢类型，也不喜欢特别动态的语言�
         <a href="/posts/20180904_%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%85%A5%E9%97%A8%E7%AC%94%E8%AE%B0/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/web-develop/">Web Develop</a></div></div>
 </article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20180829_golang/">写给 Pythonista 的 Golang 入门指北</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-08-29">2018-08-29</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/golang/"><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class="content">原计划是去年 8 月份入 Golang 大法的，然后开一篇帖子进行写个入门指北来着。这一拖就拖到了今年。
-同样是快速上手教程，这篇文章和其他的文章的不同点在于，完全假设你是 Pythonista 的入门。
-0x00 前言 0x01 安装 Golang 安装
-# 如果你是在 mac 上，建议先安装下面的 SDK 以防不测 open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg # 安装 golang brew install golang # 配置环境变量 echo $GOPATH # /Users/twocucao/Codes/ReposGo cd /Users/twocucao/Codes/ReposPublic/ mkcd thanos # mkdir &amp;&amp; cd go mod init github.com/twocucao/thanos git remote add origin git@github.com:twocucao/thanos.git 接下来，需要解决卡 golang.org 的网络问题。
-export GOPROXY=https://goproxy.io go get -v -u github.com/hqpko/go-mod-tidy go mod tidy 接下来就是随便找一些带有依赖库的代码。放到该文件夹下面。
-你也可以直接从这里 https://github.com/twocucao/thanos.git 拉取代码
-0x01 基本概念 工具链 文档 社区 书籍 内置简单类型 对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</div><div class="post-footer">
-        <a href="/posts/20180829_golang/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/golang/">Golang</a>,&nbsp;<a href="/tags/cheatsheat/">CheatSheat</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20180801_vueprojecttalking/">Vue 项目漫谈 2018 版</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-08-01">2018-08-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"><i class="far fa-folder fa-fw"></i>前端开发</a></span></div><div class="content">0x00 前言 之前草草整理过一些 Vue 的小技巧，最近温习了一遍文档，重聊一遍。
-鉴于 VueCLI 越做越臃肿，我最后还是选择了自己搭架子。
-https://github.com/twocucao/vue-starter-kit
-0x01 项目结构 # 根文件 public/ # 部署文件 src/ # 源码 .babelrc .editorconfig .eslintignore .eslintrc .gitignore .postcssrc.js LICENSE README.md jsconfig.json package-lock.json package.json webpack.common.js webpack.dev.js webpack.dll.js webpack.prod.js # 在 src 文件夹下面 api # 相关的 Web API 定义 assets # 静态资源，对于已经压缩的，还是直接放在 Static 下面 components # 公用组件 mixins # mixin directives # 定义指令，比如 v-loading pages # 页面 store # Store App.vue # CORE 组件 consts.js #定义常量名称 index.</div><div class="post-footer">
-        <a href="/posts/20180801_vueprojecttalking/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vuejs/">VueJS</a>,&nbsp;<a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/">项目经验</a></div></div>
-</article>
 <ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -233,7 +233,7 @@ https://github.com/twocucao/vue-starter-kit
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/10/">10</a>
+                        <a href="/page/11/">11</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

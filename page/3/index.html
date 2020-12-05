@@ -10,7 +10,7 @@
 <meta property="og:description" content="Get Busy is My New Hugo Site" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://twocucao.xyz/" />
-<meta property="og:updated_time" content="2020-11-30T18:14:14+08:00" />
+<meta property="og:updated_time" content="2020-12-02T18:59:58+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="海拉鲁编程客"/>
 <meta name="twitter:description" content="Get Busy is My New Hugo Site"/>
@@ -73,23 +73,33 @@
         alt="https://avatars0.githubusercontent.com/u/5625783"
         title="https://avatars0.githubusercontent.com/u/5625783" /></a></div><h1 class="home-title">海拉鲁编程客</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"></div></div>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20180829_golang/">写给 Pythonista 的 Golang 入门指北</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-08-29">2018-08-29</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/golang/"><i class="far fa-folder fa-fw"></i>Golang</a></span></div><div class="content">原计划是去年 8 月份入 Golang 大法的，然后开一篇帖子进行写个入门指北来着。这一拖就拖到了今年。
+同样是快速上手教程，这篇文章和其他的文章的不同点在于，完全假设你是 Pythonista 的入门。
+0x00 前言 0x01 安装 Golang 安装
+# 如果你是在 mac 上，建议先安装下面的 SDK 以防不测 open /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg # 安装 golang brew install golang # 配置环境变量 echo $GOPATH # /Users/twocucao/Codes/ReposGo cd /Users/twocucao/Codes/ReposPublic/ mkcd thanos # mkdir &amp;&amp; cd go mod init github.com/twocucao/thanos git remote add origin git@github.com:twocucao/thanos.git 接下来，需要解决卡 golang.org 的网络问题。
+export GOPROXY=https://goproxy.io go get -v -u github.com/hqpko/go-mod-tidy go mod tidy 接下来就是随便找一些带有依赖库的代码。放到该文件夹下面。
+你也可以直接从这里 https://github.com/twocucao/thanos.git 拉取代码
+0x01 基本概念 工具链 文档 社区 书籍 内置简单类型 对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</div><div class="post-footer">
+        <a href="/posts/20180829_golang/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/golang/">Golang</a>,&nbsp;<a href="/tags/cheatsheat/">CheatSheat</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20180801_vueprojecttalking/">Vue 项目漫谈 2018 版</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-08-01">2018-08-01</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/"><i class="far fa-folder fa-fw"></i>前端开发</a></span></div><div class="content">0x00 前言 之前草草整理过一些 Vue 的小技巧，最近温习了一遍文档，重聊一遍。
+鉴于 VueCLI 越做越臃肿，我最后还是选择了自己搭架子。
+https://github.com/twocucao/vue-starter-kit
+0x01 项目结构 # 根文件 public/ # 部署文件 src/ # 源码 .babelrc .editorconfig .eslintignore .eslintrc .gitignore .postcssrc.js LICENSE README.md jsconfig.json package-lock.json package.json webpack.common.js webpack.dev.js webpack.dll.js webpack.prod.js # 在 src 文件夹下面 api # 相关的 Web API 定义 assets # 静态资源，对于已经压缩的，还是直接放在 Static 下面 components # 公用组件 mixins # mixin directives # 定义指令，比如 v-loading pages # 页面 store # Store App.vue # CORE 组件 consts.js #定义常量名称 index.</div><div class="post-footer">
+        <a href="/posts/20180801_vueprojecttalking/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/vuejs/">VueJS</a>,&nbsp;<a href="/tags/%E9%A1%B9%E7%9B%AE%E7%BB%8F%E9%AA%8C/">项目经验</a></div></div>
+</article>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20180727_tonecolor/">Tone Color</a>
     </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-07-27">2018-07-27</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E6%91%84%E5%BD%B1%E6%91%84%E5%83%8F/"><i class="far fa-folder fa-fw"></i>摄影摄像</a></span></div><div class="content">0x00 前言 不定期更新。
 0x01 摄影与录像 0x02 接口 0x03 Sony 录像 Picture Profile PP1: &quot;Movie&quot; PP2: &quot;Still&quot; PP3: &quot;Natural&quot; PP4: &quot;Faithful&quot; PP5: &quot;Cine1&quot; PP6: &quot;Cine2&quot; PP7: &quot;S-Log2&quot; PP8: &quot;S-Log3&quot; [S-Gamut3.Cine] PP9: &quot;S-Log3&quot; [S-Gamut3] 0xEE 参考链接  ChangeLog:
  2018-07-27 初始化本文  </div><div class="post-footer">
         <a href="/posts/20180727_tonecolor/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E8%B0%83%E8%89%B2/">调色</a></div></div>
-</article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20180721_graphqlcheatsheet/">GraphQL CheetSheet</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-07-21">2018-07-21</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/web-%E5%BC%80%E5%8F%91/"><i class="far fa-folder fa-fw"></i>Web 开发</a></span></div><div class="content">0x00 前言 不定期更新。
-0x01 开接口这件小事情 开接口，究竟什么样的接口才是一个好接口？
- 刚开始的时候，后台开接口都是比较随便，本着方便，快速的方式一个一个接口的开。 后来呢？觉得接口开出来没有最佳实践，所以有人提出 Restful 的开接口姿势。 Swagger, DjangorestFramework, 以及 Apistar 便是这种最佳实践的代表性项目 再后来呢？Facebook 又搞了套自己的开接口姿势叫做 GraphQL, graphene-python , graphene-js , apollo-client , apollo-server 便是这种最佳实践的代表性项目  开接口注意点  尽量做到代码即文档。 便于前端调试。 分页处理。 API 版本管理。 额外的语义。 校验。 权限。  不管是 Restful 的实现，还是 GraphQL 的实现，在 1/2/5 上面做的非常优秀了。
-拿 Restful 的实现 DjangoRestframework 来说，直接可以在 ApiView 的注释里面写 Markdown 语法，兼容 payload 和 form 表单调试。内置 Serializer 进行序列化和校验。
-DRF 还是一个功能非常全面的框架。 PS: 如果你是不折腾的 Django 用户，DRF 绝对让你欲罢不能。
-开接口不能解决的问题  业务逻辑的沟通问题</div><div class="post-footer">
-        <a href="/posts/20180721_graphqlcheatsheet/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/graphql/">GraphQL</a>,&nbsp;<a href="/tags/restful/">Restful</a></div></div>
 </article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20180718_portrait/">人像摄影指北</a>
@@ -203,18 +213,6 @@ v2 时候，
         <a href="/posts/20180516_pycondjango/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/django/">Django</a></div></div>
 </article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20180428_djangoormcheatsheet/">DjangoORM CheatSheet</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-04-28">2018-04-28</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/django/"><i class="far fa-folder fa-fw"></i>Django</a></span></div><div class="content">本文是《Python ORM 三部曲的第二部 - Django ORM 的用法 / 原理 / 优化》
-上一部的地址为《Python ORM 三部曲的第一部 - Python ORM 的三种实现模式》
-本文基于最新 Django 版本
- 模型定义 Create/Update/Delete 各种查询 / 链式调用 / F 表达式 / Window 函数 /Lazy Loading / Eager Loading Join DEBUG 和 Profile 技巧  本文是《Python ORM 三部曲的第一部 - Python 的三种数据源架构模式》
-本文适用于：
- 好奇 or 喜欢折腾的程序员 想深入了解 ORM 的程序员  本文将解决你以下的疑惑：
- 能不能不用 ORM? ORM 为什么在某些场景下会胜于写 SQL 不同的 ORM 实现机制会带来什么差异？  0x00 前言 新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。</div><div class="post-footer">
-        <a href="/posts/20180428_djangoormcheatsheet/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/orm/">ORM</a></div></div>
-</article>
 <ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -239,7 +237,7 @@ v2 时候，
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/10/">10</a>
+                        <a href="/page/11/">11</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

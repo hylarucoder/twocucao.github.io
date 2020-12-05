@@ -10,7 +10,7 @@
 <meta property="og:description" content="Get Busy is My New Hugo Site" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="http://twocucao.xyz/" />
-<meta property="og:updated_time" content="2020-11-30T18:14:14+08:00" />
+<meta property="og:updated_time" content="2020-12-02T18:59:58+08:00" />
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="海拉鲁编程客"/>
 <meta name="twitter:description" content="Get Busy is My New Hugo Site"/>
@@ -72,6 +72,18 @@
         data-sizes="auto"
         alt="https://avatars0.githubusercontent.com/u/5625783"
         title="https://avatars0.githubusercontent.com/u/5625783" /></a></div><h1 class="home-title">海拉鲁编程客</h1><h2 class="home-subtitle"><div id="id-1" class="typeit"></div></h2><div class="links"></div></div>
+<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
+        <a href="/posts/20180428_djangoormcheatsheet/">DjangoORM CheatSheet</a>
+    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-04-28">2018-04-28</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/django/"><i class="far fa-folder fa-fw"></i>Django</a></span></div><div class="content">本文是《Python ORM 三部曲的第二部 - Django ORM 的用法 / 原理 / 优化》
+上一部的地址为《Python ORM 三部曲的第一部 - Python ORM 的三种实现模式》
+本文基于最新 Django 版本
+ 模型定义 Create/Update/Delete 各种查询 / 链式调用 / F 表达式 / Window 函数 /Lazy Loading / Eager Loading Join DEBUG 和 Profile 技巧  本文是《Python ORM 三部曲的第一部 - Python 的三种数据源架构模式》
+本文适用于：
+ 好奇 or 喜欢折腾的程序员 想深入了解 ORM 的程序员  本文将解决你以下的疑惑：
+ 能不能不用 ORM? ORM 为什么在某些场景下会胜于写 SQL 不同的 ORM 实现机制会带来什么差异？  0x00 前言 新工作的技术栈是以 Flask 为主，SQLAlchemy 是 许多玩 Flask 的人的标配。好，文档读起来，笔记搞起来。</div><div class="post-footer">
+        <a href="/posts/20180428_djangoormcheatsheet/">阅读全文</a><div class="post-tags">
+                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/orm/">ORM</a></div></div>
+</article>
 <article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
         <a href="/posts/20180331_sqlalchemycheatsheet/">SQLAlchemy CheatSheet</a>
     </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-03-31">2018-03-31</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/flask/"><i class="far fa-folder fa-fw"></i>Flask</a></span></div><div class="content">SQLAlchemy 入门，看本文就好了
@@ -188,22 +200,6 @@ Vue 自称为 Vue 渐进式 JavaScript 框架。
         <a href="/posts/20180220_unknowncheatsheet/">阅读全文</a><div class="post-tags">
                 <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/python/">Python</a>,&nbsp;<a href="/tags/django/">Django</a>,&nbsp;<a href="/tags/yadjangoblog/">YaDjangoBlog</a></div></div>
 </article>
-<article class="single summary" itemscope itemtype="http://schema.org/Article"><h1 class="single-title" itemprop="name headline">
-        <a href="/posts/20180210_dockercheatsheet/">Docker CheatSheet</a>
-    </h1><div class="post-meta"><span class="post-author"><a href="http://twocucao.xyz" title="Author" target="_blank" rel="noopener noreffer author" class="author"><i class="fas"></i>twocucao</a></span>&nbsp;<span class="post-publish">发布于 <time datetime="2018-02-10">2018-02-10</time></span>&nbsp;<span class="post-category">收录于 <a href="/categories/devops/"><i class="far fa-folder fa-fw"></i>DevOps</a></span></div><div class="content">0x00 前言 本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。
- Docker 相关概念 Docker 配套工具 Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化 Docker 踩坑记录  不定期更新。
-0x01 Docker 相关概念 1.1 Docker 是什么？ 在认知 Docker 这种相对而言比较新概念的时候，只要从以往的经验中拿出一个词语来概括新词汇即可。
-于是，我们便可以这么理解：
- Docker 是一种比虚拟机轻量的用来存放职责比较单一的应用的容器。
- 也就是三点：
- 比虚拟机轻量 用来存放职责单一的应用 容器  显然这是一种理解，而不是一种定义。
-1.2 Docker 是用来做什么的？ 新技术本质是什么？工具也。 每一个新的技术都是为了提升效率才被创造出来，那么，究竟 Docker 可以从哪些方面提升我们的效率呢？
-我们知道开发一个有些规模的网站的话，需要严格遵守如下的开发流程：
- 编码 测试 集成到系统中 部署  但如果人员比较多，则会出现问题，有的人喜欢用 MacOS, 有的人喜欢用 Ubuntu, 开发测试环境怎么统一呢？如果开发人员明明使用的是某个版本的 PostgreSQL, 用了最新的功能，但是测试和运维用的就是老版本的功能怎么办？
-部署环境也会有问题，比如，开发部突然想使用更高版本的软件，比如突然需要更多的 Django 应用来负担海量请求的怎么办？Hadoop 不够用怎么办？</div><div class="post-footer">
-        <a href="/posts/20180210_dockercheatsheet/">阅读全文</a><div class="post-tags">
-                <i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/cheatsheet/">CheatSheet</a></div></div>
-</article>
 <ul class="pagination"><li class="page-item ">
                     <span class="page-link">
                         <a href="/">1</a>
@@ -232,7 +228,7 @@ Vue 自称为 Vue 渐进式 JavaScript 框架。
                     <span class="page-link" aria-hidden="true">&hellip;</span>
                 </li><li class="page-item ">
                     <span class="page-link">
-                        <a href="/page/10/">10</a>
+                        <a href="/page/11/">11</a>
                     </span>
                 </li></ul></div></div>
             </main><footer class="footer">

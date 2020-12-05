@@ -4,7 +4,23 @@
         <link>http://twocucao.xyz/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/</link>
         <description>系统设计 - 分类 - 海拉鲁编程客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
-            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Sun, 10 Feb 2019 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Wed, 02 Dec 2020 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1/" rel="self" type="application/rss+xml" /><item>
+    <title>GraphQL 的一些项目经验</title>
+    <link>http://twocucao.xyz/posts/20180721_graphqlcheatsheet/</link>
+    <pubDate>Wed, 02 Dec 2020 21:57:40 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20180721_graphqlcheatsheet/</guid>
+    <description><![CDATA[0x00 前言 本文最早行文于 2018 年中，那时 GraphQL 的生态尚未成熟，也缺乏社区总结的一些经验。
+2020 年末，复盘一下 GraphQL 的一些使用经验。
+名词约定  接口生产端 / 服务端 下面统一称「生产端」 接口消费端 / 客户端 下面统一称「消费端」  0x01 流水的技术方案，铁打的需求。 年幼时看笑傲江湖，华山派两派居然为了剑宗和气宗争个你死我活。
+觉得甚是幼稚。
+年纪渐大之后发现社会处处充满着这种荒谬的争论。
+ 剑宗 or 气宗 自然美 or 人造美 Java or Python Editor or IDE Rest or GraphQL 单体应用 or 微服务   剑招是死的，人是活的。
+ 打个比方，当讨论问题的时候，下面两个问题意义可能并不是很大。
+ 用剑宗初学者和气宗高手比，或者相反，这个完全没有多大意义？ 用剑宗初学者和气宗初学者比，有一点意义，但意义也不是很大。  GraphQL 作为挑战者，下面几个问题是很有意义的。
+GraphQL 相比于原先成熟稳定的方案，GraphQL
+ 现有方案存在哪些问题？ 新方案解决了哪些原先没有解决的问题。 新方案更低成本解决了哪些问题。 现有的痛点是否存在一些新老方案都无法解决的问题。 有无前车之鉴，有无社区最佳实践。 迁移成本和学习成本是多少。 回滚成本多少。  0x02 RESTful 的缺点 RESTful 有很多接口上最佳实践，但生搬硬套就会使得接口比较诡异。]]></description>
+</item><item>
     <title>秒杀系统的一些注意点</title>
     <link>http://twocucao.xyz/posts/20190210_%E7%A7%92%E6%9D%80%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%B3%A8%E6%84%8F%E7%82%B9/</link>
     <pubDate>Sun, 10 Feb 2019 21:57:40 &#43;0800</pubDate>

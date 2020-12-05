@@ -4,7 +4,21 @@
         <link>http://twocucao.xyz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/</link>
         <description>前端开发 - 分类 - 海拉鲁编程客</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-cn</language><managingEditor>twocucao@gmail.com (twocucao)</managingEditor>
-            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Wed, 01 Aug 2018 21:57:40 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="self" type="application/rss+xml" /><item>
+            <webMaster>twocucao@gmail.com (twocucao)</webMaster><lastBuildDate>Wed, 02 Dec 2020 18:59:58 &#43;0800</lastBuildDate><atom:link href="http://twocucao.xyz/categories/%E5%89%8D%E7%AB%AF%E5%BC%80%E5%8F%91/" rel="self" type="application/rss+xml" /><item>
+    <title>React Stack</title>
+    <link>http://twocucao.xyz/posts/20201202_react_stack/</link>
+    <pubDate>Wed, 02 Dec 2020 18:59:58 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>http://twocucao.xyz/posts/20201202_react_stack/</guid>
+    <description><![CDATA[0x00 前言 16 年~20 年先后折腾过
+ vue 2 angular 4 react class component angular 4 react hooks vue 3  综合考虑了
+ 开发工具链 社区生态 跨端方案 与 Typescript 的结合程度  最后形成了较为稳定的 react 技术栈
+0x01 桌面端 https://github.com/twocucao/react-starter
+ react hooks typescript mobx css tailwindcss format with prettier lint with eslint  0x02 移动端 https://github.com/twocucao/react-starter
+0x03 小程序端 https://github.com/twocucao/react-starter-remaxjs
+https://github.com/twocucao/react-starter-taro
+ All Feature Supported By RemaxJS Type Hint - Typescript for better multi-user developing experience style management - tailwind like utils which called minimal.]]></description>
+</item><item>
     <title>Vue 项目漫谈 2018 版</title>
     <link>http://twocucao.xyz/posts/20180801_vueprojecttalking/</link>
     <pubDate>Wed, 01 Aug 2018 21:57:40 &#43;0800</pubDate>
