@@ -1,0 +1,415 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Thinking In Programming Language | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<p>笔者对于涉猎的语言都是草草了解，深入不敢谈。能用罢了。</p>
+<p>即便是用过几种语言，得出的经验依然是片面的。</p>
+<p>很多人得出一些结论，往往是样本就一个。比如说一个只用过 PHP 的人叫嚣 PHP 是最好的语言。</p>
+<p>所以，我得出的结论，不过是一家之言罢了。</p>
+<p>本文文章就是总结一下，我使用的一些语言的经验，我整理出一个大致的框架，方便我以后切换到其他编程语言可以更顺滑一些。</p>
+<h2 id="0x01-语言胡论"><a class="v-toc-item" href="#0x01-语言胡论">#</a> 0x01 语言胡论</h2>
+<p>在我看来，一个人说他会且只精通一门编程语言是很让我不能理解的事情，在我看来，什么编程语言框架上手两三天就能去写，但是这严格意义上应该叫做能用，和精通相差甚远。那是不是说写的时间长的人经验就老道了呢？也不见得。下棋下了一辈子是烂棋篓子的人比比皆是。</p>
+<p>那我认为什么样子的人才是懂写代码的人。</p>
+<pre><code>拥有良好的组织代码的能力的人。
+</code></pre>
+<p>恩，组织代码的能力，一个文件排布混乱的人，不太可能写出整齐严谨的代码，当然，人也可能是复杂的，比如，这个人写的代码挺好，但是生活住处一团糟。</p>
+<p>当然这是题外话了，依个人经验而言，学习任何一个复杂的系统，也需要像组织一个东西一样，系统性的学习。</p>
+<p>系统化的东西往往像《如何阅读一本书》里面描述一本书的复杂架构那样。</p>
+<pre><code>没有一种物质或产品是绝对简单的。所有的东西都是复杂的组合体。当你看一个整体组成复杂的东西的时候，如果只看它如何呈现一体的面貌，那是还没有掌握精髓，你还必须要明白它怎样呈现多个的面貌，但不是各自为政、互不相干的多个面貌，而是互相融合成有机体的多个面貌。如果组成的各个部分没有有机的关联，仅仅是一个集合体罢了。
+
+这就像是一堆砖头跟一栋又砖头建造起来的房子是有区别的。而单一的房子与建造的房子也不相同。一本书就像是一栋单一的房子。一栋大厦，拥有许多房间，每层楼都有房间，有不同的尺寸和形状，不同的外观，不同的用途，这些房间是独立的，分离的，每个房间都有自己的架构和装潢设计，但却不是完全独立与分离的，这些房间使用普通门 / 拱门 / 走廊 / 楼梯串联起来的，即建筑师错位的动线架构，因为这些架构师彼此联结的，因此每一个部分在整体的使用功能上要贡献出自己的力量。否则这栋房子便是不适合居住的。
+</code></pre>
+<h3 id="独一无二"><a class="v-toc-item" href="#独一无二">#</a> 独一无二</h3>
+<p>有的人认为所有的编程语言都是一样的。</p>
+<p>依我看，所有的编程语言都是有特点的，也是有优缺点的。</p>
+<p>举一个我朋友的爱说的很粗俗的例子：</p>
+<pre><code>虽然说关了灯全都一个样，但是每一个女孩子都有是独一无二的存在。
+</code></pre>
+<p>编程语言也是一样。</p>
+<ul>
+<li>有的偏向于运行效率，有的偏向于开发效率。</li>
+<li>有的据说是让人编程时候感到快乐 (ruby)，有的说你生命苦短，为什么不用 Python。</li>
+<li>有的偏向于 Web 开发 (PHP)，有的偏向于并发操作</li>
+<li>有的是 Windows 上面自动化的小白工具 (Autohotkey)</li>
+<li>有的是据说是一次编译，到处运行 (Java)</li>
+<li>有的是亲妈平台万金油 (C#), 当然，最近也在亲妈的带领下往其他方向前进了。</li>
+</ul>
+<p>编程语言往往是上面这些因素的取舍。</p>
+<ul>
+<li>你要运行效率，往往开发效率就会打折。</li>
+<li>你要开发效率，往往就需要堆更多的机器来提升性能。</li>
+<li>你要充分利用某个平台，往往就没有极高兼容性。</li>
+<li>你要编程语言帮你处理掉不需要考虑的问题，有的程序员就站出来了，你是不相信我控制<br>
+内存的能力么？</li>
+</ul>
+<p>有的语言生态好，比如 对于我定位于全栈工程师（其实是全干工程师）的程序员来说：</p>
+<p>文能写虫爬数据<br>
+武能后端写网站<br>
+进能数据搞 AI<br>
+退能机器跑运维</p>
+<p>十八般武艺武艺样样稀疏的 API 搬运工，那，那就 Python 好了。你还要啥自行车？</p>
+<h2 id="0x02-语言的工具链"><a class="v-toc-item" href="#0x02-语言的工具链">#</a> 0x02 语言的工具链</h2>
+<p>工欲善其事必先利其器</p>
+<h3 id="编辑器-ide"><a class="v-toc-item" href="#编辑器-ide">#</a> 编辑器 &amp;&amp; IDE</h3>
+<p>大学里有个老师喜欢用 Notepad 手撸 Pascal 代码，然后拖到 IDE 里面运行。</p>
+<p>集成开发环境 (IDE) = 编辑器 + 编译器 + 构建系统 + 调试 + 其他编辑提升（补全，重构，格式化）</p>
+<p>到底是 IDE 好，还是 Editor 好。其实你看到这里就差不多明白了。一般情况下，选择<br>
+JetBrain 的 IDE 总是没问题的。</p>
+<p>那么什么情况下，会选择编辑器呢？</p>
+<p>多个</p>
+<p>对于，这个经典的问题，可以这么回答：抓到好猫的猫，你管他是黑猫还是白猫。</p>
+<p>那么，这个问题就变成了另一个问题。编辑器或者 IDE 可以满足我当前的开发工作流么？</p>
+<h3 id="workflow"><a class="v-toc-item" href="#workflow">#</a> Workflow</h3>
+<p>那么，我们从编辑器 + 集成环境</p>
+<ul>
+<li>Mac Homebrew</li>
+<li>开发环境里面的 shell</li>
+<li>cmake</li>
+</ul>
+<h2 id="0x03-语言的学习资源"><a class="v-toc-item" href="#0x03-语言的学习资源">#</a> 0x03 语言的学习资源</h2>
+<p>官网的文档是最应该反复查看的东西，这是我现在依然喜欢强调的。</p>
+<p>而官网的文档也分为四种</p>
+<ul>
+<li>一种是 tutorial – 用于<strong>上手</strong>对应的软件 / 编程语言</li>
+<li>一种是 guide – 用于** Topic Reading **</li>
+<li>一种是 api document – 用于<strong>查看细节</strong></li>
+<li>一种是 RTFSC ( Read The Fucking Source Code ) 阅读源码</li>
+</ul>
+<blockquote>
+<p>注：把 StackOverFlow 中某个标签的 Most Votes 的答案，是除了大略看看 tutorial 之外的另一种快速熟悉入门时候的痛点的手段。</p>
+</blockquote>
+<p>当然，其实代码写的足够好的话本身就是一种注释。</p>
+<h3 id="社区"><a class="v-toc-item" href="#社区">#</a> 社区</h3>
+<p>社区一般情况下都会有的，但有几个网站特别值得提出来</p>
+<ul>
+<li>官网上一般都会放一些比较出色的社区</li>
+<li>Github</li>
+<li>reddit</li>
+<li>某个技术对应的 Weekly 订阅</li>
+</ul>
+<h3 id="书籍"><a class="v-toc-item" href="#书籍">#</a> 书籍</h3>
+<p>特别值得一提的是有一个持续不断阅读到有趣的文章的方法：</p>
+<ol>
+<li>Google 出对应的 书 / Weekly 周报 / 博客，比如 Python Weekly 然后订阅</li>
+<li>接着不断的查看列入优质文章的作者的文章，Github 地址啦，他关注的 Repo 啦等等等等。</li>
+<li>然后去阅读他的代码 / 博客。</li>
+</ol>
+<h2 id="0x04-基础概念"><a class="v-toc-item" href="#0x04-基础概念">#</a> 0x04 基础概念</h2>
+<blockquote>
+<p>程序 = 算法 + 数据结构</p>
+</blockquote>
+<p>这句话当然是不全面的，这句话经典就经典在高度概括了程序中算法和数据结构的重要性，但并不影响这句话在计算机世界里面的地位。</p>
+<p>依我看来，对我的启发是：</p>
+<blockquote>
+<p>我会把 API 的调用和数据结构以及算法想清楚，然后才动手把代码分解成伪代码。最后写成代码。</p>
+</blockquote>
+<h3 id="数据类型"><a class="v-toc-item" href="#数据类型">#</a> 数据类型</h3>
+<p>按照复杂性可划分为：</p>
+<ul>
+<li>简单类型</li>
+<li>复杂类型</li>
+</ul>
+<p>按照复杂性可划分为：</p>
+<ul>
+<li>基本类型</li>
+<li>引用类型</li>
+</ul>
+<p>按照数据结构可划分为：</p>
+<ul>
+<li>集合结构 : 串</li>
+<li>线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，<strong>栈，队列</strong>)</li>
+<li>树形结构 : 树（二叉树，B+ 树，红黑树）</li>
+<li>图形结构 : 图</li>
+</ul>
+<p>对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</p>
+<p>对于复杂的一些数据类型，则需要对数据结构多一些了解。</p>
+<p>比如，对队列而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>
+比如，对 hash 而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>
+比如，对字典而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>
+比如，对字符串而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？</p>
+<p>那字符串来说，Java 推荐使用 StringBuilder 来合并多个字符串，Python 推荐 join 多个字符串等等。</p>
+<h3 id="语句"><a class="v-toc-item" href="#语句">#</a> 语句</h3>
+<ul>
+<li>
+<p>声明语句</p>
+</li>
+<li>
+<p>赋值语句</p>
+</li>
+<li>
+<p>条件语句</p>
+<ol>
+<li>判断的时候不确定操作符优先级的时候，加括号</li>
+<li>尽量显式判断，不要用隐式判断。</li>
+</ol>
+</li>
+<li>
+<p>循环语句</p>
+<ol>
+<li>Break 和 Continue</li>
+</ol>
+</li>
+</ul>
+<h3 id="函数"><a class="v-toc-item" href="#函数">#</a> 函数</h3>
+<ol>
+<li>传值还是传引用</li>
+<li>参数</li>
+</ol>
+<p>函数或者叫做方法，叫法不同。</p>
+<p>函数，我有个很私人的称呼，称它为最小操作模块。</p>
+<p>实际上，在编程的过程中，程序员用面向对象的思想进行编码的人可能真的不是很多。把一段长程序按照自己的需求进行切分成若干个函数的倒是比比皆是。</p>
+<p>不过按照什么样子的标准来切分一段程序为多个函数，仁者见仁智者见智。</p>
+<p>这里面需要注意的事情是：</p>
+<ul>
+<li>
+<ol>
+<li>注意传值（基本类型）和传引用（引用类型）</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>函数重载</li>
+</ol>
+</li>
+</ul>
+<p>对于不同的编程语言，传值（基本类型）和传引用（引用类型）基本上达成了共识。<br>
+但在实现函数重载的时候则是有所不同，</p>
+<p>比如，Java 里面选择了多写几个函数，Python 则没有这个机制，不过，通过默认参数却可以曲线救国，实现这个机制。</p>
+<p>递归<br>
+函数式编程<br>
+高阶函数 mapreduce/ filter / sorted / 返回函数 / 匿名函数 / 装饰器 / 偏函数</p>
+<h4 id="作用域"><a class="v-toc-item" href="#作用域">#</a> 作用域</h4>
+<pre><code class="language-python">def <span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>
+    a <span class="token operator">=</span> <span class="token number">1</span>
+    def <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>
+        a <span class="token operator">=</span> <span class="token number">2</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+
+<span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+# <span class="token number">1</span>
+
+def <span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>
+    a <span class="token operator">=</span> <span class="token number">1</span>
+    def <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>
+        a <span class="token operator">=</span> <span class="token number">2</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+    <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+
+<span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+# <span class="token number">1</span>
+# <span class="token number">1</span>
+def <span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>
+    a <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+    def <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>
+        a<span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+    <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+
+<span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+# <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+# <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span>
+</code></pre>
+<pre><code class="language-javascript"><span class="token keyword">var</span> <span class="token function-variable function">outer</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> <span class="token function-variable function">inner</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        a <span class="token operator">=</span> <span class="token number">2</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+# <span class="token number">1</span>
+# <span class="token number">2</span>
+
+<span class="token keyword">var</span> <span class="token function-variable function">outer</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">var</span> <span class="token function-variable function">inner</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">var</span> a <span class="token operator">=</span> <span class="token number">2</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">inner</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+# <span class="token number">1</span>
+# <span class="token number">1</span>
+</code></pre>
+<h4 id="高阶函数"><a class="v-toc-item" href="#高阶函数">#</a> 高阶函数</h4>
+<ul>
+<li>map</li>
+<li>reduce</li>
+<li>filter</li>
+</ul>
+<h4 id="递归"><a class="v-toc-item" href="#递归">#</a> 递归</h4>
+<h2 id="0x05-中级概念"><a class="v-toc-item" href="#0x05-中级概念">#</a> 0x05 中级概念</h2>
+<h3 id="类和对象"><a class="v-toc-item" href="#类和对象">#</a> 类和对象</h3>
+<p>面向对象有三大概念：</p>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h3 id="模块与包"><a class="v-toc-item" href="#模块与包">#</a> 模块与包</h3>
+<p>模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。</p>
+<p>这里的模块指的是一个包下的函数。</p>
+<h3 id="错误-调试测试"><a class="v-toc-item" href="#错误-调试测试">#</a> 错误 / 调试测试</h3>
+<p>异常处理实际上可以考验一个程序员编写代码的健壮性。</p>
+<p>事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。</p>
+<h3 id="io-编程"><a class="v-toc-item" href="#io-编程">#</a> IO 编程</h3>
+<h3 id="正则表达式"><a class="v-toc-item" href="#正则表达式">#</a> 正则表达式</h3>
+<h2 id="0x06-高级概念"><a class="v-toc-item" href="#0x06-高级概念">#</a> 0x06 高级概念</h2>
+<h3 id="元编程"><a class="v-toc-item" href="#元编程">#</a> 元编程</h3>
+<h3 id="进程"><a class="v-toc-item" href="#进程">#</a> 进程</h3>
+<p>Spawn - 产卵，为什么叫做产卵呢，因为生出大量的 child process<br>
+Spawn = fork + exec</p>
+<h3 id="并发-并行"><a class="v-toc-item" href="#并发-并行">#</a> 并发 / 并行</h3>
+<h4 id="并行架构"><a class="v-toc-item" href="#并行架构">#</a> 并行架构</h4>
+<p>并行并不完全等同与多核并行</p>
+<ol>
+<li>bit-level 并行 : 即 8bit 与 32bit 的区别</li>
+<li>instrction-level 并行：CPU 的并行度：流水线，乱序执行，猜测执行</li>
+<li>data-level 并行：比如 GPU 在调整图像亮度的时候。</li>
+<li>task-level 并行：即多处理器，按照内存模型氛围共享内存模型与分布式内存模型</li>
+</ol>
+<h4 id="七个并发-并行模型"><a class="v-toc-item" href="#七个并发-并行模型">#</a> 七个并发 / 并行模型</h4>
+<ol>
+<li>线程与锁</li>
+<li>函数式编程</li>
+<li>分离标志与状态</li>
+<li>Actor</li>
+<li>通信顺序进程 (CSP)</li>
+<li>数据级并行</li>
+<li>Lambda 架构</li>
+</ol>
+<h4 id="模型-1-线程与锁"><a class="v-toc-item" href="#模型-1-线程与锁">#</a> 模型 1. 线程与锁</h4>
+<p>互斥<br>
+竞态条件<br>
+死锁</p>
+<h5 id="内置锁"><a class="v-toc-item" href="#内置锁">#</a> 内置锁</h5>
+<p>当若干个线程进行对某个变量进行一个非原子性的操作的时候，比如<br>
+(read-modify-write), 就吹出现竞态条件。解决方式就是进行对某个变量使用同步访问 (java 中的 synchronized)。</p>
+<p>内存可见性</p>
+<p>当一个线程使用了多把锁的时候，就可能出现死锁。简单避开死锁的方式就是总是按照一个<br>
+全局的固定思路获取多把锁</p>
+<p>哲学家进餐：五个哲学家围绕着桌子，两边五双筷子，如果饿了，就拿起两边的筷子吃饭。则迟早会出现一个情<br>
+况，所有的哲学家在同一时刻决定吃饭。于是两边都拿不到筷子。</p>
+<p>最终的解决方案就是按照全局的顺序来获取多把锁。</p>
+<h5 id="可重入锁-reentrant-lock"><a class="v-toc-item" href="#可重入锁-reentrant-lock">#</a> 可重入锁 Reentrant Lock</h5>
+<p>可以用 try lock 来和超时时间来避免无尽死锁。</p>
+<p>交替锁，避免锁整个链表，而是锁上下结点。</p>
+<h4 id="模型-2-函数式编程"><a class="v-toc-item" href="#模型-2-函数式编程">#</a> 模型 2. 函数式编程</h4>
+<h4 id="模型-3-分离标志与状态"><a class="v-toc-item" href="#模型-3-分离标志与状态">#</a> 模型 3. 分离标志与状态</h4>
+<h4 id="模型-4-actor"><a class="v-toc-item" href="#模型-4-actor">#</a> 模型 4. Actor</h4>
+<h4 id="模型-5-通信顺序进程-csp"><a class="v-toc-item" href="#模型-5-通信顺序进程-csp">#</a> 模型 5. 通信顺序进程 (CSP)</h4>
+<h4 id="模型-6-数据级并行"><a class="v-toc-item" href="#模型-6-数据级并行">#</a> 模型 6. 数据级并行</h4>
+<h4 id="模型-7-lambda-架构"><a class="v-toc-item" href="#模型-7-lambda-架构">#</a> 模型 7. Lambda 架构</h4>
+<h2 id="0x05-标准库"><a class="v-toc-item" href="#0x05-标准库">#</a> 0x05 标准库</h2>
+<h3 id="数据结构与算法"><a class="v-toc-item" href="#数据结构与算法">#</a> 数据结构与算法</h3>
+<h3 id="字符串与文本"><a class="v-toc-item" href="#字符串与文本">#</a> 字符串与文本</h3>
+<h3 id="数字日期与时间"><a class="v-toc-item" href="#数字日期与时间">#</a> 数字日期与时间</h3>
+<h3 id="迭代器与生成器"><a class="v-toc-item" href="#迭代器与生成器">#</a> 迭代器与生成器</h3>
+<h3 id="文本处理"><a class="v-toc-item" href="#文本处理">#</a> 文本处理</h3>
+<h2 id="0x07-番外篇"><a class="v-toc-item" href="#0x07-番外篇">#</a> 0x07 番外篇</h2>
+<h2 id="0x08-调试和-profile"><a class="v-toc-item" href="#0x08-调试和-profile">#</a> 0x08 调试和 Profile</h2>
+<h3 id="81-测试"><a class="v-toc-item" href="#81-测试">#</a> 8.1 测试</h3>
+<p>hash 算法</p>
+<p>rehash | redis 渐进式 rehash</p>
+<h2 id="0xee-参考"><a class="v-toc-item" href="#0xee-参考">#</a> 0xEE 参考</h2>
+<ul>
+<li><a href="http://www.yinwang.org/blog-cn/2017/07/06/master-pl">http://www.yinwang.org/blog-cn/2017/07/06/master-pl</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-03-21</strong> 初始化本文</li>
+<li><strong>2017-05-11</strong> 增加代码质量模块</li>
+<li><strong>2018-08-29</strong> 重修文字</li>
+<li><strong>2018-09-08</strong> 阅读七周七并发之后，针对并发章节做了补充</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-%E8%AF%AD%E8%A8%80%E8%83%A1%E8%AE%BA">0x01 语言胡论</a>
+<ul>
+<li><a href="#%E7%8B%AC%E4%B8%80%E6%97%A0%E4%BA%8C">独一无二</a></li>
+</ul>
+</li>
+<li><a href="#0x02-%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B7%A5%E5%85%B7%E9%93%BE">0x02 语言的工具链</a>
+<ul>
+<li><a href="#%E7%BC%96%E8%BE%91%E5%99%A8-ide">编辑器 &amp;&amp; IDE</a></li>
+<li><a href="#workflow">Workflow</a></li>
+</ul>
+</li>
+<li><a href="#0x03-%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90">0x03 语言的学习资源</a>
+<ul>
+<li><a href="#%E7%A4%BE%E5%8C%BA">社区</a></li>
+<li><a href="#%E4%B9%A6%E7%B1%8D">书籍</a></li>
+</ul>
+</li>
+<li><a href="#0x04-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5">0x04 基础概念</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">数据类型</a></li>
+<li><a href="#%E8%AF%AD%E5%8F%A5">语句</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0">函数</a>
+<ul>
+<li><a href="#%E4%BD%9C%E7%94%A8%E5%9F%9F">作用域</a></li>
+<li><a href="#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0">高阶函数</a></li>
+<li><a href="#%E9%80%92%E5%BD%92">递归</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x05-%E4%B8%AD%E7%BA%A7%E6%A6%82%E5%BF%B5">0x05 中级概念</a>
+<ul>
+<li><a href="#%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1">类和对象</a></li>
+<li><a href="#%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85">模块与包</a></li>
+<li><a href="#%E9%94%99%E8%AF%AF-%E8%B0%83%E8%AF%95%E6%B5%8B%E8%AF%95">错误 / 调试测试</a></li>
+<li><a href="#io-%E7%BC%96%E7%A8%8B">IO 编程</a></li>
+<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">正则表达式</a></li>
+</ul>
+</li>
+<li><a href="#0x06-%E9%AB%98%E7%BA%A7%E6%A6%82%E5%BF%B5">0x06 高级概念</a>
+<ul>
+<li><a href="#%E5%85%83%E7%BC%96%E7%A8%8B">元编程</a></li>
+<li><a href="#%E8%BF%9B%E7%A8%8B">进程</a></li>
+<li><a href="#%E5%B9%B6%E5%8F%91-%E5%B9%B6%E8%A1%8C">并发 / 并行</a>
+<ul>
+<li><a href="#%E5%B9%B6%E8%A1%8C%E6%9E%B6%E6%9E%84">并行架构</a></li>
+<li><a href="#%E4%B8%83%E4%B8%AA%E5%B9%B6%E5%8F%91-%E5%B9%B6%E8%A1%8C%E6%A8%A1%E5%9E%8B">七个并发 / 并行模型</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B-1-%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%94%81">模型 1. 线程与锁</a>
+<ul>
+<li><a href="#%E5%86%85%E7%BD%AE%E9%94%81">内置锁</a></li>
+<li><a href="#%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81-reentrant-lock">可重入锁 Reentrant Lock</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E5%9E%8B-2-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B">模型 2. 函数式编程</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B-3-%E5%88%86%E7%A6%BB%E6%A0%87%E5%BF%97%E4%B8%8E%E7%8A%B6%E6%80%81">模型 3. 分离标志与状态</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B-4-actor">模型 4. Actor</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B-5-%E9%80%9A%E4%BF%A1%E9%A1%BA%E5%BA%8F%E8%BF%9B%E7%A8%8B-csp">模型 5. 通信顺序进程 (CSP)</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B-6-%E6%95%B0%E6%8D%AE%E7%BA%A7%E5%B9%B6%E8%A1%8C">模型 6. 数据级并行</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B-7-lambda-%E6%9E%B6%E6%9E%84">模型 7. Lambda 架构</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x05-%E6%A0%87%E5%87%86%E5%BA%93">0x05 标准库</a>
+<ul>
+<li><a href="#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95">数据结构与算法</a></li>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%96%87%E6%9C%AC">字符串与文本</a></li>
+<li><a href="#%E6%95%B0%E5%AD%97%E6%97%A5%E6%9C%9F%E4%B8%8E%E6%97%B6%E9%97%B4">数字日期与时间</a></li>
+<li><a href="#%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8">迭代器与生成器</a></li>
+<li><a href="#%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86">文本处理</a></li>
+</ul>
+</li>
+<li><a href="#0x07-%E7%95%AA%E5%A4%96%E7%AF%87">0x07 番外篇</a></li>
+<li><a href="#0x08-%E8%B0%83%E8%AF%95%E5%92%8C-profile">0x08 调试和 Profile</a>
+<ul>
+<li><a href="#81-%E6%B5%8B%E8%AF%95">8.1 测试</a></li>
+</ul>
+</li>
+<li><a href="#0xee-%E5%8F%82%E8%80%83">0xEE 参考</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Python"],"path":"20180908_ThinkingInProgrammingLanguage.md","title":"Thinking In Programming Language","slug":"Thinking In Programming Language","date":"2018-09-08","category":"技术未分类","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cp\u003e笔者对于涉猎的语言都是草草了解，深入不敢谈。能用罢了。\u003c/p\u003e\n\u003cp\u003e即便是用过几种语言，得出的经验依然是片面的。\u003c/p\u003e\n\u003cp\u003e很多人得出一些结论，往往是样本就一个。比如说一个只用过 PHP 的人叫嚣 PHP 是最好的语言。\u003c/p\u003e\n\u003cp\u003e所以，我得出的结论，不过是一家之言罢了。\u003c/p\u003e\n\u003cp\u003e本文文章就是总结一下，我使用的一些语言的经验，我整理出一个大致的框架，方便我以后切换到其他编程语言可以更顺滑一些。\u003c/p\u003e\n\u003ch2 id=\"0x01-语言胡论\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-语言胡论\"\u003e#\u003c/a\u003e 0x01 语言胡论\u003c/h2\u003e\n\u003cp\u003e在我看来，一个人说他会且只精通一门编程语言是很让我不能理解的事情，在我看来，什么编程语言框架上手两三天就能去写，但是这严格意义上应该叫做能用，和精通相差甚远。那是不是说写的时间长的人经验就老道了呢？也不见得。下棋下了一辈子是烂棋篓子的人比比皆是。\u003c/p\u003e\n\u003cp\u003e那我认为什么样子的人才是懂写代码的人。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e拥有良好的组织代码的能力的人。\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e恩，组织代码的能力，一个文件排布混乱的人，不太可能写出整齐严谨的代码，当然，人也可能是复杂的，比如，这个人写的代码挺好，但是生活住处一团糟。\u003c/p\u003e\n\u003cp\u003e当然这是题外话了，依个人经验而言，学习任何一个复杂的系统，也需要像组织一个东西一样，系统性的学习。\u003c/p\u003e\n\u003cp\u003e系统化的东西往往像《如何阅读一本书》里面描述一本书的复杂架构那样。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e没有一种物质或产品是绝对简单的。所有的东西都是复杂的组合体。当你看一个整体组成复杂的东西的时候，如果只看它如何呈现一体的面貌，那是还没有掌握精髓，你还必须要明白它怎样呈现多个的面貌，但不是各自为政、互不相干的多个面貌，而是互相融合成有机体的多个面貌。如果组成的各个部分没有有机的关联，仅仅是一个集合体罢了。\n\n这就像是一堆砖头跟一栋又砖头建造起来的房子是有区别的。而单一的房子与建造的房子也不相同。一本书就像是一栋单一的房子。一栋大厦，拥有许多房间，每层楼都有房间，有不同的尺寸和形状，不同的外观，不同的用途，这些房间是独立的，分离的，每个房间都有自己的架构和装潢设计，但却不是完全独立与分离的，这些房间使用普通门 / 拱门 / 走廊 / 楼梯串联起来的，即建筑师错位的动线架构，因为这些架构师彼此联结的，因此每一个部分在整体的使用功能上要贡献出自己的力量。否则这栋房子便是不适合居住的。\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"独一无二\"\u003e\u003ca class=\"v-toc-item\" href=\"#独一无二\"\u003e#\u003c/a\u003e 独一无二\u003c/h3\u003e\n\u003cp\u003e有的人认为所有的编程语言都是一样的。\u003c/p\u003e\n\u003cp\u003e依我看，所有的编程语言都是有特点的，也是有优缺点的。\u003c/p\u003e\n\u003cp\u003e举一个我朋友的爱说的很粗俗的例子：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e虽然说关了灯全都一个样，但是每一个女孩子都有是独一无二的存在。\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e编程语言也是一样。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e有的偏向于运行效率，有的偏向于开发效率。\u003c/li\u003e\n\u003cli\u003e有的据说是让人编程时候感到快乐 (ruby)，有的说你生命苦短，为什么不用 Python。\u003c/li\u003e\n\u003cli\u003e有的偏向于 Web 开发 (PHP)，有的偏向于并发操作\u003c/li\u003e\n\u003cli\u003e有的是 Windows 上面自动化的小白工具 (Autohotkey)\u003c/li\u003e\n\u003cli\u003e有的是据说是一次编译，到处运行 (Java)\u003c/li\u003e\n\u003cli\u003e有的是亲妈平台万金油 (C#), 当然，最近也在亲妈的带领下往其他方向前进了。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e编程语言往往是上面这些因素的取舍。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e你要运行效率，往往开发效率就会打折。\u003c/li\u003e\n\u003cli\u003e你要开发效率，往往就需要堆更多的机器来提升性能。\u003c/li\u003e\n\u003cli\u003e你要充分利用某个平台，往往就没有极高兼容性。\u003c/li\u003e\n\u003cli\u003e你要编程语言帮你处理掉不需要考虑的问题，有的程序员就站出来了，你是不相信我控制\u003cbr\u003e\n内存的能力么？\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e有的语言生态好，比如 对于我定位于全栈工程师（其实是全干工程师）的程序员来说：\u003c/p\u003e\n\u003cp\u003e文能写虫爬数据\u003cbr\u003e\n武能后端写网站\u003cbr\u003e\n进能数据搞 AI\u003cbr\u003e\n退能机器跑运维\u003c/p\u003e\n\u003cp\u003e十八般武艺武艺样样稀疏的 API 搬运工，那，那就 Python 好了。你还要啥自行车？\u003c/p\u003e\n\u003ch2 id=\"0x02-语言的工具链\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-语言的工具链\"\u003e#\u003c/a\u003e 0x02 语言的工具链\u003c/h2\u003e\n\u003cp\u003e工欲善其事必先利其器\u003c/p\u003e\n\u003ch3 id=\"编辑器-ide\"\u003e\u003ca class=\"v-toc-item\" href=\"#编辑器-ide\"\u003e#\u003c/a\u003e 编辑器 \u0026amp;\u0026amp; IDE\u003c/h3\u003e\n\u003cp\u003e大学里有个老师喜欢用 Notepad 手撸 Pascal 代码，然后拖到 IDE 里面运行。\u003c/p\u003e\n\u003cp\u003e集成开发环境 (IDE) = 编辑器 + 编译器 + 构建系统 + 调试 + 其他编辑提升（补全，重构，格式化）\u003c/p\u003e\n\u003cp\u003e到底是 IDE 好，还是 Editor 好。其实你看到这里就差不多明白了。一般情况下，选择\u003cbr\u003e\nJetBrain 的 IDE 总是没问题的。\u003c/p\u003e\n\u003cp\u003e那么什么情况下，会选择编辑器呢？\u003c/p\u003e\n\u003cp\u003e多个\u003c/p\u003e\n\u003cp\u003e对于，这个经典的问题，可以这么回答：抓到好猫的猫，你管他是黑猫还是白猫。\u003c/p\u003e\n\u003cp\u003e那么，这个问题就变成了另一个问题。编辑器或者 IDE 可以满足我当前的开发工作流么？\u003c/p\u003e\n\u003ch3 id=\"workflow\"\u003e\u003ca class=\"v-toc-item\" href=\"#workflow\"\u003e#\u003c/a\u003e Workflow\u003c/h3\u003e\n\u003cp\u003e那么，我们从编辑器 + 集成环境\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eMac Homebrew\u003c/li\u003e\n\u003cli\u003e开发环境里面的 shell\u003c/li\u003e\n\u003cli\u003ecmake\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x03-语言的学习资源\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-语言的学习资源\"\u003e#\u003c/a\u003e 0x03 语言的学习资源\u003c/h2\u003e\n\u003cp\u003e官网的文档是最应该反复查看的东西，这是我现在依然喜欢强调的。\u003c/p\u003e\n\u003cp\u003e而官网的文档也分为四种\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e一种是 tutorial – 用于\u003cstrong\u003e上手\u003c/strong\u003e对应的软件 / 编程语言\u003c/li\u003e\n\u003cli\u003e一种是 guide – 用于** Topic Reading **\u003c/li\u003e\n\u003cli\u003e一种是 api document – 用于\u003cstrong\u003e查看细节\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e一种是 RTFSC ( Read The Fucking Source Code ) 阅读源码\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e注：把 StackOverFlow 中某个标签的 Most Votes 的答案，是除了大略看看 tutorial 之外的另一种快速熟悉入门时候的痛点的手段。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e当然，其实代码写的足够好的话本身就是一种注释。\u003c/p\u003e\n\u003ch3 id=\"社区\"\u003e\u003ca class=\"v-toc-item\" href=\"#社区\"\u003e#\u003c/a\u003e 社区\u003c/h3\u003e\n\u003cp\u003e社区一般情况下都会有的，但有几个网站特别值得提出来\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e官网上一般都会放一些比较出色的社区\u003c/li\u003e\n\u003cli\u003eGithub\u003c/li\u003e\n\u003cli\u003ereddit\u003c/li\u003e\n\u003cli\u003e某个技术对应的 Weekly 订阅\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"书籍\"\u003e\u003ca class=\"v-toc-item\" href=\"#书籍\"\u003e#\u003c/a\u003e 书籍\u003c/h3\u003e\n\u003cp\u003e特别值得一提的是有一个持续不断阅读到有趣的文章的方法：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eGoogle 出对应的 书 / Weekly 周报 / 博客，比如 Python Weekly 然后订阅\u003c/li\u003e\n\u003cli\u003e接着不断的查看列入优质文章的作者的文章，Github 地址啦，他关注的 Repo 啦等等等等。\u003c/li\u003e\n\u003cli\u003e然后去阅读他的代码 / 博客。\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2 id=\"0x04-基础概念\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x04-基础概念\"\u003e#\u003c/a\u003e 0x04 基础概念\u003c/h2\u003e\n\u003cblockquote\u003e\n\u003cp\u003e程序 = 算法 + 数据结构\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e这句话当然是不全面的，这句话经典就经典在高度概括了程序中算法和数据结构的重要性，但并不影响这句话在计算机世界里面的地位。\u003c/p\u003e\n\u003cp\u003e依我看来，对我的启发是：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e我会把 API 的调用和数据结构以及算法想清楚，然后才动手把代码分解成伪代码。最后写成代码。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch3 id=\"数据类型\"\u003e\u003ca class=\"v-toc-item\" href=\"#数据类型\"\u003e#\u003c/a\u003e 数据类型\u003c/h3\u003e\n\u003cp\u003e按照复杂性可划分为：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e简单类型\u003c/li\u003e\n\u003cli\u003e复杂类型\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e按照复杂性可划分为：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e基本类型\u003c/li\u003e\n\u003cli\u003e引用类型\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e按照数据结构可划分为：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e集合结构 : 串\u003c/li\u003e\n\u003cli\u003e线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，\u003cstrong\u003e栈，队列\u003c/strong\u003e)\u003c/li\u003e\n\u003cli\u003e树形结构 : 树（二叉树，B+ 树，红黑树）\u003c/li\u003e\n\u003cli\u003e图形结构 : 图\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e对于一些基本的数据类型，操作为 加减乘除取余数位运算等等\u003c/p\u003e\n\u003cp\u003e对于复杂的一些数据类型，则需要对数据结构多一些了解。\u003c/p\u003e\n\u003cp\u003e比如，对队列而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？\u003cbr\u003e\n比如，对 hash 而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？\u003cbr\u003e\n比如，对字典而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？\u003cbr\u003e\n比如，对字符串而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？\u003c/p\u003e\n\u003cp\u003e那字符串来说，Java 推荐使用 StringBuilder 来合并多个字符串，Python 推荐 join 多个字符串等等。\u003c/p\u003e\n\u003ch3 id=\"语句\"\u003e\u003ca class=\"v-toc-item\" href=\"#语句\"\u003e#\u003c/a\u003e 语句\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e声明语句\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e赋值语句\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e条件语句\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e判断的时候不确定操作符优先级的时候，加括号\u003c/li\u003e\n\u003cli\u003e尽量显式判断，不要用隐式判断。\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e循环语句\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eBreak 和 Continue\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"函数\"\u003e\u003ca class=\"v-toc-item\" href=\"#函数\"\u003e#\u003c/a\u003e 函数\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e传值还是传引用\u003c/li\u003e\n\u003cli\u003e参数\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e函数或者叫做方法，叫法不同。\u003c/p\u003e\n\u003cp\u003e函数，我有个很私人的称呼，称它为最小操作模块。\u003c/p\u003e\n\u003cp\u003e实际上，在编程的过程中，程序员用面向对象的思想进行编码的人可能真的不是很多。把一段长程序按照自己的需求进行切分成若干个函数的倒是比比皆是。\u003c/p\u003e\n\u003cp\u003e不过按照什么样子的标准来切分一段程序为多个函数，仁者见仁智者见智。\u003c/p\u003e\n\u003cp\u003e这里面需要注意的事情是：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003col\u003e\n\u003cli\u003e注意传值（基本类型）和传引用（引用类型）\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003col start=\"2\"\u003e\n\u003cli\u003e函数重载\u003c/li\u003e\n\u003c/ol\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e对于不同的编程语言，传值（基本类型）和传引用（引用类型）基本上达成了共识。\u003cbr\u003e\n但在实现函数重载的时候则是有所不同，\u003c/p\u003e\n\u003cp\u003e比如，Java 里面选择了多写几个函数，Python 则没有这个机制，不过，通过默认参数却可以曲线救国，实现这个机制。\u003c/p\u003e\n\u003cp\u003e递归\u003cbr\u003e\n函数式编程\u003cbr\u003e\n高阶函数 mapreduce/ filter / sorted / 返回函数 / 匿名函数 / 装饰器 / 偏函数\u003c/p\u003e\n\u003ch4 id=\"作用域\"\u003e\u003ca class=\"v-toc-item\" href=\"#作用域\"\u003e#\u003c/a\u003e 作用域\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003edef \u003cspan class=\"token function\"\u003eouter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n    a \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\n    def \u003cspan class=\"token function\"\u003einner\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n        a \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\n    \u003cspan class=\"token function\"\u003eprint\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ea\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\n\u003cspan class=\"token function\"\u003eouter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\n\ndef \u003cspan class=\"token function\"\u003eouter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n    a \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\n    def \u003cspan class=\"token function\"\u003einner\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n        a \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\n    \u003cspan class=\"token function\"\u003eprint\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ea\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n    \u003cspan class=\"token function\"\u003einner\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n    \u003cspan class=\"token function\"\u003eprint\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ea\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\n\u003cspan class=\"token function\"\u003eouter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\n# \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\ndef \u003cspan class=\"token function\"\u003eouter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n    a \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\n    def \u003cspan class=\"token function\"\u003einner\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n        a\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eappend\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n    \u003cspan class=\"token function\"\u003eprint\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ea\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n    \u003cspan class=\"token function\"\u003einner\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n    \u003cspan class=\"token function\"\u003eprint\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ea\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\n\u003cspan class=\"token function\"\u003eouter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\n# \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e\u003cspan class=\"token keyword\"\u003evar\u003c/span\u003e \u003cspan class=\"token function-variable function\"\u003eouter\u003c/span\u003e \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efunction\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n    \u003cspan class=\"token keyword\"\u003evar\u003c/span\u003e a \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n    \u003cspan class=\"token keyword\"\u003evar\u003c/span\u003e \u003cspan class=\"token function-variable function\"\u003einner\u003c/span\u003e \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efunction\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n        a \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\n    \u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n    console\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003elog\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ea\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n    \u003cspan class=\"token function\"\u003einner\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n    console\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003elog\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ea\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n\u003cspan class=\"token function\"\u003eouter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\n# \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\n\n\u003cspan class=\"token keyword\"\u003evar\u003c/span\u003e \u003cspan class=\"token function-variable function\"\u003eouter\u003c/span\u003e \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efunction\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n    \u003cspan class=\"token keyword\"\u003evar\u003c/span\u003e a \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n    \u003cspan class=\"token keyword\"\u003evar\u003c/span\u003e \u003cspan class=\"token function-variable function\"\u003einner\u003c/span\u003e \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efunction\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n        \u003cspan class=\"token keyword\"\u003evar\u003c/span\u003e a \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\n    \u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n    console\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003elog\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ea\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n    \u003cspan class=\"token function\"\u003einner\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n    console\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003elog\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ea\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n\u003cspan class=\"token function\"\u003eouter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\n# \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"高阶函数\"\u003e\u003ca class=\"v-toc-item\" href=\"#高阶函数\"\u003e#\u003c/a\u003e 高阶函数\u003c/h4\u003e\n\u003cul\u003e\n\u003cli\u003emap\u003c/li\u003e\n\u003cli\u003ereduce\u003c/li\u003e\n\u003cli\u003efilter\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4 id=\"递归\"\u003e\u003ca class=\"v-toc-item\" href=\"#递归\"\u003e#\u003c/a\u003e 递归\u003c/h4\u003e\n\u003ch2 id=\"0x05-中级概念\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x05-中级概念\"\u003e#\u003c/a\u003e 0x05 中级概念\u003c/h2\u003e\n\u003ch3 id=\"类和对象\"\u003e\u003ca class=\"v-toc-item\" href=\"#类和对象\"\u003e#\u003c/a\u003e 类和对象\u003c/h3\u003e\n\u003cp\u003e面向对象有三大概念：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e封装\u003c/li\u003e\n\u003cli\u003e继承\u003c/li\u003e\n\u003cli\u003e多态\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"模块与包\"\u003e\u003ca class=\"v-toc-item\" href=\"#模块与包\"\u003e#\u003c/a\u003e 模块与包\u003c/h3\u003e\n\u003cp\u003e模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。\u003c/p\u003e\n\u003cp\u003e这里的模块指的是一个包下的函数。\u003c/p\u003e\n\u003ch3 id=\"错误-调试测试\"\u003e\u003ca class=\"v-toc-item\" href=\"#错误-调试测试\"\u003e#\u003c/a\u003e 错误 / 调试测试\u003c/h3\u003e\n\u003cp\u003e异常处理实际上可以考验一个程序员编写代码的健壮性。\u003c/p\u003e\n\u003cp\u003e事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。\u003c/p\u003e\n\u003ch3 id=\"io-编程\"\u003e\u003ca class=\"v-toc-item\" href=\"#io-编程\"\u003e#\u003c/a\u003e IO 编程\u003c/h3\u003e\n\u003ch3 id=\"正则表达式\"\u003e\u003ca class=\"v-toc-item\" href=\"#正则表达式\"\u003e#\u003c/a\u003e 正则表达式\u003c/h3\u003e\n\u003ch2 id=\"0x06-高级概念\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x06-高级概念\"\u003e#\u003c/a\u003e 0x06 高级概念\u003c/h2\u003e\n\u003ch3 id=\"元编程\"\u003e\u003ca class=\"v-toc-item\" href=\"#元编程\"\u003e#\u003c/a\u003e 元编程\u003c/h3\u003e\n\u003ch3 id=\"进程\"\u003e\u003ca class=\"v-toc-item\" href=\"#进程\"\u003e#\u003c/a\u003e 进程\u003c/h3\u003e\n\u003cp\u003eSpawn - 产卵，为什么叫做产卵呢，因为生出大量的 child process\u003cbr\u003e\nSpawn = fork + exec\u003c/p\u003e\n\u003ch3 id=\"并发-并行\"\u003e\u003ca class=\"v-toc-item\" href=\"#并发-并行\"\u003e#\u003c/a\u003e 并发 / 并行\u003c/h3\u003e\n\u003ch4 id=\"并行架构\"\u003e\u003ca class=\"v-toc-item\" href=\"#并行架构\"\u003e#\u003c/a\u003e 并行架构\u003c/h4\u003e\n\u003cp\u003e并行并不完全等同与多核并行\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003ebit-level 并行 : 即 8bit 与 32bit 的区别\u003c/li\u003e\n\u003cli\u003einstrction-level 并行：CPU 的并行度：流水线，乱序执行，猜测执行\u003c/li\u003e\n\u003cli\u003edata-level 并行：比如 GPU 在调整图像亮度的时候。\u003c/li\u003e\n\u003cli\u003etask-level 并行：即多处理器，按照内存模型氛围共享内存模型与分布式内存模型\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch4 id=\"七个并发-并行模型\"\u003e\u003ca class=\"v-toc-item\" href=\"#七个并发-并行模型\"\u003e#\u003c/a\u003e 七个并发 / 并行模型\u003c/h4\u003e\n\u003col\u003e\n\u003cli\u003e线程与锁\u003c/li\u003e\n\u003cli\u003e函数式编程\u003c/li\u003e\n\u003cli\u003e分离标志与状态\u003c/li\u003e\n\u003cli\u003eActor\u003c/li\u003e\n\u003cli\u003e通信顺序进程 (CSP)\u003c/li\u003e\n\u003cli\u003e数据级并行\u003c/li\u003e\n\u003cli\u003eLambda 架构\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch4 id=\"模型-1-线程与锁\"\u003e\u003ca class=\"v-toc-item\" href=\"#模型-1-线程与锁\"\u003e#\u003c/a\u003e 模型 1. 线程与锁\u003c/h4\u003e\n\u003cp\u003e互斥\u003cbr\u003e\n竞态条件\u003cbr\u003e\n死锁\u003c/p\u003e\n\u003ch5 id=\"内置锁\"\u003e\u003ca class=\"v-toc-item\" href=\"#内置锁\"\u003e#\u003c/a\u003e 内置锁\u003c/h5\u003e\n\u003cp\u003e当若干个线程进行对某个变量进行一个非原子性的操作的时候，比如\u003cbr\u003e\n(read-modify-write), 就吹出现竞态条件。解决方式就是进行对某个变量使用同步访问 (java 中的 synchronized)。\u003c/p\u003e\n\u003cp\u003e内存可见性\u003c/p\u003e\n\u003cp\u003e当一个线程使用了多把锁的时候，就可能出现死锁。简单避开死锁的方式就是总是按照一个\u003cbr\u003e\n全局的固定思路获取多把锁\u003c/p\u003e\n\u003cp\u003e哲学家进餐：五个哲学家围绕着桌子，两边五双筷子，如果饿了，就拿起两边的筷子吃饭。则迟早会出现一个情\u003cbr\u003e\n况，所有的哲学家在同一时刻决定吃饭。于是两边都拿不到筷子。\u003c/p\u003e\n\u003cp\u003e最终的解决方案就是按照全局的顺序来获取多把锁。\u003c/p\u003e\n\u003ch5 id=\"可重入锁-reentrant-lock\"\u003e\u003ca class=\"v-toc-item\" href=\"#可重入锁-reentrant-lock\"\u003e#\u003c/a\u003e 可重入锁 Reentrant Lock\u003c/h5\u003e\n\u003cp\u003e可以用 try lock 来和超时时间来避免无尽死锁。\u003c/p\u003e\n\u003cp\u003e交替锁，避免锁整个链表，而是锁上下结点。\u003c/p\u003e\n\u003ch4 id=\"模型-2-函数式编程\"\u003e\u003ca class=\"v-toc-item\" href=\"#模型-2-函数式编程\"\u003e#\u003c/a\u003e 模型 2. 函数式编程\u003c/h4\u003e\n\u003ch4 id=\"模型-3-分离标志与状态\"\u003e\u003ca class=\"v-toc-item\" href=\"#模型-3-分离标志与状态\"\u003e#\u003c/a\u003e 模型 3. 分离标志与状态\u003c/h4\u003e\n\u003ch4 id=\"模型-4-actor\"\u003e\u003ca class=\"v-toc-item\" href=\"#模型-4-actor\"\u003e#\u003c/a\u003e 模型 4. Actor\u003c/h4\u003e\n\u003ch4 id=\"模型-5-通信顺序进程-csp\"\u003e\u003ca class=\"v-toc-item\" href=\"#模型-5-通信顺序进程-csp\"\u003e#\u003c/a\u003e 模型 5. 通信顺序进程 (CSP)\u003c/h4\u003e\n\u003ch4 id=\"模型-6-数据级并行\"\u003e\u003ca class=\"v-toc-item\" href=\"#模型-6-数据级并行\"\u003e#\u003c/a\u003e 模型 6. 数据级并行\u003c/h4\u003e\n\u003ch4 id=\"模型-7-lambda-架构\"\u003e\u003ca class=\"v-toc-item\" href=\"#模型-7-lambda-架构\"\u003e#\u003c/a\u003e 模型 7. Lambda 架构\u003c/h4\u003e\n\u003ch2 id=\"0x05-标准库\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x05-标准库\"\u003e#\u003c/a\u003e 0x05 标准库\u003c/h2\u003e\n\u003ch3 id=\"数据结构与算法\"\u003e\u003ca class=\"v-toc-item\" href=\"#数据结构与算法\"\u003e#\u003c/a\u003e 数据结构与算法\u003c/h3\u003e\n\u003ch3 id=\"字符串与文本\"\u003e\u003ca class=\"v-toc-item\" href=\"#字符串与文本\"\u003e#\u003c/a\u003e 字符串与文本\u003c/h3\u003e\n\u003ch3 id=\"数字日期与时间\"\u003e\u003ca class=\"v-toc-item\" href=\"#数字日期与时间\"\u003e#\u003c/a\u003e 数字日期与时间\u003c/h3\u003e\n\u003ch3 id=\"迭代器与生成器\"\u003e\u003ca class=\"v-toc-item\" href=\"#迭代器与生成器\"\u003e#\u003c/a\u003e 迭代器与生成器\u003c/h3\u003e\n\u003ch3 id=\"文本处理\"\u003e\u003ca class=\"v-toc-item\" href=\"#文本处理\"\u003e#\u003c/a\u003e 文本处理\u003c/h3\u003e\n\u003ch2 id=\"0x07-番外篇\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x07-番外篇\"\u003e#\u003c/a\u003e 0x07 番外篇\u003c/h2\u003e\n\u003ch2 id=\"0x08-调试和-profile\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x08-调试和-profile\"\u003e#\u003c/a\u003e 0x08 调试和 Profile\u003c/h2\u003e\n\u003ch3 id=\"81-测试\"\u003e\u003ca class=\"v-toc-item\" href=\"#81-测试\"\u003e#\u003c/a\u003e 8.1 测试\u003c/h3\u003e\n\u003cp\u003ehash 算法\u003c/p\u003e\n\u003cp\u003erehash | redis 渐进式 rehash\u003c/p\u003e\n\u003ch2 id=\"0xee-参考\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-参考\"\u003e#\u003c/a\u003e 0xEE 参考\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"http://www.yinwang.org/blog-cn/2017/07/06/master-pl\"\u003ehttp://www.yinwang.org/blog-cn/2017/07/06/master-pl\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2017-03-21\u003c/strong\u003e 初始化本文\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e2017-05-11\u003c/strong\u003e 增加代码质量模块\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e2018-08-29\u003c/strong\u003e 重修文字\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e2018-09-08\u003c/strong\u003e 阅读七周七并发之后，针对并发章节做了补充\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E8%AF%AD%E8%A8%80%E8%83%A1%E8%AE%BA\"\u003e0x01 语言胡论\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E7%8B%AC%E4%B8%80%E6%97%A0%E4%BA%8C\"\u003e独一无二\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E8%AF%AD%E8%A8%80%E7%9A%84%E5%B7%A5%E5%85%B7%E9%93%BE\"\u003e0x02 语言的工具链\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E7%BC%96%E8%BE%91%E5%99%A8-ide\"\u003e编辑器 \u0026amp;\u0026amp; IDE\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#workflow\"\u003eWorkflow\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-%E8%AF%AD%E8%A8%80%E7%9A%84%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90\"\u003e0x03 语言的学习资源\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E7%A4%BE%E5%8C%BA\"\u003e社区\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E4%B9%A6%E7%B1%8D\"\u003e书籍\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x04-%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5\"\u003e0x04 基础概念\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B\"\u003e数据类型\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E8%AF%AD%E5%8F%A5\"\u003e语句\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%87%BD%E6%95%B0\"\u003e函数\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E4%BD%9C%E7%94%A8%E5%9F%9F\"\u003e作用域\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E9%AB%98%E9%98%B6%E5%87%BD%E6%95%B0\"\u003e高阶函数\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E9%80%92%E5%BD%92\"\u003e递归\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x05-%E4%B8%AD%E7%BA%A7%E6%A6%82%E5%BF%B5\"\u003e0x05 中级概念\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E7%B1%BB%E5%92%8C%E5%AF%B9%E8%B1%A1\"\u003e类和对象\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%A8%A1%E5%9D%97%E4%B8%8E%E5%8C%85\"\u003e模块与包\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E9%94%99%E8%AF%AF-%E8%B0%83%E8%AF%95%E6%B5%8B%E8%AF%95\"\u003e错误 / 调试测试\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#io-%E7%BC%96%E7%A8%8B\"\u003eIO 编程\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F\"\u003e正则表达式\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x06-%E9%AB%98%E7%BA%A7%E6%A6%82%E5%BF%B5\"\u003e0x06 高级概念\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%85%83%E7%BC%96%E7%A8%8B\"\u003e元编程\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E8%BF%9B%E7%A8%8B\"\u003e进程\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%B9%B6%E5%8F%91-%E5%B9%B6%E8%A1%8C\"\u003e并发 / 并行\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%B9%B6%E8%A1%8C%E6%9E%B6%E6%9E%84\"\u003e并行架构\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E4%B8%83%E4%B8%AA%E5%B9%B6%E5%8F%91-%E5%B9%B6%E8%A1%8C%E6%A8%A1%E5%9E%8B\"\u003e七个并发 / 并行模型\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%A8%A1%E5%9E%8B-1-%E7%BA%BF%E7%A8%8B%E4%B8%8E%E9%94%81\"\u003e模型 1. 线程与锁\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%86%85%E7%BD%AE%E9%94%81\"\u003e内置锁\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%8F%AF%E9%87%8D%E5%85%A5%E9%94%81-reentrant-lock\"\u003e可重入锁 Reentrant Lock\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%A8%A1%E5%9E%8B-2-%E5%87%BD%E6%95%B0%E5%BC%8F%E7%BC%96%E7%A8%8B\"\u003e模型 2. 函数式编程\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%A8%A1%E5%9E%8B-3-%E5%88%86%E7%A6%BB%E6%A0%87%E5%BF%97%E4%B8%8E%E7%8A%B6%E6%80%81\"\u003e模型 3. 分离标志与状态\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%A8%A1%E5%9E%8B-4-actor\"\u003e模型 4. Actor\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%A8%A1%E5%9E%8B-5-%E9%80%9A%E4%BF%A1%E9%A1%BA%E5%BA%8F%E8%BF%9B%E7%A8%8B-csp\"\u003e模型 5. 通信顺序进程 (CSP)\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%A8%A1%E5%9E%8B-6-%E6%95%B0%E6%8D%AE%E7%BA%A7%E5%B9%B6%E8%A1%8C\"\u003e模型 6. 数据级并行\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%A8%A1%E5%9E%8B-7-lambda-%E6%9E%B6%E6%9E%84\"\u003e模型 7. Lambda 架构\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x05-%E6%A0%87%E5%87%86%E5%BA%93\"\u003e0x05 标准库\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95\"\u003e数据结构与算法\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%AD%97%E7%AC%A6%E4%B8%B2%E4%B8%8E%E6%96%87%E6%9C%AC\"\u003e字符串与文本\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%95%B0%E5%AD%97%E6%97%A5%E6%9C%9F%E4%B8%8E%E6%97%B6%E9%97%B4\"\u003e数字日期与时间\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E8%BF%AD%E4%BB%A3%E5%99%A8%E4%B8%8E%E7%94%9F%E6%88%90%E5%99%A8\"\u003e迭代器与生成器\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86\"\u003e文本处理\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x07-%E7%95%AA%E5%A4%96%E7%AF%87\"\u003e0x07 番外篇\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x08-%E8%B0%83%E8%AF%95%E5%92%8C-profile\"\u003e0x08 调试和 Profile\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#81-%E6%B5%8B%E8%AF%95\"\u003e8.1 测试\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E5%8F%82%E8%80%83\"\u003e0xEE 参考\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"Thinking In Programming Language"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

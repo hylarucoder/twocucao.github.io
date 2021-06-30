@@ -1,0 +1,723 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>SQLAlchemy CheatSheet | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><p>SQLAlchemy 入门，看本文就好了</p>
+<h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<p>大约一年前，工作从 Django 开发切到 Flask 开发，ORM 选用的是 SQLAlchemy, 用了大半年后，借着这个机会重新回顾一下 SQLAchemy 和 Django ORM, 补充一下文档。</p>
+<p>这篇文章算是笔记吧</p>
+<p>Python 圈内有两大 ORM 框架</p>
+<ul>
+<li>SQLAlchemy</li>
+<li>Django ORM</li>
+</ul>
+<p>当然，也有 peewee 之类的其他 ORM。</p>
+<h2 id="0x01-orm-解决了什么问题"><a class="v-toc-item" href="#0x01-orm-解决了什么问题">#</a> 0x01 ORM 解决了什么问题？</h2>
+<p>了解一个框架，最好是从下面几处入手：</p>
+<ul>
+<li>官方 Tuorial</li>
+<li>官方 Example</li>
+<li>官方 Guide</li>
+<li>官方 APIDocument</li>
+<li>源码</li>
+</ul>
+<p>对框架掌握越深，就越需要使用者多多从上开始逐渐向下了解。</p>
+<p>其实还有一些途径：</p>
+<ul>
+<li>Github 上面的 issue</li>
+<li>Stack Overflow 的高 vote 常见问题</li>
+<li><strong>如果作者有一些活跃的社区的话，可以火速前往</strong></li>
+</ul>
+<p>鉴于我们的目标在于入手，所以可以火速过一下：</p>
+<ul>
+<li>官方 Tuorial</li>
+<li>官方 Example</li>
+<li>官方 Guide</li>
+<li>Github 上面的 issue</li>
+<li>Stack Overflow 的高 vote 常见问题</li>
+<li><strong>如果作者有一些活跃的社区的话，可以火速前往</strong></li>
+</ul>
+<h2 id="0x02-sqlalchemy-的基本功能"><a class="v-toc-item" href="#0x02-sqlalchemy-的基本功能">#</a> 0x02 SQLAlchemy 的基本功能</h2>
+<h3 id="20-sqlalchemy-vs-djangoorm"><a class="v-toc-item" href="#20-sqlalchemy-vs-djangoorm">#</a> 2.0 SQLAlchemy VS DjangoORM</h3>
+<p>ORM 通常有 DataMapper 实现和 ActiveRecord 实现两种。</p>
+<p>依照我的经验，ActiveRecord 使用起来的更接近对象 (Object) 的操作，DataMapper 使用起来更接近 (Table) 的操作。</p>
+<blockquote>
+<p>SQLAlchemy 是 DataMapper 模式的实现，在该模式下，session 会暴露出来，即 Model 与 session 并不耦合。</p>
+</blockquote>
+<blockquote>
+<p>DjangoORM 是 ActivityRecord 模式的一种实现，在该模式下，session 并不暴露出来，即 Model 与 session 耦合。</p>
+</blockquote>
+<p>使用 Django ORM 的时候，往往是</p>
+<pre><code>b = Blog(**data)
+b.save()
+</code></pre>
+<p>使用 SQLAlchemy 的时候，往往是</p>
+<pre><code>b = Blog(**data)
+session.add(b)
+session.session(b)
+</code></pre>
+<p>由于 Django 帮你屏蔽了 session 的操作。</p>
+<p>在通常情况下，</p>
+<ol>
+<li>DjangoORM 使用起来更加接近 Object 的操作。</li>
+<li>SQLAlchemy 使用起来更加接近 Table 的操作。</li>
+</ol>
+<p>举个例子，</p>
+<p>一对多，Father 添加两个小孩（其中一个小孩是已经存在的）</p>
+<p>在 DjangoORM 里面， 这里更像是一个 Set 的 add 操作。</p>
+<pre><code>father.children.add(new_child,exsit_child)
+</code></pre>
+<p>在 SQLAlchemy 里面，这里更像是一个 table 的 insert 操作。（麻蛋，你要说是一个 list 的 append 操作也行）</p>
+<pre><code>for child in (new_child,exsit_child):
+    if child in father.children:
+        father.children.append(child)
+</code></pre>
+<blockquote>
+<p>写 SQLAlchemy 更接近操作放在数据库里面的数据记录，而 DjangoORM 更接近操作一批放在数据库里面的对象。</p>
+</blockquote>
+<p>由于 session 的使用姿势不同，所以往往会有很多使用上面的区别。</p>
+<p>至于孰优孰劣，难以评判。</p>
+<ul>
+<li>
+<p>技术老大 (Flask 和 React 大神）倾向于使用 SQLAlchemy, 他认为</p>
+<ul>
+<li>对于一个技术『知其然，知其所以然』</li>
+<li>对于 ORM
+<ul>
+<li>操作数据库，操作最好要落实在成 SQL</li>
+<li>如果有可能的话，每一个 SQL 语句都要经过推敲，而且写这个 SQL 和 ORM 过程要反复练习</li>
+</ul>
+</li>
+<li>对于 Migration 机制
+<ul>
+<li>Alembic 这个迁移工具是为了省事用的，甚至在某些情况下没必要用。完全可以写 SQL 代替</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>我 (Django 和 Vue 弱鸡）倾向于使用 DjangoORM, 我认为</p>
+<ul>
+<li>对于一个技术『先知其大致然，需要深入的时候知其所以然』</li>
+<li>对于 ORM
+<ul>
+<li>操作数据，最好抽象为对对象的操作。</li>
+<li>测试到位的情况下，快糙狠先出东西。到需要优化的时候该怎么 Profile 怎么 Profile</li>
+</ul>
+</li>
+<li>对于 Migration 机制
+<ul>
+<li>用起来啊，能操作对象为什么还要强行到数据库操作？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="21-模型定义"><a class="v-toc-item" href="#21-模型定义">#</a> 2.1 模型定义</h3>
+<p>先看一组模型</p>
+<pre><code class="language-python">from sqlalchemy<span class="token punctuation">.</span>ext<span class="token punctuation">.</span>declarative <span class="token keyword">import</span> declarative_base
+Base <span class="token operator">=</span> <span class="token function">declarative_base</span><span class="token punctuation">(</span><span class="token punctuation">)</span> # 模型基类
+from sqlalchemy <span class="token keyword">import</span> Column<span class="token punctuation">,</span> Integer<span class="token punctuation">,</span> String
+<span class="token keyword">class</span> <span class="token class-name">User</span><span class="token punctuation">(</span>Base<span class="token punctuation">)</span><span class="token operator">:</span>
+    __tablename__ <span class="token operator">=</span> <span class="token string">'users'</span>
+
+    id <span class="token operator">=</span> <span class="token function">Column</span><span class="token punctuation">(</span>Integer<span class="token punctuation">,</span> primary_key<span class="token operator">=</span>True<span class="token punctuation">)</span> # 主键
+    name <span class="token operator">=</span> <span class="token function">Column</span><span class="token punctuation">(</span>String<span class="token punctuation">)</span>
+    fullname <span class="token operator">=</span> <span class="token function">Column</span><span class="token punctuation">(</span>String<span class="token punctuation">)</span>
+    password <span class="token operator">=</span> <span class="token function">Column</span><span class="token punctuation">(</span>String<span class="token punctuation">)</span>
+
+    def <span class="token function">__repr__</span><span class="token punctuation">(</span>self<span class="token punctuation">)</span><span class="token operator">:</span>
+       <span class="token keyword">return</span> <span class="token string">"&lt;User(name='%s', fullname='%s', password='%s')>"</span> <span class="token operator">%</span> <span class="token punctuation">(</span>
+                            self<span class="token punctuation">.</span>name<span class="token punctuation">,</span> self<span class="token punctuation">.</span>fullname<span class="token punctuation">,</span> self<span class="token punctuation">.</span>password<span class="token punctuation">)</span>
+Base<span class="token punctuation">.</span>metadata<span class="token punctuation">.</span><span class="token function">create_all</span><span class="token punctuation">(</span>engine<span class="token punctuation">)</span>
+</code></pre>
+<p>可以看出，包含如下的部分：</p>
+<ol>
+<li>Model 与 Model 内部的 Meta</li>
+<li>Field 与 Field 内部的 Options</li>
+<li>Model 与 Model 之间的关系</li>
+<li>其他，比如索引</li>
+</ol>
+<h4 id="models-与-meta"><a class="v-toc-item" href="#models-与-meta">#</a> Models 与 Meta</h4>
+<p><a href="https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685">https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685</a></p>
+<h4 id="关系"><a class="v-toc-item" href="#关系">#</a> 关系</h4>
+<h5 id="one-to-many"><a class="v-toc-item" href="#one-to-many">#</a> One To Many</h5>
+<p>母亲有若干个孩子，外键在孩子上。</p>
+<pre><code>class Parent(Base):
+    #...
+    children = relationship(&quot;Child&quot;, backref=&quot;parent&quot;)
+
+class Child(Base):
+    #...
+    parent_id = Column(Integer, ForeignKey('parent.id'))
+</code></pre>
+<h5 id="many-to-one"><a class="v-toc-item" href="#many-to-one">#</a> Many To One</h5>
+<p>多个母亲共享一个孩子，外键在母亲上。</p>
+<pre><code>class Parent(Base):
+    child_id = Column(Integer, ForeignKey('child.id'))
+    child = relationship(&quot;Child&quot;)
+
+class Child(Base):
+    # ...
+</code></pre>
+<h5 id="one-to-one"><a class="v-toc-item" href="#one-to-one">#</a> One To One</h5>
+<p>One to One 是 One to Many 或者是 Many to One 的简化版本</p>
+<pre><code># Many To One
+class Parent(Base):
+    # ...
+    child_id = Column(Integer, ForeignKey('child.id'))
+    child = relationship(&quot;Child&quot;, backref=backref(&quot;parent&quot;, uselist=False))
+
+class Child(Base):
+    # ...
+
+# One To Many 改 One To One
+class Parent(Base):
+    # ...
+
+class Child(Base):
+    # ...
+    parent_id = Column(Integer, ForeignKey('parent.id'))
+    parent = relationship(&quot;Parent&quot;, backref=backref(&quot;child&quot;, uselist=False))
+</code></pre>
+<h5 id="many-to-many"><a class="v-toc-item" href="#many-to-many">#</a> Many To Many</h5>
+<pre><code>association_table = Table('association', Base.metadata,
+    Column('left_id', Integer, ForeignKey('left.id')),
+    Column('right_id', Integer, ForeignKey('right.id'))
+)
+
+class Parent(Base):
+    # ...
+    children = relationship(&quot;Child&quot;,
+                    secondary=association_table,
+                    backref=&quot;parents&quot;)
+
+class Child(Base):
+    # ...
+</code></pre>
+<p>注意事项</p>
+<p>执行删除 mapping 表的时候尽量这样。</p>
+<pre><code class="language-bash">myparent<span class="token punctuation">.</span>children<span class="token punctuation">.</span><span class="token function">remove</span><span class="token punctuation">(</span>somechild<span class="token punctuation">)</span>
+</code></pre>
+<p>当你想干掉 somechild 的时候，会执行</p>
+<pre><code>session.delete(somechild)
+</code></pre>
+<ol>
+<li>假如 Child 没有 ref Parent 的话，Secondary Table 无删除，则无法删除。</li>
+<li>假如 ref 了的话，则删除 secondary 里面的记录。</li>
+<li>TODO</li>
+</ol>
+<h5 id="邻接列表关系"><a class="v-toc-item" href="#邻接列表关系">#</a> 邻接列表关系</h5>
+<pre><code>class Node(Base):
+    __tablename__ = 'node'
+    id = Column(Integer, primary_key=True)
+    parent_id = Column(Integer, ForeignKey('node.id'))
+    data = Column(String(50))
+    children = relationship(&quot;Node&quot;,
+                backref=backref('parent', remote_side=[id])
+            )
+</code></pre>
+<h5 id="relationship-详解"><a class="v-toc-item" href="#relationship-详解">#</a> relationship 详解</h5>
+<h3 id="21-query"><a class="v-toc-item" href="#21-query">#</a> 2.1 Query</h3>
+<h4 id="create"><a class="v-toc-item" href="#create">#</a> Create</h4>
+<pre><code>c1 = Child(name=&quot;苏轼&quot;)
+session.add(c1)
+session.flush()
+p = Parent(name=&quot;苏辙&quot;)
+p.best_child = c1
+for c in [c1,c2,c3,c4]:
+    p.children.append(c)
+session.add(c1)
+session.commit()
+</code></pre>
+<h4 id="retrieve"><a class="v-toc-item" href="#retrieve">#</a> Retrieve</h4>
+<p>过滤</p>
+<p>filter(**kwargs)<br>
+filter(<a href="http://Singer.name">Singer.name</a> == “周杰伦”)<br>
+filter(<a href="http://Singer.name">Singer.name</a> =! “周杰棍”)</p>
+<h5 id="跨关系跨表查询"><a class="v-toc-item" href="#跨关系跨表查询">#</a> 跨关系（跨表）查询</h5>
+<p>session.query(Entry).join(Blog,Blog.entry_id == <a href="http://Entry.id">Entry.id</a>).filter(<a href="http://Blog.name">Blog.name</a> = “SqlAlchemy CheatSheet”)</p>
+<h5 id="limit-offset-分页"><a class="v-toc-item" href="#limit-offset-分页">#</a> Limit / Offset / 分页</h5>
+<ul>
+<li>limit()</li>
+<li>offset()</li>
+</ul>
+<h5 id="链式调用"><a class="v-toc-item" href="#链式调用">#</a> 链式调用</h5>
+<pre><code>query = session.query(Order) # query = session.query(Order)
+query = query.filter(Order.name.like(f&quot;%name%&quot;))
+</code></pre>
+<h5 id="二进制表达式"><a class="v-toc-item" href="#二进制表达式">#</a> 二进制表达式</h5>
+<p>我们先 type 一下表达式，找到 eq 的类型</p>
+<pre><code class="language-python"><span class="token function">type</span><span class="token punctuation">(</span>model<span class="token punctuation">.</span>column_name <span class="token operator">==</span> <span class="token string">'asdf'</span><span class="token punctuation">)</span> → sqlalchemy<span class="token punctuation">.</span>sql<span class="token punctuation">.</span>elements<span class="token punctuation">.</span>BinaryExpression
+</code></pre>
+<p>是一个二进制表达式。</p>
+<pre><code class="language-python"># 等于
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name <span class="token operator">==</span> <span class="token string">'ed'</span><span class="token punctuation">)</span>
+# 不等于
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name <span class="token operator">!=</span> <span class="token string">'ed'</span><span class="token punctuation">)</span>
+# Like（有的数据库不区分大小写）
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name<span class="token punctuation">.</span><span class="token function">like</span><span class="token punctuation">(</span><span class="token string">'%ed%'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+# <span class="token constant">ILIKE</span> <span class="token punctuation">(</span><span class="token keyword">case</span><span class="token operator">-</span>insensitive <span class="token constant">LIKE</span><span class="token punctuation">)</span>
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name<span class="token punctuation">.</span><span class="token function">ilike</span><span class="token punctuation">(</span><span class="token string">'%ed%'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+# <span class="token constant">IN</span>
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name<span class="token punctuation">.</span><span class="token function">in_</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'ed'</span><span class="token punctuation">,</span> <span class="token string">'wendy'</span><span class="token punctuation">,</span> <span class="token string">'jack'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+# Not <span class="token keyword">in</span>
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token operator">~</span>User<span class="token punctuation">.</span>name<span class="token punctuation">.</span><span class="token function">in_</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token string">'ed'</span><span class="token punctuation">,</span> <span class="token string">'wendy'</span><span class="token punctuation">,</span> <span class="token string">'jack'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+# <span class="token constant">IS</span> <span class="token constant">NULL</span>
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name <span class="token operator">==</span> None<span class="token punctuation">)</span>
+## 如果你用了 pep8<span class="token operator">/</span>linter 的话
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name<span class="token punctuation">.</span><span class="token function">is_</span><span class="token punctuation">(</span>None<span class="token punctuation">)</span><span class="token punctuation">)</span>
+# <span class="token constant">IS</span> <span class="token constant">NOT</span> <span class="token constant">NULL</span><span class="token operator">:</span>
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name <span class="token operator">!=</span> None<span class="token punctuation">)</span>
+## 如果你用了 pep8<span class="token operator">/</span>linter 的话
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name<span class="token punctuation">.</span><span class="token function">isnot</span><span class="token punctuation">(</span>None<span class="token punctuation">)</span><span class="token punctuation">)</span>
+# <span class="token constant">AND</span>
+## use <span class="token function">and_</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token function">and_</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name <span class="token operator">==</span> <span class="token string">'ed'</span><span class="token punctuation">,</span> User<span class="token punctuation">.</span>fullname <span class="token operator">==</span> <span class="token string">'Ed Jones'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+## or send multiple expressions to <span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name <span class="token operator">==</span> <span class="token string">'ed'</span><span class="token punctuation">,</span> User<span class="token punctuation">.</span>fullname <span class="token operator">==</span> <span class="token string">'Ed Jones'</span><span class="token punctuation">)</span>
+## or chain multiple <span class="token function">filter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">/</span><span class="token function">filter_by</span><span class="token punctuation">(</span><span class="token punctuation">)</span> calls
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name <span class="token operator">==</span> <span class="token string">'ed'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>fullname <span class="token operator">==</span> <span class="token string">'Ed Jones'</span><span class="token punctuation">)</span>
+# <span class="token constant">OR</span>
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span><span class="token function">or_</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name <span class="token operator">==</span> <span class="token string">'ed'</span><span class="token punctuation">,</span> User<span class="token punctuation">.</span>name <span class="token operator">==</span> <span class="token string">'wendy'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+# <span class="token constant">MATCH</span>
+query<span class="token punctuation">.</span><span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>name<span class="token punctuation">.</span><span class="token function">match</span><span class="token punctuation">(</span><span class="token string">'wendy'</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<h5 id="执行查询"><a class="v-toc-item" href="#执行查询">#</a> 执行查询</h5>
+<pre><code>all()
+first()
+one()
+one_or_none()
+scalar()
+</code></pre>
+<p>YourModel.query.get((pk1, pk2))</p>
+<h5 id="比较"><a class="v-toc-item" href="#比较">#</a> 比较</h5>
+<blockquote>
+<p>同一个 Session 下面，取到的某一条数据对应的 objects 应该是一样的？</p>
+</blockquote>
+<h5 id="复制-实例"><a class="v-toc-item" href="#复制-实例">#</a> 复制 实例</h5>
+<h5 id="其他"><a class="v-toc-item" href="#其他">#</a> 其他</h5>
+<pre><code># 查询的是 SomeModel 里面所有的字段 即 select *
+query = session.query(SomeModel)
+# 查询的是 SomeModel 里面部分的字段 即 select acol, bcol
+query = session.query(SomeModel.acol,SomeModel.bcol)
+# 即 select acol , bcol
+# alias
+user_alias = aliased(User, name='user_alias')
+for row in session.query(user_alias, user_alias.name).all():
+    # 即相当于 select name as name_label
+    print(row.user_alias)
+
+# limit 和 offset
+for u in session.query(User).order_by(User.id)[1:3]:
+    print(u)
+
+# distinct
+session.query(model.Name).distinct(model.Name.value).order_by(model.Name.value)
+# order_by
+User.query.order_by(User.popularity.desc(),User.date_created.desc()).limit(10).all()
+</code></pre>
+<h4 id="update"><a class="v-toc-item" href="#update">#</a> Update</h4>
+<p>单个 object 更新</p>
+<pre><code>blog.title = &quot;大宝天天见&quot;
+session.add(blog)
+session.commit()
+</code></pre>
+<p>批量更新</p>
+<pre><code>session.query.filter(Blog.content.like(&quot;% 敏感词 %&quot;)).update({
+    Blog.content: &quot;依照相关 XX 无法查看&quot;
+})
+</code></pre>
+<p>一对多的更新</p>
+<pre><code>append
+</code></pre>
+<h4 id="delete"><a class="v-toc-item" href="#delete">#</a> Delete</h4>
+<p>query.delete()</p>
+<h4 id="join"><a class="v-toc-item" href="#join">#</a> JOIN</h4>
+<p><a href="https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query">https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query</a></p>
+<h5 id="两表-innerjoin"><a class="v-toc-item" href="#两表-innerjoin">#</a> 两表 InnerJoin</h5>
+<pre><code class="language-python"><span class="token keyword">for</span> u<span class="token punctuation">,</span> a <span class="token keyword">in</span> session<span class="token punctuation">.</span><span class="token function">query</span><span class="token punctuation">(</span>User<span class="token punctuation">,</span> Address<span class="token punctuation">)</span><span class="token punctuation">.</span>\
+                    <span class="token function">filter</span><span class="token punctuation">(</span>User<span class="token punctuation">.</span>id<span class="token operator">==</span>Address<span class="token punctuation">.</span>user_id<span class="token punctuation">)</span><span class="token punctuation">.</span>\
+                    <span class="token function">filter</span><span class="token punctuation">(</span>Address<span class="token punctuation">.</span>email_address<span class="token operator">==</span><span class="token string">'jack@google.com'</span><span class="token punctuation">)</span><span class="token punctuation">.</span>\
+                    <span class="token function">all</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span>
+    <span class="token function">print</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+# <span class="token operator">&lt;</span><span class="token function">User</span><span class="token punctuation">(</span>name<span class="token operator">=</span><span class="token string">'jack'</span><span class="token punctuation">,</span> fullname<span class="token operator">=</span><span class="token string">'Jack Bean'</span><span class="token punctuation">,</span> password<span class="token operator">=</span><span class="token string">'gjffdd'</span><span class="token punctuation">)</span><span class="token operator">></span>
+# <span class="token operator">&lt;</span><span class="token function">Address</span><span class="token punctuation">(</span>email_address<span class="token operator">=</span><span class="token string">'jack@google.com'</span><span class="token punctuation">)</span><span class="token operator">></span>
+
+</code></pre>
+<h5 id="多表-innerjoin-leftjoin"><a class="v-toc-item" href="#多表-innerjoin-leftjoin">#</a> 多表 InnerJoin + LeftJoin</h5>
+<pre><code>query.outerjoin(User.addresses)   # LEFT OUTER JOIN
+</code></pre>
+<h4 id="聚集查询"><a class="v-toc-item" href="#聚集查询">#</a> 聚集查询</h4>
+<pre><code>session.query(User).filter(User.name.like('%ed')).count()
+</code></pre>
+<pre><code>from sqlalchemy import func
+session.query(Table.column, func.count(Table.column)).group_by(Table.column).all()
+
+self.session.query(func.count(Table.column1),Table.column1, Table.column2).group_by(Table.column1, Table.column2).all()
+
+from sqlalchemy.sql import func
+session.query(func.avg(Rating.field2).label('average')).filter(Rating.url==url_string.netloc)
+</code></pre>
+<h4 id="缓存机制"><a class="v-toc-item" href="#缓存机制">#</a> 缓存机制</h4>
+<p>Query 对象，下文中，我会聊到这个 Query 对象。这里先跳过。</p>
+<h3 id="22-原生查询"><a class="v-toc-item" href="#22-原生查询">#</a> 2.2 原生查询</h3>
+<pre><code>from sqlalchemy import text
+
+sql = text('select name from penguins')
+result = db.engine.execute(sql)
+names = []
+for row in result:
+    names.append(row[0])
+
+print names
+
+from collections import namedtuple
+
+Record = namedtuple('Record', result.keys())
+records = [Record(*r) for r in result.fetchall()]
+for r in records:
+    print(r)
+
+from sqlalchemy.sql import text
+
+connection = engine.connect()
+
+# recommended
+cmd = 'select * from Employees where EmployeeGroup == :group'
+employeeGroup = 'Staff'
+employees = connection.execute(text(cmd), group = employeeGroup)
+
+</code></pre>
+<p>get_or_create</p>
+<pre><code>def get_or_create(session, model, defaults=None, **kwargs):
+    instance = session.query(model).filter_by(**kwargs).first()
+    if instance:
+        return instance, False
+    else:
+        params = dict((k, v) for k, v in kwargs.iteritems() if not isinstance(v, ClauseElement))
+        params.update(defaults or {})
+        instance = model(**params)
+        session.add(instance)
+        return instance, True
+</code></pre>
+<h3 id="23-更新查询"><a class="v-toc-item" href="#23-更新查询">#</a> 2.3 更新查询</h3>
+<pre><code>session.query(Stuff).update({Stuff.foo: Stuff.foo + 1})
+</code></pre>
+<pre><code>1) for c in session.query(Stuff).all():
+       c.foo += 1
+   session.commit()
+
+2) session.query().\
+       update({&quot;foo&quot;: (Stuff.foo + 1)})
+   session.commit()
+
+3) conn = engine.connect()
+   stmt = Stuff.update().\
+       values(Stuff.foo = (Stuff.foo + 1))
+   conn.execute(stmt)
+</code></pre>
+<pre><code>1) user.no_of_logins += 1
+   session.commit()
+
+2) session.query().\
+       filter(User.username == form.username.data).\
+       update({&quot;no_of_logins&quot;: (User.no_of_logins +1)})
+   session.commit()
+
+3) conn = engine.connect()
+   stmt = User.update().\
+       values(no_of_logins=(User.no_of_logins + 1)).\
+       where(User.username == form.username.data)
+   conn.execute(stmt)
+
+4) setattr(user, 'no_of_logins', user.no_of_logins+1)
+   session.commit()
+</code></pre>
+<h3 id="24-删除"><a class="v-toc-item" href="#24-删除">#</a> 2.4 删除</h3>
+<p><a href="https://stackoverflow.com/questions/5033547/sqlalchemy-cascade-delete">https://stackoverflow.com/questions/5033547/sqlalchemy-cascade-delete</a></p>
+<h4 id="ondelete"><a class="v-toc-item" href="#ondelete">#</a> OnDelete</h4>
+<p>ondelete=‘CASCADE’))</p>
+<h4 id="批量操作"><a class="v-toc-item" href="#批量操作">#</a> 批量操作</h4>
+<p>models.User.query.delete()</p>
+<h3 id="如何从-object-到一个-orm"><a class="v-toc-item" href="#如何从-object-到一个-orm">#</a> 如何从 Object 到一个 ORM</h3>
+<p>如何追踪 Object 的变化？</p>
+<h2 id="0x03-sqlalchemy-的高级特性"><a class="v-toc-item" href="#0x03-sqlalchemy-的高级特性">#</a> 0x03 SQLAlchemy 的高级特性</h2>
+<h3 id="表继承"><a class="v-toc-item" href="#表继承">#</a> 表继承</h3>
+<p><a href="https://stackoverflow.com/questions/1337095/sqlalchemy-inheritance">https://stackoverflow.com/questions/1337095/sqlalchemy-inheritance</a></p>
+<h3 id="啥玩意"><a class="v-toc-item" href="#啥玩意">#</a> 啥玩意</h3>
+<p>Flush 和 commit</p>
+<p><a href="https://stackoverflow.com/questions/4201455/sqlalchemy-whats-the-difference-between-flush-and-commit">https://stackoverflow.com/questions/4201455/sqlalchemy-whats-the-difference-between-flush-and-commit</a></p>
+<pre><code>x = Foo(bar=1)
+print x.id
+# None
+session.add(x)
+session.flush()
+# BEGIN
+# INSERT INTO foo (bar) VALUES(1)
+# COMMIT
+print x.id
+</code></pre>
+<pre><code>qry = DBSession.query(User).filter(
+        and_(User.birthday &lt;= '1988-01-17', User.birthday &gt;= '1985-01-17'))
+</code></pre>
+<h2 id="0x04-sqlalchemy-的基础特性-under-the-hood"><a class="v-toc-item" href="#0x04-sqlalchemy-的基础特性-under-the-hood">#</a> 0x04 SQLAlchemy 的基础特性 Under The Hood</h2>
+<h3 id="loading-策略"><a class="v-toc-item" href="#loading-策略">#</a> Loading 策略</h3>
+<h4 id="lazy-loading"><a class="v-toc-item" href="#lazy-loading">#</a> Lazy Loading</h4>
+<h4 id="eager-loading"><a class="v-toc-item" href="#eager-loading">#</a> Eager Loading</h4>
+<pre><code>&gt;&gt;&gt; from sqlalchemy.dialects import postgresql
+&gt;&gt;&gt; print str(q.statement.compile(dialect=postgresql.dialect()))
+Where q is defined as:
+
+</code></pre>
+<h2 id="0x05-sqlalchemy-的高级特性-under-the-hood"><a class="v-toc-item" href="#0x05-sqlalchemy-的高级特性-under-the-hood">#</a> 0x05 SQLAlchemy 的高级特性 Under The Hood</h2>
+<h3 id="多线程"><a class="v-toc-item" href="#多线程">#</a> 多线程</h3>
+<p><a href="https://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy">https://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy</a><br>
+<a href="https://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications">https://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications</a></p>
+<pre><code>
+https://stackoverflow.com/questions/34322471/sqlalchemy-engine-connection-and-session-difference
+https://stackoverflow.com/questions/11769366/why-is-sqlalchemy-insert-with-sqlite-25-times-slower-than-using-sqlite3-directly
+https://stackoverflow.com/questions/12223335/sqlalchemy-creating-vs-reusing-a-session
+session 是个容器
+
+https://stackoverflow.com/questions/18199053/example-of-what-sqlalchemy-can-do-and-django-orm-cannot
+https://stackoverflow.com/questions/7389759/memory-efficient-built-in-sqlalchemy-iterator-generator
+
+# 日志
+import logging
+logging.basicConfig()
+logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+</code></pre>
+<h2 id="0x06-debug-和-profile-技巧"><a class="v-toc-item" href="#0x06-debug-和-profile-技巧">#</a> 0x06 DEBUG 和 Profile 技巧</h2>
+<pre><code>SQLALCHEMY_TRACK_MODIFICATIONS = False
+</code></pre>
+<h3 id="61-查看技巧"><a class="v-toc-item" href="#61-查看技巧">#</a> 6.1 查看技巧</h3>
+<p>dict(u)<br>
+u.<strong>dict</strong></p>
+<p><a href="https://stackoverflow.com/questions/1171166/how-can-i-profile-a-sqlalchemy-powered-application">https://stackoverflow.com/questions/1171166/how-can-i-profile-a-sqlalchemy-powered-application</a></p>
+<p>如果用上 Flask+SQLAlchemy 一般也要带上，Flask-Migration 与 Flask-SQLAlchemy, 这两个库也是对 Alembic 和 SQLAlchemy 的浅封装。</p>
+<p>那么，对于这个 ORM 库还有那些通用性的知识需要了解？</p>
+<p>嗯，是时候了解本质了。</p>
+<p><a href="http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/">http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/</a></p>
+<h2 id="0x07-orm-的本质"><a class="v-toc-item" href="#0x07-orm-的本质">#</a> 0x07 ORM 的本质</h2>
+<p>ORM 的本质是 Data Access Layer 上的一层封装。如果你写原生 SQL, 即手写 DAL 的话，开发效率可能会大打折扣。</p>
+<h3 id="orm-的两种类型-active-record-与-data-mappers"><a class="v-toc-item" href="#orm-的两种类型-active-record-与-data-mappers">#</a> ORM 的两种类型 Active Record 与 Data Mappers</h3>
+<pre><code># ActiveRecord 风格写起来类似于 Django ORM, 大致是这样的
+
+## AR 的模型定义
+
+class User(db.models):
+    name = db.StringField(verbose=&quot;xyz&quot;)
+
+## AR 的新增
+user = User()
+user.name = &quot;123456&quot;
+user.save() ## 正好对应数据库中的一行
+
+## AR 的查询
+
+users = User.objects.filter(Q(name=&quot;黄老板的小姨子&quot;)).all()
+
+# Data Mappers 风格写起来类似于 SQLAlchemy ORM, 大致是这样的
+
+## SA 的定义
+
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
+
+from sqlalchemy import Column, Integer, String
+class User(Base):
+    __tablename__ = 'users'
+
+    id = Column(Integer, primary_key=True)
+    name = Column(String)
+
+Base.metadata.create_all(engine)
+
+## SA 的新增
+
+user = User()
+user.name = &quot;123456&quot;
+session.add(user)
+sessoon.commit() ## 嗯？其实也是对应数据库中的一行。
+
+## SA 的查询
+
+session.query(User).filter(User.name)
+
+</code></pre>
+<p>问题来了，这两者到底是什么，看起来似乎相差不大。</p>
+<pre><code>class Person:
+
+    lastname
+    firstname
+    children
+
+    # 数据操作
+    def findone(self):
+        pass
+
+    def insert(self):
+        pass
+
+    def update(self):
+        pass
+
+    def delete(self):
+        pass
+
+    # 业务逻辑
+    def getChildrenTax(self):
+        pass
+
+</code></pre>
+<p>lastName firstName numberOfDependents</p>
+<p>insert update delete</p>
+<p>getExemption isFlaggedForAudit getTaxableEarnings</p>
+<p>An object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data.</p>
+<p>The essence of an Active Record is a Domain Model (116) in which the classes match very closely the record structure of an underlying database. Each Active Record is responsible for saving and loading to the database and also for any domain logic that acts on the data. This may be all the domain logic in the application, or you may ﬁnd that some domain logic is held in Transaction Scripts (110) with common and data-oriented code in the Active Record.</p>
+<p>The data structure of the Active Record should exactly match that of the database: one ﬁeld in the class for each column in the table. Type the ﬁelds the way the SQL interface gives you the data—don’t do any conversion at this stage. You may consider Foreign Key Mapping (236), but you may also leave the foreign keys as they are. You can use views or tables with Active Record, although updates through views are obviously harder. Views are particularly useful for reporting purposes.</p>
+<p>objects correspond directly to the database tables: an isomorphic schema. If your business logic is complex, you’ll soon want to use your object’s direct relationships, collections, inheritance, and so forth. These don’t map easily onto Active Record, and adding them piecemeal gets very messy. That’s what will lead you to use Data Mapper (165) instead.</p>
+<p>Another argument against Active Record is the fact that it couples the object design to the database design. This makes it more difﬁcult to refactor either design as a project goes forward.</p>
+<p>Active Record is a good pattern to consider if you’re using Transaction Script (110) and are beginning to feel the pain of code duplication and the difﬁculty in updating scripts and tables that Transaction Script (110) often brings. In this case you can gradually start creating Active Records and then slowly refactor behavior into them. It often helps to wrap the tables as a Gateway (466) ﬁrst, and then start moving behavior so that the tables evolve to a Active Record.</p>
+<p>其实为什么不选择设计成 ActiveRecord , 而是选择设计成 Data Mapper, 其实就可以回答这个问题：</p>
+<blockquote>
+<p>虽然要设计成 ORM, 考虑到数量和性能因素，SQL 数据库（多个表）并不应该是表现像 Object 集合那样（换言之，也就是 AR 表现的像 Object 的集合一样）。<br>
+同时，出于更好的抽象，object 集合也应该表现的像表以及行</p>
+</blockquote>
+<p>于是我们可以得出结论，可以在 SQLAlchemy 上面进行一定的封装，使得最后用起来非常的 Django ORM like，其实 SQLAlchemy 稍加定制还是可以很 Django ORM-like 的。</p>
+<p>:TODO: 有机会看看那本书再修改一下本小节</p>
+<p>这不，果然有人就这么搞了 <a href="https://github.com/absent1706/sqlalchemy-mixins">https://github.com/absent1706/sqlalchemy-mixins</a></p>
+<h2 id="0x09-踩坑集"><a class="v-toc-item" href="#0x09-踩坑集">#</a> 0x09 踩坑集</h2>
+<h3 id="关系持久化坑"><a class="v-toc-item" href="#关系持久化坑">#</a> 关系持久化坑</h3>
+<ol>
+<li>Rows that point to themselves : 比如一个 insert 一个推荐自己的用户，则需要保存 id / ref_id , 但是在这个 user 插入之前，并不存在 id. 所以，一般情况下是先 insert, 然后保存 ref_id</li>
+<li>Mutually Dependent Rows</li>
+</ol>
+<h3 id="sql-注入"><a class="v-toc-item" href="#sql-注入">#</a> SQL 注入</h3>
+<p>session.query(MyClass).filter(“foo={}”.format(getArgs[‘val’]))</p>
+<h2 id="0xee-参考链接"><a class="v-toc-item" href="#0xee-参考链接">#</a> 0xEE 参考链接</h2>
+<ul>
+<li>
+<p><a href="https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/">https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create">https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create</a></p>
+</li>
+<li>
+<p>除了文档本身，作者在 Stack Overflow 上的回答都是非常值得阅读的。<a href="https://stackoverflow.com/users/34549/zzzeek">https://stackoverflow.com/users/34549/zzzeek</a></p>
+</li>
+<li>
+<p>Patterns of Enterprise Application Architecture - Martin Fowler</p>
+</li>
+<li>
+<p><a href="http://aosabook.org/en/sqlalchemy.html">http://aosabook.org/en/sqlalchemy.html</a></p>
+<p><a href="http://techspot.zzzeek.org/">http://techspot.zzzeek.org/</a></p>
+</li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-03-09</strong> 重修文字</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-orm-%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98">0x01 ORM 解决了什么问题？</a></li>
+<li><a href="#0x02-sqlalchemy-%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD">0x02 SQLAlchemy 的基本功能</a>
+<ul>
+<li><a href="#20-sqlalchemy-vs-djangoorm">2.0 SQLAlchemy VS DjangoORM</a></li>
+<li><a href="#21-%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89">2.1 模型定义</a>
+<ul>
+<li><a href="#models-%E4%B8%8E-meta">Models 与 Meta</a></li>
+<li><a href="#%E5%85%B3%E7%B3%BB">关系</a>
+<ul>
+<li><a href="#one-to-many">One To Many</a></li>
+<li><a href="#many-to-one">Many To One</a></li>
+<li><a href="#one-to-one">One To One</a></li>
+<li><a href="#many-to-many">Many To Many</a></li>
+<li><a href="#%E9%82%BB%E6%8E%A5%E5%88%97%E8%A1%A8%E5%85%B3%E7%B3%BB">邻接列表关系</a></li>
+<li><a href="#relationship-%E8%AF%A6%E8%A7%A3">relationship 详解</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#21-query">2.1 Query</a>
+<ul>
+<li><a href="#create">Create</a></li>
+<li><a href="#retrieve">Retrieve</a>
+<ul>
+<li><a href="#%E8%B7%A8%E5%85%B3%E7%B3%BB%E8%B7%A8%E8%A1%A8%E6%9F%A5%E8%AF%A2">跨关系（跨表）查询</a></li>
+<li><a href="#limit-offset-%E5%88%86%E9%A1%B5">Limit / Offset / 分页</a></li>
+<li><a href="#%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8">链式调用</a></li>
+<li><a href="#%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F">二进制表达式</a></li>
+<li><a href="#%E6%89%A7%E8%A1%8C%E6%9F%A5%E8%AF%A2">执行查询</a></li>
+<li><a href="#%E6%AF%94%E8%BE%83">比较</a></li>
+<li><a href="#%E5%A4%8D%E5%88%B6-%E5%AE%9E%E4%BE%8B">复制 实例</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
+</ul>
+</li>
+<li><a href="#update">Update</a></li>
+<li><a href="#delete">Delete</a></li>
+<li><a href="#join">JOIN</a>
+<ul>
+<li><a href="#%E4%B8%A4%E8%A1%A8-innerjoin">两表 InnerJoin</a></li>
+<li><a href="#%E5%A4%9A%E8%A1%A8-innerjoin-leftjoin">多表 InnerJoin + LeftJoin</a></li>
+</ul>
+</li>
+<li><a href="#%E8%81%9A%E9%9B%86%E6%9F%A5%E8%AF%A2">聚集查询</a></li>
+<li><a href="#%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6">缓存机制</a></li>
+</ul>
+</li>
+<li><a href="#22-%E5%8E%9F%E7%94%9F%E6%9F%A5%E8%AF%A2">2.2 原生查询</a></li>
+<li><a href="#23-%E6%9B%B4%E6%96%B0%E6%9F%A5%E8%AF%A2">2.3 更新查询</a></li>
+<li><a href="#24-%E5%88%A0%E9%99%A4">2.4 删除</a>
+<ul>
+<li><a href="#ondelete">OnDelete</a></li>
+<li><a href="#%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C">批量操作</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A6%82%E4%BD%95%E4%BB%8E-object-%E5%88%B0%E4%B8%80%E4%B8%AA-orm">如何从 Object 到一个 ORM</a></li>
+</ul>
+</li>
+<li><a href="#0x03-sqlalchemy-%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7">0x03 SQLAlchemy 的高级特性</a>
+<ul>
+<li><a href="#%E8%A1%A8%E7%BB%A7%E6%89%BF">表继承</a></li>
+<li><a href="#%E5%95%A5%E7%8E%A9%E6%84%8F">啥玩意</a></li>
+</ul>
+</li>
+<li><a href="#0x04-sqlalchemy-%E7%9A%84%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7-under-the-hood">0x04 SQLAlchemy 的基础特性 Under The Hood</a>
+<ul>
+<li><a href="#loading-%E7%AD%96%E7%95%A5">Loading 策略</a>
+<ul>
+<li><a href="#lazy-loading">Lazy Loading</a></li>
+<li><a href="#eager-loading">Eager Loading</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x05-sqlalchemy-%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7-under-the-hood">0x05 SQLAlchemy 的高级特性 Under The Hood</a>
+<ul>
+<li><a href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B">多线程</a></li>
+</ul>
+</li>
+<li><a href="#0x06-debug-%E5%92%8C-profile-%E6%8A%80%E5%B7%A7">0x06 DEBUG 和 Profile 技巧</a>
+<ul>
+<li><a href="#61-%E6%9F%A5%E7%9C%8B%E6%8A%80%E5%B7%A7">6.1 查看技巧</a></li>
+</ul>
+</li>
+<li><a href="#0x07-orm-%E7%9A%84%E6%9C%AC%E8%B4%A8">0x07 ORM 的本质</a>
+<ul>
+<li><a href="#orm-%E7%9A%84%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B-active-record-%E4%B8%8E-data-mappers">ORM 的两种类型 Active Record 与 Data Mappers</a></li>
+</ul>
+</li>
+<li><a href="#0x09-%E8%B8%A9%E5%9D%91%E9%9B%86">0x09 踩坑集</a>
+<ul>
+<li><a href="#%E5%85%B3%E7%B3%BB%E6%8C%81%E4%B9%85%E5%8C%96%E5%9D%91">关系持久化坑</a></li>
+<li><a href="#sql-%E6%B3%A8%E5%85%A5">SQL 注入</a></li>
+</ul>
+</li>
+<li><a href="#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">0xEE 参考链接</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Flask","ORM"],"path":"20180331_SQLAlchemyCheatSheet.md","title":"SQLAlchemy CheatSheet","slug":"SQLAlchemy CheatSheet","date":"2018-03-31","category":"Flask","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003cp\u003eSQLAlchemy 入门，看本文就好了\u003c/p\u003e\n\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cp\u003e大约一年前，工作从 Django 开发切到 Flask 开发，ORM 选用的是 SQLAlchemy, 用了大半年后，借着这个机会重新回顾一下 SQLAchemy 和 Django ORM, 补充一下文档。\u003c/p\u003e\n\u003cp\u003e这篇文章算是笔记吧\u003c/p\u003e\n\u003cp\u003ePython 圈内有两大 ORM 框架\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eSQLAlchemy\u003c/li\u003e\n\u003cli\u003eDjango ORM\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e当然，也有 peewee 之类的其他 ORM。\u003c/p\u003e\n\u003ch2 id=\"0x01-orm-解决了什么问题\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-orm-解决了什么问题\"\u003e#\u003c/a\u003e 0x01 ORM 解决了什么问题？\u003c/h2\u003e\n\u003cp\u003e了解一个框架，最好是从下面几处入手：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e官方 Tuorial\u003c/li\u003e\n\u003cli\u003e官方 Example\u003c/li\u003e\n\u003cli\u003e官方 Guide\u003c/li\u003e\n\u003cli\u003e官方 APIDocument\u003c/li\u003e\n\u003cli\u003e源码\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e对框架掌握越深，就越需要使用者多多从上开始逐渐向下了解。\u003c/p\u003e\n\u003cp\u003e其实还有一些途径：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eGithub 上面的 issue\u003c/li\u003e\n\u003cli\u003eStack Overflow 的高 vote 常见问题\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e如果作者有一些活跃的社区的话，可以火速前往\u003c/strong\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e鉴于我们的目标在于入手，所以可以火速过一下：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e官方 Tuorial\u003c/li\u003e\n\u003cli\u003e官方 Example\u003c/li\u003e\n\u003cli\u003e官方 Guide\u003c/li\u003e\n\u003cli\u003eGithub 上面的 issue\u003c/li\u003e\n\u003cli\u003eStack Overflow 的高 vote 常见问题\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e如果作者有一些活跃的社区的话，可以火速前往\u003c/strong\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x02-sqlalchemy-的基本功能\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-sqlalchemy-的基本功能\"\u003e#\u003c/a\u003e 0x02 SQLAlchemy 的基本功能\u003c/h2\u003e\n\u003ch3 id=\"20-sqlalchemy-vs-djangoorm\"\u003e\u003ca class=\"v-toc-item\" href=\"#20-sqlalchemy-vs-djangoorm\"\u003e#\u003c/a\u003e 2.0 SQLAlchemy VS DjangoORM\u003c/h3\u003e\n\u003cp\u003eORM 通常有 DataMapper 实现和 ActiveRecord 实现两种。\u003c/p\u003e\n\u003cp\u003e依照我的经验，ActiveRecord 使用起来的更接近对象 (Object) 的操作，DataMapper 使用起来更接近 (Table) 的操作。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eSQLAlchemy 是 DataMapper 模式的实现，在该模式下，session 会暴露出来，即 Model 与 session 并不耦合。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cblockquote\u003e\n\u003cp\u003eDjangoORM 是 ActivityRecord 模式的一种实现，在该模式下，session 并不暴露出来，即 Model 与 session 耦合。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e使用 Django ORM 的时候，往往是\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eb = Blog(**data)\nb.save()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e使用 SQLAlchemy 的时候，往往是\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eb = Blog(**data)\nsession.add(b)\nsession.session(b)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e由于 Django 帮你屏蔽了 session 的操作。\u003c/p\u003e\n\u003cp\u003e在通常情况下，\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eDjangoORM 使用起来更加接近 Object 的操作。\u003c/li\u003e\n\u003cli\u003eSQLAlchemy 使用起来更加接近 Table 的操作。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e举个例子，\u003c/p\u003e\n\u003cp\u003e一对多，Father 添加两个小孩（其中一个小孩是已经存在的）\u003c/p\u003e\n\u003cp\u003e在 DjangoORM 里面， 这里更像是一个 Set 的 add 操作。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efather.children.add(new_child,exsit_child)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e在 SQLAlchemy 里面，这里更像是一个 table 的 insert 操作。（麻蛋，你要说是一个 list 的 append 操作也行）\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003efor child in (new_child,exsit_child):\n    if child in father.children:\n        father.children.append(child)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e写 SQLAlchemy 更接近操作放在数据库里面的数据记录，而 DjangoORM 更接近操作一批放在数据库里面的对象。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e由于 session 的使用姿势不同，所以往往会有很多使用上面的区别。\u003c/p\u003e\n\u003cp\u003e至于孰优孰劣，难以评判。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e技术老大 (Flask 和 React 大神）倾向于使用 SQLAlchemy, 他认为\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e对于一个技术『知其然，知其所以然』\u003c/li\u003e\n\u003cli\u003e对于 ORM\n\u003cul\u003e\n\u003cli\u003e操作数据库，操作最好要落实在成 SQL\u003c/li\u003e\n\u003cli\u003e如果有可能的话，每一个 SQL 语句都要经过推敲，而且写这个 SQL 和 ORM 过程要反复练习\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e对于 Migration 机制\n\u003cul\u003e\n\u003cli\u003eAlembic 这个迁移工具是为了省事用的，甚至在某些情况下没必要用。完全可以写 SQL 代替\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e我 (Django 和 Vue 弱鸡）倾向于使用 DjangoORM, 我认为\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e对于一个技术『先知其大致然，需要深入的时候知其所以然』\u003c/li\u003e\n\u003cli\u003e对于 ORM\n\u003cul\u003e\n\u003cli\u003e操作数据，最好抽象为对对象的操作。\u003c/li\u003e\n\u003cli\u003e测试到位的情况下，快糙狠先出东西。到需要优化的时候该怎么 Profile 怎么 Profile\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e对于 Migration 机制\n\u003cul\u003e\n\u003cli\u003e用起来啊，能操作对象为什么还要强行到数据库操作？\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"21-模型定义\"\u003e\u003ca class=\"v-toc-item\" href=\"#21-模型定义\"\u003e#\u003c/a\u003e 2.1 模型定义\u003c/h3\u003e\n\u003cp\u003e先看一组模型\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003efrom sqlalchemy\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eext\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003edeclarative \u003cspan class=\"token keyword\"\u003eimport\u003c/span\u003e declarative_base\nBase \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003edeclarative_base\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e # 模型基类\nfrom sqlalchemy \u003cspan class=\"token keyword\"\u003eimport\u003c/span\u003e Column\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e Integer\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e String\n\u003cspan class=\"token keyword\"\u003eclass\u003c/span\u003e \u003cspan class=\"token class-name\"\u003eUser\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eBase\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n    __tablename__ \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token string\"\u003e'users'\u003c/span\u003e\n\n    id \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003eColumn\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eInteger\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e primary_key\u003cspan class=\"token operator\"\u003e=\u003c/span\u003eTrue\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e # 主键\n    name \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003eColumn\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eString\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n    fullname \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003eColumn\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eString\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n    password \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003eColumn\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eString\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\n    def \u003cspan class=\"token function\"\u003e__repr__\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eself\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n       \u003cspan class=\"token keyword\"\u003ereturn\u003c/span\u003e \u003cspan class=\"token string\"\u003e\"\u0026lt;User(name='%s', fullname='%s', password='%s')\u003e\"\u003c/span\u003e \u003cspan class=\"token operator\"\u003e%\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\n                            self\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e self\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003efullname\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e self\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epassword\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\nBase\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003emetadata\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003ecreate_all\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eengine\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可以看出，包含如下的部分：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eModel 与 Model 内部的 Meta\u003c/li\u003e\n\u003cli\u003eField 与 Field 内部的 Options\u003c/li\u003e\n\u003cli\u003eModel 与 Model 之间的关系\u003c/li\u003e\n\u003cli\u003e其他，比如索引\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch4 id=\"models-与-meta\"\u003e\u003ca class=\"v-toc-item\" href=\"#models-与-meta\"\u003e#\u003c/a\u003e Models 与 Meta\u003c/h4\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685\"\u003ehttps://github.com/zzzeek/sqlalchemy/blob/master/lib/sqlalchemy/sql/schema.py#L3685\u003c/a\u003e\u003c/p\u003e\n\u003ch4 id=\"关系\"\u003e\u003ca class=\"v-toc-item\" href=\"#关系\"\u003e#\u003c/a\u003e 关系\u003c/h4\u003e\n\u003ch5 id=\"one-to-many\"\u003e\u003ca class=\"v-toc-item\" href=\"#one-to-many\"\u003e#\u003c/a\u003e One To Many\u003c/h5\u003e\n\u003cp\u003e母亲有若干个孩子，外键在孩子上。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eclass Parent(Base):\n    #...\n    children = relationship(\u0026quot;Child\u0026quot;, backref=\u0026quot;parent\u0026quot;)\n\nclass Child(Base):\n    #...\n    parent_id = Column(Integer, ForeignKey('parent.id'))\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch5 id=\"many-to-one\"\u003e\u003ca class=\"v-toc-item\" href=\"#many-to-one\"\u003e#\u003c/a\u003e Many To One\u003c/h5\u003e\n\u003cp\u003e多个母亲共享一个孩子，外键在母亲上。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eclass Parent(Base):\n    child_id = Column(Integer, ForeignKey('child.id'))\n    child = relationship(\u0026quot;Child\u0026quot;)\n\nclass Child(Base):\n    # ...\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch5 id=\"one-to-one\"\u003e\u003ca class=\"v-toc-item\" href=\"#one-to-one\"\u003e#\u003c/a\u003e One To One\u003c/h5\u003e\n\u003cp\u003eOne to One 是 One to Many 或者是 Many to One 的简化版本\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# Many To One\nclass Parent(Base):\n    # ...\n    child_id = Column(Integer, ForeignKey('child.id'))\n    child = relationship(\u0026quot;Child\u0026quot;, backref=backref(\u0026quot;parent\u0026quot;, uselist=False))\n\nclass Child(Base):\n    # ...\n\n# One To Many 改 One To One\nclass Parent(Base):\n    # ...\n\nclass Child(Base):\n    # ...\n    parent_id = Column(Integer, ForeignKey('parent.id'))\n    parent = relationship(\u0026quot;Parent\u0026quot;, backref=backref(\u0026quot;child\u0026quot;, uselist=False))\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch5 id=\"many-to-many\"\u003e\u003ca class=\"v-toc-item\" href=\"#many-to-many\"\u003e#\u003c/a\u003e Many To Many\u003c/h5\u003e\n\u003cpre\u003e\u003ccode\u003eassociation_table = Table('association', Base.metadata,\n    Column('left_id', Integer, ForeignKey('left.id')),\n    Column('right_id', Integer, ForeignKey('right.id'))\n)\n\nclass Parent(Base):\n    # ...\n    children = relationship(\u0026quot;Child\u0026quot;,\n                    secondary=association_table,\n                    backref=\u0026quot;parents\u0026quot;)\n\nclass Child(Base):\n    # ...\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e注意事项\u003c/p\u003e\n\u003cp\u003e执行删除 mapping 表的时候尽量这样。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003emyparent\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003echildren\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eremove\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003esomechild\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e当你想干掉 somechild 的时候，会执行\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esession.delete(somechild)\n\u003c/code\u003e\u003c/pre\u003e\n\u003col\u003e\n\u003cli\u003e假如 Child 没有 ref Parent 的话，Secondary Table 无删除，则无法删除。\u003c/li\u003e\n\u003cli\u003e假如 ref 了的话，则删除 secondary 里面的记录。\u003c/li\u003e\n\u003cli\u003eTODO\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch5 id=\"邻接列表关系\"\u003e\u003ca class=\"v-toc-item\" href=\"#邻接列表关系\"\u003e#\u003c/a\u003e 邻接列表关系\u003c/h5\u003e\n\u003cpre\u003e\u003ccode\u003eclass Node(Base):\n    __tablename__ = 'node'\n    id = Column(Integer, primary_key=True)\n    parent_id = Column(Integer, ForeignKey('node.id'))\n    data = Column(String(50))\n    children = relationship(\u0026quot;Node\u0026quot;,\n                backref=backref('parent', remote_side=[id])\n            )\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch5 id=\"relationship-详解\"\u003e\u003ca class=\"v-toc-item\" href=\"#relationship-详解\"\u003e#\u003c/a\u003e relationship 详解\u003c/h5\u003e\n\u003ch3 id=\"21-query\"\u003e\u003ca class=\"v-toc-item\" href=\"#21-query\"\u003e#\u003c/a\u003e 2.1 Query\u003c/h3\u003e\n\u003ch4 id=\"create\"\u003e\u003ca class=\"v-toc-item\" href=\"#create\"\u003e#\u003c/a\u003e Create\u003c/h4\u003e\n\u003cpre\u003e\u003ccode\u003ec1 = Child(name=\u0026quot;苏轼\u0026quot;)\nsession.add(c1)\nsession.flush()\np = Parent(name=\u0026quot;苏辙\u0026quot;)\np.best_child = c1\nfor c in [c1,c2,c3,c4]:\n    p.children.append(c)\nsession.add(c1)\nsession.commit()\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"retrieve\"\u003e\u003ca class=\"v-toc-item\" href=\"#retrieve\"\u003e#\u003c/a\u003e Retrieve\u003c/h4\u003e\n\u003cp\u003e过滤\u003c/p\u003e\n\u003cp\u003efilter(**kwargs)\u003cbr\u003e\nfilter(\u003ca href=\"http://Singer.name\"\u003eSinger.name\u003c/a\u003e == “周杰伦”)\u003cbr\u003e\nfilter(\u003ca href=\"http://Singer.name\"\u003eSinger.name\u003c/a\u003e =! “周杰棍”)\u003c/p\u003e\n\u003ch5 id=\"跨关系跨表查询\"\u003e\u003ca class=\"v-toc-item\" href=\"#跨关系跨表查询\"\u003e#\u003c/a\u003e 跨关系（跨表）查询\u003c/h5\u003e\n\u003cp\u003esession.query(Entry).join(Blog,Blog.entry_id == \u003ca href=\"http://Entry.id\"\u003eEntry.id\u003c/a\u003e).filter(\u003ca href=\"http://Blog.name\"\u003eBlog.name\u003c/a\u003e = “SqlAlchemy CheatSheet”)\u003c/p\u003e\n\u003ch5 id=\"limit-offset-分页\"\u003e\u003ca class=\"v-toc-item\" href=\"#limit-offset-分页\"\u003e#\u003c/a\u003e Limit / Offset / 分页\u003c/h5\u003e\n\u003cul\u003e\n\u003cli\u003elimit()\u003c/li\u003e\n\u003cli\u003eoffset()\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch5 id=\"链式调用\"\u003e\u003ca class=\"v-toc-item\" href=\"#链式调用\"\u003e#\u003c/a\u003e 链式调用\u003c/h5\u003e\n\u003cpre\u003e\u003ccode\u003equery = session.query(Order) # query = session.query(Order)\nquery = query.filter(Order.name.like(f\u0026quot;%name%\u0026quot;))\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch5 id=\"二进制表达式\"\u003e\u003ca class=\"v-toc-item\" href=\"#二进制表达式\"\u003e#\u003c/a\u003e 二进制表达式\u003c/h5\u003e\n\u003cp\u003e我们先 type 一下表达式，找到 eq 的类型\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e\u003cspan class=\"token function\"\u003etype\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003emodel\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ecolumn_name \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token string\"\u003e'asdf'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e → sqlalchemy\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003esql\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eelements\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eBinaryExpression\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e是一个二进制表达式。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e# 等于\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token string\"\u003e'ed'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# 不等于\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename \u003cspan class=\"token operator\"\u003e!=\u003c/span\u003e \u003cspan class=\"token string\"\u003e'ed'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# Like（有的数据库不区分大小写）\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003elike\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e'%ed%'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token constant\"\u003eILIKE\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token keyword\"\u003ecase\u003c/span\u003e\u003cspan class=\"token operator\"\u003e-\u003c/span\u003einsensitive \u003cspan class=\"token constant\"\u003eLIKE\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eilike\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e'%ed%'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token constant\"\u003eIN\u003c/span\u003e\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003ein_\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token string\"\u003e'ed'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'wendy'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'jack'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# Not \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token operator\"\u003e~\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003ein_\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token string\"\u003e'ed'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'wendy'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'jack'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token constant\"\u003eIS\u003c/span\u003e \u003cspan class=\"token constant\"\u003eNULL\u003c/span\u003e\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e None\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n## 如果你用了 pep8\u003cspan class=\"token operator\"\u003e/\u003c/span\u003elinter 的话\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eis_\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eNone\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token constant\"\u003eIS\u003c/span\u003e \u003cspan class=\"token constant\"\u003eNOT\u003c/span\u003e \u003cspan class=\"token constant\"\u003eNULL\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename \u003cspan class=\"token operator\"\u003e!=\u003c/span\u003e None\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n## 如果你用了 pep8\u003cspan class=\"token operator\"\u003e/\u003c/span\u003elinter 的话\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eisnot\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eNone\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token constant\"\u003eAND\u003c/span\u003e\n## use \u003cspan class=\"token function\"\u003eand_\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token function\"\u003eand_\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token string\"\u003e'ed'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e User\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003efullname \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token string\"\u003e'Ed Jones'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n## or send multiple expressions to \u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token string\"\u003e'ed'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e User\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003efullname \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token string\"\u003e'Ed Jones'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n## or chain multiple \u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter_by\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e calls\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token string\"\u003e'ed'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003efullname \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token string\"\u003e'Ed Jones'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token constant\"\u003eOR\u003c/span\u003e\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token function\"\u003eor_\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token string\"\u003e'ed'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e User\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token string\"\u003e'wendy'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token constant\"\u003eMATCH\u003c/span\u003e\nquery\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ename\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003ematch\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e'wendy'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch5 id=\"执行查询\"\u003e\u003ca class=\"v-toc-item\" href=\"#执行查询\"\u003e#\u003c/a\u003e 执行查询\u003c/h5\u003e\n\u003cpre\u003e\u003ccode\u003eall()\nfirst()\none()\none_or_none()\nscalar()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eYourModel.query.get((pk1, pk2))\u003c/p\u003e\n\u003ch5 id=\"比较\"\u003e\u003ca class=\"v-toc-item\" href=\"#比较\"\u003e#\u003c/a\u003e 比较\u003c/h5\u003e\n\u003cblockquote\u003e\n\u003cp\u003e同一个 Session 下面，取到的某一条数据对应的 objects 应该是一样的？\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch5 id=\"复制-实例\"\u003e\u003ca class=\"v-toc-item\" href=\"#复制-实例\"\u003e#\u003c/a\u003e 复制 实例\u003c/h5\u003e\n\u003ch5 id=\"其他\"\u003e\u003ca class=\"v-toc-item\" href=\"#其他\"\u003e#\u003c/a\u003e 其他\u003c/h5\u003e\n\u003cpre\u003e\u003ccode\u003e# 查询的是 SomeModel 里面所有的字段 即 select *\nquery = session.query(SomeModel)\n# 查询的是 SomeModel 里面部分的字段 即 select acol, bcol\nquery = session.query(SomeModel.acol,SomeModel.bcol)\n# 即 select acol , bcol\n# alias\nuser_alias = aliased(User, name='user_alias')\nfor row in session.query(user_alias, user_alias.name).all():\n    # 即相当于 select name as name_label\n    print(row.user_alias)\n\n# limit 和 offset\nfor u in session.query(User).order_by(User.id)[1:3]:\n    print(u)\n\n# distinct\nsession.query(model.Name).distinct(model.Name.value).order_by(model.Name.value)\n# order_by\nUser.query.order_by(User.popularity.desc(),User.date_created.desc()).limit(10).all()\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"update\"\u003e\u003ca class=\"v-toc-item\" href=\"#update\"\u003e#\u003c/a\u003e Update\u003c/h4\u003e\n\u003cp\u003e单个 object 更新\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eblog.title = \u0026quot;大宝天天见\u0026quot;\nsession.add(blog)\nsession.commit()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e批量更新\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esession.query.filter(Blog.content.like(\u0026quot;% 敏感词 %\u0026quot;)).update({\n    Blog.content: \u0026quot;依照相关 XX 无法查看\u0026quot;\n})\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e一对多的更新\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eappend\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"delete\"\u003e\u003ca class=\"v-toc-item\" href=\"#delete\"\u003e#\u003c/a\u003e Delete\u003c/h4\u003e\n\u003cp\u003equery.delete()\u003c/p\u003e\n\u003ch4 id=\"join\"\u003e\u003ca class=\"v-toc-item\" href=\"#join\"\u003e#\u003c/a\u003e JOIN\u003c/h4\u003e\n\u003cp\u003e\u003ca href=\"https://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query\"\u003ehttps://stackoverflow.com/questions/6044309/sqlalchemy-how-to-join-several-tables-by-one-query\u003c/a\u003e\u003c/p\u003e\n\u003ch5 id=\"两表-innerjoin\"\u003e\u003ca class=\"v-toc-item\" href=\"#两表-innerjoin\"\u003e#\u003c/a\u003e 两表 InnerJoin\u003c/h5\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e\u003cspan class=\"token keyword\"\u003efor\u003c/span\u003e u\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e a \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e session\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003equery\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e Address\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\\\n                    \u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eUser\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eid\u003cspan class=\"token operator\"\u003e==\u003c/span\u003eAddress\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003euser_id\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\\\n                    \u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eAddress\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eemail_address\u003cspan class=\"token operator\"\u003e==\u003c/span\u003e\u003cspan class=\"token string\"\u003e'jack@google.com'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\\\n                    \u003cspan class=\"token function\"\u003eall\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n    \u003cspan class=\"token function\"\u003eprint\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eu\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n    \u003cspan class=\"token function\"\u003eprint\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ea\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# \u003cspan class=\"token operator\"\u003e\u0026lt;\u003c/span\u003e\u003cspan class=\"token function\"\u003eUser\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ename\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token string\"\u003e'jack'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e fullname\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token string\"\u003e'Jack Bean'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e password\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token string\"\u003e'gjffdd'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e\u003e\u003c/span\u003e\n# \u003cspan class=\"token operator\"\u003e\u0026lt;\u003c/span\u003e\u003cspan class=\"token function\"\u003eAddress\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eemail_address\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token string\"\u003e'jack@google.com'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e\u003e\u003c/span\u003e\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch5 id=\"多表-innerjoin-leftjoin\"\u003e\u003ca class=\"v-toc-item\" href=\"#多表-innerjoin-leftjoin\"\u003e#\u003c/a\u003e 多表 InnerJoin + LeftJoin\u003c/h5\u003e\n\u003cpre\u003e\u003ccode\u003equery.outerjoin(User.addresses)   # LEFT OUTER JOIN\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"聚集查询\"\u003e\u003ca class=\"v-toc-item\" href=\"#聚集查询\"\u003e#\u003c/a\u003e 聚集查询\u003c/h4\u003e\n\u003cpre\u003e\u003ccode\u003esession.query(User).filter(User.name.like('%ed')).count()\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003efrom sqlalchemy import func\nsession.query(Table.column, func.count(Table.column)).group_by(Table.column).all()\n\nself.session.query(func.count(Table.column1),Table.column1, Table.column2).group_by(Table.column1, Table.column2).all()\n\nfrom sqlalchemy.sql import func\nsession.query(func.avg(Rating.field2).label('average')).filter(Rating.url==url_string.netloc)\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"缓存机制\"\u003e\u003ca class=\"v-toc-item\" href=\"#缓存机制\"\u003e#\u003c/a\u003e 缓存机制\u003c/h4\u003e\n\u003cp\u003eQuery 对象，下文中，我会聊到这个 Query 对象。这里先跳过。\u003c/p\u003e\n\u003ch3 id=\"22-原生查询\"\u003e\u003ca class=\"v-toc-item\" href=\"#22-原生查询\"\u003e#\u003c/a\u003e 2.2 原生查询\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003efrom sqlalchemy import text\n\nsql = text('select name from penguins')\nresult = db.engine.execute(sql)\nnames = []\nfor row in result:\n    names.append(row[0])\n\nprint names\n\nfrom collections import namedtuple\n\nRecord = namedtuple('Record', result.keys())\nrecords = [Record(*r) for r in result.fetchall()]\nfor r in records:\n    print(r)\n\nfrom sqlalchemy.sql import text\n\nconnection = engine.connect()\n\n# recommended\ncmd = 'select * from Employees where EmployeeGroup == :group'\nemployeeGroup = 'Staff'\nemployees = connection.execute(text(cmd), group = employeeGroup)\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003eget_or_create\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003edef get_or_create(session, model, defaults=None, **kwargs):\n    instance = session.query(model).filter_by(**kwargs).first()\n    if instance:\n        return instance, False\n    else:\n        params = dict((k, v) for k, v in kwargs.iteritems() if not isinstance(v, ClauseElement))\n        params.update(defaults or {})\n        instance = model(**params)\n        session.add(instance)\n        return instance, True\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"23-更新查询\"\u003e\u003ca class=\"v-toc-item\" href=\"#23-更新查询\"\u003e#\u003c/a\u003e 2.3 更新查询\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003esession.query(Stuff).update({Stuff.foo: Stuff.foo + 1})\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e1) for c in session.query(Stuff).all():\n       c.foo += 1\n   session.commit()\n\n2) session.query().\\\n       update({\u0026quot;foo\u0026quot;: (Stuff.foo + 1)})\n   session.commit()\n\n3) conn = engine.connect()\n   stmt = Stuff.update().\\\n       values(Stuff.foo = (Stuff.foo + 1))\n   conn.execute(stmt)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e1) user.no_of_logins += 1\n   session.commit()\n\n2) session.query().\\\n       filter(User.username == form.username.data).\\\n       update({\u0026quot;no_of_logins\u0026quot;: (User.no_of_logins +1)})\n   session.commit()\n\n3) conn = engine.connect()\n   stmt = User.update().\\\n       values(no_of_logins=(User.no_of_logins + 1)).\\\n       where(User.username == form.username.data)\n   conn.execute(stmt)\n\n4) setattr(user, 'no_of_logins', user.no_of_logins+1)\n   session.commit()\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"24-删除\"\u003e\u003ca class=\"v-toc-item\" href=\"#24-删除\"\u003e#\u003c/a\u003e 2.4 删除\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://stackoverflow.com/questions/5033547/sqlalchemy-cascade-delete\"\u003ehttps://stackoverflow.com/questions/5033547/sqlalchemy-cascade-delete\u003c/a\u003e\u003c/p\u003e\n\u003ch4 id=\"ondelete\"\u003e\u003ca class=\"v-toc-item\" href=\"#ondelete\"\u003e#\u003c/a\u003e OnDelete\u003c/h4\u003e\n\u003cp\u003eondelete=‘CASCADE’))\u003c/p\u003e\n\u003ch4 id=\"批量操作\"\u003e\u003ca class=\"v-toc-item\" href=\"#批量操作\"\u003e#\u003c/a\u003e 批量操作\u003c/h4\u003e\n\u003cp\u003emodels.User.query.delete()\u003c/p\u003e\n\u003ch3 id=\"如何从-object-到一个-orm\"\u003e\u003ca class=\"v-toc-item\" href=\"#如何从-object-到一个-orm\"\u003e#\u003c/a\u003e 如何从 Object 到一个 ORM\u003c/h3\u003e\n\u003cp\u003e如何追踪 Object 的变化？\u003c/p\u003e\n\u003ch2 id=\"0x03-sqlalchemy-的高级特性\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-sqlalchemy-的高级特性\"\u003e#\u003c/a\u003e 0x03 SQLAlchemy 的高级特性\u003c/h2\u003e\n\u003ch3 id=\"表继承\"\u003e\u003ca class=\"v-toc-item\" href=\"#表继承\"\u003e#\u003c/a\u003e 表继承\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://stackoverflow.com/questions/1337095/sqlalchemy-inheritance\"\u003ehttps://stackoverflow.com/questions/1337095/sqlalchemy-inheritance\u003c/a\u003e\u003c/p\u003e\n\u003ch3 id=\"啥玩意\"\u003e\u003ca class=\"v-toc-item\" href=\"#啥玩意\"\u003e#\u003c/a\u003e 啥玩意\u003c/h3\u003e\n\u003cp\u003eFlush 和 commit\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://stackoverflow.com/questions/4201455/sqlalchemy-whats-the-difference-between-flush-and-commit\"\u003ehttps://stackoverflow.com/questions/4201455/sqlalchemy-whats-the-difference-between-flush-and-commit\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ex = Foo(bar=1)\nprint x.id\n# None\nsession.add(x)\nsession.flush()\n# BEGIN\n# INSERT INTO foo (bar) VALUES(1)\n# COMMIT\nprint x.id\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003eqry = DBSession.query(User).filter(\n        and_(User.birthday \u0026lt;= '1988-01-17', User.birthday \u0026gt;= '1985-01-17'))\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"0x04-sqlalchemy-的基础特性-under-the-hood\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x04-sqlalchemy-的基础特性-under-the-hood\"\u003e#\u003c/a\u003e 0x04 SQLAlchemy 的基础特性 Under The Hood\u003c/h2\u003e\n\u003ch3 id=\"loading-策略\"\u003e\u003ca class=\"v-toc-item\" href=\"#loading-策略\"\u003e#\u003c/a\u003e Loading 策略\u003c/h3\u003e\n\u003ch4 id=\"lazy-loading\"\u003e\u003ca class=\"v-toc-item\" href=\"#lazy-loading\"\u003e#\u003c/a\u003e Lazy Loading\u003c/h4\u003e\n\u003ch4 id=\"eager-loading\"\u003e\u003ca class=\"v-toc-item\" href=\"#eager-loading\"\u003e#\u003c/a\u003e Eager Loading\u003c/h4\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026gt;\u0026gt;\u0026gt; from sqlalchemy.dialects import postgresql\n\u0026gt;\u0026gt;\u0026gt; print str(q.statement.compile(dialect=postgresql.dialect()))\nWhere q is defined as:\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"0x05-sqlalchemy-的高级特性-under-the-hood\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x05-sqlalchemy-的高级特性-under-the-hood\"\u003e#\u003c/a\u003e 0x05 SQLAlchemy 的高级特性 Under The Hood\u003c/h2\u003e\n\u003ch3 id=\"多线程\"\u003e\u003ca class=\"v-toc-item\" href=\"#多线程\"\u003e#\u003c/a\u003e 多线程\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"https://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy\"\u003ehttps://stackoverflow.com/questions/6297404/multi-threaded-use-of-sqlalchemy\u003c/a\u003e\u003cbr\u003e\n\u003ca href=\"https://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications\"\u003ehttps://stackoverflow.com/questions/9619789/sqlalchemy-proper-session-handling-in-multi-thread-applications\u003c/a\u003e\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\nhttps://stackoverflow.com/questions/34322471/sqlalchemy-engine-connection-and-session-difference\nhttps://stackoverflow.com/questions/11769366/why-is-sqlalchemy-insert-with-sqlite-25-times-slower-than-using-sqlite3-directly\nhttps://stackoverflow.com/questions/12223335/sqlalchemy-creating-vs-reusing-a-session\nsession 是个容器\n\nhttps://stackoverflow.com/questions/18199053/example-of-what-sqlalchemy-can-do-and-django-orm-cannot\nhttps://stackoverflow.com/questions/7389759/memory-efficient-built-in-sqlalchemy-iterator-generator\n\n# 日志\nimport logging\nlogging.basicConfig()\nlogging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"0x06-debug-和-profile-技巧\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x06-debug-和-profile-技巧\"\u003e#\u003c/a\u003e 0x06 DEBUG 和 Profile 技巧\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003eSQLALCHEMY_TRACK_MODIFICATIONS = False\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"61-查看技巧\"\u003e\u003ca class=\"v-toc-item\" href=\"#61-查看技巧\"\u003e#\u003c/a\u003e 6.1 查看技巧\u003c/h3\u003e\n\u003cp\u003edict(u)\u003cbr\u003e\nu.\u003cstrong\u003edict\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://stackoverflow.com/questions/1171166/how-can-i-profile-a-sqlalchemy-powered-application\"\u003ehttps://stackoverflow.com/questions/1171166/how-can-i-profile-a-sqlalchemy-powered-application\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e如果用上 Flask+SQLAlchemy 一般也要带上，Flask-Migration 与 Flask-SQLAlchemy, 这两个库也是对 Alembic 和 SQLAlchemy 的浅封装。\u003c/p\u003e\n\u003cp\u003e那么，对于这个 ORM 库还有那些通用性的知识需要了解？\u003c/p\u003e\n\u003cp\u003e嗯，是时候了解本质了。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://derrickgilland.com/posts/demystifying-flask-sqlalchemy/\"\u003ehttp://derrickgilland.com/posts/demystifying-flask-sqlalchemy/\u003c/a\u003e\u003c/p\u003e\n\u003ch2 id=\"0x07-orm-的本质\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x07-orm-的本质\"\u003e#\u003c/a\u003e 0x07 ORM 的本质\u003c/h2\u003e\n\u003cp\u003eORM 的本质是 Data Access Layer 上的一层封装。如果你写原生 SQL, 即手写 DAL 的话，开发效率可能会大打折扣。\u003c/p\u003e\n\u003ch3 id=\"orm-的两种类型-active-record-与-data-mappers\"\u003e\u003ca class=\"v-toc-item\" href=\"#orm-的两种类型-active-record-与-data-mappers\"\u003e#\u003c/a\u003e ORM 的两种类型 Active Record 与 Data Mappers\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e# ActiveRecord 风格写起来类似于 Django ORM, 大致是这样的\n\n## AR 的模型定义\n\nclass User(db.models):\n    name = db.StringField(verbose=\u0026quot;xyz\u0026quot;)\n\n## AR 的新增\nuser = User()\nuser.name = \u0026quot;123456\u0026quot;\nuser.save() ## 正好对应数据库中的一行\n\n## AR 的查询\n\nusers = User.objects.filter(Q(name=\u0026quot;黄老板的小姨子\u0026quot;)).all()\n\n# Data Mappers 风格写起来类似于 SQLAlchemy ORM, 大致是这样的\n\n## SA 的定义\n\nfrom sqlalchemy.ext.declarative import declarative_base\n\nBase = declarative_base()\n\nfrom sqlalchemy import Column, Integer, String\nclass User(Base):\n    __tablename__ = 'users'\n\n    id = Column(Integer, primary_key=True)\n    name = Column(String)\n\nBase.metadata.create_all(engine)\n\n## SA 的新增\n\nuser = User()\nuser.name = \u0026quot;123456\u0026quot;\nsession.add(user)\nsessoon.commit() ## 嗯？其实也是对应数据库中的一行。\n\n## SA 的查询\n\nsession.query(User).filter(User.name)\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e问题来了，这两者到底是什么，看起来似乎相差不大。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eclass Person:\n\n    lastname\n    firstname\n    children\n\n    # 数据操作\n    def findone(self):\n        pass\n\n    def insert(self):\n        pass\n\n    def update(self):\n        pass\n\n    def delete(self):\n        pass\n\n    # 业务逻辑\n    def getChildrenTax(self):\n        pass\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003elastName firstName numberOfDependents\u003c/p\u003e\n\u003cp\u003einsert update delete\u003c/p\u003e\n\u003cp\u003egetExemption isFlaggedForAudit getTaxableEarnings\u003c/p\u003e\n\u003cp\u003eAn object that wraps a row in a database table or view, encapsulates the database access, and adds domain logic on that data.\u003c/p\u003e\n\u003cp\u003eThe essence of an Active Record is a Domain Model (116) in which the classes match very closely the record structure of an underlying database. Each Active Record is responsible for saving and loading to the database and also for any domain logic that acts on the data. This may be all the domain logic in the application, or you may ﬁnd that some domain logic is held in Transaction Scripts (110) with common and data-oriented code in the Active Record.\u003c/p\u003e\n\u003cp\u003eThe data structure of the Active Record should exactly match that of the database: one ﬁeld in the class for each column in the table. Type the ﬁelds the way the SQL interface gives you the data—don’t do any conversion at this stage. You may consider Foreign Key Mapping (236), but you may also leave the foreign keys as they are. You can use views or tables with Active Record, although updates through views are obviously harder. Views are particularly useful for reporting purposes.\u003c/p\u003e\n\u003cp\u003eobjects correspond directly to the database tables: an isomorphic schema. If your business logic is complex, you’ll soon want to use your object’s direct relationships, collections, inheritance, and so forth. These don’t map easily onto Active Record, and adding them piecemeal gets very messy. That’s what will lead you to use Data Mapper (165) instead.\u003c/p\u003e\n\u003cp\u003eAnother argument against Active Record is the fact that it couples the object design to the database design. This makes it more difﬁcult to refactor either design as a project goes forward.\u003c/p\u003e\n\u003cp\u003eActive Record is a good pattern to consider if you’re using Transaction Script (110) and are beginning to feel the pain of code duplication and the difﬁculty in updating scripts and tables that Transaction Script (110) often brings. In this case you can gradually start creating Active Records and then slowly refactor behavior into them. It often helps to wrap the tables as a Gateway (466) ﬁrst, and then start moving behavior so that the tables evolve to a Active Record.\u003c/p\u003e\n\u003cp\u003e其实为什么不选择设计成 ActiveRecord , 而是选择设计成 Data Mapper, 其实就可以回答这个问题：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e虽然要设计成 ORM, 考虑到数量和性能因素，SQL 数据库（多个表）并不应该是表现像 Object 集合那样（换言之，也就是 AR 表现的像 Object 的集合一样）。\u003cbr\u003e\n同时，出于更好的抽象，object 集合也应该表现的像表以及行\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e于是我们可以得出结论，可以在 SQLAlchemy 上面进行一定的封装，使得最后用起来非常的 Django ORM like，其实 SQLAlchemy 稍加定制还是可以很 Django ORM-like 的。\u003c/p\u003e\n\u003cp\u003e:TODO: 有机会看看那本书再修改一下本小节\u003c/p\u003e\n\u003cp\u003e这不，果然有人就这么搞了 \u003ca href=\"https://github.com/absent1706/sqlalchemy-mixins\"\u003ehttps://github.com/absent1706/sqlalchemy-mixins\u003c/a\u003e\u003c/p\u003e\n\u003ch2 id=\"0x09-踩坑集\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x09-踩坑集\"\u003e#\u003c/a\u003e 0x09 踩坑集\u003c/h2\u003e\n\u003ch3 id=\"关系持久化坑\"\u003e\u003ca class=\"v-toc-item\" href=\"#关系持久化坑\"\u003e#\u003c/a\u003e 关系持久化坑\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003eRows that point to themselves : 比如一个 insert 一个推荐自己的用户，则需要保存 id / ref_id , 但是在这个 user 插入之前，并不存在 id. 所以，一般情况下是先 insert, 然后保存 ref_id\u003c/li\u003e\n\u003cli\u003eMutually Dependent Rows\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3 id=\"sql-注入\"\u003e\u003ca class=\"v-toc-item\" href=\"#sql-注入\"\u003e#\u003c/a\u003e SQL 注入\u003c/h3\u003e\n\u003cp\u003esession.query(MyClass).filter(“foo={}”.format(getArgs[‘val’]))\u003c/p\u003e\n\u003ch2 id=\"0xee-参考链接\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-参考链接\"\u003e#\u003c/a\u003e 0xEE 参考链接\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"https://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/\"\u003ehttps://www.eversql.com/django-vs-sqlalchemy-which-python-orm-is-better/\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"https://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create\"\u003ehttps://stackoverflow.com/questions/2546207/does-sqlalchemy-have-an-equivalent-of-djangos-get-or-create\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e除了文档本身，作者在 Stack Overflow 上的回答都是非常值得阅读的。\u003ca href=\"https://stackoverflow.com/users/34549/zzzeek\"\u003ehttps://stackoverflow.com/users/34549/zzzeek\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003ePatterns of Enterprise Application Architecture - Martin Fowler\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"http://aosabook.org/en/sqlalchemy.html\"\u003ehttp://aosabook.org/en/sqlalchemy.html\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://techspot.zzzeek.org/\"\u003ehttp://techspot.zzzeek.org/\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2018-03-09\u003c/strong\u003e 重修文字\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-orm-%E8%A7%A3%E5%86%B3%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98\"\u003e0x01 ORM 解决了什么问题？\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-sqlalchemy-%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%8A%9F%E8%83%BD\"\u003e0x02 SQLAlchemy 的基本功能\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#20-sqlalchemy-vs-djangoorm\"\u003e2.0 SQLAlchemy VS DjangoORM\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#21-%E6%A8%A1%E5%9E%8B%E5%AE%9A%E4%B9%89\"\u003e2.1 模型定义\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#models-%E4%B8%8E-meta\"\u003eModels 与 Meta\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%85%B3%E7%B3%BB\"\u003e关系\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#one-to-many\"\u003eOne To Many\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#many-to-one\"\u003eMany To One\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#one-to-one\"\u003eOne To One\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#many-to-many\"\u003eMany To Many\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E9%82%BB%E6%8E%A5%E5%88%97%E8%A1%A8%E5%85%B3%E7%B3%BB\"\u003e邻接列表关系\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#relationship-%E8%AF%A6%E8%A7%A3\"\u003erelationship 详解\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#21-query\"\u003e2.1 Query\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#create\"\u003eCreate\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#retrieve\"\u003eRetrieve\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E8%B7%A8%E5%85%B3%E7%B3%BB%E8%B7%A8%E8%A1%A8%E6%9F%A5%E8%AF%A2\"\u003e跨关系（跨表）查询\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#limit-offset-%E5%88%86%E9%A1%B5\"\u003eLimit / Offset / 分页\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8\"\u003e链式调用\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E4%BA%8C%E8%BF%9B%E5%88%B6%E8%A1%A8%E8%BE%BE%E5%BC%8F\"\u003e二进制表达式\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%89%A7%E8%A1%8C%E6%9F%A5%E8%AF%A2\"\u003e执行查询\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%AF%94%E8%BE%83\"\u003e比较\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%A4%8D%E5%88%B6-%E5%AE%9E%E4%BE%8B\"\u003e复制 实例\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%85%B6%E4%BB%96\"\u003e其他\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#update\"\u003eUpdate\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#delete\"\u003eDelete\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#join\"\u003eJOIN\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E4%B8%A4%E8%A1%A8-innerjoin\"\u003e两表 InnerJoin\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%A4%9A%E8%A1%A8-innerjoin-leftjoin\"\u003e多表 InnerJoin + LeftJoin\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E8%81%9A%E9%9B%86%E6%9F%A5%E8%AF%A2\"\u003e聚集查询\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6\"\u003e缓存机制\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#22-%E5%8E%9F%E7%94%9F%E6%9F%A5%E8%AF%A2\"\u003e2.2 原生查询\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#23-%E6%9B%B4%E6%96%B0%E6%9F%A5%E8%AF%A2\"\u003e2.3 更新查询\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#24-%E5%88%A0%E9%99%A4\"\u003e2.4 删除\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#ondelete\"\u003eOnDelete\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C\"\u003e批量操作\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%A6%82%E4%BD%95%E4%BB%8E-object-%E5%88%B0%E4%B8%80%E4%B8%AA-orm\"\u003e如何从 Object 到一个 ORM\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-sqlalchemy-%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7\"\u003e0x03 SQLAlchemy 的高级特性\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E8%A1%A8%E7%BB%A7%E6%89%BF\"\u003e表继承\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%95%A5%E7%8E%A9%E6%84%8F\"\u003e啥玩意\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x04-sqlalchemy-%E7%9A%84%E5%9F%BA%E7%A1%80%E7%89%B9%E6%80%A7-under-the-hood\"\u003e0x04 SQLAlchemy 的基础特性 Under The Hood\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#loading-%E7%AD%96%E7%95%A5\"\u003eLoading 策略\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#lazy-loading\"\u003eLazy Loading\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#eager-loading\"\u003eEager Loading\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x05-sqlalchemy-%E7%9A%84%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7-under-the-hood\"\u003e0x05 SQLAlchemy 的高级特性 Under The Hood\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%A4%9A%E7%BA%BF%E7%A8%8B\"\u003e多线程\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x06-debug-%E5%92%8C-profile-%E6%8A%80%E5%B7%A7\"\u003e0x06 DEBUG 和 Profile 技巧\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#61-%E6%9F%A5%E7%9C%8B%E6%8A%80%E5%B7%A7\"\u003e6.1 查看技巧\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x07-orm-%E7%9A%84%E6%9C%AC%E8%B4%A8\"\u003e0x07 ORM 的本质\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#orm-%E7%9A%84%E4%B8%A4%E7%A7%8D%E7%B1%BB%E5%9E%8B-active-record-%E4%B8%8E-data-mappers\"\u003eORM 的两种类型 Active Record 与 Data Mappers\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x09-%E8%B8%A9%E5%9D%91%E9%9B%86\"\u003e0x09 踩坑集\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%85%B3%E7%B3%BB%E6%8C%81%E4%B9%85%E5%8C%96%E5%9D%91\"\u003e关系持久化坑\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#sql-%E6%B3%A8%E5%85%A5\"\u003eSQL 注入\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5\"\u003e0xEE 参考链接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"SQLAlchemy CheatSheet"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Chorthotkey 发布 | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h1 id="chorthotkey-发布"><a class="v-toc-item" href="#chorthotkey-发布">#</a> Chorthotkey 发布</h1>
+<h2 id="0x01-概要介绍"><a class="v-toc-item" href="#0x01-概要介绍">#</a> 0x01 概要介绍</h2>
+<p>经过长时间的电脑的使用，我渐渐的喜欢上了 Autohotkey 这个神器，喜欢 Python 是因为 Python 强大与高效，喜欢 AHK 则是太方便了。</p>
+<p>长时间的使用，毕竟也积攒了一些脚本，加上对很多脚本的收集以及修改，勉强算得上是一个入门的 AHK 菜鸟了。</p>
+<p>AHK 的优点可以对快捷键进行编程，对一个经常使用电脑自动化处理一些事情的人说，非常之方便，但缺点，太多，效率低，语法乱，数据结构乱。让我写一段文字处理简直就让我非常难受。</p>
+<p>但为了取长补短，我仅仅使用其中的对快捷键编程的功能，加上收集来的别人的一些函数。修改集成，然后做一个顺手的 AHK 脚本，名字就叫做 Chorthotkey。</p>
+<blockquote>
+<p>开源，协议选择 Mit 协议。简而言之也就是你改了名字版权就是你的了。</p>
+</blockquote>
+<p>我在编写这篇文章的时候，也在重构并进行 V0.4 版本的完善。</p>
+<p>什么时候使用 AHK 脚本呢。</p>
+<blockquote>
+<p>当繁杂的功能可以批量完成的时候。</p>
+</blockquote>
+<p>换而言之，当这个功能不值得用另一个大的专业性比较强的软件代替的时候，或者对快捷键进行编程的时候。</p>
+<ul>
+<li>先说第一点：当我想使用一个功能的时候，比如快速打开一个网页，或者进行文字上的简单处理，这个时候没有必要单独下载一个软件进行处理，这个在 AHK 中就是简单的几行代码就可以搞定。比如打开网站直接 Run <a href="http://www.baidu.com">www.baidu.com</a> AHK 就会直接调用相关浏览器打开 baidu. 这么简单的东西没有必要单独下载一个软件进行管理。</li>
+<li>再说第二点：当我想着对快捷键进行编程调用进行自动化处理东西的时候，或者编写一套自己的热键用来打游戏或者其他的一些编辑用途等等，都可以。理论上来说，AHK 几乎是只有想不到没有做不到的。</li>
+</ul>
+<p>那么，AHK 不能替代什么东西？</p>
+<p>在文件管理方面，尽管你可以自己编写很多的快捷键，但你没有办法超越 TotalCMD，没有办法超越 Listary 或者 Everything，所以，你编写的东西只需要辅助你使用这些东西就好了。</p>
+<p>在文本编辑方面，你始终无法超越 sublime text 3，无法超越 vi，无法超越 Emacs，你只需要辅助你使用这些工具即可。</p>
+<p>其他专业软件同理。</p>
+<p>既然说了 AHK 那么多的不足和缺憾，但是 AHK 在我的脚本语言中依然傲立第二名，就是因为它擅长的快捷键编程。</p>
+<p>好了，废话这么多，总该说点干货了。</p>
+<p>我认为 Autohotkey 用好这三个脚本即可：</p>
+<ul>
+<li>Candy 一个非常强大的第三方弹出菜单 amii 编写。</li>
+<li>ChortHotKey 一个我编写的工具</li>
+<li>vimd 无所不在的 vim 党编写的软件。</li>
+</ul>
+<p>好吧，我无耻的把三个工具放在一起了。虽然 Candy 和 vimdesktop 在使用上面甩 Chorthotkey 几条街，但是，我乐意把他们放在一起，怎么滴？</p>
+<h2 id="0x02-设计思路"><a class="v-toc-item" href="#0x02-设计思路">#</a> 0x02 设计思路</h2>
+<p>AHK 的操作按照是否聪明分为两种：</p>
+<ol>
+<li>第一种叫做非上下文的操作</li>
+<li>第二种叫做上下文操作</li>
+</ol>
+<p>AHK 操作按照使用场景分为：</p>
+<ol>
+<li>直接操作</li>
+<li>选中操作</li>
+</ol>
+<p>AHK 按照操作目标分为</p>
+<ol>
+<li>程序类操作</li>
+<li>键盘类操作</li>
+<li>文件类操作</li>
+<li>文本类操作</li>
+<li>命令类操作</li>
+<li>其他操作</li>
+</ol>
+<p>选取一个角度对 Chorthotkey 描述 — 按照操作目标</p>
+<p>PS：浏览器建议 chrome</p>
+<h3 id="1-程序类-涉及运行程序或者一些常用的小功能"><a class="v-toc-item" href="#1-程序类-涉及运行程序或者一些常用的小功能">#</a> 1. 程序类 – 涉及运行程序，或者一些常用的小功能</h3>
+<p>我的所有程序都是使用配置好的环境变量 D:\Sysconfig 其中的快捷方式搞定的。比如 win+r 输入 qq 然后回车自动打开 QQ。这个并不使用 AHK。因为没有必要增加大量的热键来增加自己的记忆负担。<br>
+但是使用频率非常高的必须设置快捷键。</p>
+<p>程序类快捷键我主要使用的是 Win 按键，AHK 中用 # 来表示</p>
+<pre><code class="language-autohotkey"> #a 到有道官网查找单词翻译，并且保存到桌面上一个文本文档中。
+ #b 选中某段文字进行解析，如果里面有网址则访问网址，否则使用百度进行搜索
+ #g 选中某段文字进行解析，如果里面有网址则访问网址，否则使用 Google 进行搜索
+ #f 打开 everything 进行搜索
+ #e 替换原有的资源管理器，打开 TotalCMD
+ #q 打开 <span class="token constant">QQ</span>
+ #v open <span class="token keyword">with</span> vim
+ #s open <span class="token keyword">with</span> sublime text
+
+官方的操作
+
+ #c Windows8 什么鸟菜单
+ #x win8 快捷菜单
+ #r 运行，比较方便
+ #<span class="token number">1</span><span class="token operator">-</span><span class="token number">9</span> 数字，建议把几个（四个之内，超过四个你的手可能就跟不上操作了）可能有变化的软件放在 pin 在 taskbar 上面。
+</code></pre>
+<h3 id="2-键盘鼠标操作"><a class="v-toc-item" href="#2-键盘鼠标操作">#</a> 2. 键盘鼠标操作</h3>
+<pre><code class="language-bash">alt<span class="token operator">+</span>f4 按住左键再按住右键输出
+
+<span class="token constant">CAPSLOCK</span> 超级导航
+<span class="token constant">CAPSLOCK</span> 输出 <span class="token constant">ESC</span>
+<span class="token constant">SHIFT</span> <span class="token operator">&amp;</span> <span class="token constant">CAPSLOCK</span> 调用 Candy
+下面内容属于组合键的另一个按键
+hjkl 前下上右
+a 行尾进行编辑
+o 下一行进行编辑
+
+n ctrl<span class="token operator">+</span><span class="token keyword">delete</span>
+m <span class="token keyword">delete</span>
+<span class="token punctuation">,</span> backspace
+<span class="token punctuation">.</span> ctrl<span class="token operator">+</span>backspace
+
+<span class="token number">5</span> 打开 coding workspace
+<span class="token number">6</span> 打开未整理文件
+<span class="token number">7</span> 打开 Onedirve
+<span class="token number">8</span> 打开同步文件夹
+<span class="token number">9</span> 打开娱乐文件
+<span class="token number">0</span> 打开 sysconfig
+</code></pre>
+<h3 id="3-文件类操作"><a class="v-toc-item" href="#3-文件类操作">#</a> 3. 文件类操作</h3>
+<p>选中的文件夹在 TC 中打开，其余操作全部在 TC 中解决<br>
+由于我使用了 Capslock 的导航功能，这时候的 capslock hjkl 完全可以当作左下上右使用。<br>
+vim+tc，可以使用 vim desktop 进行超级强化。我一直对 TOTALCMD 的快捷键设计抱有不满和一丝丝的畏惧，但是这个软件把 TC 的快捷键常用快捷键精简到了令人发指的地步。</p>
+<blockquote>
+<p>I love TC plus AHK</p>
+</blockquote>
+<h3 id="4-文本类操作"><a class="v-toc-item" href="#4-文本类操作">#</a> 4. 文本类操作</h3>
+<p>candy 操作，保存，发送等等，凡是 Ctrl + c 飘落的地方，就一定会有 candy 的存在（火影忍者既视感）。请在我另一篇 Blog 中看看我是怎么使用 Candy 的。</p>
+<h3 id="5-命令类操作"><a class="v-toc-item" href="#5-命令类操作">#</a> 5. 命令类操作</h3>
+<p>这里面存放的是 AHK 的命令。其实就是使用 ahk 调用 python 脚本执行之类的东西。起到一个胶水的作用。</p>
+<h3 id="6-其他操作"><a class="v-toc-item" href="#6-其他操作">#</a> 6. 其他操作</h3>
+<p>热字符串输入其实和代码的 Snippet 比较相近。</p>
+<pre><code class="language-bash">用的特别频繁的
+<span class="token comment">//date 20150223</span>
+<span class="token operator">/</span>dd
+<span class="token comment">//time 08:52:33</span>
+<span class="token operator">/</span>tt
+<span class="token comment">//lastupdate 最后修改时间 2015-02-23 08:52:33</span>
+<span class="token operator">/</span>ll
+<span class="token comment">//mail twocucao@gmail.com</span>
+<span class="token operator">/</span>mm
+<span class="token comment">//anouncement  声明 lalalalalallalalalallalalalla</span>
+<span class="token operator">/</span>aa
+
+常用的
+<span class="token comment">//motto 我挥舞着纸笔和键盘，发誓要把这个世界写个明白。</span>
+
+常用打开 Vim 的文字模板使用
+<span class="token operator">/</span>hexo  打开 gvim，粘贴进去对应的模板。
+
+比如我输入
+<span class="token comment">//hexo</span>
+那么就会 Copy 我之前定义的文字，然后存放在我的剪切板中。（时间是动态的）
+接着脚本打开 gvim，你要做的就是把文字粘贴进去就可以进行 <span class="token constant">HEXO</span> 的编写了。
+
+</code></pre>
+<pre><code class="language-python">title<span class="token operator">:</span> 标题
+date<span class="token operator">:</span><span class="token number">2015</span><span class="token operator">-</span><span class="token number">02</span><span class="token operator">-</span><span class="token number">23</span> <span class="token number">10</span><span class="token operator">:</span><span class="token number">16</span><span class="token operator">:</span><span class="token number">30</span>
+tags<span class="token operator">:</span> 感悟
+category<span class="token operator">:</span> 『生活，感悟』
+<span class="token operator">--</span><span class="token operator">-</span>
+
+正文
+<span class="token operator">&lt;</span><span class="token operator">!</span><span class="token operator">--</span> more <span class="token operator">--</span><span class="token operator">></span>
+其他
+
+博客文章原创声明：
+本博文章如果没有声明为整理或者转载，均为本人原创。非商业可以任意转载分享。但是编写的代码如果没有特别声明，虽然我建议保留原作者出处，但是代码皆为 mit 协议，也就是修改了名字也算是你的版权，开源世界嘛，我就喜欢那些可以拿来直接使用的东西，贯彻最纯粹的免费自由，但是求求你，改掉名字等等信息再说是版权是你的啊。
+
+<span class="token operator">!</span><span class="token punctuation">[</span>关于本人<span class="token punctuation">]</span><span class="token punctuation">(</span>http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>twocucao<span class="token punctuation">.</span>xyz<span class="token operator">/</span>about<span class="token operator">/</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+点击链接就可以以 web 幻灯片的方式看到我的介绍。
+
+我的 Github 地址：https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>github<span class="token punctuation">.</span>com<span class="token operator">/</span>twocucao  （尽管东西不多，但是欢迎来 Star 和 Fork，就算你们来这里提前 Star Folk 了）
+简书地址：http<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>www<span class="token punctuation">.</span>jianshu<span class="token punctuation">.</span>com<span class="token operator">/</span>users<span class="token operator">/</span><span class="token number">9</span>a7e0b9da317<span class="token operator">/</span>latest_articles （不常更新，而且几乎没有技术文章的讲解）
+联系方式：twocucao@gmail<span class="token punctuation">.</span>com
+本人才疏学浅，是一个水平比较菜的程序员，如果行文之间发现任何错误，欢迎指正，特别欢迎技术上的指正。
+</code></pre>
+<h2 id="0x03-三剑客地址"><a class="v-toc-item" href="#0x03-三剑客地址">#</a> 0x03 三剑客地址</h2>
+<ul>
+<li>Chorthotkey <a href="https://github.com/twocucao/ChortHotKey">https://github.com/twocucao/ChortHotKey</a></li>
+<li>Candy <a href="https://github.com/aamii/Candy">https://github.com/aamii/Candy</a></li>
+<li>VimDesktop <a href="https://github.com/victorwoo/vimdesktop">https://github.com/victorwoo/vimdesktop</a></li>
+</ul>
+<p>如果你想了解关于 ahk 的世界，请到这里来看：</p>
+<ul>
+<li>
+<p><a href="http://xbeta.info/autohotkey-guide-2.htm">善用佳软的 ahk 地址</a></p>
+</li>
+<li>
+<p><a href="http://zhuanlan.zhihu.com/autohotkey">A 大在知乎的系列专题</a></p>
+</li>
+<li>
+<p><a href="https://github.com/twocucao/ChortHotKey">我的 AUTOHOTKEY 脚本使用我的脚本来上手速度会快很多）</a></p>
+</li>
+<li>
+<p><a href="https://github.com/twocucao/AwesomeAutohotkeyL">AWESOME AUTOHOTKEY_L 这里仅仅是关于 AHKL 的资源。</a></p>
+</li>
+<li>
+<p><a href="http://www.ahk8.com/">AHK 论坛</a></p>
+</li>
+<li>
+<p>欢迎加入 AUTOHOTKEY 的官方群 3222783 这里的大神喜欢解答有挑战性的问题，很多 AHK 的脚本都在这里。</p>
+</li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li>2016-11-23 已经于 2015-12 月份转投苹果平台，从此不想念 Windows. 除了 Windows 上面的 Autohotkey / Everything / TotalCMD</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li><a href="#chorthotkey-%E5%8F%91%E5%B8%83">Chorthotkey 发布</a>
+<ul>
+<li><a href="#0x01-%E6%A6%82%E8%A6%81%E4%BB%8B%E7%BB%8D">0x01 概要介绍</a></li>
+<li><a href="#0x02-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF">0x02 设计思路</a>
+<ul>
+<li><a href="#1-%E7%A8%8B%E5%BA%8F%E7%B1%BB-%E6%B6%89%E5%8F%8A%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E6%88%96%E8%80%85%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E5%B0%8F%E5%8A%9F%E8%83%BD">1. 程序类 – 涉及运行程序，或者一些常用的小功能</a></li>
+<li><a href="#2-%E9%94%AE%E7%9B%98%E9%BC%A0%E6%A0%87%E6%93%8D%E4%BD%9C">2. 键盘鼠标操作</a></li>
+<li><a href="#3-%E6%96%87%E4%BB%B6%E7%B1%BB%E6%93%8D%E4%BD%9C">3. 文件类操作</a></li>
+<li><a href="#4-%E6%96%87%E6%9C%AC%E7%B1%BB%E6%93%8D%E4%BD%9C">4. 文本类操作</a></li>
+<li><a href="#5-%E5%91%BD%E4%BB%A4%E7%B1%BB%E6%93%8D%E4%BD%9C">5. 命令类操作</a></li>
+<li><a href="#6-%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C">6. 其他操作</a></li>
+</ul>
+</li>
+<li><a href="#0x03-%E4%B8%89%E5%89%91%E5%AE%A2%E5%9C%B0%E5%9D%80">0x03 三剑客地址</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Windows"],"path":"20150222_Chorthotkey发布.md","title":"Chorthotkey 发布","slug":"Chorthotkey 发布","date":"2015-02-22","category":"开源项目","lastMod":"2015-10-25","description":"未描述","thumbnail":"","content":"\u003ch1 id=\"chorthotkey-发布\"\u003e\u003ca class=\"v-toc-item\" href=\"#chorthotkey-发布\"\u003e#\u003c/a\u003e Chorthotkey 发布\u003c/h1\u003e\n\u003ch2 id=\"0x01-概要介绍\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-概要介绍\"\u003e#\u003c/a\u003e 0x01 概要介绍\u003c/h2\u003e\n\u003cp\u003e经过长时间的电脑的使用，我渐渐的喜欢上了 Autohotkey 这个神器，喜欢 Python 是因为 Python 强大与高效，喜欢 AHK 则是太方便了。\u003c/p\u003e\n\u003cp\u003e长时间的使用，毕竟也积攒了一些脚本，加上对很多脚本的收集以及修改，勉强算得上是一个入门的 AHK 菜鸟了。\u003c/p\u003e\n\u003cp\u003eAHK 的优点可以对快捷键进行编程，对一个经常使用电脑自动化处理一些事情的人说，非常之方便，但缺点，太多，效率低，语法乱，数据结构乱。让我写一段文字处理简直就让我非常难受。\u003c/p\u003e\n\u003cp\u003e但为了取长补短，我仅仅使用其中的对快捷键编程的功能，加上收集来的别人的一些函数。修改集成，然后做一个顺手的 AHK 脚本，名字就叫做 Chorthotkey。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e开源，协议选择 Mit 协议。简而言之也就是你改了名字版权就是你的了。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e我在编写这篇文章的时候，也在重构并进行 V0.4 版本的完善。\u003c/p\u003e\n\u003cp\u003e什么时候使用 AHK 脚本呢。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e当繁杂的功能可以批量完成的时候。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e换而言之，当这个功能不值得用另一个大的专业性比较强的软件代替的时候，或者对快捷键进行编程的时候。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e先说第一点：当我想使用一个功能的时候，比如快速打开一个网页，或者进行文字上的简单处理，这个时候没有必要单独下载一个软件进行处理，这个在 AHK 中就是简单的几行代码就可以搞定。比如打开网站直接 Run \u003ca href=\"http://www.baidu.com\"\u003ewww.baidu.com\u003c/a\u003e AHK 就会直接调用相关浏览器打开 baidu. 这么简单的东西没有必要单独下载一个软件进行管理。\u003c/li\u003e\n\u003cli\u003e再说第二点：当我想着对快捷键进行编程调用进行自动化处理东西的时候，或者编写一套自己的热键用来打游戏或者其他的一些编辑用途等等，都可以。理论上来说，AHK 几乎是只有想不到没有做不到的。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e那么，AHK 不能替代什么东西？\u003c/p\u003e\n\u003cp\u003e在文件管理方面，尽管你可以自己编写很多的快捷键，但你没有办法超越 TotalCMD，没有办法超越 Listary 或者 Everything，所以，你编写的东西只需要辅助你使用这些东西就好了。\u003c/p\u003e\n\u003cp\u003e在文本编辑方面，你始终无法超越 sublime text 3，无法超越 vi，无法超越 Emacs，你只需要辅助你使用这些工具即可。\u003c/p\u003e\n\u003cp\u003e其他专业软件同理。\u003c/p\u003e\n\u003cp\u003e既然说了 AHK 那么多的不足和缺憾，但是 AHK 在我的脚本语言中依然傲立第二名，就是因为它擅长的快捷键编程。\u003c/p\u003e\n\u003cp\u003e好了，废话这么多，总该说点干货了。\u003c/p\u003e\n\u003cp\u003e我认为 Autohotkey 用好这三个脚本即可：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eCandy 一个非常强大的第三方弹出菜单 amii 编写。\u003c/li\u003e\n\u003cli\u003eChortHotKey 一个我编写的工具\u003c/li\u003e\n\u003cli\u003evimd 无所不在的 vim 党编写的软件。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e好吧，我无耻的把三个工具放在一起了。虽然 Candy 和 vimdesktop 在使用上面甩 Chorthotkey 几条街，但是，我乐意把他们放在一起，怎么滴？\u003c/p\u003e\n\u003ch2 id=\"0x02-设计思路\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-设计思路\"\u003e#\u003c/a\u003e 0x02 设计思路\u003c/h2\u003e\n\u003cp\u003eAHK 的操作按照是否聪明分为两种：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e第一种叫做非上下文的操作\u003c/li\u003e\n\u003cli\u003e第二种叫做上下文操作\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eAHK 操作按照使用场景分为：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e直接操作\u003c/li\u003e\n\u003cli\u003e选中操作\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003eAHK 按照操作目标分为\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e程序类操作\u003c/li\u003e\n\u003cli\u003e键盘类操作\u003c/li\u003e\n\u003cli\u003e文件类操作\u003c/li\u003e\n\u003cli\u003e文本类操作\u003c/li\u003e\n\u003cli\u003e命令类操作\u003c/li\u003e\n\u003cli\u003e其他操作\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e选取一个角度对 Chorthotkey 描述 — 按照操作目标\u003c/p\u003e\n\u003cp\u003ePS：浏览器建议 chrome\u003c/p\u003e\n\u003ch3 id=\"1-程序类-涉及运行程序或者一些常用的小功能\"\u003e\u003ca class=\"v-toc-item\" href=\"#1-程序类-涉及运行程序或者一些常用的小功能\"\u003e#\u003c/a\u003e 1. 程序类 – 涉及运行程序，或者一些常用的小功能\u003c/h3\u003e\n\u003cp\u003e我的所有程序都是使用配置好的环境变量 D:\\Sysconfig 其中的快捷方式搞定的。比如 win+r 输入 qq 然后回车自动打开 QQ。这个并不使用 AHK。因为没有必要增加大量的热键来增加自己的记忆负担。\u003cbr\u003e\n但是使用频率非常高的必须设置快捷键。\u003c/p\u003e\n\u003cp\u003e程序类快捷键我主要使用的是 Win 按键，AHK 中用 # 来表示\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-autohotkey\"\u003e #a 到有道官网查找单词翻译，并且保存到桌面上一个文本文档中。\n #b 选中某段文字进行解析，如果里面有网址则访问网址，否则使用百度进行搜索\n #g 选中某段文字进行解析，如果里面有网址则访问网址，否则使用 Google 进行搜索\n #f 打开 everything 进行搜索\n #e 替换原有的资源管理器，打开 TotalCMD\n #q 打开 \u003cspan class=\"token constant\"\u003eQQ\u003c/span\u003e\n #v open \u003cspan class=\"token keyword\"\u003ewith\u003c/span\u003e vim\n #s open \u003cspan class=\"token keyword\"\u003ewith\u003c/span\u003e sublime text\n\n官方的操作\n\n #c Windows8 什么鸟菜单\n #x win8 快捷菜单\n #r 运行，比较方便\n #\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token operator\"\u003e-\u003c/span\u003e\u003cspan class=\"token number\"\u003e9\u003c/span\u003e 数字，建议把几个（四个之内，超过四个你的手可能就跟不上操作了）可能有变化的软件放在 pin 在 taskbar 上面。\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"2-键盘鼠标操作\"\u003e\u003ca class=\"v-toc-item\" href=\"#2-键盘鼠标操作\"\u003e#\u003c/a\u003e 2. 键盘鼠标操作\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003ealt\u003cspan class=\"token operator\"\u003e+\u003c/span\u003ef4 按住左键再按住右键输出\n\n\u003cspan class=\"token constant\"\u003eCAPSLOCK\u003c/span\u003e 超级导航\n\u003cspan class=\"token constant\"\u003eCAPSLOCK\u003c/span\u003e 输出 \u003cspan class=\"token constant\"\u003eESC\u003c/span\u003e\n\u003cspan class=\"token constant\"\u003eSHIFT\u003c/span\u003e \u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e \u003cspan class=\"token constant\"\u003eCAPSLOCK\u003c/span\u003e 调用 Candy\n下面内容属于组合键的另一个按键\nhjkl 前下上右\na 行尾进行编辑\no 下一行进行编辑\n\nn ctrl\u003cspan class=\"token operator\"\u003e+\u003c/span\u003e\u003cspan class=\"token keyword\"\u003edelete\u003c/span\u003e\nm \u003cspan class=\"token keyword\"\u003edelete\u003c/span\u003e\n\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e backspace\n\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e ctrl\u003cspan class=\"token operator\"\u003e+\u003c/span\u003ebackspace\n\n\u003cspan class=\"token number\"\u003e5\u003c/span\u003e 打开 coding workspace\n\u003cspan class=\"token number\"\u003e6\u003c/span\u003e 打开未整理文件\n\u003cspan class=\"token number\"\u003e7\u003c/span\u003e 打开 Onedirve\n\u003cspan class=\"token number\"\u003e8\u003c/span\u003e 打开同步文件夹\n\u003cspan class=\"token number\"\u003e9\u003c/span\u003e 打开娱乐文件\n\u003cspan class=\"token number\"\u003e0\u003c/span\u003e 打开 sysconfig\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"3-文件类操作\"\u003e\u003ca class=\"v-toc-item\" href=\"#3-文件类操作\"\u003e#\u003c/a\u003e 3. 文件类操作\u003c/h3\u003e\n\u003cp\u003e选中的文件夹在 TC 中打开，其余操作全部在 TC 中解决\u003cbr\u003e\n由于我使用了 Capslock 的导航功能，这时候的 capslock hjkl 完全可以当作左下上右使用。\u003cbr\u003e\nvim+tc，可以使用 vim desktop 进行超级强化。我一直对 TOTALCMD 的快捷键设计抱有不满和一丝丝的畏惧，但是这个软件把 TC 的快捷键常用快捷键精简到了令人发指的地步。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eI love TC plus AHK\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch3 id=\"4-文本类操作\"\u003e\u003ca class=\"v-toc-item\" href=\"#4-文本类操作\"\u003e#\u003c/a\u003e 4. 文本类操作\u003c/h3\u003e\n\u003cp\u003ecandy 操作，保存，发送等等，凡是 Ctrl + c 飘落的地方，就一定会有 candy 的存在（火影忍者既视感）。请在我另一篇 Blog 中看看我是怎么使用 Candy 的。\u003c/p\u003e\n\u003ch3 id=\"5-命令类操作\"\u003e\u003ca class=\"v-toc-item\" href=\"#5-命令类操作\"\u003e#\u003c/a\u003e 5. 命令类操作\u003c/h3\u003e\n\u003cp\u003e这里面存放的是 AHK 的命令。其实就是使用 ahk 调用 python 脚本执行之类的东西。起到一个胶水的作用。\u003c/p\u003e\n\u003ch3 id=\"6-其他操作\"\u003e\u003ca class=\"v-toc-item\" href=\"#6-其他操作\"\u003e#\u003c/a\u003e 6. 其他操作\u003c/h3\u003e\n\u003cp\u003e热字符串输入其实和代码的 Snippet 比较相近。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e用的特别频繁的\n\u003cspan class=\"token comment\"\u003e//date 20150223\u003c/span\u003e\n\u003cspan class=\"token operator\"\u003e/\u003c/span\u003edd\n\u003cspan class=\"token comment\"\u003e//time 08:52:33\u003c/span\u003e\n\u003cspan class=\"token operator\"\u003e/\u003c/span\u003ett\n\u003cspan class=\"token comment\"\u003e//lastupdate 最后修改时间 2015-02-23 08:52:33\u003c/span\u003e\n\u003cspan class=\"token operator\"\u003e/\u003c/span\u003ell\n\u003cspan class=\"token comment\"\u003e//mail twocucao@gmail.com\u003c/span\u003e\n\u003cspan class=\"token operator\"\u003e/\u003c/span\u003emm\n\u003cspan class=\"token comment\"\u003e//anouncement  声明 lalalalalallalalalallalalalla\u003c/span\u003e\n\u003cspan class=\"token operator\"\u003e/\u003c/span\u003eaa\n\n常用的\n\u003cspan class=\"token comment\"\u003e//motto 我挥舞着纸笔和键盘，发誓要把这个世界写个明白。\u003c/span\u003e\n\n常用打开 Vim 的文字模板使用\n\u003cspan class=\"token operator\"\u003e/\u003c/span\u003ehexo  打开 gvim，粘贴进去对应的模板。\n\n比如我输入\n\u003cspan class=\"token comment\"\u003e//hexo\u003c/span\u003e\n那么就会 Copy 我之前定义的文字，然后存放在我的剪切板中。（时间是动态的）\n接着脚本打开 gvim，你要做的就是把文字粘贴进去就可以进行 \u003cspan class=\"token constant\"\u003eHEXO\u003c/span\u003e 的编写了。\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003etitle\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e 标题\ndate\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token number\"\u003e2015\u003c/span\u003e\u003cspan class=\"token operator\"\u003e-\u003c/span\u003e\u003cspan class=\"token number\"\u003e02\u003c/span\u003e\u003cspan class=\"token operator\"\u003e-\u003c/span\u003e\u003cspan class=\"token number\"\u003e23\u003c/span\u003e \u003cspan class=\"token number\"\u003e10\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token number\"\u003e16\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token number\"\u003e30\u003c/span\u003e\ntags\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e 感悟\ncategory\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e 『生活，感悟』\n\u003cspan class=\"token operator\"\u003e--\u003c/span\u003e\u003cspan class=\"token operator\"\u003e-\u003c/span\u003e\n\n正文\n\u003cspan class=\"token operator\"\u003e\u0026lt;\u003c/span\u003e\u003cspan class=\"token operator\"\u003e!\u003c/span\u003e\u003cspan class=\"token operator\"\u003e--\u003c/span\u003e more \u003cspan class=\"token operator\"\u003e--\u003c/span\u003e\u003cspan class=\"token operator\"\u003e\u003e\u003c/span\u003e\n其他\n\n博客文章原创声明：\n本博文章如果没有声明为整理或者转载，均为本人原创。非商业可以任意转载分享。但是编写的代码如果没有特别声明，虽然我建议保留原作者出处，但是代码皆为 mit 协议，也就是修改了名字也算是你的版权，开源世界嘛，我就喜欢那些可以拿来直接使用的东西，贯彻最纯粹的免费自由，但是求求你，改掉名字等等信息再说是版权是你的啊。\n\n\u003cspan class=\"token operator\"\u003e!\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e关于本人\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ehttp\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003etwocucao\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003exyz\u003cspan class=\"token operator\"\u003e/\u003c/span\u003eabout\u003cspan class=\"token operator\"\u003e/\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e\n点击链接就可以以 web 幻灯片的方式看到我的介绍。\n\n我的 Github 地址：https\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003egithub\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ecom\u003cspan class=\"token operator\"\u003e/\u003c/span\u003etwocucao  （尽管东西不多，但是欢迎来 Star 和 Fork，就算你们来这里提前 Star Folk 了）\n简书地址：http\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003ewww\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejianshu\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ecom\u003cspan class=\"token operator\"\u003e/\u003c/span\u003eusers\u003cspan class=\"token operator\"\u003e/\u003c/span\u003e\u003cspan class=\"token number\"\u003e9\u003c/span\u003ea7e0b9da317\u003cspan class=\"token operator\"\u003e/\u003c/span\u003elatest_articles （不常更新，而且几乎没有技术文章的讲解）\n联系方式：twocucao@gmail\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ecom\n本人才疏学浅，是一个水平比较菜的程序员，如果行文之间发现任何错误，欢迎指正，特别欢迎技术上的指正。\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"0x03-三剑客地址\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-三剑客地址\"\u003e#\u003c/a\u003e 0x03 三剑客地址\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003eChorthotkey \u003ca href=\"https://github.com/twocucao/ChortHotKey\"\u003ehttps://github.com/twocucao/ChortHotKey\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eCandy \u003ca href=\"https://github.com/aamii/Candy\"\u003ehttps://github.com/aamii/Candy\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003eVimDesktop \u003ca href=\"https://github.com/victorwoo/vimdesktop\"\u003ehttps://github.com/victorwoo/vimdesktop\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e如果你想了解关于 ahk 的世界，请到这里来看：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"http://xbeta.info/autohotkey-guide-2.htm\"\u003e善用佳软的 ahk 地址\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"http://zhuanlan.zhihu.com/autohotkey\"\u003eA 大在知乎的系列专题\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/twocucao/ChortHotKey\"\u003e我的 AUTOHOTKEY 脚本使用我的脚本来上手速度会快很多）\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/twocucao/AwesomeAutohotkeyL\"\u003eAWESOME AUTOHOTKEY_L 这里仅仅是关于 AHKL 的资源。\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e\u003ca href=\"http://www.ahk8.com/\"\u003eAHK 论坛\u003c/a\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e欢迎加入 AUTOHOTKEY 的官方群 3222783 这里的大神喜欢解答有挑战性的问题，很多 AHK 的脚本都在这里。\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e2016-11-23 已经于 2015-12 月份转投苹果平台，从此不想念 Windows. 除了 Windows 上面的 Autohotkey / Everything / TotalCMD\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\u003ca href=\"#chorthotkey-%E5%8F%91%E5%B8%83\"\u003eChorthotkey 发布\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E6%A6%82%E8%A6%81%E4%BB%8B%E7%BB%8D\"\u003e0x01 概要介绍\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E8%AE%BE%E8%AE%A1%E6%80%9D%E8%B7%AF\"\u003e0x02 设计思路\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#1-%E7%A8%8B%E5%BA%8F%E7%B1%BB-%E6%B6%89%E5%8F%8A%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F%E6%88%96%E8%80%85%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E7%9A%84%E5%B0%8F%E5%8A%9F%E8%83%BD\"\u003e1. 程序类 – 涉及运行程序，或者一些常用的小功能\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#2-%E9%94%AE%E7%9B%98%E9%BC%A0%E6%A0%87%E6%93%8D%E4%BD%9C\"\u003e2. 键盘鼠标操作\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#3-%E6%96%87%E4%BB%B6%E7%B1%BB%E6%93%8D%E4%BD%9C\"\u003e3. 文件类操作\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#4-%E6%96%87%E6%9C%AC%E7%B1%BB%E6%93%8D%E4%BD%9C\"\u003e4. 文本类操作\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#5-%E5%91%BD%E4%BB%A4%E7%B1%BB%E6%93%8D%E4%BD%9C\"\u003e5. 命令类操作\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#6-%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C\"\u003e6. 其他操作\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-%E4%B8%89%E5%89%91%E5%AE%A2%E5%9C%B0%E5%9D%80\"\u003e0x03 三剑客地址\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"Chorthotkey 发布"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

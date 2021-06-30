@@ -1,0 +1,100 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>用 tmux 与 tmuxinator 打造开发工作流 | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00. 前言</h2>
+<p>本文就我最近开发的一个前后端的项目（名字叫做 yavueblog) 来简单介绍两个神器</p>
+<ul>
+<li>一个是 tmux</li>
+<li>一个是 tmuxinator</li>
+</ul>
+<p>我在开发这个前后端的项目的时候要开启要通过不少的命令来启动服务：</p>
+<ul>
+<li>（前端开发）运行 npm run dev 进行开发前端页面</li>
+<li>（前端开发）运行 npm run dev:theme , 当主题的 SCSS 发生变化的同时，编译 SCSS</li>
+<li>（前端开发）运行 npm run dev:iconfont, 当移入了新的 svg 图标的时候，自动构建出新的字体文件与 iconfont.css 。</li>
+<li>（后端开发）运行 make dockerup 中开启 Django 应用。启动 Django 服务，PostgreSQL 数据库，Redis 等等，</li>
+</ul>
+<p>我的需求如下：</p>
+<ul>
+<li>一键启动这些脚本，前两个任务，放在第一个终端。</li>
+<li>后面两个任务放在第二、三个终端里。</li>
+</ul>
+<p>以前的做法都是新建三个终端选项卡，然后第一个终端分两屏，然后分别到各个终端 cd 或者 autojump 到对应的目录，然后手动运行命令。</p>
+<p>加上运行 npm run dev:theme 的时候，我是通过 Python 的 watchdog 来实现对指定目录和指定类型文件的变化进行监听的，所以还要切换 PyEnv 自定义的 Python 的环境中。</p>
+<p>这些命令反反复复输入还是挺麻烦的事情，为何不用工具来解决呢？</p>
+<h2 id="0x01-tmux-tmuxinator"><a class="v-toc-item" href="#0x01-tmux-tmuxinator">#</a> 0x01 tmux + tmuxinator</h2>
+<p>先安装</p>
+<pre><code>brew install tmux
+brew install ruby
+gem install tmuxinator
+</code></pre>
+<p>什么是 tmux? 简单而言，就是一个终端复用软件。<br>
+什么是 tmuxinator? 简单而言，就是为了简化 tmux 操作的软件。只需要编写 yaml 即快速开启一个比较适合你的终端窗口布局。</p>
+<p>关于 tmux 的配置，推荐这个 repo</p>
+<p><a href="https://github.com/gpakosz/.tmux">https://github.com/gpakosz/.tmux</a></p>
+<h2 id="0x02-编写-tmuxinator-配置文件"><a class="v-toc-item" href="#0x02-编写-tmuxinator-配置文件">#</a> 0x02 编写 Tmuxinator 配置文件</h2>
+<p>输入 tmuxinator new yavueblog</p>
+<p>修改文件如下</p>
+<pre><code># ~/.tmuxinator/yavueblog.yml
+
+name: yavueblog
+root: ~/Codes/PublicRepos/YaBlogSystem/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+# pre: sudo /etc/rc.d/mysqld start
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+pre_window: pyenv activate 3.5.2/envs/py3-daily
+
+windows:
+  - &quot;网站开发&quot;:
+      layout: main-vertical
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'
+      # synchronize: after
+      panes:
+        - &quot;cd ./YaVueBlog/ &amp;&amp; npm run dev&quot;
+        - &quot;cd ./YaVueBlog/ &amp;&amp; npm run dev:theme&quot;
+  - &quot;iconfont 构建&quot;: &quot;cd ./YaVueBlog/ &amp;&amp; npm run dev:iconfont&quot;
+  - &quot;DockerizedDjango&quot;: &quot;cd ./YaDjangoBlog/ &amp;&amp; make docker-compose-build-up&quot;
+
+</code></pre>
+<p>这样的话，每次开发就只需要运行 tmuxinator start yavueblog，并且打开 IDE 直接捋起袖子就是干就好了。</p>
+<h2 id="0x03-玩-tmux-首先要掌握的三个小技巧"><a class="v-toc-item" href="#0x03-玩-tmux-首先要掌握的三个小技巧">#</a> 0x03 玩 tmux 首先要掌握的三个小技巧</h2>
+<p>如果你刚用 tmux 的话，火速掌握下面三个小技巧。要不然会抓狂的。</p>
+<ol>
+<li>切换终端</li>
+</ol>
+<ul>
+<li>c-b + 数字</li>
+<li>c-b + n</li>
+</ul>
+<ol start="2">
+<li>滚屏</li>
+</ol>
+<p><a href="https://superuser.com/questions/209437/how-do-i-scroll-in-tmux">https://superuser.com/questions/209437/how-do-i-scroll-in-tmux</a></p>
+<ol start="3">
+<li>复制文字</li>
+</ol>
+<p><a href="https://superuser.com/questions/196060/selecting-text-in-tmux-copy-mode">https://superuser.com/questions/196060/selecting-text-in-tmux-copy-mode</a></p>
+<h2 id="0xee-参考链接"><a class="v-toc-item" href="#0xee-参考链接">#</a> 0xEE 参考链接</h2>
+<ul>
+<li><a href="https://github.com/twocucao">我的 Github</a></li>
+</ul>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-03-08 09:33:37</strong> 重新润饰文字，弃用 Rails 开发一年。现在主 DjangoRestFrameWork+VueJS</li>
+<li><strong>2018-01-28 11:44:00</strong> 重修文字，适配本文</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00. 前言</a></li>
+<li><a href="#0x01-tmux-tmuxinator">0x01 tmux + tmuxinator</a></li>
+<li><a href="#0x02-%E7%BC%96%E5%86%99-tmuxinator-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">0x02 编写 Tmuxinator 配置文件</a></li>
+<li><a href="#0x03-%E7%8E%A9-tmux-%E9%A6%96%E5%85%88%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B0%8F%E6%8A%80%E5%B7%A7">0x03 玩 tmux 首先要掌握的三个小技巧</a></li>
+<li><a href="#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">0xEE 参考链接</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Tmux"],"path":"20180128_TmuxWithTmuxinatorWorkflow.md","title":"用 tmux 与 tmuxinator 打造开发工作流","slug":"用 tmux 与 tmuxinator 打造开发工作流","date":"2018-01-28","category":"善用佳软","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00. 前言\u003c/h2\u003e\n\u003cp\u003e本文就我最近开发的一个前后端的项目（名字叫做 yavueblog) 来简单介绍两个神器\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e一个是 tmux\u003c/li\u003e\n\u003cli\u003e一个是 tmuxinator\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e我在开发这个前后端的项目的时候要开启要通过不少的命令来启动服务：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e（前端开发）运行 npm run dev 进行开发前端页面\u003c/li\u003e\n\u003cli\u003e（前端开发）运行 npm run dev:theme , 当主题的 SCSS 发生变化的同时，编译 SCSS\u003c/li\u003e\n\u003cli\u003e（前端开发）运行 npm run dev:iconfont, 当移入了新的 svg 图标的时候，自动构建出新的字体文件与 iconfont.css 。\u003c/li\u003e\n\u003cli\u003e（后端开发）运行 make dockerup 中开启 Django 应用。启动 Django 服务，PostgreSQL 数据库，Redis 等等，\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e我的需求如下：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e一键启动这些脚本，前两个任务，放在第一个终端。\u003c/li\u003e\n\u003cli\u003e后面两个任务放在第二、三个终端里。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e以前的做法都是新建三个终端选项卡，然后第一个终端分两屏，然后分别到各个终端 cd 或者 autojump 到对应的目录，然后手动运行命令。\u003c/p\u003e\n\u003cp\u003e加上运行 npm run dev:theme 的时候，我是通过 Python 的 watchdog 来实现对指定目录和指定类型文件的变化进行监听的，所以还要切换 PyEnv 自定义的 Python 的环境中。\u003c/p\u003e\n\u003cp\u003e这些命令反反复复输入还是挺麻烦的事情，为何不用工具来解决呢？\u003c/p\u003e\n\u003ch2 id=\"0x01-tmux-tmuxinator\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-tmux-tmuxinator\"\u003e#\u003c/a\u003e 0x01 tmux + tmuxinator\u003c/h2\u003e\n\u003cp\u003e先安装\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ebrew install tmux\nbrew install ruby\ngem install tmuxinator\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e什么是 tmux? 简单而言，就是一个终端复用软件。\u003cbr\u003e\n什么是 tmuxinator? 简单而言，就是为了简化 tmux 操作的软件。只需要编写 yaml 即快速开启一个比较适合你的终端窗口布局。\u003c/p\u003e\n\u003cp\u003e关于 tmux 的配置，推荐这个 repo\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/gpakosz/.tmux\"\u003ehttps://github.com/gpakosz/.tmux\u003c/a\u003e\u003c/p\u003e\n\u003ch2 id=\"0x02-编写-tmuxinator-配置文件\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-编写-tmuxinator-配置文件\"\u003e#\u003c/a\u003e 0x02 编写 Tmuxinator 配置文件\u003c/h2\u003e\n\u003cp\u003e输入 tmuxinator new yavueblog\u003c/p\u003e\n\u003cp\u003e修改文件如下\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e# ~/.tmuxinator/yavueblog.yml\n\nname: yavueblog\nroot: ~/Codes/PublicRepos/YaBlogSystem/\n\n# Optional tmux socket\n# socket_name: foo\n\n# Runs before everything. Use it to start daemons etc.\n# pre: sudo /etc/rc.d/mysqld start\n\n# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.\npre_window: pyenv activate 3.5.2/envs/py3-daily\n\nwindows:\n  - \u0026quot;网站开发\u0026quot;:\n      layout: main-vertical\n      # Synchronize all panes of this window, can be enabled before or after the pane commands run.\n      # 'before' represents legacy functionality and will be deprecated in a future release, in favour of 'after'\n      # synchronize: after\n      panes:\n        - \u0026quot;cd ./YaVueBlog/ \u0026amp;\u0026amp; npm run dev\u0026quot;\n        - \u0026quot;cd ./YaVueBlog/ \u0026amp;\u0026amp; npm run dev:theme\u0026quot;\n  - \u0026quot;iconfont 构建\u0026quot;: \u0026quot;cd ./YaVueBlog/ \u0026amp;\u0026amp; npm run dev:iconfont\u0026quot;\n  - \u0026quot;DockerizedDjango\u0026quot;: \u0026quot;cd ./YaDjangoBlog/ \u0026amp;\u0026amp; make docker-compose-build-up\u0026quot;\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这样的话，每次开发就只需要运行 tmuxinator start yavueblog，并且打开 IDE 直接捋起袖子就是干就好了。\u003c/p\u003e\n\u003ch2 id=\"0x03-玩-tmux-首先要掌握的三个小技巧\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-玩-tmux-首先要掌握的三个小技巧\"\u003e#\u003c/a\u003e 0x03 玩 tmux 首先要掌握的三个小技巧\u003c/h2\u003e\n\u003cp\u003e如果你刚用 tmux 的话，火速掌握下面三个小技巧。要不然会抓狂的。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e切换终端\u003c/li\u003e\n\u003c/ol\u003e\n\u003cul\u003e\n\u003cli\u003ec-b + 数字\u003c/li\u003e\n\u003cli\u003ec-b + n\u003c/li\u003e\n\u003c/ul\u003e\n\u003col start=\"2\"\u003e\n\u003cli\u003e滚屏\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003ca href=\"https://superuser.com/questions/209437/how-do-i-scroll-in-tmux\"\u003ehttps://superuser.com/questions/209437/how-do-i-scroll-in-tmux\u003c/a\u003e\u003c/p\u003e\n\u003col start=\"3\"\u003e\n\u003cli\u003e复制文字\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003ca href=\"https://superuser.com/questions/196060/selecting-text-in-tmux-copy-mode\"\u003ehttps://superuser.com/questions/196060/selecting-text-in-tmux-copy-mode\u003c/a\u003e\u003c/p\u003e\n\u003ch2 id=\"0xee-参考链接\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-参考链接\"\u003e#\u003c/a\u003e 0xEE 参考链接\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/twocucao\"\u003e我的 Github\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2017-03-08 09:33:37\u003c/strong\u003e 重新润饰文字，弃用 Rails 开发一年。现在主 DjangoRestFrameWork+VueJS\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e2018-01-28 11:44:00\u003c/strong\u003e 重修文字，适配本文\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00. 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-tmux-tmuxinator\"\u003e0x01 tmux + tmuxinator\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E7%BC%96%E5%86%99-tmuxinator-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6\"\u003e0x02 编写 Tmuxinator 配置文件\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-%E7%8E%A9-tmux-%E9%A6%96%E5%85%88%E8%A6%81%E6%8E%8C%E6%8F%A1%E7%9A%84%E4%B8%89%E4%B8%AA%E5%B0%8F%E6%8A%80%E5%B7%A7\"\u003e0x03 玩 tmux 首先要掌握的三个小技巧\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5\"\u003e0xEE 参考链接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"用 tmux 与 tmuxinator 打造开发工作流"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

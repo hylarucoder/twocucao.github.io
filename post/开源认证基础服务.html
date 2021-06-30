@@ -1,0 +1,110 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>开源认证基础服务 | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<p>随着业务的增长，往往需要统一体系内的服务的账户。</p>
+<p>经过一番调研，决定尝试一下 ory 的开源认证基础服务</p>
+<h2 id="0x01-ory-尝试解决问题"><a class="v-toc-item" href="#0x01-ory-尝试解决问题">#</a> 0x01 ORY 尝试解决问题？</h2>
+<p>ORY 提供了四个主要项目，每个项目着力于解决一个边界清晰的认证 / 鉴权问题</p>
+<ul>
+<li>ORY Kratos 提供了用户认证服务</li>
+<li>ORY Hydra 提供了 OAuth 2.0 &amp; OpenID Connect provider.</li>
+<li>ORY Keto 提供了 访问控制</li>
+<li>ORY Oathkeeper 提供了认证访问代理</li>
+</ul>
+<h2 id="0x02-用户认证服务-kratos"><a class="v-toc-item" href="#0x02-用户认证服务-kratos">#</a> 0x02 用户认证服务 Kratos</h2>
+<h3 id="常见方案"><a class="v-toc-item" href="#常见方案">#</a> 常见方案</h3>
+<ol>
+<li>方案 1, 选择全栈式解决方案 - 比如 Java 社区的 JGroups</li>
+<li>方案 2, 选择 IDaas - 比如 Login With Apple, Google</li>
+<li>方案 3, 选择自己来 - 比如 Java 社区的 JGroups</li>
+</ol>
+<p>三种方案各有利弊</p>
+<ol>
+<li>全栈式解决方案上手极快，但
+<ul>
+<li>扩展性不强</li>
+<li>绑定 Java 技术栈</li>
+<li>数据模型固定</li>
+<li>登陆流程固定</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>更新迭代慢</li>
+</ul>
+<ol start="2">
+<li>Login With Google 虽然方便，但是并没有解决如下的问题</li>
+</ol>
+<ul>
+<li>更新 Profile
+<ul>
+<li>添加第二个恢复邮箱</li>
+<li>2FA</li>
+<li>存储管理 Sessions</li>
+</ul>
+</li>
+<li>全局登出</li>
+</ul>
+<ol start="3">
+<li>自己来，需要处理事情也挺多</li>
+</ol>
+<ul>
+<li>方案二遇到的问题，一个不会少</li>
+<li>加密算法
+<ul>
+<li>流程可能较为复杂，比如先用邮箱注册，然后用 Sign Up Using Google, 或者先用 Sign Up Google, 然后使用邮箱登陆。(PS: 我国的登陆姿势就更多了）</li>
+</ul>
+</li>
+</ul>
+<p>是不是某种方案是最好的呢？其实未必</p>
+<p>就我个人经验来说，</p>
+<ul>
+<li>第一种方案比较适合稳定的，技术栈相同的团队使用。如果对原先应用进行少量裁剪就可以使用，其实未尝不可。</li>
+<li>第二种方案如果登陆入口仅是 Login With Google, 并且内网服务数量就几个，也不需要做全局登出，那么其实做起来比较省事。我工作过的一个公司就喜欢这么干。</li>
+<li>第三种方案虽然处理的问题看起来比较多，但是社区现有的 Building Block 已经比较多了。如果流程没有特别复杂，一手打造的非常容易往自己的项目发展情况发展。</li>
+</ul>
+<h3 id="kratos-的方案"><a class="v-toc-item" href="#kratos-的方案">#</a> Kratos 的方案</h3>
+<p>Kratos 提供了如下的解决方案</p>
+<ul>
+<li>登陆与注册</li>
+<li>track sesison/devices</li>
+<li>MFA/2FA</li>
+<li>账户验证</li>
+<li>账户恢复</li>
+<li>Profile &amp; Account Management</li>
+<li>管理后台接口 API</li>
+<li>消费 OAuth2 and OpenID Connect</li>
+</ul>
+<h2 id="0x03-ory-hydra"><a class="v-toc-item" href="#0x03-ory-hydra">#</a> 0x03 Ory Hydra</h2>
+<blockquote>
+<p>You May Not Need It</p>
+</blockquote>
+<ul>
+<li>Provider OAuth2 and OpenID Connect via <a href="https://github.com/ory/hydra">https://github.com/ory/hydra</a></li>
+</ul>
+<h2 id="0x03-ory-keto"><a class="v-toc-item" href="#0x03-ory-keto">#</a> 0x03 Ory Keto</h2>
+<p>权限系统一般放在按照产品需求，最好跟着产品走。而不是随随便便提取出来做一个权限系统。</p>
+<blockquote>
+<p>You May Not Need It</p>
+</blockquote>
+<h2 id="0x04-ory-oathkeeper"><a class="v-toc-item" href="#0x04-ory-oathkeeper">#</a> 0x04 Ory Oathkeeper</h2>
+<p>同样，如果你不是有做 zero trust</p>
+<blockquote>
+<p>You May Not Need It</p>
+</blockquote>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-ory-%E5%B0%9D%E8%AF%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98">0x01 ORY 尝试解决问题？</a></li>
+<li><a href="#0x02-%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E6%9C%8D%E5%8A%A1-kratos">0x02 用户认证服务 Kratos</a>
+<ul>
+<li><a href="#%E5%B8%B8%E8%A7%81%E6%96%B9%E6%A1%88">常见方案</a></li>
+<li><a href="#kratos-%E7%9A%84%E6%96%B9%E6%A1%88">Kratos 的方案</a></li>
+</ul>
+</li>
+<li><a href="#0x03-ory-hydra">0x03 Ory Hydra</a></li>
+<li><a href="#0x03-ory-keto">0x03 Ory Keto</a></li>
+<li><a href="#0x04-ory-oathkeeper">0x04 Ory Oathkeeper</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Golang"],"path":"20201130_ORY.md","title":"开源认证基础服务","slug":"开源认证基础服务","date":"2020-11-30T18:03:01+08:00","category":"开源项目","lastMod":"2020-12-01","description":"未描述","thumbnail":"","content":"\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cp\u003e随着业务的增长，往往需要统一体系内的服务的账户。\u003c/p\u003e\n\u003cp\u003e经过一番调研，决定尝试一下 ory 的开源认证基础服务\u003c/p\u003e\n\u003ch2 id=\"0x01-ory-尝试解决问题\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-ory-尝试解决问题\"\u003e#\u003c/a\u003e 0x01 ORY 尝试解决问题？\u003c/h2\u003e\n\u003cp\u003eORY 提供了四个主要项目，每个项目着力于解决一个边界清晰的认证 / 鉴权问题\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eORY Kratos 提供了用户认证服务\u003c/li\u003e\n\u003cli\u003eORY Hydra 提供了 OAuth 2.0 \u0026amp; OpenID Connect provider.\u003c/li\u003e\n\u003cli\u003eORY Keto 提供了 访问控制\u003c/li\u003e\n\u003cli\u003eORY Oathkeeper 提供了认证访问代理\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x02-用户认证服务-kratos\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-用户认证服务-kratos\"\u003e#\u003c/a\u003e 0x02 用户认证服务 Kratos\u003c/h2\u003e\n\u003ch3 id=\"常见方案\"\u003e\u003ca class=\"v-toc-item\" href=\"#常见方案\"\u003e#\u003c/a\u003e 常见方案\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e方案 1, 选择全栈式解决方案 - 比如 Java 社区的 JGroups\u003c/li\u003e\n\u003cli\u003e方案 2, 选择 IDaas - 比如 Login With Apple, Google\u003c/li\u003e\n\u003cli\u003e方案 3, 选择自己来 - 比如 Java 社区的 JGroups\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e三种方案各有利弊\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e全栈式解决方案上手极快，但\n\u003cul\u003e\n\u003cli\u003e扩展性不强\u003c/li\u003e\n\u003cli\u003e绑定 Java 技术栈\u003c/li\u003e\n\u003cli\u003e数据模型固定\u003c/li\u003e\n\u003cli\u003e登陆流程固定\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cul\u003e\n\u003cli\u003e更新迭代慢\u003c/li\u003e\n\u003c/ul\u003e\n\u003col start=\"2\"\u003e\n\u003cli\u003eLogin With Google 虽然方便，但是并没有解决如下的问题\u003c/li\u003e\n\u003c/ol\u003e\n\u003cul\u003e\n\u003cli\u003e更新 Profile\n\u003cul\u003e\n\u003cli\u003e添加第二个恢复邮箱\u003c/li\u003e\n\u003cli\u003e2FA\u003c/li\u003e\n\u003cli\u003e存储管理 Sessions\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e全局登出\u003c/li\u003e\n\u003c/ul\u003e\n\u003col start=\"3\"\u003e\n\u003cli\u003e自己来，需要处理事情也挺多\u003c/li\u003e\n\u003c/ol\u003e\n\u003cul\u003e\n\u003cli\u003e方案二遇到的问题，一个不会少\u003c/li\u003e\n\u003cli\u003e加密算法\n\u003cul\u003e\n\u003cli\u003e流程可能较为复杂，比如先用邮箱注册，然后用 Sign Up Using Google, 或者先用 Sign Up Google, 然后使用邮箱登陆。(PS: 我国的登陆姿势就更多了）\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e是不是某种方案是最好的呢？其实未必\u003c/p\u003e\n\u003cp\u003e就我个人经验来说，\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e第一种方案比较适合稳定的，技术栈相同的团队使用。如果对原先应用进行少量裁剪就可以使用，其实未尝不可。\u003c/li\u003e\n\u003cli\u003e第二种方案如果登陆入口仅是 Login With Google, 并且内网服务数量就几个，也不需要做全局登出，那么其实做起来比较省事。我工作过的一个公司就喜欢这么干。\u003c/li\u003e\n\u003cli\u003e第三种方案虽然处理的问题看起来比较多，但是社区现有的 Building Block 已经比较多了。如果流程没有特别复杂，一手打造的非常容易往自己的项目发展情况发展。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"kratos-的方案\"\u003e\u003ca class=\"v-toc-item\" href=\"#kratos-的方案\"\u003e#\u003c/a\u003e Kratos 的方案\u003c/h3\u003e\n\u003cp\u003eKratos 提供了如下的解决方案\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e登陆与注册\u003c/li\u003e\n\u003cli\u003etrack sesison/devices\u003c/li\u003e\n\u003cli\u003eMFA/2FA\u003c/li\u003e\n\u003cli\u003e账户验证\u003c/li\u003e\n\u003cli\u003e账户恢复\u003c/li\u003e\n\u003cli\u003eProfile \u0026amp; Account Management\u003c/li\u003e\n\u003cli\u003e管理后台接口 API\u003c/li\u003e\n\u003cli\u003e消费 OAuth2 and OpenID Connect\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x03-ory-hydra\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-ory-hydra\"\u003e#\u003c/a\u003e 0x03 Ory Hydra\u003c/h2\u003e\n\u003cblockquote\u003e\n\u003cp\u003eYou May Not Need It\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003eProvider OAuth2 and OpenID Connect via \u003ca href=\"https://github.com/ory/hydra\"\u003ehttps://github.com/ory/hydra\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x03-ory-keto\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-ory-keto\"\u003e#\u003c/a\u003e 0x03 Ory Keto\u003c/h2\u003e\n\u003cp\u003e权限系统一般放在按照产品需求，最好跟着产品走。而不是随随便便提取出来做一个权限系统。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eYou May Not Need It\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2 id=\"0x04-ory-oathkeeper\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x04-ory-oathkeeper\"\u003e#\u003c/a\u003e 0x04 Ory Oathkeeper\u003c/h2\u003e\n\u003cp\u003e同样，如果你不是有做 zero trust\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eYou May Not Need It\u003c/p\u003e\n\u003c/blockquote\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-ory-%E5%B0%9D%E8%AF%95%E8%A7%A3%E5%86%B3%E9%97%AE%E9%A2%98\"\u003e0x01 ORY 尝试解决问题？\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E7%94%A8%E6%88%B7%E8%AE%A4%E8%AF%81%E6%9C%8D%E5%8A%A1-kratos\"\u003e0x02 用户认证服务 Kratos\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%B8%B8%E8%A7%81%E6%96%B9%E6%A1%88\"\u003e常见方案\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#kratos-%E7%9A%84%E6%96%B9%E6%A1%88\"\u003eKratos 的方案\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-ory-hydra\"\u003e0x03 Ory Hydra\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-ory-keto\"\u003e0x03 Ory Keto\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x04-ory-oathkeeper\"\u003e0x04 Ory Oathkeeper\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"开源认证基础服务"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

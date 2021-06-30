@@ -1,0 +1,196 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Sublime Text | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h1 id="sublime-text"><a class="v-toc-item" href="#sublime-text">#</a> Sublime Text</h1>
+<blockquote>
+<p>NOTE: 2021 年,已经全面转 vscode</p>
+</blockquote>
+<p>这个 Sublime 究竟好在哪里？</p>
+<ul>
+<li>方便的 Vim 模式。</li>
+<li>各种语言特性支持。</li>
+<li>强大的社区支持。插件教程，balbalbala</li>
+<li>长的好看，而且能干。</li>
+</ul>
+<h2 id="0x01-最佳实践"><a class="v-toc-item" href="#0x01-最佳实践">#</a> 0x01 最佳实践</h2>
+<h3 id="下载安装建议便携版本"><a class="v-toc-item" href="#下载安装建议便携版本">#</a> 下载安装（建议便携版本）</h3>
+<p><a href="http://www.sublimetext.com/3">http://www.sublimetext.com/3</a></p>
+<h3 id="安装-package-control-用于管理插件"><a class="v-toc-item" href="#安装-package-control-用于管理插件">#</a> 安装 Package Control 用于管理插件</h3>
+<p>步骤：view showconsole 输入下面代码</p>
+<pre><code class="language-python"><span class="token keyword">import</span> urllib<span class="token punctuation">.</span>request<span class="token punctuation">,</span>os<span class="token punctuation">,</span>hashlib<span class="token punctuation">;</span> h <span class="token operator">=</span> <span class="token string">'eb2297e1a458f27d836c04bb0cbaf282'</span> <span class="token operator">+</span> <span class="token string">'d0e7a3098092775ccb37ca9d6b2e4b7d'</span><span class="token punctuation">;</span> pf <span class="token operator">=</span> <span class="token string">'Package Control.sublime-package'</span><span class="token punctuation">;</span> ipp <span class="token operator">=</span> sublime<span class="token punctuation">.</span><span class="token function">installed_packages_path</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> urllib<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">install_opener</span><span class="token punctuation">(</span> urllib<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">build_opener</span><span class="token punctuation">(</span> urllib<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">ProxyHandler</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">)</span><span class="token punctuation">;</span> by <span class="token operator">=</span> urllib<span class="token punctuation">.</span>request<span class="token punctuation">.</span><span class="token function">urlopen</span><span class="token punctuation">(</span> <span class="token string">'http://packagecontrol.io/'</span> <span class="token operator">+</span> pf<span class="token punctuation">.</span><span class="token function">replace</span><span class="token punctuation">(</span><span class="token string">' '</span><span class="token punctuation">,</span> <span class="token string">'%20'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> dh <span class="token operator">=</span> hashlib<span class="token punctuation">.</span><span class="token function">sha256</span><span class="token punctuation">(</span>by<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">hexdigest</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token function">print</span><span class="token punctuation">(</span><span class="token string">'Error validating download (got %s instead of %s), please try manual install'</span> <span class="token operator">%</span> <span class="token punctuation">(</span>dh<span class="token punctuation">,</span> h<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">if</span> dh <span class="token operator">!=</span> h <span class="token keyword">else</span> <span class="token function">open</span><span class="token punctuation">(</span>os<span class="token punctuation">.</span>path<span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span> ipp<span class="token punctuation">,</span> pf<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'wb'</span> <span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">write</span><span class="token punctuation">(</span>by<span class="token punctuation">)</span>
+</code></pre>
+<p>重启，然后你就可以正常使用 Package Control 了</p>
+<h2 id="0x02-基本使用方法之编辑功能"><a class="v-toc-item" href="#0x02-基本使用方法之编辑功能">#</a> 0x02 基本使用方法之编辑功能</h2>
+<h3 id="命令面板"><a class="v-toc-item" href="#命令面板">#</a> 命令面板</h3>
+<p>^+p</p>
+<p>ctrl+shift+p 打开的是命令面板<br>
+命令面板主要内容分为四块。</p>
+<ul>
+<li>设置</li>
+<li>改变语法</li>
+<li>来自插件的命令</li>
+</ul>
+<h3 id="go-to-anything"><a class="v-toc-item" href="#go-to-anything">#</a> Go to Anything</h3>
+<p>^p 打开的是切换面板<br>
+直接输入文件名可以切换文件<br>
+可以直接预览<br>
+输入 @ 可以查看按照 Header 查看 (Markdown 语法）, 代码中按照函数来查找<br>
+输入 # 可以查看变量</p>
+<h4 id="同一页面搜索"><a class="v-toc-item" href="#同一页面搜索">#</a> 同一页面搜索</h4>
+<p>^r</p>
+<h4 id="整个项目搜索"><a class="v-toc-item" href="#整个项目搜索">#</a> 整个项目搜索</h4>
+<p>ctrl + shift + r</p>
+<h4 id="toggle-sidebar"><a class="v-toc-item" href="#toggle-sidebar">#</a> Toggle Sidebar</h4>
+<p>ctrl+k Ctrl+b</p>
+<h4 id="切换面板"><a class="v-toc-item" href="#切换面板">#</a> 切换面板</h4>
+<p>alt + shift + 1 to 4</p>
+<h4 id="直达某行"><a class="v-toc-item" href="#直达某行">#</a> 直达某行</h4>
+<p>ctrl+g</p>
+<h4 id="移动行"><a class="v-toc-item" href="#移动行">#</a> 移动行</h4>
+<p>ctrl+shift+ 上下左右。</p>
+<h2 id="0x03-结论一"><a class="v-toc-item" href="#0x03-结论一">#</a> 0x03 结论一</h2>
+<p>嘿嘿，这样看上去你基本的编辑任务都是可以比较出色完成的吧？<br>
+好，我们依然可以看出来，这款编辑器的的确确足够日常编辑使用了，但是，还是并不代表有一定的优越性啊？</p>
+<p>你说，老师，能不能再给力一点啊？<br>
+<img src="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg" alt=""></p>
+<h2 id="0x04-深入研究其中的编辑功能"><a class="v-toc-item" href="#0x04-深入研究其中的编辑功能">#</a> 0x04 深入研究其中的编辑功能</h2>
+<p>把上面的一些功能进行系统性梳理。<br>
+已经有前辈完成了，我就直接贴上他的地址了。</p>
+<p><a href="http://feliving.github.io/Sublime-Text-3-Documentation/index.html">http://feliving.github.io/Sublime-Text-3-Documentation/index.html</a></p>
+<h2 id="0x05-结论二确实强大-但是"><a class="v-toc-item" href="#0x05-结论二确实强大-但是">#</a> 0x05 结论二，确实强大。但是…</h2>
+<p>你说，老师，能不能再给力一点啊？<br>
+<img src="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg" alt=""><br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…</p>
+<p>当然可以！!</p>
+<h2 id="0x06-插件让-sublime-长出逆风飞翔的翅膀"><a class="v-toc-item" href="#0x06-插件让-sublime-长出逆风飞翔的翅膀">#</a> 0x06 插件，让 sublime 长出逆风飞翔的翅膀。</h2>
+<p>sublime 的功能已经是比较强大了。可是还有什么地方可以优化的吗？<br>
+加上插件，可以增强已经有的功能，可以扩展越来没有的功能。下面请看好！</p>
+<h3 id="用-vim-强化编辑功能"><a class="v-toc-item" href="#用-vim-强化编辑功能">#</a> 用 Vim 强化编辑功能。</h3>
+<p>在编辑强化方面，Sublime 自带了一个非常好用的模式，叫做 Vintage mode<br>
+这个模式有一点点的小问题，就是不方便，我们不妨使用另一个小插件来替换它。</p>
+<p><a href="https://github.com/guillermooo/Vintageous">https://github.com/guillermooo/Vintageous</a></p>
+<p>ctrl+shift+p 输入 install 输入{enter} 输入 Vintageous{Enter}</p>
+<p>安装完毕，你就可以在 Sublime 上面比较方便的使用 vim 编辑方式了。</p>
+<h3 id="能不能好看一点"><a class="v-toc-item" href="#能不能好看一点">#</a> 能不能好看一点？</h3>
+<p>Of course!</p>
+<p>来来来，戳这里戳这里</p>
+<p><a href="https://scotch.io/bar-talk/the-complete-visual-guide-to-sublime-text-3-themes-color-schemes-and-cool-features">https://scotch.io/bar-talk/the-complete-visual-guide-to-sublime-text-3-themes-color-schemes-and-cool-features</a></p>
+<h3 id="新建文件可以方便一点吗"><a class="v-toc-item" href="#新建文件可以方便一点吗">#</a> 新建文件可以方便一点吗？</h3>
+<p>可以，AdvancedNewFile<br>
+你只需要 ctrl+alt+n 就可以使用这个插件。</p>
+<p>输入文件名可以直接在当前目录下新建。<br>
+你也可以使用相对路径比如 …/ 或者 …/_drafts/AndroidShow<br>
+是不是非常方便？</p>
+<h3 id="侧边栏好像右键菜单好少能不能再给力一点啊"><a class="v-toc-item" href="#侧边栏好像右键菜单好少能不能再给力一点啊">#</a> 侧边栏好像右键菜单好少，能不能再给力一点啊</h3>
+<p>有，SidebarEnhancement</p>
+<h3 id="只能补全功能不够用能不能再给力一点啊"><a class="v-toc-item" href="#只能补全功能不够用能不能再给力一点啊">#</a> 只能补全功能不够用，能不能再给力一点啊</h3>
+<p>好，SublimeCodeIntel</p>
+<h3 id="我有强迫症对齐功能不够强大能不能再给力一点啊"><a class="v-toc-item" href="#我有强迫症对齐功能不够强大能不能再给力一点啊">#</a> 我有强迫症，对齐功能不够强大，能不能再给力一点啊</h3>
+<p>好，ALignment</p>
+<h3 id="写注释可以方便一些就像-intellij-idea-那样写注释吗"><a class="v-toc-item" href="#写注释可以方便一些就像-intellij-idea-那样写注释吗">#</a> 写注释可以方便一些，就像 Intellij IDEA 那样写注释吗？</h3>
+<p>可以 Doc Blockr</p>
+<h3 id="前端工程师要那些插件吗"><a class="v-toc-item" href="#前端工程师要那些插件吗">#</a> 前端工程师要那些插件吗？</h3>
+<p>Emmet<br>
+HTML-CSS-JS<br>
+等等</p>
+<h3 id="我平时用-markdown-写-blog-有什么比较方便的东西吗"><a class="v-toc-item" href="#我平时用-markdown-写-blog-有什么比较方便的东西吗">#</a> 我平时用 markdown 写 BLOG, 有什么比较方便的东西吗？</h3>
+<p>markdown</p>
+<ul>
+<li>extended</li>
+<li>preview</li>
+<li>light</li>
+<li>toc</li>
+</ul>
+<h2 id="0x07-结论三老师真的很好用啊-但是"><a class="v-toc-item" href="#0x07-结论三老师真的很好用啊-但是">#</a> 0x07 结论三，老师真的很好用啊。但是…</h2>
+<p>你说，老师，能不能再给力一点啊？<br>
+<img src="http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg" alt=""><br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…<br>
+…</p>
+<p>特码的，你是来编程的还是来配置编辑器的啊！<br>
+等你有需求了再去寻找更好的配置方案 OK?</p>
+<h2 id="0xee-其他链接"><a class="v-toc-item" href="#0xee-其他链接">#</a> 0xEE 其他链接</h2>
+<p>这个 BLog 分享了不少关于 Sublime 的干货</p>
+<p><a href="https://scotch.io/">https://scotch.io/</a></p>
+<p>这个视频链接讲解了一些关于 Sublime 的一些小知识。</p>
+<p><a href="http://www.imooc.com/learn/40">http://www.imooc.com/learn/40</a></p>
+<p>sublime 非官方资源</p>
+<p><a href="http://docs.sublimetext.info/en/latest/index.html">http://docs.sublimetext.info/en/latest/index.html</a></p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2016-12-05</strong> 重修文字，已转投 Vim. sublime 作为非主力编辑器。</li>
+<li><strong>2016 中期</strong> 重修文字，声明已转投 Vim. sublime 作为非主力编辑器。</li>
+<li><strong>2017 前期</strong> 重修文字，声明已转投 Spacemacs.</li>
+<li><strong>2020 后期</strong> 重修文字，重回 Vim.</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li><a href="#sublime-text">Sublime Text</a>
+<ul>
+<li><a href="#0x01-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5">0x01 最佳实践</a>
+<ul>
+<li><a href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%BB%BA%E8%AE%AE%E4%BE%BF%E6%90%BA%E7%89%88%E6%9C%AC">下载安装（建议便携版本）</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-package-control-%E7%94%A8%E4%BA%8E%E7%AE%A1%E7%90%86%E6%8F%92%E4%BB%B6">安装 Package Control 用于管理插件</a></li>
+</ul>
+</li>
+<li><a href="#0x02-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E4%B9%8B%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD">0x02 基本使用方法之编辑功能</a>
+<ul>
+<li><a href="#%E5%91%BD%E4%BB%A4%E9%9D%A2%E6%9D%BF">命令面板</a></li>
+<li><a href="#go-to-anything">Go to Anything</a>
+<ul>
+<li><a href="#%E5%90%8C%E4%B8%80%E9%A1%B5%E9%9D%A2%E6%90%9C%E7%B4%A2">同一页面搜索</a></li>
+<li><a href="#%E6%95%B4%E4%B8%AA%E9%A1%B9%E7%9B%AE%E6%90%9C%E7%B4%A2">整个项目搜索</a></li>
+<li><a href="#toggle-sidebar">Toggle Sidebar</a></li>
+<li><a href="#%E5%88%87%E6%8D%A2%E9%9D%A2%E6%9D%BF">切换面板</a></li>
+<li><a href="#%E7%9B%B4%E8%BE%BE%E6%9F%90%E8%A1%8C">直达某行</a></li>
+<li><a href="#%E7%A7%BB%E5%8A%A8%E8%A1%8C">移动行</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x03-%E7%BB%93%E8%AE%BA%E4%B8%80">0x03 结论一</a></li>
+<li><a href="#0x04-%E6%B7%B1%E5%85%A5%E7%A0%94%E7%A9%B6%E5%85%B6%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD">0x04 深入研究其中的编辑功能</a></li>
+<li><a href="#0x05-%E7%BB%93%E8%AE%BA%E4%BA%8C%E7%A1%AE%E5%AE%9E%E5%BC%BA%E5%A4%A7-%E4%BD%86%E6%98%AF">0x05 结论二，确实强大。但是…</a></li>
+<li><a href="#0x06-%E6%8F%92%E4%BB%B6%E8%AE%A9-sublime-%E9%95%BF%E5%87%BA%E9%80%86%E9%A3%8E%E9%A3%9E%E7%BF%94%E7%9A%84%E7%BF%85%E8%86%80">0x06 插件，让 sublime 长出逆风飞翔的翅膀。</a>
+<ul>
+<li><a href="#%E7%94%A8-vim-%E5%BC%BA%E5%8C%96%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD">用 Vim 强化编辑功能。</a></li>
+<li><a href="#%E8%83%BD%E4%B8%8D%E8%83%BD%E5%A5%BD%E7%9C%8B%E4%B8%80%E7%82%B9">能不能好看一点？</a></li>
+<li><a href="#%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%8F%AF%E4%BB%A5%E6%96%B9%E4%BE%BF%E4%B8%80%E7%82%B9%E5%90%97">新建文件可以方便一点吗？</a></li>
+<li><a href="#%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%A5%BD%E5%83%8F%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E5%A5%BD%E5%B0%91%E8%83%BD%E4%B8%8D%E8%83%BD%E5%86%8D%E7%BB%99%E5%8A%9B%E4%B8%80%E7%82%B9%E5%95%8A">侧边栏好像右键菜单好少，能不能再给力一点啊</a></li>
+<li><a href="#%E5%8F%AA%E8%83%BD%E8%A1%A5%E5%85%A8%E5%8A%9F%E8%83%BD%E4%B8%8D%E5%A4%9F%E7%94%A8%E8%83%BD%E4%B8%8D%E8%83%BD%E5%86%8D%E7%BB%99%E5%8A%9B%E4%B8%80%E7%82%B9%E5%95%8A">只能补全功能不够用，能不能再给力一点啊</a></li>
+<li><a href="#%E6%88%91%E6%9C%89%E5%BC%BA%E8%BF%AB%E7%97%87%E5%AF%B9%E9%BD%90%E5%8A%9F%E8%83%BD%E4%B8%8D%E5%A4%9F%E5%BC%BA%E5%A4%A7%E8%83%BD%E4%B8%8D%E8%83%BD%E5%86%8D%E7%BB%99%E5%8A%9B%E4%B8%80%E7%82%B9%E5%95%8A">我有强迫症，对齐功能不够强大，能不能再给力一点啊</a></li>
+<li><a href="#%E5%86%99%E6%B3%A8%E9%87%8A%E5%8F%AF%E4%BB%A5%E6%96%B9%E4%BE%BF%E4%B8%80%E4%BA%9B%E5%B0%B1%E5%83%8F-intellij-idea-%E9%82%A3%E6%A0%B7%E5%86%99%E6%B3%A8%E9%87%8A%E5%90%97">写注释可以方便一些，就像 Intellij IDEA 那样写注释吗？</a></li>
+<li><a href="#%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A6%81%E9%82%A3%E4%BA%9B%E6%8F%92%E4%BB%B6%E5%90%97">前端工程师要那些插件吗？</a></li>
+<li><a href="#%E6%88%91%E5%B9%B3%E6%97%B6%E7%94%A8-markdown-%E5%86%99-blog-%E6%9C%89%E4%BB%80%E4%B9%88%E6%AF%94%E8%BE%83%E6%96%B9%E4%BE%BF%E7%9A%84%E4%B8%9C%E8%A5%BF%E5%90%97">我平时用 markdown 写 BLOG, 有什么比较方便的东西吗？</a></li>
+</ul>
+</li>
+<li><a href="#0x07-%E7%BB%93%E8%AE%BA%E4%B8%89%E8%80%81%E5%B8%88%E7%9C%9F%E7%9A%84%E5%BE%88%E5%A5%BD%E7%94%A8%E5%95%8A-%E4%BD%86%E6%98%AF">0x07 结论三，老师真的很好用啊。但是…</a></li>
+<li><a href="#0xee-%E5%85%B6%E4%BB%96%E9%93%BE%E6%8E%A5">0xEE 其他链接</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["编辑器"],"path":"20150227_编辑器Sublime.md","title":"Sublime Text","slug":"Sublime Text","date":"2014-10-25","category":"善用佳软","lastMod":"2014-10-25","description":"未描述","thumbnail":"","content":"\u003ch1 id=\"sublime-text\"\u003e\u003ca class=\"v-toc-item\" href=\"#sublime-text\"\u003e#\u003c/a\u003e Sublime Text\u003c/h1\u003e\n\u003cblockquote\u003e\n\u003cp\u003eNOTE: 2021 年,已经全面转 vscode\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e这个 Sublime 究竟好在哪里？\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e方便的 Vim 模式。\u003c/li\u003e\n\u003cli\u003e各种语言特性支持。\u003c/li\u003e\n\u003cli\u003e强大的社区支持。插件教程，balbalbala\u003c/li\u003e\n\u003cli\u003e长的好看，而且能干。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x01-最佳实践\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-最佳实践\"\u003e#\u003c/a\u003e 0x01 最佳实践\u003c/h2\u003e\n\u003ch3 id=\"下载安装建议便携版本\"\u003e\u003ca class=\"v-toc-item\" href=\"#下载安装建议便携版本\"\u003e#\u003c/a\u003e 下载安装（建议便携版本）\u003c/h3\u003e\n\u003cp\u003e\u003ca href=\"http://www.sublimetext.com/3\"\u003ehttp://www.sublimetext.com/3\u003c/a\u003e\u003c/p\u003e\n\u003ch3 id=\"安装-package-control-用于管理插件\"\u003e\u003ca class=\"v-toc-item\" href=\"#安装-package-control-用于管理插件\"\u003e#\u003c/a\u003e 安装 Package Control 用于管理插件\u003c/h3\u003e\n\u003cp\u003e步骤：view showconsole 输入下面代码\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e\u003cspan class=\"token keyword\"\u003eimport\u003c/span\u003e urllib\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003erequest\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003eos\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003ehashlib\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e h \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token string\"\u003e'eb2297e1a458f27d836c04bb0cbaf282'\u003c/span\u003e \u003cspan class=\"token operator\"\u003e+\u003c/span\u003e \u003cspan class=\"token string\"\u003e'd0e7a3098092775ccb37ca9d6b2e4b7d'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e pf \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token string\"\u003e'Package Control.sublime-package'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e ipp \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e sublime\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003einstalled_packages_path\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e urllib\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003erequest\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003einstall_opener\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e urllib\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003erequest\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003ebuild_opener\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e urllib\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003erequest\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eProxyHandler\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e by \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e urllib\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003erequest\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eurlopen\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e \u003cspan class=\"token string\"\u003e'http://packagecontrol.io/'\u003c/span\u003e \u003cspan class=\"token operator\"\u003e+\u003c/span\u003e pf\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003ereplace\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e' '\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'%20'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eread\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e dh \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e hashlib\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003esha256\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eby\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003ehexdigest\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e \u003cspan class=\"token function\"\u003eprint\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e'Error validating download (got %s instead of %s), please try manual install'\u003c/span\u003e \u003cspan class=\"token operator\"\u003e%\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003edh\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e h\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token keyword\"\u003eif\u003c/span\u003e dh \u003cspan class=\"token operator\"\u003e!=\u003c/span\u003e h \u003cspan class=\"token keyword\"\u003eelse\u003c/span\u003e \u003cspan class=\"token function\"\u003eopen\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eos\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epath\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003ejoin\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e ipp\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e pf\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'wb'\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003ewrite\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eby\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e重启，然后你就可以正常使用 Package Control 了\u003c/p\u003e\n\u003ch2 id=\"0x02-基本使用方法之编辑功能\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-基本使用方法之编辑功能\"\u003e#\u003c/a\u003e 0x02 基本使用方法之编辑功能\u003c/h2\u003e\n\u003ch3 id=\"命令面板\"\u003e\u003ca class=\"v-toc-item\" href=\"#命令面板\"\u003e#\u003c/a\u003e 命令面板\u003c/h3\u003e\n\u003cp\u003e^+p\u003c/p\u003e\n\u003cp\u003ectrl+shift+p 打开的是命令面板\u003cbr\u003e\n命令面板主要内容分为四块。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e设置\u003c/li\u003e\n\u003cli\u003e改变语法\u003c/li\u003e\n\u003cli\u003e来自插件的命令\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"go-to-anything\"\u003e\u003ca class=\"v-toc-item\" href=\"#go-to-anything\"\u003e#\u003c/a\u003e Go to Anything\u003c/h3\u003e\n\u003cp\u003e^p 打开的是切换面板\u003cbr\u003e\n直接输入文件名可以切换文件\u003cbr\u003e\n可以直接预览\u003cbr\u003e\n输入 @ 可以查看按照 Header 查看 (Markdown 语法）, 代码中按照函数来查找\u003cbr\u003e\n输入 # 可以查看变量\u003c/p\u003e\n\u003ch4 id=\"同一页面搜索\"\u003e\u003ca class=\"v-toc-item\" href=\"#同一页面搜索\"\u003e#\u003c/a\u003e 同一页面搜索\u003c/h4\u003e\n\u003cp\u003e^r\u003c/p\u003e\n\u003ch4 id=\"整个项目搜索\"\u003e\u003ca class=\"v-toc-item\" href=\"#整个项目搜索\"\u003e#\u003c/a\u003e 整个项目搜索\u003c/h4\u003e\n\u003cp\u003ectrl + shift + r\u003c/p\u003e\n\u003ch4 id=\"toggle-sidebar\"\u003e\u003ca class=\"v-toc-item\" href=\"#toggle-sidebar\"\u003e#\u003c/a\u003e Toggle Sidebar\u003c/h4\u003e\n\u003cp\u003ectrl+k Ctrl+b\u003c/p\u003e\n\u003ch4 id=\"切换面板\"\u003e\u003ca class=\"v-toc-item\" href=\"#切换面板\"\u003e#\u003c/a\u003e 切换面板\u003c/h4\u003e\n\u003cp\u003ealt + shift + 1 to 4\u003c/p\u003e\n\u003ch4 id=\"直达某行\"\u003e\u003ca class=\"v-toc-item\" href=\"#直达某行\"\u003e#\u003c/a\u003e 直达某行\u003c/h4\u003e\n\u003cp\u003ectrl+g\u003c/p\u003e\n\u003ch4 id=\"移动行\"\u003e\u003ca class=\"v-toc-item\" href=\"#移动行\"\u003e#\u003c/a\u003e 移动行\u003c/h4\u003e\n\u003cp\u003ectrl+shift+ 上下左右。\u003c/p\u003e\n\u003ch2 id=\"0x03-结论一\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-结论一\"\u003e#\u003c/a\u003e 0x03 结论一\u003c/h2\u003e\n\u003cp\u003e嘿嘿，这样看上去你基本的编辑任务都是可以比较出色完成的吧？\u003cbr\u003e\n好，我们依然可以看出来，这款编辑器的的确确足够日常编辑使用了，但是，还是并不代表有一定的优越性啊？\u003c/p\u003e\n\u003cp\u003e你说，老师，能不能再给力一点啊？\u003cbr\u003e\n\u003cimg src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg\" alt=\"\"\u003e\u003c/p\u003e\n\u003ch2 id=\"0x04-深入研究其中的编辑功能\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x04-深入研究其中的编辑功能\"\u003e#\u003c/a\u003e 0x04 深入研究其中的编辑功能\u003c/h2\u003e\n\u003cp\u003e把上面的一些功能进行系统性梳理。\u003cbr\u003e\n已经有前辈完成了，我就直接贴上他的地址了。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://feliving.github.io/Sublime-Text-3-Documentation/index.html\"\u003ehttp://feliving.github.io/Sublime-Text-3-Documentation/index.html\u003c/a\u003e\u003c/p\u003e\n\u003ch2 id=\"0x05-结论二确实强大-但是\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x05-结论二确实强大-但是\"\u003e#\u003c/a\u003e 0x05 结论二，确实强大。但是…\u003c/h2\u003e\n\u003cp\u003e你说，老师，能不能再给力一点啊？\u003cbr\u003e\n\u003cimg src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg\" alt=\"\"\u003e\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003c/p\u003e\n\u003cp\u003e当然可以！!\u003c/p\u003e\n\u003ch2 id=\"0x06-插件让-sublime-长出逆风飞翔的翅膀\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x06-插件让-sublime-长出逆风飞翔的翅膀\"\u003e#\u003c/a\u003e 0x06 插件，让 sublime 长出逆风飞翔的翅膀。\u003c/h2\u003e\n\u003cp\u003esublime 的功能已经是比较强大了。可是还有什么地方可以优化的吗？\u003cbr\u003e\n加上插件，可以增强已经有的功能，可以扩展越来没有的功能。下面请看好！\u003c/p\u003e\n\u003ch3 id=\"用-vim-强化编辑功能\"\u003e\u003ca class=\"v-toc-item\" href=\"#用-vim-强化编辑功能\"\u003e#\u003c/a\u003e 用 Vim 强化编辑功能。\u003c/h3\u003e\n\u003cp\u003e在编辑强化方面，Sublime 自带了一个非常好用的模式，叫做 Vintage mode\u003cbr\u003e\n这个模式有一点点的小问题，就是不方便，我们不妨使用另一个小插件来替换它。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/guillermooo/Vintageous\"\u003ehttps://github.com/guillermooo/Vintageous\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003ectrl+shift+p 输入 install 输入{enter} 输入 Vintageous{Enter}\u003c/p\u003e\n\u003cp\u003e安装完毕，你就可以在 Sublime 上面比较方便的使用 vim 编辑方式了。\u003c/p\u003e\n\u003ch3 id=\"能不能好看一点\"\u003e\u003ca class=\"v-toc-item\" href=\"#能不能好看一点\"\u003e#\u003c/a\u003e 能不能好看一点？\u003c/h3\u003e\n\u003cp\u003eOf course!\u003c/p\u003e\n\u003cp\u003e来来来，戳这里戳这里\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://scotch.io/bar-talk/the-complete-visual-guide-to-sublime-text-3-themes-color-schemes-and-cool-features\"\u003ehttps://scotch.io/bar-talk/the-complete-visual-guide-to-sublime-text-3-themes-color-schemes-and-cool-features\u003c/a\u003e\u003c/p\u003e\n\u003ch3 id=\"新建文件可以方便一点吗\"\u003e\u003ca class=\"v-toc-item\" href=\"#新建文件可以方便一点吗\"\u003e#\u003c/a\u003e 新建文件可以方便一点吗？\u003c/h3\u003e\n\u003cp\u003e可以，AdvancedNewFile\u003cbr\u003e\n你只需要 ctrl+alt+n 就可以使用这个插件。\u003c/p\u003e\n\u003cp\u003e输入文件名可以直接在当前目录下新建。\u003cbr\u003e\n你也可以使用相对路径比如 …/ 或者 …/_drafts/AndroidShow\u003cbr\u003e\n是不是非常方便？\u003c/p\u003e\n\u003ch3 id=\"侧边栏好像右键菜单好少能不能再给力一点啊\"\u003e\u003ca class=\"v-toc-item\" href=\"#侧边栏好像右键菜单好少能不能再给力一点啊\"\u003e#\u003c/a\u003e 侧边栏好像右键菜单好少，能不能再给力一点啊\u003c/h3\u003e\n\u003cp\u003e有，SidebarEnhancement\u003c/p\u003e\n\u003ch3 id=\"只能补全功能不够用能不能再给力一点啊\"\u003e\u003ca class=\"v-toc-item\" href=\"#只能补全功能不够用能不能再给力一点啊\"\u003e#\u003c/a\u003e 只能补全功能不够用，能不能再给力一点啊\u003c/h3\u003e\n\u003cp\u003e好，SublimeCodeIntel\u003c/p\u003e\n\u003ch3 id=\"我有强迫症对齐功能不够强大能不能再给力一点啊\"\u003e\u003ca class=\"v-toc-item\" href=\"#我有强迫症对齐功能不够强大能不能再给力一点啊\"\u003e#\u003c/a\u003e 我有强迫症，对齐功能不够强大，能不能再给力一点啊\u003c/h3\u003e\n\u003cp\u003e好，ALignment\u003c/p\u003e\n\u003ch3 id=\"写注释可以方便一些就像-intellij-idea-那样写注释吗\"\u003e\u003ca class=\"v-toc-item\" href=\"#写注释可以方便一些就像-intellij-idea-那样写注释吗\"\u003e#\u003c/a\u003e 写注释可以方便一些，就像 Intellij IDEA 那样写注释吗？\u003c/h3\u003e\n\u003cp\u003e可以 Doc Blockr\u003c/p\u003e\n\u003ch3 id=\"前端工程师要那些插件吗\"\u003e\u003ca class=\"v-toc-item\" href=\"#前端工程师要那些插件吗\"\u003e#\u003c/a\u003e 前端工程师要那些插件吗？\u003c/h3\u003e\n\u003cp\u003eEmmet\u003cbr\u003e\nHTML-CSS-JS\u003cbr\u003e\n等等\u003c/p\u003e\n\u003ch3 id=\"我平时用-markdown-写-blog-有什么比较方便的东西吗\"\u003e\u003ca class=\"v-toc-item\" href=\"#我平时用-markdown-写-blog-有什么比较方便的东西吗\"\u003e#\u003c/a\u003e 我平时用 markdown 写 BLOG, 有什么比较方便的东西吗？\u003c/h3\u003e\n\u003cp\u003emarkdown\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eextended\u003c/li\u003e\n\u003cli\u003epreview\u003c/li\u003e\n\u003cli\u003elight\u003c/li\u003e\n\u003cli\u003etoc\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x07-结论三老师真的很好用啊-但是\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x07-结论三老师真的很好用啊-但是\"\u003e#\u003c/a\u003e 0x07 结论三，老师真的很好用啊。但是…\u003c/h2\u003e\n\u003cp\u003e你说，老师，能不能再给力一点啊？\u003cbr\u003e\n\u003cimg src=\"http://imgsrc.baidu.com/forum/w%3D580/sign=87eeeefcd688d43ff0a991fa4d1cd2aa/1f91e058ccbf6c81fbe76561bc3eb13532fa407e.jpg\" alt=\"\"\u003e\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003cbr\u003e\n…\u003c/p\u003e\n\u003cp\u003e特码的，你是来编程的还是来配置编辑器的啊！\u003cbr\u003e\n等你有需求了再去寻找更好的配置方案 OK?\u003c/p\u003e\n\u003ch2 id=\"0xee-其他链接\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-其他链接\"\u003e#\u003c/a\u003e 0xEE 其他链接\u003c/h2\u003e\n\u003cp\u003e这个 BLog 分享了不少关于 Sublime 的干货\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://scotch.io/\"\u003ehttps://scotch.io/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e这个视频链接讲解了一些关于 Sublime 的一些小知识。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://www.imooc.com/learn/40\"\u003ehttp://www.imooc.com/learn/40\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003esublime 非官方资源\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://docs.sublimetext.info/en/latest/index.html\"\u003ehttp://docs.sublimetext.info/en/latest/index.html\u003c/a\u003e\u003c/p\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2016-12-05\u003c/strong\u003e 重修文字，已转投 Vim. sublime 作为非主力编辑器。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e2016 中期\u003c/strong\u003e 重修文字，声明已转投 Vim. sublime 作为非主力编辑器。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e2017 前期\u003c/strong\u003e 重修文字，声明已转投 Spacemacs.\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e2020 后期\u003c/strong\u003e 重修文字，重回 Vim.\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\u003ca href=\"#sublime-text\"\u003eSublime Text\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5\"\u003e0x01 最佳实践\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%BB%BA%E8%AE%AE%E4%BE%BF%E6%90%BA%E7%89%88%E6%9C%AC\"\u003e下载安装（建议便携版本）\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%AE%89%E8%A3%85-package-control-%E7%94%A8%E4%BA%8E%E7%AE%A1%E7%90%86%E6%8F%92%E4%BB%B6\"\u003e安装 Package Control 用于管理插件\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95%E4%B9%8B%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD\"\u003e0x02 基本使用方法之编辑功能\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%91%BD%E4%BB%A4%E9%9D%A2%E6%9D%BF\"\u003e命令面板\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#go-to-anything\"\u003eGo to Anything\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%90%8C%E4%B8%80%E9%A1%B5%E9%9D%A2%E6%90%9C%E7%B4%A2\"\u003e同一页面搜索\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%95%B4%E4%B8%AA%E9%A1%B9%E7%9B%AE%E6%90%9C%E7%B4%A2\"\u003e整个项目搜索\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#toggle-sidebar\"\u003eToggle Sidebar\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%88%87%E6%8D%A2%E9%9D%A2%E6%9D%BF\"\u003e切换面板\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%9B%B4%E8%BE%BE%E6%9F%90%E8%A1%8C\"\u003e直达某行\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%A7%BB%E5%8A%A8%E8%A1%8C\"\u003e移动行\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-%E7%BB%93%E8%AE%BA%E4%B8%80\"\u003e0x03 结论一\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x04-%E6%B7%B1%E5%85%A5%E7%A0%94%E7%A9%B6%E5%85%B6%E4%B8%AD%E7%9A%84%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD\"\u003e0x04 深入研究其中的编辑功能\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x05-%E7%BB%93%E8%AE%BA%E4%BA%8C%E7%A1%AE%E5%AE%9E%E5%BC%BA%E5%A4%A7-%E4%BD%86%E6%98%AF\"\u003e0x05 结论二，确实强大。但是…\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x06-%E6%8F%92%E4%BB%B6%E8%AE%A9-sublime-%E9%95%BF%E5%87%BA%E9%80%86%E9%A3%8E%E9%A3%9E%E7%BF%94%E7%9A%84%E7%BF%85%E8%86%80\"\u003e0x06 插件，让 sublime 长出逆风飞翔的翅膀。\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E7%94%A8-vim-%E5%BC%BA%E5%8C%96%E7%BC%96%E8%BE%91%E5%8A%9F%E8%83%BD\"\u003e用 Vim 强化编辑功能。\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E8%83%BD%E4%B8%8D%E8%83%BD%E5%A5%BD%E7%9C%8B%E4%B8%80%E7%82%B9\"\u003e能不能好看一点？\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%96%B0%E5%BB%BA%E6%96%87%E4%BB%B6%E5%8F%AF%E4%BB%A5%E6%96%B9%E4%BE%BF%E4%B8%80%E7%82%B9%E5%90%97\"\u003e新建文件可以方便一点吗？\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E4%BE%A7%E8%BE%B9%E6%A0%8F%E5%A5%BD%E5%83%8F%E5%8F%B3%E9%94%AE%E8%8F%9C%E5%8D%95%E5%A5%BD%E5%B0%91%E8%83%BD%E4%B8%8D%E8%83%BD%E5%86%8D%E7%BB%99%E5%8A%9B%E4%B8%80%E7%82%B9%E5%95%8A\"\u003e侧边栏好像右键菜单好少，能不能再给力一点啊\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%8F%AA%E8%83%BD%E8%A1%A5%E5%85%A8%E5%8A%9F%E8%83%BD%E4%B8%8D%E5%A4%9F%E7%94%A8%E8%83%BD%E4%B8%8D%E8%83%BD%E5%86%8D%E7%BB%99%E5%8A%9B%E4%B8%80%E7%82%B9%E5%95%8A\"\u003e只能补全功能不够用，能不能再给力一点啊\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%88%91%E6%9C%89%E5%BC%BA%E8%BF%AB%E7%97%87%E5%AF%B9%E9%BD%90%E5%8A%9F%E8%83%BD%E4%B8%8D%E5%A4%9F%E5%BC%BA%E5%A4%A7%E8%83%BD%E4%B8%8D%E8%83%BD%E5%86%8D%E7%BB%99%E5%8A%9B%E4%B8%80%E7%82%B9%E5%95%8A\"\u003e我有强迫症，对齐功能不够强大，能不能再给力一点啊\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%86%99%E6%B3%A8%E9%87%8A%E5%8F%AF%E4%BB%A5%E6%96%B9%E4%BE%BF%E4%B8%80%E4%BA%9B%E5%B0%B1%E5%83%8F-intellij-idea-%E9%82%A3%E6%A0%B7%E5%86%99%E6%B3%A8%E9%87%8A%E5%90%97\"\u003e写注释可以方便一些，就像 Intellij IDEA 那样写注释吗？\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%A6%81%E9%82%A3%E4%BA%9B%E6%8F%92%E4%BB%B6%E5%90%97\"\u003e前端工程师要那些插件吗？\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%88%91%E5%B9%B3%E6%97%B6%E7%94%A8-markdown-%E5%86%99-blog-%E6%9C%89%E4%BB%80%E4%B9%88%E6%AF%94%E8%BE%83%E6%96%B9%E4%BE%BF%E7%9A%84%E4%B8%9C%E8%A5%BF%E5%90%97\"\u003e我平时用 markdown 写 BLOG, 有什么比较方便的东西吗？\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x07-%E7%BB%93%E8%AE%BA%E4%B8%89%E8%80%81%E5%B8%88%E7%9C%9F%E7%9A%84%E5%BE%88%E5%A5%BD%E7%94%A8%E5%95%8A-%E4%BD%86%E6%98%AF\"\u003e0x07 结论三，老师真的很好用啊。但是…\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E5%85%B6%E4%BB%96%E9%93%BE%E6%8E%A5\"\u003e0xEE 其他链接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"Sublime Text"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

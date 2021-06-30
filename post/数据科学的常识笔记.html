@@ -1,0 +1,291 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>数据科学的常识笔记 | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<p>2017 年 07 月，为了解统计学和机器学习的基本常识，开了这篇文章。</p>
+<p>当然，仅仅是为了了解，所以也就写的随性（不严谨）一些，排版什么的也都详细推敲。想到哪里就记录到哪里。</p>
+<!-- more -->
+<h2 id="0x01-数据科学的含义与内容"><a class="v-toc-item" href="#0x01-数据科学的含义与内容">#</a> 0x01 数据科学的含义与内容</h2>
+<h3 id="01-what"><a class="v-toc-item" href="#01-what">#</a> 0.1 WHAT?</h3>
+<blockquote>
+<p>To gain insights into data through computation, statistics , and visualization.</p>
+</blockquote>
+<p>Josh Blumenstock 认为 数据科学家就是比计算机科学家多点统计技术，比统计学家多点计算机技术。</p>
+<p>Shlomo Aragmon 认为 数据科学家 = 统计学家 + 程序员 + 教练 + 讲故事者 + 艺术家</p>
+<h4 id="一些准则"><a class="v-toc-item" href="#一些准则">#</a> 一些准则</h4>
+<ul>
+<li>多数据源</li>
+<li>懂得数据如何被采集</li>
+<li>对数据进行权重</li>
+<li>使用统计模型</li>
+<li>理解相关性</li>
+<li>像 Bayesian 一样思考，像 frequentist 一样检验</li>
+<li>良好的沟通能力（代表什么，如何可视化，检验，理解结论）</li>
+</ul>
+<h4 id="一些挑战"><a class="v-toc-item" href="#一些挑战">#</a> 一些挑战</h4>
+<ul>
+<li>数据量大</li>
+<li>高维诅咒</li>
+<li>数据缺失</li>
+<li>需要避免过度拟合 (test data vs. training data)</li>
+</ul>
+<h4 id="data-science-涉及到哪些领域呢"><a class="v-toc-item" href="#data-science-涉及到哪些领域呢">#</a> Data Science 涉及到哪些领域呢？</h4>
+<ul>
+<li>Data Management</li>
+<li>Data Mining</li>
+<li>Machine Learning</li>
+<li>Business Intelligence</li>
+<li>Statistics</li>
+<li>Decision Making Theory</li>
+<li>Story Telling</li>
+<li>Perception</li>
+<li>Human Cognition</li>
+</ul>
+<h3 id="02-why"><a class="v-toc-item" href="#02-why">#</a> 0.2 WHY?</h3>
+<p>海量数据的时代</p>
+<h3 id="03-how"><a class="v-toc-item" href="#03-how">#</a> 0.3 HOW?</h3>
+<ul>
+<li><strong>ASK</strong> an interesting question. 目标是什么？如果拿到数据可以预测或者估计什么？</li>
+<li><strong>GET</strong> the data. 数据如何抽样？那些数据是相关的？</li>
+<li><strong>EXPLORE</strong> the data. 可视化数据，有异常吗？有模式吗？</li>
+<li><strong>MODEL</strong> the data. 构建模型，拟合模型，检验模型。</li>
+<li><strong>COMMUNICATE</strong> and <strong>VISUALIZE</strong> the results 我们学到了什么？结果有意义吗？</li>
+</ul>
+<h3 id="04-本文目录"><a class="v-toc-item" href="#04-本文目录">#</a> 0.4 本文目录</h3>
+<ul>
+<li>
+<p>统计学与数据分析</p>
+<ul>
+<li>信息可视化</li>
+<li>集中趋势的量度</li>
+<li>分散性与变异的量度</li>
+<li>概率计算</li>
+<li>离散概率分布</li>
+<li>排列与组合</li>
+<li>几何分布、二项分布、泊松分布</li>
+<li>正态分布</li>
+<li>统计抽样</li>
+<li>总体和样本的估计</li>
+<li>置信区间</li>
+<li>假设检验的运用</li>
+<li>x2 分布</li>
+<li>相关与回归</li>
+</ul>
+</li>
+<li>
+<p>数据挖掘基本扫盲</p>
+<ul>
+<li>推荐系统入门</li>
+<li>隐式评价和基于物品的过滤算法</li>
+<li>分类与分类进阶</li>
+<li>朴素贝叶斯</li>
+<li>朴素贝叶斯算法和非结构化文本</li>
+<li>聚类</li>
+</ul>
+</li>
+<li>
+<p>机器学习</p>
+<ul>
+<li>分类与回归</li>
+<li>交差校验</li>
+<li>降维</li>
+<li>支持向量机</li>
+<li>决策树 &amp; 随机森林</li>
+<li>Bagging &amp; Boosting</li>
+<li>聚类与文本</li>
+<li>贝叶斯思维 &amp; Naive Bayes</li>
+<li>文本分析：LDA&amp;Topic Modeling</li>
+<li>聚类</li>
+</ul>
+</li>
+<li>
+<p>深度学习</p>
+</li>
+<li>
+<p>自然语言 NLP</p>
+<ul>
+<li>中文分词</li>
+<li>新词发现</li>
+</ul>
+</li>
+</ul>
+<h2 id="0x02-统计学与数据分析"><a class="v-toc-item" href="#0x02-统计学与数据分析">#</a> 0x02 统计学与数据分析</h2>
+<h3 id="21-信息可视化"><a class="v-toc-item" href="#21-信息可视化">#</a> 2.1 信息可视化</h3>
+<p>建议直接阅读 AntV 的可视化基础 <a href="https://antv.alipay.com/vis/doc/chart/index.html">https://antv.alipay.com/vis/doc/chart/index.html</a></p>
+<h3 id="22-集中趋势的量度"><a class="v-toc-item" href="#22-集中趋势的量度">#</a> 2.2 集中趋势的量度</h3>
+<blockquote>
+<p>目的：找出能够反映集中趋势的一个数值</p>
+</blockquote>
+<p>PS: 可以用分布图看它的均值和平均数是否落在集中趋势，数据向右偏斜，均值位于中位数右侧</p>
+<ul>
+<li>均值 （均值对于抽样数据更加稳定，但是如果村里一个杨千万九个穷光蛋，则个个都是杨百万）</li>
+<li>中位数</li>
+<li>众数</li>
+</ul>
+<h3 id="23-分散性与变异的量度"><a class="v-toc-item" href="#23-分散性与变异的量度">#</a> 2.3 分散性与变异的量度</h3>
+<blockquote>
+<p>目的：仅有均值，中位数，众数是不够的，还需要距和差</p>
+</blockquote>
+<ul>
+<li>全距：MAX（上界） - MIN（下界）</li>
+<li>按照四分位书的切分方式： 下界 - 下四分位数目 (Q1) - 中位数 - 上四分位数 - 上界</li>
+<li>四分位距：上四分位数 - 下四分位数 （当然，可以使用箱线图进行绘制，从而判断出数据集中的地方）</li>
+<li>百分位距：在统计的时候，往往需要避免极值对数据的影响</li>
+<li>方差：量度数据分散性</li>
+<li>标准差：典型值与均值的距离，体现了数值的变异程度。即加入有一批数据的标准差为 3cm, 代表着平均而言，这些数值与均值的距离为 3cm</li>
+</ul>
+<h2 id="0x03-数据挖掘"><a class="v-toc-item" href="#0x03-数据挖掘">#</a> 0x03 数据挖掘</h2>
+<p>本节是『面向程序员的挖掘指南』的笔记。</p>
+<p>数据挖掘是深一步的分析统计。</p>
+<p>本书所讲内容就是一个核心：</p>
+<blockquote>
+<p>给用户推荐物品</p>
+</blockquote>
+<p>内容就是：</p>
+<ul>
+<li>第一章和第二章均为依据用户对物品的评价（显示评价以及隐式评价）来做出相关推荐。</li>
+<li>第三章为物品本身的特点进行<strong>分类</strong></li>
+<li>第四章直到最后一章则是分类的详细讨论以及聚类分析。</li>
+</ul>
+<h3 id="基于用户的协同过滤算法"><a class="v-toc-item" href="#基于用户的协同过滤算法">#</a> 基于用户的协同过滤算法</h3>
+<p>用户与用户之间相似</p>
+<h4 id="基本的距离算法"><a class="v-toc-item" href="#基本的距离算法">#</a> 基本的距离算法</h4>
+<blockquote>
+<p>擦擦擦，LaTeX 公式 居然不能用…</p>
+</blockquote>
+<ul>
+<li>曼哈顿距离 如果在 n 维坐标上，即绝对值。</li>
+<li>欧几里得距离 就是其实就是 n 维勾股定理。</li>
+</ul>
+<p>曼哈顿距离和欧几里得距离在判断 同样是 n 维的数据是完全 OK 的。即总量为 m 部电影的情况下，k 个人同样评价了 n 部电影，比较容易算出距离。</p>
+<p>但，n 纬和比他更小的纬度算出的距离，似乎并不应该相等。 如何处理这些缺失的数据呢？如果是我的话，会设定一个默认值吧。（半值，均值）</p>
+<ul>
+<li>闵科夫斯基距离</li>
+</ul>
+<pre><code>TODO: 以后补上公式
+</code></pre>
+<blockquote>
+<p>r 值越大，单个维度的差值大小会对整体距离有更大的影响。</p>
+</blockquote>
+<ul>
+<li>皮尔森相关系数</li>
+</ul>
+<p>用户也分为好几种，比如说：</p>
+<p>用户 1: 好的打分 5, 差的打分 3<br>
+用户 2: 好的打分 5, 差的打分 1<br>
+用户 3: 要么 5, 要么 1</p>
+<ul>
+<li>余弦相似度</li>
+</ul>
+<p>如果数据存在“分数膨胀”问题，就使用皮尔逊相关系数。<br>
+如果数据比较“密集”，变量之间基本都存在公有值，且这些距离数据是非常重要的，那就使用欧几里得或曼哈顿距离。<br>
+如果数据是稀疏的，则使用余弦相似度。</p>
+<ul>
+<li>K 最邻近算法</li>
+</ul>
+<h3 id="隐式评价和基于物品的过滤算法"><a class="v-toc-item" href="#隐式评价和基于物品的过滤算法">#</a> 隐式评价和基于物品的过滤算法</h3>
+<p>显式评价：豆瓣的五星，用户的评论</p>
+<p>显式评价可能存在下面几个问题：</p>
+<ol>
+<li>懒得评价</li>
+<li>会出于面子，合群，偏见撒谎。</li>
+<li>懒得追加评价一般数量少，假如买的东西一个月后坏掉了，则不用。</li>
+<li>账号共享带来的问题。</li>
+<li>买东西就是有问题才调出来判断，其他的情况下懒得评价。</li>
+</ol>
+<p>隐式评价：通过观察可得。通常需要工程师针对客户端和浏览器端进行埋点。比如，买过，还买过，点击情趣用品多次。</p>
+<ol>
+<li>网页方面：页面点击、停留时间、重复访问次数、引用率、观看视频的次数； 音乐播放器：播放的曲目、跳过的曲目、播放次数；</li>
+</ol>
+<blockquote>
+<p>然而，越精准的判断越消耗性能。</p>
+</blockquote>
+<ul>
+<li>扩展性：当用户数量大幅度上升的时候，计算量就上来了。千万用户其中一个用户和其他用户进行有一次运算的话，计算量就相当大了。</li>
+<li>稀疏性：物品数量远大于用户数量，而千万级用户仅仅对百万本书中几十本评价，</li>
+</ul>
+<blockquote>
+<p>书中说，可以考虑基于物品的协同过滤，其实可以考虑，先给用户和书划分类型，从而使得计算量下来。 计算标签和标签之间的相似度，这样可以使得成本大幅度下降。</p>
+</blockquote>
+<h3 id="基于物品的协同过滤算法"><a class="v-toc-item" href="#基于物品的协同过滤算法">#</a> 基于物品的协同过滤算法</h3>
+<ul>
+<li><strong>修正的余弦相似度</strong> 是一种基于模型的协同过滤算法。我们前面提过，这种算法的优势之一是扩展性好，对于大数据量而言，运算速度快、占用内存少。 用户的评价标准是不同的，比如喜欢一个歌手时有些人会打 4 分，有些打 5 分；不喜欢时有人会打 3 分，有些则会只给 1 分。修正的余弦相似度计算时会将用户对物品的评分减去用户所有评分的均值，从而解决这个问题。</li>
+<li><strong>Slope One 算法</strong></li>
+</ul>
+<h3 id="训练集和测试集"><a class="v-toc-item" href="#训练集和测试集">#</a> 训练集和测试集</h3>
+<p>十折交叉验证</p>
+<p>将数据集随机分割成十个等份，每次用 9 份数据做训练集，1 份数据做测试集，如此迭代 10 次。</p>
+<p>n 折交叉验证</p>
+<h3 id="评估分类器"><a class="v-toc-item" href="#评估分类器">#</a> 评估分类器</h3>
+<ul>
+<li>
+<p>混淆矩阵 （其实就是交叉表的统计学说法）</p>
+</li>
+<li>
+<p>Kappa 指标</p>
+</li>
+<li>
+<p>优化邻近算法</p>
+<ul>
+<li>kNN 算法</li>
+</ul>
+</li>
+</ul>
+<h3 id="分类方法"><a class="v-toc-item" href="#分类方法">#</a> 分类方法</h3>
+<h2 id="0x03-机器学习"><a class="v-toc-item" href="#0x03-机器学习">#</a> 0x03 机器学习</h2>
+<h2 id="0x04-深度学习"><a class="v-toc-item" href="#0x04-深度学习">#</a> 0x04 深度学习</h2>
+<h2 id="0x05-自然语言-nlp"><a class="v-toc-item" href="#0x05-自然语言-nlp">#</a> 0x05 自然语言 NLP</h2>
+<h2 id="0xee-链接"><a class="v-toc-item" href="#0xee-链接">#</a> 0xEE 链接</h2>
+<ul>
+<li><a href="https://dataminingguide.books.yourtion.com/">面向程序员的数据挖掘指南</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-07-17</strong> 重修文字</li>
+<li><strong>2017-10-12</strong> 增加数据挖掘模块</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%9A%84%E5%90%AB%E4%B9%89%E4%B8%8E%E5%86%85%E5%AE%B9">0x01 数据科学的含义与内容</a>
+<ul>
+<li><a href="#01-what">0.1 WHAT?</a>
+<ul>
+<li><a href="#%E4%B8%80%E4%BA%9B%E5%87%86%E5%88%99">一些准则</a></li>
+<li><a href="#%E4%B8%80%E4%BA%9B%E6%8C%91%E6%88%98">一些挑战</a></li>
+<li><a href="#data-science-%E6%B6%89%E5%8F%8A%E5%88%B0%E5%93%AA%E4%BA%9B%E9%A2%86%E5%9F%9F%E5%91%A2">Data Science 涉及到哪些领域呢？</a></li>
+</ul>
+</li>
+<li><a href="#02-why">0.2 WHY?</a></li>
+<li><a href="#03-how">0.3 HOW?</a></li>
+<li><a href="#04-%E6%9C%AC%E6%96%87%E7%9B%AE%E5%BD%95">0.4 本文目录</a></li>
+</ul>
+</li>
+<li><a href="#0x02-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90">0x02 统计学与数据分析</a>
+<ul>
+<li><a href="#21-%E4%BF%A1%E6%81%AF%E5%8F%AF%E8%A7%86%E5%8C%96">2.1 信息可视化</a></li>
+<li><a href="#22-%E9%9B%86%E4%B8%AD%E8%B6%8B%E5%8A%BF%E7%9A%84%E9%87%8F%E5%BA%A6">2.2 集中趋势的量度</a></li>
+<li><a href="#23-%E5%88%86%E6%95%A3%E6%80%A7%E4%B8%8E%E5%8F%98%E5%BC%82%E7%9A%84%E9%87%8F%E5%BA%A6">2.3 分散性与变异的量度</a></li>
+</ul>
+</li>
+<li><a href="#0x03-%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98">0x03 数据挖掘</a>
+<ul>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E7%94%A8%E6%88%B7%E7%9A%84%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E7%AE%97%E6%B3%95">基于用户的协同过滤算法</a>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E7%9A%84%E8%B7%9D%E7%A6%BB%E7%AE%97%E6%B3%95">基本的距离算法</a></li>
+</ul>
+</li>
+<li><a href="#%E9%9A%90%E5%BC%8F%E8%AF%84%E4%BB%B7%E5%92%8C%E5%9F%BA%E4%BA%8E%E7%89%A9%E5%93%81%E7%9A%84%E8%BF%87%E6%BB%A4%E7%AE%97%E6%B3%95">隐式评价和基于物品的过滤算法</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E7%89%A9%E5%93%81%E7%9A%84%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E7%AE%97%E6%B3%95">基于物品的协同过滤算法</a></li>
+<li><a href="#%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86">训练集和测试集</a></li>
+<li><a href="#%E8%AF%84%E4%BC%B0%E5%88%86%E7%B1%BB%E5%99%A8">评估分类器</a></li>
+<li><a href="#%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95">分类方法</a></li>
+</ul>
+</li>
+<li><a href="#0x03-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0">0x03 机器学习</a></li>
+<li><a href="#0x04-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0">0x04 深度学习</a></li>
+<li><a href="#0x05-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80-nlp">0x05 自然语言 NLP</a></li>
+<li><a href="#0xee-%E9%93%BE%E6%8E%A5">0xEE 链接</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Python"],"path":"20170717_数据科学的常识笔记.md","title":"数据科学的常识笔记","slug":"数据科学的常识笔记","date":"2017-07-17","category":"数据分析","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cp\u003e2017 年 07 月，为了解统计学和机器学习的基本常识，开了这篇文章。\u003c/p\u003e\n\u003cp\u003e当然，仅仅是为了了解，所以也就写的随性（不严谨）一些，排版什么的也都详细推敲。想到哪里就记录到哪里。\u003c/p\u003e\n\u003c!-- more --\u003e\n\u003ch2 id=\"0x01-数据科学的含义与内容\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-数据科学的含义与内容\"\u003e#\u003c/a\u003e 0x01 数据科学的含义与内容\u003c/h2\u003e\n\u003ch3 id=\"01-what\"\u003e\u003ca class=\"v-toc-item\" href=\"#01-what\"\u003e#\u003c/a\u003e 0.1 WHAT?\u003c/h3\u003e\n\u003cblockquote\u003e\n\u003cp\u003eTo gain insights into data through computation, statistics , and visualization.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003eJosh Blumenstock 认为 数据科学家就是比计算机科学家多点统计技术，比统计学家多点计算机技术。\u003c/p\u003e\n\u003cp\u003eShlomo Aragmon 认为 数据科学家 = 统计学家 + 程序员 + 教练 + 讲故事者 + 艺术家\u003c/p\u003e\n\u003ch4 id=\"一些准则\"\u003e\u003ca class=\"v-toc-item\" href=\"#一些准则\"\u003e#\u003c/a\u003e 一些准则\u003c/h4\u003e\n\u003cul\u003e\n\u003cli\u003e多数据源\u003c/li\u003e\n\u003cli\u003e懂得数据如何被采集\u003c/li\u003e\n\u003cli\u003e对数据进行权重\u003c/li\u003e\n\u003cli\u003e使用统计模型\u003c/li\u003e\n\u003cli\u003e理解相关性\u003c/li\u003e\n\u003cli\u003e像 Bayesian 一样思考，像 frequentist 一样检验\u003c/li\u003e\n\u003cli\u003e良好的沟通能力（代表什么，如何可视化，检验，理解结论）\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4 id=\"一些挑战\"\u003e\u003ca class=\"v-toc-item\" href=\"#一些挑战\"\u003e#\u003c/a\u003e 一些挑战\u003c/h4\u003e\n\u003cul\u003e\n\u003cli\u003e数据量大\u003c/li\u003e\n\u003cli\u003e高维诅咒\u003c/li\u003e\n\u003cli\u003e数据缺失\u003c/li\u003e\n\u003cli\u003e需要避免过度拟合 (test data vs. training data)\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4 id=\"data-science-涉及到哪些领域呢\"\u003e\u003ca class=\"v-toc-item\" href=\"#data-science-涉及到哪些领域呢\"\u003e#\u003c/a\u003e Data Science 涉及到哪些领域呢？\u003c/h4\u003e\n\u003cul\u003e\n\u003cli\u003eData Management\u003c/li\u003e\n\u003cli\u003eData Mining\u003c/li\u003e\n\u003cli\u003eMachine Learning\u003c/li\u003e\n\u003cli\u003eBusiness Intelligence\u003c/li\u003e\n\u003cli\u003eStatistics\u003c/li\u003e\n\u003cli\u003eDecision Making Theory\u003c/li\u003e\n\u003cli\u003eStory Telling\u003c/li\u003e\n\u003cli\u003ePerception\u003c/li\u003e\n\u003cli\u003eHuman Cognition\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"02-why\"\u003e\u003ca class=\"v-toc-item\" href=\"#02-why\"\u003e#\u003c/a\u003e 0.2 WHY?\u003c/h3\u003e\n\u003cp\u003e海量数据的时代\u003c/p\u003e\n\u003ch3 id=\"03-how\"\u003e\u003ca class=\"v-toc-item\" href=\"#03-how\"\u003e#\u003c/a\u003e 0.3 HOW?\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eASK\u003c/strong\u003e an interesting question. 目标是什么？如果拿到数据可以预测或者估计什么？\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eGET\u003c/strong\u003e the data. 数据如何抽样？那些数据是相关的？\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eEXPLORE\u003c/strong\u003e the data. 可视化数据，有异常吗？有模式吗？\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eMODEL\u003c/strong\u003e the data. 构建模型，拟合模型，检验模型。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eCOMMUNICATE\u003c/strong\u003e and \u003cstrong\u003eVISUALIZE\u003c/strong\u003e the results 我们学到了什么？结果有意义吗？\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"04-本文目录\"\u003e\u003ca class=\"v-toc-item\" href=\"#04-本文目录\"\u003e#\u003c/a\u003e 0.4 本文目录\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e统计学与数据分析\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e信息可视化\u003c/li\u003e\n\u003cli\u003e集中趋势的量度\u003c/li\u003e\n\u003cli\u003e分散性与变异的量度\u003c/li\u003e\n\u003cli\u003e概率计算\u003c/li\u003e\n\u003cli\u003e离散概率分布\u003c/li\u003e\n\u003cli\u003e排列与组合\u003c/li\u003e\n\u003cli\u003e几何分布、二项分布、泊松分布\u003c/li\u003e\n\u003cli\u003e正态分布\u003c/li\u003e\n\u003cli\u003e统计抽样\u003c/li\u003e\n\u003cli\u003e总体和样本的估计\u003c/li\u003e\n\u003cli\u003e置信区间\u003c/li\u003e\n\u003cli\u003e假设检验的运用\u003c/li\u003e\n\u003cli\u003ex2 分布\u003c/li\u003e\n\u003cli\u003e相关与回归\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e数据挖掘基本扫盲\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e推荐系统入门\u003c/li\u003e\n\u003cli\u003e隐式评价和基于物品的过滤算法\u003c/li\u003e\n\u003cli\u003e分类与分类进阶\u003c/li\u003e\n\u003cli\u003e朴素贝叶斯\u003c/li\u003e\n\u003cli\u003e朴素贝叶斯算法和非结构化文本\u003c/li\u003e\n\u003cli\u003e聚类\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e机器学习\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e分类与回归\u003c/li\u003e\n\u003cli\u003e交差校验\u003c/li\u003e\n\u003cli\u003e降维\u003c/li\u003e\n\u003cli\u003e支持向量机\u003c/li\u003e\n\u003cli\u003e决策树 \u0026amp; 随机森林\u003c/li\u003e\n\u003cli\u003eBagging \u0026amp; Boosting\u003c/li\u003e\n\u003cli\u003e聚类与文本\u003c/li\u003e\n\u003cli\u003e贝叶斯思维 \u0026amp; Naive Bayes\u003c/li\u003e\n\u003cli\u003e文本分析：LDA\u0026amp;Topic Modeling\u003c/li\u003e\n\u003cli\u003e聚类\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e深度学习\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e自然语言 NLP\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e中文分词\u003c/li\u003e\n\u003cli\u003e新词发现\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x02-统计学与数据分析\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-统计学与数据分析\"\u003e#\u003c/a\u003e 0x02 统计学与数据分析\u003c/h2\u003e\n\u003ch3 id=\"21-信息可视化\"\u003e\u003ca class=\"v-toc-item\" href=\"#21-信息可视化\"\u003e#\u003c/a\u003e 2.1 信息可视化\u003c/h3\u003e\n\u003cp\u003e建议直接阅读 AntV 的可视化基础 \u003ca href=\"https://antv.alipay.com/vis/doc/chart/index.html\"\u003ehttps://antv.alipay.com/vis/doc/chart/index.html\u003c/a\u003e\u003c/p\u003e\n\u003ch3 id=\"22-集中趋势的量度\"\u003e\u003ca class=\"v-toc-item\" href=\"#22-集中趋势的量度\"\u003e#\u003c/a\u003e 2.2 集中趋势的量度\u003c/h3\u003e\n\u003cblockquote\u003e\n\u003cp\u003e目的：找出能够反映集中趋势的一个数值\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003ePS: 可以用分布图看它的均值和平均数是否落在集中趋势，数据向右偏斜，均值位于中位数右侧\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e均值 （均值对于抽样数据更加稳定，但是如果村里一个杨千万九个穷光蛋，则个个都是杨百万）\u003c/li\u003e\n\u003cli\u003e中位数\u003c/li\u003e\n\u003cli\u003e众数\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"23-分散性与变异的量度\"\u003e\u003ca class=\"v-toc-item\" href=\"#23-分散性与变异的量度\"\u003e#\u003c/a\u003e 2.3 分散性与变异的量度\u003c/h3\u003e\n\u003cblockquote\u003e\n\u003cp\u003e目的：仅有均值，中位数，众数是不够的，还需要距和差\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e全距：MAX（上界） - MIN（下界）\u003c/li\u003e\n\u003cli\u003e按照四分位书的切分方式： 下界 - 下四分位数目 (Q1) - 中位数 - 上四分位数 - 上界\u003c/li\u003e\n\u003cli\u003e四分位距：上四分位数 - 下四分位数 （当然，可以使用箱线图进行绘制，从而判断出数据集中的地方）\u003c/li\u003e\n\u003cli\u003e百分位距：在统计的时候，往往需要避免极值对数据的影响\u003c/li\u003e\n\u003cli\u003e方差：量度数据分散性\u003c/li\u003e\n\u003cli\u003e标准差：典型值与均值的距离，体现了数值的变异程度。即加入有一批数据的标准差为 3cm, 代表着平均而言，这些数值与均值的距离为 3cm\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x03-数据挖掘\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-数据挖掘\"\u003e#\u003c/a\u003e 0x03 数据挖掘\u003c/h2\u003e\n\u003cp\u003e本节是『面向程序员的挖掘指南』的笔记。\u003c/p\u003e\n\u003cp\u003e数据挖掘是深一步的分析统计。\u003c/p\u003e\n\u003cp\u003e本书所讲内容就是一个核心：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e给用户推荐物品\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e内容就是：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e第一章和第二章均为依据用户对物品的评价（显示评价以及隐式评价）来做出相关推荐。\u003c/li\u003e\n\u003cli\u003e第三章为物品本身的特点进行\u003cstrong\u003e分类\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e第四章直到最后一章则是分类的详细讨论以及聚类分析。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"基于用户的协同过滤算法\"\u003e\u003ca class=\"v-toc-item\" href=\"#基于用户的协同过滤算法\"\u003e#\u003c/a\u003e 基于用户的协同过滤算法\u003c/h3\u003e\n\u003cp\u003e用户与用户之间相似\u003c/p\u003e\n\u003ch4 id=\"基本的距离算法\"\u003e\u003ca class=\"v-toc-item\" href=\"#基本的距离算法\"\u003e#\u003c/a\u003e 基本的距离算法\u003c/h4\u003e\n\u003cblockquote\u003e\n\u003cp\u003e擦擦擦，LaTeX 公式 居然不能用…\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e曼哈顿距离 如果在 n 维坐标上，即绝对值。\u003c/li\u003e\n\u003cli\u003e欧几里得距离 就是其实就是 n 维勾股定理。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e曼哈顿距离和欧几里得距离在判断 同样是 n 维的数据是完全 OK 的。即总量为 m 部电影的情况下，k 个人同样评价了 n 部电影，比较容易算出距离。\u003c/p\u003e\n\u003cp\u003e但，n 纬和比他更小的纬度算出的距离，似乎并不应该相等。 如何处理这些缺失的数据呢？如果是我的话，会设定一个默认值吧。（半值，均值）\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e闵科夫斯基距离\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003eTODO: 以后补上公式\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003er 值越大，单个维度的差值大小会对整体距离有更大的影响。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e皮尔森相关系数\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e用户也分为好几种，比如说：\u003c/p\u003e\n\u003cp\u003e用户 1: 好的打分 5, 差的打分 3\u003cbr\u003e\n用户 2: 好的打分 5, 差的打分 1\u003cbr\u003e\n用户 3: 要么 5, 要么 1\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e余弦相似度\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e如果数据存在“分数膨胀”问题，就使用皮尔逊相关系数。\u003cbr\u003e\n如果数据比较“密集”，变量之间基本都存在公有值，且这些距离数据是非常重要的，那就使用欧几里得或曼哈顿距离。\u003cbr\u003e\n如果数据是稀疏的，则使用余弦相似度。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eK 最邻近算法\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"隐式评价和基于物品的过滤算法\"\u003e\u003ca class=\"v-toc-item\" href=\"#隐式评价和基于物品的过滤算法\"\u003e#\u003c/a\u003e 隐式评价和基于物品的过滤算法\u003c/h3\u003e\n\u003cp\u003e显式评价：豆瓣的五星，用户的评论\u003c/p\u003e\n\u003cp\u003e显式评价可能存在下面几个问题：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e懒得评价\u003c/li\u003e\n\u003cli\u003e会出于面子，合群，偏见撒谎。\u003c/li\u003e\n\u003cli\u003e懒得追加评价一般数量少，假如买的东西一个月后坏掉了，则不用。\u003c/li\u003e\n\u003cli\u003e账号共享带来的问题。\u003c/li\u003e\n\u003cli\u003e买东西就是有问题才调出来判断，其他的情况下懒得评价。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e隐式评价：通过观察可得。通常需要工程师针对客户端和浏览器端进行埋点。比如，买过，还买过，点击情趣用品多次。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e网页方面：页面点击、停留时间、重复访问次数、引用率、观看视频的次数； 音乐播放器：播放的曲目、跳过的曲目、播放次数；\u003c/li\u003e\n\u003c/ol\u003e\n\u003cblockquote\u003e\n\u003cp\u003e然而，越精准的判断越消耗性能。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cul\u003e\n\u003cli\u003e扩展性：当用户数量大幅度上升的时候，计算量就上来了。千万用户其中一个用户和其他用户进行有一次运算的话，计算量就相当大了。\u003c/li\u003e\n\u003cli\u003e稀疏性：物品数量远大于用户数量，而千万级用户仅仅对百万本书中几十本评价，\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e书中说，可以考虑基于物品的协同过滤，其实可以考虑，先给用户和书划分类型，从而使得计算量下来。 计算标签和标签之间的相似度，这样可以使得成本大幅度下降。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch3 id=\"基于物品的协同过滤算法\"\u003e\u003ca class=\"v-toc-item\" href=\"#基于物品的协同过滤算法\"\u003e#\u003c/a\u003e 基于物品的协同过滤算法\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e修正的余弦相似度\u003c/strong\u003e 是一种基于模型的协同过滤算法。我们前面提过，这种算法的优势之一是扩展性好，对于大数据量而言，运算速度快、占用内存少。 用户的评价标准是不同的，比如喜欢一个歌手时有些人会打 4 分，有些打 5 分；不喜欢时有人会打 3 分，有些则会只给 1 分。修正的余弦相似度计算时会将用户对物品的评分减去用户所有评分的均值，从而解决这个问题。\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eSlope One 算法\u003c/strong\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"训练集和测试集\"\u003e\u003ca class=\"v-toc-item\" href=\"#训练集和测试集\"\u003e#\u003c/a\u003e 训练集和测试集\u003c/h3\u003e\n\u003cp\u003e十折交叉验证\u003c/p\u003e\n\u003cp\u003e将数据集随机分割成十个等份，每次用 9 份数据做训练集，1 份数据做测试集，如此迭代 10 次。\u003c/p\u003e\n\u003cp\u003en 折交叉验证\u003c/p\u003e\n\u003ch3 id=\"评估分类器\"\u003e\u003ca class=\"v-toc-item\" href=\"#评估分类器\"\u003e#\u003c/a\u003e 评估分类器\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e混淆矩阵 （其实就是交叉表的统计学说法）\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eKappa 指标\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e优化邻近算法\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ekNN 算法\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"分类方法\"\u003e\u003ca class=\"v-toc-item\" href=\"#分类方法\"\u003e#\u003c/a\u003e 分类方法\u003c/h3\u003e\n\u003ch2 id=\"0x03-机器学习\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-机器学习\"\u003e#\u003c/a\u003e 0x03 机器学习\u003c/h2\u003e\n\u003ch2 id=\"0x04-深度学习\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x04-深度学习\"\u003e#\u003c/a\u003e 0x04 深度学习\u003c/h2\u003e\n\u003ch2 id=\"0x05-自然语言-nlp\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x05-自然语言-nlp\"\u003e#\u003c/a\u003e 0x05 自然语言 NLP\u003c/h2\u003e\n\u003ch2 id=\"0xee-链接\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-链接\"\u003e#\u003c/a\u003e 0xEE 链接\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://dataminingguide.books.yourtion.com/\"\u003e面向程序员的数据挖掘指南\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2017-07-17\u003c/strong\u003e 重修文字\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e2017-10-12\u003c/strong\u003e 增加数据挖掘模块\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6%E7%9A%84%E5%90%AB%E4%B9%89%E4%B8%8E%E5%86%85%E5%AE%B9\"\u003e0x01 数据科学的含义与内容\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#01-what\"\u003e0.1 WHAT?\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E4%B8%80%E4%BA%9B%E5%87%86%E5%88%99\"\u003e一些准则\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E4%B8%80%E4%BA%9B%E6%8C%91%E6%88%98\"\u003e一些挑战\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#data-science-%E6%B6%89%E5%8F%8A%E5%88%B0%E5%93%AA%E4%BA%9B%E9%A2%86%E5%9F%9F%E5%91%A2\"\u003eData Science 涉及到哪些领域呢？\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#02-why\"\u003e0.2 WHY?\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#03-how\"\u003e0.3 HOW?\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#04-%E6%9C%AC%E6%96%87%E7%9B%AE%E5%BD%95\"\u003e0.4 本文目录\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E7%BB%9F%E8%AE%A1%E5%AD%A6%E4%B8%8E%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90\"\u003e0x02 统计学与数据分析\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#21-%E4%BF%A1%E6%81%AF%E5%8F%AF%E8%A7%86%E5%8C%96\"\u003e2.1 信息可视化\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#22-%E9%9B%86%E4%B8%AD%E8%B6%8B%E5%8A%BF%E7%9A%84%E9%87%8F%E5%BA%A6\"\u003e2.2 集中趋势的量度\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#23-%E5%88%86%E6%95%A3%E6%80%A7%E4%B8%8E%E5%8F%98%E5%BC%82%E7%9A%84%E9%87%8F%E5%BA%A6\"\u003e2.3 分散性与变异的量度\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-%E6%95%B0%E6%8D%AE%E6%8C%96%E6%8E%98\"\u003e0x03 数据挖掘\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%9F%BA%E4%BA%8E%E7%94%A8%E6%88%B7%E7%9A%84%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E7%AE%97%E6%B3%95\"\u003e基于用户的协同过滤算法\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%9F%BA%E6%9C%AC%E7%9A%84%E8%B7%9D%E7%A6%BB%E7%AE%97%E6%B3%95\"\u003e基本的距离算法\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E9%9A%90%E5%BC%8F%E8%AF%84%E4%BB%B7%E5%92%8C%E5%9F%BA%E4%BA%8E%E7%89%A9%E5%93%81%E7%9A%84%E8%BF%87%E6%BB%A4%E7%AE%97%E6%B3%95\"\u003e隐式评价和基于物品的过滤算法\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%9F%BA%E4%BA%8E%E7%89%A9%E5%93%81%E7%9A%84%E5%8D%8F%E5%90%8C%E8%BF%87%E6%BB%A4%E7%AE%97%E6%B3%95\"\u003e基于物品的协同过滤算法\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E8%AE%AD%E7%BB%83%E9%9B%86%E5%92%8C%E6%B5%8B%E8%AF%95%E9%9B%86\"\u003e训练集和测试集\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E8%AF%84%E4%BC%B0%E5%88%86%E7%B1%BB%E5%99%A8\"\u003e评估分类器\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%88%86%E7%B1%BB%E6%96%B9%E6%B3%95\"\u003e分类方法\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0\"\u003e0x03 机器学习\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x04-%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0\"\u003e0x04 深度学习\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x05-%E8%87%AA%E7%84%B6%E8%AF%AD%E8%A8%80-nlp\"\u003e0x05 自然语言 NLP\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E9%93%BE%E6%8E%A5\"\u003e0xEE 链接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"数据科学的常识笔记"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

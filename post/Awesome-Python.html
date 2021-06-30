@@ -1,0 +1,166 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Awesome-Python | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h1 id="python-awesome"><a class="v-toc-item" href="#python-awesome">#</a> Python Awesome</h1>
+<p>清单入选标准</p>
+<ol>
+<li>笔者正在使用的，即，过时的东西不入选</li>
+<li>并不拘泥于 Python, 即如果在其他语言里有更好的解决方案，我会在其他语言的 Awesome list 里推荐</li>
+</ol>
+<h2 id="0x01-环境搭建"><a class="v-toc-item" href="#0x01-环境搭建">#</a> 0x01 环境搭建</h2>
+<ul>
+<li>pyenv</li>
+<li>pyenv virtualenv</li>
+<li>poetry</li>
+<li>pipenv （更推荐 poetry)</li>
+</ul>
+<h2 id="0x02-爬虫"><a class="v-toc-item" href="#0x02-爬虫">#</a> 0x02 爬虫</h2>
+<p>爬虫的流程如下，获取 - 解析 - 分析 - 入库</p>
+<p>扩展的时候需要各自做好拆分</p>
+<ul>
+<li>获取</li>
+<li>解析</li>
+<li>分析</li>
+<li>入库</li>
+</ul>
+<p>社区爱用 PySpider Scrapy 这类框架</p>
+<p>也有喜欢直接手动组装的库来做爬虫的</p>
+<p>分析</p>
+<ul>
+<li>charles 用于抓包和测试</li>
+<li>mitmproxy</li>
+</ul>
+<p>请求</p>
+<ul>
+<li>requests</li>
+<li>headless-chrome</li>
+<li>socket</li>
+</ul>
+<p>App 模拟点击</p>
+<ul>
+<li>appnium</li>
+</ul>
+<p>解析</p>
+<ul>
+<li>json</li>
+<li>nodejs 配合 v8 引擎可以复用一部分 js 代码得出真实数据。</li>
+<li>beautifulsoup</li>
+<li>lxml</li>
+<li>pyquery</li>
+</ul>
+<p>清洗与入库</p>
+<p>并发</p>
+<ul>
+<li>multiprocessing</li>
+<li>threading</li>
+<li>asyncio</li>
+<li>gevent</li>
+</ul>
+<h2 id="0x03-flask-web"><a class="v-toc-item" href="#0x03-flask-web">#</a> 0x03 Flask Web</h2>
+<pre><code class="language-bash">flask<span class="token operator">-</span>sqlalchemy
+flask<span class="token operator">-</span>migrate
+</code></pre>
+<h2 id="0x04-django-web"><a class="v-toc-item" href="#0x04-django-web">#</a> 0x04 Django Web</h2>
+<pre><code class="language-bash">Django
+celery
+django<span class="token operator">-</span>debug<span class="token operator">-</span>toolbar
+django<span class="token operator">-</span>extensions
+django<span class="token operator">-</span>filter
+django<span class="token operator">-</span>grappelli
+xadmin
+django<span class="token operator">-</span>mptt
+django<span class="token operator">-</span>redis
+djangorestframework
+</code></pre>
+<h2 id="0x04-fastapi-web"><a class="v-toc-item" href="#0x04-fastapi-web">#</a> 0x04 FastApi Web</h2>
+<pre><code class="language-bash">fastapi
+uvicorn
+jwt
+psycopg2<span class="token operator">-</span>binary
+aiofiles
+orjson
+tortoise<span class="token operator">-</span>orm
+asyncpg
+aioredis
+aiokafka
+</code></pre>
+<h2 id="0x07-调试与测试"><a class="v-toc-item" href="#0x07-调试与测试">#</a> 0x07 调试与测试</h2>
+<pre><code>ipython
+jupyter notebook
+ipdb
+https://github.com/joerick/pyinstrument
+https://github.com/joerick/pyinstrument_cext
+speedscope
+pyspeedscope
+</code></pre>
+<h2 id="0x08-dry-python"><a class="v-toc-item" href="#0x08-dry-python">#</a> 0x08 dry python</h2>
+<ul>
+<li><a href="https://github.com/dry-python/returns">https://github.com/dry-python/returns</a></li>
+<li><a href="https://github.com/jd/tenacity">https://github.com/jd/tenacity</a></li>
+</ul>
+<h2 id="0x09-clear-code"><a class="v-toc-item" href="#0x09-clear-code">#</a> 0x09 clear code</h2>
+<h2 id="0x08-工具"><a class="v-toc-item" href="#0x08-工具">#</a> 0x08 工具</h2>
+<h2 id="0xbb-news"><a class="v-toc-item" href="#0xbb-news">#</a> 0xBB News</h2>
+<ul>
+<li><a href="https://github.com/markshannon/faster-cpython">https://github.com/markshannon/faster-cpython</a></li>
+</ul>
+<h2 id="0xcc-推荐源码"><a class="v-toc-item" href="#0xcc-推荐源码">#</a> 0xCC 推荐源码</h2>
+<h3 id="简单"><a class="v-toc-item" href="#简单">#</a> 简单</h3>
+<ul>
+<li>kennethreitz/records: SQL for Humans™</li>
+<li>chrisallenlane/cheat</li>
+<li>jek/blinker: A fast Python in-process signal/event dispatching system.</li>
+<li>mitsuhiko/platter: A useful helper for wheel deployments.</li>
+<li>kennethreitz/tablib: Python Module for Tabular Datasets in XLS, CSV, JSON, YAML, &amp;c.</li>
+</ul>
+<h3 id="中级"><a class="v-toc-item" href="#中级">#</a> 中级</h3>
+<ul>
+<li>faif/python-patterns 使用 Python 实现一些设计模式的例子。</li>
+<li>pallets/werkzeug flask 的 WSGI 工具集。其中包含了实现非常好的 LocalProxy,cached_property,import_string,find_modules,TypeConversionDict 等。</li>
+<li>msiemens/tinydb 了解用 Python 实现数据库。</li>
+</ul>
+<h3 id="高级"><a class="v-toc-item" href="#高级">#</a> 高级</h3>
+<p>以及一个非常神奇的进阶项目 500lines <a href="https://github.com/aosabook/500lines">https://github.com/aosabook/500lines</a></p>
+<h3 id="其他"><a class="v-toc-item" href="#其他">#</a> 其他</h3>
+<ul>
+<li><a href="https://github.com/howie6879/ruia">https://github.com/howie6879/ruia</a></li>
+</ul>
+<h2 id="0xdd-书籍"><a class="v-toc-item" href="#0xdd-书籍">#</a> 0xDD 书籍</h2>
+<ul class="contains-task-list">
+<li class="task-list-item"><label><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> CPython Internals</label></li>
+<li class="task-list-item"><label><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Python Cookbook</label></li>
+<li class="task-list-item"><label><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Python Web 开发实战</label></li>
+<li class="task-list-item"><label><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> Python For Data Analysis</label></li>
+<li class="task-list-item"><label><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> 深入浅出 MySQL</label></li>
+<li class="task-list-item"><label><input class="task-list-item-checkbox" checked="" disabled="" type="checkbox"> 大型网站技术架构 - 核心原理与案例分析</label></li>
+</ul>
+<h2 id="0xee-结语"><a class="v-toc-item" href="#0xee-结语">#</a> 0xEE 结语</h2>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2020-10-24</strong> 重修文字</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li><a href="#python-awesome">Python Awesome</a>
+<ul>
+<li><a href="#0x01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA">0x01 环境搭建</a></li>
+<li><a href="#0x02-%E7%88%AC%E8%99%AB">0x02 爬虫</a></li>
+<li><a href="#0x03-flask-web">0x03 Flask Web</a></li>
+<li><a href="#0x04-django-web">0x04 Django Web</a></li>
+<li><a href="#0x04-fastapi-web">0x04 FastApi Web</a></li>
+<li><a href="#0x07-%E8%B0%83%E8%AF%95%E4%B8%8E%E6%B5%8B%E8%AF%95">0x07 调试与测试</a></li>
+<li><a href="#0x08-dry-python">0x08 dry python</a></li>
+<li><a href="#0x09-clear-code">0x09 clear code</a></li>
+<li><a href="#0x08-%E5%B7%A5%E5%85%B7">0x08 工具</a></li>
+<li><a href="#0xbb-news">0xBB News</a></li>
+<li><a href="#0xcc-%E6%8E%A8%E8%8D%90%E6%BA%90%E7%A0%81">0xCC 推荐源码</a>
+<ul>
+<li><a href="#%E7%AE%80%E5%8D%95">简单</a></li>
+<li><a href="#%E4%B8%AD%E7%BA%A7">中级</a></li>
+<li><a href="#%E9%AB%98%E7%BA%A7">高级</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a></li>
+</ul>
+</li>
+<li><a href="#0xdd-%E4%B9%A6%E7%B1%8D">0xDD 书籍</a></li>
+<li><a href="#0xee-%E7%BB%93%E8%AF%AD">0xEE 结语</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["清单"],"path":"20161126_Pythonista_List.md","title":"Awesome-Python","slug":"Awesome-Python","date":"2016-11-26","category":"Python","lastMod":"2021-06-30","description":"Awesome-Python","thumbnail":"","content":"\u003ch1 id=\"python-awesome\"\u003e\u003ca class=\"v-toc-item\" href=\"#python-awesome\"\u003e#\u003c/a\u003e Python Awesome\u003c/h1\u003e\n\u003cp\u003e清单入选标准\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e笔者正在使用的，即，过时的东西不入选\u003c/li\u003e\n\u003cli\u003e并不拘泥于 Python, 即如果在其他语言里有更好的解决方案，我会在其他语言的 Awesome list 里推荐\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2 id=\"0x01-环境搭建\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-环境搭建\"\u003e#\u003c/a\u003e 0x01 环境搭建\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003epyenv\u003c/li\u003e\n\u003cli\u003epyenv virtualenv\u003c/li\u003e\n\u003cli\u003epoetry\u003c/li\u003e\n\u003cli\u003epipenv （更推荐 poetry)\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x02-爬虫\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-爬虫\"\u003e#\u003c/a\u003e 0x02 爬虫\u003c/h2\u003e\n\u003cp\u003e爬虫的流程如下，获取 - 解析 - 分析 - 入库\u003c/p\u003e\n\u003cp\u003e扩展的时候需要各自做好拆分\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e获取\u003c/li\u003e\n\u003cli\u003e解析\u003c/li\u003e\n\u003cli\u003e分析\u003c/li\u003e\n\u003cli\u003e入库\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e社区爱用 PySpider Scrapy 这类框架\u003c/p\u003e\n\u003cp\u003e也有喜欢直接手动组装的库来做爬虫的\u003c/p\u003e\n\u003cp\u003e分析\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003echarles 用于抓包和测试\u003c/li\u003e\n\u003cli\u003emitmproxy\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e请求\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003erequests\u003c/li\u003e\n\u003cli\u003eheadless-chrome\u003c/li\u003e\n\u003cli\u003esocket\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eApp 模拟点击\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eappnium\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e解析\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ejson\u003c/li\u003e\n\u003cli\u003enodejs 配合 v8 引擎可以复用一部分 js 代码得出真实数据。\u003c/li\u003e\n\u003cli\u003ebeautifulsoup\u003c/li\u003e\n\u003cli\u003elxml\u003c/li\u003e\n\u003cli\u003epyquery\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e清洗与入库\u003c/p\u003e\n\u003cp\u003e并发\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003emultiprocessing\u003c/li\u003e\n\u003cli\u003ethreading\u003c/li\u003e\n\u003cli\u003easyncio\u003c/li\u003e\n\u003cli\u003egevent\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x03-flask-web\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-flask-web\"\u003e#\u003c/a\u003e 0x03 Flask Web\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003eflask\u003cspan class=\"token operator\"\u003e-\u003c/span\u003esqlalchemy\nflask\u003cspan class=\"token operator\"\u003e-\u003c/span\u003emigrate\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"0x04-django-web\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x04-django-web\"\u003e#\u003c/a\u003e 0x04 Django Web\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003eDjango\ncelery\ndjango\u003cspan class=\"token operator\"\u003e-\u003c/span\u003edebug\u003cspan class=\"token operator\"\u003e-\u003c/span\u003etoolbar\ndjango\u003cspan class=\"token operator\"\u003e-\u003c/span\u003eextensions\ndjango\u003cspan class=\"token operator\"\u003e-\u003c/span\u003efilter\ndjango\u003cspan class=\"token operator\"\u003e-\u003c/span\u003egrappelli\nxadmin\ndjango\u003cspan class=\"token operator\"\u003e-\u003c/span\u003emptt\ndjango\u003cspan class=\"token operator\"\u003e-\u003c/span\u003eredis\ndjangorestframework\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"0x04-fastapi-web\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x04-fastapi-web\"\u003e#\u003c/a\u003e 0x04 FastApi Web\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003efastapi\nuvicorn\njwt\npsycopg2\u003cspan class=\"token operator\"\u003e-\u003c/span\u003ebinary\naiofiles\norjson\ntortoise\u003cspan class=\"token operator\"\u003e-\u003c/span\u003eorm\nasyncpg\naioredis\naiokafka\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"0x07-调试与测试\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x07-调试与测试\"\u003e#\u003c/a\u003e 0x07 调试与测试\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003eipython\njupyter notebook\nipdb\nhttps://github.com/joerick/pyinstrument\nhttps://github.com/joerick/pyinstrument_cext\nspeedscope\npyspeedscope\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"0x08-dry-python\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x08-dry-python\"\u003e#\u003c/a\u003e 0x08 dry python\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/dry-python/returns\"\u003ehttps://github.com/dry-python/returns\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/jd/tenacity\"\u003ehttps://github.com/jd/tenacity\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x09-clear-code\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x09-clear-code\"\u003e#\u003c/a\u003e 0x09 clear code\u003c/h2\u003e\n\u003ch2 id=\"0x08-工具\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x08-工具\"\u003e#\u003c/a\u003e 0x08 工具\u003c/h2\u003e\n\u003ch2 id=\"0xbb-news\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xbb-news\"\u003e#\u003c/a\u003e 0xBB News\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/markshannon/faster-cpython\"\u003ehttps://github.com/markshannon/faster-cpython\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0xcc-推荐源码\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xcc-推荐源码\"\u003e#\u003c/a\u003e 0xCC 推荐源码\u003c/h2\u003e\n\u003ch3 id=\"简单\"\u003e\u003ca class=\"v-toc-item\" href=\"#简单\"\u003e#\u003c/a\u003e 简单\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003ekennethreitz/records: SQL for Humans™\u003c/li\u003e\n\u003cli\u003echrisallenlane/cheat\u003c/li\u003e\n\u003cli\u003ejek/blinker: A fast Python in-process signal/event dispatching system.\u003c/li\u003e\n\u003cli\u003emitsuhiko/platter: A useful helper for wheel deployments.\u003c/li\u003e\n\u003cli\u003ekennethreitz/tablib: Python Module for Tabular Datasets in XLS, CSV, JSON, YAML, \u0026amp;c.\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"中级\"\u003e\u003ca class=\"v-toc-item\" href=\"#中级\"\u003e#\u003c/a\u003e 中级\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003efaif/python-patterns 使用 Python 实现一些设计模式的例子。\u003c/li\u003e\n\u003cli\u003epallets/werkzeug flask 的 WSGI 工具集。其中包含了实现非常好的 LocalProxy,cached_property,import_string,find_modules,TypeConversionDict 等。\u003c/li\u003e\n\u003cli\u003emsiemens/tinydb 了解用 Python 实现数据库。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"高级\"\u003e\u003ca class=\"v-toc-item\" href=\"#高级\"\u003e#\u003c/a\u003e 高级\u003c/h3\u003e\n\u003cp\u003e以及一个非常神奇的进阶项目 500lines \u003ca href=\"https://github.com/aosabook/500lines\"\u003ehttps://github.com/aosabook/500lines\u003c/a\u003e\u003c/p\u003e\n\u003ch3 id=\"其他\"\u003e\u003ca class=\"v-toc-item\" href=\"#其他\"\u003e#\u003c/a\u003e 其他\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/howie6879/ruia\"\u003ehttps://github.com/howie6879/ruia\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0xdd-书籍\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xdd-书籍\"\u003e#\u003c/a\u003e 0xDD 书籍\u003c/h2\u003e\n\u003cul class=\"contains-task-list\"\u003e\n\u003cli class=\"task-list-item\"\u003e\u003clabel\u003e\u003cinput class=\"task-list-item-checkbox\" checked=\"\" disabled=\"\" type=\"checkbox\"\u003e CPython Internals\u003c/label\u003e\u003c/li\u003e\n\u003cli class=\"task-list-item\"\u003e\u003clabel\u003e\u003cinput class=\"task-list-item-checkbox\" checked=\"\" disabled=\"\" type=\"checkbox\"\u003e Python Cookbook\u003c/label\u003e\u003c/li\u003e\n\u003cli class=\"task-list-item\"\u003e\u003clabel\u003e\u003cinput class=\"task-list-item-checkbox\" checked=\"\" disabled=\"\" type=\"checkbox\"\u003e Python Web 开发实战\u003c/label\u003e\u003c/li\u003e\n\u003cli class=\"task-list-item\"\u003e\u003clabel\u003e\u003cinput class=\"task-list-item-checkbox\" checked=\"\" disabled=\"\" type=\"checkbox\"\u003e Python For Data Analysis\u003c/label\u003e\u003c/li\u003e\n\u003cli class=\"task-list-item\"\u003e\u003clabel\u003e\u003cinput class=\"task-list-item-checkbox\" checked=\"\" disabled=\"\" type=\"checkbox\"\u003e 深入浅出 MySQL\u003c/label\u003e\u003c/li\u003e\n\u003cli class=\"task-list-item\"\u003e\u003clabel\u003e\u003cinput class=\"task-list-item-checkbox\" checked=\"\" disabled=\"\" type=\"checkbox\"\u003e 大型网站技术架构 - 核心原理与案例分析\u003c/label\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0xee-结语\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-结语\"\u003e#\u003c/a\u003e 0xEE 结语\u003c/h2\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2020-10-24\u003c/strong\u003e 重修文字\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\u003ca href=\"#python-awesome\"\u003ePython Awesome\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA\"\u003e0x01 环境搭建\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E7%88%AC%E8%99%AB\"\u003e0x02 爬虫\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-flask-web\"\u003e0x03 Flask Web\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x04-django-web\"\u003e0x04 Django Web\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x04-fastapi-web\"\u003e0x04 FastApi Web\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x07-%E8%B0%83%E8%AF%95%E4%B8%8E%E6%B5%8B%E8%AF%95\"\u003e0x07 调试与测试\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x08-dry-python\"\u003e0x08 dry python\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x09-clear-code\"\u003e0x09 clear code\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x08-%E5%B7%A5%E5%85%B7\"\u003e0x08 工具\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xbb-news\"\u003e0xBB News\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xcc-%E6%8E%A8%E8%8D%90%E6%BA%90%E7%A0%81\"\u003e0xCC 推荐源码\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E7%AE%80%E5%8D%95\"\u003e简单\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E4%B8%AD%E7%BA%A7\"\u003e中级\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E9%AB%98%E7%BA%A7\"\u003e高级\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%85%B6%E4%BB%96\"\u003e其他\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xdd-%E4%B9%A6%E7%B1%8D\"\u003e0xDD 书籍\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E7%BB%93%E8%AF%AD\"\u003e0xEE 结语\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"Awesome-Python"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

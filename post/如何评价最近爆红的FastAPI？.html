@@ -1,0 +1,125 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>如何评价最近爆红的FastAPI？ | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h1 id="如何评价最近爆红的-fastapi"><a class="v-toc-item" href="#如何评价最近爆红的-fastapi">#</a> 如何评价最近爆红的 FastAPI</h1>
+<p>用 fastapi 写过两个项目。</p>
+<p>两个系统写下来后，对 fastapi 的使用有了比较粗浅的认识。也封装了一个极简脚手架，希望能帮助到有缘人。<strong>（文末有对这个脚手架的介绍）</strong></p>
+<p><a href="https://link.zhihu.com/?target=https%3A//github.com/twocucao/tifa">https://link.zhihu.com/?target=https%3A//github.com/twocucao/tifa</a></p>
+<p>首先抛出结论</p>
+<blockquote>
+<p><strong>fastapi 长远看好, 保持关注，但截至目前 (2021 年 4 月）写业务还是比较倾向于 django/flask。</strong></p>
+</blockquote>
+<p>gevent + flask/django 对比 async fastapi</p>
+<p>当然, 本文的比较是不公平的, 因为我比较的是「现有服务迁移到 FastAPI」的一些痛点</p>
+<p>综合了『上手成本』 『开发成本』 『迁移成本』后，我得出一个结论『迁移的边际效益不高』</p>
+<p>分开说的话，主要有如下几个原因。</p>
+<ol>
+<li>
+<p>「<strong>相对较弱的生态</strong>」 django/flask 相比生态太丰富了, 当我遇到一个问题, 当我想找一个插件, 都能比较轻松的找到。但 fastapi 尽管出来了好几年，但依然不如。async/await 的生态也是不如 sync 的生态。</p>
+</li>
+<li>
+<p>「<strong>其实 FastAPI 的一些卖点可以很方便的集成到你的项目中</strong>」比如 Pydantic + django/flask 甚至可以做的更加简单清晰。</p>
+</li>
+<li>
+<p>「<strong>async await 调试成本较高</strong>」async await 对代码的侵入性很强，迁移简单的项目还行，成年老项目，迁移过程不见得很顺畅。对常规的 Web 性能的提升也没有到非要它不可的地步。gevent+django/flask 性能虽然没有那么强，但是依旧是耐打。</p>
+</li>
+</ol>
+<h2 id="原因-1-相对较弱的生态"><a class="v-toc-item" href="#原因-1-相对较弱的生态">#</a> 原因 1. 相对较弱的生态</h2>
+<p>生态粗略分为三种</p>
+<ol>
+<li>
+<p>围绕着框架本身的插件生态，比如 flask-sqlalchemy 很好的集成了 flask 框架本身和 sqlalchemy</p>
+</li>
+<li>
+<p>一些开放平台的 sdk 生态，比如有的是官方出品 - aliyun-oss-sdk, 有的是社区贡献 - wechatpy 。</p>
+</li>
+<li>
+<p>io 的生态，由于上了异步，那么原先的请求库，数据库驱动等等 io 相关的库也要拿出来重新踩坑。</p>
+</li>
+</ol>
+<p>在挑选这些插件的时候，则会遇到这种或者那种的问题，比如</p>
+<ol>
+<li>
+<p>django-debug-toolbar / flask-debug-toolbar 的 fastapi 替代品是啥？</p>
+</li>
+<li>
+<p>celery 的 async 替代品是啥，即使有我为何要抛弃一个成熟的 celery 去踩坑？听说, faust 挺火的, 但用了这个库, 代码组织结构都变太多了. 听说 aiotasks 也不错, 仔细一看, 代码最后更新时间是<strong>3 年前</strong></p>
+</li>
+<li>
+<p>为了新开启一个项目，我还得把支付宝 sdk 从同步代码改成异步代码？直接用他们的 sdk+gevent 不改一行代码不香嘛？数据库驱动，redis 库，请求库，支付宝 sdk，微信 sdk，各类开放平台 sdk，只要是涉及到 io 的库基本上都要换一套，但是现有的 codebase 线上已经踩过不少的坑了，为何要换？甚至要重写？</p>
+</li>
+</ol>
+<p>在经过很长时间的调研和一个一个插件的测试之后，我一拍脑袋，下了结论。</p>
+<blockquote>
+<p>还是用成熟的东西省心呀，顺畅跑了那么多年的老代码，拷贝在身边，一用好多年。</p>
+<p><strong>django/flask + gevent 赛高！</strong></p>
+</blockquote>
+<h2 id="原因-2-其实-fastapi-的一些卖点可以很方便的集成到你的项目中"><a class="v-toc-item" href="#原因-2-其实-fastapi-的一些卖点可以很方便的集成到你的项目中">#</a> 原因 2. 其实 FastAPI 的一些卖点可以很方便的集成到你的项目中</h2>
+<p>fastapi 所说的亮点是什么性能好、编码速度快、减少人为的 BUG 符合直觉等等</p>
+<p>但回过头来想想，除了 asyncio 和 自带 openapi/json schema, 其他的框架也有这些特点嘛比如写起来很快，简单、简洁</p>
+<blockquote>
+<p>有人说，Pydantic 用来做校验器很好用。所以，我们要用 fastapi</p>
+</blockquote>
+<p>可是，当我写 flask + pydantic 代码的时候，我写的代码是这样的</p>
+<pre><code class="language-python"><span class="token keyword">class</span> <span class="token class-name">LoginType</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span> <span class="token keyword">enum</span><span class="token punctuation">.</span>Enum<span class="token punctuation">)</span><span class="token operator">:</span>
+  <span class="token constant">MOBILE_CODE</span> <span class="token operator">=</span> <span class="token string">"MOBILE_CODE"</span>
+  <span class="token constant">USER_PASSWORD</span> <span class="token operator">=</span> <span class="token string">"USER_PASSWORD"</span>
+
+<span class="token keyword">class</span> <span class="token class-name">VLogin</span><span class="token punctuation">(</span>BaseModel<span class="token punctuation">)</span><span class="token operator">:</span>
+  mobile_or_username<span class="token operator">:</span> str # 这里可以加上更加复杂的校验
+  password<span class="token operator">:</span> Optional<span class="token punctuation">[</span>str<span class="token punctuation">]</span>
+  type<span class="token operator">:</span> LoginType
+
+@bp<span class="token punctuation">.</span><span class="token function">post</span><span class="token punctuation">(</span><span class="token string">"/login"</span><span class="token punctuation">)</span>
+@validator
+def <span class="token function">do_login</span><span class="token punctuation">(</span>data<span class="token operator">:</span> VLogin<span class="token punctuation">)</span><span class="token operator">:</span>
+  # read data and <span class="token keyword">do</span> login logic
+  <span class="token keyword">return</span> user_dict
+
+</code></pre>
+<p><strong>这个 validator 装饰器实现连换行加起来才 60 行。</strong></p>
+<p>所以说，在 flask/django 里，你完全不需要懂依赖注入。就可以把校验做的很干净。</p>
+<p>啥，你还要文档? pydantic 可以直接导出 jsonschema ，写个简单的解析放到文档里就行了。</p>
+<p>啥，你还要更加详细的文档丢给前端，那我觉得 graphql 可能是更加合适的选择。</p>
+<blockquote>
+<p><strong>你说 asyncio 并发量高, 但 gevent 并发量相比也不低呀</strong></p>
+</blockquote>
+<h2 id="原因-3-asyncawait-调试成本比较高"><a class="v-toc-item" href="#原因-3-asyncawait-调试成本比较高">#</a> 原因 3. async/await 调试成本比较高</h2>
+<p>为何说，调试成本较高</p>
+<p>async await 对代码的污染性太强。</p>
+<p>比如，<strong>风陵渡口初相遇， 一 await 误终身。</strong> 开发者深恶痛绝的「一次 await，处处 async」</p>
+<p>底层模块一旦 await/async 了，则依赖于上面的所有模块函数都要 await, 如果不 await 代码就出问题。</p>
+<blockquote>
+<p><strong>设想一下，如果你用了别人写的函数，这个函数突然 async 了。万一 ci 跑过了发了版本，是不是感觉今天要先回滚后加班了？</strong></p>
+<p>当然，如果某一天有一种方法可以做到调用的时候，自动 await 的话，调试成本倒是低了不少。</p>
+</blockquote>
+<h2 id="那么这是否代表我不看好不喜欢-fastapi-呢"><a class="v-toc-item" href="#那么这是否代表我不看好不喜欢-fastapi-呢">#</a> 那么这是否代表我不看好/不喜欢 FastAPI 呢？</h2>
+<blockquote>
+<p><strong>恰恰相反，我很喜欢这个让人耳目一新的框架。</strong></p>
+</blockquote>
+<p>对于 FastAPI 的一些诟病，大多来自于我本人对 async/await 生态不了解(<strong>也可以理解为老了, 懒得踩坑了</strong>)。以及「<strong>我已经用好了这 flask/django, 没有必要再去为了踩坑新 Web 框架而踩坑</strong>」。</p>
+<p><strong>但这可以说成是「我懒」的问题, 也可以说是「新框架挑战老框架」的问题</strong></p>
+<p>毕竟某种角度上，苹果手机贵不一定是「苹果手机的贵」的问题，也可以说是「我穷」的问题。如果不能飞花摘叶, 那便老老实实玄铁重剑.</p>
+<p>当我要做一个纯业务的系统，我的目标是快速上线验证市场。在这个阶段其实 gevent+flask/django 的性能是完全足够的。性能不足，扩容来凑。</p>
+<p>在 gevent + flask/django 这种既有成熟解决方案的面前，FastAPI 的一些优点并没有解决我的痛点。</p>
+<p>fastapi 实实在在解决了我的痛点的，是对 websocket 良好的支持。 如果我要写系统是聊天室系统，比如弹幕系统，比如实时协作。fastapi 应该是目前为止最好的解决方案了(相比 django channel/gevent)</p>
+<blockquote>
+<p><strong>总而言之 如果我的下一个系统没有历史负担, 需要的是并发数+Python, 而不是狂怼业务, 接各种 SDK, 那么 FastAPI 就是我的首选.</strong></p>
+</blockquote>
+<h2 id="关于脚手架"><a class="v-toc-item" href="#关于脚手架">#</a> 关于脚手架</h2>
+<p>我在踩坑 fastapi 的过程中封装了一套极简脚手架。</p>
+<ol>
+<li>FastAPI + Python 3.9 + poetry + Makefile</li>
+<li>tortoise-orm + tortoise-migration</li>
+<li>自带 shell plus (如下图)</li>
+</ol>
+<p><a href="https://link.zhihu.com/?target=https%3A//github.com/twocucao/tifa">https://link.zhihu.com/?target=https%3A//github.com/twocucao/tifa</a></p>
+</div></div><div><ul class="v-article-toc">
+<li><a href="#%E5%A6%82%E4%BD%95%E8%AF%84%E4%BB%B7%E6%9C%80%E8%BF%91%E7%88%86%E7%BA%A2%E7%9A%84-fastapi">如何评价最近爆红的 FastAPI</a>
+<ul>
+<li><a href="#%E5%8E%9F%E5%9B%A0-1-%E7%9B%B8%E5%AF%B9%E8%BE%83%E5%BC%B1%E7%9A%84%E7%94%9F%E6%80%81">原因 1. 相对较弱的生态</a></li>
+<li><a href="#%E5%8E%9F%E5%9B%A0-2-%E5%85%B6%E5%AE%9E-fastapi-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%8D%96%E7%82%B9%E5%8F%AF%E4%BB%A5%E5%BE%88%E6%96%B9%E4%BE%BF%E7%9A%84%E9%9B%86%E6%88%90%E5%88%B0%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD">原因 2. 其实 FastAPI 的一些卖点可以很方便的集成到你的项目中</a></li>
+<li><a href="#%E5%8E%9F%E5%9B%A0-3-asyncawait-%E8%B0%83%E8%AF%95%E6%88%90%E6%9C%AC%E6%AF%94%E8%BE%83%E9%AB%98">原因 3. async/await 调试成本比较高</a></li>
+<li><a href="#%E9%82%A3%E4%B9%88%E8%BF%99%E6%98%AF%E5%90%A6%E4%BB%A3%E8%A1%A8%E6%88%91%E4%B8%8D%E7%9C%8B%E5%A5%BD%E4%B8%8D%E5%96%9C%E6%AC%A2-fastapi-%E5%91%A2">那么这是否代表我不看好/不喜欢 FastAPI 呢？</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8E%E8%84%9A%E6%89%8B%E6%9E%B6">关于脚手架</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["业务系统"],"path":"20210430_FastAPI.md","title":"如何评价最近爆红的FastAPI？","slug":"如何评价最近爆红的FastAPI？","date":"2021-04-27","category":"系统设计","lastMod":"2021-06-20","description":"系统设计","thumbnail":"","content":"\u003ch1 id=\"如何评价最近爆红的-fastapi\"\u003e\u003ca class=\"v-toc-item\" href=\"#如何评价最近爆红的-fastapi\"\u003e#\u003c/a\u003e 如何评价最近爆红的 FastAPI\u003c/h1\u003e\n\u003cp\u003e用 fastapi 写过两个项目。\u003c/p\u003e\n\u003cp\u003e两个系统写下来后，对 fastapi 的使用有了比较粗浅的认识。也封装了一个极简脚手架，希望能帮助到有缘人。\u003cstrong\u003e（文末有对这个脚手架的介绍）\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://link.zhihu.com/?target=https%3A//github.com/twocucao/tifa\"\u003ehttps://link.zhihu.com/?target=https%3A//github.com/twocucao/tifa\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e首先抛出结论\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003efastapi 长远看好, 保持关注，但截至目前 (2021 年 4 月）写业务还是比较倾向于 django/flask。\u003c/strong\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003egevent + flask/django 对比 async fastapi\u003c/p\u003e\n\u003cp\u003e当然, 本文的比较是不公平的, 因为我比较的是「现有服务迁移到 FastAPI」的一些痛点\u003c/p\u003e\n\u003cp\u003e综合了『上手成本』 『开发成本』 『迁移成本』后，我得出一个结论『迁移的边际效益不高』\u003c/p\u003e\n\u003cp\u003e分开说的话，主要有如下几个原因。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e「\u003cstrong\u003e相对较弱的生态\u003c/strong\u003e」 django/flask 相比生态太丰富了, 当我遇到一个问题, 当我想找一个插件, 都能比较轻松的找到。但 fastapi 尽管出来了好几年，但依然不如。async/await 的生态也是不如 sync 的生态。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e「\u003cstrong\u003e其实 FastAPI 的一些卖点可以很方便的集成到你的项目中\u003c/strong\u003e」比如 Pydantic + django/flask 甚至可以做的更加简单清晰。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e「\u003cstrong\u003easync await 调试成本较高\u003c/strong\u003e」async await 对代码的侵入性很强，迁移简单的项目还行，成年老项目，迁移过程不见得很顺畅。对常规的 Web 性能的提升也没有到非要它不可的地步。gevent+django/flask 性能虽然没有那么强，但是依旧是耐打。\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2 id=\"原因-1-相对较弱的生态\"\u003e\u003ca class=\"v-toc-item\" href=\"#原因-1-相对较弱的生态\"\u003e#\u003c/a\u003e 原因 1. 相对较弱的生态\u003c/h2\u003e\n\u003cp\u003e生态粗略分为三种\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003e围绕着框架本身的插件生态，比如 flask-sqlalchemy 很好的集成了 flask 框架本身和 sqlalchemy\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e一些开放平台的 sdk 生态，比如有的是官方出品 - aliyun-oss-sdk, 有的是社区贡献 - wechatpy 。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eio 的生态，由于上了异步，那么原先的请求库，数据库驱动等等 io 相关的库也要拿出来重新踩坑。\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e在挑选这些插件的时候，则会遇到这种或者那种的问题，比如\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e\n\u003cp\u003edjango-debug-toolbar / flask-debug-toolbar 的 fastapi 替代品是啥？\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003ecelery 的 async 替代品是啥，即使有我为何要抛弃一个成熟的 celery 去踩坑？听说, faust 挺火的, 但用了这个库, 代码组织结构都变太多了. 听说 aiotasks 也不错, 仔细一看, 代码最后更新时间是\u003cstrong\u003e3 年前\u003c/strong\u003e\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e为了新开启一个项目，我还得把支付宝 sdk 从同步代码改成异步代码？直接用他们的 sdk+gevent 不改一行代码不香嘛？数据库驱动，redis 库，请求库，支付宝 sdk，微信 sdk，各类开放平台 sdk，只要是涉及到 io 的库基本上都要换一套，但是现有的 codebase 线上已经踩过不少的坑了，为何要换？甚至要重写？\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e在经过很长时间的调研和一个一个插件的测试之后，我一拍脑袋，下了结论。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e还是用成熟的东西省心呀，顺畅跑了那么多年的老代码，拷贝在身边，一用好多年。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003edjango/flask + gevent 赛高！\u003c/strong\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2 id=\"原因-2-其实-fastapi-的一些卖点可以很方便的集成到你的项目中\"\u003e\u003ca class=\"v-toc-item\" href=\"#原因-2-其实-fastapi-的一些卖点可以很方便的集成到你的项目中\"\u003e#\u003c/a\u003e 原因 2. 其实 FastAPI 的一些卖点可以很方便的集成到你的项目中\u003c/h2\u003e\n\u003cp\u003efastapi 所说的亮点是什么性能好、编码速度快、减少人为的 BUG 符合直觉等等\u003c/p\u003e\n\u003cp\u003e但回过头来想想，除了 asyncio 和 自带 openapi/json schema, 其他的框架也有这些特点嘛比如写起来很快，简单、简洁\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e有人说，Pydantic 用来做校验器很好用。所以，我们要用 fastapi\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e可是，当我写 flask + pydantic 代码的时候，我写的代码是这样的\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e\u003cspan class=\"token keyword\"\u003eclass\u003c/span\u003e \u003cspan class=\"token class-name\"\u003eLoginType\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003estr\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token keyword\"\u003eenum\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eEnum\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n  \u003cspan class=\"token constant\"\u003eMOBILE_CODE\u003c/span\u003e \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token string\"\u003e\"MOBILE_CODE\"\u003c/span\u003e\n  \u003cspan class=\"token constant\"\u003eUSER_PASSWORD\u003c/span\u003e \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token string\"\u003e\"USER_PASSWORD\"\u003c/span\u003e\n\n\u003cspan class=\"token keyword\"\u003eclass\u003c/span\u003e \u003cspan class=\"token class-name\"\u003eVLogin\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eBaseModel\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n  mobile_or_username\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e str # 这里可以加上更加复杂的校验\n  password\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e Optional\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003estr\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\n  type\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e LoginType\n\n@bp\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003epost\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e\"/login\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n@validator\ndef \u003cspan class=\"token function\"\u003edo_login\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003edata\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e VLogin\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n  # read data and \u003cspan class=\"token keyword\"\u003edo\u003c/span\u003e login logic\n  \u003cspan class=\"token keyword\"\u003ereturn\u003c/span\u003e user_dict\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e\u003cstrong\u003e这个 validator 装饰器实现连换行加起来才 60 行。\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e所以说，在 flask/django 里，你完全不需要懂依赖注入。就可以把校验做的很干净。\u003c/p\u003e\n\u003cp\u003e啥，你还要文档? pydantic 可以直接导出 jsonschema ，写个简单的解析放到文档里就行了。\u003c/p\u003e\n\u003cp\u003e啥，你还要更加详细的文档丢给前端，那我觉得 graphql 可能是更加合适的选择。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e你说 asyncio 并发量高, 但 gevent 并发量相比也不低呀\u003c/strong\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2 id=\"原因-3-asyncawait-调试成本比较高\"\u003e\u003ca class=\"v-toc-item\" href=\"#原因-3-asyncawait-调试成本比较高\"\u003e#\u003c/a\u003e 原因 3. async/await 调试成本比较高\u003c/h2\u003e\n\u003cp\u003e为何说，调试成本较高\u003c/p\u003e\n\u003cp\u003easync await 对代码的污染性太强。\u003c/p\u003e\n\u003cp\u003e比如，\u003cstrong\u003e风陵渡口初相遇， 一 await 误终身。\u003c/strong\u003e 开发者深恶痛绝的「一次 await，处处 async」\u003c/p\u003e\n\u003cp\u003e底层模块一旦 await/async 了，则依赖于上面的所有模块函数都要 await, 如果不 await 代码就出问题。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e设想一下，如果你用了别人写的函数，这个函数突然 async 了。万一 ci 跑过了发了版本，是不是感觉今天要先回滚后加班了？\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e当然，如果某一天有一种方法可以做到调用的时候，自动 await 的话，调试成本倒是低了不少。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2 id=\"那么这是否代表我不看好不喜欢-fastapi-呢\"\u003e\u003ca class=\"v-toc-item\" href=\"#那么这是否代表我不看好不喜欢-fastapi-呢\"\u003e#\u003c/a\u003e 那么这是否代表我不看好/不喜欢 FastAPI 呢？\u003c/h2\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e恰恰相反，我很喜欢这个让人耳目一新的框架。\u003c/strong\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e对于 FastAPI 的一些诟病，大多来自于我本人对 async/await 生态不了解(\u003cstrong\u003e也可以理解为老了, 懒得踩坑了\u003c/strong\u003e)。以及「\u003cstrong\u003e我已经用好了这 flask/django, 没有必要再去为了踩坑新 Web 框架而踩坑\u003c/strong\u003e」。\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e但这可以说成是「我懒」的问题, 也可以说是「新框架挑战老框架」的问题\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e毕竟某种角度上，苹果手机贵不一定是「苹果手机的贵」的问题，也可以说是「我穷」的问题。如果不能飞花摘叶, 那便老老实实玄铁重剑.\u003c/p\u003e\n\u003cp\u003e当我要做一个纯业务的系统，我的目标是快速上线验证市场。在这个阶段其实 gevent+flask/django 的性能是完全足够的。性能不足，扩容来凑。\u003c/p\u003e\n\u003cp\u003e在 gevent + flask/django 这种既有成熟解决方案的面前，FastAPI 的一些优点并没有解决我的痛点。\u003c/p\u003e\n\u003cp\u003efastapi 实实在在解决了我的痛点的，是对 websocket 良好的支持。 如果我要写系统是聊天室系统，比如弹幕系统，比如实时协作。fastapi 应该是目前为止最好的解决方案了(相比 django channel/gevent)\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e总而言之 如果我的下一个系统没有历史负担, 需要的是并发数+Python, 而不是狂怼业务, 接各种 SDK, 那么 FastAPI 就是我的首选.\u003c/strong\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2 id=\"关于脚手架\"\u003e\u003ca class=\"v-toc-item\" href=\"#关于脚手架\"\u003e#\u003c/a\u003e 关于脚手架\u003c/h2\u003e\n\u003cp\u003e我在踩坑 fastapi 的过程中封装了一套极简脚手架。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eFastAPI + Python 3.9 + poetry + Makefile\u003c/li\u003e\n\u003cli\u003etortoise-orm + tortoise-migration\u003c/li\u003e\n\u003cli\u003e自带 shell plus (如下图)\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003ca href=\"https://link.zhihu.com/?target=https%3A//github.com/twocucao/tifa\"\u003ehttps://link.zhihu.com/?target=https%3A//github.com/twocucao/tifa\u003c/a\u003e\u003c/p\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\u003ca href=\"#%E5%A6%82%E4%BD%95%E8%AF%84%E4%BB%B7%E6%9C%80%E8%BF%91%E7%88%86%E7%BA%A2%E7%9A%84-fastapi\"\u003e如何评价最近爆红的 FastAPI\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%8E%9F%E5%9B%A0-1-%E7%9B%B8%E5%AF%B9%E8%BE%83%E5%BC%B1%E7%9A%84%E7%94%9F%E6%80%81\"\u003e原因 1. 相对较弱的生态\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%8E%9F%E5%9B%A0-2-%E5%85%B6%E5%AE%9E-fastapi-%E7%9A%84%E4%B8%80%E4%BA%9B%E5%8D%96%E7%82%B9%E5%8F%AF%E4%BB%A5%E5%BE%88%E6%96%B9%E4%BE%BF%E7%9A%84%E9%9B%86%E6%88%90%E5%88%B0%E4%BD%A0%E7%9A%84%E9%A1%B9%E7%9B%AE%E4%B8%AD\"\u003e原因 2. 其实 FastAPI 的一些卖点可以很方便的集成到你的项目中\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%8E%9F%E5%9B%A0-3-asyncawait-%E8%B0%83%E8%AF%95%E6%88%90%E6%9C%AC%E6%AF%94%E8%BE%83%E9%AB%98\"\u003e原因 3. async/await 调试成本比较高\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E9%82%A3%E4%B9%88%E8%BF%99%E6%98%AF%E5%90%A6%E4%BB%A3%E8%A1%A8%E6%88%91%E4%B8%8D%E7%9C%8B%E5%A5%BD%E4%B8%8D%E5%96%9C%E6%AC%A2-fastapi-%E5%91%A2\"\u003e那么这是否代表我不看好/不喜欢 FastAPI 呢？\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%85%B3%E4%BA%8E%E8%84%9A%E6%89%8B%E6%9E%B6\"\u003e关于脚手架\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"如何评价最近爆红的FastAPI？"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

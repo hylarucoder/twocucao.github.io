@@ -1,0 +1,277 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Vue 项目漫谈 2018 版 | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<p>之前草草整理过一些 Vue 的小技巧，最近温习了一遍文档，重聊一遍。</p>
+<p>鉴于 VueCLI 越做越臃肿，我最后还是选择了自己搭架子。</p>
+<p><a href="https://github.com/twocucao/vue-starter-kit">https://github.com/twocucao/vue-starter-kit</a></p>
+<h2 id="0x01-项目结构"><a class="v-toc-item" href="#0x01-项目结构">#</a> 0x01 项目结构</h2>
+<pre><code class="language-bash"># 根文件
+<span class="token keyword">public</span><span class="token operator">/</span> # 部署文件
+src<span class="token operator">/</span> # 源码
+<span class="token punctuation">.</span>babelrc
+<span class="token punctuation">.</span>editorconfig
+<span class="token punctuation">.</span>eslintignore
+<span class="token punctuation">.</span>eslintrc
+<span class="token punctuation">.</span>gitignore
+<span class="token punctuation">.</span>postcssrc<span class="token punctuation">.</span>js
+<span class="token constant">LICENSE</span>
+<span class="token constant">README</span><span class="token punctuation">.</span>md
+jsconfig<span class="token punctuation">.</span>json
+<span class="token keyword">package</span><span class="token operator">-</span>lock<span class="token punctuation">.</span>json
+<span class="token keyword">package</span><span class="token punctuation">.</span>json
+webpack<span class="token punctuation">.</span>common<span class="token punctuation">.</span>js
+webpack<span class="token punctuation">.</span>dev<span class="token punctuation">.</span>js
+webpack<span class="token punctuation">.</span>dll<span class="token punctuation">.</span>js
+webpack<span class="token punctuation">.</span>prod<span class="token punctuation">.</span>js
+</code></pre>
+<!-- more -->
+<pre><code class="language-bash"># 在 src 文件夹下面
+
+api # 相关的 Web <span class="token constant">API</span> 定义
+assets # 静态资源，对于已经压缩的，还是直接放在 Static 下面
+components # 公用组件
+mixins # mixin
+directives # 定义指令，比如 v<span class="token operator">-</span>loading
+pages # 页面
+store # Store
+App<span class="token punctuation">.</span>vue # <span class="token constant">CORE</span> 组件
+consts<span class="token punctuation">.</span>js #定义常量名称
+index<span class="token punctuation">.</span>js # 用于初始化项目，注册组件等等
+routes<span class="token punctuation">.</span>js # 路由
+utils # 工具方法
+</code></pre>
+<p>值得一提的就是 index.js 应该要做的事情</p>
+<ul>
+<li>注册全局组件和过滤器</li>
+<li>给 Vue 实例加戏，哦，说错了，给实例加一些全局性的方法，比如 $comfirm 等对话框 $verbose $warning 等日志</li>
+<li>完成刷新界面之后的从 localStorage 的重新赋值</li>
+<li>注册路由切换的时候的调用的各类方法</li>
+</ul>
+<h2 id="0x02-开发技巧"><a class="v-toc-item" href="#0x02-开发技巧">#</a> 0x02 开发技巧</h2>
+<h3 id="1-登录登录校验以及权限"><a class="v-toc-item" href="#1-登录登录校验以及权限">#</a> 1. 登录，登录校验以及权限</h3>
+<p>通过路由的 meta 属性来区分</p>
+<h3 id="8-日志管理"><a class="v-toc-item" href="#8-日志管理">#</a> 8. 日志管理</h3>
+<p>我觉得日志管理也应该是比较重要的部分，不管是调试程序，还是用于检查用户浏览器这块的错误日志，甚至是埋点。</p>
+<p>依据具体技术栈可以考虑上个 sentry 或者 ELK</p>
+<h3 id="7-首屏-loading"><a class="v-toc-item" href="#7-首屏-loading">#</a> 7. 首屏 Loading</h3>
+<p>这个可以放在 index.html 里面</p>
+<h3 id="4-路由管理与嵌套路由"><a class="v-toc-item" href="#4-路由管理与嵌套路由">#</a> 4. 路由管理与嵌套路由</h3>
+<p>路由管理</p>
+<p>嵌套路由有什么优点？</p>
+<ol>
+<li>使得子路由里的页面可以复用父级路由的页面的组件</li>
+<li>减少手动硬编码 meta 和 props 的代码量</li>
+<li>便于定制面包屑组件</li>
+<li>其他</li>
+</ol>
+<h2 id="0x03-构建技巧"><a class="v-toc-item" href="#0x03-构建技巧">#</a> 0x03 构建技巧</h2>
+<h3 id="31-离线-iconfont"><a class="v-toc-item" href="#31-离线-iconfont">#</a> 3.1 离线 IconFont</h3>
+<p>经常需要离线调试网页，顺手写了这个脚本。</p>
+<p>之前在研究某个网站的反爬机制的时候发现时动态生成 iconfont, 然后通过 unicode 码来实现数字的显示，从而让爬虫小白无法爬取。研究了一下他们的 iconfont, 知道了 font-carrier, 然后调用 node 脚本打包字体文件，并在这个过程中自动生成对应的 iconfont.css</p>
+<p>最后的结果就是，当我放一个文件到 svg 文件夹下面的时候，比如 bank.svg , 我执行一下脚本，生成对应的字体文件，在 html 里面编写脚本</p>
+<pre><code>&lt;span class=&quot;iconfont iconfont-bank&quot; &gt;&lt;/span&gt;
+</code></pre>
+<p>然后对应图标就呈现出来了。</p>
+<h3 id="32-webpack-构建工具"><a class="v-toc-item" href="#32-webpack-构建工具">#</a> 3.2 Webpack 构建工具</h3>
+<p>日常开发用的是 VueCli, 配置还是非常人性化的。开箱即用。</p>
+<h4 id="开发环境与部署环境"><a class="v-toc-item" href="#开发环境与部署环境">#</a> 开发环境与部署环境</h4>
+<p>VueCLI 内置了变量的管理，你可以定义 config/dev.js</p>
+<pre><code class="language-javascript">module<span class="token punctuation">.</span>exports <span class="token operator">=</span> <span class="token function">merge</span><span class="token punctuation">(</span>prodEnv<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token constant">NODE_ENV</span><span class="token operator">:</span> <span class="token string">'"development"'</span><span class="token punctuation">,</span>
+  <span class="token constant">API_ROOT</span><span class="token operator">:</span> <span class="token string">'"http://dev-data.twocucao.xyz"'</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre>
+<p>其实，开发的环境用一组变量是不行的。比如，开发的人分为纯前端，纯后端，我这样的前后都会一些的人，每个对于环境的配置都是不太一样的。</p>
+<ul>
+<li>对于前端 Windowser 直接执行 npm run dev 对接到局域网服务器</li>
+<li>对于单个人同时调试后端和前端的时候，一般要把 Web API 对应到本地的机器上。可是使用环境便来配置不同的 DEBUG_MODE=True npm run dev</li>
+</ul>
+<pre><code class="language-javascript">
+</code></pre>
+<h4 id="dll-打包"><a class="v-toc-item" href="#dll-打包">#</a> DLL 打包</h4>
+<p>大约在半年前，开发过程中突然在使用 ECharts 后，仅仅不到 10M 大小的项目居然开发 build 的时间需要 5MIN, 打包出来的文件超级大。居然接近了 100 多 M</p>
+<p>震惊之余，差点准备写一篇骗点击量的文章：<strong>看完震惊了！！前端和后端男程序员都无法忍受的大小！</strong>, 然后文章内就介绍 Webpack 打包文件居然没有避免重复引入依赖库导致打包文件太大提出抗议。</p>
+<p>回到主题，使用 npm run analyze 发现问题出现在 ECharts 上， 每一个图表组件都是依赖于 ECharts, 而每一个组件都包含了一个完整的 ECharts 库的大小。</p>
+<p>于是，我一边吐槽 webpack 考虑不周，另一方面寻找解决方案。最后找到了 DLL 方案</p>
+<p>这个方案的原理大致是：</p>
+<ul>
+<li>编写独立的脚本，把几个需要复用的库一个配置文件 (manifest.json), 以及打包库到一个 JS 文件中。</li>
+<li>然后从 index.html 引入这个 JS 文件。</li>
+<li>接着在 webpack 配置中使之每次引入一个库的时候，避免重复引入。</li>
+</ul>
+<blockquote>
+<p>但这不应该是 Webpack 本身就应该做的吗？为嘛还要配置，还要不伦不类的生成一个配置文件和一个 JS 文件，再从 index.html 里面导入？</p>
+</blockquote>
+<p>当然，Webpack 生态还是很丰富的，后来出来了一个 <a href="https://github.com/asfktz/autodll-webpack-plugin">https://github.com/asfktz/autodll-webpack-plugin</a> 尝试了之后。感觉很赞。</p>
+<pre><code class="language-javascript">
+</code></pre>
+<p>可惜在 mac 上一切安好，Windows 上晴天霹雳，debug 了一下，发现是这个库的一个依赖库对 windows 的路径处理好像还有点小问题。而公司的前端小伙伴是 Windowser, 只好作罢。</p>
+<p>Macer 可以先用试试，至于 Windowser, 那就去这个 ISSUE 下面催催作者吧… 哈哈哈</p>
+<blockquote>
+<p>update: 现在 windows 已经可以用了。</p>
+</blockquote>
+<h2 id="0x03-代码质量工程管理"><a class="v-toc-item" href="#0x03-代码质量工程管理">#</a> 0x03 代码质量工程管理</h2>
+<h3 id="1-语义化与可读性"><a class="v-toc-item" href="#1-语义化与可读性">#</a> 1. 语义化与可读性</h3>
+<h3 id="2-提取公共逻辑通过-service-mixin-来"><a class="v-toc-item" href="#2-提取公共逻辑通过-service-mixin-来">#</a> 2. 提取公共逻辑（通过 Service, Mixin 来）</h3>
+<h3 id="3-css-管理"><a class="v-toc-item" href="#3-css-管理">#</a> 3. CSS 管理</h3>
+<p>在项目中，我采用 SCSS 来管理 CSS 代码，</p>
+<p>过去的时候有两种 css 的代码命名方法</p>
+<p>第一种，我管他叫做<strong>配置式写法</strong>，通过将 CSS 语法的几个片段转化成名称，从而实现快速配置出效果的的 CSS</p>
+<pre><code class="language-css"><span class="token punctuation">.</span>fl <span class="token punctuation">{</span>
+  float<span class="token operator">:</span> left
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">.</span>fr <span class="token punctuation">{</span>
+  float<span class="token operator">:</span> right
+<span class="token punctuation">}</span>
+<span class="token punctuation">.</span>mr10 <span class="token punctuation">{</span>
+  margin<span class="token operator">-</span>right<span class="token operator">:</span> <span class="token number">10</span>px
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">.</span>pb10 <span class="token punctuation">{</span>
+  padding<span class="token operator">-</span>bottom<span class="token operator">:</span> <span class="token number">10</span>px
+<span class="token punctuation">}</span>
+<span class="token operator">...</span><span class="token punctuation">.</span>
+</code></pre>
+<p>这种写法对于简单页面来说确实也是可以使用的。缺点就是当页面变得复杂一些的时候，则比较难控制这种短小精捍（不直观）的变量。比如</p>
+<pre><code class="language-css"><span class="token punctuation">.</span>tmd01<span class="token punctuation">{</span>
+  padding<span class="token operator">-</span>bottom<span class="token operator">:</span> <span class="token number">10</span>px
+  font<span class="token operator">-</span>size<span class="token operator">:</span> <span class="token number">16</span>px<span class="token punctuation">;</span>
+  position<span class="token operator">:</span> relative<span class="token punctuation">;</span>
+  top<span class="token operator">:</span> <span class="token number">0</span><span class="token punctuation">;</span>
+  color<span class="token operator">:</span> #<span class="token number">2</span>d3c48<span class="token punctuation">;</span>
+  line<span class="token operator">-</span>height<span class="token operator">:</span> <span class="token number">1.6</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<blockquote>
+<p>请脑补一下我的黄人问号脸</p>
+</blockquote>
+<p>当然，如果用得好的话，自然是 OK, 如果用不好的话，</p>
+<p>后来进入了嵌套写法时代（感谢伟大的 Rails 社区出的 SASS）, 下面的语法都是 SCSS.</p>
+<p>第二种写法就变成了这样</p>
+<pre><code class="language-scss"><span class="token punctuation">.</span>actions <span class="token punctuation">{</span>
+  <span class="token punctuation">.</span>card_wrapper <span class="token punctuation">{</span>
+    <span class="token punctuation">.</span>card <span class="token punctuation">{</span>
+      <span class="token punctuation">.</span>title <span class="token punctuation">{</span>
+      <span class="token punctuation">}</span>
+      <span class="token punctuation">.</span>content <span class="token punctuation">{</span>
+        <span class="token punctuation">.</span>list <span class="token punctuation">{</span>
+          <span class="token punctuation">.</span>fa <span class="token punctuation">{</span>
+          <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<p>外加变量和 mixin 以及函数的话，基本上就可以完成代码的组织了。</p>
+<p>这种写法倒是比原来不知道高到哪里去了，但问题依旧存在，比如 title,content 这些玩意太多，完完全全的看不懂。更加糟糕的事情是，有的小伙伴直接是乱用嵌套，也不用伪类和伪选择器，从而达到单页面调出来小伙比较快，但因为代码不能重用，调多个页面的时候速度巨慢无比。</p>
+<pre><code>.apage {
+  bbizlogic {
+    .actions {
+      .card_wrapper {
+        .card {
+          .title {
+          }
+          .content {
+            .list {
+              .fa {
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</code></pre>
+<p>我本人推荐（其实我是写 Python Web 后端的，逃… ) 代码风格比较倾向于 BEM 命名，关于 BEM 的介绍，请参考简单心理团队的教程。</p>
+<ul>
+<li><a href="https://jiandanxinli.github.io/2016-08-11.html">https://jiandanxinli.github.io/2016-08-11.html</a></li>
+<li><a href="https://juejin.im/post/58d0e5caa22b9d00643e8b51">https://juejin.im/post/58d0e5caa22b9d00643e8b51</a></li>
+</ul>
+<p>然而，最好的方式，就是读一个非常使用 SCSS 来组织项目的 CSS 代码的成熟项目。</p>
+<p>我推荐两个：</p>
+<ul>
+<li>BOOTSTRAP V4: Bootstrap V4 使用 SCSS 来写</li>
+<li>ELEMENT UI: 饿了么的团队出的，前段时间从 v1 版本升级到 v2 版本，发现网站大部分样式都没有出现大变动，在这里给个赞。</li>
+</ul>
+<h4 id="0-先从整体上设计好骨架"><a class="v-toc-item" href="#0-先从整体上设计好骨架">#</a> 0. 先从整体上设计好骨架</h4>
+<p>接着才是 HTML, 然后才是 CSS</p>
+<p>现在前端入行的人越来越多，很多的新手前端 er 会用比较快的思维来编写，这就导致代码质量奇差无比。</p>
+<ul>
+<li>哎，我看看，面粉加多了，我加点水，水加多了，我再加点面粉。</li>
+<li>哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。</li>
+<li>哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。</li>
+<li>哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。</li>
+<li>哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。</li>
+</ul>
+<p>当设计出来的网页本身的 HTML 写的就很混乱，CSS 能写的好在哪里呢？</p>
+<p>命名都很混乱，遑论代码可维护性？</p>
+<p>可以多去参考一些成熟的项目的 CSS 是怎么命名的呀，HTML 是怎么设计的呀</p>
+<h4 id="1-scoped-的滥用"><a class="v-toc-item" href="#1-scoped-的滥用">#</a> 1. Scoped 的滥用</h4>
+<p>我印象中，有个小伙伴把一个比较大的 CSS 库多次 import 到被 Scoped 的组件中，于是开发时猛然发现 head 处多了大量的 style 标签，除了 css 选择器后面随机的属性 hash, 文件内容都一样。</p>
+<blockquote>
+<p>公共组件往往可以通过嵌套和加前缀的方式来防止污染。如果 scoped 的属性里面有成吨的 style, 慎用 import.</p>
+</blockquote>
+<p>还有小伙伴喜欢在很多七七八八的组件各种 import scss. 其实对于中小型项目，完全可以直接全局一个文件 style 即可。</p>
+<p>我现在的做法，是直接在 src 的上方直接用 gulp 搭建一个只用来编译 SCSS 到 CSS 的项目，每次编译后输出到页面里面。</p>
+<p>如果项目是小项目，建议直接在 app.vue 里面 import pages</p>
+<pre><code>├── common
+├── fonts
+├── global.scss
+├── index.scss
+├── mixins
+├── pages.scss
+└── reset.scss
+</code></pre>
+<h4 id="2-保持代码的通用性"><a class="v-toc-item" href="#2-保持代码的通用性">#</a> 2. 保持代码的通用性</h4>
+<p>一般，当同一段逻辑出现三次的时候，是要停下来重构一下的，这样的话，就可以节省很多时间。</p>
+<p>套用在 CSS 的样式上也是如此。</p>
+<h2 id="0x04-tmux-和-tmuxnator-打造工作流"><a class="v-toc-item" href="#0x04-tmux-和-tmuxnator-打造工作流">#</a> 0x04 Tmux 和 Tmuxnator 打造工作流</h2>
+<p>具体参考我的文章 <a href="l">用 Tmux 和 Tmuxnator 打造工作流</a></p>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-09-25</strong> 初始化本文</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">0x01 项目结构</a></li>
+<li><a href="#0x02-%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7">0x02 开发技巧</a>
+<ul>
+<li><a href="#1-%E7%99%BB%E5%BD%95%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E4%BB%A5%E5%8F%8A%E6%9D%83%E9%99%90">1. 登录，登录校验以及权限</a></li>
+<li><a href="#8-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86">8. 日志管理</a></li>
+<li><a href="#7-%E9%A6%96%E5%B1%8F-loading">7. 首屏 Loading</a></li>
+<li><a href="#4-%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86%E4%B8%8E%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1">4. 路由管理与嵌套路由</a></li>
+</ul>
+</li>
+<li><a href="#0x03-%E6%9E%84%E5%BB%BA%E6%8A%80%E5%B7%A7">0x03 构建技巧</a>
+<ul>
+<li><a href="#31-%E7%A6%BB%E7%BA%BF-iconfont">3.1 离线 IconFont</a></li>
+<li><a href="#32-webpack-%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7">3.2 Webpack 构建工具</a>
+<ul>
+<li><a href="#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%B8%8E%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83">开发环境与部署环境</a></li>
+<li><a href="#dll-%E6%89%93%E5%8C%85">DLL 打包</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x03-%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%B7%A5%E7%A8%8B%E7%AE%A1%E7%90%86">0x03 代码质量工程管理</a>
+<ul>
+<li><a href="#1-%E8%AF%AD%E4%B9%89%E5%8C%96%E4%B8%8E%E5%8F%AF%E8%AF%BB%E6%80%A7">1. 语义化与可读性</a></li>
+<li><a href="#2-%E6%8F%90%E5%8F%96%E5%85%AC%E5%85%B1%E9%80%BB%E8%BE%91%E9%80%9A%E8%BF%87-service-mixin-%E6%9D%A5">2. 提取公共逻辑（通过 Service, Mixin 来）</a></li>
+<li><a href="#3-css-%E7%AE%A1%E7%90%86">3. CSS 管理</a>
+<ul>
+<li><a href="#0-%E5%85%88%E4%BB%8E%E6%95%B4%E4%BD%93%E4%B8%8A%E8%AE%BE%E8%AE%A1%E5%A5%BD%E9%AA%A8%E6%9E%B6">0. 先从整体上设计好骨架</a></li>
+<li><a href="#1-scoped-%E7%9A%84%E6%BB%A5%E7%94%A8">1. Scoped 的滥用</a></li>
+<li><a href="#2-%E4%BF%9D%E6%8C%81%E4%BB%A3%E7%A0%81%E7%9A%84%E9%80%9A%E7%94%A8%E6%80%A7">2. 保持代码的通用性</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x04-tmux-%E5%92%8C-tmuxnator-%E6%89%93%E9%80%A0%E5%B7%A5%E4%BD%9C%E6%B5%81">0x04 Tmux 和 Tmuxnator 打造工作流</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["VueJS","项目经验"],"path":"20180801_VueProjectTalking.md","title":"Vue 项目漫谈 2018 版","slug":"Vue 项目漫谈 2018 版","date":"2018-08-01","category":"前端开发","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cp\u003e之前草草整理过一些 Vue 的小技巧，最近温习了一遍文档，重聊一遍。\u003c/p\u003e\n\u003cp\u003e鉴于 VueCLI 越做越臃肿，我最后还是选择了自己搭架子。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/twocucao/vue-starter-kit\"\u003ehttps://github.com/twocucao/vue-starter-kit\u003c/a\u003e\u003c/p\u003e\n\u003ch2 id=\"0x01-项目结构\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-项目结构\"\u003e#\u003c/a\u003e 0x01 项目结构\u003c/h2\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e# 根文件\n\u003cspan class=\"token keyword\"\u003epublic\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003e # 部署文件\nsrc\u003cspan class=\"token operator\"\u003e/\u003c/span\u003e # 源码\n\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ebabelrc\n\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eeditorconfig\n\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eeslintignore\n\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eeslintrc\n\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003egitignore\n\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epostcssrc\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejs\n\u003cspan class=\"token constant\"\u003eLICENSE\u003c/span\u003e\n\u003cspan class=\"token constant\"\u003eREADME\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003emd\njsconfig\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejson\n\u003cspan class=\"token keyword\"\u003epackage\u003c/span\u003e\u003cspan class=\"token operator\"\u003e-\u003c/span\u003elock\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejson\n\u003cspan class=\"token keyword\"\u003epackage\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejson\nwebpack\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ecommon\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejs\nwebpack\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003edev\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejs\nwebpack\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003edll\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejs\nwebpack\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eprod\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejs\n\u003c/code\u003e\u003c/pre\u003e\n\u003c!-- more --\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e# 在 src 文件夹下面\n\napi # 相关的 Web \u003cspan class=\"token constant\"\u003eAPI\u003c/span\u003e 定义\nassets # 静态资源，对于已经压缩的，还是直接放在 Static 下面\ncomponents # 公用组件\nmixins # mixin\ndirectives # 定义指令，比如 v\u003cspan class=\"token operator\"\u003e-\u003c/span\u003eloading\npages # 页面\nstore # Store\nApp\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003evue # \u003cspan class=\"token constant\"\u003eCORE\u003c/span\u003e 组件\nconsts\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejs #定义常量名称\nindex\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejs # 用于初始化项目，注册组件等等\nroutes\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ejs # 路由\nutils # 工具方法\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e值得一提的就是 index.js 应该要做的事情\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e注册全局组件和过滤器\u003c/li\u003e\n\u003cli\u003e给 Vue 实例加戏，哦，说错了，给实例加一些全局性的方法，比如 $comfirm 等对话框 $verbose $warning 等日志\u003c/li\u003e\n\u003cli\u003e完成刷新界面之后的从 localStorage 的重新赋值\u003c/li\u003e\n\u003cli\u003e注册路由切换的时候的调用的各类方法\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x02-开发技巧\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-开发技巧\"\u003e#\u003c/a\u003e 0x02 开发技巧\u003c/h2\u003e\n\u003ch3 id=\"1-登录登录校验以及权限\"\u003e\u003ca class=\"v-toc-item\" href=\"#1-登录登录校验以及权限\"\u003e#\u003c/a\u003e 1. 登录，登录校验以及权限\u003c/h3\u003e\n\u003cp\u003e通过路由的 meta 属性来区分\u003c/p\u003e\n\u003ch3 id=\"8-日志管理\"\u003e\u003ca class=\"v-toc-item\" href=\"#8-日志管理\"\u003e#\u003c/a\u003e 8. 日志管理\u003c/h3\u003e\n\u003cp\u003e我觉得日志管理也应该是比较重要的部分，不管是调试程序，还是用于检查用户浏览器这块的错误日志，甚至是埋点。\u003c/p\u003e\n\u003cp\u003e依据具体技术栈可以考虑上个 sentry 或者 ELK\u003c/p\u003e\n\u003ch3 id=\"7-首屏-loading\"\u003e\u003ca class=\"v-toc-item\" href=\"#7-首屏-loading\"\u003e#\u003c/a\u003e 7. 首屏 Loading\u003c/h3\u003e\n\u003cp\u003e这个可以放在 index.html 里面\u003c/p\u003e\n\u003ch3 id=\"4-路由管理与嵌套路由\"\u003e\u003ca class=\"v-toc-item\" href=\"#4-路由管理与嵌套路由\"\u003e#\u003c/a\u003e 4. 路由管理与嵌套路由\u003c/h3\u003e\n\u003cp\u003e路由管理\u003c/p\u003e\n\u003cp\u003e嵌套路由有什么优点？\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e使得子路由里的页面可以复用父级路由的页面的组件\u003c/li\u003e\n\u003cli\u003e减少手动硬编码 meta 和 props 的代码量\u003c/li\u003e\n\u003cli\u003e便于定制面包屑组件\u003c/li\u003e\n\u003cli\u003e其他\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2 id=\"0x03-构建技巧\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-构建技巧\"\u003e#\u003c/a\u003e 0x03 构建技巧\u003c/h2\u003e\n\u003ch3 id=\"31-离线-iconfont\"\u003e\u003ca class=\"v-toc-item\" href=\"#31-离线-iconfont\"\u003e#\u003c/a\u003e 3.1 离线 IconFont\u003c/h3\u003e\n\u003cp\u003e经常需要离线调试网页，顺手写了这个脚本。\u003c/p\u003e\n\u003cp\u003e之前在研究某个网站的反爬机制的时候发现时动态生成 iconfont, 然后通过 unicode 码来实现数字的显示，从而让爬虫小白无法爬取。研究了一下他们的 iconfont, 知道了 font-carrier, 然后调用 node 脚本打包字体文件，并在这个过程中自动生成对应的 iconfont.css\u003c/p\u003e\n\u003cp\u003e最后的结果就是，当我放一个文件到 svg 文件夹下面的时候，比如 bank.svg , 我执行一下脚本，生成对应的字体文件，在 html 里面编写脚本\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e\u0026lt;span class=\u0026quot;iconfont iconfont-bank\u0026quot; \u0026gt;\u0026lt;/span\u0026gt;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e然后对应图标就呈现出来了。\u003c/p\u003e\n\u003ch3 id=\"32-webpack-构建工具\"\u003e\u003ca class=\"v-toc-item\" href=\"#32-webpack-构建工具\"\u003e#\u003c/a\u003e 3.2 Webpack 构建工具\u003c/h3\u003e\n\u003cp\u003e日常开发用的是 VueCli, 配置还是非常人性化的。开箱即用。\u003c/p\u003e\n\u003ch4 id=\"开发环境与部署环境\"\u003e\u003ca class=\"v-toc-item\" href=\"#开发环境与部署环境\"\u003e#\u003c/a\u003e 开发环境与部署环境\u003c/h4\u003e\n\u003cp\u003eVueCLI 内置了变量的管理，你可以定义 config/dev.js\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003emodule\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eexports \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003emerge\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eprodEnv\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n  \u003cspan class=\"token constant\"\u003eNODE_ENV\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e \u003cspan class=\"token string\"\u003e'\"development\"'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e\n  \u003cspan class=\"token constant\"\u003eAPI_ROOT\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e \u003cspan class=\"token string\"\u003e'\"http://dev-data.twocucao.xyz\"'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e其实，开发的环境用一组变量是不行的。比如，开发的人分为纯前端，纯后端，我这样的前后都会一些的人，每个对于环境的配置都是不太一样的。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e对于前端 Windowser 直接执行 npm run dev 对接到局域网服务器\u003c/li\u003e\n\u003cli\u003e对于单个人同时调试后端和前端的时候，一般要把 Web API 对应到本地的机器上。可是使用环境便来配置不同的 DEBUG_MODE=True npm run dev\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"dll-打包\"\u003e\u003ca class=\"v-toc-item\" href=\"#dll-打包\"\u003e#\u003c/a\u003e DLL 打包\u003c/h4\u003e\n\u003cp\u003e大约在半年前，开发过程中突然在使用 ECharts 后，仅仅不到 10M 大小的项目居然开发 build 的时间需要 5MIN, 打包出来的文件超级大。居然接近了 100 多 M\u003c/p\u003e\n\u003cp\u003e震惊之余，差点准备写一篇骗点击量的文章：\u003cstrong\u003e看完震惊了！！前端和后端男程序员都无法忍受的大小！\u003c/strong\u003e, 然后文章内就介绍 Webpack 打包文件居然没有避免重复引入依赖库导致打包文件太大提出抗议。\u003c/p\u003e\n\u003cp\u003e回到主题，使用 npm run analyze 发现问题出现在 ECharts 上， 每一个图表组件都是依赖于 ECharts, 而每一个组件都包含了一个完整的 ECharts 库的大小。\u003c/p\u003e\n\u003cp\u003e于是，我一边吐槽 webpack 考虑不周，另一方面寻找解决方案。最后找到了 DLL 方案\u003c/p\u003e\n\u003cp\u003e这个方案的原理大致是：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e编写独立的脚本，把几个需要复用的库一个配置文件 (manifest.json), 以及打包库到一个 JS 文件中。\u003c/li\u003e\n\u003cli\u003e然后从 index.html 引入这个 JS 文件。\u003c/li\u003e\n\u003cli\u003e接着在 webpack 配置中使之每次引入一个库的时候，避免重复引入。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e但这不应该是 Webpack 本身就应该做的吗？为嘛还要配置，还要不伦不类的生成一个配置文件和一个 JS 文件，再从 index.html 里面导入？\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e当然，Webpack 生态还是很丰富的，后来出来了一个 \u003ca href=\"https://github.com/asfktz/autodll-webpack-plugin\"\u003ehttps://github.com/asfktz/autodll-webpack-plugin\u003c/a\u003e 尝试了之后。感觉很赞。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-javascript\"\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e可惜在 mac 上一切安好，Windows 上晴天霹雳，debug 了一下，发现是这个库的一个依赖库对 windows 的路径处理好像还有点小问题。而公司的前端小伙伴是 Windowser, 只好作罢。\u003c/p\u003e\n\u003cp\u003eMacer 可以先用试试，至于 Windowser, 那就去这个 ISSUE 下面催催作者吧… 哈哈哈\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eupdate: 现在 windows 已经可以用了。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2 id=\"0x03-代码质量工程管理\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-代码质量工程管理\"\u003e#\u003c/a\u003e 0x03 代码质量工程管理\u003c/h2\u003e\n\u003ch3 id=\"1-语义化与可读性\"\u003e\u003ca class=\"v-toc-item\" href=\"#1-语义化与可读性\"\u003e#\u003c/a\u003e 1. 语义化与可读性\u003c/h3\u003e\n\u003ch3 id=\"2-提取公共逻辑通过-service-mixin-来\"\u003e\u003ca class=\"v-toc-item\" href=\"#2-提取公共逻辑通过-service-mixin-来\"\u003e#\u003c/a\u003e 2. 提取公共逻辑（通过 Service, Mixin 来）\u003c/h3\u003e\n\u003ch3 id=\"3-css-管理\"\u003e\u003ca class=\"v-toc-item\" href=\"#3-css-管理\"\u003e#\u003c/a\u003e 3. CSS 管理\u003c/h3\u003e\n\u003cp\u003e在项目中，我采用 SCSS 来管理 CSS 代码，\u003c/p\u003e\n\u003cp\u003e过去的时候有两种 css 的代码命名方法\u003c/p\u003e\n\u003cp\u003e第一种，我管他叫做\u003cstrong\u003e配置式写法\u003c/strong\u003e，通过将 CSS 语法的几个片段转化成名称，从而实现快速配置出效果的的 CSS\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-css\"\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003efl \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n  float\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e left\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n\n\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003efr \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n  float\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e right\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003emr10 \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n  margin\u003cspan class=\"token operator\"\u003e-\u003c/span\u003eright\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e \u003cspan class=\"token number\"\u003e10\u003c/span\u003epx\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n\n\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epb10 \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n  padding\u003cspan class=\"token operator\"\u003e-\u003c/span\u003ebottom\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e \u003cspan class=\"token number\"\u003e10\u003c/span\u003epx\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n\u003cspan class=\"token operator\"\u003e...\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e这种写法对于简单页面来说确实也是可以使用的。缺点就是当页面变得复杂一些的时候，则比较难控制这种短小精捍（不直观）的变量。比如\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-css\"\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003etmd01\u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n  padding\u003cspan class=\"token operator\"\u003e-\u003c/span\u003ebottom\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e \u003cspan class=\"token number\"\u003e10\u003c/span\u003epx\n  font\u003cspan class=\"token operator\"\u003e-\u003c/span\u003esize\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e \u003cspan class=\"token number\"\u003e16\u003c/span\u003epx\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n  position\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e relative\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n  top\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e \u003cspan class=\"token number\"\u003e0\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n  color\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e #\u003cspan class=\"token number\"\u003e2\u003c/span\u003ed3c48\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n  line\u003cspan class=\"token operator\"\u003e-\u003c/span\u003eheight\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e \u003cspan class=\"token number\"\u003e1.6\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e请脑补一下我的黄人问号脸\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e当然，如果用得好的话，自然是 OK, 如果用不好的话，\u003c/p\u003e\n\u003cp\u003e后来进入了嵌套写法时代（感谢伟大的 Rails 社区出的 SASS）, 下面的语法都是 SCSS.\u003c/p\u003e\n\u003cp\u003e第二种写法就变成了这样\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-scss\"\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eactions \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n  \u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ecard_wrapper \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n    \u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ecard \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n      \u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003etitle \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n      \u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n      \u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003econtent \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n        \u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003elist \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n          \u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003efa \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n          \u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n        \u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n      \u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n    \u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n  \u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e外加变量和 mixin 以及函数的话，基本上就可以完成代码的组织了。\u003c/p\u003e\n\u003cp\u003e这种写法倒是比原来不知道高到哪里去了，但问题依旧存在，比如 title,content 这些玩意太多，完完全全的看不懂。更加糟糕的事情是，有的小伙伴直接是乱用嵌套，也不用伪类和伪选择器，从而达到单页面调出来小伙比较快，但因为代码不能重用，调多个页面的时候速度巨慢无比。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e.apage {\n  bbizlogic {\n    .actions {\n      .card_wrapper {\n        .card {\n          .title {\n          }\n          .content {\n            .list {\n              .fa {\n              }\n            }\n          }\n        }\n      }\n    }\n  }\n}\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e我本人推荐（其实我是写 Python Web 后端的，逃… ) 代码风格比较倾向于 BEM 命名，关于 BEM 的介绍，请参考简单心理团队的教程。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://jiandanxinli.github.io/2016-08-11.html\"\u003ehttps://jiandanxinli.github.io/2016-08-11.html\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"https://juejin.im/post/58d0e5caa22b9d00643e8b51\"\u003ehttps://juejin.im/post/58d0e5caa22b9d00643e8b51\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e然而，最好的方式，就是读一个非常使用 SCSS 来组织项目的 CSS 代码的成熟项目。\u003c/p\u003e\n\u003cp\u003e我推荐两个：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eBOOTSTRAP V4: Bootstrap V4 使用 SCSS 来写\u003c/li\u003e\n\u003cli\u003eELEMENT UI: 饿了么的团队出的，前段时间从 v1 版本升级到 v2 版本，发现网站大部分样式都没有出现大变动，在这里给个赞。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4 id=\"0-先从整体上设计好骨架\"\u003e\u003ca class=\"v-toc-item\" href=\"#0-先从整体上设计好骨架\"\u003e#\u003c/a\u003e 0. 先从整体上设计好骨架\u003c/h4\u003e\n\u003cp\u003e接着才是 HTML, 然后才是 CSS\u003c/p\u003e\n\u003cp\u003e现在前端入行的人越来越多，很多的新手前端 er 会用比较快的思维来编写，这就导致代码质量奇差无比。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e哎，我看看，面粉加多了，我加点水，水加多了，我再加点面粉。\u003c/li\u003e\n\u003cli\u003e哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。\u003c/li\u003e\n\u003cli\u003e哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。\u003c/li\u003e\n\u003cli\u003e哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。\u003c/li\u003e\n\u003cli\u003e哎，我看看，面粉又加多了，我加点水，水加多了，我再加点面粉。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e当设计出来的网页本身的 HTML 写的就很混乱，CSS 能写的好在哪里呢？\u003c/p\u003e\n\u003cp\u003e命名都很混乱，遑论代码可维护性？\u003c/p\u003e\n\u003cp\u003e可以多去参考一些成熟的项目的 CSS 是怎么命名的呀，HTML 是怎么设计的呀\u003c/p\u003e\n\u003ch4 id=\"1-scoped-的滥用\"\u003e\u003ca class=\"v-toc-item\" href=\"#1-scoped-的滥用\"\u003e#\u003c/a\u003e 1. Scoped 的滥用\u003c/h4\u003e\n\u003cp\u003e我印象中，有个小伙伴把一个比较大的 CSS 库多次 import 到被 Scoped 的组件中，于是开发时猛然发现 head 处多了大量的 style 标签，除了 css 选择器后面随机的属性 hash, 文件内容都一样。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e公共组件往往可以通过嵌套和加前缀的方式来防止污染。如果 scoped 的属性里面有成吨的 style, 慎用 import.\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e还有小伙伴喜欢在很多七七八八的组件各种 import scss. 其实对于中小型项目，完全可以直接全局一个文件 style 即可。\u003c/p\u003e\n\u003cp\u003e我现在的做法，是直接在 src 的上方直接用 gulp 搭建一个只用来编译 SCSS 到 CSS 的项目，每次编译后输出到页面里面。\u003c/p\u003e\n\u003cp\u003e如果项目是小项目，建议直接在 app.vue 里面 import pages\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e├── common\n├── fonts\n├── global.scss\n├── index.scss\n├── mixins\n├── pages.scss\n└── reset.scss\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"2-保持代码的通用性\"\u003e\u003ca class=\"v-toc-item\" href=\"#2-保持代码的通用性\"\u003e#\u003c/a\u003e 2. 保持代码的通用性\u003c/h4\u003e\n\u003cp\u003e一般，当同一段逻辑出现三次的时候，是要停下来重构一下的，这样的话，就可以节省很多时间。\u003c/p\u003e\n\u003cp\u003e套用在 CSS 的样式上也是如此。\u003c/p\u003e\n\u003ch2 id=\"0x04-tmux-和-tmuxnator-打造工作流\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x04-tmux-和-tmuxnator-打造工作流\"\u003e#\u003c/a\u003e 0x04 Tmux 和 Tmuxnator 打造工作流\u003c/h2\u003e\n\u003cp\u003e具体参考我的文章 \u003ca href=\"l\"\u003e用 Tmux 和 Tmuxnator 打造工作流\u003c/a\u003e\u003c/p\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2017-09-25\u003c/strong\u003e 初始化本文\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84\"\u003e0x01 项目结构\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E5%BC%80%E5%8F%91%E6%8A%80%E5%B7%A7\"\u003e0x02 开发技巧\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#1-%E7%99%BB%E5%BD%95%E7%99%BB%E5%BD%95%E6%A0%A1%E9%AA%8C%E4%BB%A5%E5%8F%8A%E6%9D%83%E9%99%90\"\u003e1. 登录，登录校验以及权限\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#8-%E6%97%A5%E5%BF%97%E7%AE%A1%E7%90%86\"\u003e8. 日志管理\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#7-%E9%A6%96%E5%B1%8F-loading\"\u003e7. 首屏 Loading\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#4-%E8%B7%AF%E7%94%B1%E7%AE%A1%E7%90%86%E4%B8%8E%E5%B5%8C%E5%A5%97%E8%B7%AF%E7%94%B1\"\u003e4. 路由管理与嵌套路由\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-%E6%9E%84%E5%BB%BA%E6%8A%80%E5%B7%A7\"\u003e0x03 构建技巧\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#31-%E7%A6%BB%E7%BA%BF-iconfont\"\u003e3.1 离线 IconFont\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#32-webpack-%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7\"\u003e3.2 Webpack 构建工具\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%B8%8E%E9%83%A8%E7%BD%B2%E7%8E%AF%E5%A2%83\"\u003e开发环境与部署环境\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#dll-%E6%89%93%E5%8C%85\"\u003eDLL 打包\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F%E5%B7%A5%E7%A8%8B%E7%AE%A1%E7%90%86\"\u003e0x03 代码质量工程管理\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#1-%E8%AF%AD%E4%B9%89%E5%8C%96%E4%B8%8E%E5%8F%AF%E8%AF%BB%E6%80%A7\"\u003e1. 语义化与可读性\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#2-%E6%8F%90%E5%8F%96%E5%85%AC%E5%85%B1%E9%80%BB%E8%BE%91%E9%80%9A%E8%BF%87-service-mixin-%E6%9D%A5\"\u003e2. 提取公共逻辑（通过 Service, Mixin 来）\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#3-css-%E7%AE%A1%E7%90%86\"\u003e3. CSS 管理\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0-%E5%85%88%E4%BB%8E%E6%95%B4%E4%BD%93%E4%B8%8A%E8%AE%BE%E8%AE%A1%E5%A5%BD%E9%AA%A8%E6%9E%B6\"\u003e0. 先从整体上设计好骨架\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#1-scoped-%E7%9A%84%E6%BB%A5%E7%94%A8\"\u003e1. Scoped 的滥用\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#2-%E4%BF%9D%E6%8C%81%E4%BB%A3%E7%A0%81%E7%9A%84%E9%80%9A%E7%94%A8%E6%80%A7\"\u003e2. 保持代码的通用性\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x04-tmux-%E5%92%8C-tmuxnator-%E6%89%93%E9%80%A0%E5%B7%A5%E4%BD%9C%E6%B5%81\"\u003e0x04 Tmux 和 Tmuxnator 打造工作流\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"Vue 项目漫谈 2018 版"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

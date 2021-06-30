@@ -1,0 +1,319 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Docker CheatSheet | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。</p>
+<ul>
+<li>Docker 相关概念</li>
+<li>Docker 配套工具</li>
+<li>Django PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化</li>
+<li>Docker 踩坑记录</li>
+</ul>
+<p>不定期更新。</p>
+<!-- more -->
+<h2 id="0x01-docker-相关概念"><a class="v-toc-item" href="#0x01-docker-相关概念">#</a> 0x01 Docker 相关概念</h2>
+<h3 id="11-docker-是什么"><a class="v-toc-item" href="#11-docker-是什么">#</a> 1.1 Docker 是什么？</h3>
+<p>在认知 Docker 这种相对而言比较新概念的时候，只要从以往的经验中拿出一个词语来概括新词汇即可。</p>
+<p>于是，我们便可以这么理解：</p>
+<blockquote>
+<p>Docker 是一种比虚拟机轻量的用来存放职责比较单一的应用的容器。</p>
+</blockquote>
+<p>也就是三点：</p>
+<ul>
+<li>比虚拟机轻量</li>
+<li>用来存放职责单一的应用</li>
+<li>容器</li>
+</ul>
+<p>显然这是一种理解，而不是一种定义。</p>
+<h3 id="12-docker-是用来做什么的"><a class="v-toc-item" href="#12-docker-是用来做什么的">#</a> 1.2 Docker 是用来做什么的？</h3>
+<p>新技术本质是什么？工具也。<br>
+每一个新的技术都是为了提升效率才被创造出来，那么，究竟 Docker 可以从哪些方面提升我们的效率呢？</p>
+<p>我们知道开发一个有些规模的网站的话，需要严格遵守如下的开发流程：</p>
+<ul>
+<li>编码</li>
+<li>测试</li>
+<li>集成到系统中</li>
+<li>部署</li>
+</ul>
+<p>但如果人员比较多，则会出现问题，有的人喜欢用 MacOS, 有的人喜欢用 Ubuntu, 开发测试环境怎么统一呢？如果开发人员明明使用的是某个版本的 PostgreSQL, 用了最新的功能，但是测试和运维用的就是老版本的功能怎么办？</p>
+<p>部署环境也会有问题，比如，开发部突然想使用更高版本的软件，比如突然需要更多的 Django 应用来负担海量请求的怎么办？Hadoop 不够用怎么办？</p>
+<p>当然，思路很简单，开发的时候使用虚拟机，拷贝给大家一起用，部署的时候多创建一些机器，然后上 Ansible 远程操控。即可。</p>
+<p>并不是不行，但是 Docker 由于更加轻量，操作粒度更加细腻，我可以销毁镜像，上传镜像，定制镜像，很轻松调整镜像包并且安装挂载文件。</p>
+<h2 id="0x02-docker-初始配置"><a class="v-toc-item" href="#0x02-docker-初始配置">#</a> 0x02 Docker 初始配置</h2>
+<pre><code>docker-machine create --driver=virtualbox default
+docker-machine ls
+eval &quot;$(docker-machine env default)&quot;
+</code></pre>
+<h2 id="0x03-django-技术栈-docker-化"><a class="v-toc-item" href="#0x03-django-技术栈-docker-化">#</a> 0x03 Django 技术栈 Docker 化</h2>
+<p>为了理解这个过程，下面我将我 Docker 化 django 应用的流程按照一定步骤演示出来。我将我使用 Django 的部分经验搞出来，做成了一个 django-bpc ，即 django best practice。如果诸位有兴趣研究的话，拿来看看源码倒是倒是非常好。</p>
+<pre><code class="language-bash"># 演示环境为 <span class="token constant">MAC</span><span class="token punctuation">,</span> 在此之前，务必安装好 docker <span class="token keyword">for</span> mac 以及 virualbox
+# xxxxxx 为 阿里云分配的容器 registry
+docker<span class="token operator">-</span>machine create <span class="token operator">--</span>engine<span class="token operator">-</span>registry<span class="token operator">-</span>mirror<span class="token operator">=</span>https<span class="token operator">:</span><span class="token operator">/</span><span class="token operator">/</span>xxxxxx<span class="token punctuation">.</span>mirror<span class="token punctuation">.</span>aliyuncs<span class="token punctuation">.</span>com <span class="token operator">-</span>d virtualbox <span class="token keyword">default</span>
+
+</code></pre>
+<pre><code class="language-bash">├── <span class="token constant">AUTHORS</span><span class="token punctuation">.</span>md
+├── <span class="token constant">HISTORY</span><span class="token punctuation">.</span>md
+├── <span class="token constant">LICENSE</span>
+├── <span class="token constant">MANIFEST</span><span class="token punctuation">.</span>in
+├── Makefile
+├── <span class="token constant">README</span><span class="token punctuation">.</span>md
+├── assets
+├── compose
+│   ├── django
+│   ├── elasticsearch
+│   ├── nginx
+│   ├── postgres
+│   ├── rabbitmq
+│   └── redis
+├── config
+│   ├── __init__<span class="token punctuation">.</span>py
+│   ├── settings
+│   ├── urls<span class="token punctuation">.</span>py
+│   └── wsgi<span class="token punctuation">.</span>py
+├── dev<span class="token punctuation">.</span>yml
+├── docker<span class="token operator">-</span>compose<span class="token punctuation">.</span>yml
+├── docs
+│   ├── Makefile
+│   ├── exts
+│   ├── make<span class="token punctuation">.</span>bat
+│   ├── make_pdf<span class="token punctuation">.</span>sh
+│   └── source
+├── manage<span class="token punctuation">.</span>py
+├── pytest<span class="token punctuation">.</span>ini
+├── requirements
+│   ├── base<span class="token punctuation">.</span>txt
+│   ├── local<span class="token punctuation">.</span>txt
+│   ├── production<span class="token punctuation">.</span>txt
+│   └── test<span class="token punctuation">.</span>txt
+├── scripts
+├── setup<span class="token punctuation">.</span>cfg
+├── tests
+│   ├── __init__<span class="token punctuation">.</span>py
+│   ├── conftest<span class="token punctuation">.</span>py
+│   └── test_basics<span class="token punctuation">.</span>py
+└── yadjangoblog
+    ├── __init__<span class="token punctuation">.</span>py
+    ├── contrib
+    ├── <span class="token keyword">static</span>
+    ├── templates
+    ├── yaaccounts
+    ├── yaadmin
+    ├── yaapi
+    ├── yablog
+    ├── yacommon
+    └── yataskapp
+</code></pre>
+<h3 id="31-开发时"><a class="v-toc-item" href="#31-开发时">#</a> 3.1 开发时</h3>
+<h4 id="1-运行所需组件"><a class="v-toc-item" href="#1-运行所需组件">#</a> 1. 运行所需组件</h4>
+<p>在开发时候需要使用几个后台的组件</p>
+<ul>
+<li>PostgreSQL 用于做数据存储</li>
+<li>Redis 用于做缓存 和 Session 等等</li>
+<li>RedditMQ 用于消息队列</li>
+<li>ElasticSearch 用于做搜索与推荐</li>
+</ul>
+<p>目录中的组件基本上都在这儿了。</p>
+<pre><code>├── compose
+│   ├── django
+│   ├── elasticsearch
+│   ├── nginx
+│   ├── postgres
+│   ├── rabbitmq
+│   └── redis
+</code></pre>
+<p>进行初步的封装和添加脚本，不直接采用官网的配置需要是因为添加一些的定制版本。</p>
+<h4 id="2-vuejs-运行环境"><a class="v-toc-item" href="#2-vuejs-运行环境">#</a> 2. Vue.JS 运行环境</h4>
+<p>Vue.JS 使用 Vue-Cli 搭建的脚手架还是挺方便的，这个就无需 Docker 化了，需要注意的是，建议配置一下开发时候请求的 API 地址。</p>
+<p>我本人用于请求本地地址的 8080 端口，并且 8080 端口映射到 Docker 容器里面的 Django App</p>
+<h4 id="3-django-app"><a class="v-toc-item" href="#3-django-app">#</a> 3. Django App</h4>
+<p>配置 Django, 我使用的是 ubuntu 16.04 基础镜像，然后安装必备的依赖。</p>
+<p>接着指定 workdir 为当前目录</p>
+<p>需要注意的是，Django App 里面需要等待 PostgreSQL 初始化完毕才能进行正常的运行接下来需要运行的命令，比如 runserver 之类的命令。</p>
+<p>entrypoint 的左右即是放在命令执行之前，这样的话，重写掉 entrypoint 文件，就可以实现上面的功能了</p>
+<pre><code class="language-python"># 本段代码来自 cookiecutter Django
+<span class="token keyword">function</span> <span class="token function">postgres_ready</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+python <span class="token operator">&lt;&lt;</span> <span class="token constant">END</span>
+<span class="token keyword">import</span> sys
+<span class="token keyword">import</span> psycopg2
+<span class="token keyword">try</span><span class="token operator">:</span>
+    conn <span class="token operator">=</span> psycopg2<span class="token punctuation">.</span><span class="token function">connect</span><span class="token punctuation">(</span>dbname<span class="token operator">=</span><span class="token string">"$POSTGRES_USER"</span><span class="token punctuation">,</span> user<span class="token operator">=</span><span class="token string">"$POSTGRES_USER"</span><span class="token punctuation">,</span> password<span class="token operator">=</span><span class="token string">"$POSTGRES_PASSWORD"</span><span class="token punctuation">,</span> host<span class="token operator">=</span><span class="token string">"postgres"</span><span class="token punctuation">)</span>
+except psycopg2<span class="token punctuation">.</span>OperationalError<span class="token operator">:</span>
+    sys<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">)</span>
+sys<span class="token punctuation">.</span><span class="token function">exit</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span>
+<span class="token constant">END</span>
+<span class="token punctuation">}</span>
+
+until postgres_ready<span class="token punctuation">;</span> <span class="token keyword">do</span>
+  <span class="token operator">></span><span class="token operator">&amp;</span><span class="token number">2</span> echo <span class="token string">"Postgres is unavailable - sleeping"</span>
+  sleep <span class="token number">1</span>
+done
+</code></pre>
+<p>最后封装一些命令到，比如启动 Celery 之类的。</p>
+<h4 id="4-celery-运行环境"><a class="v-toc-item" href="#4-celery-运行环境">#</a> 4. Celery 运行环境</h4>
+<h4 id="5-其他零散的重要配置"><a class="v-toc-item" href="#5-其他零散的重要配置">#</a> 5. 其他零散的重要配置</h4>
+<h3 id="32-具体开发"><a class="v-toc-item" href="#32-具体开发">#</a> 3.2 具体开发</h3>
+<p>我编写了一整套 makefile 的命令，我会先进入项目 YaDjangoBlog , 然后执行 make ; 执行 make 之后，显示了我编写的一些便于开发测试的命令如下：</p>
+<pre><code>sep--sep-a           ========== 开发时命令 ==============
+django-build-up      build and compose up
+force_djnago_build-up django / pg / es
+django-before-up     e.g pg / es / redis
+django-runserver     runserver
+django-celerybeat    celerybeat
+django-celeryworker  celeryworker
+django-just-up       build and up
+django-manager       Enter python manage.py
+django-console       Enter Django Console
+shell                Enter Shell
+dbshell              Enter psql as yadjangoweb
+sep--sep-b           ========== 测试与代码质量 ==============
+lint                 check style with flake8
+test                 run tests quickly with the default Python
+coverage             check code coverage quickly with the default Python
+sep--sep-c           ========== 文档生成相关 ==============
+docs                 generate Sphinx HTML documentation, including API docs
+servedocs            compile the docs watching for changes
+sep--sep-d           ========== 程序发布相关 ==============
+release              package and upload a release
+dist                 builds source and wheel package
+install              install the package to the active Python's site-packages
+sep--sep-e           ========== Docker 镜像相关 ==============
+build-postgres       &gt; Postgres
+force-build-postgres &gt; Postgres
+build-ubuntu         &gt; base ubuntu
+force_build-ubuntu   &gt; base ubuntu
+build-django         &gt; base django
+force_build-django   &gt; base django
+sep--sep-f           ========== 文件清理相关 ==============
+clean                remove all build, test, coverage and Python artifacts
+clean-build          remove build artifacts
+clean-pyc            remove Python file artifacts
+clean-test           remove test and coverage artifacts
+</code></pre>
+<h4 id="1-构建镜像"><a class="v-toc-item" href="#1-构建镜像">#</a> 1. 构建镜像</h4>
+<p>执行 build 命令即可。</p>
+<h4 id="2-使用-tmuxinator-批量运行命令"><a class="v-toc-item" href="#2-使用-tmuxinator-批量运行命令">#</a> 2. 使用 Tmuxinator 批量运行命令</h4>
+<p>现在，我有这么一个需求，就是在 iterm 中开启如下的终端：</p>
+<ul>
+<li>第 1 个终端，运行的命令是 Vue.JS 的启动命令 npm run dev。</li>
+<li>第 2 个终端，有两个分屏，其一用于构建 iconfont 字体文件的命令，其二用于 Gulp 动态编译 SCSS 文件的命令。</li>
+<li>第 3 个终端，运行的命令是 Django 的 runserver 的命令。</li>
+<li>第 4 个终端，有两个分屏，一个是 Django 容器的 bash 环境，另一个是 PostgreSQL 的 命令行环境。</li>
+<li>第 5 个终端，有两个分屏，一者运行 Celery Beat，另一者则是运行 Celery Worker.</li>
+</ul>
+<blockquote>
+<p>当然，目前没有添加 redis 和 RabbitMQ 的命令行环境</p>
+</blockquote>
+<h4 id="3-使用-pycharm-进行开发"><a class="v-toc-item" href="#3-使用-pycharm-进行开发">#</a> 3. 使用 PyCharm 进行开发</h4>
+<h3 id="33-部署时"><a class="v-toc-item" href="#33-部署时">#</a> 3.3 部署时</h3>
+<p>Docker 部署需要解决的问题，是裸机部署的 Docker 化。</p>
+<blockquote>
+<p>TODO: 目前 Docker 部署的脚本还在编写中，这部分的文字可能后期会调整</p>
+</blockquote>
+<h4 id="0-django-生产环境和开发环境之间的区别"><a class="v-toc-item" href="#0-django-生产环境和开发环境之间的区别">#</a> 0. Django 生产环境和开发环境之间的区别</h4>
+<p>生产环境和开发环境除了一些文字配置上的不同，还有一些不同，比如：</p>
+<ol>
+<li>新增了 uwsgi / gunicorn 作为新的 web 容器</li>
+<li>新增了 Ngnix 作为反向代理</li>
+<li>Celery Worker 数量的变化</li>
+<li>Supervisor 进程守护</li>
+</ol>
+<p>首先说第一点带来的区别，我们使用 Django 内置的 runserver 的时候，其实这个命令可以用于做生产环境的 Web 服务器。</p>
+<p>比如，只需如此 python <a href="http://manage.py">manage.py</a> runserver 0.0.0.0:8888</p>
+<p>可以用，但不推荐用。没什么负载量。这时候就需要 gunicorn 了。你可以理解 Gunicorn 是进阶的 runserver,</p>
+<p>可以参考：<a href="https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/gunicorn/">https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/gunicorn/</a></p>
+<p>同时，Gunicorn 可以进行颗粒度更细致的操作，但负载量不如 uwsgi, 毕竟前者 python 写的，后者是 C 写的。</p>
+<p>一般 Gunicorn 也会配上 NGNIX,</p>
+<p>简单来说，Nginx 至少可以解决下面的问题：</p>
+<ul>
+<li>匹配域名</li>
+<li>转发请求
+<ul>
+<li>设置请求头</li>
+<li>转发本地的静态文件 (static / media）</li>
+<li>映射部分请求到 gunicorn , 然后 gunicorn 开启一个线程到 Django</li>
+<li>负载均衡</li>
+</ul>
+</li>
+</ul>
+<p>需要注意的是 gunicorn 这种关键性的进程，一定要用 Supervisor 进行守护，否则挂掉了就完蛋了，</p>
+<h4 id="1-裸机部署-django-程序"><a class="v-toc-item" href="#1-裸机部署-django-程序">#</a> 1. 裸机部署 Django 程序</h4>
+<h4 id="2-docker-部署"><a class="v-toc-item" href="#2-docker-部署">#</a> 2. Docker 部署</h4>
+<h2 id="0x04-docker-踩坑记录"><a class="v-toc-item" href="#0x04-docker-踩坑记录">#</a> 0x04 Docker 踩坑记录</h2>
+<h3 id="41-postgresql-的初始化"><a class="v-toc-item" href="#41-postgresql-的初始化">#</a> 4.1 PostgreSQL 的初始化</h3>
+<p>当 Docker 化 PostgreSQL 的时候，必须要把一些初始化脚本放在 docker-entrypoint-initdb.d 中，才能初始化，笔者在进行测试的时候多次发现无法进行初始化，究其原因，经过查找，如果没有及时删除 Volume 的话，则无论怎么初始化，或者 Build, 每一次都会挂载原来的文件夹。</p>
+<pre><code class="language-bash"><span class="token constant">ADD</span> init_django_db<span class="token punctuation">.</span>sh <span class="token operator">/</span>docker<span class="token operator">-</span>entrypoint<span class="token operator">-</span>initdb<span class="token punctuation">.</span>d<span class="token operator">/</span>init_django_db<span class="token punctuation">.</span>sh
+</code></pre>
+<h3 id="42-清空所有-image"><a class="v-toc-item" href="#42-清空所有-image">#</a> 4.2 清空所有 Image</h3>
+<pre><code class="language-bash"># Delete all containers
+docker rm <span class="token function">$</span><span class="token punctuation">(</span>docker ps <span class="token operator">-</span>a <span class="token operator">-</span>q<span class="token punctuation">)</span>
+# Delete all images
+docker rmi <span class="token function">$</span><span class="token punctuation">(</span>docker images <span class="token operator">-</span>q<span class="token punctuation">)</span>
+# Force <span class="token keyword">delete</span>
+docker rmi <span class="token function">$</span><span class="token punctuation">(</span>docker images <span class="token operator">-</span>q<span class="token punctuation">)</span> <span class="token operator">-</span>f
+# Delete Unused Volume
+docker volume prune
+</code></pre>
+<h3 id="43-时区"><a class="v-toc-item" href="#43-时区">#</a> 4.3 时区</h3>
+<pre><code># Alpine
+RUN apk --no-cache add tzdata &amp;&amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime &amp;&amp; echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone
+# Ubuntu
+RUN echo &quot;Asia/Shanghai&quot; &gt; /etc/timezone &amp;&amp; dpkg-reconfigure -f noninteractive tzdata
+# Centos
+RUN echo &quot;Asia/shanghai&quot; &gt; /etc/timezone
+</code></pre>
+<h1 id="0xee-参考链接"><a class="v-toc-item" href="#0xee-参考链接">#</a> 0xEE 参考链接</h1>
+<ul>
+<li><a href="https://github.com/wsargent/docker-cheat-sheet">https://github.com/wsargent/docker-cheat-sheet</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-01-20</strong> 初始化本文</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-docker-%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5">0x01 Docker 相关概念</a>
+<ul>
+<li><a href="#11-docker-%E6%98%AF%E4%BB%80%E4%B9%88">1.1 Docker 是什么？</a></li>
+<li><a href="#12-docker-%E6%98%AF%E7%94%A8%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84">1.2 Docker 是用来做什么的？</a></li>
+</ul>
+</li>
+<li><a href="#0x02-docker-%E5%88%9D%E5%A7%8B%E9%85%8D%E7%BD%AE">0x02 Docker 初始配置</a></li>
+<li><a href="#0x03-django-%E6%8A%80%E6%9C%AF%E6%A0%88-docker-%E5%8C%96">0x03 Django 技术栈 Docker 化</a>
+<ul>
+<li><a href="#31-%E5%BC%80%E5%8F%91%E6%97%B6">3.1 开发时</a>
+<ul>
+<li><a href="#1-%E8%BF%90%E8%A1%8C%E6%89%80%E9%9C%80%E7%BB%84%E4%BB%B6">1. 运行所需组件</a></li>
+<li><a href="#2-vuejs-%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83">2. Vue.JS 运行环境</a></li>
+<li><a href="#3-django-app">3. Django App</a></li>
+<li><a href="#4-celery-%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83">4. Celery 运行环境</a></li>
+<li><a href="#5-%E5%85%B6%E4%BB%96%E9%9B%B6%E6%95%A3%E7%9A%84%E9%87%8D%E8%A6%81%E9%85%8D%E7%BD%AE">5. 其他零散的重要配置</a></li>
+</ul>
+</li>
+<li><a href="#32-%E5%85%B7%E4%BD%93%E5%BC%80%E5%8F%91">3.2 具体开发</a>
+<ul>
+<li><a href="#1-%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F">1. 构建镜像</a></li>
+<li><a href="#2-%E4%BD%BF%E7%94%A8-tmuxinator-%E6%89%B9%E9%87%8F%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4">2. 使用 Tmuxinator 批量运行命令</a></li>
+<li><a href="#3-%E4%BD%BF%E7%94%A8-pycharm-%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91">3. 使用 PyCharm 进行开发</a></li>
+</ul>
+</li>
+<li><a href="#33-%E9%83%A8%E7%BD%B2%E6%97%B6">3.3 部署时</a>
+<ul>
+<li><a href="#0-django-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB">0. Django 生产环境和开发环境之间的区别</a></li>
+<li><a href="#1-%E8%A3%B8%E6%9C%BA%E9%83%A8%E7%BD%B2-django-%E7%A8%8B%E5%BA%8F">1. 裸机部署 Django 程序</a></li>
+<li><a href="#2-docker-%E9%83%A8%E7%BD%B2">2. Docker 部署</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x04-docker-%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95">0x04 Docker 踩坑记录</a>
+<ul>
+<li><a href="#41-postgresql-%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96">4.1 PostgreSQL 的初始化</a></li>
+<li><a href="#42-%E6%B8%85%E7%A9%BA%E6%89%80%E6%9C%89-image">4.2 清空所有 Image</a></li>
+<li><a href="#43-%E6%97%B6%E5%8C%BA">4.3 时区</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">0xEE 参考链接</a></li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["CheatSheet"],"path":"20180210_DockerCheatSheet.md","title":"Docker CheatSheet","slug":"Docker CheatSheet","date":"2018-02-10","category":"DevOps","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cp\u003e本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Docker 相关和命令。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eDocker 相关概念\u003c/li\u003e\n\u003cli\u003eDocker 配套工具\u003c/li\u003e\n\u003cli\u003eDjango PostgreSQL RabbitMQ Redis ElasticSearch Sentry 集群 Docker 化\u003c/li\u003e\n\u003cli\u003eDocker 踩坑记录\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e不定期更新。\u003c/p\u003e\n\u003c!-- more --\u003e\n\u003ch2 id=\"0x01-docker-相关概念\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-docker-相关概念\"\u003e#\u003c/a\u003e 0x01 Docker 相关概念\u003c/h2\u003e\n\u003ch3 id=\"11-docker-是什么\"\u003e\u003ca class=\"v-toc-item\" href=\"#11-docker-是什么\"\u003e#\u003c/a\u003e 1.1 Docker 是什么？\u003c/h3\u003e\n\u003cp\u003e在认知 Docker 这种相对而言比较新概念的时候，只要从以往的经验中拿出一个词语来概括新词汇即可。\u003c/p\u003e\n\u003cp\u003e于是，我们便可以这么理解：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eDocker 是一种比虚拟机轻量的用来存放职责比较单一的应用的容器。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e也就是三点：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e比虚拟机轻量\u003c/li\u003e\n\u003cli\u003e用来存放职责单一的应用\u003c/li\u003e\n\u003cli\u003e容器\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e显然这是一种理解，而不是一种定义。\u003c/p\u003e\n\u003ch3 id=\"12-docker-是用来做什么的\"\u003e\u003ca class=\"v-toc-item\" href=\"#12-docker-是用来做什么的\"\u003e#\u003c/a\u003e 1.2 Docker 是用来做什么的？\u003c/h3\u003e\n\u003cp\u003e新技术本质是什么？工具也。\u003cbr\u003e\n每一个新的技术都是为了提升效率才被创造出来，那么，究竟 Docker 可以从哪些方面提升我们的效率呢？\u003c/p\u003e\n\u003cp\u003e我们知道开发一个有些规模的网站的话，需要严格遵守如下的开发流程：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e编码\u003c/li\u003e\n\u003cli\u003e测试\u003c/li\u003e\n\u003cli\u003e集成到系统中\u003c/li\u003e\n\u003cli\u003e部署\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e但如果人员比较多，则会出现问题，有的人喜欢用 MacOS, 有的人喜欢用 Ubuntu, 开发测试环境怎么统一呢？如果开发人员明明使用的是某个版本的 PostgreSQL, 用了最新的功能，但是测试和运维用的就是老版本的功能怎么办？\u003c/p\u003e\n\u003cp\u003e部署环境也会有问题，比如，开发部突然想使用更高版本的软件，比如突然需要更多的 Django 应用来负担海量请求的怎么办？Hadoop 不够用怎么办？\u003c/p\u003e\n\u003cp\u003e当然，思路很简单，开发的时候使用虚拟机，拷贝给大家一起用，部署的时候多创建一些机器，然后上 Ansible 远程操控。即可。\u003c/p\u003e\n\u003cp\u003e并不是不行，但是 Docker 由于更加轻量，操作粒度更加细腻，我可以销毁镜像，上传镜像，定制镜像，很轻松调整镜像包并且安装挂载文件。\u003c/p\u003e\n\u003ch2 id=\"0x02-docker-初始配置\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-docker-初始配置\"\u003e#\u003c/a\u003e 0x02 Docker 初始配置\u003c/h2\u003e\n\u003cpre\u003e\u003ccode\u003edocker-machine create --driver=virtualbox default\ndocker-machine ls\neval \u0026quot;$(docker-machine env default)\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"0x03-django-技术栈-docker-化\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-django-技术栈-docker-化\"\u003e#\u003c/a\u003e 0x03 Django 技术栈 Docker 化\u003c/h2\u003e\n\u003cp\u003e为了理解这个过程，下面我将我 Docker 化 django 应用的流程按照一定步骤演示出来。我将我使用 Django 的部分经验搞出来，做成了一个 django-bpc ，即 django best practice。如果诸位有兴趣研究的话，拿来看看源码倒是倒是非常好。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e# 演示环境为 \u003cspan class=\"token constant\"\u003eMAC\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e 在此之前，务必安装好 docker \u003cspan class=\"token keyword\"\u003efor\u003c/span\u003e mac 以及 virualbox\n# xxxxxx 为 阿里云分配的容器 registry\ndocker\u003cspan class=\"token operator\"\u003e-\u003c/span\u003emachine create \u003cspan class=\"token operator\"\u003e--\u003c/span\u003eengine\u003cspan class=\"token operator\"\u003e-\u003c/span\u003eregistry\u003cspan class=\"token operator\"\u003e-\u003c/span\u003emirror\u003cspan class=\"token operator\"\u003e=\u003c/span\u003ehttps\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003exxxxxx\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003emirror\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ealiyuncs\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ecom \u003cspan class=\"token operator\"\u003e-\u003c/span\u003ed virtualbox \u003cspan class=\"token keyword\"\u003edefault\u003c/span\u003e\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e├── \u003cspan class=\"token constant\"\u003eAUTHORS\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003emd\n├── \u003cspan class=\"token constant\"\u003eHISTORY\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003emd\n├── \u003cspan class=\"token constant\"\u003eLICENSE\u003c/span\u003e\n├── \u003cspan class=\"token constant\"\u003eMANIFEST\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ein\n├── Makefile\n├── \u003cspan class=\"token constant\"\u003eREADME\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003emd\n├── assets\n├── compose\n│   ├── django\n│   ├── elasticsearch\n│   ├── nginx\n│   ├── postgres\n│   ├── rabbitmq\n│   └── redis\n├── config\n│   ├── __init__\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epy\n│   ├── settings\n│   ├── urls\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epy\n│   └── wsgi\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epy\n├── dev\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eyml\n├── docker\u003cspan class=\"token operator\"\u003e-\u003c/span\u003ecompose\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eyml\n├── docs\n│   ├── Makefile\n│   ├── exts\n│   ├── make\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ebat\n│   ├── make_pdf\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003esh\n│   └── source\n├── manage\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epy\n├── pytest\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eini\n├── requirements\n│   ├── base\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003etxt\n│   ├── local\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003etxt\n│   ├── production\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003etxt\n│   └── test\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003etxt\n├── scripts\n├── setup\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ecfg\n├── tests\n│   ├── __init__\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epy\n│   ├── conftest\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epy\n│   └── test_basics\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epy\n└── yadjangoblog\n    ├── __init__\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epy\n    ├── contrib\n    ├── \u003cspan class=\"token keyword\"\u003estatic\u003c/span\u003e\n    ├── templates\n    ├── yaaccounts\n    ├── yaadmin\n    ├── yaapi\n    ├── yablog\n    ├── yacommon\n    └── yataskapp\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"31-开发时\"\u003e\u003ca class=\"v-toc-item\" href=\"#31-开发时\"\u003e#\u003c/a\u003e 3.1 开发时\u003c/h3\u003e\n\u003ch4 id=\"1-运行所需组件\"\u003e\u003ca class=\"v-toc-item\" href=\"#1-运行所需组件\"\u003e#\u003c/a\u003e 1. 运行所需组件\u003c/h4\u003e\n\u003cp\u003e在开发时候需要使用几个后台的组件\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003ePostgreSQL 用于做数据存储\u003c/li\u003e\n\u003cli\u003eRedis 用于做缓存 和 Session 等等\u003c/li\u003e\n\u003cli\u003eRedditMQ 用于消息队列\u003c/li\u003e\n\u003cli\u003eElasticSearch 用于做搜索与推荐\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e目录中的组件基本上都在这儿了。\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e├── compose\n│   ├── django\n│   ├── elasticsearch\n│   ├── nginx\n│   ├── postgres\n│   ├── rabbitmq\n│   └── redis\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e进行初步的封装和添加脚本，不直接采用官网的配置需要是因为添加一些的定制版本。\u003c/p\u003e\n\u003ch4 id=\"2-vuejs-运行环境\"\u003e\u003ca class=\"v-toc-item\" href=\"#2-vuejs-运行环境\"\u003e#\u003c/a\u003e 2. Vue.JS 运行环境\u003c/h4\u003e\n\u003cp\u003eVue.JS 使用 Vue-Cli 搭建的脚手架还是挺方便的，这个就无需 Docker 化了，需要注意的是，建议配置一下开发时候请求的 API 地址。\u003c/p\u003e\n\u003cp\u003e我本人用于请求本地地址的 8080 端口，并且 8080 端口映射到 Docker 容器里面的 Django App\u003c/p\u003e\n\u003ch4 id=\"3-django-app\"\u003e\u003ca class=\"v-toc-item\" href=\"#3-django-app\"\u003e#\u003c/a\u003e 3. Django App\u003c/h4\u003e\n\u003cp\u003e配置 Django, 我使用的是 ubuntu 16.04 基础镜像，然后安装必备的依赖。\u003c/p\u003e\n\u003cp\u003e接着指定 workdir 为当前目录\u003c/p\u003e\n\u003cp\u003e需要注意的是，Django App 里面需要等待 PostgreSQL 初始化完毕才能进行正常的运行接下来需要运行的命令，比如 runserver 之类的命令。\u003c/p\u003e\n\u003cp\u003eentrypoint 的左右即是放在命令执行之前，这样的话，重写掉 entrypoint 文件，就可以实现上面的功能了\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e# 本段代码来自 cookiecutter Django\n\u003cspan class=\"token keyword\"\u003efunction\u003c/span\u003e \u003cspan class=\"token function\"\u003epostgres_ready\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\npython \u003cspan class=\"token operator\"\u003e\u0026lt;\u0026lt;\u003c/span\u003e \u003cspan class=\"token constant\"\u003eEND\u003c/span\u003e\n\u003cspan class=\"token keyword\"\u003eimport\u003c/span\u003e sys\n\u003cspan class=\"token keyword\"\u003eimport\u003c/span\u003e psycopg2\n\u003cspan class=\"token keyword\"\u003etry\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n    conn \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e psycopg2\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003econnect\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003edbname\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token string\"\u003e\"$POSTGRES_USER\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e user\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token string\"\u003e\"$POSTGRES_USER\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e password\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token string\"\u003e\"$POSTGRES_PASSWORD\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e host\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token string\"\u003e\"postgres\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\nexcept psycopg2\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eOperationalError\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n    sys\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eexit\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token operator\"\u003e-\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\nsys\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eexit\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e0\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003cspan class=\"token constant\"\u003eEND\u003c/span\u003e\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\n\nuntil postgres_ready\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e \u003cspan class=\"token keyword\"\u003edo\u003c/span\u003e\n  \u003cspan class=\"token operator\"\u003e\u003e\u003c/span\u003e\u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e echo \u003cspan class=\"token string\"\u003e\"Postgres is unavailable - sleeping\"\u003c/span\u003e\n  sleep \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\ndone\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e最后封装一些命令到，比如启动 Celery 之类的。\u003c/p\u003e\n\u003ch4 id=\"4-celery-运行环境\"\u003e\u003ca class=\"v-toc-item\" href=\"#4-celery-运行环境\"\u003e#\u003c/a\u003e 4. Celery 运行环境\u003c/h4\u003e\n\u003ch4 id=\"5-其他零散的重要配置\"\u003e\u003ca class=\"v-toc-item\" href=\"#5-其他零散的重要配置\"\u003e#\u003c/a\u003e 5. 其他零散的重要配置\u003c/h4\u003e\n\u003ch3 id=\"32-具体开发\"\u003e\u003ca class=\"v-toc-item\" href=\"#32-具体开发\"\u003e#\u003c/a\u003e 3.2 具体开发\u003c/h3\u003e\n\u003cp\u003e我编写了一整套 makefile 的命令，我会先进入项目 YaDjangoBlog , 然后执行 make ; 执行 make 之后，显示了我编写的一些便于开发测试的命令如下：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esep--sep-a           ========== 开发时命令 ==============\ndjango-build-up      build and compose up\nforce_djnago_build-up django / pg / es\ndjango-before-up     e.g pg / es / redis\ndjango-runserver     runserver\ndjango-celerybeat    celerybeat\ndjango-celeryworker  celeryworker\ndjango-just-up       build and up\ndjango-manager       Enter python manage.py\ndjango-console       Enter Django Console\nshell                Enter Shell\ndbshell              Enter psql as yadjangoweb\nsep--sep-b           ========== 测试与代码质量 ==============\nlint                 check style with flake8\ntest                 run tests quickly with the default Python\ncoverage             check code coverage quickly with the default Python\nsep--sep-c           ========== 文档生成相关 ==============\ndocs                 generate Sphinx HTML documentation, including API docs\nservedocs            compile the docs watching for changes\nsep--sep-d           ========== 程序发布相关 ==============\nrelease              package and upload a release\ndist                 builds source and wheel package\ninstall              install the package to the active Python's site-packages\nsep--sep-e           ========== Docker 镜像相关 ==============\nbuild-postgres       \u0026gt; Postgres\nforce-build-postgres \u0026gt; Postgres\nbuild-ubuntu         \u0026gt; base ubuntu\nforce_build-ubuntu   \u0026gt; base ubuntu\nbuild-django         \u0026gt; base django\nforce_build-django   \u0026gt; base django\nsep--sep-f           ========== 文件清理相关 ==============\nclean                remove all build, test, coverage and Python artifacts\nclean-build          remove build artifacts\nclean-pyc            remove Python file artifacts\nclean-test           remove test and coverage artifacts\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"1-构建镜像\"\u003e\u003ca class=\"v-toc-item\" href=\"#1-构建镜像\"\u003e#\u003c/a\u003e 1. 构建镜像\u003c/h4\u003e\n\u003cp\u003e执行 build 命令即可。\u003c/p\u003e\n\u003ch4 id=\"2-使用-tmuxinator-批量运行命令\"\u003e\u003ca class=\"v-toc-item\" href=\"#2-使用-tmuxinator-批量运行命令\"\u003e#\u003c/a\u003e 2. 使用 Tmuxinator 批量运行命令\u003c/h4\u003e\n\u003cp\u003e现在，我有这么一个需求，就是在 iterm 中开启如下的终端：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e第 1 个终端，运行的命令是 Vue.JS 的启动命令 npm run dev。\u003c/li\u003e\n\u003cli\u003e第 2 个终端，有两个分屏，其一用于构建 iconfont 字体文件的命令，其二用于 Gulp 动态编译 SCSS 文件的命令。\u003c/li\u003e\n\u003cli\u003e第 3 个终端，运行的命令是 Django 的 runserver 的命令。\u003c/li\u003e\n\u003cli\u003e第 4 个终端，有两个分屏，一个是 Django 容器的 bash 环境，另一个是 PostgreSQL 的 命令行环境。\u003c/li\u003e\n\u003cli\u003e第 5 个终端，有两个分屏，一者运行 Celery Beat，另一者则是运行 Celery Worker.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e当然，目前没有添加 redis 和 RabbitMQ 的命令行环境\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch4 id=\"3-使用-pycharm-进行开发\"\u003e\u003ca class=\"v-toc-item\" href=\"#3-使用-pycharm-进行开发\"\u003e#\u003c/a\u003e 3. 使用 PyCharm 进行开发\u003c/h4\u003e\n\u003ch3 id=\"33-部署时\"\u003e\u003ca class=\"v-toc-item\" href=\"#33-部署时\"\u003e#\u003c/a\u003e 3.3 部署时\u003c/h3\u003e\n\u003cp\u003eDocker 部署需要解决的问题，是裸机部署的 Docker 化。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eTODO: 目前 Docker 部署的脚本还在编写中，这部分的文字可能后期会调整\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch4 id=\"0-django-生产环境和开发环境之间的区别\"\u003e\u003ca class=\"v-toc-item\" href=\"#0-django-生产环境和开发环境之间的区别\"\u003e#\u003c/a\u003e 0. Django 生产环境和开发环境之间的区别\u003c/h4\u003e\n\u003cp\u003e生产环境和开发环境除了一些文字配置上的不同，还有一些不同，比如：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e新增了 uwsgi / gunicorn 作为新的 web 容器\u003c/li\u003e\n\u003cli\u003e新增了 Ngnix 作为反向代理\u003c/li\u003e\n\u003cli\u003eCelery Worker 数量的变化\u003c/li\u003e\n\u003cli\u003eSupervisor 进程守护\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e首先说第一点带来的区别，我们使用 Django 内置的 runserver 的时候，其实这个命令可以用于做生产环境的 Web 服务器。\u003c/p\u003e\n\u003cp\u003e比如，只需如此 python \u003ca href=\"http://manage.py\"\u003emanage.py\u003c/a\u003e runserver 0.0.0.0:8888\u003c/p\u003e\n\u003cp\u003e可以用，但不推荐用。没什么负载量。这时候就需要 gunicorn 了。你可以理解 Gunicorn 是进阶的 runserver,\u003c/p\u003e\n\u003cp\u003e可以参考：\u003ca href=\"https://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/gunicorn/\"\u003ehttps://docs.djangoproject.com/en/2.0/howto/deployment/wsgi/gunicorn/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e同时，Gunicorn 可以进行颗粒度更细致的操作，但负载量不如 uwsgi, 毕竟前者 python 写的，后者是 C 写的。\u003c/p\u003e\n\u003cp\u003e一般 Gunicorn 也会配上 NGNIX,\u003c/p\u003e\n\u003cp\u003e简单来说，Nginx 至少可以解决下面的问题：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e匹配域名\u003c/li\u003e\n\u003cli\u003e转发请求\n\u003cul\u003e\n\u003cli\u003e设置请求头\u003c/li\u003e\n\u003cli\u003e转发本地的静态文件 (static / media）\u003c/li\u003e\n\u003cli\u003e映射部分请求到 gunicorn , 然后 gunicorn 开启一个线程到 Django\u003c/li\u003e\n\u003cli\u003e负载均衡\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e需要注意的是 gunicorn 这种关键性的进程，一定要用 Supervisor 进行守护，否则挂掉了就完蛋了，\u003c/p\u003e\n\u003ch4 id=\"1-裸机部署-django-程序\"\u003e\u003ca class=\"v-toc-item\" href=\"#1-裸机部署-django-程序\"\u003e#\u003c/a\u003e 1. 裸机部署 Django 程序\u003c/h4\u003e\n\u003ch4 id=\"2-docker-部署\"\u003e\u003ca class=\"v-toc-item\" href=\"#2-docker-部署\"\u003e#\u003c/a\u003e 2. Docker 部署\u003c/h4\u003e\n\u003ch2 id=\"0x04-docker-踩坑记录\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x04-docker-踩坑记录\"\u003e#\u003c/a\u003e 0x04 Docker 踩坑记录\u003c/h2\u003e\n\u003ch3 id=\"41-postgresql-的初始化\"\u003e\u003ca class=\"v-toc-item\" href=\"#41-postgresql-的初始化\"\u003e#\u003c/a\u003e 4.1 PostgreSQL 的初始化\u003c/h3\u003e\n\u003cp\u003e当 Docker 化 PostgreSQL 的时候，必须要把一些初始化脚本放在 docker-entrypoint-initdb.d 中，才能初始化，笔者在进行测试的时候多次发现无法进行初始化，究其原因，经过查找，如果没有及时删除 Volume 的话，则无论怎么初始化，或者 Build, 每一次都会挂载原来的文件夹。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e\u003cspan class=\"token constant\"\u003eADD\u003c/span\u003e init_django_db\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003esh \u003cspan class=\"token operator\"\u003e/\u003c/span\u003edocker\u003cspan class=\"token operator\"\u003e-\u003c/span\u003eentrypoint\u003cspan class=\"token operator\"\u003e-\u003c/span\u003einitdb\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ed\u003cspan class=\"token operator\"\u003e/\u003c/span\u003einit_django_db\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003esh\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"42-清空所有-image\"\u003e\u003ca class=\"v-toc-item\" href=\"#42-清空所有-image\"\u003e#\u003c/a\u003e 4.2 清空所有 Image\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e# Delete all containers\ndocker rm \u003cspan class=\"token function\"\u003e$\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003edocker ps \u003cspan class=\"token operator\"\u003e-\u003c/span\u003ea \u003cspan class=\"token operator\"\u003e-\u003c/span\u003eq\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# Delete all images\ndocker rmi \u003cspan class=\"token function\"\u003e$\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003edocker images \u003cspan class=\"token operator\"\u003e-\u003c/span\u003eq\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# Force \u003cspan class=\"token keyword\"\u003edelete\u003c/span\u003e\ndocker rmi \u003cspan class=\"token function\"\u003e$\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003edocker images \u003cspan class=\"token operator\"\u003e-\u003c/span\u003eq\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token operator\"\u003e-\u003c/span\u003ef\n# Delete Unused Volume\ndocker volume prune\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"43-时区\"\u003e\u003ca class=\"v-toc-item\" href=\"#43-时区\"\u003e#\u003c/a\u003e 4.3 时区\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e# Alpine\nRUN apk --no-cache add tzdata \u0026amp;\u0026amp; ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime \u0026amp;\u0026amp; echo \u0026quot;Asia/Shanghai\u0026quot; \u0026gt; /etc/timezone\n# Ubuntu\nRUN echo \u0026quot;Asia/Shanghai\u0026quot; \u0026gt; /etc/timezone \u0026amp;\u0026amp; dpkg-reconfigure -f noninteractive tzdata\n# Centos\nRUN echo \u0026quot;Asia/shanghai\u0026quot; \u0026gt; /etc/timezone\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch1 id=\"0xee-参考链接\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-参考链接\"\u003e#\u003c/a\u003e 0xEE 参考链接\u003c/h1\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://github.com/wsargent/docker-cheat-sheet\"\u003ehttps://github.com/wsargent/docker-cheat-sheet\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2017-01-20\u003c/strong\u003e 初始化本文\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-docker-%E7%9B%B8%E5%85%B3%E6%A6%82%E5%BF%B5\"\u003e0x01 Docker 相关概念\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#11-docker-%E6%98%AF%E4%BB%80%E4%B9%88\"\u003e1.1 Docker 是什么？\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#12-docker-%E6%98%AF%E7%94%A8%E6%9D%A5%E5%81%9A%E4%BB%80%E4%B9%88%E7%9A%84\"\u003e1.2 Docker 是用来做什么的？\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-docker-%E5%88%9D%E5%A7%8B%E9%85%8D%E7%BD%AE\"\u003e0x02 Docker 初始配置\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-django-%E6%8A%80%E6%9C%AF%E6%A0%88-docker-%E5%8C%96\"\u003e0x03 Django 技术栈 Docker 化\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#31-%E5%BC%80%E5%8F%91%E6%97%B6\"\u003e3.1 开发时\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#1-%E8%BF%90%E8%A1%8C%E6%89%80%E9%9C%80%E7%BB%84%E4%BB%B6\"\u003e1. 运行所需组件\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#2-vuejs-%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83\"\u003e2. Vue.JS 运行环境\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#3-django-app\"\u003e3. Django App\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#4-celery-%E8%BF%90%E8%A1%8C%E7%8E%AF%E5%A2%83\"\u003e4. Celery 运行环境\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#5-%E5%85%B6%E4%BB%96%E9%9B%B6%E6%95%A3%E7%9A%84%E9%87%8D%E8%A6%81%E9%85%8D%E7%BD%AE\"\u003e5. 其他零散的重要配置\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#32-%E5%85%B7%E4%BD%93%E5%BC%80%E5%8F%91\"\u003e3.2 具体开发\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#1-%E6%9E%84%E5%BB%BA%E9%95%9C%E5%83%8F\"\u003e1. 构建镜像\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#2-%E4%BD%BF%E7%94%A8-tmuxinator-%E6%89%B9%E9%87%8F%E8%BF%90%E8%A1%8C%E5%91%BD%E4%BB%A4\"\u003e2. 使用 Tmuxinator 批量运行命令\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#3-%E4%BD%BF%E7%94%A8-pycharm-%E8%BF%9B%E8%A1%8C%E5%BC%80%E5%8F%91\"\u003e3. 使用 PyCharm 进行开发\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#33-%E9%83%A8%E7%BD%B2%E6%97%B6\"\u003e3.3 部署时\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0-django-%E7%94%9F%E4%BA%A7%E7%8E%AF%E5%A2%83%E5%92%8C%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E4%B9%8B%E9%97%B4%E7%9A%84%E5%8C%BA%E5%88%AB\"\u003e0. Django 生产环境和开发环境之间的区别\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#1-%E8%A3%B8%E6%9C%BA%E9%83%A8%E7%BD%B2-django-%E7%A8%8B%E5%BA%8F\"\u003e1. 裸机部署 Django 程序\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#2-docker-%E9%83%A8%E7%BD%B2\"\u003e2. Docker 部署\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x04-docker-%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95\"\u003e0x04 Docker 踩坑记录\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#41-postgresql-%E7%9A%84%E5%88%9D%E5%A7%8B%E5%8C%96\"\u003e4.1 PostgreSQL 的初始化\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#42-%E6%B8%85%E7%A9%BA%E6%89%80%E6%9C%89-image\"\u003e4.2 清空所有 Image\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#43-%E6%97%B6%E5%8C%BA\"\u003e4.3 时区\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5\"\u003e0xEE 参考链接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"Docker CheatSheet"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Celery 快速入门指北 | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<p>本文编写于 2018 年初，于 2019 四月进行修订，也是笔者对 Celery 的系统梳理。</p>
+<p>在我的文章如何保证 Django 项目的数据一致性中，提到了这么一个解决超卖的方案。</p>
+<ol>
+<li>在 Redis 里面直接生成 200 个订单号</li>
+<li>然后用户来一个取走一个订单号码</li>
+<li>通过 Celery 削峰 排队走异步任务</li>
+<li>最后通过数据表的 uniq 约束来防止下单超过 200 个。</li>
+</ol>
+<p><a href="https://zhuanlan.zhihu.com/p/57668068">https://zhuanlan.zhihu.com/p/57668068</a></p>
+<p>有朋友和我讲，你这个方法是有问题的，走异步任务容易并发量太大，容易把数据库打爆。</p>
+<p>其实是可以的，Celery 可以对 Worker 的 Task 限流 (ratelimit)。</p>
+<h2 id="0x01-celery"><a class="v-toc-item" href="#0x01-celery">#</a> 0x01 Celery</h2>
+<h3 id="为什么需要-celery"><a class="v-toc-item" href="#为什么需要-celery">#</a> 为什么需要 Celery</h3>
+<p>在日常开发的时候，常常有一些『任务』需要处理。</p>
+<ol>
+<li>为了提升系统的响应速度，比如发送短信 / 发送邮箱，这类的『任务』可以走异步。</li>
+<li>为了在某个时间执行耗时操作，比如统计用户的文章 / 点赞 / 活跃度。</li>
+<li>为了削减峰值，比如秒杀系统的削峰走异步</li>
+<li>为了业务代码解耦，比如当我在知乎上更新文章，可能就会触发『推荐系统』,『文章管理系统』,『用户通知系统』</li>
+</ol>
+<p>不用 Celery 的话，其实上面的业务也是能做的。 比如 1 中，可以直接启一个线程来做。比如 2 完全可以 Crontab 做一个定时任务。</p>
+<p>那为什么要用 Celery 呢？</p>
+<ol>
+<li>把目光聚焦在 Task 的分发上面。而非线程，Deamon 之类细节的处理。</li>
+<li>方便，简单，易维护，高可用。</li>
+<li>便于监控。</li>
+<li>扩展性好。</li>
+</ol>
+<p>基本上满足了你九成的需求。</p>
+<h2 id="0x02-celery-快速开始"><a class="v-toc-item" href="#0x02-celery-快速开始">#</a> 0x02 Celery 快速开始</h2>
+<p>本文的讨论基于 Broker 为 RabbitMQ, Result Backend 为 Redis, Django 的 Web 应用，叫做 djoo</p>
+<pre><code>sudo rabbitmqctl add_user djoo djoo
+sudo rabbitmqctl add_vhost djoo
+sudo rabbitmqctl set_user_tags djoo djoo
+sudo rabbitmqctl set_permissions -p djoo djoo &quot;.*&quot; &quot;.*&quot; &quot;.*&quot;
+</code></pre>
+<pre><code>CELERY_BROKER_URL = 'amqp://djoo:djoo@localhost:5672/djoo'
+
+CELERY_RESULT_BACKEND = &quot;redis://{host}:{port}/1&quot;.format(
+    host=os.getenv(&quot;REDIS_HOST&quot;, &quot;localhost&quot;), port=os.getenv(&quot;REDIS_PORT&quot;, &quot;6379&quot;)
+)
+
+</code></pre>
+<p>泛读文档之后，需要搞清楚几个概念。</p>
+<ul>
+<li>Broker: 携带 Task 的消息中间件，是发送消息和接收消息的解决方案，比如 RabbitMQ</li>
+<li>Result Backend: Task 执行结果。</li>
+<li>Application: Celery 的实例</li>
+<li>Worker: 执行任务者</li>
+<li>Beat: 或叫做 Schedule, 一般用于执行定时任务。</li>
+<li>Task: 任务</li>
+</ul>
+<h2 id="0x03-celery-guide"><a class="v-toc-item" href="#0x03-celery-guide">#</a> 0x03 Celery Guide</h2>
+<h3 id="application"><a class="v-toc-item" href="#application">#</a> Application</h3>
+<p>Application 可以针对整个 Celery 实例进行配置，比如配置时区，重写 Application 里的基类</p>
+<h3 id="tasks"><a class="v-toc-item" href="#tasks">#</a> Tasks</h3>
+<p>Task 是一个 Class, 并且可以从任意 Callable 的对象创建。</p>
+<p>Task Message 除非被 Acked, 否则不会从队列中移除。</p>
+<blockquote>
+<p>NOTE: 那什么时候算是 Acked?</p>
+</blockquote>
+<pre><code>@app.task(name=&quot;xsum&quot;)
+def xsum(numbers):
+    return sum(numbers)
+</code></pre>
+<ul>
+<li>Tasks</li>
+<li>Calling Tasks</li>
+<li>Canvas: Designing Work-flows</li>
+<li>Workers Guide</li>
+<li>Daemonization</li>
+<li>Periodic Tasks</li>
+<li>Routing Tasks</li>
+<li>Monitoring and Management Guide</li>
+<li>Security</li>
+<li>Optimizing</li>
+<li>Debugging</li>
+<li>Concurrency</li>
+<li>Signals</li>
+<li>Testing with Celery</li>
+<li>Extensions and Bootsteps</li>
+<li>Configuration and defaults</li>
+</ul>
+<h3 id="application-2"><a class="v-toc-item" href="#application-2">#</a> Application</h3>
+<h3 id="tasks-2"><a class="v-toc-item" href="#tasks-2">#</a> Tasks</h3>
+<h3 id="calling-tasks"><a class="v-toc-item" href="#calling-tasks">#</a> Calling Tasks</h3>
+<h3 id="canvas-designing-work-flows"><a class="v-toc-item" href="#canvas-designing-work-flows">#</a> Canvas: Designing Work-flows</h3>
+<h3 id="workers-guide"><a class="v-toc-item" href="#workers-guide">#</a> Workers Guide</h3>
+<h3 id="daemonization"><a class="v-toc-item" href="#daemonization">#</a> Daemonization</h3>
+<h3 id="periodic-tasks"><a class="v-toc-item" href="#periodic-tasks">#</a> Periodic Tasks</h3>
+<h3 id="routing-tasks"><a class="v-toc-item" href="#routing-tasks">#</a> Routing Tasks</h3>
+<h3 id="monitoring-and-management-guide"><a class="v-toc-item" href="#monitoring-and-management-guide">#</a> Monitoring and Management Guide</h3>
+<h3 id="security"><a class="v-toc-item" href="#security">#</a> Security</h3>
+<h3 id="optimizing"><a class="v-toc-item" href="#optimizing">#</a> Optimizing</h3>
+<h3 id="debugging"><a class="v-toc-item" href="#debugging">#</a> Debugging</h3>
+<h3 id="concurrency"><a class="v-toc-item" href="#concurrency">#</a> Concurrency</h3>
+<h3 id="signals"><a class="v-toc-item" href="#signals">#</a> Signals</h3>
+<h3 id="testing-with-celery"><a class="v-toc-item" href="#testing-with-celery">#</a> Testing with Celery</h3>
+<h3 id="extensions-and-bootsteps"><a class="v-toc-item" href="#extensions-and-bootsteps">#</a> Extensions and Bootsteps</h3>
+<h3 id="configuration-and-defaults"><a class="v-toc-item" href="#configuration-and-defaults">#</a> Configuration and defaults</h3>
+<h2 id="0x03-rabbitmq"><a class="v-toc-item" href="#0x03-rabbitmq">#</a> 0x03 RabbitMQ</h2>
+<p>发布者的消息经过交换机，分发到不同的队列，最后由接收方进行处理。</p>
+<p>那么问题来了，交换机都是用来干嘛的</p>
+<ul>
+<li>Direct 单播路由：扔一条消息到一个队列中，依照 routingkey 投递</li>
+<li>Topic 多播路由：发给某几类队列（通知）.</li>
+<li>Fanout 广播路由：发给全部绑定在该路由上面的队列。</li>
+<li>Headers</li>
+</ul>
+<ol>
+<li>应用解耦。（平台无关，语言无关）</li>
+</ol>
+<p>比如说，但项目足够大的时候，更新一个活动，可能需要更新用户的一些状态，可能要更新一波统计数据，可能要记录一批日志。这个时候原来的代码可能这么写：</p>
+<pre><code class="language-bash"><span class="token function">update_activity</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">update_user</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">update_user_cache</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">update_stats</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">record_user_log</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</code></pre>
+<p>现在代码就可能这么写：</p>
+<pre><code>send_task_update_activity()
+send_task_update_user()
+send_task_update_user_cache()
+send_task_update_stats()
+send_task_record_user_log()
+</code></pre>
+<ol start="2">
+<li>异步通信。（减轻请求峰值）</li>
+</ol>
+<p>原本一个 webapp 不做异步的话，也能搞定，但做了异步之后，可以大幅度提升吞吐量和响应时间。</p>
+<ol start="3">
+<li>数据持久化。（不丢失消息）</li>
+<li>送达保证。(ack late)</li>
+</ol>
+<h3 id="简单步骤"><a class="v-toc-item" href="#简单步骤">#</a> 简单步骤</h3>
+<ol>
+<li>定义 app, 指定 broker 和 backend</li>
+<li>定义 tasks</li>
+<li>指定 worker</li>
+<li>调用 Task , 调用后返回 AsyncResult 实例，</li>
+</ol>
+<pre><code class="language-python">add<span class="token punctuation">.</span><span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+add<span class="token punctuation">.</span><span class="token function">apply_async</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+add<span class="token punctuation">.</span><span class="token function">apply_async</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> queue<span class="token operator">=</span><span class="token string">'lopri'</span><span class="token punctuation">,</span> countdown<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+add<span class="token punctuation">.</span><span class="token function">signature</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span> countdown<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">)</span>
+
+res <span class="token operator">=</span> add<span class="token punctuation">.</span><span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span>
+res<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>timeout<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">)</span>
+
+</code></pre>
+<h4 id="groups"><a class="v-toc-item" href="#groups">#</a> Groups</h4>
+<pre><code># 并行
+group(add.s(i, i) for i in xrange(10))().get()
+# [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]
+# partial group
+g = group(add.s(i) for i in xrange(10))
+g(10).get()
+</code></pre>
+<h4 id="chains"><a class="v-toc-item" href="#chains">#</a> Chains</h4>
+<pre><code>chain(add.s(4, 4) | mul.s(8))().get()
+(add.s(4, 4) | mul.s(8))().get()
+# partial chain
+g = chain(add.s(4) | mul.s(8))
+g(4).get()
+</code></pre>
+<h4 id="chords"><a class="v-toc-item" href="#chords">#</a> Chords</h4>
+<pre><code class="language-python"><span class="token function">chord</span><span class="token punctuation">(</span><span class="token punctuation">(</span>add<span class="token punctuation">.</span><span class="token function">s</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token function">xrange</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">,</span> xsum<span class="token punctuation">.</span><span class="token function">s</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">(</span><span class="token function">group</span><span class="token punctuation">(</span>add<span class="token punctuation">.</span><span class="token function">s</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> i<span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token function">xrange</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">|</span> xsum<span class="token punctuation">.</span><span class="token function">s</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+# eg <span class="token operator">:</span> upload_document<span class="token punctuation">.</span><span class="token function">s</span><span class="token punctuation">(</span>file<span class="token punctuation">)</span> <span class="token operator">|</span> <span class="token function">group</span><span class="token punctuation">(</span>apply_filter<span class="token punctuation">.</span><span class="token function">s</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">for</span> filter <span class="token keyword">in</span> filters<span class="token punctuation">)</span>
+</code></pre>
+<h2 id="0x07-踩坑集"><a class="v-toc-item" href="#0x07-踩坑集">#</a> 0x07 踩坑集</h2>
+<ul>
+<li>序列问题</li>
+</ul>
+<h2 id="0xee-参考链接"><a class="v-toc-item" href="#0xee-参考链接">#</a> 0xEE 参考链接</h2>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-20</strong> 初始化</li>
+<li><strong>2019-04-04</strong> 重修文字</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-celery">0x01 Celery</a>
+<ul>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-celery">为什么需要 Celery</a></li>
+</ul>
+</li>
+<li><a href="#0x02-celery-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B">0x02 Celery 快速开始</a></li>
+<li><a href="#0x03-celery-guide">0x03 Celery Guide</a>
+<ul>
+<li><a href="#application">Application</a></li>
+<li><a href="#tasks">Tasks</a></li>
+<li><a href="#application-2">Application</a></li>
+<li><a href="#tasks-2">Tasks</a></li>
+<li><a href="#calling-tasks">Calling Tasks</a></li>
+<li><a href="#canvas-designing-work-flows">Canvas: Designing Work-flows</a></li>
+<li><a href="#workers-guide">Workers Guide</a></li>
+<li><a href="#daemonization">Daemonization</a></li>
+<li><a href="#periodic-tasks">Periodic Tasks</a></li>
+<li><a href="#routing-tasks">Routing Tasks</a></li>
+<li><a href="#monitoring-and-management-guide">Monitoring and Management Guide</a></li>
+<li><a href="#security">Security</a></li>
+<li><a href="#optimizing">Optimizing</a></li>
+<li><a href="#debugging">Debugging</a></li>
+<li><a href="#concurrency">Concurrency</a></li>
+<li><a href="#signals">Signals</a></li>
+<li><a href="#testing-with-celery">Testing with Celery</a></li>
+<li><a href="#extensions-and-bootsteps">Extensions and Bootsteps</a></li>
+<li><a href="#configuration-and-defaults">Configuration and defaults</a></li>
+</ul>
+</li>
+<li><a href="#0x03-rabbitmq">0x03 RabbitMQ</a>
+<ul>
+<li><a href="#%E7%AE%80%E5%8D%95%E6%AD%A5%E9%AA%A4">简单步骤</a>
+<ul>
+<li><a href="#groups">Groups</a></li>
+<li><a href="#chains">Chains</a></li>
+<li><a href="#chords">Chords</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#0x07-%E8%B8%A9%E5%9D%91%E9%9B%86">0x07 踩坑集</a></li>
+<li><a href="#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">0xEE 参考链接</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Celery","消息队列"],"path":"20180220_CeleryCheatSheet.md","title":"Celery 快速入门指北","slug":"Celery 快速入门指北","date":"2018-02-02","category":"Python","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cp\u003e本文编写于 2018 年初，于 2019 四月进行修订，也是笔者对 Celery 的系统梳理。\u003c/p\u003e\n\u003cp\u003e在我的文章如何保证 Django 项目的数据一致性中，提到了这么一个解决超卖的方案。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e在 Redis 里面直接生成 200 个订单号\u003c/li\u003e\n\u003cli\u003e然后用户来一个取走一个订单号码\u003c/li\u003e\n\u003cli\u003e通过 Celery 削峰 排队走异步任务\u003c/li\u003e\n\u003cli\u003e最后通过数据表的 uniq 约束来防止下单超过 200 个。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e\u003ca href=\"https://zhuanlan.zhihu.com/p/57668068\"\u003ehttps://zhuanlan.zhihu.com/p/57668068\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e有朋友和我讲，你这个方法是有问题的，走异步任务容易并发量太大，容易把数据库打爆。\u003c/p\u003e\n\u003cp\u003e其实是可以的，Celery 可以对 Worker 的 Task 限流 (ratelimit)。\u003c/p\u003e\n\u003ch2 id=\"0x01-celery\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-celery\"\u003e#\u003c/a\u003e 0x01 Celery\u003c/h2\u003e\n\u003ch3 id=\"为什么需要-celery\"\u003e\u003ca class=\"v-toc-item\" href=\"#为什么需要-celery\"\u003e#\u003c/a\u003e 为什么需要 Celery\u003c/h3\u003e\n\u003cp\u003e在日常开发的时候，常常有一些『任务』需要处理。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e为了提升系统的响应速度，比如发送短信 / 发送邮箱，这类的『任务』可以走异步。\u003c/li\u003e\n\u003cli\u003e为了在某个时间执行耗时操作，比如统计用户的文章 / 点赞 / 活跃度。\u003c/li\u003e\n\u003cli\u003e为了削减峰值，比如秒杀系统的削峰走异步\u003c/li\u003e\n\u003cli\u003e为了业务代码解耦，比如当我在知乎上更新文章，可能就会触发『推荐系统』,『文章管理系统』,『用户通知系统』\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e不用 Celery 的话，其实上面的业务也是能做的。 比如 1 中，可以直接启一个线程来做。比如 2 完全可以 Crontab 做一个定时任务。\u003c/p\u003e\n\u003cp\u003e那为什么要用 Celery 呢？\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e把目光聚焦在 Task 的分发上面。而非线程，Deamon 之类细节的处理。\u003c/li\u003e\n\u003cli\u003e方便，简单，易维护，高可用。\u003c/li\u003e\n\u003cli\u003e便于监控。\u003c/li\u003e\n\u003cli\u003e扩展性好。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e基本上满足了你九成的需求。\u003c/p\u003e\n\u003ch2 id=\"0x02-celery-快速开始\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-celery-快速开始\"\u003e#\u003c/a\u003e 0x02 Celery 快速开始\u003c/h2\u003e\n\u003cp\u003e本文的讨论基于 Broker 为 RabbitMQ, Result Backend 为 Redis, Django 的 Web 应用，叫做 djoo\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esudo rabbitmqctl add_user djoo djoo\nsudo rabbitmqctl add_vhost djoo\nsudo rabbitmqctl set_user_tags djoo djoo\nsudo rabbitmqctl set_permissions -p djoo djoo \u0026quot;.*\u0026quot; \u0026quot;.*\u0026quot; \u0026quot;.*\u0026quot;\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003eCELERY_BROKER_URL = 'amqp://djoo:djoo@localhost:5672/djoo'\n\nCELERY_RESULT_BACKEND = \u0026quot;redis://{host}:{port}/1\u0026quot;.format(\n    host=os.getenv(\u0026quot;REDIS_HOST\u0026quot;, \u0026quot;localhost\u0026quot;), port=os.getenv(\u0026quot;REDIS_PORT\u0026quot;, \u0026quot;6379\u0026quot;)\n)\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e泛读文档之后，需要搞清楚几个概念。\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eBroker: 携带 Task 的消息中间件，是发送消息和接收消息的解决方案，比如 RabbitMQ\u003c/li\u003e\n\u003cli\u003eResult Backend: Task 执行结果。\u003c/li\u003e\n\u003cli\u003eApplication: Celery 的实例\u003c/li\u003e\n\u003cli\u003eWorker: 执行任务者\u003c/li\u003e\n\u003cli\u003eBeat: 或叫做 Schedule, 一般用于执行定时任务。\u003c/li\u003e\n\u003cli\u003eTask: 任务\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x03-celery-guide\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-celery-guide\"\u003e#\u003c/a\u003e 0x03 Celery Guide\u003c/h2\u003e\n\u003ch3 id=\"application\"\u003e\u003ca class=\"v-toc-item\" href=\"#application\"\u003e#\u003c/a\u003e Application\u003c/h3\u003e\n\u003cp\u003eApplication 可以针对整个 Celery 实例进行配置，比如配置时区，重写 Application 里的基类\u003c/p\u003e\n\u003ch3 id=\"tasks\"\u003e\u003ca class=\"v-toc-item\" href=\"#tasks\"\u003e#\u003c/a\u003e Tasks\u003c/h3\u003e\n\u003cp\u003eTask 是一个 Class, 并且可以从任意 Callable 的对象创建。\u003c/p\u003e\n\u003cp\u003eTask Message 除非被 Acked, 否则不会从队列中移除。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eNOTE: 那什么时候算是 Acked?\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode\u003e@app.task(name=\u0026quot;xsum\u0026quot;)\ndef xsum(numbers):\n    return sum(numbers)\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003eTasks\u003c/li\u003e\n\u003cli\u003eCalling Tasks\u003c/li\u003e\n\u003cli\u003eCanvas: Designing Work-flows\u003c/li\u003e\n\u003cli\u003eWorkers Guide\u003c/li\u003e\n\u003cli\u003eDaemonization\u003c/li\u003e\n\u003cli\u003ePeriodic Tasks\u003c/li\u003e\n\u003cli\u003eRouting Tasks\u003c/li\u003e\n\u003cli\u003eMonitoring and Management Guide\u003c/li\u003e\n\u003cli\u003eSecurity\u003c/li\u003e\n\u003cli\u003eOptimizing\u003c/li\u003e\n\u003cli\u003eDebugging\u003c/li\u003e\n\u003cli\u003eConcurrency\u003c/li\u003e\n\u003cli\u003eSignals\u003c/li\u003e\n\u003cli\u003eTesting with Celery\u003c/li\u003e\n\u003cli\u003eExtensions and Bootsteps\u003c/li\u003e\n\u003cli\u003eConfiguration and defaults\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"application-2\"\u003e\u003ca class=\"v-toc-item\" href=\"#application-2\"\u003e#\u003c/a\u003e Application\u003c/h3\u003e\n\u003ch3 id=\"tasks-2\"\u003e\u003ca class=\"v-toc-item\" href=\"#tasks-2\"\u003e#\u003c/a\u003e Tasks\u003c/h3\u003e\n\u003ch3 id=\"calling-tasks\"\u003e\u003ca class=\"v-toc-item\" href=\"#calling-tasks\"\u003e#\u003c/a\u003e Calling Tasks\u003c/h3\u003e\n\u003ch3 id=\"canvas-designing-work-flows\"\u003e\u003ca class=\"v-toc-item\" href=\"#canvas-designing-work-flows\"\u003e#\u003c/a\u003e Canvas: Designing Work-flows\u003c/h3\u003e\n\u003ch3 id=\"workers-guide\"\u003e\u003ca class=\"v-toc-item\" href=\"#workers-guide\"\u003e#\u003c/a\u003e Workers Guide\u003c/h3\u003e\n\u003ch3 id=\"daemonization\"\u003e\u003ca class=\"v-toc-item\" href=\"#daemonization\"\u003e#\u003c/a\u003e Daemonization\u003c/h3\u003e\n\u003ch3 id=\"periodic-tasks\"\u003e\u003ca class=\"v-toc-item\" href=\"#periodic-tasks\"\u003e#\u003c/a\u003e Periodic Tasks\u003c/h3\u003e\n\u003ch3 id=\"routing-tasks\"\u003e\u003ca class=\"v-toc-item\" href=\"#routing-tasks\"\u003e#\u003c/a\u003e Routing Tasks\u003c/h3\u003e\n\u003ch3 id=\"monitoring-and-management-guide\"\u003e\u003ca class=\"v-toc-item\" href=\"#monitoring-and-management-guide\"\u003e#\u003c/a\u003e Monitoring and Management Guide\u003c/h3\u003e\n\u003ch3 id=\"security\"\u003e\u003ca class=\"v-toc-item\" href=\"#security\"\u003e#\u003c/a\u003e Security\u003c/h3\u003e\n\u003ch3 id=\"optimizing\"\u003e\u003ca class=\"v-toc-item\" href=\"#optimizing\"\u003e#\u003c/a\u003e Optimizing\u003c/h3\u003e\n\u003ch3 id=\"debugging\"\u003e\u003ca class=\"v-toc-item\" href=\"#debugging\"\u003e#\u003c/a\u003e Debugging\u003c/h3\u003e\n\u003ch3 id=\"concurrency\"\u003e\u003ca class=\"v-toc-item\" href=\"#concurrency\"\u003e#\u003c/a\u003e Concurrency\u003c/h3\u003e\n\u003ch3 id=\"signals\"\u003e\u003ca class=\"v-toc-item\" href=\"#signals\"\u003e#\u003c/a\u003e Signals\u003c/h3\u003e\n\u003ch3 id=\"testing-with-celery\"\u003e\u003ca class=\"v-toc-item\" href=\"#testing-with-celery\"\u003e#\u003c/a\u003e Testing with Celery\u003c/h3\u003e\n\u003ch3 id=\"extensions-and-bootsteps\"\u003e\u003ca class=\"v-toc-item\" href=\"#extensions-and-bootsteps\"\u003e#\u003c/a\u003e Extensions and Bootsteps\u003c/h3\u003e\n\u003ch3 id=\"configuration-and-defaults\"\u003e\u003ca class=\"v-toc-item\" href=\"#configuration-and-defaults\"\u003e#\u003c/a\u003e Configuration and defaults\u003c/h3\u003e\n\u003ch2 id=\"0x03-rabbitmq\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-rabbitmq\"\u003e#\u003c/a\u003e 0x03 RabbitMQ\u003c/h2\u003e\n\u003cp\u003e发布者的消息经过交换机，分发到不同的队列，最后由接收方进行处理。\u003c/p\u003e\n\u003cp\u003e那么问题来了，交换机都是用来干嘛的\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eDirect 单播路由：扔一条消息到一个队列中，依照 routingkey 投递\u003c/li\u003e\n\u003cli\u003eTopic 多播路由：发给某几类队列（通知）.\u003c/li\u003e\n\u003cli\u003eFanout 广播路由：发给全部绑定在该路由上面的队列。\u003c/li\u003e\n\u003cli\u003eHeaders\u003c/li\u003e\n\u003c/ul\u003e\n\u003col\u003e\n\u003cli\u003e应用解耦。（平台无关，语言无关）\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e比如说，但项目足够大的时候，更新一个活动，可能需要更新用户的一些状态，可能要更新一波统计数据，可能要记录一批日志。这个时候原来的代码可能这么写：\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e\u003cspan class=\"token function\"\u003eupdate_activity\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003cspan class=\"token function\"\u003eupdate_user\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003cspan class=\"token function\"\u003eupdate_user_cache\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003cspan class=\"token function\"\u003eupdate_stats\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003cspan class=\"token function\"\u003erecord_user_log\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e现在代码就可能这么写：\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003esend_task_update_activity()\nsend_task_update_user()\nsend_task_update_user_cache()\nsend_task_update_stats()\nsend_task_record_user_log()\n\u003c/code\u003e\u003c/pre\u003e\n\u003col start=\"2\"\u003e\n\u003cli\u003e异步通信。（减轻请求峰值）\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e原本一个 webapp 不做异步的话，也能搞定，但做了异步之后，可以大幅度提升吞吐量和响应时间。\u003c/p\u003e\n\u003col start=\"3\"\u003e\n\u003cli\u003e数据持久化。（不丢失消息）\u003c/li\u003e\n\u003cli\u003e送达保证。(ack late)\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3 id=\"简单步骤\"\u003e\u003ca class=\"v-toc-item\" href=\"#简单步骤\"\u003e#\u003c/a\u003e 简单步骤\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e定义 app, 指定 broker 和 backend\u003c/li\u003e\n\u003cli\u003e定义 tasks\u003c/li\u003e\n\u003cli\u003e指定 worker\u003c/li\u003e\n\u003cli\u003e调用 Task , 调用后返回 AsyncResult 实例，\u003c/li\u003e\n\u003c/ol\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003eadd\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003edelay\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\nadd\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eapply_async\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\nadd\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eapply_async\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e queue\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token string\"\u003e'lopri'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e countdown\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token number\"\u003e10\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\nadd\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003esignature\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e countdown\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token number\"\u003e10\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\nres \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e add\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003edelay\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\nres\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eget\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003etimeout\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"groups\"\u003e\u003ca class=\"v-toc-item\" href=\"#groups\"\u003e#\u003c/a\u003e Groups\u003c/h4\u003e\n\u003cpre\u003e\u003ccode\u003e# 并行\ngroup(add.s(i, i) for i in xrange(10))().get()\n# [0, 2, 4, 6, 8, 10, 12, 14, 16, 18]\n# partial group\ng = group(add.s(i) for i in xrange(10))\ng(10).get()\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"chains\"\u003e\u003ca class=\"v-toc-item\" href=\"#chains\"\u003e#\u003c/a\u003e Chains\u003c/h4\u003e\n\u003cpre\u003e\u003ccode\u003echain(add.s(4, 4) | mul.s(8))().get()\n(add.s(4, 4) | mul.s(8))().get()\n# partial chain\ng = chain(add.s(4) | mul.s(8))\ng(4).get()\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"chords\"\u003e\u003ca class=\"v-toc-item\" href=\"#chords\"\u003e#\u003c/a\u003e Chords\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e\u003cspan class=\"token function\"\u003echord\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eadd\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003es\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ei\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e i\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efor\u003c/span\u003e i \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e \u003cspan class=\"token function\"\u003exrange\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e10\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e xsum\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003es\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eget\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token function\"\u003egroup\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eadd\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003es\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ei\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e i\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efor\u003c/span\u003e i \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e \u003cspan class=\"token function\"\u003exrange\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e10\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token operator\"\u003e|\u003c/span\u003e xsum\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003es\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eget\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# eg \u003cspan class=\"token operator\"\u003e:\u003c/span\u003e upload_document\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003es\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003efile\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token operator\"\u003e|\u003c/span\u003e \u003cspan class=\"token function\"\u003egroup\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eapply_filter\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003es\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efor\u003c/span\u003e filter \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e filters\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"0x07-踩坑集\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x07-踩坑集\"\u003e#\u003c/a\u003e 0x07 踩坑集\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e序列问题\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0xee-参考链接\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-参考链接\"\u003e#\u003c/a\u003e 0xEE 参考链接\u003c/h2\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2018-02-20\u003c/strong\u003e 初始化\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e2019-04-04\u003c/strong\u003e 重修文字\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-celery\"\u003e0x01 Celery\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81-celery\"\u003e为什么需要 Celery\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-celery-%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B\"\u003e0x02 Celery 快速开始\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-celery-guide\"\u003e0x03 Celery Guide\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#application\"\u003eApplication\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#tasks\"\u003eTasks\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#application-2\"\u003eApplication\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#tasks-2\"\u003eTasks\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#calling-tasks\"\u003eCalling Tasks\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#canvas-designing-work-flows\"\u003eCanvas: Designing Work-flows\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#workers-guide\"\u003eWorkers Guide\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#daemonization\"\u003eDaemonization\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#periodic-tasks\"\u003ePeriodic Tasks\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#routing-tasks\"\u003eRouting Tasks\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#monitoring-and-management-guide\"\u003eMonitoring and Management Guide\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#security\"\u003eSecurity\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#optimizing\"\u003eOptimizing\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#debugging\"\u003eDebugging\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#concurrency\"\u003eConcurrency\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#signals\"\u003eSignals\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#testing-with-celery\"\u003eTesting with Celery\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#extensions-and-bootsteps\"\u003eExtensions and Bootsteps\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#configuration-and-defaults\"\u003eConfiguration and defaults\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-rabbitmq\"\u003e0x03 RabbitMQ\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E7%AE%80%E5%8D%95%E6%AD%A5%E9%AA%A4\"\u003e简单步骤\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#groups\"\u003eGroups\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#chains\"\u003eChains\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#chords\"\u003eChords\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x07-%E8%B8%A9%E5%9D%91%E9%9B%86\"\u003e0x07 踩坑集\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5\"\u003e0xEE 参考链接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"Celery 快速入门指北"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>2018 年不容错过的 Django 全栈项目 | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<blockquote>
+<p>写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。</p>
+</blockquote>
+<p>这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。</p>
+<p>为什么写这系列的文章呢？目的总的来说有两个：</p>
+<ol>
+<li>一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。</li>
+<li>二是希望借由这个持续更新的过程让自己更加深入理解 Django 技术栈 Django / DjangoRestFramework / Docker / Vue.JS / Celery / PostgreSQL / Redis / RabbitMQ</li>
+</ol>
+<p>为什么说这个项目你不容错过？</p>
+<ul>
+<li>新！新！新！保持最新的软件开发版本，E.G: Django 2.0 + Vue.JS 2.5 + PostgreSQL 10 + Celery 4.1.0</li>
+<li>Django 框架：Django 及其 强大的生态圈</li>
+<li>后端组件：PostgreSQL RabbitMQ Redis Ngnix</li>
+<li>前端技术：单页应用 前后端分离 (VueJS+Webpack+DjangoRestFramework), 自动化部署</li>
+<li>Django 社区最佳实践：从配置 / 开发 / 测试 / 部署 <strong>全干</strong>工程师 (Full Stuff Engineer) 的最新的 DevOps 思考成果。</li>
+<li>基本覆盖了进阶 Django 开发所需要的各种组件与操作。</li>
+<li>只需要适当的调整，本项目就可以成为你新开项目的最佳脚手架。</li>
+</ul>
+<p>本系列文章的面向读者：</p>
+<ul>
+<li>目标是 DevOps 的 Pythonist</li>
+<li>爱瞎几把折腾的 Pythonist</li>
+<li>前后端分离的实践者</li>
+</ul>
+<blockquote>
+<p>生命苦短，赶快上车</p>
+</blockquote>
+<blockquote>
+<p>Life is Short , I Use Python</p>
+</blockquote>
+<h2 id="0x01-项目介绍"><a class="v-toc-item" href="#0x01-项目介绍">#</a> 0x01 项目介绍</h2>
+<p>YaDjangoBlog 是另一个关于博客的轮子，但是其野心并不在于仅仅多造一个博客系统，还有通过本项目做 Django 全栈开发的最佳实践。</p>
+<h3 id="11-项目地址"><a class="v-toc-item" href="#11-项目地址">#</a> 1.1 项目地址</h3>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<h3 id="12-项目技术栈"><a class="v-toc-item" href="#12-项目技术栈">#</a> 1.2 项目技术栈</h3>
+<ul>
+<li>开发与部署环境为 Docker</li>
+<li>Python 3.5.2</li>
+<li>前端 Vue + Webpack + ES2015 + axios</li>
+<li>后端 <a href="https://github.com/django/django">Django 2.0</a> + <a href="https://github.com/tomchristie/django-rest-framework/">DjangoRestFramework</a> + Celery</li>
+<li>自动化部署选用工具 Ansible 以及 Docker</li>
+<li>后端组件
+<ul>
+<li>ElasticSearch 用于搜索和推荐</li>
+<li>PostgreSQL 用于数据持久化</li>
+<li>Redis 用于 Session / 和缓存</li>
+<li>RabbitMQ 分布式队列 / 定时任务</li>
+<li>Nginx 用于反向代理</li>
+</ul>
+</li>
+</ul>
+<h3 id="13-特别感谢"><a class="v-toc-item" href="#13-特别感谢">#</a> 1.3 特别感谢</h3>
+<ul>
+<li>ansible django stack: <a href="https://github.com/jcalazan/ansible-django-stack">https://github.com/jcalazan/ansible-django-stack</a></li>
+<li>cookiecutter-django: <a href="https://github.com/pydanny/cookiecutter-django">https://github.com/pydanny/cookiecutter-django</a></li>
+<li>djangopackages: <a href="https://github.com/djangopackages/djangopackages">https://github.com/djangopackages/djangopackages</a></li>
+<li>董伟明 关于 ElasticSearch 的几篇文章 <a href="http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/">http://www.dongwm.com/archives/知乎Live全文搜索之使用Elasticsearch搜索/</a></li>
+<li>各个组件的开发者们
+<ul>
+<li>ElasticSearch</li>
+<li>PostgreSQL</li>
+<li>Redis</li>
+<li>RabbitMQ</li>
+<li>Nginx</li>
+<li>Docker</li>
+</ul>
+</li>
+</ul>
+<h3 id="14-项目截图"><a class="v-toc-item" href="#14-项目截图">#</a> 1.4 项目截图</h3>
+<p>好，讲了半天有的没的，还是贴点图吧，毕竟我不是 Markdown 程序员</p>
+<blockquote>
+<p>我们先看看能看得见的前端页面</p>
+</blockquote>
+<p>主页</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344&amp;h=1822&amp;f=png&amp;s=1504757" alt=""></p>
+<p>博客详情</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342&amp;h=1846&amp;f=png&amp;s=1021166" alt=""><br>
+<img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350&amp;h=1804&amp;f=png&amp;s=1016132" alt=""></p>
+<p>这是一个很普通的 Archive 页面</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312&amp;h=1818&amp;f=png&amp;s=425859" alt=""></p>
+<p>这是以 Elasticsearch 为支持的 搜索功能</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348&amp;h=1840&amp;f=png&amp;s=1582839" alt=""></p>
+<p>Django 自带后台</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356&amp;h=1768&amp;f=png&amp;s=365303" alt=""></p>
+<p>前后端分离怎么能少的了 rest api 的实现与便捷的前端调试？</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346&amp;h=1840&amp;f=png&amp;s=486772" alt=""><br>
+<img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a" alt=""></p>
+<p>Django Debug Tools 帮你迅速调优接口</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348&amp;h=1838&amp;f=png&amp;s=735083" alt=""></p>
+<blockquote>
+<p>我们再先看看能看得见的开发界面</p>
+</blockquote>
+<p>在终端执行 tmuxinator start yavueblog 就可以自动运行所有任务</p>
+<p>前端运行状态</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360&amp;h=2054&amp;f=png&amp;s=539522" alt=""><br>
+<img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360&amp;h=2054&amp;f=png&amp;s=2446065" alt=""></p>
+<p>后端运行状态<br>
+<img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360&amp;h=2054&amp;f=png&amp;s=3296514" alt=""><br>
+<img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360&amp;h=2054&amp;f=png&amp;s=2720324" alt=""><br>
+<img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360&amp;h=2054&amp;f=png&amp;s=3932296" alt=""></p>
+<p>当然，你可以直接用客户端连接到对应的服务商检查组件的运行状态</p>
+<p><img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352&amp;h=1430&amp;f=png&amp;s=640103" alt=""><br>
+<img src="https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352&amp;h=1126&amp;f=png&amp;s=532337" alt=""></p>
+<h2 id="0x02-系列教程目录"><a class="v-toc-item" href="#0x02-系列教程目录">#</a> 0x02 系列教程目录</h2>
+<h3 id="21-教程注意项"><a class="v-toc-item" href="#21-教程注意项">#</a> 2.1 教程注意项</h3>
+<ol>
+<li>本文的开发环境配置仅仅限于 macOS 上，如果读者使用的是 Windows / 可能需要自己搞定环境的配置。不过笔者使用了 Docker 进行环境配置，应该配置环境会省事很多。</li>
+<li>在阅读本教程，请读者至少跟着 Django 官方的教程跟着走一遍。不要零基础一通瞎搞。</li>
+<li>如果在使用过程中出现问题，请在 ISSUE 提供尽可能多的信息，将问题描述清楚。</li>
+</ol>
+<p>本系列教程并不按照一步一步增加代码的方式写教程。</p>
+<p>我先带着大家搭建好整个项目框架，然后从不同的视角开介绍这个项目，比如：</p>
+<ol>
+<li>某个模块的 models 是如何设计的？有哪些卧槽居然可以这么用的写代码方式。</li>
+<li>Django User 如何做扩展？同样在 Django 的生态圈里面，哪些场景有哪些值得围观的包，比如 guardian</li>
+<li>Restful API 应该如何写，Django 里面的 Rest API 应该如何写？会有哪些生产效率 guangguangguang 提升上去的使用方法？权限怎么做？限流怎么搞？</li>
+<li>Py.test TDD 测试驱动开发了解一下？</li>
+<li>使用 Tmux 等合理工具的优雅的单终端多开。</li>
+</ol>
+<h3 id="22-教程目录"><a class="v-toc-item" href="#22-教程目录">#</a> 2.2 教程目录</h3>
+<ul>
+<li>Django 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的开发环境配置</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件配置</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的前后端初步设计</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端初步实现</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的前端实现 YaVueBlog</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Redis</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 PostgreSQL</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 Elasticsearch</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的后端组件之 RabbitMQ</li>
+<li>Django 全栈开发教程 - YaDjangoBlog 的生产环境部署</li>
+</ul>
+<h2 id="0xee-参考链接"><a class="v-toc-item" href="#0xee-参考链接">#</a> 0xEE. 参考链接</h2>
+<p>还犹豫啥，快上车吧</p>
+<ul>
+<li>前端代码 <a href="https://github.com/twocucao/YaVueBlog">https://github.com/twocucao/YaVueBlog</a></li>
+<li>后端代码 <a href="https://github.com/twocucao/YaDjangoBlog">https://github.com/twocucao/YaDjangoBlog</a></li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2018-02-21</strong> 重修文字</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D">0x01 项目介绍</a>
+<ul>
+<li><a href="#11-%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80">1.1 项目地址</a></li>
+<li><a href="#12-%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E6%A0%88">1.2 项目技术栈</a></li>
+<li><a href="#13-%E7%89%B9%E5%88%AB%E6%84%9F%E8%B0%A2">1.3 特别感谢</a></li>
+<li><a href="#14-%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE">1.4 项目截图</a></li>
+</ul>
+</li>
+<li><a href="#0x02-%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B%E7%9B%AE%E5%BD%95">0x02 系列教程目录</a>
+<ul>
+<li><a href="#21-%E6%95%99%E7%A8%8B%E6%B3%A8%E6%84%8F%E9%A1%B9">2.1 教程注意项</a></li>
+<li><a href="#22-%E6%95%99%E7%A8%8B%E7%9B%AE%E5%BD%95">2.2 教程目录</a></li>
+</ul>
+</li>
+<li><a href="#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">0xEE. 参考链接</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Python","Django","YaDjangoBlog"],"path":"20180221_FullStackDjangoDevOps.md","title":"2018 年不容错过的 Django 全栈项目","slug":"2018 年不容错过的 Django 全栈项目","date":"2018-02-21","category":"Django","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cblockquote\u003e\n\u003cp\u003e写在前面的话：不好意思，标题难以免俗，起了个很俗气的名字。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e这是我的一个全栈类型 Django 开源项目的系列讲解教程的目录。\u003c/p\u003e\n\u003cp\u003e为什么写这系列的文章呢？目的总的来说有两个：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e一是希望更多的人通过本系列的教程更好的认识 Django 开发技术栈或者说是 Web 开发技术栈，让更多的 Pythonist 更顺畅的进入 Django 开发的世界。\u003c/li\u003e\n\u003cli\u003e二是希望借由这个持续更新的过程让自己更加深入理解 Django 技术栈 Django / DjangoRestFramework / Docker / Vue.JS / Celery / PostgreSQL / Redis / RabbitMQ\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e为什么说这个项目你不容错过？\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e新！新！新！保持最新的软件开发版本，E.G: Django 2.0 + Vue.JS 2.5 + PostgreSQL 10 + Celery 4.1.0\u003c/li\u003e\n\u003cli\u003eDjango 框架：Django 及其 强大的生态圈\u003c/li\u003e\n\u003cli\u003e后端组件：PostgreSQL RabbitMQ Redis Ngnix\u003c/li\u003e\n\u003cli\u003e前端技术：单页应用 前后端分离 (VueJS+Webpack+DjangoRestFramework), 自动化部署\u003c/li\u003e\n\u003cli\u003eDjango 社区最佳实践：从配置 / 开发 / 测试 / 部署 \u003cstrong\u003e全干\u003c/strong\u003e工程师 (Full Stuff Engineer) 的最新的 DevOps 思考成果。\u003c/li\u003e\n\u003cli\u003e基本覆盖了进阶 Django 开发所需要的各种组件与操作。\u003c/li\u003e\n\u003cli\u003e只需要适当的调整，本项目就可以成为你新开项目的最佳脚手架。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e本系列文章的面向读者：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e目标是 DevOps 的 Pythonist\u003c/li\u003e\n\u003cli\u003e爱瞎几把折腾的 Pythonist\u003c/li\u003e\n\u003cli\u003e前后端分离的实践者\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e生命苦短，赶快上车\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cblockquote\u003e\n\u003cp\u003eLife is Short , I Use Python\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2 id=\"0x01-项目介绍\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-项目介绍\"\u003e#\u003c/a\u003e 0x01 项目介绍\u003c/h2\u003e\n\u003cp\u003eYaDjangoBlog 是另一个关于博客的轮子，但是其野心并不在于仅仅多造一个博客系统，还有通过本项目做 Django 全栈开发的最佳实践。\u003c/p\u003e\n\u003ch3 id=\"11-项目地址\"\u003e\u003ca class=\"v-toc-item\" href=\"#11-项目地址\"\u003e#\u003c/a\u003e 1.1 项目地址\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e前端代码 \u003ca href=\"https://github.com/twocucao/YaVueBlog\"\u003ehttps://github.com/twocucao/YaVueBlog\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e后端代码 \u003ca href=\"https://github.com/twocucao/YaDjangoBlog\"\u003ehttps://github.com/twocucao/YaDjangoBlog\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"12-项目技术栈\"\u003e\u003ca class=\"v-toc-item\" href=\"#12-项目技术栈\"\u003e#\u003c/a\u003e 1.2 项目技术栈\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e开发与部署环境为 Docker\u003c/li\u003e\n\u003cli\u003ePython 3.5.2\u003c/li\u003e\n\u003cli\u003e前端 Vue + Webpack + ES2015 + axios\u003c/li\u003e\n\u003cli\u003e后端 \u003ca href=\"https://github.com/django/django\"\u003eDjango 2.0\u003c/a\u003e + \u003ca href=\"https://github.com/tomchristie/django-rest-framework/\"\u003eDjangoRestFramework\u003c/a\u003e + Celery\u003c/li\u003e\n\u003cli\u003e自动化部署选用工具 Ansible 以及 Docker\u003c/li\u003e\n\u003cli\u003e后端组件\n\u003cul\u003e\n\u003cli\u003eElasticSearch 用于搜索和推荐\u003c/li\u003e\n\u003cli\u003ePostgreSQL 用于数据持久化\u003c/li\u003e\n\u003cli\u003eRedis 用于 Session / 和缓存\u003c/li\u003e\n\u003cli\u003eRabbitMQ 分布式队列 / 定时任务\u003c/li\u003e\n\u003cli\u003eNginx 用于反向代理\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"13-特别感谢\"\u003e\u003ca class=\"v-toc-item\" href=\"#13-特别感谢\"\u003e#\u003c/a\u003e 1.3 特别感谢\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eansible django stack: \u003ca href=\"https://github.com/jcalazan/ansible-django-stack\"\u003ehttps://github.com/jcalazan/ansible-django-stack\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003ecookiecutter-django: \u003ca href=\"https://github.com/pydanny/cookiecutter-django\"\u003ehttps://github.com/pydanny/cookiecutter-django\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003edjangopackages: \u003ca href=\"https://github.com/djangopackages/djangopackages\"\u003ehttps://github.com/djangopackages/djangopackages\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e董伟明 关于 ElasticSearch 的几篇文章 \u003ca href=\"http://www.dongwm.com/archives/%E7%9F%A5%E4%B9%8ELive%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E4%B9%8B%E4%BD%BF%E7%94%A8Elasticsearch%E6%90%9C%E7%B4%A2/\"\u003ehttp://www.dongwm.com/archives/知乎Live全文搜索之使用Elasticsearch搜索/\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e各个组件的开发者们\n\u003cul\u003e\n\u003cli\u003eElasticSearch\u003c/li\u003e\n\u003cli\u003ePostgreSQL\u003c/li\u003e\n\u003cli\u003eRedis\u003c/li\u003e\n\u003cli\u003eRabbitMQ\u003c/li\u003e\n\u003cli\u003eNginx\u003c/li\u003e\n\u003cli\u003eDocker\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"14-项目截图\"\u003e\u003ca class=\"v-toc-item\" href=\"#14-项目截图\"\u003e#\u003c/a\u003e 1.4 项目截图\u003c/h3\u003e\n\u003cp\u003e好，讲了半天有的没的，还是贴点图吧，毕竟我不是 Markdown 程序员\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e我们先看看能看得见的前端页面\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e主页\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6ba50ddaa85f?w=3344\u0026amp;h=1822\u0026amp;f=png\u0026amp;s=1504757\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e博客详情\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6c3e3a0b8dd4?w=3342\u0026amp;h=1846\u0026amp;f=png\u0026amp;s=1021166\" alt=\"\"\u003e\u003cbr\u003e\n\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6c31db9c8d5c?w=3350\u0026amp;h=1804\u0026amp;f=png\u0026amp;s=1016132\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e这是一个很普通的 Archive 页面\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6bfa8c121ed4?w=3312\u0026amp;h=1818\u0026amp;f=png\u0026amp;s=425859\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e这是以 Elasticsearch 为支持的 搜索功能\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6bc0a967a3e1?w=3348\u0026amp;h=1840\u0026amp;f=png\u0026amp;s=1582839\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003eDjango 自带后台\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6c47b50b6827?w=3356\u0026amp;h=1768\u0026amp;f=png\u0026amp;s=365303\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e前后端分离怎么能少的了 rest api 的实现与便捷的前端调试？\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6c5522e83368?w=3346\u0026amp;h=1840\u0026amp;f=png\u0026amp;s=486772\" alt=\"\"\u003e\u003cbr\u003e\n\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6c7ad6641b0a\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003eDjango Debug Tools 帮你迅速调优接口\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6c782bf2a593?w=3348\u0026amp;h=1838\u0026amp;f=png\u0026amp;s=735083\" alt=\"\"\u003e\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e我们再先看看能看得见的开发界面\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e在终端执行 tmuxinator start yavueblog 就可以自动运行所有任务\u003c/p\u003e\n\u003cp\u003e前端运行状态\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6d2d904bb3aa?w=3360\u0026amp;h=2054\u0026amp;f=png\u0026amp;s=539522\" alt=\"\"\u003e\u003cbr\u003e\n\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6d7172d15be3?w=3360\u0026amp;h=2054\u0026amp;f=png\u0026amp;s=2446065\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e后端运行状态\u003cbr\u003e\n\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6d5933c52727?w=3360\u0026amp;h=2054\u0026amp;f=png\u0026amp;s=3296514\" alt=\"\"\u003e\u003cbr\u003e\n\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6d8ce415395c?w=3360\u0026amp;h=2054\u0026amp;f=png\u0026amp;s=2720324\" alt=\"\"\u003e\u003cbr\u003e\n\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6d9ff1f2efb1?w=3360\u0026amp;h=2054\u0026amp;f=png\u0026amp;s=3932296\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e当然，你可以直接用客户端连接到对应的服务商检查组件的运行状态\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6db1754b4e8b?w=3352\u0026amp;h=1430\u0026amp;f=png\u0026amp;s=640103\" alt=\"\"\u003e\u003cbr\u003e\n\u003cimg src=\"https://user-gold-cdn.xitu.io/2018/2/21/161b6d949bd83c81?w=3352\u0026amp;h=1126\u0026amp;f=png\u0026amp;s=532337\" alt=\"\"\u003e\u003c/p\u003e\n\u003ch2 id=\"0x02-系列教程目录\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-系列教程目录\"\u003e#\u003c/a\u003e 0x02 系列教程目录\u003c/h2\u003e\n\u003ch3 id=\"21-教程注意项\"\u003e\u003ca class=\"v-toc-item\" href=\"#21-教程注意项\"\u003e#\u003c/a\u003e 2.1 教程注意项\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003e本文的开发环境配置仅仅限于 macOS 上，如果读者使用的是 Windows / 可能需要自己搞定环境的配置。不过笔者使用了 Docker 进行环境配置，应该配置环境会省事很多。\u003c/li\u003e\n\u003cli\u003e在阅读本教程，请读者至少跟着 Django 官方的教程跟着走一遍。不要零基础一通瞎搞。\u003c/li\u003e\n\u003cli\u003e如果在使用过程中出现问题，请在 ISSUE 提供尽可能多的信息，将问题描述清楚。\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e本系列教程并不按照一步一步增加代码的方式写教程。\u003c/p\u003e\n\u003cp\u003e我先带着大家搭建好整个项目框架，然后从不同的视角开介绍这个项目，比如：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e某个模块的 models 是如何设计的？有哪些卧槽居然可以这么用的写代码方式。\u003c/li\u003e\n\u003cli\u003eDjango User 如何做扩展？同样在 Django 的生态圈里面，哪些场景有哪些值得围观的包，比如 guardian\u003c/li\u003e\n\u003cli\u003eRestful API 应该如何写，Django 里面的 Rest API 应该如何写？会有哪些生产效率 guangguangguang 提升上去的使用方法？权限怎么做？限流怎么搞？\u003c/li\u003e\n\u003cli\u003ePy.test TDD 测试驱动开发了解一下？\u003c/li\u003e\n\u003cli\u003e使用 Tmux 等合理工具的优雅的单终端多开。\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3 id=\"22-教程目录\"\u003e\u003ca class=\"v-toc-item\" href=\"#22-教程目录\"\u003e#\u003c/a\u003e 2.2 教程目录\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003eDjango 全栈开发教程 - 2018 年不容错过的 Django 全栈项目 – 目录篇\u003c/li\u003e\n\u003cli\u003eDjango 全栈开发教程 - YaDjangoBlog 的开发环境配置\u003c/li\u003e\n\u003cli\u003eDjango 全栈开发教程 - YaDjangoBlog 的后端组件配置\u003c/li\u003e\n\u003cli\u003eDjango 全栈开发教程 - YaDjangoBlog 的前后端初步设计\u003c/li\u003e\n\u003cli\u003eDjango 全栈开发教程 - YaDjangoBlog 的后端初步实现\u003c/li\u003e\n\u003cli\u003eDjango 全栈开发教程 - YaDjangoBlog 的前端实现 YaVueBlog\u003c/li\u003e\n\u003cli\u003eDjango 全栈开发教程 - YaDjangoBlog 的后端组件之 Redis\u003c/li\u003e\n\u003cli\u003eDjango 全栈开发教程 - YaDjangoBlog 的后端组件之 PostgreSQL\u003c/li\u003e\n\u003cli\u003eDjango 全栈开发教程 - YaDjangoBlog 的后端组件之 Elasticsearch\u003c/li\u003e\n\u003cli\u003eDjango 全栈开发教程 - YaDjangoBlog 的后端组件之 RabbitMQ\u003c/li\u003e\n\u003cli\u003eDjango 全栈开发教程 - YaDjangoBlog 的生产环境部署\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0xee-参考链接\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-参考链接\"\u003e#\u003c/a\u003e 0xEE. 参考链接\u003c/h2\u003e\n\u003cp\u003e还犹豫啥，快上车吧\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e前端代码 \u003ca href=\"https://github.com/twocucao/YaVueBlog\"\u003ehttps://github.com/twocucao/YaVueBlog\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e后端代码 \u003ca href=\"https://github.com/twocucao/YaDjangoBlog\"\u003ehttps://github.com/twocucao/YaDjangoBlog\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2018-02-21\u003c/strong\u003e 重修文字\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E9%A1%B9%E7%9B%AE%E4%BB%8B%E7%BB%8D\"\u003e0x01 项目介绍\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#11-%E9%A1%B9%E7%9B%AE%E5%9C%B0%E5%9D%80\"\u003e1.1 项目地址\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#12-%E9%A1%B9%E7%9B%AE%E6%8A%80%E6%9C%AF%E6%A0%88\"\u003e1.2 项目技术栈\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#13-%E7%89%B9%E5%88%AB%E6%84%9F%E8%B0%A2\"\u003e1.3 特别感谢\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#14-%E9%A1%B9%E7%9B%AE%E6%88%AA%E5%9B%BE\"\u003e1.4 项目截图\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B%E7%9B%AE%E5%BD%95\"\u003e0x02 系列教程目录\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#21-%E6%95%99%E7%A8%8B%E6%B3%A8%E6%84%8F%E9%A1%B9\"\u003e2.1 教程注意项\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#22-%E6%95%99%E7%A8%8B%E7%9B%AE%E5%BD%95\"\u003e2.2 教程目录\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5\"\u003e0xEE. 参考链接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"2018 年不容错过的 Django 全栈项目"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

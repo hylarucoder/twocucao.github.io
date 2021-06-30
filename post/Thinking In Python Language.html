@@ -1,0 +1,278 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>Thinking In Python Language | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h2 id="0x01-前言"><a class="v-toc-item" href="#0x01-前言">#</a> 0x01 前言</h2>
+<blockquote>
+<p>Python 简略笔记</p>
+</blockquote>
+<p>本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。</p>
+<!-- more -->
+<h2 id="0x00-简介"><a class="v-toc-item" href="#0x00-简介">#</a> 0x00 简介</h2>
+<h3 id="1-为什么是-python"><a class="v-toc-item" href="#1-为什么是-python">#</a> 1. 为什么是 Python</h3>
+<p>选 Python, 很大程度上是因为 Python 的快速开发。</p>
+<p>当然，快速开发（这里的开发包含部署）这个词也往往会被误解。什么叫做快速？我用一个 CMS 框架快速搭建出一个网站这是否叫做快速？</p>
+<ul>
+<li>每一次部署的时候，如果使用 Java 或者是 Go, 部署的时候直接 maven 编译打包，接着把 War 包直接上传到 Tomcat 就结束了。而用 Python 则需要各种虚拟环境，各种稀里哗啦的配置。这种情况下是哪一种快速呢？</li>
+</ul>
+<p>Python 有什么好处呢？</p>
+<ul>
+<li>写代码效率高</li>
+<li>生态圈好</li>
+</ul>
+<p>写代码效率高，这指的是写 Python 代码，而不是运行时。</p>
+<p>生态圈好，Web 开发用 Django/Flask , 数据抓取用 Requests , 数据分析清洗用 Pandas, 机器学习。</p>
+<h3 id="2-工具链"><a class="v-toc-item" href="#2-工具链">#</a> 2. 工具链</h3>
+<h3 id="4-文档"><a class="v-toc-item" href="#4-文档">#</a> 4. 文档</h3>
+<h3 id="5-社区"><a class="v-toc-item" href="#5-社区">#</a> 5. 社区</h3>
+<h3 id="6-书籍"><a class="v-toc-item" href="#6-书籍">#</a> 6. 书籍</h3>
+<h2 id="0x01-基本概念"><a class="v-toc-item" href="#0x01-基本概念">#</a> 0x01 基本概念</h2>
+<blockquote>
+<p>程序 = 算法 + 数据结构</p>
+</blockquote>
+<p>这句话当然是不全面的，但并不影响这句话在计算机世界里面的地位。</p>
+<p>依我看来，对我的启发大致是：</p>
+<blockquote>
+<p>我会把 API 的调用和数据结构以及算法想清楚，然后才动手把代码分解成伪代码。</p>
+</blockquote>
+<h3 id="1-数据类型"><a class="v-toc-item" href="#1-数据类型">#</a> 1. 数据类型</h3>
+<p>数据类型按照不同的划分标准可以进行不同的划分：</p>
+<p>按照复杂性可以这么划分：</p>
+<ul>
+<li>简单类型</li>
+<li>复杂类型</li>
+</ul>
+<p>按照复杂性可以这么划分：</p>
+<ul>
+<li>基本类型</li>
+<li>引用类型</li>
+</ul>
+<p>按照数据结构可以这么划分：</p>
+<ul>
+<li>集合结构 : 串</li>
+<li>线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，<strong>栈，队列</strong>)</li>
+<li>树形结构 : 树（二叉树，B+ 树，红黑树）</li>
+<li>图形结构 : 图</li>
+</ul>
+<h3 id="2-操作"><a class="v-toc-item" href="#2-操作">#</a> 2. 操作</h3>
+<h4 id="操作"><a class="v-toc-item" href="#操作">#</a> 操作</h4>
+<p>对于一些基本的数据类型，操作为 加减乘除取余数位运算等等</p>
+<p>对于复杂的一些数据类型，则需要对数据结构多一些了解。</p>
+<p>比如，对队列而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>
+比如，对 hash 而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>
+比如，对字典而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？<br>
+比如，对字符串而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？</p>
+<p>那字符串来说，Java 推荐使用 StringBuilder 来合并多个字符串，Python 推荐 join 多个字符串等等。</p>
+<h4 id="操作-2"><a class="v-toc-item" href="#操作-2">#</a> 操作</h4>
+<h3 id="3-语句"><a class="v-toc-item" href="#3-语句">#</a> 3. 语句</h3>
+<h2 id="0x02-中级概念"><a class="v-toc-item" href="#0x02-中级概念">#</a> 0x02 中级概念</h2>
+<h3 id="函数"><a class="v-toc-item" href="#函数">#</a> 函数</h3>
+<h4 id="作用域"><a class="v-toc-item" href="#作用域">#</a> 作用域</h4>
+<h3 id="模块"><a class="v-toc-item" href="#模块">#</a> 模块</h3>
+<p>模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。</p>
+<p>这里的模块指的是一个包下的函数。</p>
+<h3 id="面向对象"><a class="v-toc-item" href="#面向对象">#</a> 面向对象</h3>
+<p>面向对象有三大概念：</p>
+<ul>
+<li>封装</li>
+<li>继承</li>
+<li>多态</li>
+</ul>
+<h3 id="错误-调试测试"><a class="v-toc-item" href="#错误-调试测试">#</a> 错误 / 调试测试</h3>
+<p>异常处理实际上可以考验一个程序员编写代码的健壮性。</p>
+<p>事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。</p>
+<h3 id="io-编程"><a class="v-toc-item" href="#io-编程">#</a> IO 编程</h3>
+<h3 id="进程和线程"><a class="v-toc-item" href="#进程和线程">#</a> 进程和线程</h3>
+<h4 id="多线程"><a class="v-toc-item" href="#多线程">#</a> 多线程</h4>
+<blockquote>
+<p>Python 多线程约等于并发。</p>
+</blockquote>
+<h4 id="多进程"><a class="v-toc-item" href="#多进程">#</a> 多进程</h4>
+<h4 id="gil"><a class="v-toc-item" href="#gil">#</a> GIL</h4>
+<p>Global Interpreter Lock</p>
+<p>并不是所有的解释器语言都有 GIL （尽管 Python 和 Ruby 里面都有）, 也并不是没有尝试过去除 GIL, 但是每次去除都会导致单线程性能的下降。所以暂时保留。</p>
+<p>GIL 对程序中的影响：</p>
+<blockquote>
+<p>一个线程运行 Python , 而其他 N 个睡眠或者等待 I/O - <strong>同一时刻只有一个线程对共享资源进行存取</strong> , Python 线程也可以等待 threading.Lock 或者线程模块中的其他同步对象；</p>
+</blockquote>
+<h5 id="协同式多任务处理"><a class="v-toc-item" href="#协同式多任务处理">#</a> 协同式多任务处理</h5>
+<p>如果有两个线程，同时进行 IO 请求，当其中一个线程连接之后，立即会<strong>主动让出 GIL</strong>, 其他线程就可以运行。</p>
+<blockquote>
+<p>当 N 个线程在网络 I/O 堵塞，或等待重新获取 GIL，而一个线程运行 Python。</p>
+</blockquote>
+<p>让出之后还要执行代码呀，所以要有个收回 GIL 的动作。</p>
+<h5 id="抢占式多任务处理"><a class="v-toc-item" href="#抢占式多任务处理">#</a> 抢占式多任务处理</h5>
+<p>Python 2 GIL , 尝试收回 GIL 为 执行 1000 字节码。<br>
+Python 3 GIL , 尝试收回 GIL 检测间隔为 15ms</p>
+<h5 id="线程安全"><a class="v-toc-item" href="#线程安全">#</a> 线程安全</h5>
+<p>原子操作：sort 之类不需要<br>
+非原子操作：n=n+2 的字节码分为 加载 n , 加载 2 , 相加，存储 n, 四个步骤，由于不是原子性，很可能被由于 15 ms 而被打断。</p>
+<p>当然，懒人一向是 : <strong>优先级不决加括号，线程不决加 lock</strong></p>
+<p>对于 Java, 程序员努力在尽可能短的时间内加锁存取共享数据，减轻线程的争夺，实现最大并行。但 Python 中，线程无法并行运行，细粒度的锁就没有了优势。</p>
+<h3 id="正则表达式"><a class="v-toc-item" href="#正则表达式">#</a> 正则表达式</h3>
+<h2 id="0x03-高级技巧"><a class="v-toc-item" href="#0x03-高级技巧">#</a> 0x03 高级技巧</h2>
+<h2 id="0x04-标准库"><a class="v-toc-item" href="#0x04-标准库">#</a> 0x04 标准库</h2>
+<h3 id="常用内建模块"><a class="v-toc-item" href="#常用内建模块">#</a> 常用内建模块</h3>
+<h3 id="系统化模块"><a class="v-toc-item" href="#系统化模块">#</a> 系统化模块</h3>
+<ol>
+<li>Introduction</li>
+<li>Built-in Functions</li>
+<li>Built-in Constants</li>
+<li>Built-in Types</li>
+<li>Built-in Exceptions</li>
+<li>Text Processing Services</li>
+<li>Binary Data Services</li>
+<li>Data Types</li>
+<li>Numeric and Mathematical Modules</li>
+<li>Functional Programming Modules</li>
+<li>File and Directory Access</li>
+<li>Data Persistence</li>
+<li>Data Compression and Archiving</li>
+<li>File Formats</li>
+<li>Cryptographic Services</li>
+<li>Generic Operating System Services</li>
+<li>Concurrent Execution</li>
+<li>Interprocess Communication and Networking</li>
+<li>Internet Data Handling</li>
+<li>Structured Markup Processing Tools</li>
+<li>Internet Protocols and Support</li>
+<li>Multimedia Services</li>
+<li>Internationalization</li>
+<li>Program Frameworks</li>
+<li>Graphical User Interfaces with Tk</li>
+<li>Development Tools</li>
+<li>Debugging and Profiling</li>
+<li>Software Packaging and Distribution</li>
+<li>Python Runtime Services</li>
+<li>Custom Python Interpreters</li>
+<li>Importing Modules</li>
+<li>Python Language Services</li>
+<li>Miscellaneous Services</li>
+<li>MS Windows Specific Services</li>
+<li>Unix Specific Services</li>
+<li>Superseded Modules</li>
+<li>Undocumented Modules</li>
+</ol>
+<h2 id="0x05-第三方库"><a class="v-toc-item" href="#0x05-第三方库">#</a> 0x05 第三方库</h2>
+<ul>
+<li>Requests : API 人性化</li>
+</ul>
+<h2 id="0x06-代码质量"><a class="v-toc-item" href="#0x06-代码质量">#</a> 0x06 代码质量</h2>
+<h3 id="正确性"><a class="v-toc-item" href="#正确性">#</a> 正确性</h3>
+<ul>
+<li>外部<strong>不该</strong>引用 protected member （单下划线）</li>
+<li>lambda 为一次使用，最好不要赋值。</li>
+<li>不要给 buildin 函数赋值</li>
+<li>py3 直接 super()</li>
+<li>for in else 如果不内置 break 则出会在最后 for in 为 empty 的时候再执行 else 中的语句</li>
+<li>context exit 如果不 catch 掉异常让其自然向上一级抛出错误的话，必须为 (self, exception_type, exception_value, traceback):</li>
+<li>不要在 init 里面 return 数据</li>
+<li>不要混用 tab 和 space</li>
+<li>4 个 space 缩进</li>
+<li>staticmethod 直接是 参数，classmethod 第一个参数为 cls</li>
+<li>可变的 default value 是不能作为 参数的。（可能是解释器在确定函数的定义的时候完成赋值？)</li>
+<li>遵循 exception hierachy <a href="https://docs.python.org/3/library/exceptions.html#exception-hierarchy">https://docs.python.org/3/library/exceptions.html#exception-hierarchy</a></li>
+<li>defaultdict defaultdict(lambda : 6) , 必须 callable</li>
+<li>尽量 unpack 赋值</li>
+<li>字典用获取用 get(“myk”,None) , 赋值用 dictionary.setdefault(“list”, []).append(“list_item”)</li>
+</ul>
+<h3 id="可维护性"><a class="v-toc-item" href="#可维护性">#</a> 可维护性</h3>
+<ul>
+<li>避免使用 import * , 我觉得这点值得商榷 , 如果是某个模块下，完全可以先把模块拆分成多个，最后 import 进来，接着使用 all.</li>
+<li>getxxx 获取实际值，如果不为实际值，返回 None 显然不如 try catch 来的实在。</li>
+<li>避免使用 global</li>
+<li>命名要注意</li>
+<li>动态创建方法 , 我觉得这点值得商榷。</li>
+</ul>
+<h3 id="可读性"><a class="v-toc-item" href="#可读性">#</a> 可读性</h3>
+<ul>
+<li>不要检查，如果可能有异常，尽量抛出异常来 trycatch 解决。</li>
+<li>a is None , if flag</li>
+<li>isinstance , not type® is types.ListType</li>
+<li>“{name}{city}”.format(**info_dict)</li>
+<li>for k , v in infodict.items()</li>
+<li>使用 poiinfo = namedtuple(“poiinfo”,[“name”,“lng”,“lat”]) 返回 poiinfo[‘上海’,121.00,23] 最后返回值打印 <a href="http://poi.name">poi.name</a> , poi.lng , poi lat</li>
+<li>for numbers_value, letters_value in zip(numbers, letters):</li>
+<li>enumerate</li>
+<li>如果能用 listcomp 则不使用 map 和 filter</li>
+</ul>
+<h3 id="安全性"><a class="v-toc-item" href="#安全性">#</a> 安全性</h3>
+<h3 id="性能"><a class="v-toc-item" href="#性能">#</a> 性能</h3>
+<ul>
+<li>用 set</li>
+<li>d.iteritems() 比 items() 省内存</li>
+</ul>
+<h2 id="0xee-文章更新"><a class="v-toc-item" href="#0xee-文章更新">#</a> 0xEE 文章更新</h2>
+<ul>
+<li><strong>2017-05-11 19:43:00</strong> : 增加代码质量模块</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x01-%E5%89%8D%E8%A8%80">0x01 前言</a></li>
+<li><a href="#0x00-%E7%AE%80%E4%BB%8B">0x00 简介</a>
+<ul>
+<li><a href="#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-python">1. 为什么是 Python</a></li>
+<li><a href="#2-%E5%B7%A5%E5%85%B7%E9%93%BE">2. 工具链</a></li>
+<li><a href="#4-%E6%96%87%E6%A1%A3">4. 文档</a></li>
+<li><a href="#5-%E7%A4%BE%E5%8C%BA">5. 社区</a></li>
+<li><a href="#6-%E4%B9%A6%E7%B1%8D">6. 书籍</a></li>
+</ul>
+</li>
+<li><a href="#0x01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">0x01 基本概念</a>
+<ul>
+<li><a href="#1-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">1. 数据类型</a></li>
+<li><a href="#2-%E6%93%8D%E4%BD%9C">2. 操作</a>
+<ul>
+<li><a href="#%E6%93%8D%E4%BD%9C">操作</a></li>
+<li><a href="#%E6%93%8D%E4%BD%9C-2">操作</a></li>
+</ul>
+</li>
+<li><a href="#3-%E8%AF%AD%E5%8F%A5">3. 语句</a></li>
+</ul>
+</li>
+<li><a href="#0x02-%E4%B8%AD%E7%BA%A7%E6%A6%82%E5%BF%B5">0x02 中级概念</a>
+<ul>
+<li><a href="#%E5%87%BD%E6%95%B0">函数</a>
+<ul>
+<li><a href="#%E4%BD%9C%E7%94%A8%E5%9F%9F">作用域</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E5%9D%97">模块</a></li>
+<li><a href="#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1">面向对象</a></li>
+<li><a href="#%E9%94%99%E8%AF%AF-%E8%B0%83%E8%AF%95%E6%B5%8B%E8%AF%95">错误 / 调试测试</a></li>
+<li><a href="#io-%E7%BC%96%E7%A8%8B">IO 编程</a></li>
+<li><a href="#%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B">进程和线程</a>
+<ul>
+<li><a href="#%E5%A4%9A%E7%BA%BF%E7%A8%8B">多线程</a></li>
+<li><a href="#%E5%A4%9A%E8%BF%9B%E7%A8%8B">多进程</a></li>
+<li><a href="#gil">GIL</a>
+<ul>
+<li><a href="#%E5%8D%8F%E5%90%8C%E5%BC%8F%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86">协同式多任务处理</a></li>
+<li><a href="#%E6%8A%A2%E5%8D%A0%E5%BC%8F%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86">抢占式多任务处理</a></li>
+<li><a href="#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8">线程安全</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F">正则表达式</a></li>
+</ul>
+</li>
+<li><a href="#0x03-%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7">0x03 高级技巧</a></li>
+<li><a href="#0x04-%E6%A0%87%E5%87%86%E5%BA%93">0x04 标准库</a>
+<ul>
+<li><a href="#%E5%B8%B8%E7%94%A8%E5%86%85%E5%BB%BA%E6%A8%A1%E5%9D%97">常用内建模块</a></li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E5%8C%96%E6%A8%A1%E5%9D%97">系统化模块</a></li>
+</ul>
+</li>
+<li><a href="#0x05-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93">0x05 第三方库</a></li>
+<li><a href="#0x06-%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F">0x06 代码质量</a>
+<ul>
+<li><a href="#%E6%AD%A3%E7%A1%AE%E6%80%A7">正确性</a></li>
+<li><a href="#%E5%8F%AF%E7%BB%B4%E6%8A%A4%E6%80%A7">可维护性</a></li>
+<li><a href="#%E5%8F%AF%E8%AF%BB%E6%80%A7">可读性</a></li>
+<li><a href="#%E5%AE%89%E5%85%A8%E6%80%A7">安全性</a></li>
+<li><a href="#%E6%80%A7%E8%83%BD">性能</a></li>
+</ul>
+</li>
+<li><a href="#0xee-%E6%96%87%E7%AB%A0%E6%9B%B4%E6%96%B0">0xEE 文章更新</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Python"],"path":"20170408_ThinkingInPython.md","title":"Thinking In Python Language","slug":"Thinking In Python Language","date":"2017-04-08","category":"Python","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch2 id=\"0x01-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-前言\"\u003e#\u003c/a\u003e 0x01 前言\u003c/h2\u003e\n\u003cblockquote\u003e\n\u003cp\u003ePython 简略笔记\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e本文诞生于利用 Topic Reading 方法读 Python 和 JavaScript 若干本技术书籍这个过程中结合自己的开发常见场景记录下来的一些笔记。\u003c/p\u003e\n\u003c!-- more --\u003e\n\u003ch2 id=\"0x00-简介\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-简介\"\u003e#\u003c/a\u003e 0x00 简介\u003c/h2\u003e\n\u003ch3 id=\"1-为什么是-python\"\u003e\u003ca class=\"v-toc-item\" href=\"#1-为什么是-python\"\u003e#\u003c/a\u003e 1. 为什么是 Python\u003c/h3\u003e\n\u003cp\u003e选 Python, 很大程度上是因为 Python 的快速开发。\u003c/p\u003e\n\u003cp\u003e当然，快速开发（这里的开发包含部署）这个词也往往会被误解。什么叫做快速？我用一个 CMS 框架快速搭建出一个网站这是否叫做快速？\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e每一次部署的时候，如果使用 Java 或者是 Go, 部署的时候直接 maven 编译打包，接着把 War 包直接上传到 Tomcat 就结束了。而用 Python 则需要各种虚拟环境，各种稀里哗啦的配置。这种情况下是哪一种快速呢？\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003ePython 有什么好处呢？\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e写代码效率高\u003c/li\u003e\n\u003cli\u003e生态圈好\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e写代码效率高，这指的是写 Python 代码，而不是运行时。\u003c/p\u003e\n\u003cp\u003e生态圈好，Web 开发用 Django/Flask , 数据抓取用 Requests , 数据分析清洗用 Pandas, 机器学习。\u003c/p\u003e\n\u003ch3 id=\"2-工具链\"\u003e\u003ca class=\"v-toc-item\" href=\"#2-工具链\"\u003e#\u003c/a\u003e 2. 工具链\u003c/h3\u003e\n\u003ch3 id=\"4-文档\"\u003e\u003ca class=\"v-toc-item\" href=\"#4-文档\"\u003e#\u003c/a\u003e 4. 文档\u003c/h3\u003e\n\u003ch3 id=\"5-社区\"\u003e\u003ca class=\"v-toc-item\" href=\"#5-社区\"\u003e#\u003c/a\u003e 5. 社区\u003c/h3\u003e\n\u003ch3 id=\"6-书籍\"\u003e\u003ca class=\"v-toc-item\" href=\"#6-书籍\"\u003e#\u003c/a\u003e 6. 书籍\u003c/h3\u003e\n\u003ch2 id=\"0x01-基本概念\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-基本概念\"\u003e#\u003c/a\u003e 0x01 基本概念\u003c/h2\u003e\n\u003cblockquote\u003e\n\u003cp\u003e程序 = 算法 + 数据结构\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e这句话当然是不全面的，但并不影响这句话在计算机世界里面的地位。\u003c/p\u003e\n\u003cp\u003e依我看来，对我的启发大致是：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e我会把 API 的调用和数据结构以及算法想清楚，然后才动手把代码分解成伪代码。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch3 id=\"1-数据类型\"\u003e\u003ca class=\"v-toc-item\" href=\"#1-数据类型\"\u003e#\u003c/a\u003e 1. 数据类型\u003c/h3\u003e\n\u003cp\u003e数据类型按照不同的划分标准可以进行不同的划分：\u003c/p\u003e\n\u003cp\u003e按照复杂性可以这么划分：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e简单类型\u003c/li\u003e\n\u003cli\u003e复杂类型\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e按照复杂性可以这么划分：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e基本类型\u003c/li\u003e\n\u003cli\u003e引用类型\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e按照数据结构可以这么划分：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e集合结构 : 串\u003c/li\u003e\n\u003cli\u003e线性结构 : 线性表 （单链表，静态链表，循环链表，双向链表，\u003cstrong\u003e栈，队列\u003c/strong\u003e)\u003c/li\u003e\n\u003cli\u003e树形结构 : 树（二叉树，B+ 树，红黑树）\u003c/li\u003e\n\u003cli\u003e图形结构 : 图\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"2-操作\"\u003e\u003ca class=\"v-toc-item\" href=\"#2-操作\"\u003e#\u003c/a\u003e 2. 操作\u003c/h3\u003e\n\u003ch4 id=\"操作\"\u003e\u003ca class=\"v-toc-item\" href=\"#操作\"\u003e#\u003c/a\u003e 操作\u003c/h4\u003e\n\u003cp\u003e对于一些基本的数据类型，操作为 加减乘除取余数位运算等等\u003c/p\u003e\n\u003cp\u003e对于复杂的一些数据类型，则需要对数据结构多一些了解。\u003c/p\u003e\n\u003cp\u003e比如，对队列而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？\u003cbr\u003e\n比如，对 hash 而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？\u003cbr\u003e\n比如，对字典而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？\u003cbr\u003e\n比如，对字符串而言，增删改查在算法复杂度上意味着什么？对机器的性能会不会有很多影响呢？\u003c/p\u003e\n\u003cp\u003e那字符串来说，Java 推荐使用 StringBuilder 来合并多个字符串，Python 推荐 join 多个字符串等等。\u003c/p\u003e\n\u003ch4 id=\"操作-2\"\u003e\u003ca class=\"v-toc-item\" href=\"#操作-2\"\u003e#\u003c/a\u003e 操作\u003c/h4\u003e\n\u003ch3 id=\"3-语句\"\u003e\u003ca class=\"v-toc-item\" href=\"#3-语句\"\u003e#\u003c/a\u003e 3. 语句\u003c/h3\u003e\n\u003ch2 id=\"0x02-中级概念\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-中级概念\"\u003e#\u003c/a\u003e 0x02 中级概念\u003c/h2\u003e\n\u003ch3 id=\"函数\"\u003e\u003ca class=\"v-toc-item\" href=\"#函数\"\u003e#\u003c/a\u003e 函数\u003c/h3\u003e\n\u003ch4 id=\"作用域\"\u003e\u003ca class=\"v-toc-item\" href=\"#作用域\"\u003e#\u003c/a\u003e 作用域\u003c/h4\u003e\n\u003ch3 id=\"模块\"\u003e\u003ca class=\"v-toc-item\" href=\"#模块\"\u003e#\u003c/a\u003e 模块\u003c/h3\u003e\n\u003cp\u003e模块，这个概念，可大可小，大的时候，把一个程序说成是模块，小的时候，可以把一个文件，甚至你说这一个函数是一个模块，也行。\u003c/p\u003e\n\u003cp\u003e这里的模块指的是一个包下的函数。\u003c/p\u003e\n\u003ch3 id=\"面向对象\"\u003e\u003ca class=\"v-toc-item\" href=\"#面向对象\"\u003e#\u003c/a\u003e 面向对象\u003c/h3\u003e\n\u003cp\u003e面向对象有三大概念：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e封装\u003c/li\u003e\n\u003cli\u003e继承\u003c/li\u003e\n\u003cli\u003e多态\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"错误-调试测试\"\u003e\u003ca class=\"v-toc-item\" href=\"#错误-调试测试\"\u003e#\u003c/a\u003e 错误 / 调试测试\u003c/h3\u003e\n\u003cp\u003e异常处理实际上可以考验一个程序员编写代码的健壮性。\u003c/p\u003e\n\u003cp\u003e事实上来说，代码写的健壮是一个程序员必备的素养。但其实在开发过程中，出于对项目进行赶工上线，需要对程序的健壮性做出一定的取舍。并且，在编写客户端，服务端，网页前端的时候基本上都会遇到这个问题。什么时候选择健壮的程序，什么时候选择是还可以的程序。需要自己的经验。\u003c/p\u003e\n\u003ch3 id=\"io-编程\"\u003e\u003ca class=\"v-toc-item\" href=\"#io-编程\"\u003e#\u003c/a\u003e IO 编程\u003c/h3\u003e\n\u003ch3 id=\"进程和线程\"\u003e\u003ca class=\"v-toc-item\" href=\"#进程和线程\"\u003e#\u003c/a\u003e 进程和线程\u003c/h3\u003e\n\u003ch4 id=\"多线程\"\u003e\u003ca class=\"v-toc-item\" href=\"#多线程\"\u003e#\u003c/a\u003e 多线程\u003c/h4\u003e\n\u003cblockquote\u003e\n\u003cp\u003ePython 多线程约等于并发。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch4 id=\"多进程\"\u003e\u003ca class=\"v-toc-item\" href=\"#多进程\"\u003e#\u003c/a\u003e 多进程\u003c/h4\u003e\n\u003ch4 id=\"gil\"\u003e\u003ca class=\"v-toc-item\" href=\"#gil\"\u003e#\u003c/a\u003e GIL\u003c/h4\u003e\n\u003cp\u003eGlobal Interpreter Lock\u003c/p\u003e\n\u003cp\u003e并不是所有的解释器语言都有 GIL （尽管 Python 和 Ruby 里面都有）, 也并不是没有尝试过去除 GIL, 但是每次去除都会导致单线程性能的下降。所以暂时保留。\u003c/p\u003e\n\u003cp\u003eGIL 对程序中的影响：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e一个线程运行 Python , 而其他 N 个睡眠或者等待 I/O - \u003cstrong\u003e同一时刻只有一个线程对共享资源进行存取\u003c/strong\u003e , Python 线程也可以等待 threading.Lock 或者线程模块中的其他同步对象；\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch5 id=\"协同式多任务处理\"\u003e\u003ca class=\"v-toc-item\" href=\"#协同式多任务处理\"\u003e#\u003c/a\u003e 协同式多任务处理\u003c/h5\u003e\n\u003cp\u003e如果有两个线程，同时进行 IO 请求，当其中一个线程连接之后，立即会\u003cstrong\u003e主动让出 GIL\u003c/strong\u003e, 其他线程就可以运行。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e当 N 个线程在网络 I/O 堵塞，或等待重新获取 GIL，而一个线程运行 Python。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e让出之后还要执行代码呀，所以要有个收回 GIL 的动作。\u003c/p\u003e\n\u003ch5 id=\"抢占式多任务处理\"\u003e\u003ca class=\"v-toc-item\" href=\"#抢占式多任务处理\"\u003e#\u003c/a\u003e 抢占式多任务处理\u003c/h5\u003e\n\u003cp\u003ePython 2 GIL , 尝试收回 GIL 为 执行 1000 字节码。\u003cbr\u003e\nPython 3 GIL , 尝试收回 GIL 检测间隔为 15ms\u003c/p\u003e\n\u003ch5 id=\"线程安全\"\u003e\u003ca class=\"v-toc-item\" href=\"#线程安全\"\u003e#\u003c/a\u003e 线程安全\u003c/h5\u003e\n\u003cp\u003e原子操作：sort 之类不需要\u003cbr\u003e\n非原子操作：n=n+2 的字节码分为 加载 n , 加载 2 , 相加，存储 n, 四个步骤，由于不是原子性，很可能被由于 15 ms 而被打断。\u003c/p\u003e\n\u003cp\u003e当然，懒人一向是 : \u003cstrong\u003e优先级不决加括号，线程不决加 lock\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e对于 Java, 程序员努力在尽可能短的时间内加锁存取共享数据，减轻线程的争夺，实现最大并行。但 Python 中，线程无法并行运行，细粒度的锁就没有了优势。\u003c/p\u003e\n\u003ch3 id=\"正则表达式\"\u003e\u003ca class=\"v-toc-item\" href=\"#正则表达式\"\u003e#\u003c/a\u003e 正则表达式\u003c/h3\u003e\n\u003ch2 id=\"0x03-高级技巧\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-高级技巧\"\u003e#\u003c/a\u003e 0x03 高级技巧\u003c/h2\u003e\n\u003ch2 id=\"0x04-标准库\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x04-标准库\"\u003e#\u003c/a\u003e 0x04 标准库\u003c/h2\u003e\n\u003ch3 id=\"常用内建模块\"\u003e\u003ca class=\"v-toc-item\" href=\"#常用内建模块\"\u003e#\u003c/a\u003e 常用内建模块\u003c/h3\u003e\n\u003ch3 id=\"系统化模块\"\u003e\u003ca class=\"v-toc-item\" href=\"#系统化模块\"\u003e#\u003c/a\u003e 系统化模块\u003c/h3\u003e\n\u003col\u003e\n\u003cli\u003eIntroduction\u003c/li\u003e\n\u003cli\u003eBuilt-in Functions\u003c/li\u003e\n\u003cli\u003eBuilt-in Constants\u003c/li\u003e\n\u003cli\u003eBuilt-in Types\u003c/li\u003e\n\u003cli\u003eBuilt-in Exceptions\u003c/li\u003e\n\u003cli\u003eText Processing Services\u003c/li\u003e\n\u003cli\u003eBinary Data Services\u003c/li\u003e\n\u003cli\u003eData Types\u003c/li\u003e\n\u003cli\u003eNumeric and Mathematical Modules\u003c/li\u003e\n\u003cli\u003eFunctional Programming Modules\u003c/li\u003e\n\u003cli\u003eFile and Directory Access\u003c/li\u003e\n\u003cli\u003eData Persistence\u003c/li\u003e\n\u003cli\u003eData Compression and Archiving\u003c/li\u003e\n\u003cli\u003eFile Formats\u003c/li\u003e\n\u003cli\u003eCryptographic Services\u003c/li\u003e\n\u003cli\u003eGeneric Operating System Services\u003c/li\u003e\n\u003cli\u003eConcurrent Execution\u003c/li\u003e\n\u003cli\u003eInterprocess Communication and Networking\u003c/li\u003e\n\u003cli\u003eInternet Data Handling\u003c/li\u003e\n\u003cli\u003eStructured Markup Processing Tools\u003c/li\u003e\n\u003cli\u003eInternet Protocols and Support\u003c/li\u003e\n\u003cli\u003eMultimedia Services\u003c/li\u003e\n\u003cli\u003eInternationalization\u003c/li\u003e\n\u003cli\u003eProgram Frameworks\u003c/li\u003e\n\u003cli\u003eGraphical User Interfaces with Tk\u003c/li\u003e\n\u003cli\u003eDevelopment Tools\u003c/li\u003e\n\u003cli\u003eDebugging and Profiling\u003c/li\u003e\n\u003cli\u003eSoftware Packaging and Distribution\u003c/li\u003e\n\u003cli\u003ePython Runtime Services\u003c/li\u003e\n\u003cli\u003eCustom Python Interpreters\u003c/li\u003e\n\u003cli\u003eImporting Modules\u003c/li\u003e\n\u003cli\u003ePython Language Services\u003c/li\u003e\n\u003cli\u003eMiscellaneous Services\u003c/li\u003e\n\u003cli\u003eMS Windows Specific Services\u003c/li\u003e\n\u003cli\u003eUnix Specific Services\u003c/li\u003e\n\u003cli\u003eSuperseded Modules\u003c/li\u003e\n\u003cli\u003eUndocumented Modules\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2 id=\"0x05-第三方库\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x05-第三方库\"\u003e#\u003c/a\u003e 0x05 第三方库\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003eRequests : API 人性化\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x06-代码质量\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x06-代码质量\"\u003e#\u003c/a\u003e 0x06 代码质量\u003c/h2\u003e\n\u003ch3 id=\"正确性\"\u003e\u003ca class=\"v-toc-item\" href=\"#正确性\"\u003e#\u003c/a\u003e 正确性\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e外部\u003cstrong\u003e不该\u003c/strong\u003e引用 protected member （单下划线）\u003c/li\u003e\n\u003cli\u003elambda 为一次使用，最好不要赋值。\u003c/li\u003e\n\u003cli\u003e不要给 buildin 函数赋值\u003c/li\u003e\n\u003cli\u003epy3 直接 super()\u003c/li\u003e\n\u003cli\u003efor in else 如果不内置 break 则出会在最后 for in 为 empty 的时候再执行 else 中的语句\u003c/li\u003e\n\u003cli\u003econtext exit 如果不 catch 掉异常让其自然向上一级抛出错误的话，必须为 (self, exception_type, exception_value, traceback):\u003c/li\u003e\n\u003cli\u003e不要在 init 里面 return 数据\u003c/li\u003e\n\u003cli\u003e不要混用 tab 和 space\u003c/li\u003e\n\u003cli\u003e4 个 space 缩进\u003c/li\u003e\n\u003cli\u003estaticmethod 直接是 参数，classmethod 第一个参数为 cls\u003c/li\u003e\n\u003cli\u003e可变的 default value 是不能作为 参数的。（可能是解释器在确定函数的定义的时候完成赋值？)\u003c/li\u003e\n\u003cli\u003e遵循 exception hierachy \u003ca href=\"https://docs.python.org/3/library/exceptions.html#exception-hierarchy\"\u003ehttps://docs.python.org/3/library/exceptions.html#exception-hierarchy\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003edefaultdict defaultdict(lambda : 6) , 必须 callable\u003c/li\u003e\n\u003cli\u003e尽量 unpack 赋值\u003c/li\u003e\n\u003cli\u003e字典用获取用 get(“myk”,None) , 赋值用 dictionary.setdefault(“list”, []).append(“list_item”)\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"可维护性\"\u003e\u003ca class=\"v-toc-item\" href=\"#可维护性\"\u003e#\u003c/a\u003e 可维护性\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e避免使用 import * , 我觉得这点值得商榷 , 如果是某个模块下，完全可以先把模块拆分成多个，最后 import 进来，接着使用 all.\u003c/li\u003e\n\u003cli\u003egetxxx 获取实际值，如果不为实际值，返回 None 显然不如 try catch 来的实在。\u003c/li\u003e\n\u003cli\u003e避免使用 global\u003c/li\u003e\n\u003cli\u003e命名要注意\u003c/li\u003e\n\u003cli\u003e动态创建方法 , 我觉得这点值得商榷。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"可读性\"\u003e\u003ca class=\"v-toc-item\" href=\"#可读性\"\u003e#\u003c/a\u003e 可读性\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e不要检查，如果可能有异常，尽量抛出异常来 trycatch 解决。\u003c/li\u003e\n\u003cli\u003ea is None , if flag\u003c/li\u003e\n\u003cli\u003eisinstance , not type® is types.ListType\u003c/li\u003e\n\u003cli\u003e“{name}{city}”.format(**info_dict)\u003c/li\u003e\n\u003cli\u003efor k , v in infodict.items()\u003c/li\u003e\n\u003cli\u003e使用 poiinfo = namedtuple(“poiinfo”,[“name”,“lng”,“lat”]) 返回 poiinfo[‘上海’,121.00,23] 最后返回值打印 \u003ca href=\"http://poi.name\"\u003epoi.name\u003c/a\u003e , poi.lng , poi lat\u003c/li\u003e\n\u003cli\u003efor numbers_value, letters_value in zip(numbers, letters):\u003c/li\u003e\n\u003cli\u003eenumerate\u003c/li\u003e\n\u003cli\u003e如果能用 listcomp 则不使用 map 和 filter\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"安全性\"\u003e\u003ca class=\"v-toc-item\" href=\"#安全性\"\u003e#\u003c/a\u003e 安全性\u003c/h3\u003e\n\u003ch3 id=\"性能\"\u003e\u003ca class=\"v-toc-item\" href=\"#性能\"\u003e#\u003c/a\u003e 性能\u003c/h3\u003e\n\u003cul\u003e\n\u003cli\u003e用 set\u003c/li\u003e\n\u003cli\u003ed.iteritems() 比 items() 省内存\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0xee-文章更新\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-文章更新\"\u003e#\u003c/a\u003e 0xEE 文章更新\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2017-05-11 19:43:00\u003c/strong\u003e : 增加代码质量模块\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E5%89%8D%E8%A8%80\"\u003e0x01 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E7%AE%80%E4%BB%8B\"\u003e0x00 简介\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#1-%E4%B8%BA%E4%BB%80%E4%B9%88%E6%98%AF-python\"\u003e1. 为什么是 Python\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#2-%E5%B7%A5%E5%85%B7%E9%93%BE\"\u003e2. 工具链\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#4-%E6%96%87%E6%A1%A3\"\u003e4. 文档\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#5-%E7%A4%BE%E5%8C%BA\"\u003e5. 社区\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#6-%E4%B9%A6%E7%B1%8D\"\u003e6. 书籍\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5\"\u003e0x01 基本概念\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#1-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B\"\u003e1. 数据类型\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#2-%E6%93%8D%E4%BD%9C\"\u003e2. 操作\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E6%93%8D%E4%BD%9C\"\u003e操作\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%93%8D%E4%BD%9C-2\"\u003e操作\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#3-%E8%AF%AD%E5%8F%A5\"\u003e3. 语句\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E4%B8%AD%E7%BA%A7%E6%A6%82%E5%BF%B5\"\u003e0x02 中级概念\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%87%BD%E6%95%B0\"\u003e函数\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E4%BD%9C%E7%94%A8%E5%9F%9F\"\u003e作用域\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%A8%A1%E5%9D%97\"\u003e模块\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1\"\u003e面向对象\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E9%94%99%E8%AF%AF-%E8%B0%83%E8%AF%95%E6%B5%8B%E8%AF%95\"\u003e错误 / 调试测试\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#io-%E7%BC%96%E7%A8%8B\"\u003eIO 编程\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B\"\u003e进程和线程\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%A4%9A%E7%BA%BF%E7%A8%8B\"\u003e多线程\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%A4%9A%E8%BF%9B%E7%A8%8B\"\u003e多进程\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#gil\"\u003eGIL\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%8D%8F%E5%90%8C%E5%BC%8F%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86\"\u003e协同式多任务处理\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%8A%A2%E5%8D%A0%E5%BC%8F%E5%A4%9A%E4%BB%BB%E5%8A%A1%E5%A4%84%E7%90%86\"\u003e抢占式多任务处理\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%BA%BF%E7%A8%8B%E5%AE%89%E5%85%A8\"\u003e线程安全\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F\"\u003e正则表达式\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7\"\u003e0x03 高级技巧\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x04-%E6%A0%87%E5%87%86%E5%BA%93\"\u003e0x04 标准库\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%B8%B8%E7%94%A8%E5%86%85%E5%BB%BA%E6%A8%A1%E5%9D%97\"\u003e常用内建模块\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%B3%BB%E7%BB%9F%E5%8C%96%E6%A8%A1%E5%9D%97\"\u003e系统化模块\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x05-%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93\"\u003e0x05 第三方库\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x06-%E4%BB%A3%E7%A0%81%E8%B4%A8%E9%87%8F\"\u003e0x06 代码质量\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E6%AD%A3%E7%A1%AE%E6%80%A7\"\u003e正确性\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%8F%AF%E7%BB%B4%E6%8A%A4%E6%80%A7\"\u003e可维护性\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%8F%AF%E8%AF%BB%E6%80%A7\"\u003e可读性\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E5%AE%89%E5%85%A8%E6%80%A7\"\u003e安全性\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%80%A7%E8%83%BD\"\u003e性能\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E6%96%87%E7%AB%A0%E6%9B%B4%E6%96%B0\"\u003e0xEE 文章更新\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"Thinking In Python Language"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

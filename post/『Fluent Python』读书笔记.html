@@ -1,0 +1,981 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>『Fluent Python』读书笔记 | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h2 id="前言"><a class="v-toc-item" href="#前言">#</a> 前言</h2>
+<p>Fluent Python 适用于中级 Pythoner。</p>
+<blockquote>
+<p>以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。</p>
+</blockquote>
+<!-- more -->
+<h2 id="本文目录"><a class="v-toc-item" href="#本文目录">#</a> 本文目录</h2>
+<h2 id="本书结构"><a class="v-toc-item" href="#本书结构">#</a> 本书结构</h2>
+<ul>
+<li>P1. Prologue
+<ul>
+<li>C01. The Python Data Model</li>
+</ul>
+</li>
+<li>P2. Data Structure
+<ul>
+<li>C02. An Array of Sequences
+<ul>
+<li>Overview of Built-in Sequences</li>
+<li>List Comprehensions and Generator Expressions</li>
+<li>Tuples Are Not Just Immutable Lists</li>
+<li>Slicing</li>
+<li>Using plus and star with Sequences</li>
+<li>Augmented Assignment with Sequences</li>
+<li>list.sort and the sorted Built-In Function</li>
+<li>Managing Ordered Sequences with bisect</li>
+<li>When a List Is Not the Answer</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C03. Dictionaries and Sets
+<ul>
+<li>Generic Mapping Types</li>
+<li>Dict Comprehensions</li>
+<li>Common Mapping Methods</li>
+<li>Mappings with Flexiable Key Lookup</li>
+<li>Variations of Dict</li>
+<li>Subclassing UserDict</li>
+<li>Immutable Mappings</li>
+<li>Set Theory</li>
+<li>Dict and Set Under the Hood</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C04. Text VS Bytes
+<ul>
+<li>Character Issues</li>
+<li>Byte Essentials</li>
+<li>Basic Encoders/Decoders</li>
+<li>Understanding Encode/Decode Problems</li>
+<li>Handling Text Files</li>
+<li>Normalizng Unicode for Saner Comparisons</li>
+<li>Sorting Unicode Text</li>
+<li>The Unicode Database</li>
+<li>Dual-Mode str and bytes APIs</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>P3. Function as Objects
+<ul>
+<li>C05. First-Class Function
+<ul>
+<li>Treating a Function Like an Object</li>
+<li>Higher-Order Functions</li>
+<li>Anonymous Functions</li>
+<li>The Seven Flavors of Callable Objects</li>
+<li>User-Defined Callable Types</li>
+<li>Function Introspection</li>
+<li>From Positional to Keyword-Only Parameters</li>
+<li>Function Annotations</li>
+<li>Packages for Functional Programming</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C06. Design Patterns with First-Class Functions
+<ul>
+<li>Refactoring Strategy</li>
+<li>Command</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C07. Function Decorators and Closures
+<ul>
+<li>Decorators 101</li>
+<li>When Python Executes Decorators</li>
+<li>Decorator-Enhanced Strategy Pattern</li>
+<li>Variable Scope Rules</li>
+<li>Closures</li>
+<li>The nonlocal Declaration</li>
+<li>Implementing a Simple Decorator</li>
+<li>Decorators In the Standard Library</li>
+<li>Stacked Decorators</li>
+<li>Parameterized Decorators</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>P4. Object-Oriented Idioms
+<ul>
+<li>C08. Object References, Mutability, and Recycling
+<ul>
+<li>Variables Are Not Boxes</li>
+<li>Identity, Equality , and Aliases</li>
+<li>Copies Are Shallow by Default</li>
+<li>Function Parameters as References</li>
+<li>del and Garbage Collection</li>
+<li>Weak References</li>
+<li>Tricts Python Plays with Immutables</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C09. A Pythonic Object
+<ul>
+<li>Object Representations</li>
+<li>Vector Class Redux</li>
+<li>An Alternative Constructor</li>
+<li>classmethod VS staticmethod</li>
+<li>Formatted Displays</li>
+<li>A Hashable Vector2d</li>
+<li>Private and “Protected” Attributes in Python</li>
+<li>Saving Space with the slots Class Attribute</li>
+<li>Overriding Class Attributes</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C10. Sequence Hacking , Hashing , and Slicing
+<ul>
+<li>Vector: A User-Defined Sequence Type</li>
+<li>Vector Take #1: Vector2d Compatible</li>
+<li>Protocols and Duck Typing</li>
+<li>Vector Take #2: A Sliceable Sequence</li>
+<li>Vector Take #3: Dynamic Attribute Access</li>
+<li>Vector Take #4: Hashing and a Faster ==</li>
+<li>Vector Take #5: Formatting</li>
+<li>Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C11. Interfaces: From Protocols to ABCs
+<ul>
+<li>Interfaces and Protocols in Python Culture</li>
+<li>Python Digs Sequences</li>
+<li>Monkey-Patching to Implement a Protocol at Runtime</li>
+<li>Alex Martelli’s Waterfowl</li>
+<li>Subclassing an ABC</li>
+<li>ABCs in the Standard Library</li>
+<li>Defining and Using an ABC</li>
+<li>How the Tombola Subclasses Were Tested</li>
+<li>Usage of register in Practice</li>
+<li>Geese Can Behave as Ducks</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C12. Inheritance: For Good or For Worse
+<ul>
+<li>Subclassing Built-In Types Is Tricty</li>
+<li>Multiple Inheritance and Method Resolution Order</li>
+<li>Multiple Inheritance in the Real World</li>
+<li>Coping with Multiple Inheritance</li>
+<li>A Modern Example: Mixins in Django Generic Views</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C13. Operator Overloading: Doing It Right
+<ul>
+<li>Operator Overloading 101</li>
+<li>Unary Operators</li>
+<li>Overloading plus for Verctor Addtion</li>
+<li>Overloading star for Scalar Multiplication</li>
+<li>Rich Comparison Operators</li>
+<li>Augmented Assignment Operator</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>P5. Control Flow
+<ul>
+<li>C14. Iterables, Iterators , and Generators
+<ul>
+<li>Sentence Take #1 : A Sequence of Words Iterables VS Iterators</li>
+<li>Iterables Versus Itertors</li>
+<li>Sentence Take #2 : A Classic Iterator</li>
+<li>Sentence Take #3 : A Generator Function</li>
+<li>Sentence Take #4 : A Lazy Implementation</li>
+<li>Sentence Take #5 : A Generator Expression</li>
+<li>Generator Expressions : When to Use Them</li>
+<li>Another Example : Arithmetic Progression Generator</li>
+<li>Generator Functions in the Standard Library</li>
+<li>New Syntax In Python 3.3 : yield from</li>
+<li>Iterable Reducing Functions</li>
+<li>A Closer Look at the iter Function</li>
+<li>Case Study : Generators in a Databse Conversion Utility</li>
+<li>Generators as Coroutines</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C15. Context Managers and else Blocks
+<ul>
+<li>Do This , Then That: else Blocks Beyond if</li>
+<li>Context Managers and with Blocks</li>
+<li>The contextlib Utilities</li>
+<li>Using @contextmanager</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C16. Coroutines
+<ul>
+<li>How Coroutines Evolved from Generators</li>
+<li>Basic Behavior of a Generator Used as a Coroutine</li>
+<li>Example: Coroutine to Compute a Running Average</li>
+<li>Decorators for Conroutine Priming</li>
+<li>Coroutine Termination and Exception Handing</li>
+<li>Returning a Value from a Coroutine</li>
+<li>Using Yield from</li>
+<li>The Meaning of yield from</li>
+<li>Use Case: Coroutines for Discrete Event Simulation</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C17. Concurrency with Futures
+<ul>
+<li>e.g. Web Downloads in Three Styles</li>
+<li>Blocking I/O and the GIL</li>
+<li>Launching Processes with concurrent.futures</li>
+<li>Experimenting with Executor.map</li>
+<li>Downloads with Progress Display and Error Handling</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C18. Concurrency with asyncio
+<ul>
+<li>Thread VS Coroutine : A Comparison</li>
+<li>Downloading with asyncio and aiohttp</li>
+<li>Running Circling Around Blocking Calls</li>
+<li>Enhancing the asyncio downloader Script</li>
+<li>From Callbacks to Futures and Coroutines</li>
+<li>Writing asyncio Servers</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>P6. Metaprogramming
+<ul>
+<li>C19. Dynamic Attributes and Properties
+<ul>
+<li>Data Wrangling with Dynamic Attributes</li>
+<li>Using a Property for Attribute Validation</li>
+<li>A Proper Look at Properties</li>
+<li>Coding a Property Factory</li>
+<li>Handling Attribute Deletion</li>
+<li>Essential Attributes and Functions For Attribute Handling</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C20. Attribute Descriptors
+<ul>
+<li>Desciptor Example: Attribute Validation</li>
+<li>Overriding VS Nonoverriding Descriptors</li>
+<li>Methods Are Descriptors</li>
+<li>Descriptor Usage Tips</li>
+<li>Descriptor docstring and Overriding Deletion</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+<li>C21. Class Metaprogramming
+<ul>
+<li>A Class Factory</li>
+<li>A Class Decorator for Customizing Descriptors</li>
+<li>What Happens When: Import Time VS Runtime</li>
+<li>Metaclasses 101</li>
+<li>A Metaclass for Customizing Descriptors</li>
+<li>The Metaclass prepare Special Method</li>
+<li>Classes as Objects</li>
+<li>Chapter Summary</li>
+<li>Further Reading</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="p1-prologue"><a class="v-toc-item" href="#p1-prologue">#</a> P1. Prologue</h2>
+<p>序言部分讲了很重要的一点，Python 最优秀的地方就是其统一性。</p>
+<p>Pythonic 体现在使用的 Python Data Model 来表述，其途径主要编写<strong>特殊方法 (Special/Magic Method)</strong></p>
+<ul>
+<li>Iteration</li>
+<li>Collections</li>
+<li>Attribute access</li>
+<li>Operator overloading</li>
+<li>Function and method invocation</li>
+<li>Object creation and destruction</li>
+<li>String representation and formatting</li>
+<li>Managed contexts (i.e., with blocks)</li>
+</ul>
+<h3 id="c01-the-python-data-model"><a class="v-toc-item" href="#c01-the-python-data-model">#</a> C01. The Python Data Model</h3>
+<p>扩展阅读：<a href="http://zopeinterface.readthedocs.io/en/latest/">http://zopeinterface.readthedocs.io/en/latest/</a></p>
+<h4 id="a-pythonic-card-deck"><a class="v-toc-item" href="#a-pythonic-card-deck">#</a> A Pythonic Card Deck</h4>
+<pre><code class="language-python">#### <span class="token number">1.</span> 案例一：纸牌 nametuple
+Card <span class="token operator">=</span> collections<span class="token punctuation">.</span><span class="token function">namedtuple</span><span class="token punctuation">(</span><span class="token string">'Card'</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token string">'rank'</span><span class="token punctuation">,</span> <span class="token string">'suit'</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+# Card 是一个类
+# 重载到 <span class="token function">Cards</span><span class="token punctuation">(</span>object<span class="token punctuation">)</span> 的 __init__ <span class="token punctuation">,</span> __len__ <span class="token punctuation">,</span> __getitem__
+# 重载可以之后可以使用 <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token function">语法</span> <span class="token punctuation">(</span> <span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">]</span> random<span class="token punctuation">.</span><span class="token function">choice</span><span class="token punctuation">(</span>cards<span class="token punctuation">)</span> <span class="token punctuation">[</span><span class="token operator">:</span><span class="token number">3</span><span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token number">12</span><span class="token operator">:</span><span class="token operator">:</span><span class="token number">13</span><span class="token punctuation">]</span> <span class="token keyword">for</span> <span class="token keyword">in</span> sorted reversed<span class="token punctuation">,</span><span class="token function">sorted</span><span class="token punctuation">(</span>cards<span class="token punctuation">,</span> key<span class="token operator">=</span>calc_score<span class="token punctuation">)</span> card <span class="token keyword">in</span> cards <span class="token punctuation">)</span><span class="token punctuation">,</span>
+# 还可以重载 __setitem__<span class="token punctuation">,</span> 之后就可以 shuffle
+# 重载 __repr__ <span class="token punctuation">,</span> __abs__ <span class="token punctuation">,</span> __bool__ <span class="token punctuation">,</span> __add__ <span class="token punctuation">,</span> __mul__ 可以 <span class="token function">repr</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token function">abs</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token function">bool</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token operator">*</span>
+</code></pre>
+<h4 id="how-special-methods-are-used"><a class="v-toc-item" href="#how-special-methods-are-used">#</a> How Special Methods Are Used</h4>
+<pre><code class="language-python">obj<span class="token punctuation">.</span><span class="token function">__len__</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token function">len</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+obj<span class="token punctuation">.</span>__
+</code></pre>
+<h4 id="overview-of-special-methods"><a class="v-toc-item" href="#overview-of-special-methods">#</a> Overview of Special Methods</h4>
+<p>对于内置类型 (list, str , bytearray) 解释器在调用特殊方法的时候调用 C 库，比如 CPython 实现的 len 方法一般直接会调用 PyVarObject C Struct ob_size</p>
+<p>特殊方法往往并不是显示调用，而是被隐式调用。比如 init 在 new 中的作用，比如 for item in items 世界上会调用 iter(items), 这也会隐式调用 items.<strong>iter</strong>() .</p>
+<p>一般当大量使用特殊方法的时候，都是在进行元编程。</p>
+<pre><code class="language-python"><span class="token function">bool</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> 先调用 x<span class="token punctuation">.</span><span class="token function">__bool__</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">,</span> 如果 x<span class="token punctuation">.</span><span class="token function">__bool__</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 没有实现，则调用 x<span class="token punctuation">.</span><span class="token function">__len__</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 如果为 <span class="token number">0</span> 则返回 False
+<span class="token function">sorted</span><span class="token punctuation">(</span>arr<span class="token punctuation">)</span> 可以直接返回 arr，arr<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">)</span> 是排序内部。
+</code></pre>
+<p>特殊方法名 （有操作符）</p>
+<table>
+<thead>
+<tr>
+<th>种类</th>
+<th>方法名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>String/Bytes</td>
+<td>repr , str , format , bytes</td>
+</tr>
+<tr>
+<td>Conversion to number</td>
+<td>abs , bool , complex , init , float , hash , index</td>
+</tr>
+<tr>
+<td>Emulating collections</td>
+<td>len , getitem , setitem , delitem , contains</td>
+</tr>
+<tr>
+<td>Iteration</td>
+<td>iter, reversed , next</td>
+</tr>
+<tr>
+<td>Emulating callables</td>
+<td>call</td>
+</tr>
+<tr>
+<td>Context management</td>
+<td>enter, exit</td>
+</tr>
+<tr>
+<td>Instance creation &amp; destruction</td>
+<td>new , init , del</td>
+</tr>
+<tr>
+<td>Attribute management</td>
+<td>getattr , getattribute , setattr , delattr, dir</td>
+</tr>
+<tr>
+<td>Attribute descriptors</td>
+<td>get , set ,delete</td>
+</tr>
+<tr>
+<td>Class service</td>
+<td>prepare , instancecheck , subclasscheck</td>
+</tr>
+</tbody>
+</table>
+<p>特殊方法名 （无操作符）</p>
+<table>
+<thead>
+<tr>
+<th>种类</th>
+<th>方法名</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unary numeric operators</td>
+<td>neg , pos , abs</td>
+</tr>
+<tr>
+<td>Rich comparison operators</td>
+<td>lt , le , eq , ne , gt , ge</td>
+</tr>
+<tr>
+<td>Arithmetic operators</td>
+<td>add ,sub , mul ,truediv ,floordiv ,mod , divmod , pow , round round</td>
+</tr>
+<tr>
+<td>Reversed arithmetic operators</td>
+<td>radd , rsub , rmul , rtruediv, rfloordiv , rmod , rdivmod, rpow</td>
+</tr>
+<tr>
+<td>Augmented assignment mathmatic</td>
+<td>iadd , isub , imul , itruediv, ifloordiv</td>
+</tr>
+<tr>
+<td>Bitwise operators</td>
+<td>invert , lshift , rshift , and , or</td>
+</tr>
+<tr>
+<td>Reversed bitwise operators</td>
+<td>rlshift , rrshift , rand , rxor , ror</td>
+</tr>
+<tr>
+<td>Augmented assignment bitwise</td>
+<td>ilshift , irshift , iand , ixor , ior</td>
+</tr>
+</tbody>
+</table>
+<h4 id="why-len-is-not-a-method"><a class="v-toc-item" href="#why-len-is-not-a-method">#</a> Why len Is Not a Method</h4>
+<pre><code class="language-python">因为对 不同类型并不是一定调用 __len__ <span class="token punctuation">,</span> 对于基本类型查看 c struct 中长度，对于其他类型直接调用 __len__ <span class="token punctuation">,</span> 这种区分对待
+</code></pre>
+<h2 id="p2-data-structure"><a class="v-toc-item" href="#p2-data-structure">#</a> P2. Data Structure</h2>
+<h3 id="c02-an-array-of-sequences"><a class="v-toc-item" href="#c02-an-array-of-sequences">#</a> C02. An Array of Sequences</h3>
+<p>Strings, lists, byte sequences, arrays, XML elements, and database results share a rich set of common operations including iteration, slicing, sorting, and concatenation.</p>
+<h4 id="overview-of-built-in-sequences"><a class="v-toc-item" href="#overview-of-built-in-sequences">#</a> Overview of Built-in Sequences</h4>
+<p>C 实现的按照 item 是否为同一类型分为：</p>
+<ul>
+<li><strong>Container sequences</strong>: list, tuple, and collections.deque can hold items of different types.</li>
+<li><strong>Flat sequences</strong>: str, bytes, bytearray, memoryview, and array.array hold items of one type.</li>
+</ul>
+<p>C 实现按照 item 是否可修改分为：</p>
+<ul>
+<li><strong>Mutable sequences</strong>: list, bytearray, array.array, collections.deque, and memoryview</li>
+<li><strong>Immutable sequences</strong>: tuple, str, and bytes</li>
+</ul>
+<h4 id="list-comprehensions-and-generator-expressions"><a class="v-toc-item" href="#list-comprehensions-and-generator-expressions">#</a> List Comprehensions and Generator Expressions</h4>
+<pre><code class="language-python">new_items <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token function">func</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span> <span class="token keyword">for</span> item <span class="token keyword">in</span> items<span class="token punctuation">]</span>
+new_items <span class="token operator">=</span> <span class="token punctuation">[</span> <span class="token function">str</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span> <span class="token keyword">for</span> x <span class="token keyword">in</span> <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token keyword">if</span> x <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">]</span>
+new_items <span class="token operator">=</span> <span class="token function">list</span><span class="token punctuation">(</span><span class="token function">map</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span><span class="token function">list</span><span class="token punctuation">(</span><span class="token function">filter</span><span class="token punctuation">(</span>lambda x<span class="token operator">:</span> x <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">,</span> <span class="token function">list</span><span class="token punctuation">(</span><span class="token function">range</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+# 可写成
+new_items <span class="token operator">=</span> <span class="token function">list</span><span class="token punctuation">(</span><span class="token function">map</span><span class="token punctuation">(</span>str<span class="token punctuation">,</span><span class="token function">filter</span><span class="token punctuation">(</span>lambda x<span class="token operator">:</span> x <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span> <span class="token punctuation">,</span> <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</code></pre>
+<p>list 往往和 map filter 以及 listcomp 用于创建简单的序列</p>
+<h4 id="tuples-are-not-just-immutable-lists"><a class="v-toc-item" href="#tuples-are-not-just-immutable-lists">#</a> Tuples Are Not Just Immutable Lists</h4>
+<ul>
+<li>解包赋值</li>
+<li>不要手贱加逗号</li>
+<li>下划线可以用作临时变量 （但是 django 中下划线用于中英文）</li>
+</ul>
+<pre><code class="language-python">a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token operator">*</span>rest <span class="token operator">=</span> <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> # <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token operator">*</span>rest <span class="token operator">=</span> <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> # <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> <span class="token operator">*</span>rest <span class="token operator">=</span> <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> # <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+
+a<span class="token punctuation">,</span> <span class="token operator">*</span>body<span class="token punctuation">,</span> c<span class="token punctuation">,</span> d <span class="token operator">=</span> <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> # <span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+<span class="token operator">*</span>head<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c<span class="token punctuation">,</span> d <span class="token operator">=</span> <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> # <span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span>
+</code></pre>
+<ul>
+<li>namedtuple</li>
+</ul>
+<pre><code class="language-python">City <span class="token operator">=</span> <span class="token function">namedtuple</span><span class="token punctuation">(</span><span class="token string">'City'</span><span class="token punctuation">,</span> <span class="token string">'name country population coordinates'</span><span class="token punctuation">)</span>
+tokyo <span class="token operator">=</span> <span class="token function">City</span><span class="token punctuation">(</span><span class="token string">'Tokyo'</span><span class="token punctuation">,</span> <span class="token string">'JP'</span><span class="token punctuation">,</span> <span class="token number">36.933</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token number">35.689722</span><span class="token punctuation">,</span> <span class="token number">139.691667</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+tokyo<span class="token punctuation">.</span>population
+tokyo<span class="token punctuation">.</span>coordinates
+tokyo<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">]</span>
+City<span class="token punctuation">.</span>_fields # tuple
+</code></pre>
+<h4 id="slicing"><a class="v-toc-item" href="#slicing">#</a> Slicing</h4>
+<p>为何 Slice 和 Range 会排除 最后一个 Item?</p>
+<p>书中讲的太复杂，其实这个和尺子是一个作用，尺子从 0 刻度开始，这样方便丈量。</p>
+<p>比如说：</p>
+<ul>
+<li>items[0:10] 为 10 厘米</li>
+<li>items[10] 为 10 刻度后一个单位，即 items[10:11]</li>
+<li>items[2:] 为 2 刻度后面若干个单位</li>
+<li>items[::3] 以三为单位，从 0 刻度开始，最后为结尾，每三个</li>
+</ul>
+<pre><code>a[i, j] # 调用 a.__getitem__((i, j))
+</code></pre>
+<h4 id="augmented-assignment-with-sequences"><a class="v-toc-item" href="#augmented-assignment-with-sequences">#</a> Augmented Assignment with Sequences</h4>
+<pre><code class="language-python">对于不可变类型 赋值 l <span class="token operator">*=</span> <span class="token number">2</span> 在内存中则是创建了新的两个长度的元祖，然后赋值
+而由于字符串则需要注意，str_a <span class="token operator">+=</span> <span class="token string">"str b"</span> <span class="token punctuation">,</span> 虽然为不可变变量，但并不需要拷贝整个字符串（特殊情况）<span class="token punctuation">,</span> 但字符串的拼接建议还是<span class="token string">""</span><span class="token punctuation">.</span><span class="token function">join</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+t <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token number">30</span><span class="token punctuation">,</span> <span class="token number">40</span><span class="token punctuation">]</span><span class="token punctuation">)</span>
+t<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span> <span class="token operator">+=</span> <span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">]</span>
+# 结果为既赋值成功，又报错
+# 但 t<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token function">extend</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token number">50</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">]</span><span class="token punctuation">)</span> 可以赋值成功
+<span class="token keyword">import</span> dis
+dis<span class="token punctuation">.</span><span class="token function">dis</span><span class="token punctuation">(</span><span class="token string">'s[a] += b'</span><span class="token punctuation">)</span> # 可以查看字节码
+</code></pre>
+<ol>
+<li>尽量不要在不可变变量内保存可变变量</li>
+<li>t[2] += [50,60] 并不是原子操作，因为，当做了一半的时候，抛出的错误。</li>
+</ol>
+<h4 id="listsort-and-the-sorted-built-in-function"><a class="v-toc-item" href="#listsort-and-the-sorted-built-in-function">#</a> list.sort and the sorted Built-In Function</h4>
+<p>对于 sort 和 sorted 来说，reverse 代表 desc,key 为单参数用于计算每一个值的结果的函数。<br>
+list.sort 直接针对列表排序，并且返回 None（出于编程习惯的问题，直接返回 None 的函数大多是对程序有一定的修改）</p>
+<h4 id="managing-ordered-sequences-with-bisect"><a class="v-toc-item" href="#managing-ordered-sequences-with-bisect">#</a> Managing Ordered Sequences with bisect</h4>
+<pre><code class="language-python"><span class="token keyword">import</span> bisect
+bisect <span class="token operator">-</span><span class="token operator">></span> bisect_right
+bisect_left
+insort <span class="token operator">-</span><span class="token operator">></span> insort_left
+insort_right
+# 搜索可以用来划分档次
+def <span class="token function">grade</span><span class="token punctuation">(</span>score<span class="token punctuation">,</span> breakpoints<span class="token operator">=</span><span class="token punctuation">[</span><span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">,</span> <span class="token number">80</span><span class="token punctuation">,</span> <span class="token number">90</span><span class="token punctuation">]</span><span class="token punctuation">,</span> grades<span class="token operator">=</span><span class="token string">'FDCBA'</span><span class="token punctuation">)</span><span class="token operator">:</span>
+    i <span class="token operator">=</span> bisect<span class="token punctuation">.</span><span class="token function">bisect</span><span class="token punctuation">(</span>breakpoints<span class="token punctuation">,</span> score<span class="token punctuation">)</span>
+    <span class="token keyword">return</span> grades<span class="token punctuation">[</span>i<span class="token punctuation">]</span>
+
+<span class="token punctuation">[</span><span class="token function">grade</span><span class="token punctuation">(</span>score<span class="token punctuation">)</span> <span class="token keyword">for</span> score <span class="token keyword">in</span> <span class="token punctuation">[</span><span class="token number">33</span><span class="token punctuation">,</span> <span class="token number">99</span><span class="token punctuation">,</span> <span class="token number">77</span><span class="token punctuation">,</span> <span class="token number">70</span><span class="token punctuation">,</span> <span class="token number">89</span><span class="token punctuation">,</span> <span class="token number">90</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">]</span> # <span class="token punctuation">[</span><span class="token string">'F'</span><span class="token punctuation">,</span> <span class="token string">'A'</span><span class="token punctuation">,</span> <span class="token string">'C'</span><span class="token punctuation">,</span> <span class="token string">'C'</span><span class="token punctuation">,</span> <span class="token string">'B'</span><span class="token punctuation">,</span> <span class="token string">'A'</span><span class="token punctuation">,</span> <span class="token string">'A'</span><span class="token punctuation">]</span>
+</code></pre>
+<h4 id="when-a-list-is-not-the-answer"><a class="v-toc-item" href="#when-a-list-is-not-the-answer">#</a> When a List Is Not the Answer</h4>
+<p>list 是一种 mix-typed 的数据结构，即可以存放不同种类型的数据结构，由此带来的问题自然是性能问题：</p>
+<ul>
+<li>list 第一是 mix-typed 的数据结构</li>
+<li>动态数组，并非数组</li>
+</ul>
+<p>当考虑性能的时候，则需要考虑是不是要换一个更好的数据结构：</p>
+<ul>
+<li>适用于类型单一的 array</li>
+<li>增删比较多，或者需要使用 FIFO,LIFO, 则使用 deque (double-ended queue)</li>
+</ul>
+<pre><code class="language-python"># Arrays
+floats <span class="token operator">=</span> <span class="token function">array</span><span class="token punctuation">(</span><span class="token string">'d'</span><span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token function">random</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token operator">**</span><span class="token number">7</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+# NumPy and SciPy
+
+# Deques and Other Queue
+</code></pre>
+<h4 id="deques-and-other-queue"><a class="v-toc-item" href="#deques-and-other-queue">#</a> Deques and Other Queue</h4>
+<ul>
+<li>Deque</li>
+<li>queue 线程安全 Queue, LifoQueue, and PriorityQueue</li>
+<li>multiprocessing Queue 和 JoinableQueue</li>
+<li>asyncio Queue, LifoQueue, PriorityQueue, and JoinableQueue</li>
+</ul>
+<h3 id="c03-dictionaries-and-sets"><a class="v-toc-item" href="#c03-dictionaries-and-sets">#</a> C03. Dictionaries and Sets</h3>
+<p>本章内容：</p>
+<ul>
+<li>Common dictionary methods</li>
+<li>Special handling for missing keys</li>
+<li>Variations of dict in the standard library</li>
+<li>The set and frozenset types</li>
+<li>How hash tables work</li>
+<li>Implications of hash tables (key type limitations, unpredictable ordering, etc.)</li>
+</ul>
+<h5 id="generic-mapping-types"><a class="v-toc-item" href="#generic-mapping-types">#</a> Generic Mapping Types</h5>
+<p>Hashable ? 一个 obj 的 hash value 在他生命周期内 hash value 是不变的。一个 frozen set 也是 hashable 的（包括每个子元素）.</p>
+<blockquote>
+<p>All of Python’s immutable built-in objects are hashable , except that tuple<br>
+如果一个 tuple 是每个子元素都是 hashable 的话，则该 tuple 也是 hashable 的。</p>
+</blockquote>
+<pre><code class="language-bash"># 直接在 dict 上面进行操作
+index<span class="token punctuation">.</span><span class="token function">setdefault</span><span class="token punctuation">(</span>word<span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">append</span><span class="token punctuation">(</span>location<span class="token punctuation">)</span>
+</code></pre>
+<h5 id="missing-方法"><a class="v-toc-item" href="#missing-方法">#</a> missing 方法</h5>
+<p>keyerror 会触发 missing 方法</p>
+<h5 id="variations-of-dict"><a class="v-toc-item" href="#variations-of-dict">#</a> Variations of Dict</h5>
+<p>OrderedDict - 有序字典<br>
+ChainMap - 组装多个字典，按照次序搜索<br>
+Counter - COUNTER</p>
+<h5 id="immutable-mappings"><a class="v-toc-item" href="#immutable-mappings">#</a> Immutable Mappings</h5>
+<h5 id="set-theory"><a class="v-toc-item" href="#set-theory">#</a> Set Theory</h5>
+<p>交差并补</p>
+<pre><code class="language-python"># <span class="token number">1.</span> 交集
+s <span class="token operator">&amp;</span> z
+z <span class="token operator">&amp;</span> s
+s <span class="token operator">&amp;=</span> z
+# <span class="token number">2.</span> 差集
+s <span class="token operator">-</span> z
+z <span class="token operator">-</span> s
+s <span class="token operator">-=</span> z
+# <span class="token number">3.</span> 并集
+s <span class="token operator">|</span> z
+z <span class="token operator">|</span> s
+s <span class="token operator">|=</span> z
+# <span class="token number">4.</span> 补集
+s <span class="token operator">^</span> z
+z <span class="token operator">^</span> s
+s <span class="token operator">^=</span> z
+
+# 被包含
+e <span class="token keyword">in</span> z
+
+# 子集
+s <span class="token operator">&lt;=</span> z
+<span class="token parameter">s</span> <span class="token operator">=></span> z
+</code></pre>
+<h5 id="dict-and-set-under-the-hood"><a class="v-toc-item" href="#dict-and-set-under-the-hood">#</a> Dict and Set Under the Hood</h5>
+<h3 id="c04-text-vs-bytes"><a class="v-toc-item" href="#c04-text-vs-bytes">#</a> C04. Text VS Bytes</h3>
+<pre><code> - Character Issues
+ - Byte Essentials
+ - Basic Encoders/Decoders
+ - Understanding Encode/Decode Problems
+ - Handling Text Files
+ - Normalizng Unicode for Saner Comparisons
+ - Sorting Unicode Text
+ - The Unicode Database
+ - Dual-Mode str and bytes APIs
+ - Summary
+ - Further Reading
+</code></pre>
+<h2 id="p3-function-as-objects"><a class="v-toc-item" href="#p3-function-as-objects">#</a> P3. Function as Objects</h2>
+<p>function is the first-class object</p>
+<p>Higher-Order Functions</p>
+<ul>
+<li>
+<p>设计模式</p>
+</li>
+<li>
+<p>装饰器</p>
+</li>
+<li>
+<p>callables</p>
+</li>
+<li>
+<p>function attributes</p>
+</li>
+<li>
+<p>introspection</p>
+</li>
+<li>
+<p>parameter annotations</p>
+</li>
+<li>
+<p>nonlocal declaration</p>
+</li>
+<li>
+<p>references, mutability, 实例生命周期，定制自己集合类 collections and ABCs, 多继承，重载操作符。</p>
+</li>
+<li>
+<p>生成器</p>
+</li>
+<li>
+<p>上下文管理器</p>
+</li>
+<li>
+<p>协程 （包括 Yield)</p>
+</li>
+<li>
+<p>concurrency</p>
+</li>
+<li>
+<p>event-oriented IO asyncio</p>
+</li>
+<li>
+<p>动态创建类</p>
+</li>
+<li>
+<p>descriptors</p>
+</li>
+<li>
+<p>class decorators</p>
+</li>
+<li>
+<p>metaclasses</p>
+</li>
+</ul>
+<h3 id="c05-first-class-function"><a class="v-toc-item" href="#c05-first-class-function">#</a> C05. First-Class Function</h3>
+<pre><code> - Treating a Function Like an Object
+ - Higher-Order Functions
+ - Anonymous Functions
+ - The Seven Flavors of Callable Objects
+ - User-Defined Callable Types
+ - Function Introspection
+ - From Positional to Keyword-Only Parameters
+ - Function Annotations
+ - Packages for Functional Programming
+ - Summary
+ - Further Reading
+</code></pre>
+<h3 id="c06-design-patterns-with-first-class-functions"><a class="v-toc-item" href="#c06-design-patterns-with-first-class-functions">#</a> C06. Design Patterns with First-Class Functions</h3>
+<pre><code> - Refactoring Strategy
+ - Command
+ - Summary
+ - Further Reading
+</code></pre>
+<h3 id="c07-function-decorators-and-closures"><a class="v-toc-item" href="#c07-function-decorators-and-closures">#</a> C07. Function Decorators and Closures</h3>
+<pre><code> - Decorators 101
+ - When Python Executes Decorators
+ - Decorator-Enhanced Strategy Pattern
+ - Variable Scope Rules
+ - Closures
+ - The nonlocal Declaration
+ - Implementing a Simple Decorator
+ - Decorators In the Standard Library
+ - Stacked Decorators
+ - Parameterized Decorators
+ - Summary
+ - Further Reading
+</code></pre>
+<h2 id="p4-object-oriented-idioms"><a class="v-toc-item" href="#p4-object-oriented-idioms">#</a> P4. Object-Oriented Idioms</h2>
+<h3 id="c08-object-references-mutability-and-recycling"><a class="v-toc-item" href="#c08-object-references-mutability-and-recycling">#</a> C08. Object References, Mutability, and Recycling</h3>
+<p>reference variable : variable 不是盒子，贴在盒子上的标签。</p>
+<p>赋值并非创建 Copy<br>
+赋值给一个值并非改变之前绑定的值，而仅仅是重新绑定 rebinding<br>
+函数由于参数为 reference, 所以可以修改 mutable 的变量<br>
+函数参数不应当初始化为可修改的值。</p>
+<p>id 与 == : 内存值 和 值相等<br>
+copy 默认是浅拷贝<br>
+函数参数是引用<br>
+GC 使用的引用计数，通过 weakref.finalize 可以增加 obj 被回收的回调函数<br>
+强引用和弱引用，weakref 具体使用场景？ <a href="https://pymotw.com/3/weakref/">https://pymotw.com/3/weakref/</a><br>
+One example is a class that wants to keep track of all its current instances. This can be done with weak references, a low-level mechanism underlying the more useful collections WeakValueDictionary, WeakKey Dictionary, WeakSet, and the finalize function from the weakref module.<br>
+公用字符串字面量和小的数的技巧叫做 interning</p>
+<p>PS:</p>
+<pre><code>在 IPython 中 _ 为某个表达式返回的值
+</code></pre>
+<pre><code> - Weak References
+ - Tricts Python Plays with Immutables
+ - Summary
+ - Further Reading
+</code></pre>
+<h3 id="c09-a-pythonic-object"><a class="v-toc-item" href="#c09-a-pythonic-object">#</a> C09. A Pythonic Object</h3>
+<pre><code> - Object Representations
+ - Vector Class Redux
+ - An Alternative Constructor
+ - classmethod VS staticmethod
+ - Formatted Displays
+ - A Hashable Vector2d
+ - Private and &quot;Protected&quot; Attributes in Python
+ - Saving Space with the slots Class Attribute
+ - Overriding Class Attributes
+ - Summary
+ - Further Reading
+</code></pre>
+<h3 id="c10-sequence-hacking-hashing-and-slicing"><a class="v-toc-item" href="#c10-sequence-hacking-hashing-and-slicing">#</a> C10. Sequence Hacking , Hashing , and Slicing</h3>
+<pre><code> - Vector: A User-Defined Sequence Type
+ - Vector Take #1: Vector2d Compatible
+ - Protocols and Duck Typing
+ - Vector Take #2: A Sliceable Sequence
+ - Vector Take #3: Dynamic Attribute Access
+ - Vector Take #4: Hashing and a Faster ==
+ - Vector Take #5: Formatting
+ - Summary
+ - Further Reading
+</code></pre>
+<h3 id="c11-interfaces-from-protocols-to-abcs"><a class="v-toc-item" href="#c11-interfaces-from-protocols-to-abcs">#</a> C11. Interfaces: From Protocols to ABCs</h3>
+<pre><code> - Interfaces and Protocols in Python Culture
+ - Python Digs Sequences
+ - Monkey-Patching to Implement a Protocol at Runtime
+ - Alex Martelli's Waterfowl
+ - Subclassing an ABC
+ - ABCs in the Standard Library
+ - Defining and Using an ABC
+ - How the Tombola Subclasses Were Tested
+ - Usage of register in Practice
+ - Geese Can Behave as Ducks
+ - Chapter Summary
+ - Further Reading
+</code></pre>
+<h3 id="c12-inheritance-for-good-or-for-worse"><a class="v-toc-item" href="#c12-inheritance-for-good-or-for-worse">#</a> C12. Inheritance: For Good or For Worse</h3>
+<pre><code> - Subclassing Built-In Types Is Tricty
+ - Multiple Inheritance and Method Resolution Order
+ - Multiple Inheritance in the Real World
+ - Coping with Multiple Inheritance
+ - A Modern Example: Mixins in Django Generic Views
+ - Chapter Summary
+ - Further Reading
+</code></pre>
+<h3 id="c13-operator-overloading-doing-it-right"><a class="v-toc-item" href="#c13-operator-overloading-doing-it-right">#</a> C13. Operator Overloading: Doing It Right</h3>
+<blockquote>
+<p>依据我的经验。除非特别适合，比如说矩阵相加，否则不要进行操作符重载。 因为 加减乘除之类的操作符本身就容易有二义性。</p>
+</blockquote>
+<h2 id="p5-control-flow"><a class="v-toc-item" href="#p5-control-flow">#</a> P5. Control Flow</h2>
+<h3 id="c14-iterables-iterators-and-generators"><a class="v-toc-item" href="#c14-iterables-iterators-and-generators">#</a> C14. Iterables, Iterators , and Generators</h3>
+<pre><code> - Sentence Take #1 : A Sequence of Words Iterables VS Iterators
+ - Iterables Versus Itertors
+ - Sentence Take #2 : A Classic Iterator
+ - Sentence Take #3 : A Generator Function
+ - Sentence Take #4 : A Lazy Implementation
+ - Sentence Take #5 : A Generator Expression
+ - Generator Expressions : When to Use Them
+ - Another Example : Arithmetic Progression Generator
+ - Generator Functions in the Standard Library
+ - New Syntax In Python 3.3 : yield from
+ - Iterable Reducing Functions
+ - A Closer Look at the iter Function
+ - Case Study : Generators in a Databse Conversion Utility
+ - Generators as Coroutines
+ - Chapter Summary
+ - Further Reading
+</code></pre>
+<h3 id="c15-context-managers-and-else-blocks"><a class="v-toc-item" href="#c15-context-managers-and-else-blocks">#</a> C15. Context Managers and else Blocks</h3>
+<pre><code> - Do This , Then That: else Blocks Beyond if
+ - Context Managers and with Blocks
+ - The contextlib Utilities
+ - Using @contextmanager
+ - Chapter Summary
+ - Further Reading
+</code></pre>
+<h3 id="c16-coroutines"><a class="v-toc-item" href="#c16-coroutines">#</a> C16. Coroutines</h3>
+<pre><code> - How Coroutines Evolved from Generators
+ - Basic Behavior of a Generator Used as a Coroutine
+ - Example: Coroutine to Compute a Running Average
+ - Decorators for Conroutine Priming
+ - Coroutine Termination and Exception Handing
+ - Returning a Value from a Coroutine
+ - Using Yield from
+ - The Meaning of yield from
+ - Use Case: Coroutines for Discrete Event Simulation
+ - Chapter Summary
+ - Further Reading
+</code></pre>
+<h3 id="c17-concurrency-with-futures"><a class="v-toc-item" href="#c17-concurrency-with-futures">#</a> C17. Concurrency with Futures</h3>
+<pre><code> - e.g. Web Downloads in Three Styles
+ - Blocking I/O and the GIL
+ - Launching Processes with concurrent.futures
+ - Experimenting with Executor.map
+ - Downloads with Progress Display and Error Handling
+ - Chapter Summary
+ - Further Reading
+</code></pre>
+<h3 id="c18-concurrency-with-asyncio"><a class="v-toc-item" href="#c18-concurrency-with-asyncio">#</a> C18. Concurrency with asyncio</h3>
+<pre><code> - Thread VS Coroutine : A Comparison
+ - Downloading with asyncio and aiohttp
+ - Running Circling Around Blocking Calls
+ - Enhancing the asyncio downloader Script
+ - From Callbacks to Futures and Coroutines
+ - Writing asyncio Servers
+ - Chapter Summary
+ - Further Reading
+</code></pre>
+<h2 id="p6-metaprogramming"><a class="v-toc-item" href="#p6-metaprogramming">#</a> P6. Metaprogramming</h2>
+<h3 id="c19-dynamic-attributes-and-properties"><a class="v-toc-item" href="#c19-dynamic-attributes-and-properties">#</a> C19. Dynamic Attributes and Properties</h3>
+<pre><code> - Data Wrangling with Dynamic Attributes
+ - Using a Property for Attribute Validation
+ - A Proper Look at Properties
+ - Coding a Property Factory
+ - Handling Attribute Deletion
+ - Essential Attributes and Functions For Attribute Handling
+ - Chapter Summary
+ - Further Reading
+</code></pre>
+<h3 id="c20-attribute-descriptors"><a class="v-toc-item" href="#c20-attribute-descriptors">#</a> C20. Attribute Descriptors</h3>
+<pre><code> - Desciptor Example: Attribute Validation
+ - Overriding VS Nonoverriding Descriptors
+ - Methods Are Descriptors
+ - Descriptor Usage Tips
+ - Descriptor docstring and Overriding Deletion
+ - Chapter Summary
+ - Further Reading
+</code></pre>
+<h3 id="c21-class-metaprogramming"><a class="v-toc-item" href="#c21-class-metaprogramming">#</a> C21. Class Metaprogramming</h3>
+<pre><code> - A Class Factory
+ - A Class Decorator for Customizing Descriptors
+ - What Happens When: Import Time VS Runtime
+ - Metaclasses 101
+ - A Metaclass for Customizing Descriptors
+ - The Metaclass prepare Special Method
+ - Classes as Objects
+ - Chapter Summary
+ - Further Reading
+</code></pre>
+<h2 id="相关链接"><a class="v-toc-item" href="#相关链接">#</a> 相关链接</h2>
+<ul>
+<li><a href="https://docs.python.org/3/reference/datamodel.html">https://docs.python.org/3/reference/datamodel.html</a></li>
+<li>Python Cookbook</li>
+<li>Python Essential Reference, 4th Edition</li>
+<li>The Art of the Metaobject Protocol</li>
+</ul>
+<p>UPDATE:</p>
+<table>
+<thead>
+<tr>
+<th>日期</th>
+<th>类型</th>
+<th>详细操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>2017-04-18</strong></td>
+<td>动笔</td>
+<td>初始化本文结构</td>
+</tr>
+<tr>
+<td><strong>2017-04-26</strong></td>
+<td>重构</td>
+<td>添加目录和阅读笔记</td>
+</tr>
+</tbody>
+</table>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E6%9C%AC%E6%96%87%E7%9B%AE%E5%BD%95">本文目录</a></li>
+<li><a href="#%E6%9C%AC%E4%B9%A6%E7%BB%93%E6%9E%84">本书结构</a></li>
+<li><a href="#p1-prologue">P1. Prologue</a>
+<ul>
+<li><a href="#c01-the-python-data-model">C01. The Python Data Model</a>
+<ul>
+<li><a href="#a-pythonic-card-deck">A Pythonic Card Deck</a></li>
+<li><a href="#how-special-methods-are-used">How Special Methods Are Used</a></li>
+<li><a href="#overview-of-special-methods">Overview of Special Methods</a></li>
+<li><a href="#why-len-is-not-a-method">Why len Is Not a Method</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#p2-data-structure">P2. Data Structure</a>
+<ul>
+<li><a href="#c02-an-array-of-sequences">C02. An Array of Sequences</a>
+<ul>
+<li><a href="#overview-of-built-in-sequences">Overview of Built-in Sequences</a></li>
+<li><a href="#list-comprehensions-and-generator-expressions">List Comprehensions and Generator Expressions</a></li>
+<li><a href="#tuples-are-not-just-immutable-lists">Tuples Are Not Just Immutable Lists</a></li>
+<li><a href="#slicing">Slicing</a></li>
+<li><a href="#augmented-assignment-with-sequences">Augmented Assignment with Sequences</a></li>
+<li><a href="#listsort-and-the-sorted-built-in-function">list.sort and the sorted Built-In Function</a></li>
+<li><a href="#managing-ordered-sequences-with-bisect">Managing Ordered Sequences with bisect</a></li>
+<li><a href="#when-a-list-is-not-the-answer">When a List Is Not the Answer</a></li>
+<li><a href="#deques-and-other-queue">Deques and Other Queue</a></li>
+</ul>
+</li>
+<li><a href="#c03-dictionaries-and-sets">C03. Dictionaries and Sets</a><br>
+*
+<ul>
+<li><a href="#generic-mapping-types">Generic Mapping Types</a></li>
+<li><a href="#missing-%E6%96%B9%E6%B3%95">missing 方法</a></li>
+<li><a href="#variations-of-dict">Variations of Dict</a></li>
+<li><a href="#immutable-mappings">Immutable Mappings</a></li>
+<li><a href="#set-theory">Set Theory</a></li>
+<li><a href="#dict-and-set-under-the-hood">Dict and Set Under the Hood</a></li>
+</ul>
+</li>
+<li><a href="#c04-text-vs-bytes">C04. Text VS Bytes</a></li>
+</ul>
+</li>
+<li><a href="#p3-function-as-objects">P3. Function as Objects</a>
+<ul>
+<li><a href="#c05-first-class-function">C05. First-Class Function</a></li>
+<li><a href="#c06-design-patterns-with-first-class-functions">C06. Design Patterns with First-Class Functions</a></li>
+<li><a href="#c07-function-decorators-and-closures">C07. Function Decorators and Closures</a></li>
+</ul>
+</li>
+<li><a href="#p4-object-oriented-idioms">P4. Object-Oriented Idioms</a>
+<ul>
+<li><a href="#c08-object-references-mutability-and-recycling">C08. Object References, Mutability, and Recycling</a></li>
+<li><a href="#c09-a-pythonic-object">C09. A Pythonic Object</a></li>
+<li><a href="#c10-sequence-hacking-hashing-and-slicing">C10. Sequence Hacking , Hashing , and Slicing</a></li>
+<li><a href="#c11-interfaces-from-protocols-to-abcs">C11. Interfaces: From Protocols to ABCs</a></li>
+<li><a href="#c12-inheritance-for-good-or-for-worse">C12. Inheritance: For Good or For Worse</a></li>
+<li><a href="#c13-operator-overloading-doing-it-right">C13. Operator Overloading: Doing It Right</a></li>
+</ul>
+</li>
+<li><a href="#p5-control-flow">P5. Control Flow</a>
+<ul>
+<li><a href="#c14-iterables-iterators-and-generators">C14. Iterables, Iterators , and Generators</a></li>
+<li><a href="#c15-context-managers-and-else-blocks">C15. Context Managers and else Blocks</a></li>
+<li><a href="#c16-coroutines">C16. Coroutines</a></li>
+<li><a href="#c17-concurrency-with-futures">C17. Concurrency with Futures</a></li>
+<li><a href="#c18-concurrency-with-asyncio">C18. Concurrency with asyncio</a></li>
+</ul>
+</li>
+<li><a href="#p6-metaprogramming">P6. Metaprogramming</a>
+<ul>
+<li><a href="#c19-dynamic-attributes-and-properties">C19. Dynamic Attributes and Properties</a></li>
+<li><a href="#c20-attribute-descriptors">C20. Attribute Descriptors</a></li>
+<li><a href="#c21-class-metaprogramming">C21. Class Metaprogramming</a></li>
+</ul>
+</li>
+<li><a href="#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5">相关链接</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Python"],"path":"20170417_读书笔记_FluentPython.md","title":"『Fluent Python』读书笔记","slug":"『Fluent Python』读书笔记","date":"2017-04-07","category":"读书笔记","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch2 id=\"前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#前言\"\u003e#\u003c/a\u003e 前言\u003c/h2\u003e\n\u003cp\u003eFluent Python 适用于中级 Pythoner。\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e以 Python 作为主力编程语言已经 1 年多了，读这本书，希望写的代码可以更加的 Pythonic。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003c!-- more --\u003e\n\u003ch2 id=\"本文目录\"\u003e\u003ca class=\"v-toc-item\" href=\"#本文目录\"\u003e#\u003c/a\u003e 本文目录\u003c/h2\u003e\n\u003ch2 id=\"本书结构\"\u003e\u003ca class=\"v-toc-item\" href=\"#本书结构\"\u003e#\u003c/a\u003e 本书结构\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003eP1. Prologue\n\u003cul\u003e\n\u003cli\u003eC01. The Python Data Model\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eP2. Data Structure\n\u003cul\u003e\n\u003cli\u003eC02. An Array of Sequences\n\u003cul\u003e\n\u003cli\u003eOverview of Built-in Sequences\u003c/li\u003e\n\u003cli\u003eList Comprehensions and Generator Expressions\u003c/li\u003e\n\u003cli\u003eTuples Are Not Just Immutable Lists\u003c/li\u003e\n\u003cli\u003eSlicing\u003c/li\u003e\n\u003cli\u003eUsing plus and star with Sequences\u003c/li\u003e\n\u003cli\u003eAugmented Assignment with Sequences\u003c/li\u003e\n\u003cli\u003elist.sort and the sorted Built-In Function\u003c/li\u003e\n\u003cli\u003eManaging Ordered Sequences with bisect\u003c/li\u003e\n\u003cli\u003eWhen a List Is Not the Answer\u003c/li\u003e\n\u003cli\u003eSummary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC03. Dictionaries and Sets\n\u003cul\u003e\n\u003cli\u003eGeneric Mapping Types\u003c/li\u003e\n\u003cli\u003eDict Comprehensions\u003c/li\u003e\n\u003cli\u003eCommon Mapping Methods\u003c/li\u003e\n\u003cli\u003eMappings with Flexiable Key Lookup\u003c/li\u003e\n\u003cli\u003eVariations of Dict\u003c/li\u003e\n\u003cli\u003eSubclassing UserDict\u003c/li\u003e\n\u003cli\u003eImmutable Mappings\u003c/li\u003e\n\u003cli\u003eSet Theory\u003c/li\u003e\n\u003cli\u003eDict and Set Under the Hood\u003c/li\u003e\n\u003cli\u003eSummary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC04. Text VS Bytes\n\u003cul\u003e\n\u003cli\u003eCharacter Issues\u003c/li\u003e\n\u003cli\u003eByte Essentials\u003c/li\u003e\n\u003cli\u003eBasic Encoders/Decoders\u003c/li\u003e\n\u003cli\u003eUnderstanding Encode/Decode Problems\u003c/li\u003e\n\u003cli\u003eHandling Text Files\u003c/li\u003e\n\u003cli\u003eNormalizng Unicode for Saner Comparisons\u003c/li\u003e\n\u003cli\u003eSorting Unicode Text\u003c/li\u003e\n\u003cli\u003eThe Unicode Database\u003c/li\u003e\n\u003cli\u003eDual-Mode str and bytes APIs\u003c/li\u003e\n\u003cli\u003eSummary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eP3. Function as Objects\n\u003cul\u003e\n\u003cli\u003eC05. First-Class Function\n\u003cul\u003e\n\u003cli\u003eTreating a Function Like an Object\u003c/li\u003e\n\u003cli\u003eHigher-Order Functions\u003c/li\u003e\n\u003cli\u003eAnonymous Functions\u003c/li\u003e\n\u003cli\u003eThe Seven Flavors of Callable Objects\u003c/li\u003e\n\u003cli\u003eUser-Defined Callable Types\u003c/li\u003e\n\u003cli\u003eFunction Introspection\u003c/li\u003e\n\u003cli\u003eFrom Positional to Keyword-Only Parameters\u003c/li\u003e\n\u003cli\u003eFunction Annotations\u003c/li\u003e\n\u003cli\u003ePackages for Functional Programming\u003c/li\u003e\n\u003cli\u003eSummary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC06. Design Patterns with First-Class Functions\n\u003cul\u003e\n\u003cli\u003eRefactoring Strategy\u003c/li\u003e\n\u003cli\u003eCommand\u003c/li\u003e\n\u003cli\u003eSummary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC07. Function Decorators and Closures\n\u003cul\u003e\n\u003cli\u003eDecorators 101\u003c/li\u003e\n\u003cli\u003eWhen Python Executes Decorators\u003c/li\u003e\n\u003cli\u003eDecorator-Enhanced Strategy Pattern\u003c/li\u003e\n\u003cli\u003eVariable Scope Rules\u003c/li\u003e\n\u003cli\u003eClosures\u003c/li\u003e\n\u003cli\u003eThe nonlocal Declaration\u003c/li\u003e\n\u003cli\u003eImplementing a Simple Decorator\u003c/li\u003e\n\u003cli\u003eDecorators In the Standard Library\u003c/li\u003e\n\u003cli\u003eStacked Decorators\u003c/li\u003e\n\u003cli\u003eParameterized Decorators\u003c/li\u003e\n\u003cli\u003eSummary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eP4. Object-Oriented Idioms\n\u003cul\u003e\n\u003cli\u003eC08. Object References, Mutability, and Recycling\n\u003cul\u003e\n\u003cli\u003eVariables Are Not Boxes\u003c/li\u003e\n\u003cli\u003eIdentity, Equality , and Aliases\u003c/li\u003e\n\u003cli\u003eCopies Are Shallow by Default\u003c/li\u003e\n\u003cli\u003eFunction Parameters as References\u003c/li\u003e\n\u003cli\u003edel and Garbage Collection\u003c/li\u003e\n\u003cli\u003eWeak References\u003c/li\u003e\n\u003cli\u003eTricts Python Plays with Immutables\u003c/li\u003e\n\u003cli\u003eSummary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC09. A Pythonic Object\n\u003cul\u003e\n\u003cli\u003eObject Representations\u003c/li\u003e\n\u003cli\u003eVector Class Redux\u003c/li\u003e\n\u003cli\u003eAn Alternative Constructor\u003c/li\u003e\n\u003cli\u003eclassmethod VS staticmethod\u003c/li\u003e\n\u003cli\u003eFormatted Displays\u003c/li\u003e\n\u003cli\u003eA Hashable Vector2d\u003c/li\u003e\n\u003cli\u003ePrivate and “Protected” Attributes in Python\u003c/li\u003e\n\u003cli\u003eSaving Space with the slots Class Attribute\u003c/li\u003e\n\u003cli\u003eOverriding Class Attributes\u003c/li\u003e\n\u003cli\u003eSummary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC10. Sequence Hacking , Hashing , and Slicing\n\u003cul\u003e\n\u003cli\u003eVector: A User-Defined Sequence Type\u003c/li\u003e\n\u003cli\u003eVector Take #1: Vector2d Compatible\u003c/li\u003e\n\u003cli\u003eProtocols and Duck Typing\u003c/li\u003e\n\u003cli\u003eVector Take #2: A Sliceable Sequence\u003c/li\u003e\n\u003cli\u003eVector Take #3: Dynamic Attribute Access\u003c/li\u003e\n\u003cli\u003eVector Take #4: Hashing and a Faster ==\u003c/li\u003e\n\u003cli\u003eVector Take #5: Formatting\u003c/li\u003e\n\u003cli\u003eSummary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC11. Interfaces: From Protocols to ABCs\n\u003cul\u003e\n\u003cli\u003eInterfaces and Protocols in Python Culture\u003c/li\u003e\n\u003cli\u003ePython Digs Sequences\u003c/li\u003e\n\u003cli\u003eMonkey-Patching to Implement a Protocol at Runtime\u003c/li\u003e\n\u003cli\u003eAlex Martelli’s Waterfowl\u003c/li\u003e\n\u003cli\u003eSubclassing an ABC\u003c/li\u003e\n\u003cli\u003eABCs in the Standard Library\u003c/li\u003e\n\u003cli\u003eDefining and Using an ABC\u003c/li\u003e\n\u003cli\u003eHow the Tombola Subclasses Were Tested\u003c/li\u003e\n\u003cli\u003eUsage of register in Practice\u003c/li\u003e\n\u003cli\u003eGeese Can Behave as Ducks\u003c/li\u003e\n\u003cli\u003eChapter Summary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC12. Inheritance: For Good or For Worse\n\u003cul\u003e\n\u003cli\u003eSubclassing Built-In Types Is Tricty\u003c/li\u003e\n\u003cli\u003eMultiple Inheritance and Method Resolution Order\u003c/li\u003e\n\u003cli\u003eMultiple Inheritance in the Real World\u003c/li\u003e\n\u003cli\u003eCoping with Multiple Inheritance\u003c/li\u003e\n\u003cli\u003eA Modern Example: Mixins in Django Generic Views\u003c/li\u003e\n\u003cli\u003eChapter Summary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC13. Operator Overloading: Doing It Right\n\u003cul\u003e\n\u003cli\u003eOperator Overloading 101\u003c/li\u003e\n\u003cli\u003eUnary Operators\u003c/li\u003e\n\u003cli\u003eOverloading plus for Verctor Addtion\u003c/li\u003e\n\u003cli\u003eOverloading star for Scalar Multiplication\u003c/li\u003e\n\u003cli\u003eRich Comparison Operators\u003c/li\u003e\n\u003cli\u003eAugmented Assignment Operator\u003c/li\u003e\n\u003cli\u003eChapter Summary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eP5. Control Flow\n\u003cul\u003e\n\u003cli\u003eC14. Iterables, Iterators , and Generators\n\u003cul\u003e\n\u003cli\u003eSentence Take #1 : A Sequence of Words Iterables VS Iterators\u003c/li\u003e\n\u003cli\u003eIterables Versus Itertors\u003c/li\u003e\n\u003cli\u003eSentence Take #2 : A Classic Iterator\u003c/li\u003e\n\u003cli\u003eSentence Take #3 : A Generator Function\u003c/li\u003e\n\u003cli\u003eSentence Take #4 : A Lazy Implementation\u003c/li\u003e\n\u003cli\u003eSentence Take #5 : A Generator Expression\u003c/li\u003e\n\u003cli\u003eGenerator Expressions : When to Use Them\u003c/li\u003e\n\u003cli\u003eAnother Example : Arithmetic Progression Generator\u003c/li\u003e\n\u003cli\u003eGenerator Functions in the Standard Library\u003c/li\u003e\n\u003cli\u003eNew Syntax In Python 3.3 : yield from\u003c/li\u003e\n\u003cli\u003eIterable Reducing Functions\u003c/li\u003e\n\u003cli\u003eA Closer Look at the iter Function\u003c/li\u003e\n\u003cli\u003eCase Study : Generators in a Databse Conversion Utility\u003c/li\u003e\n\u003cli\u003eGenerators as Coroutines\u003c/li\u003e\n\u003cli\u003eChapter Summary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC15. Context Managers and else Blocks\n\u003cul\u003e\n\u003cli\u003eDo This , Then That: else Blocks Beyond if\u003c/li\u003e\n\u003cli\u003eContext Managers and with Blocks\u003c/li\u003e\n\u003cli\u003eThe contextlib Utilities\u003c/li\u003e\n\u003cli\u003eUsing @contextmanager\u003c/li\u003e\n\u003cli\u003eChapter Summary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC16. Coroutines\n\u003cul\u003e\n\u003cli\u003eHow Coroutines Evolved from Generators\u003c/li\u003e\n\u003cli\u003eBasic Behavior of a Generator Used as a Coroutine\u003c/li\u003e\n\u003cli\u003eExample: Coroutine to Compute a Running Average\u003c/li\u003e\n\u003cli\u003eDecorators for Conroutine Priming\u003c/li\u003e\n\u003cli\u003eCoroutine Termination and Exception Handing\u003c/li\u003e\n\u003cli\u003eReturning a Value from a Coroutine\u003c/li\u003e\n\u003cli\u003eUsing Yield from\u003c/li\u003e\n\u003cli\u003eThe Meaning of yield from\u003c/li\u003e\n\u003cli\u003eUse Case: Coroutines for Discrete Event Simulation\u003c/li\u003e\n\u003cli\u003eChapter Summary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC17. Concurrency with Futures\n\u003cul\u003e\n\u003cli\u003ee.g. Web Downloads in Three Styles\u003c/li\u003e\n\u003cli\u003eBlocking I/O and the GIL\u003c/li\u003e\n\u003cli\u003eLaunching Processes with concurrent.futures\u003c/li\u003e\n\u003cli\u003eExperimenting with Executor.map\u003c/li\u003e\n\u003cli\u003eDownloads with Progress Display and Error Handling\u003c/li\u003e\n\u003cli\u003eChapter Summary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC18. Concurrency with asyncio\n\u003cul\u003e\n\u003cli\u003eThread VS Coroutine : A Comparison\u003c/li\u003e\n\u003cli\u003eDownloading with asyncio and aiohttp\u003c/li\u003e\n\u003cli\u003eRunning Circling Around Blocking Calls\u003c/li\u003e\n\u003cli\u003eEnhancing the asyncio downloader Script\u003c/li\u003e\n\u003cli\u003eFrom Callbacks to Futures and Coroutines\u003c/li\u003e\n\u003cli\u003eWriting asyncio Servers\u003c/li\u003e\n\u003cli\u003eChapter Summary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eP6. Metaprogramming\n\u003cul\u003e\n\u003cli\u003eC19. Dynamic Attributes and Properties\n\u003cul\u003e\n\u003cli\u003eData Wrangling with Dynamic Attributes\u003c/li\u003e\n\u003cli\u003eUsing a Property for Attribute Validation\u003c/li\u003e\n\u003cli\u003eA Proper Look at Properties\u003c/li\u003e\n\u003cli\u003eCoding a Property Factory\u003c/li\u003e\n\u003cli\u003eHandling Attribute Deletion\u003c/li\u003e\n\u003cli\u003eEssential Attributes and Functions For Attribute Handling\u003c/li\u003e\n\u003cli\u003eChapter Summary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC20. Attribute Descriptors\n\u003cul\u003e\n\u003cli\u003eDesciptor Example: Attribute Validation\u003c/li\u003e\n\u003cli\u003eOverriding VS Nonoverriding Descriptors\u003c/li\u003e\n\u003cli\u003eMethods Are Descriptors\u003c/li\u003e\n\u003cli\u003eDescriptor Usage Tips\u003c/li\u003e\n\u003cli\u003eDescriptor docstring and Overriding Deletion\u003c/li\u003e\n\u003cli\u003eChapter Summary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eC21. Class Metaprogramming\n\u003cul\u003e\n\u003cli\u003eA Class Factory\u003c/li\u003e\n\u003cli\u003eA Class Decorator for Customizing Descriptors\u003c/li\u003e\n\u003cli\u003eWhat Happens When: Import Time VS Runtime\u003c/li\u003e\n\u003cli\u003eMetaclasses 101\u003c/li\u003e\n\u003cli\u003eA Metaclass for Customizing Descriptors\u003c/li\u003e\n\u003cli\u003eThe Metaclass prepare Special Method\u003c/li\u003e\n\u003cli\u003eClasses as Objects\u003c/li\u003e\n\u003cli\u003eChapter Summary\u003c/li\u003e\n\u003cli\u003eFurther Reading\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"p1-prologue\"\u003e\u003ca class=\"v-toc-item\" href=\"#p1-prologue\"\u003e#\u003c/a\u003e P1. Prologue\u003c/h2\u003e\n\u003cp\u003e序言部分讲了很重要的一点，Python 最优秀的地方就是其统一性。\u003c/p\u003e\n\u003cp\u003ePythonic 体现在使用的 Python Data Model 来表述，其途径主要编写\u003cstrong\u003e特殊方法 (Special/Magic Method)\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eIteration\u003c/li\u003e\n\u003cli\u003eCollections\u003c/li\u003e\n\u003cli\u003eAttribute access\u003c/li\u003e\n\u003cli\u003eOperator overloading\u003c/li\u003e\n\u003cli\u003eFunction and method invocation\u003c/li\u003e\n\u003cli\u003eObject creation and destruction\u003c/li\u003e\n\u003cli\u003eString representation and formatting\u003c/li\u003e\n\u003cli\u003eManaged contexts (i.e., with blocks)\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"c01-the-python-data-model\"\u003e\u003ca class=\"v-toc-item\" href=\"#c01-the-python-data-model\"\u003e#\u003c/a\u003e C01. The Python Data Model\u003c/h3\u003e\n\u003cp\u003e扩展阅读：\u003ca href=\"http://zopeinterface.readthedocs.io/en/latest/\"\u003ehttp://zopeinterface.readthedocs.io/en/latest/\u003c/a\u003e\u003c/p\u003e\n\u003ch4 id=\"a-pythonic-card-deck\"\u003e\u003ca class=\"v-toc-item\" href=\"#a-pythonic-card-deck\"\u003e#\u003c/a\u003e A Pythonic Card Deck\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e#### \u003cspan class=\"token number\"\u003e1.\u003c/span\u003e 案例一：纸牌 nametuple\nCard \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e collections\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003enamedtuple\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e'Card'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token string\"\u003e'rank'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'suit'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# Card 是一个类\n# 重载到 \u003cspan class=\"token function\"\u003eCards\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eobject\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e 的 __init__ \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e __len__ \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e __getitem__\n# 重载可以之后可以使用 \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e \u003cspan class=\"token function\"\u003e语法\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e0\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token operator\"\u003e-\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e random\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003echoice\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ecards\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token number\"\u003e3\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e12\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token number\"\u003e13\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efor\u003c/span\u003e \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e sorted reversed\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e\u003cspan class=\"token function\"\u003esorted\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ecards\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e key\u003cspan class=\"token operator\"\u003e=\u003c/span\u003ecalc_score\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e card \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e cards \u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e\n# 还可以重载 __setitem__\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e 之后就可以 shuffle\n# 重载 __repr__ \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e __abs__ \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e __bool__ \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e __add__ \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e __mul__ 可以 \u003cspan class=\"token function\"\u003erepr\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token function\"\u003eabs\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token function\"\u003ebool\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token operator\"\u003e+\u003c/span\u003e \u003cspan class=\"token operator\"\u003e*\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"how-special-methods-are-used\"\u003e\u003ca class=\"v-toc-item\" href=\"#how-special-methods-are-used\"\u003e#\u003c/a\u003e How Special Methods Are Used\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003eobj\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003e__len__\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003cspan class=\"token function\"\u003elen\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\nobj\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e__\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"overview-of-special-methods\"\u003e\u003ca class=\"v-toc-item\" href=\"#overview-of-special-methods\"\u003e#\u003c/a\u003e Overview of Special Methods\u003c/h4\u003e\n\u003cp\u003e对于内置类型 (list, str , bytearray) 解释器在调用特殊方法的时候调用 C 库，比如 CPython 实现的 len 方法一般直接会调用 PyVarObject C Struct ob_size\u003c/p\u003e\n\u003cp\u003e特殊方法往往并不是显示调用，而是被隐式调用。比如 init 在 new 中的作用，比如 for item in items 世界上会调用 iter(items), 这也会隐式调用 items.\u003cstrong\u003eiter\u003c/strong\u003e() .\u003c/p\u003e\n\u003cp\u003e一般当大量使用特殊方法的时候，都是在进行元编程。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e\u003cspan class=\"token function\"\u003ebool\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ex\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e 先调用 x\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003e__bool__\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e 如果 x\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003e__bool__\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e 没有实现，则调用 x\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003e__len__\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e 如果为 \u003cspan class=\"token number\"\u003e0\u003c/span\u003e 则返回 False\n\u003cspan class=\"token function\"\u003esorted\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003earr\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e 可以直接返回 arr，arr\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003esort\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e 是排序内部。\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e特殊方法名 （有操作符）\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e种类\u003c/th\u003e\n\u003cth\u003e方法名\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003eString/Bytes\u003c/td\u003e\n\u003ctd\u003erepr , str , format , bytes\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eConversion to number\u003c/td\u003e\n\u003ctd\u003eabs , bool , complex , init , float , hash , index\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eEmulating collections\u003c/td\u003e\n\u003ctd\u003elen , getitem , setitem , delitem , contains\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eIteration\u003c/td\u003e\n\u003ctd\u003eiter, reversed , next\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eEmulating callables\u003c/td\u003e\n\u003ctd\u003ecall\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eContext management\u003c/td\u003e\n\u003ctd\u003eenter, exit\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eInstance creation \u0026amp; destruction\u003c/td\u003e\n\u003ctd\u003enew , init , del\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eAttribute management\u003c/td\u003e\n\u003ctd\u003egetattr , getattribute , setattr , delattr, dir\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eAttribute descriptors\u003c/td\u003e\n\u003ctd\u003eget , set ,delete\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eClass service\u003c/td\u003e\n\u003ctd\u003eprepare , instancecheck , subclasscheck\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003cp\u003e特殊方法名 （无操作符）\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e种类\u003c/th\u003e\n\u003cth\u003e方法名\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003eUnary numeric operators\u003c/td\u003e\n\u003ctd\u003eneg , pos , abs\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eRich comparison operators\u003c/td\u003e\n\u003ctd\u003elt , le , eq , ne , gt , ge\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eArithmetic operators\u003c/td\u003e\n\u003ctd\u003eadd ,sub , mul ,truediv ,floordiv ,mod , divmod , pow , round round\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eReversed arithmetic operators\u003c/td\u003e\n\u003ctd\u003eradd , rsub , rmul , rtruediv, rfloordiv , rmod , rdivmod, rpow\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eAugmented assignment mathmatic\u003c/td\u003e\n\u003ctd\u003eiadd , isub , imul , itruediv, ifloordiv\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eBitwise operators\u003c/td\u003e\n\u003ctd\u003einvert , lshift , rshift , and , or\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eReversed bitwise operators\u003c/td\u003e\n\u003ctd\u003erlshift , rrshift , rand , rxor , ror\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003eAugmented assignment bitwise\u003c/td\u003e\n\u003ctd\u003eilshift , irshift , iand , ixor , ior\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n\u003ch4 id=\"why-len-is-not-a-method\"\u003e\u003ca class=\"v-toc-item\" href=\"#why-len-is-not-a-method\"\u003e#\u003c/a\u003e Why len Is Not a Method\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e因为对 不同类型并不是一定调用 __len__ \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e 对于基本类型查看 c struct 中长度，对于其他类型直接调用 __len__ \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e 这种区分对待\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"p2-data-structure\"\u003e\u003ca class=\"v-toc-item\" href=\"#p2-data-structure\"\u003e#\u003c/a\u003e P2. Data Structure\u003c/h2\u003e\n\u003ch3 id=\"c02-an-array-of-sequences\"\u003e\u003ca class=\"v-toc-item\" href=\"#c02-an-array-of-sequences\"\u003e#\u003c/a\u003e C02. An Array of Sequences\u003c/h3\u003e\n\u003cp\u003eStrings, lists, byte sequences, arrays, XML elements, and database results share a rich set of common operations including iteration, slicing, sorting, and concatenation.\u003c/p\u003e\n\u003ch4 id=\"overview-of-built-in-sequences\"\u003e\u003ca class=\"v-toc-item\" href=\"#overview-of-built-in-sequences\"\u003e#\u003c/a\u003e Overview of Built-in Sequences\u003c/h4\u003e\n\u003cp\u003eC 实现的按照 item 是否为同一类型分为：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eContainer sequences\u003c/strong\u003e: list, tuple, and collections.deque can hold items of different types.\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eFlat sequences\u003c/strong\u003e: str, bytes, bytearray, memoryview, and array.array hold items of one type.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eC 实现按照 item 是否可修改分为：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eMutable sequences\u003c/strong\u003e: list, bytearray, array.array, collections.deque, and memoryview\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eImmutable sequences\u003c/strong\u003e: tuple, str, and bytes\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch4 id=\"list-comprehensions-and-generator-expressions\"\u003e\u003ca class=\"v-toc-item\" href=\"#list-comprehensions-and-generator-expressions\"\u003e#\u003c/a\u003e List Comprehensions and Generator Expressions\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003enew_items \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token function\"\u003efunc\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ea\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efor\u003c/span\u003e item \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e items\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\nnew_items \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e \u003cspan class=\"token function\"\u003estr\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ex\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efor\u003c/span\u003e x \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e \u003cspan class=\"token function\"\u003erange\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e100\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token keyword\"\u003eif\u003c/span\u003e x \u003cspan class=\"token operator\"\u003e%\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token number\"\u003e0\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\nnew_items \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003elist\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token function\"\u003emap\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003estr\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e\u003cspan class=\"token function\"\u003elist\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003elambda x\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e x \u003cspan class=\"token operator\"\u003e%\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token number\"\u003e0\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token function\"\u003elist\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token function\"\u003erange\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e100\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# 可写成\nnew_items \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003elist\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token function\"\u003emap\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003estr\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e\u003cspan class=\"token function\"\u003efilter\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003elambda x\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e x \u003cspan class=\"token operator\"\u003e%\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e \u003cspan class=\"token operator\"\u003e==\u003c/span\u003e \u003cspan class=\"token number\"\u003e0\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token function\"\u003erange\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e100\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003elist 往往和 map filter 以及 listcomp 用于创建简单的序列\u003c/p\u003e\n\u003ch4 id=\"tuples-are-not-just-immutable-lists\"\u003e\u003ca class=\"v-toc-item\" href=\"#tuples-are-not-just-immutable-lists\"\u003e#\u003c/a\u003e Tuples Are Not Just Immutable Lists\u003c/h4\u003e\n\u003cul\u003e\n\u003cli\u003e解包赋值\u003c/li\u003e\n\u003cli\u003e不要手贱加逗号\u003c/li\u003e\n\u003cli\u003e下划线可以用作临时变量 （但是 django 中下划线用于中英文）\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003ea\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e b\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token operator\"\u003e*\u003c/span\u003erest \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003erange\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e5\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e # \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e0\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e3\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e4\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\na\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e b\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token operator\"\u003e*\u003c/span\u003erest \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003erange\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e3\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e # \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e0\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\na\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e b\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token operator\"\u003e*\u003c/span\u003erest \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003erange\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e # \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e0\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\na\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token operator\"\u003e*\u003c/span\u003ebody\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e c\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e d \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003erange\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e5\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e # \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e0\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e3\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e4\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003cspan class=\"token operator\"\u003e*\u003c/span\u003ehead\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e b\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e c\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e d \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003erange\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e5\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e # \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e0\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e3\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e4\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cul\u003e\n\u003cli\u003enamedtuple\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003eCity \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003enamedtuple\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e'City'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'name country population coordinates'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\ntokyo \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003eCity\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e'Tokyo'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'JP'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e36.933\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e35.689722\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e139.691667\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\ntokyo\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003epopulation\ntokyo\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ecoordinates\ntokyo\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\nCity\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e_fields # tuple\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"slicing\"\u003e\u003ca class=\"v-toc-item\" href=\"#slicing\"\u003e#\u003c/a\u003e Slicing\u003c/h4\u003e\n\u003cp\u003e为何 Slice 和 Range 会排除 最后一个 Item?\u003c/p\u003e\n\u003cp\u003e书中讲的太复杂，其实这个和尺子是一个作用，尺子从 0 刻度开始，这样方便丈量。\u003c/p\u003e\n\u003cp\u003e比如说：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eitems[0:10] 为 10 厘米\u003c/li\u003e\n\u003cli\u003eitems[10] 为 10 刻度后一个单位，即 items[10:11]\u003c/li\u003e\n\u003cli\u003eitems[2:] 为 2 刻度后面若干个单位\u003c/li\u003e\n\u003cli\u003eitems[::3] 以三为单位，从 0 刻度开始，最后为结尾，每三个\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode\u003ea[i, j] # 调用 a.__getitem__((i, j))\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"augmented-assignment-with-sequences\"\u003e\u003ca class=\"v-toc-item\" href=\"#augmented-assignment-with-sequences\"\u003e#\u003c/a\u003e Augmented Assignment with Sequences\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e对于不可变类型 赋值 l \u003cspan class=\"token operator\"\u003e*=\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e 在内存中则是创建了新的两个长度的元祖，然后赋值\n而由于字符串则需要注意，str_a \u003cspan class=\"token operator\"\u003e+=\u003c/span\u003e \u003cspan class=\"token string\"\u003e\"str b\"\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e 虽然为不可变变量，但并不需要拷贝整个字符串（特殊情况）\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e 但字符串的拼接建议还是\u003cspan class=\"token string\"\u003e\"\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003ejoin\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\nt \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e30\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e40\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\nt\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e \u003cspan class=\"token operator\"\u003e+=\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e50\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e60\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\n# 结果为既赋值成功，又报错\n# 但 t\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eextend\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e50\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e60\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e 可以赋值成功\n\u003cspan class=\"token keyword\"\u003eimport\u003c/span\u003e dis\ndis\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003edis\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e's[a] += b'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e # 可以查看字节码\n\u003c/code\u003e\u003c/pre\u003e\n\u003col\u003e\n\u003cli\u003e尽量不要在不可变变量内保存可变变量\u003c/li\u003e\n\u003cli\u003et[2] += [50,60] 并不是原子操作，因为，当做了一半的时候，抛出的错误。\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch4 id=\"listsort-and-the-sorted-built-in-function\"\u003e\u003ca class=\"v-toc-item\" href=\"#listsort-and-the-sorted-built-in-function\"\u003e#\u003c/a\u003e list.sort and the sorted Built-In Function\u003c/h4\u003e\n\u003cp\u003e对于 sort 和 sorted 来说，reverse 代表 desc,key 为单参数用于计算每一个值的结果的函数。\u003cbr\u003e\nlist.sort 直接针对列表排序，并且返回 None（出于编程习惯的问题，直接返回 None 的函数大多是对程序有一定的修改）\u003c/p\u003e\n\u003ch4 id=\"managing-ordered-sequences-with-bisect\"\u003e\u003ca class=\"v-toc-item\" href=\"#managing-ordered-sequences-with-bisect\"\u003e#\u003c/a\u003e Managing Ordered Sequences with bisect\u003c/h4\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e\u003cspan class=\"token keyword\"\u003eimport\u003c/span\u003e bisect\nbisect \u003cspan class=\"token operator\"\u003e-\u003c/span\u003e\u003cspan class=\"token operator\"\u003e\u003e\u003c/span\u003e bisect_right\nbisect_left\ninsort \u003cspan class=\"token operator\"\u003e-\u003c/span\u003e\u003cspan class=\"token operator\"\u003e\u003e\u003c/span\u003e insort_left\ninsort_right\n# 搜索可以用来划分档次\ndef \u003cspan class=\"token function\"\u003egrade\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003escore\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e breakpoints\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e60\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e70\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e80\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e90\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e grades\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token string\"\u003e'FDCBA'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n    i \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e bisect\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003ebisect\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ebreakpoints\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e score\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n    \u003cspan class=\"token keyword\"\u003ereturn\u003c/span\u003e grades\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003ei\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\n\n\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token function\"\u003egrade\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003escore\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efor\u003c/span\u003e score \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e33\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e99\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e77\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e70\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e89\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e90\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e100\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e # \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token string\"\u003e'F'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'A'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'C'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'C'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'B'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'A'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token string\"\u003e'A'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"when-a-list-is-not-the-answer\"\u003e\u003ca class=\"v-toc-item\" href=\"#when-a-list-is-not-the-answer\"\u003e#\u003c/a\u003e When a List Is Not the Answer\u003c/h4\u003e\n\u003cp\u003elist 是一种 mix-typed 的数据结构，即可以存放不同种类型的数据结构，由此带来的问题自然是性能问题：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003elist 第一是 mix-typed 的数据结构\u003c/li\u003e\n\u003cli\u003e动态数组，并非数组\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e当考虑性能的时候，则需要考虑是不是要换一个更好的数据结构：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e适用于类型单一的 array\u003c/li\u003e\n\u003cli\u003e增删比较多，或者需要使用 FIFO,LIFO, 则使用 deque (double-ended queue)\u003c/li\u003e\n\u003c/ul\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e# Arrays\nfloats \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003earray\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e'd'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token function\"\u003erandom\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token keyword\"\u003efor\u003c/span\u003e i \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e \u003cspan class=\"token function\"\u003erange\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e10\u003c/span\u003e\u003cspan class=\"token operator\"\u003e**\u003c/span\u003e\u003cspan class=\"token number\"\u003e7\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n# NumPy and SciPy\n\n# Deques and Other Queue\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch4 id=\"deques-and-other-queue\"\u003e\u003ca class=\"v-toc-item\" href=\"#deques-and-other-queue\"\u003e#\u003c/a\u003e Deques and Other Queue\u003c/h4\u003e\n\u003cul\u003e\n\u003cli\u003eDeque\u003c/li\u003e\n\u003cli\u003equeue 线程安全 Queue, LifoQueue, and PriorityQueue\u003c/li\u003e\n\u003cli\u003emultiprocessing Queue 和 JoinableQueue\u003c/li\u003e\n\u003cli\u003easyncio Queue, LifoQueue, PriorityQueue, and JoinableQueue\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"c03-dictionaries-and-sets\"\u003e\u003ca class=\"v-toc-item\" href=\"#c03-dictionaries-and-sets\"\u003e#\u003c/a\u003e C03. Dictionaries and Sets\u003c/h3\u003e\n\u003cp\u003e本章内容：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eCommon dictionary methods\u003c/li\u003e\n\u003cli\u003eSpecial handling for missing keys\u003c/li\u003e\n\u003cli\u003eVariations of dict in the standard library\u003c/li\u003e\n\u003cli\u003eThe set and frozenset types\u003c/li\u003e\n\u003cli\u003eHow hash tables work\u003c/li\u003e\n\u003cli\u003eImplications of hash tables (key type limitations, unpredictable ordering, etc.)\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch5 id=\"generic-mapping-types\"\u003e\u003ca class=\"v-toc-item\" href=\"#generic-mapping-types\"\u003e#\u003c/a\u003e Generic Mapping Types\u003c/h5\u003e\n\u003cp\u003eHashable ? 一个 obj 的 hash value 在他生命周期内 hash value 是不变的。一个 frozen set 也是 hashable 的（包括每个子元素）.\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003eAll of Python’s immutable built-in objects are hashable , except that tuple\u003cbr\u003e\n如果一个 tuple 是每个子元素都是 hashable 的话，则该 tuple 也是 hashable 的。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e# 直接在 dict 上面进行操作\nindex\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003esetdefault\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eword\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eappend\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003elocation\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch5 id=\"missing-方法\"\u003e\u003ca class=\"v-toc-item\" href=\"#missing-方法\"\u003e#\u003c/a\u003e missing 方法\u003c/h5\u003e\n\u003cp\u003ekeyerror 会触发 missing 方法\u003c/p\u003e\n\u003ch5 id=\"variations-of-dict\"\u003e\u003ca class=\"v-toc-item\" href=\"#variations-of-dict\"\u003e#\u003c/a\u003e Variations of Dict\u003c/h5\u003e\n\u003cp\u003eOrderedDict - 有序字典\u003cbr\u003e\nChainMap - 组装多个字典，按照次序搜索\u003cbr\u003e\nCounter - COUNTER\u003c/p\u003e\n\u003ch5 id=\"immutable-mappings\"\u003e\u003ca class=\"v-toc-item\" href=\"#immutable-mappings\"\u003e#\u003c/a\u003e Immutable Mappings\u003c/h5\u003e\n\u003ch5 id=\"set-theory\"\u003e\u003ca class=\"v-toc-item\" href=\"#set-theory\"\u003e#\u003c/a\u003e Set Theory\u003c/h5\u003e\n\u003cp\u003e交差并补\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003e# \u003cspan class=\"token number\"\u003e1.\u003c/span\u003e 交集\ns \u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e z\nz \u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e s\ns \u003cspan class=\"token operator\"\u003e\u0026amp;=\u003c/span\u003e z\n# \u003cspan class=\"token number\"\u003e2.\u003c/span\u003e 差集\ns \u003cspan class=\"token operator\"\u003e-\u003c/span\u003e z\nz \u003cspan class=\"token operator\"\u003e-\u003c/span\u003e s\ns \u003cspan class=\"token operator\"\u003e-=\u003c/span\u003e z\n# \u003cspan class=\"token number\"\u003e3.\u003c/span\u003e 并集\ns \u003cspan class=\"token operator\"\u003e|\u003c/span\u003e z\nz \u003cspan class=\"token operator\"\u003e|\u003c/span\u003e s\ns \u003cspan class=\"token operator\"\u003e|=\u003c/span\u003e z\n# \u003cspan class=\"token number\"\u003e4.\u003c/span\u003e 补集\ns \u003cspan class=\"token operator\"\u003e^\u003c/span\u003e z\nz \u003cspan class=\"token operator\"\u003e^\u003c/span\u003e s\ns \u003cspan class=\"token operator\"\u003e^=\u003c/span\u003e z\n\n# 被包含\ne \u003cspan class=\"token keyword\"\u003ein\u003c/span\u003e z\n\n# 子集\ns \u003cspan class=\"token operator\"\u003e\u0026lt;=\u003c/span\u003e z\n\u003cspan class=\"token parameter\"\u003es\u003c/span\u003e \u003cspan class=\"token operator\"\u003e=\u003e\u003c/span\u003e z\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch5 id=\"dict-and-set-under-the-hood\"\u003e\u003ca class=\"v-toc-item\" href=\"#dict-and-set-under-the-hood\"\u003e#\u003c/a\u003e Dict and Set Under the Hood\u003c/h5\u003e\n\u003ch3 id=\"c04-text-vs-bytes\"\u003e\u003ca class=\"v-toc-item\" href=\"#c04-text-vs-bytes\"\u003e#\u003c/a\u003e C04. Text VS Bytes\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Character Issues\n - Byte Essentials\n - Basic Encoders/Decoders\n - Understanding Encode/Decode Problems\n - Handling Text Files\n - Normalizng Unicode for Saner Comparisons\n - Sorting Unicode Text\n - The Unicode Database\n - Dual-Mode str and bytes APIs\n - Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"p3-function-as-objects\"\u003e\u003ca class=\"v-toc-item\" href=\"#p3-function-as-objects\"\u003e#\u003c/a\u003e P3. Function as Objects\u003c/h2\u003e\n\u003cp\u003efunction is the first-class object\u003c/p\u003e\n\u003cp\u003eHigher-Order Functions\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\n\u003cp\u003e设计模式\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e装饰器\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003ecallables\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003efunction attributes\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eintrospection\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eparameter annotations\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003enonlocal declaration\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003ereferences, mutability, 实例生命周期，定制自己集合类 collections and ABCs, 多继承，重载操作符。\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e生成器\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e上下文管理器\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e协程 （包括 Yield)\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003econcurrency\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eevent-oriented IO asyncio\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003e动态创建类\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003edescriptors\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003eclass decorators\u003c/p\u003e\n\u003c/li\u003e\n\u003cli\u003e\n\u003cp\u003emetaclasses\u003c/p\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch3 id=\"c05-first-class-function\"\u003e\u003ca class=\"v-toc-item\" href=\"#c05-first-class-function\"\u003e#\u003c/a\u003e C05. First-Class Function\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Treating a Function Like an Object\n - Higher-Order Functions\n - Anonymous Functions\n - The Seven Flavors of Callable Objects\n - User-Defined Callable Types\n - Function Introspection\n - From Positional to Keyword-Only Parameters\n - Function Annotations\n - Packages for Functional Programming\n - Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c06-design-patterns-with-first-class-functions\"\u003e\u003ca class=\"v-toc-item\" href=\"#c06-design-patterns-with-first-class-functions\"\u003e#\u003c/a\u003e C06. Design Patterns with First-Class Functions\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Refactoring Strategy\n - Command\n - Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c07-function-decorators-and-closures\"\u003e\u003ca class=\"v-toc-item\" href=\"#c07-function-decorators-and-closures\"\u003e#\u003c/a\u003e C07. Function Decorators and Closures\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Decorators 101\n - When Python Executes Decorators\n - Decorator-Enhanced Strategy Pattern\n - Variable Scope Rules\n - Closures\n - The nonlocal Declaration\n - Implementing a Simple Decorator\n - Decorators In the Standard Library\n - Stacked Decorators\n - Parameterized Decorators\n - Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"p4-object-oriented-idioms\"\u003e\u003ca class=\"v-toc-item\" href=\"#p4-object-oriented-idioms\"\u003e#\u003c/a\u003e P4. Object-Oriented Idioms\u003c/h2\u003e\n\u003ch3 id=\"c08-object-references-mutability-and-recycling\"\u003e\u003ca class=\"v-toc-item\" href=\"#c08-object-references-mutability-and-recycling\"\u003e#\u003c/a\u003e C08. Object References, Mutability, and Recycling\u003c/h3\u003e\n\u003cp\u003ereference variable : variable 不是盒子，贴在盒子上的标签。\u003c/p\u003e\n\u003cp\u003e赋值并非创建 Copy\u003cbr\u003e\n赋值给一个值并非改变之前绑定的值，而仅仅是重新绑定 rebinding\u003cbr\u003e\n函数由于参数为 reference, 所以可以修改 mutable 的变量\u003cbr\u003e\n函数参数不应当初始化为可修改的值。\u003c/p\u003e\n\u003cp\u003eid 与 == : 内存值 和 值相等\u003cbr\u003e\ncopy 默认是浅拷贝\u003cbr\u003e\n函数参数是引用\u003cbr\u003e\nGC 使用的引用计数，通过 weakref.finalize 可以增加 obj 被回收的回调函数\u003cbr\u003e\n强引用和弱引用，weakref 具体使用场景？ \u003ca href=\"https://pymotw.com/3/weakref/\"\u003ehttps://pymotw.com/3/weakref/\u003c/a\u003e\u003cbr\u003e\nOne example is a class that wants to keep track of all its current instances. This can be done with weak references, a low-level mechanism underlying the more useful collections WeakValueDictionary, WeakKey Dictionary, WeakSet, and the finalize function from the weakref module.\u003cbr\u003e\n公用字符串字面量和小的数的技巧叫做 interning\u003c/p\u003e\n\u003cp\u003ePS:\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003e在 IPython 中 _ 为某个表达式返回的值\n\u003c/code\u003e\u003c/pre\u003e\n\u003cpre\u003e\u003ccode\u003e - Weak References\n - Tricts Python Plays with Immutables\n - Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c09-a-pythonic-object\"\u003e\u003ca class=\"v-toc-item\" href=\"#c09-a-pythonic-object\"\u003e#\u003c/a\u003e C09. A Pythonic Object\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Object Representations\n - Vector Class Redux\n - An Alternative Constructor\n - classmethod VS staticmethod\n - Formatted Displays\n - A Hashable Vector2d\n - Private and \u0026quot;Protected\u0026quot; Attributes in Python\n - Saving Space with the slots Class Attribute\n - Overriding Class Attributes\n - Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c10-sequence-hacking-hashing-and-slicing\"\u003e\u003ca class=\"v-toc-item\" href=\"#c10-sequence-hacking-hashing-and-slicing\"\u003e#\u003c/a\u003e C10. Sequence Hacking , Hashing , and Slicing\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Vector: A User-Defined Sequence Type\n - Vector Take #1: Vector2d Compatible\n - Protocols and Duck Typing\n - Vector Take #2: A Sliceable Sequence\n - Vector Take #3: Dynamic Attribute Access\n - Vector Take #4: Hashing and a Faster ==\n - Vector Take #5: Formatting\n - Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c11-interfaces-from-protocols-to-abcs\"\u003e\u003ca class=\"v-toc-item\" href=\"#c11-interfaces-from-protocols-to-abcs\"\u003e#\u003c/a\u003e C11. Interfaces: From Protocols to ABCs\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Interfaces and Protocols in Python Culture\n - Python Digs Sequences\n - Monkey-Patching to Implement a Protocol at Runtime\n - Alex Martelli's Waterfowl\n - Subclassing an ABC\n - ABCs in the Standard Library\n - Defining and Using an ABC\n - How the Tombola Subclasses Were Tested\n - Usage of register in Practice\n - Geese Can Behave as Ducks\n - Chapter Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c12-inheritance-for-good-or-for-worse\"\u003e\u003ca class=\"v-toc-item\" href=\"#c12-inheritance-for-good-or-for-worse\"\u003e#\u003c/a\u003e C12. Inheritance: For Good or For Worse\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Subclassing Built-In Types Is Tricty\n - Multiple Inheritance and Method Resolution Order\n - Multiple Inheritance in the Real World\n - Coping with Multiple Inheritance\n - A Modern Example: Mixins in Django Generic Views\n - Chapter Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c13-operator-overloading-doing-it-right\"\u003e\u003ca class=\"v-toc-item\" href=\"#c13-operator-overloading-doing-it-right\"\u003e#\u003c/a\u003e C13. Operator Overloading: Doing It Right\u003c/h3\u003e\n\u003cblockquote\u003e\n\u003cp\u003e依据我的经验。除非特别适合，比如说矩阵相加，否则不要进行操作符重载。 因为 加减乘除之类的操作符本身就容易有二义性。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2 id=\"p5-control-flow\"\u003e\u003ca class=\"v-toc-item\" href=\"#p5-control-flow\"\u003e#\u003c/a\u003e P5. Control Flow\u003c/h2\u003e\n\u003ch3 id=\"c14-iterables-iterators-and-generators\"\u003e\u003ca class=\"v-toc-item\" href=\"#c14-iterables-iterators-and-generators\"\u003e#\u003c/a\u003e C14. Iterables, Iterators , and Generators\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Sentence Take #1 : A Sequence of Words Iterables VS Iterators\n - Iterables Versus Itertors\n - Sentence Take #2 : A Classic Iterator\n - Sentence Take #3 : A Generator Function\n - Sentence Take #4 : A Lazy Implementation\n - Sentence Take #5 : A Generator Expression\n - Generator Expressions : When to Use Them\n - Another Example : Arithmetic Progression Generator\n - Generator Functions in the Standard Library\n - New Syntax In Python 3.3 : yield from\n - Iterable Reducing Functions\n - A Closer Look at the iter Function\n - Case Study : Generators in a Databse Conversion Utility\n - Generators as Coroutines\n - Chapter Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c15-context-managers-and-else-blocks\"\u003e\u003ca class=\"v-toc-item\" href=\"#c15-context-managers-and-else-blocks\"\u003e#\u003c/a\u003e C15. Context Managers and else Blocks\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Do This , Then That: else Blocks Beyond if\n - Context Managers and with Blocks\n - The contextlib Utilities\n - Using @contextmanager\n - Chapter Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c16-coroutines\"\u003e\u003ca class=\"v-toc-item\" href=\"#c16-coroutines\"\u003e#\u003c/a\u003e C16. Coroutines\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - How Coroutines Evolved from Generators\n - Basic Behavior of a Generator Used as a Coroutine\n - Example: Coroutine to Compute a Running Average\n - Decorators for Conroutine Priming\n - Coroutine Termination and Exception Handing\n - Returning a Value from a Coroutine\n - Using Yield from\n - The Meaning of yield from\n - Use Case: Coroutines for Discrete Event Simulation\n - Chapter Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c17-concurrency-with-futures\"\u003e\u003ca class=\"v-toc-item\" href=\"#c17-concurrency-with-futures\"\u003e#\u003c/a\u003e C17. Concurrency with Futures\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - e.g. Web Downloads in Three Styles\n - Blocking I/O and the GIL\n - Launching Processes with concurrent.futures\n - Experimenting with Executor.map\n - Downloads with Progress Display and Error Handling\n - Chapter Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c18-concurrency-with-asyncio\"\u003e\u003ca class=\"v-toc-item\" href=\"#c18-concurrency-with-asyncio\"\u003e#\u003c/a\u003e C18. Concurrency with asyncio\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Thread VS Coroutine : A Comparison\n - Downloading with asyncio and aiohttp\n - Running Circling Around Blocking Calls\n - Enhancing the asyncio downloader Script\n - From Callbacks to Futures and Coroutines\n - Writing asyncio Servers\n - Chapter Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"p6-metaprogramming\"\u003e\u003ca class=\"v-toc-item\" href=\"#p6-metaprogramming\"\u003e#\u003c/a\u003e P6. Metaprogramming\u003c/h2\u003e\n\u003ch3 id=\"c19-dynamic-attributes-and-properties\"\u003e\u003ca class=\"v-toc-item\" href=\"#c19-dynamic-attributes-and-properties\"\u003e#\u003c/a\u003e C19. Dynamic Attributes and Properties\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Data Wrangling with Dynamic Attributes\n - Using a Property for Attribute Validation\n - A Proper Look at Properties\n - Coding a Property Factory\n - Handling Attribute Deletion\n - Essential Attributes and Functions For Attribute Handling\n - Chapter Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c20-attribute-descriptors\"\u003e\u003ca class=\"v-toc-item\" href=\"#c20-attribute-descriptors\"\u003e#\u003c/a\u003e C20. Attribute Descriptors\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - Desciptor Example: Attribute Validation\n - Overriding VS Nonoverriding Descriptors\n - Methods Are Descriptors\n - Descriptor Usage Tips\n - Descriptor docstring and Overriding Deletion\n - Chapter Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"c21-class-metaprogramming\"\u003e\u003ca class=\"v-toc-item\" href=\"#c21-class-metaprogramming\"\u003e#\u003c/a\u003e C21. Class Metaprogramming\u003c/h3\u003e\n\u003cpre\u003e\u003ccode\u003e - A Class Factory\n - A Class Decorator for Customizing Descriptors\n - What Happens When: Import Time VS Runtime\n - Metaclasses 101\n - A Metaclass for Customizing Descriptors\n - The Metaclass prepare Special Method\n - Classes as Objects\n - Chapter Summary\n - Further Reading\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"相关链接\"\u003e\u003ca class=\"v-toc-item\" href=\"#相关链接\"\u003e#\u003c/a\u003e 相关链接\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://docs.python.org/3/reference/datamodel.html\"\u003ehttps://docs.python.org/3/reference/datamodel.html\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003ePython Cookbook\u003c/li\u003e\n\u003cli\u003ePython Essential Reference, 4th Edition\u003c/li\u003e\n\u003cli\u003eThe Art of the Metaobject Protocol\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003eUPDATE:\u003c/p\u003e\n\u003ctable\u003e\n\u003cthead\u003e\n\u003ctr\u003e\n\u003cth\u003e日期\u003c/th\u003e\n\u003cth\u003e类型\u003c/th\u003e\n\u003cth\u003e详细操作\u003c/th\u003e\n\u003c/tr\u003e\n\u003c/thead\u003e\n\u003ctbody\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003cstrong\u003e2017-04-18\u003c/strong\u003e\u003c/td\u003e\n\u003ctd\u003e动笔\u003c/td\u003e\n\u003ctd\u003e初始化本文结构\u003c/td\u003e\n\u003c/tr\u003e\n\u003ctr\u003e\n\u003ctd\u003e\u003cstrong\u003e2017-04-26\u003c/strong\u003e\u003c/td\u003e\n\u003ctd\u003e重构\u003c/td\u003e\n\u003ctd\u003e添加目录和阅读笔记\u003c/td\u003e\n\u003c/tr\u003e\n\u003c/tbody\u003e\n\u003c/table\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E5%89%8D%E8%A8%80\"\u003e前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%9C%AC%E6%96%87%E7%9B%AE%E5%BD%95\"\u003e本文目录\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E6%9C%AC%E4%B9%A6%E7%BB%93%E6%9E%84\"\u003e本书结构\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#p1-prologue\"\u003eP1. Prologue\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#c01-the-python-data-model\"\u003eC01. The Python Data Model\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#a-pythonic-card-deck\"\u003eA Pythonic Card Deck\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#how-special-methods-are-used\"\u003eHow Special Methods Are Used\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#overview-of-special-methods\"\u003eOverview of Special Methods\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#why-len-is-not-a-method\"\u003eWhy len Is Not a Method\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#p2-data-structure\"\u003eP2. Data Structure\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#c02-an-array-of-sequences\"\u003eC02. An Array of Sequences\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#overview-of-built-in-sequences\"\u003eOverview of Built-in Sequences\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#list-comprehensions-and-generator-expressions\"\u003eList Comprehensions and Generator Expressions\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#tuples-are-not-just-immutable-lists\"\u003eTuples Are Not Just Immutable Lists\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#slicing\"\u003eSlicing\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#augmented-assignment-with-sequences\"\u003eAugmented Assignment with Sequences\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#listsort-and-the-sorted-built-in-function\"\u003elist.sort and the sorted Built-In Function\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#managing-ordered-sequences-with-bisect\"\u003eManaging Ordered Sequences with bisect\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#when-a-list-is-not-the-answer\"\u003eWhen a List Is Not the Answer\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#deques-and-other-queue\"\u003eDeques and Other Queue\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c03-dictionaries-and-sets\"\u003eC03. Dictionaries and Sets\u003c/a\u003e\u003cbr\u003e\n*\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#generic-mapping-types\"\u003eGeneric Mapping Types\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#missing-%E6%96%B9%E6%B3%95\"\u003emissing 方法\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#variations-of-dict\"\u003eVariations of Dict\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#immutable-mappings\"\u003eImmutable Mappings\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#set-theory\"\u003eSet Theory\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#dict-and-set-under-the-hood\"\u003eDict and Set Under the Hood\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c04-text-vs-bytes\"\u003eC04. Text VS Bytes\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#p3-function-as-objects\"\u003eP3. Function as Objects\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#c05-first-class-function\"\u003eC05. First-Class Function\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c06-design-patterns-with-first-class-functions\"\u003eC06. Design Patterns with First-Class Functions\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c07-function-decorators-and-closures\"\u003eC07. Function Decorators and Closures\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#p4-object-oriented-idioms\"\u003eP4. Object-Oriented Idioms\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#c08-object-references-mutability-and-recycling\"\u003eC08. Object References, Mutability, and Recycling\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c09-a-pythonic-object\"\u003eC09. A Pythonic Object\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c10-sequence-hacking-hashing-and-slicing\"\u003eC10. Sequence Hacking , Hashing , and Slicing\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c11-interfaces-from-protocols-to-abcs\"\u003eC11. Interfaces: From Protocols to ABCs\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c12-inheritance-for-good-or-for-worse\"\u003eC12. Inheritance: For Good or For Worse\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c13-operator-overloading-doing-it-right\"\u003eC13. Operator Overloading: Doing It Right\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#p5-control-flow\"\u003eP5. Control Flow\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#c14-iterables-iterators-and-generators\"\u003eC14. Iterables, Iterators , and Generators\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c15-context-managers-and-else-blocks\"\u003eC15. Context Managers and else Blocks\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c16-coroutines\"\u003eC16. Coroutines\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c17-concurrency-with-futures\"\u003eC17. Concurrency with Futures\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c18-concurrency-with-asyncio\"\u003eC18. Concurrency with asyncio\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#p6-metaprogramming\"\u003eP6. Metaprogramming\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#c19-dynamic-attributes-and-properties\"\u003eC19. Dynamic Attributes and Properties\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c20-attribute-descriptors\"\u003eC20. Attribute Descriptors\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#c21-class-metaprogramming\"\u003eC21. Class Metaprogramming\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5\"\u003e相关链接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"『Fluent Python』读书笔记"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

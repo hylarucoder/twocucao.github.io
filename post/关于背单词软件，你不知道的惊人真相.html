@@ -1,0 +1,181 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>关于背单词软件，你不知道的惊人真相 | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h1 id="关于背单词软件你不知道的惊人真相"><a class="v-toc-item" href="#关于背单词软件你不知道的惊人真相">#</a> 关于背单词软件，你不知道的惊人真相</h1>
+<h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<ul>
+<li>你想知道背单词软件有大概多少人注册第一天都没有背完嘛？</li>
+<li>你想知道背单词软件这么火，这么多人在使用，真的有多少人真的在背诵嘛？</li>
+</ul>
+<p>别急，Python 程序员用数据给你说话。</p>
+<p>文章目录如下：</p>
+<ul>
+<li>0x00 前言</li>
+<li>0x01 问题的提出和任务的分解</li>
+<li>0x02 任务一，信息爬取</li>
+<li>ox03 任务二，清理和存储</li>
+<li>0x04 任务三，分析</li>
+<li>0x05 任务四，结论</li>
+<li>0x06 整个流程的不足和反思。</li>
+<li>0x07 代码。</li>
+</ul>
+<h2 id="0x01-问题的提出和任务的分解"><a class="v-toc-item" href="#0x01-问题的提出和任务的分解">#</a> 0x01 问题的提出和任务的分解</h2>
+<p>前两天，就在一个雷电交加的夜晚，我躺在床上，草草的看了一篇英文文章，突然想到一个非常有意思的问题：</p>
+<blockquote>
+<p>是不是大部分的人做事真的不能坚持呢？比如，背单词。</p>
+</blockquote>
+<p>好，那我就看看到底有多少人是坚持不下来的？</p>
+<p>那么，我们的问题就变成了这样子：</p>
+<ul>
+<li>有多少人是在坚持或者曾经坚持过背单词呢？（假设 100 天以上算的上是背单词的话）</li>
+<li>有多少梦想，毁于不能坚持？</li>
+<li>背单词的人们学习的量，是不是符合正太分布呢？</li>
+</ul>
+<p>于是我选中了业内的标杆扇贝软件作为分析的对象。抽取其中的大约 1/30 的用户的公开数据，也就是游客用户都可以看得到的数据，进行抽样调查。</p>
+<p>调查的具体内容如下：</p>
+<ul>
+<li>打卡最高 / 成长值最高 / 学习单词数量最高</li>
+<li>平均每个人打卡次数 / 成长值 / 学习单词数量</li>
+<li>打卡 / 成长值 / 学习单词数量的分布（也就是已经坚持了多少天了）</li>
+</ul>
+<p>那么，我的任务也就可以分解如下：</p>
+<ul>
+<li>爬取数据
+<ul>
+<li>使用 Python2 的 Scrapy 进行爬站</li>
+</ul>
+</li>
+<li>清理数据
+<ul>
+<li>sql 语句和 pandas 运算</li>
+</ul>
+</li>
+<li>分析数据
+<ul>
+<li>pandas + seaborn + ipython book</li>
+</ul>
+</li>
+<li>得出结论</li>
+</ul>
+<h2 id="0x02-任务一信息爬取清理和存储"><a class="v-toc-item" href="#0x02-任务一信息爬取清理和存储">#</a> 0x02 任务一，信息爬取，清理和存储</h2>
+<p>每个用户的信息都在这里：</p>
+<p><a href="http://www.shanbay.com/bdc/review/progress/2">http://www.shanbay.com/bdc/review/progress/2</a></p>
+<p>使用 beautifulsoup4 进行解析即可。其他部分参考代码。</p>
+<p>扇贝的工程师反爬虫做的还不错，主要有两点：</p>
+<ul>
+<li>访问数量超标，封禁 IP 半个小时。对应的方法就是代理服务器.（代码中已经删除代理服务器，所以，如果你运行不了代码，那你应该知道怎么做了.)</li>
+<li>cookie 如果不禁用很快就无法爬取。对应的方法就是禁用 Cookie.</li>
+</ul>
+<h2 id="0x03-任务二清理和存储"><a class="v-toc-item" href="#0x03-任务二清理和存储">#</a> 0x03 任务二，清理和存储</h2>
+<p>对于数据库，使用 Postgresql 存储就好了。也没有什么大问题。参考代码。有问题在评论下面问。</p>
+<p>通常情况下在存入数据库的时候需要进行数据的净化，不处理也没有什么大问题。</p>
+<h2 id="0x04-任务三分析"><a class="v-toc-item" href="#0x04-任务三分析">#</a> 0x04 任务三，分析</h2>
+<p>分析阶段，使用 IPython notebook. 通常情况下，我们使用的是 Anaconda 里面的 Python3 版本 . 可以到这里下载，注意，mac 和 ubuntu 下载的是命令行版本。</p>
+<p><a href="https://www.continuum.io/downloads">https://www.continuum.io/downloads</a></p>
+<p>安装完毕以后，重启终端。环境变量生效。</p>
+<pre><code class="language-bash">#直接安装 seaborn
+pip install seaborn
+</code></pre>
+<p>切换到指定目录然后敲入命令 ipython notebook 打开浏览器进行编辑。</p>
+<p>至于怎么使用，请看代码。</p>
+<h2 id="0x05-任务三结论"><a class="v-toc-item" href="#0x05-任务三结论">#</a> 0x05 任务三，结论</h2>
+<p>在这里省去部分的分析过程直接贴出结论。</p>
+<p>总共抓取 1111111 张网页，成功获取 610888 个用户的信息。</p>
+<p>于是得出结论如下：</p>
+<p><strong>扇贝之最：</strong></p>
+<ul>
+<li>最高打卡天数：chainyu 1830 天</li>
+<li>最高成长值：Lerystal 成长值 28767</li>
+<li>最高单词数量：chenmaoboss 单词量 38313</li>
+</ul>
+<p><strong>平均到每一个人身上</strong></p>
+<ul>
+<li>平均每人打卡天数：14.18, 而超过成长平均值的人数为 71342, 占总抽样人数的，额，11.69%</li>
+<li>平均成长值：121.79, 而超过平均成长的人数为 13351, 占总抽样人数的，额，11.42%</li>
+<li>平均学习单词数量：78.92, 而背超过平均单词的人数为 13351, 占总抽样人数的，额，2.19%（注意，真的是 2% 左右）</li>
+</ul>
+<p><strong>那么，我们来看看打卡，成长值，单词数量的，分布吧.</strong></p>
+<p>第一个，所有人的打卡数量直方图。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-700e3adc4e88dd4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="这是所有人的打卡数量直方图"></p>
+<p>简直惨不忍睹。</p>
+<p>第二个，非零用户的打卡数量直方图。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-d43f053706de8b37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="非零用户的打卡数量的直方图"></p>
+<p>这真是一段悲伤的故事。由于坚持不了几天的用户实在是太多，简直就是反比例函数嘛，导致图像严重畸形。那么，我们只能分段了看用户打卡天数在 0<sub>20,20</sub>100,100<sub>500,500</sub>2000 范围的分布图了。</p>
+<p>分别如下：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-532a24af7f6a4c0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="0~20"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-a1adbb9a925128a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="20~100"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-6e0b3c72b5c02c13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="100~500"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/52890-2cf944cc1c837507.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="500~2000"></p>
+<p>其他成长值的各种分布也是如此，在此就不贴出来了。</p>
+<p>正如你所看到的，我再来总结一下，</p>
+<p>在抽样中，</p>
+<ol>
+<li>英语梦死在前 0 天的有 416351 人，占总比 68.15%;</li>
+<li>英语梦死在前 1 天的有 466761 人，占总比 76.40%;</li>
+<li>英语梦死在前 2 天的有 484535 人，占总比 79.31%;</li>
+<li>英语梦死在前 5 天的有 510230 人，占总比 83.52%;</li>
+<li>英语梦死在前 10 天的有 531219 人，占总比 86.95%;</li>
+<li>英语梦死在前 20 天的有 551557 人，占总比 90.28%;</li>
+<li>英语梦死在前 50 天的有 575975 人，占总比的 94.28%;</li>
+<li>英语梦死在前 100 天的有 590700 人，占总比 96.69%;</li>
+<li>英语梦死在前 200 天的有 575975 人，占总比 98.36%;</li>
+<li>英语梦死在前 263 天的有 600875 人，占总比 98.81%;</li>
+</ol>
+<p>你可以大致感受到残酷的现实，几乎没有多少人可以坚持到 200 天以后。</p>
+<p>但是，你还需要注意到的事情是：</p>
+<blockquote>
+<p>抽样的来源是 ID 为 1~1111111 之间的 60W 成员</p>
+</blockquote>
+<p>众所周知的事情是：</p>
+<ul>
+<li>早期的用户往往质量相对会高一些。而且，注册的 ID 越大，证明注册时间距离现在越近。获得 200 天的几率也就低了不少。</li>
+</ul>
+<blockquote>
+<p>那么，这样的话，英语梦死在 200 天之前的人数比例还会大上不少。</p>
+</blockquote>
+<p>回到文章开始：</p>
+<p>问：背单词软件有大概多少人注册第一天都没有背完嘛？<br>
+答：68.15%</p>
+<p>问：有多少人是在坚持或者曾经坚持过背单词呢？（假设 100 天以上算的上是背单词的话）<br>
+答：保守估计，不足 3.4%</p>
+<p>问：有多少梦想，毁于不能坚持？<br>
+答：不妨干了这碗鸡汤，歌唱青春一去不复返。</p>
+<p>问：背单词的人们学习的量，是不是符合正太分布呢？<br>
+答：不是，简直就是反比例函数。</p>
+<p>抛出一个结论：</p>
+<blockquote>
+<p>以绝大部分人努力之低，根本就用不着拼天赋。</p>
+</blockquote>
+<p>赠给你我，共勉。</p>
+<h2 id="0x06-整个流程的不足和反思"><a class="v-toc-item" href="#0x06-整个流程的不足和反思">#</a> 0x06 整个流程的不足和反思。</h2>
+<p>扇贝的工程师反爬虫做的还不错，主要有两点：</p>
+<ul>
+<li>访问数量超标，封禁 IP 半个小时。对应的方法就是代理服务器。</li>
+<li>cookie 如果不禁用很快就无法爬取。对应的方法就是禁用 Cookie.</li>
+</ul>
+<p>爬虫框架使用 Scrapy, 这样就免去了大量的繁琐的线程调度问题，直接写获取信息的逻辑代码，以及存储信息的逻辑代码就好了。</p>
+<p>在编写爬虫的过程中，有一些经验：</p>
+<ul>
+<li>在爬虫开启以后，由于我暴力的关闭，导致还是有不少的 item 没有完成请求处理和存储。</li>
+<li>我在处理异常的时候忘了应当把失败的 item 存放放在文件中，方便我第二次补充，这样的话就不会丢失一部分的用户信息了。</li>
+<li>代理服务器需要自己写脚本进行测试，否则你可能有很多很多的请求都会超时（毕竟很多代理服务器还是很不靠谱的）.</li>
+</ul>
+<p>我的分析数据能力并不是很强，仅仅是从 CS109 里面偷学了一点点，然后使用 Seaborn 画图，但是这整个过程中还是觉得自己分析不过来，不是写不出代码，而是不清楚使用什么样的数据模型进行分析更好。</p>
+<h2 id="0x07-代码"><a class="v-toc-item" href="#0x07-代码">#</a> 0x07 代码</h2>
+<p>代码放在了 Github 上面，咳咳，注意，没有把代理服务器放进去。如果你跑一下会发现只能半小时抓取 300+ 页面，这不是我的问题，是你没有把代理服务器填好。代码比较粗糙，还请轻拍。</p>
+<p>代码的地址为：</p>
+<p><a href="https://github.com/twocucao/DataScience/">https://github.com/twocucao/DataScience/</a></p>
+<p>仓库里包含了抓取网站的代码和分析数据的 IPython Notebook, 自己阅读吧。</p>
+<p>如果喜欢本文，就点个喜欢吧。</p>
+</div></div><div><ul class="v-article-toc">
+<li><a href="#%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8">关于背单词软件，你不知道的惊人真相</a>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8F%90%E5%87%BA%E5%92%8C%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%88%86%E8%A7%A3">0x01 问题的提出和任务的分解</a></li>
+<li><a href="#0x02-%E4%BB%BB%E5%8A%A1%E4%B8%80%E4%BF%A1%E6%81%AF%E7%88%AC%E5%8F%96%E6%B8%85%E7%90%86%E5%92%8C%E5%AD%98%E5%82%A8">0x02 任务一，信息爬取，清理和存储</a></li>
+<li><a href="#0x03-%E4%BB%BB%E5%8A%A1%E4%BA%8C%E6%B8%85%E7%90%86%E5%92%8C%E5%AD%98%E5%82%A8">0x03 任务二，清理和存储</a></li>
+<li><a href="#0x04-%E4%BB%BB%E5%8A%A1%E4%B8%89%E5%88%86%E6%9E%90">0x04 任务三，分析</a></li>
+<li><a href="#0x05-%E4%BB%BB%E5%8A%A1%E4%B8%89%E7%BB%93%E8%AE%BA">0x05 任务三，结论</a></li>
+<li><a href="#0x06-%E6%95%B4%E4%B8%AA%E6%B5%81%E7%A8%8B%E7%9A%84%E4%B8%8D%E8%B6%B3%E5%92%8C%E5%8F%8D%E6%80%9D">0x06 整个流程的不足和反思。</a></li>
+<li><a href="#0x07-%E4%BB%A3%E7%A0%81">0x07 代码</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Python"],"path":"20160224_关于背单词软件,你不知道的惊人真相.md","title":"关于背单词软件，你不知道的惊人真相","slug":"关于背单词软件，你不知道的惊人真相","date":"2016-02-24","category":"数据分析","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch1 id=\"关于背单词软件你不知道的惊人真相\"\u003e\u003ca class=\"v-toc-item\" href=\"#关于背单词软件你不知道的惊人真相\"\u003e#\u003c/a\u003e 关于背单词软件，你不知道的惊人真相\u003c/h1\u003e\n\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e你想知道背单词软件有大概多少人注册第一天都没有背完嘛？\u003c/li\u003e\n\u003cli\u003e你想知道背单词软件这么火，这么多人在使用，真的有多少人真的在背诵嘛？\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e别急，Python 程序员用数据给你说话。\u003c/p\u003e\n\u003cp\u003e文章目录如下：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e0x00 前言\u003c/li\u003e\n\u003cli\u003e0x01 问题的提出和任务的分解\u003c/li\u003e\n\u003cli\u003e0x02 任务一，信息爬取\u003c/li\u003e\n\u003cli\u003eox03 任务二，清理和存储\u003c/li\u003e\n\u003cli\u003e0x04 任务三，分析\u003c/li\u003e\n\u003cli\u003e0x05 任务四，结论\u003c/li\u003e\n\u003cli\u003e0x06 整个流程的不足和反思。\u003c/li\u003e\n\u003cli\u003e0x07 代码。\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x01-问题的提出和任务的分解\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-问题的提出和任务的分解\"\u003e#\u003c/a\u003e 0x01 问题的提出和任务的分解\u003c/h2\u003e\n\u003cp\u003e前两天，就在一个雷电交加的夜晚，我躺在床上，草草的看了一篇英文文章，突然想到一个非常有意思的问题：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e是不是大部分的人做事真的不能坚持呢？比如，背单词。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e好，那我就看看到底有多少人是坚持不下来的？\u003c/p\u003e\n\u003cp\u003e那么，我们的问题就变成了这样子：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e有多少人是在坚持或者曾经坚持过背单词呢？（假设 100 天以上算的上是背单词的话）\u003c/li\u003e\n\u003cli\u003e有多少梦想，毁于不能坚持？\u003c/li\u003e\n\u003cli\u003e背单词的人们学习的量，是不是符合正太分布呢？\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e于是我选中了业内的标杆扇贝软件作为分析的对象。抽取其中的大约 1/30 的用户的公开数据，也就是游客用户都可以看得到的数据，进行抽样调查。\u003c/p\u003e\n\u003cp\u003e调查的具体内容如下：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e打卡最高 / 成长值最高 / 学习单词数量最高\u003c/li\u003e\n\u003cli\u003e平均每个人打卡次数 / 成长值 / 学习单词数量\u003c/li\u003e\n\u003cli\u003e打卡 / 成长值 / 学习单词数量的分布（也就是已经坚持了多少天了）\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e那么，我的任务也就可以分解如下：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e爬取数据\n\u003cul\u003e\n\u003cli\u003e使用 Python2 的 Scrapy 进行爬站\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e清理数据\n\u003cul\u003e\n\u003cli\u003esql 语句和 pandas 运算\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e分析数据\n\u003cul\u003e\n\u003cli\u003epandas + seaborn + ipython book\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e得出结论\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x02-任务一信息爬取清理和存储\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-任务一信息爬取清理和存储\"\u003e#\u003c/a\u003e 0x02 任务一，信息爬取，清理和存储\u003c/h2\u003e\n\u003cp\u003e每个用户的信息都在这里：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://www.shanbay.com/bdc/review/progress/2\"\u003ehttp://www.shanbay.com/bdc/review/progress/2\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e使用 beautifulsoup4 进行解析即可。其他部分参考代码。\u003c/p\u003e\n\u003cp\u003e扇贝的工程师反爬虫做的还不错，主要有两点：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e访问数量超标，封禁 IP 半个小时。对应的方法就是代理服务器.（代码中已经删除代理服务器，所以，如果你运行不了代码，那你应该知道怎么做了.)\u003c/li\u003e\n\u003cli\u003ecookie 如果不禁用很快就无法爬取。对应的方法就是禁用 Cookie.\u003c/li\u003e\n\u003c/ul\u003e\n\u003ch2 id=\"0x03-任务二清理和存储\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-任务二清理和存储\"\u003e#\u003c/a\u003e 0x03 任务二，清理和存储\u003c/h2\u003e\n\u003cp\u003e对于数据库，使用 Postgresql 存储就好了。也没有什么大问题。参考代码。有问题在评论下面问。\u003c/p\u003e\n\u003cp\u003e通常情况下在存入数据库的时候需要进行数据的净化，不处理也没有什么大问题。\u003c/p\u003e\n\u003ch2 id=\"0x04-任务三分析\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x04-任务三分析\"\u003e#\u003c/a\u003e 0x04 任务三，分析\u003c/h2\u003e\n\u003cp\u003e分析阶段，使用 IPython notebook. 通常情况下，我们使用的是 Anaconda 里面的 Python3 版本 . 可以到这里下载，注意，mac 和 ubuntu 下载的是命令行版本。\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://www.continuum.io/downloads\"\u003ehttps://www.continuum.io/downloads\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e安装完毕以后，重启终端。环境变量生效。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e#直接安装 seaborn\npip install seaborn\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e切换到指定目录然后敲入命令 ipython notebook 打开浏览器进行编辑。\u003c/p\u003e\n\u003cp\u003e至于怎么使用，请看代码。\u003c/p\u003e\n\u003ch2 id=\"0x05-任务三结论\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x05-任务三结论\"\u003e#\u003c/a\u003e 0x05 任务三，结论\u003c/h2\u003e\n\u003cp\u003e在这里省去部分的分析过程直接贴出结论。\u003c/p\u003e\n\u003cp\u003e总共抓取 1111111 张网页，成功获取 610888 个用户的信息。\u003c/p\u003e\n\u003cp\u003e于是得出结论如下：\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e扇贝之最：\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e最高打卡天数：chainyu 1830 天\u003c/li\u003e\n\u003cli\u003e最高成长值：Lerystal 成长值 28767\u003c/li\u003e\n\u003cli\u003e最高单词数量：chenmaoboss 单词量 38313\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e平均到每一个人身上\u003c/strong\u003e\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e平均每人打卡天数：14.18, 而超过成长平均值的人数为 71342, 占总抽样人数的，额，11.69%\u003c/li\u003e\n\u003cli\u003e平均成长值：121.79, 而超过平均成长的人数为 13351, 占总抽样人数的，额，11.42%\u003c/li\u003e\n\u003cli\u003e平均学习单词数量：78.92, 而背超过平均单词的人数为 13351, 占总抽样人数的，额，2.19%（注意，真的是 2% 左右）\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e\u003cstrong\u003e那么，我们来看看打卡，成长值，单词数量的，分布吧.\u003c/strong\u003e\u003c/p\u003e\n\u003cp\u003e第一个，所有人的打卡数量直方图。\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"http://upload-images.jianshu.io/upload_images/52890-700e3adc4e88dd4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240\" alt=\"这是所有人的打卡数量直方图\"\u003e\u003c/p\u003e\n\u003cp\u003e简直惨不忍睹。\u003c/p\u003e\n\u003cp\u003e第二个，非零用户的打卡数量直方图。\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"http://upload-images.jianshu.io/upload_images/52890-d43f053706de8b37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240\" alt=\"非零用户的打卡数量的直方图\"\u003e\u003c/p\u003e\n\u003cp\u003e这真是一段悲伤的故事。由于坚持不了几天的用户实在是太多，简直就是反比例函数嘛，导致图像严重畸形。那么，我们只能分段了看用户打卡天数在 0\u003csub\u003e20,20\u003c/sub\u003e100,100\u003csub\u003e500,500\u003c/sub\u003e2000 范围的分布图了。\u003c/p\u003e\n\u003cp\u003e分别如下：\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"http://upload-images.jianshu.io/upload_images/52890-532a24af7f6a4c0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240\" alt=\"0~20\"\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"http://upload-images.jianshu.io/upload_images/52890-a1adbb9a925128a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240\" alt=\"20~100\"\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"http://upload-images.jianshu.io/upload_images/52890-6e0b3c72b5c02c13.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240\" alt=\"100~500\"\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"http://upload-images.jianshu.io/upload_images/52890-2cf944cc1c837507.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240\" alt=\"500~2000\"\u003e\u003c/p\u003e\n\u003cp\u003e其他成长值的各种分布也是如此，在此就不贴出来了。\u003c/p\u003e\n\u003cp\u003e正如你所看到的，我再来总结一下，\u003c/p\u003e\n\u003cp\u003e在抽样中，\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e英语梦死在前 0 天的有 416351 人，占总比 68.15%;\u003c/li\u003e\n\u003cli\u003e英语梦死在前 1 天的有 466761 人，占总比 76.40%;\u003c/li\u003e\n\u003cli\u003e英语梦死在前 2 天的有 484535 人，占总比 79.31%;\u003c/li\u003e\n\u003cli\u003e英语梦死在前 5 天的有 510230 人，占总比 83.52%;\u003c/li\u003e\n\u003cli\u003e英语梦死在前 10 天的有 531219 人，占总比 86.95%;\u003c/li\u003e\n\u003cli\u003e英语梦死在前 20 天的有 551557 人，占总比 90.28%;\u003c/li\u003e\n\u003cli\u003e英语梦死在前 50 天的有 575975 人，占总比的 94.28%;\u003c/li\u003e\n\u003cli\u003e英语梦死在前 100 天的有 590700 人，占总比 96.69%;\u003c/li\u003e\n\u003cli\u003e英语梦死在前 200 天的有 575975 人，占总比 98.36%;\u003c/li\u003e\n\u003cli\u003e英语梦死在前 263 天的有 600875 人，占总比 98.81%;\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e你可以大致感受到残酷的现实，几乎没有多少人可以坚持到 200 天以后。\u003c/p\u003e\n\u003cp\u003e但是，你还需要注意到的事情是：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e抽样的来源是 ID 为 1~1111111 之间的 60W 成员\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e众所周知的事情是：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e早期的用户往往质量相对会高一些。而且，注册的 ID 越大，证明注册时间距离现在越近。获得 200 天的几率也就低了不少。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e那么，这样的话，英语梦死在 200 天之前的人数比例还会大上不少。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e回到文章开始：\u003c/p\u003e\n\u003cp\u003e问：背单词软件有大概多少人注册第一天都没有背完嘛？\u003cbr\u003e\n答：68.15%\u003c/p\u003e\n\u003cp\u003e问：有多少人是在坚持或者曾经坚持过背单词呢？（假设 100 天以上算的上是背单词的话）\u003cbr\u003e\n答：保守估计，不足 3.4%\u003c/p\u003e\n\u003cp\u003e问：有多少梦想，毁于不能坚持？\u003cbr\u003e\n答：不妨干了这碗鸡汤，歌唱青春一去不复返。\u003c/p\u003e\n\u003cp\u003e问：背单词的人们学习的量，是不是符合正太分布呢？\u003cbr\u003e\n答：不是，简直就是反比例函数。\u003c/p\u003e\n\u003cp\u003e抛出一个结论：\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e以绝大部分人努力之低，根本就用不着拼天赋。\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e赠给你我，共勉。\u003c/p\u003e\n\u003ch2 id=\"0x06-整个流程的不足和反思\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x06-整个流程的不足和反思\"\u003e#\u003c/a\u003e 0x06 整个流程的不足和反思。\u003c/h2\u003e\n\u003cp\u003e扇贝的工程师反爬虫做的还不错，主要有两点：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e访问数量超标，封禁 IP 半个小时。对应的方法就是代理服务器。\u003c/li\u003e\n\u003cli\u003ecookie 如果不禁用很快就无法爬取。对应的方法就是禁用 Cookie.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e爬虫框架使用 Scrapy, 这样就免去了大量的繁琐的线程调度问题，直接写获取信息的逻辑代码，以及存储信息的逻辑代码就好了。\u003c/p\u003e\n\u003cp\u003e在编写爬虫的过程中，有一些经验：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e在爬虫开启以后，由于我暴力的关闭，导致还是有不少的 item 没有完成请求处理和存储。\u003c/li\u003e\n\u003cli\u003e我在处理异常的时候忘了应当把失败的 item 存放放在文件中，方便我第二次补充，这样的话就不会丢失一部分的用户信息了。\u003c/li\u003e\n\u003cli\u003e代理服务器需要自己写脚本进行测试，否则你可能有很多很多的请求都会超时（毕竟很多代理服务器还是很不靠谱的）.\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e我的分析数据能力并不是很强，仅仅是从 CS109 里面偷学了一点点，然后使用 Seaborn 画图，但是这整个过程中还是觉得自己分析不过来，不是写不出代码，而是不清楚使用什么样的数据模型进行分析更好。\u003c/p\u003e\n\u003ch2 id=\"0x07-代码\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x07-代码\"\u003e#\u003c/a\u003e 0x07 代码\u003c/h2\u003e\n\u003cp\u003e代码放在了 Github 上面，咳咳，注意，没有把代理服务器放进去。如果你跑一下会发现只能半小时抓取 300+ 页面，这不是我的问题，是你没有把代理服务器填好。代码比较粗糙，还请轻拍。\u003c/p\u003e\n\u003cp\u003e代码的地址为：\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"https://github.com/twocucao/DataScience/\"\u003ehttps://github.com/twocucao/DataScience/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e仓库里包含了抓取网站的代码和分析数据的 IPython Notebook, 自己阅读吧。\u003c/p\u003e\n\u003cp\u003e如果喜欢本文，就点个喜欢吧。\u003c/p\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\u003ca href=\"#%E5%85%B3%E4%BA%8E%E8%83%8C%E5%8D%95%E8%AF%8D%E8%BD%AF%E4%BB%B6%E4%BD%A0%E4%B8%8D%E7%9F%A5%E9%81%93%E7%9A%84%E6%83%8A%E4%BA%BA%E7%9C%9F%E7%9B%B8\"\u003e关于背单词软件，你不知道的惊人真相\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E9%97%AE%E9%A2%98%E7%9A%84%E6%8F%90%E5%87%BA%E5%92%8C%E4%BB%BB%E5%8A%A1%E7%9A%84%E5%88%86%E8%A7%A3\"\u003e0x01 问题的提出和任务的分解\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E4%BB%BB%E5%8A%A1%E4%B8%80%E4%BF%A1%E6%81%AF%E7%88%AC%E5%8F%96%E6%B8%85%E7%90%86%E5%92%8C%E5%AD%98%E5%82%A8\"\u003e0x02 任务一，信息爬取，清理和存储\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-%E4%BB%BB%E5%8A%A1%E4%BA%8C%E6%B8%85%E7%90%86%E5%92%8C%E5%AD%98%E5%82%A8\"\u003e0x03 任务二，清理和存储\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x04-%E4%BB%BB%E5%8A%A1%E4%B8%89%E5%88%86%E6%9E%90\"\u003e0x04 任务三，分析\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x05-%E4%BB%BB%E5%8A%A1%E4%B8%89%E7%BB%93%E8%AE%BA\"\u003e0x05 任务三，结论\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x06-%E6%95%B4%E4%B8%AA%E6%B5%81%E7%A8%8B%E7%9A%84%E4%B8%8D%E8%B6%B3%E5%92%8C%E5%8F%8D%E6%80%9D\"\u003e0x06 整个流程的不足和反思。\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x07-%E4%BB%A3%E7%A0%81\"\u003e0x07 代码\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"关于背单词软件，你不知道的惊人真相"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

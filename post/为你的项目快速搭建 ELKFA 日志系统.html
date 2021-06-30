@@ -1,0 +1,207 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>为你的项目快速搭建 ELKFA 日志系统 | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><p>本文是《提升你的 Python 项目代码健壮性和性能》系列的第五篇文章。</p>
+<p>讲的是日志系统 ELKFA 的搭建</p>
+<h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<p>什么是 ELKFA?</p>
+<p>这五个字母分别代表着五个开源软件</p>
+<ul>
+<li><strong>E - ElasticSearch</strong></li>
+<li><strong>L - Logstash</strong></li>
+<li><strong>K - Kibana</strong></li>
+<li><strong>F - FileBeat</strong></li>
+<li><strong>A - APM-Server</strong></li>
+</ul>
+<p>利用这五个软件的组合，我们可以在比较短的时间打造两个系统：</p>
+<ol>
+<li>日志系统，分析 Nginx 日志，Gunicorn 日志，Flask 日志，Django 日志</li>
+<li>APM 系统，解决两个问题<br>
+2.1 Metric 分析：Flask 是否正常运行，接口请求信息定期发送到 APMServer 这边，方便我观察服务是否正常，接口和业务逻辑的执行的时间是否在预期范围内。<br>
+2.2 Trouble Shooting: 如果程序报了异常，我想把需要报的异常堆栈信息打出。方便我快速的 Trouble Shooting</li>
+</ol>
+<h2 id="0x01-任务-1-分析-nginx-日志"><a class="v-toc-item" href="#0x01-任务-1-分析-nginx-日志">#</a> 0x01 任务 1: 分析 Nginx 日志</h2>
+<p>Nginx 众所周知，Nginx 日志是个宝库，所以本文选取了 Nginx 作为日志分析的案例。</p>
+<p>对于 Nginx 日志，可以采用 FileBeat 上传到 Logstash, 由 Logstash 对文件进行解析，并存储到 ElasticSearch</p>
+<p>然后从 Kibana 进行分析。</p>
+<h3 id="第一步配置-nginx"><a class="v-toc-item" href="#第一步配置-nginx">#</a> 第一步：配置 Nginx</h3>
+<p>首先，让 Nginx 的配置输出的日志符合某种模式，方便软件进行解析。</p>
+<pre><code class="language-text">log_format  main  <span class="token string">'$remote_addr - $remote_user [$time_local] "$request" '</span>
+							<span class="token string">'$status $body_bytes_sent "$http_referer" '</span>
+							<span class="token string">'"$http_user_agent" "$http_x_forwarded_for"'</span><span class="token punctuation">;</span>
+
+access_log <span class="token operator">/</span><span class="token keyword">var</span><span class="token operator">/</span>log<span class="token operator">/</span>nginx<span class="token operator">/</span>access<span class="token punctuation">.</span>log main<span class="token punctuation">;</span>
+</code></pre>
+<p>然后重启 nginx</p>
+<h3 id="第二步拉取-nginx-日志"><a class="v-toc-item" href="#第二步拉取-nginx-日志">#</a> 第二步：拉取 Nginx 日志</h3>
+<p>一天后，从 Nginx 服务器上拉一下 access.log 放到</p>
+<p>elastic-labs/logs/prod/nginx 下</p>
+<h3 id="第三步开启-elfka"><a class="v-toc-item" href="#第三步开启-elfka">#</a> 第三步：开启 ELFKA</h3>
+<pre><code class="language-text">git clone git@github<span class="token punctuation">.</span>com<span class="token operator">:</span>twocucao<span class="token operator">/</span>elastic<span class="token operator">-</span>labs<span class="token punctuation">.</span>git
+cd elastic<span class="token operator">-</span>labs
+docker<span class="token operator">-</span>compose up
+</code></pre>
+<blockquote>
+<p>啥、? 不会搭 Docker? 见文末<br>
+啥、? 不知道 ElasticSearch 怎么用、? 见文末</p>
+</blockquote>
+<p>如果运行正常，终端应该是这样的</p>
+<p><img src="https://pic1.zhimg.com/v2-15a6f7c35277ca34f035a0996ed1d23c_b.jpg" alt=""></p>
+<p>打开 kibana 进行观察</p>
+<p><a href="http://localhost:5601/">http://localhost:5601/</a></p>
+<p><img src="https://pic2.zhimg.com/v2-52689881c9e9610d37c0fb88016ed5b5_b.jpg" alt=""></p>
+<h3 id="第四步日志探秘"><a class="v-toc-item" href="#第四步日志探秘">#</a> 第四步：日志探秘</h3>
+<p>默认情况下，每一天的 Nginx 日志会在 ES 里创建一个 Index, 所以，你需要用 Index Pattern 来进行统计</p>
+<p><img src="https://pic2.zhimg.com/v2-52d45736112286a549e1e216fa0dab95_b.jpg" alt=""></p>
+<p>来看看我们可以得到哪些内容</p>
+<p><img src="https://pic1.zhimg.com/v2-341fb82fdf1615c6180fea381bca8c44_b.jpg" alt=""></p>
+<ol>
+<li>用户 IP 以及通过 GeoIP 得到的大致地理位置。</li>
+<li>OS 的类型 (Win/Mac/Linux/IOS/Android)</li>
+<li>客户端的类型，浏览器 / 小程序 / 客户端</li>
+<li>访问的接口，类型，频率</li>
+<li>访问服务的频率</li>
+<li>还有很多其他可以深挖的地方，比如通过用户访问的次序推断用户的使用姿势和思考方式等等</li>
+</ol>
+<p>对于第六点，有些人可能有些疑惑，这也能？</p>
+<blockquote>
+<p><strong>当然咯，假设用户在搜索引擎里面，先搜索了『美女』, 然后搜索了『雪白』, 然后又搜索了『白-洁』, 那基本上这个人搜索的三个词就具备一定的关联性，想搜索的这个雪白就不是『雪白』的意思</strong> &gt; <strong>而是你懂的。</strong></p>
+</blockquote>
+<h3 id="第五步扩展思考日志解决方案"><a class="v-toc-item" href="#第五步扩展思考日志解决方案">#</a> 第五步：扩展思考，日志解决方案</h3>
+<p>上面四个步骤是为了解决分析 Nginx 日志的问题</p>
+<p>一条日志从打印出来，到能在 Kibana 进行分析，需要经过如下的步骤：</p>
+<ol>
+<li>按照某种日志格式写到文件里，然后被 FileBeat 接收，FB 判断为『 Nginx 模块的日志之后』上传到 Logstash</li>
+<li>Logstash 按照一个端口一个类型的方式接受该类型的日志。通过 filters 和插件进行匹配和修改，比如 grok 的 pattern 来匹配每一条日志（类似于正则匹配）, 抽出需要独立成字段的部分。比如通过 geoip 进行地址匹配，比如对字段进行 convert</li>
+<li>输出匹配结果到 ElasticSearch</li>
+<li>Kibana 通过更加边界的工具来查询 ElasticSearch</li>
+</ol>
+<p>如果你想要自定义日志获得更加完美的解决方案，那就需要对这几个流程进行进行细化。</p>
+<p>比如你想通过 Flask 的日志来达到更好的用户操作定位。这就需要读者自行依照自己的理解来 hack 了</p>
+<h2 id="0x02-任务-2-监控-flask-app-的-apm"><a class="v-toc-item" href="#0x02-任务-2-监控-flask-app-的-apm">#</a> 0x02 任务 2: 监控 Flask App 的 APM</h2>
+<h3 id="第一步开启-elfka"><a class="v-toc-item" href="#第一步开启-elfka">#</a> 第一步：开启 ELFKA</h3>
+<p>同任务一的启动方式</p>
+<h3 id="第二步开启-flask-app"><a class="v-toc-item" href="#第二步开启-flask-app">#</a> 第二步：开启 flask app</h3>
+<pre><code class="language-bash">pip3 install poetry # 比 pip <span class="token operator">/</span> pipenv 更好的依赖管理和构建工具
+poetry install <span class="token operator">-</span>vvv
+poetry shell
+flask run
+</code></pre>
+<p>写一个简单的管理和依赖工具</p>
+<pre><code class="language-bash">from flask <span class="token keyword">import</span> Flask
+from elasticapm<span class="token punctuation">.</span>contrib<span class="token punctuation">.</span>flask <span class="token keyword">import</span> ElasticAPM
+
+app <span class="token operator">=</span> <span class="token function">Flask</span><span class="token punctuation">(</span>__name__<span class="token punctuation">)</span>
+
+app<span class="token punctuation">.</span>config<span class="token punctuation">[</span><span class="token string">"ELASTIC_APM"</span><span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+    <span class="token string">"SERVICE_NAME"</span><span class="token operator">:</span> <span class="token string">"dev-flask"</span><span class="token punctuation">,</span>
+    <span class="token string">'SECRET_TOKEN'</span><span class="token operator">:</span> <span class="token string">''</span><span class="token punctuation">,</span>
+<span class="token punctuation">}</span>
+apm <span class="token operator">=</span> <span class="token function">ElasticAPM</span><span class="token punctuation">(</span>app<span class="token punctuation">)</span>
+
+@app<span class="token punctuation">.</span><span class="token function">route</span><span class="token punctuation">(</span><span class="token string">"/"</span><span class="token punctuation">)</span>
+def <span class="token function">hello</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>
+    <span class="token keyword">return</span> <span class="token string">"Hello, World!"</span>
+
+@app<span class="token punctuation">.</span><span class="token function">route</span><span class="token punctuation">(</span><span class="token string">"/home"</span><span class="token punctuation">)</span>
+def <span class="token function">home</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">:</span>
+    <span class="token keyword">return</span> <span class="token string">"home!"</span>
+
+@app<span class="token punctuation">.</span><span class="token function">route</span><span class="token punctuation">(</span><span class="token string">"/&lt;int:num>"</span><span class="token punctuation">)</span>
+def <span class="token function">hello_num</span><span class="token punctuation">(</span>num<span class="token punctuation">)</span><span class="token operator">:</span>
+    <span class="token keyword">import</span> random
+    <span class="token keyword">if</span> random<span class="token punctuation">.</span><span class="token function">randint</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">95</span><span class="token operator">:</span>
+        raise <span class="token function">Exception</span><span class="token punctuation">(</span>f<span class="token string">"num"</span><span class="token punctuation">)</span> # 有接近 <span class="token number">1</span><span class="token operator">/</span><span class="token number">5</span> 的概率会故意抛出异常
+    <span class="token keyword">return</span> f<span class="token string">"Hello, {num}!"</span>
+</code></pre>
+<p>随手写一个脚本 20 分钟内持续不断的访问接口</p>
+<pre><code class="language-bash"><span class="token constant">SECONDS</span><span class="token operator">=</span><span class="token number">0</span>
+<span class="token keyword">while</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token constant">SECONDS</span> <span class="token operator">-</span>lt <span class="token number">1200</span> <span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token keyword">do</span>
+	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token punctuation">(</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">20</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token keyword">do</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span> <span class="token operator">&amp;</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span> <span class="token operator">&amp;</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span> <span class="token operator">&amp;</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span> <span class="token operator">&amp;</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span> <span class="token operator">&amp;</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span> <span class="token operator">&amp;</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span> <span class="token operator">&amp;</span>
+		curl <span class="token string">"http://localhost:5000/$i"</span> <span class="token operator">&amp;</span>
+	done
+done
+</code></pre>
+<h3 id="第三步apm-探秘"><a class="v-toc-item" href="#第三步apm-探秘">#</a> 第三步：APM 探秘</h3>
+<p>20 分钟过去了，我们可以获知到什么呢？</p>
+<ol>
+<li>Metric 分析：Flask 是否正常运行，接口请求信息定期发送到 APMServer 这边，方便我观察服务是否正常，接口和业务逻辑的执行的时间是否在预期范围内。</li>
+<li>Trouble Shooting: 如果程序报了异常，我想把需要报的异常堆栈信息打出。方便我快速的 Trouble Shooting</li>
+</ol>
+<p>先设置时间为最近 30 分钟</p>
+<p><img src="https://pic4.zhimg.com/v2-8076c883c59df6d2ff0821d82c2b1f7f_b.jpg" alt=""></p>
+<p>在这里可以看到接口的访问情况</p>
+<p><img src="https://pic2.zhimg.com/v2-776f3bf0834fc827edf2264ca76049f1_b.jpg" alt=""></p>
+<p>先看 Metric 分析</p>
+<p><img src="https://pic1.zhimg.com/v2-9352ae0740081699d5692df34df9f724_b.jpg" alt=""></p>
+<p>这里可以看到接口的稳定性，服务器的基本负载，以及 Error 的出现频次。</p>
+<p>再看 Error</p>
+<p><img src="https://pic2.zhimg.com/v2-1d63b7048a6144cdbf14e8543fb31225_b.jpg" alt=""></p>
+<p><strong>看到这里简直泪目 这就是 ELK 版本的 Sentry 啊</strong></p>
+<blockquote>
+<p><strong>Time Saving &amp;&amp; 防脱发利器</strong></p>
+</blockquote>
+<h3 id="第四步扩展思考"><a class="v-toc-item" href="#第四步扩展思考">#</a> 第四步：扩展思考</h3>
+<p>从 App 被监控到能在 Kibana 进行分析，需要经过如下的步骤：</p>
+<ol>
+<li>在原有的 Flask App 里面进行添加 elastc-apm 的 agent (apm-client)</li>
+<li>agent 会定期将收集完毕的性能信息以及异常信息，发到 apm-server</li>
+<li>输出结果到 ElasticSearch</li>
+<li>Kibana 通过更加边界的工具来查询 ElasticSearch</li>
+</ol>
+<p>如果你想要自定义日志获得更加完美的解决方案，那就需要对这前两个流程进行进行细化。</p>
+<p>比如公司用 Graphql 的接口，那么，在这种情况下，自带的 contrib 下的 flask 包的路由基本就是废掉的，你需要再 Hack 一下。</p>
+<h2 id="0xdd-结论"><a class="v-toc-item" href="#0xdd-结论">#</a> 0xDD 结论</h2>
+<p>本来这篇文章打算写日志的最佳实践的，结果在查找资料的时候发现了一篇更好的文章</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/27363484">https://zhuanlan.zhihu.com/p/27363484</a></li>
+</ul>
+<p>看完之后打消了这个念头，转而写如何使用 ELK 的系统落实这种日志分析系统</p>
+<p>代码见 <a href="https://link.zhihu.com/?target=https%3A//github.com/twocucao/elastic-labs">twocucao/elastic-labs</a></p>
+<blockquote>
+<p><strong>欢迎点赞 / 关注 /star 文明三连</strong></p>
+</blockquote>
+<h2 id="0xee-参考链接"><a class="v-toc-item" href="#0xee-参考链接">#</a> 0xEE 参考链接</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/27363484">https://zhuanlan.zhihu.com/p/27363484</a></li>
+<li>Photo by<a href="https://link.zhihu.com/?target=https%3A//unsplash.com/photos/rr8DvtQL9X8%3Futm_source%3Dunsplash%26utm_medium%3Dreferral%26utm_content%3DcreditCopyText">Tan Kaninthanond</a>on<a href="https://link.zhihu.com/?target=https%3A//unsplash.com/%3Futm_source%3Dunsplash%26utm_medium%3Dreferral%26utm_content%3DcreditCopyText">Unsplash</a></li>
+<li><strong>关于 elasticsearch 可以参考我以前的文章</strong> <a href="https://zhuanlan.zhihu.com/p/35143409">Django 全栈教程系列番外篇 - ElasticSearch CheatSheet</a></li>
+<li>关于 <strong>docker 的搭建</strong> 可以参考我以前的文章 <a href="https://zhuanlan.zhihu.com/p/33920401">Django 全栈教程系列之一 - YaDjangoBlog 开发环境配置</a></li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-%E4%BB%BB%E5%8A%A1-1-%E5%88%86%E6%9E%90-nginx-%E6%97%A5%E5%BF%97">0x01 任务 1: 分析 Nginx 日志</a>
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E9%85%8D%E7%BD%AE-nginx">第一步：配置 Nginx</a></li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E6%8B%89%E5%8F%96-nginx-%E6%97%A5%E5%BF%97">第二步：拉取 Nginx 日志</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%E5%BC%80%E5%90%AF-elfka">第三步：开启 ELFKA</a></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%E6%97%A5%E5%BF%97%E6%8E%A2%E7%A7%98">第四步：日志探秘</a></li>
+<li><a href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%E6%89%A9%E5%B1%95%E6%80%9D%E8%80%83%E6%97%A5%E5%BF%97%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88">第五步：扩展思考，日志解决方案</a></li>
+</ul>
+</li>
+<li><a href="#0x02-%E4%BB%BB%E5%8A%A1-2-%E7%9B%91%E6%8E%A7-flask-app-%E7%9A%84-apm">0x02 任务 2: 监控 Flask App 的 APM</a>
+<ul>
+<li><a href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%BC%80%E5%90%AF-elfka">第一步：开启 ELFKA</a></li>
+<li><a href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E5%BC%80%E5%90%AF-flask-app">第二步：开启 flask app</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E6%AD%A5apm-%E6%8E%A2%E7%A7%98">第三步：APM 探秘</a></li>
+<li><a href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%E6%89%A9%E5%B1%95%E6%80%9D%E8%80%83">第四步：扩展思考</a></li>
+</ul>
+</li>
+<li><a href="#0xdd-%E7%BB%93%E8%AE%BA">0xDD 结论</a></li>
+<li><a href="#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">0xEE 参考链接</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["Python","系列文章"],"path":"20190310_PyCode_05.md","title":"为你的项目快速搭建 ELKFA 日志系统","slug":"为你的项目快速搭建 ELKFA 日志系统","date":"2019-03-10","category":"Python 项目代码健壮性和性能","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003cp\u003e本文是《提升你的 Python 项目代码健壮性和性能》系列的第五篇文章。\u003c/p\u003e\n\u003cp\u003e讲的是日志系统 ELKFA 的搭建\u003c/p\u003e\n\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cp\u003e什么是 ELKFA?\u003c/p\u003e\n\u003cp\u003e这五个字母分别代表着五个开源软件\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003eE - ElasticSearch\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eL - Logstash\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eK - Kibana\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eF - FileBeat\u003c/strong\u003e\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003eA - APM-Server\u003c/strong\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e利用这五个软件的组合，我们可以在比较短的时间打造两个系统：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e日志系统，分析 Nginx 日志，Gunicorn 日志，Flask 日志，Django 日志\u003c/li\u003e\n\u003cli\u003eAPM 系统，解决两个问题\u003cbr\u003e\n2.1 Metric 分析：Flask 是否正常运行，接口请求信息定期发送到 APMServer 这边，方便我观察服务是否正常，接口和业务逻辑的执行的时间是否在预期范围内。\u003cbr\u003e\n2.2 Trouble Shooting: 如果程序报了异常，我想把需要报的异常堆栈信息打出。方便我快速的 Trouble Shooting\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch2 id=\"0x01-任务-1-分析-nginx-日志\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-任务-1-分析-nginx-日志\"\u003e#\u003c/a\u003e 0x01 任务 1: 分析 Nginx 日志\u003c/h2\u003e\n\u003cp\u003eNginx 众所周知，Nginx 日志是个宝库，所以本文选取了 Nginx 作为日志分析的案例。\u003c/p\u003e\n\u003cp\u003e对于 Nginx 日志，可以采用 FileBeat 上传到 Logstash, 由 Logstash 对文件进行解析，并存储到 ElasticSearch\u003c/p\u003e\n\u003cp\u003e然后从 Kibana 进行分析。\u003c/p\u003e\n\u003ch3 id=\"第一步配置-nginx\"\u003e\u003ca class=\"v-toc-item\" href=\"#第一步配置-nginx\"\u003e#\u003c/a\u003e 第一步：配置 Nginx\u003c/h3\u003e\n\u003cp\u003e首先，让 Nginx 的配置输出的日志符合某种模式，方便软件进行解析。\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-text\"\u003elog_format  main  \u003cspan class=\"token string\"\u003e'$remote_addr - $remote_user [$time_local] \"$request\" '\u003c/span\u003e\n\t\t\t\t\t\t\t\u003cspan class=\"token string\"\u003e'$status $body_bytes_sent \"$http_referer\" '\u003c/span\u003e\n\t\t\t\t\t\t\t\u003cspan class=\"token string\"\u003e'\"$http_user_agent\" \"$http_x_forwarded_for\"'\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n\naccess_log \u003cspan class=\"token operator\"\u003e/\u003c/span\u003e\u003cspan class=\"token keyword\"\u003evar\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003elog\u003cspan class=\"token operator\"\u003e/\u003c/span\u003enginx\u003cspan class=\"token operator\"\u003e/\u003c/span\u003eaccess\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003elog main\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e然后重启 nginx\u003c/p\u003e\n\u003ch3 id=\"第二步拉取-nginx-日志\"\u003e\u003ca class=\"v-toc-item\" href=\"#第二步拉取-nginx-日志\"\u003e#\u003c/a\u003e 第二步：拉取 Nginx 日志\u003c/h3\u003e\n\u003cp\u003e一天后，从 Nginx 服务器上拉一下 access.log 放到\u003c/p\u003e\n\u003cp\u003eelastic-labs/logs/prod/nginx 下\u003c/p\u003e\n\u003ch3 id=\"第三步开启-elfka\"\u003e\u003ca class=\"v-toc-item\" href=\"#第三步开启-elfka\"\u003e#\u003c/a\u003e 第三步：开启 ELFKA\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-text\"\u003egit clone git@github\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003ecom\u003cspan class=\"token operator\"\u003e:\u003c/span\u003etwocucao\u003cspan class=\"token operator\"\u003e/\u003c/span\u003eelastic\u003cspan class=\"token operator\"\u003e-\u003c/span\u003elabs\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003egit\ncd elastic\u003cspan class=\"token operator\"\u003e-\u003c/span\u003elabs\ndocker\u003cspan class=\"token operator\"\u003e-\u003c/span\u003ecompose up\n\u003c/code\u003e\u003c/pre\u003e\n\u003cblockquote\u003e\n\u003cp\u003e啥、? 不会搭 Docker? 见文末\u003cbr\u003e\n啥、? 不知道 ElasticSearch 怎么用、? 见文末\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003cp\u003e如果运行正常，终端应该是这样的\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://pic1.zhimg.com/v2-15a6f7c35277ca34f035a0996ed1d23c_b.jpg\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e打开 kibana 进行观察\u003c/p\u003e\n\u003cp\u003e\u003ca href=\"http://localhost:5601/\"\u003ehttp://localhost:5601/\u003c/a\u003e\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://pic2.zhimg.com/v2-52689881c9e9610d37c0fb88016ed5b5_b.jpg\" alt=\"\"\u003e\u003c/p\u003e\n\u003ch3 id=\"第四步日志探秘\"\u003e\u003ca class=\"v-toc-item\" href=\"#第四步日志探秘\"\u003e#\u003c/a\u003e 第四步：日志探秘\u003c/h3\u003e\n\u003cp\u003e默认情况下，每一天的 Nginx 日志会在 ES 里创建一个 Index, 所以，你需要用 Index Pattern 来进行统计\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://pic2.zhimg.com/v2-52d45736112286a549e1e216fa0dab95_b.jpg\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e来看看我们可以得到哪些内容\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://pic1.zhimg.com/v2-341fb82fdf1615c6180fea381bca8c44_b.jpg\" alt=\"\"\u003e\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e用户 IP 以及通过 GeoIP 得到的大致地理位置。\u003c/li\u003e\n\u003cli\u003eOS 的类型 (Win/Mac/Linux/IOS/Android)\u003c/li\u003e\n\u003cli\u003e客户端的类型，浏览器 / 小程序 / 客户端\u003c/li\u003e\n\u003cli\u003e访问的接口，类型，频率\u003c/li\u003e\n\u003cli\u003e访问服务的频率\u003c/li\u003e\n\u003cli\u003e还有很多其他可以深挖的地方，比如通过用户访问的次序推断用户的使用姿势和思考方式等等\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e对于第六点，有些人可能有些疑惑，这也能？\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e当然咯，假设用户在搜索引擎里面，先搜索了『美女』, 然后搜索了『雪白』, 然后又搜索了『白-洁』, 那基本上这个人搜索的三个词就具备一定的关联性，想搜索的这个雪白就不是『雪白』的意思\u003c/strong\u003e \u0026gt; \u003cstrong\u003e而是你懂的。\u003c/strong\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch3 id=\"第五步扩展思考日志解决方案\"\u003e\u003ca class=\"v-toc-item\" href=\"#第五步扩展思考日志解决方案\"\u003e#\u003c/a\u003e 第五步：扩展思考，日志解决方案\u003c/h3\u003e\n\u003cp\u003e上面四个步骤是为了解决分析 Nginx 日志的问题\u003c/p\u003e\n\u003cp\u003e一条日志从打印出来，到能在 Kibana 进行分析，需要经过如下的步骤：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e按照某种日志格式写到文件里，然后被 FileBeat 接收，FB 判断为『 Nginx 模块的日志之后』上传到 Logstash\u003c/li\u003e\n\u003cli\u003eLogstash 按照一个端口一个类型的方式接受该类型的日志。通过 filters 和插件进行匹配和修改，比如 grok 的 pattern 来匹配每一条日志（类似于正则匹配）, 抽出需要独立成字段的部分。比如通过 geoip 进行地址匹配，比如对字段进行 convert\u003c/li\u003e\n\u003cli\u003e输出匹配结果到 ElasticSearch\u003c/li\u003e\n\u003cli\u003eKibana 通过更加边界的工具来查询 ElasticSearch\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e如果你想要自定义日志获得更加完美的解决方案，那就需要对这几个流程进行进行细化。\u003c/p\u003e\n\u003cp\u003e比如你想通过 Flask 的日志来达到更好的用户操作定位。这就需要读者自行依照自己的理解来 hack 了\u003c/p\u003e\n\u003ch2 id=\"0x02-任务-2-监控-flask-app-的-apm\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-任务-2-监控-flask-app-的-apm\"\u003e#\u003c/a\u003e 0x02 任务 2: 监控 Flask App 的 APM\u003c/h2\u003e\n\u003ch3 id=\"第一步开启-elfka\"\u003e\u003ca class=\"v-toc-item\" href=\"#第一步开启-elfka\"\u003e#\u003c/a\u003e 第一步：开启 ELFKA\u003c/h3\u003e\n\u003cp\u003e同任务一的启动方式\u003c/p\u003e\n\u003ch3 id=\"第二步开启-flask-app\"\u003e\u003ca class=\"v-toc-item\" href=\"#第二步开启-flask-app\"\u003e#\u003c/a\u003e 第二步：开启 flask app\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003epip3 install poetry # 比 pip \u003cspan class=\"token operator\"\u003e/\u003c/span\u003e pipenv 更好的依赖管理和构建工具\npoetry install \u003cspan class=\"token operator\"\u003e-\u003c/span\u003evvv\npoetry shell\nflask run\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e写一个简单的管理和依赖工具\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003efrom flask \u003cspan class=\"token keyword\"\u003eimport\u003c/span\u003e Flask\nfrom elasticapm\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003econtrib\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003eflask \u003cspan class=\"token keyword\"\u003eimport\u003c/span\u003e ElasticAPM\n\napp \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003eFlask\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e__name__\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\napp\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003econfig\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token string\"\u003e\"ELASTIC_APM\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e{\u003c/span\u003e\n    \u003cspan class=\"token string\"\u003e\"SERVICE_NAME\"\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e \u003cspan class=\"token string\"\u003e\"dev-flask\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e\n    \u003cspan class=\"token string\"\u003e'SECRET_TOKEN'\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e \u003cspan class=\"token string\"\u003e''\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e\n\u003cspan class=\"token punctuation\"\u003e}\u003c/span\u003e\napm \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token function\"\u003eElasticAPM\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003eapp\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\n\n@app\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eroute\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e\"/\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\ndef \u003cspan class=\"token function\"\u003ehello\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n    \u003cspan class=\"token keyword\"\u003ereturn\u003c/span\u003e \u003cspan class=\"token string\"\u003e\"Hello, World!\"\u003c/span\u003e\n\n@app\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eroute\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e\"/home\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\ndef \u003cspan class=\"token function\"\u003ehome\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n    \u003cspan class=\"token keyword\"\u003ereturn\u003c/span\u003e \u003cspan class=\"token string\"\u003e\"home!\"\u003c/span\u003e\n\n@app\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003eroute\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token string\"\u003e\"/\u0026lt;int:num\u003e\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\ndef \u003cspan class=\"token function\"\u003ehello_num\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003enum\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n    \u003cspan class=\"token keyword\"\u003eimport\u003c/span\u003e random\n    \u003cspan class=\"token keyword\"\u003eif\u003c/span\u003e random\u003cspan class=\"token punctuation\"\u003e.\u003c/span\u003e\u003cspan class=\"token function\"\u003erandint\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e \u003cspan class=\"token number\"\u003e100\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e \u003cspan class=\"token operator\"\u003e\u003e\u003c/span\u003e \u003cspan class=\"token number\"\u003e95\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\n        raise \u003cspan class=\"token function\"\u003eException\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003ef\u003cspan class=\"token string\"\u003e\"num\"\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e # 有接近 \u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token operator\"\u003e/\u003c/span\u003e\u003cspan class=\"token number\"\u003e5\u003c/span\u003e 的概率会故意抛出异常\n    \u003cspan class=\"token keyword\"\u003ereturn\u003c/span\u003e f\u003cspan class=\"token string\"\u003e\"Hello, {num}!\"\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003cp\u003e随手写一个脚本 20 分钟内持续不断的访问接口\u003c/p\u003e\n\u003cpre\u003e\u003ccode class=\"language-bash\"\u003e\u003cspan class=\"token constant\"\u003eSECONDS\u003c/span\u003e\u003cspan class=\"token operator\"\u003e=\u003c/span\u003e\u003cspan class=\"token number\"\u003e0\u003c/span\u003e\n\u003cspan class=\"token keyword\"\u003ewhile\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e \u003cspan class=\"token constant\"\u003eSECONDS\u003c/span\u003e \u003cspan class=\"token operator\"\u003e-\u003c/span\u003elt \u003cspan class=\"token number\"\u003e1200\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e \u003cspan class=\"token keyword\"\u003edo\u003c/span\u003e\n\t\u003cspan class=\"token keyword\"\u003efor\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e(\u003c/span\u003e i \u003cspan class=\"token operator\"\u003e=\u003c/span\u003e \u003cspan class=\"token number\"\u003e0\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e i \u003cspan class=\"token operator\"\u003e\u0026lt;\u003c/span\u003e \u003cspan class=\"token number\"\u003e20\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e i\u003cspan class=\"token operator\"\u003e++\u003c/span\u003e \u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e)\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e;\u003c/span\u003e \u003cspan class=\"token keyword\"\u003edo\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e \u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e \u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e \u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e \u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e \u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e \u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e \u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e\n\t\tcurl \u003cspan class=\"token string\"\u003e\"http://localhost:5000/$i\"\u003c/span\u003e \u003cspan class=\"token operator\"\u003e\u0026amp;\u003c/span\u003e\n\tdone\ndone\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"第三步apm-探秘\"\u003e\u003ca class=\"v-toc-item\" href=\"#第三步apm-探秘\"\u003e#\u003c/a\u003e 第三步：APM 探秘\u003c/h3\u003e\n\u003cp\u003e20 分钟过去了，我们可以获知到什么呢？\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003eMetric 分析：Flask 是否正常运行，接口请求信息定期发送到 APMServer 这边，方便我观察服务是否正常，接口和业务逻辑的执行的时间是否在预期范围内。\u003c/li\u003e\n\u003cli\u003eTrouble Shooting: 如果程序报了异常，我想把需要报的异常堆栈信息打出。方便我快速的 Trouble Shooting\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e先设置时间为最近 30 分钟\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://pic4.zhimg.com/v2-8076c883c59df6d2ff0821d82c2b1f7f_b.jpg\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e在这里可以看到接口的访问情况\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://pic2.zhimg.com/v2-776f3bf0834fc827edf2264ca76049f1_b.jpg\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e先看 Metric 分析\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://pic1.zhimg.com/v2-9352ae0740081699d5692df34df9f724_b.jpg\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e这里可以看到接口的稳定性，服务器的基本负载，以及 Error 的出现频次。\u003c/p\u003e\n\u003cp\u003e再看 Error\u003c/p\u003e\n\u003cp\u003e\u003cimg src=\"https://pic2.zhimg.com/v2-1d63b7048a6144cdbf14e8543fb31225_b.jpg\" alt=\"\"\u003e\u003c/p\u003e\n\u003cp\u003e\u003cstrong\u003e看到这里简直泪目 这就是 ELK 版本的 Sentry 啊\u003c/strong\u003e\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003eTime Saving \u0026amp;\u0026amp; 防脱发利器\u003c/strong\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch3 id=\"第四步扩展思考\"\u003e\u003ca class=\"v-toc-item\" href=\"#第四步扩展思考\"\u003e#\u003c/a\u003e 第四步：扩展思考\u003c/h3\u003e\n\u003cp\u003e从 App 被监控到能在 Kibana 进行分析，需要经过如下的步骤：\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e在原有的 Flask App 里面进行添加 elastc-apm 的 agent (apm-client)\u003c/li\u003e\n\u003cli\u003eagent 会定期将收集完毕的性能信息以及异常信息，发到 apm-server\u003c/li\u003e\n\u003cli\u003e输出结果到 ElasticSearch\u003c/li\u003e\n\u003cli\u003eKibana 通过更加边界的工具来查询 ElasticSearch\u003c/li\u003e\n\u003c/ol\u003e\n\u003cp\u003e如果你想要自定义日志获得更加完美的解决方案，那就需要对这前两个流程进行进行细化。\u003c/p\u003e\n\u003cp\u003e比如公司用 Graphql 的接口，那么，在这种情况下，自带的 contrib 下的 flask 包的路由基本就是废掉的，你需要再 Hack 一下。\u003c/p\u003e\n\u003ch2 id=\"0xdd-结论\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xdd-结论\"\u003e#\u003c/a\u003e 0xDD 结论\u003c/h2\u003e\n\u003cp\u003e本来这篇文章打算写日志的最佳实践的，结果在查找资料的时候发现了一篇更好的文章\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://zhuanlan.zhihu.com/p/27363484\"\u003ehttps://zhuanlan.zhihu.com/p/27363484\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e看完之后打消了这个念头，转而写如何使用 ELK 的系统落实这种日志分析系统\u003c/p\u003e\n\u003cp\u003e代码见 \u003ca href=\"https://link.zhihu.com/?target=https%3A//github.com/twocucao/elastic-labs\"\u003etwocucao/elastic-labs\u003c/a\u003e\u003c/p\u003e\n\u003cblockquote\u003e\n\u003cp\u003e\u003cstrong\u003e欢迎点赞 / 关注 /star 文明三连\u003c/strong\u003e\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2 id=\"0xee-参考链接\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-参考链接\"\u003e#\u003c/a\u003e 0xEE 参考链接\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"https://zhuanlan.zhihu.com/p/27363484\"\u003ehttps://zhuanlan.zhihu.com/p/27363484\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003ePhoto by\u003ca href=\"https://link.zhihu.com/?target=https%3A//unsplash.com/photos/rr8DvtQL9X8%3Futm_source%3Dunsplash%26utm_medium%3Dreferral%26utm_content%3DcreditCopyText\"\u003eTan Kaninthanond\u003c/a\u003eon\u003ca href=\"https://link.zhihu.com/?target=https%3A//unsplash.com/%3Futm_source%3Dunsplash%26utm_medium%3Dreferral%26utm_content%3DcreditCopyText\"\u003eUnsplash\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e关于 elasticsearch 可以参考我以前的文章\u003c/strong\u003e \u003ca href=\"https://zhuanlan.zhihu.com/p/35143409\"\u003eDjango 全栈教程系列番外篇 - ElasticSearch CheatSheet\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e关于 \u003cstrong\u003edocker 的搭建\u003c/strong\u003e 可以参考我以前的文章 \u003ca href=\"https://zhuanlan.zhihu.com/p/33920401\"\u003eDjango 全栈教程系列之一 - YaDjangoBlog 开发环境配置\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E4%BB%BB%E5%8A%A1-1-%E5%88%86%E6%9E%90-nginx-%E6%97%A5%E5%BF%97\"\u003e0x01 任务 1: 分析 Nginx 日志\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E7%AC%AC%E4%B8%80%E6%AD%A5%E9%85%8D%E7%BD%AE-nginx\"\u003e第一步：配置 Nginx\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E6%8B%89%E5%8F%96-nginx-%E6%97%A5%E5%BF%97\"\u003e第二步：拉取 Nginx 日志\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%AC%AC%E4%B8%89%E6%AD%A5%E5%BC%80%E5%90%AF-elfka\"\u003e第三步：开启 ELFKA\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%AC%AC%E5%9B%9B%E6%AD%A5%E6%97%A5%E5%BF%97%E6%8E%A2%E7%A7%98\"\u003e第四步：日志探秘\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%AC%AC%E4%BA%94%E6%AD%A5%E6%89%A9%E5%B1%95%E6%80%9D%E8%80%83%E6%97%A5%E5%BF%97%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88\"\u003e第五步：扩展思考，日志解决方案\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E4%BB%BB%E5%8A%A1-2-%E7%9B%91%E6%8E%A7-flask-app-%E7%9A%84-apm\"\u003e0x02 任务 2: 监控 Flask App 的 APM\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#%E7%AC%AC%E4%B8%80%E6%AD%A5%E5%BC%80%E5%90%AF-elfka\"\u003e第一步：开启 ELFKA\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%AC%AC%E4%BA%8C%E6%AD%A5%E5%BC%80%E5%90%AF-flask-app\"\u003e第二步：开启 flask app\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%AC%AC%E4%B8%89%E6%AD%A5apm-%E6%8E%A2%E7%A7%98\"\u003e第三步：APM 探秘\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#%E7%AC%AC%E5%9B%9B%E6%AD%A5%E6%89%A9%E5%B1%95%E6%80%9D%E8%80%83\"\u003e第四步：扩展思考\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xdd-%E7%BB%93%E8%AE%BA\"\u003e0xDD 结论\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5\"\u003e0xEE 参考链接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"为你的项目快速搭建 ELKFA 日志系统"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

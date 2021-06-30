@@ -1,0 +1,62 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>NumPy CheatSheet | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h1 id="numpy-库"><a class="v-toc-item" href="#numpy-库">#</a> Numpy 库</h1>
+<h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<p>本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Numpy 相关语句。</p>
+<p>对于数据分析应用而言，最应该关注：</p>
+<ul>
+<li>用于数据整理和清理、子集构造和过滤、转换等快速的矢量化数组运算。</li>
+<li>常用的数组算法，如排序、唯一化、集合运算等。</li>
+<li>高效的描述统计和数据聚合 / 摘要运算。</li>
+<li>用于异构数据集的合并 / 连接运算的数据对齐和关系型数据运算。</li>
+<li>将条件逻辑表述为数组表达式（而不是带有 if-else-if 分支的循环）</li>
+<li>数据的分组运算（聚合、转换、函数应用等）。</li>
+</ul>
+<blockquote>
+<p>学习 Numpy 本质上是为了更好的使用 Pandas</p>
+</blockquote>
+<h2 id="0x01-ndarray"><a class="v-toc-item" href="#0x01-ndarray">#</a> 0x01 ndarray</h2>
+<h3 id="11-数据类型"><a class="v-toc-item" href="#11-数据类型">#</a> 1.1 数据类型</h3>
+<h3 id="12-创建-ndarray"><a class="v-toc-item" href="#12-创建-ndarray">#</a> 1.2 创建 ndarray</h3>
+<h3 id="13-数组和标量之间的运算"><a class="v-toc-item" href="#13-数组和标量之间的运算">#</a> 1.3 数组和标量之间的运算</h3>
+<p>当我们把数组当做矢量的时候。</p>
+<ol>
+<li>两个大小相同的矢量将运算到元素级</li>
+<li>矢量和标量将作用与每一个元素</li>
+<li>不同大小的矢量之间的运算叫做广播</li>
+</ol>
+<h3 id="14-索引和切片"><a class="v-toc-item" href="#14-索引和切片">#</a> 1.4 索引和切片</h3>
+<h3 id="141-一般索引和一般切片"><a class="v-toc-item" href="#141-一般索引和一般切片">#</a> 1.4.1 一般索引和一般切片</h3>
+<p>对于一维数组的话，如果没有显式 copy 则会修改原来的值。</p>
+<p>切片语法与 Python 相近</p>
+<h3 id="142-切片型索引"><a class="v-toc-item" href="#142-切片型索引">#</a> 1.4.2 切片型索引</h3>
+<pre><code class="language-python">a<span class="token punctuation">[</span><span class="token operator">:</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token operator">:</span><span class="token punctuation">]</span>
+a<span class="token punctuation">[</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token operator">:</span><span class="token punctuation">]</span>
+</code></pre>
+<h3 id="143-布尔型索引"><a class="v-toc-item" href="#143-布尔型索引">#</a> 1.4.3 布尔型索引</h3>
+<p>参考 pandas 语法</p>
+<h2 id="0xee-参考链接"><a class="v-toc-item" href="#0xee-参考链接">#</a> 0xEE 参考链接</h2>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-06-03</strong> 初始化本文</li>
+<li><strong>2018-02-03</strong> 重修文字</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li><a href="#numpy-%E5%BA%93">Numpy 库</a>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-ndarray">0x01 ndarray</a>
+<ul>
+<li><a href="#11-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B">1.1 数据类型</a></li>
+<li><a href="#12-%E5%88%9B%E5%BB%BA-ndarray">1.2 创建 ndarray</a></li>
+<li><a href="#13-%E6%95%B0%E7%BB%84%E5%92%8C%E6%A0%87%E9%87%8F%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BF%90%E7%AE%97">1.3 数组和标量之间的运算</a></li>
+<li><a href="#14-%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%87%E7%89%87">1.4 索引和切片</a></li>
+<li><a href="#141-%E4%B8%80%E8%88%AC%E7%B4%A2%E5%BC%95%E5%92%8C%E4%B8%80%E8%88%AC%E5%88%87%E7%89%87">1.4.1 一般索引和一般切片</a></li>
+<li><a href="#142-%E5%88%87%E7%89%87%E5%9E%8B%E7%B4%A2%E5%BC%95">1.4.2 切片型索引</a></li>
+<li><a href="#143-%E5%B8%83%E5%B0%94%E5%9E%8B%E7%B4%A2%E5%BC%95">1.4.3 布尔型索引</a></li>
+</ul>
+</li>
+<li><a href="#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">0xEE 参考链接</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["CheatSheet"],"path":"20180203_NumpyCheatSheet.md","title":"NumPy CheatSheet","slug":"NumPy CheatSheet","date":"2018-02-03","category":"Python","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch1 id=\"numpy-库\"\u003e\u003ca class=\"v-toc-item\" href=\"#numpy-库\"\u003e#\u003c/a\u003e Numpy 库\u003c/h1\u003e\n\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cp\u003e本文为 Cheatsheet 类型文章，用于记录我在日常编程中经常使用的 Numpy 相关语句。\u003c/p\u003e\n\u003cp\u003e对于数据分析应用而言，最应该关注：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e用于数据整理和清理、子集构造和过滤、转换等快速的矢量化数组运算。\u003c/li\u003e\n\u003cli\u003e常用的数组算法，如排序、唯一化、集合运算等。\u003c/li\u003e\n\u003cli\u003e高效的描述统计和数据聚合 / 摘要运算。\u003c/li\u003e\n\u003cli\u003e用于异构数据集的合并 / 连接运算的数据对齐和关系型数据运算。\u003c/li\u003e\n\u003cli\u003e将条件逻辑表述为数组表达式（而不是带有 if-else-if 分支的循环）\u003c/li\u003e\n\u003cli\u003e数据的分组运算（聚合、转换、函数应用等）。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cblockquote\u003e\n\u003cp\u003e学习 Numpy 本质上是为了更好的使用 Pandas\u003c/p\u003e\n\u003c/blockquote\u003e\n\u003ch2 id=\"0x01-ndarray\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-ndarray\"\u003e#\u003c/a\u003e 0x01 ndarray\u003c/h2\u003e\n\u003ch3 id=\"11-数据类型\"\u003e\u003ca class=\"v-toc-item\" href=\"#11-数据类型\"\u003e#\u003c/a\u003e 1.1 数据类型\u003c/h3\u003e\n\u003ch3 id=\"12-创建-ndarray\"\u003e\u003ca class=\"v-toc-item\" href=\"#12-创建-ndarray\"\u003e#\u003c/a\u003e 1.2 创建 ndarray\u003c/h3\u003e\n\u003ch3 id=\"13-数组和标量之间的运算\"\u003e\u003ca class=\"v-toc-item\" href=\"#13-数组和标量之间的运算\"\u003e#\u003c/a\u003e 1.3 数组和标量之间的运算\u003c/h3\u003e\n\u003cp\u003e当我们把数组当做矢量的时候。\u003c/p\u003e\n\u003col\u003e\n\u003cli\u003e两个大小相同的矢量将运算到元素级\u003c/li\u003e\n\u003cli\u003e矢量和标量将作用与每一个元素\u003c/li\u003e\n\u003cli\u003e不同大小的矢量之间的运算叫做广播\u003c/li\u003e\n\u003c/ol\u003e\n\u003ch3 id=\"14-索引和切片\"\u003e\u003ca class=\"v-toc-item\" href=\"#14-索引和切片\"\u003e#\u003c/a\u003e 1.4 索引和切片\u003c/h3\u003e\n\u003ch3 id=\"141-一般索引和一般切片\"\u003e\u003ca class=\"v-toc-item\" href=\"#141-一般索引和一般切片\"\u003e#\u003c/a\u003e 1.4.1 一般索引和一般切片\u003c/h3\u003e\n\u003cp\u003e对于一维数组的话，如果没有显式 copy 则会修改原来的值。\u003c/p\u003e\n\u003cp\u003e切片语法与 Python 相近\u003c/p\u003e\n\u003ch3 id=\"142-切片型索引\"\u003e\u003ca class=\"v-toc-item\" href=\"#142-切片型索引\"\u003e#\u003c/a\u003e 1.4.2 切片型索引\u003c/h3\u003e\n\u003cpre\u003e\u003ccode class=\"language-python\"\u003ea\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\na\u003cspan class=\"token punctuation\"\u003e[\u003c/span\u003e\u003cspan class=\"token number\"\u003e2\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e,\u003c/span\u003e\u003cspan class=\"token number\"\u003e1\u003c/span\u003e\u003cspan class=\"token operator\"\u003e:\u003c/span\u003e\u003cspan class=\"token punctuation\"\u003e]\u003c/span\u003e\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch3 id=\"143-布尔型索引\"\u003e\u003ca class=\"v-toc-item\" href=\"#143-布尔型索引\"\u003e#\u003c/a\u003e 1.4.3 布尔型索引\u003c/h3\u003e\n\u003cp\u003e参考 pandas 语法\u003c/p\u003e\n\u003ch2 id=\"0xee-参考链接\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-参考链接\"\u003e#\u003c/a\u003e 0xEE 参考链接\u003c/h2\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2017-06-03\u003c/strong\u003e 初始化本文\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e2018-02-03\u003c/strong\u003e 重修文字\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\u003ca href=\"#numpy-%E5%BA%93\"\u003eNumpy 库\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-ndarray\"\u003e0x01 ndarray\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#11-%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B\"\u003e1.1 数据类型\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#12-%E5%88%9B%E5%BB%BA-ndarray\"\u003e1.2 创建 ndarray\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#13-%E6%95%B0%E7%BB%84%E5%92%8C%E6%A0%87%E9%87%8F%E4%B9%8B%E9%97%B4%E7%9A%84%E8%BF%90%E7%AE%97\"\u003e1.3 数组和标量之间的运算\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#14-%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%87%E7%89%87\"\u003e1.4 索引和切片\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#141-%E4%B8%80%E8%88%AC%E7%B4%A2%E5%BC%95%E5%92%8C%E4%B8%80%E8%88%AC%E5%88%87%E7%89%87\"\u003e1.4.1 一般索引和一般切片\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#142-%E5%88%87%E7%89%87%E5%9E%8B%E7%B4%A2%E5%BC%95\"\u003e1.4.2 切片型索引\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#143-%E5%B8%83%E5%B0%94%E5%9E%8B%E7%B4%A2%E5%BC%95\"\u003e1.4.3 布尔型索引\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5\"\u003e0xEE 参考链接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"NumPy CheatSheet"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>

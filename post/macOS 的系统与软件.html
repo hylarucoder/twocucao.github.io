@@ -1,0 +1,82 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width"/><meta charSet="utf-8"/><title>macOS 的系统与软件 | 海拉鲁编程客</title><meta name="next-head-count" content="3"/><link rel="preload" href="/_next/static/css/49455a07b6dd33600cdf.css" as="style"/><link rel="stylesheet" href="/_next/static/css/49455a07b6dd33600cdf.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-a54b4f32bdc1ef890ddd.js"></script><script src="/_next/static/chunks/webpack-20d43e08bea62467b090.js" defer=""></script><script src="/_next/static/chunks/framework-0441fae7fd130f37dee1.js" defer=""></script><script src="/_next/static/chunks/main-4777350f2a9ff73ea2b0.js" defer=""></script><script src="/_next/static/chunks/pages/_app-3050679c6e5142ffcaf5.js" defer=""></script><script src="/_next/static/chunks/ea88be26-9bcf6ead520f4ac26973.js" defer=""></script><script src="/_next/static/chunks/421-f2f33a86b546237f0325.js" defer=""></script><script src="/_next/static/chunks/pages/post/%5Bslug%5D-173fe2de48c90365db9d.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_buildManifest.js" defer=""></script><script src="/_next/static/oDi_oBCBuu3qj6v7hDnrL/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div class="v-page"><nav class="shadow"><div class="flex flex-col container mx-auto h-12 px-40 md:flex-row md:items-center md:justify-between"><div class="flex justify-between items-center"><div><a class="text-gray-800 text-xl md:text-xl leading-5" href="/">海拉鲁编程客</a></div><div><button type="button" class="block text-gray-800 hover:text-gray-600 focus:text-gray-600 focus:outline-none md:hidden"><svg viewBox="0 0 24 24" class="h-6 w-6 fill-current"><path d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path></svg></button></div></div><div class="md:flex flex-col md:flex-row md:-mx-4 hidden"><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/">首页</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/archive">归档</a><a class="my-1 text-gray-800 hover:text-blue-500 md:mx-4 md:my-0" href="/about">关于我</a><button style="cursor:pointer;overflow:hidden;width:50px;height:23.5px;appearance:none;-moz-appearance:none;-webkit-appearance:none;border:none;background-color:transparent;padding:0" aria-hidden="true"><div style="display:flex;align-items:center;justify-content:center;margin-top:-28.749999999999996px;margin-left:-16px;width:82.5px;height:82.5px"><div></div></div></button></div></div></nav><div class="v-article"><div class="v-article-main" style="margin:auto;width:786px"><div><h2 id="0x00-前言"><a class="v-toc-item" href="#0x00-前言">#</a> 0x00 前言</h2>
+<p>折腾了 Windows 很多年，后来出于个人开发需求转投 Mac，使用起来一直很顺手。现在也开始从顺手开始到了解更深一点的东西。</p>
+<h2 id="0x01-系统安全架构"><a class="v-toc-item" href="#0x01-系统安全架构">#</a> 0x01 系统安全架构</h2>
+<h3 id="11-系统架构概述"><a class="v-toc-item" href="#11-系统架构概述">#</a> 1.1 系统架构概述</h3>
+<p>非开发人员分层：</p>
+<ul>
+<li>User Experience
+<ul>
+<li>Aqua</li>
+<li>Dashboard</li>
+<li>Spotlight</li>
+<li>Dock</li>
+<li>输入法</li>
+<li>屏保</li>
+<li>辅助功能</li>
+<li>语音</li>
+<li>位置与地图</li>
+<li>搜索</li>
+<li>etc</li>
+</ul>
+</li>
+<li>Application Framework
+<ul>
+<li>Cocoa</li>
+</ul>
+</li>
+<li>Graphics and Media
+<ul>
+<li>核心框架，OpenAL,Quartz,SceneKit,SpriteKit</li>
+</ul>
+</li>
+<li>Darwin
+<ul>
+<li>系统内核与 Shell 环境</li>
+</ul>
+</li>
+</ul>
+<p>开发人员分层：</p>
+<ul>
+<li>Cocoa Layer: Cocoa 框架层 包括了用于开发界面程序的框架集合。</li>
+<li>Foundation Layer: 提供了程序开发室使用到的基础数据类型、数值处理、网络、IO 和 日期等</li>
+<li>Media Layer: 提供了图像、声音、视频、动画及游戏开发需要的接口</li>
+<li>Core Service Layer: 系统安全、底层内部数据访问以及存储接口。比如 AddressBook,CoreData,QuickLook 用于快速浏览插件开发。CoreFoundation 框架也属于这一层。</li>
+<li>Core OS Layer: 加速器，蓝牙，异常处理，网络扩展，系统配置</li>
+<li>Kernel &amp; Driver Layer: 内核与驱动层。包括开发设备驱动程序与内核扩展所需的一些框架。</li>
+</ul>
+<p>应用程序是一个 bundle 文件，一般为 xxx.app 文件夹，</p>
+<h3 id="11-一些常用软件"><a class="v-toc-item" href="#11-一些常用软件">#</a> 1.1 一些常用软件</h3>
+<p>Clang<br>
+LLVM</p>
+<p>HT Editor</p>
+<pre><code>brew install ht
+</code></pre>
+<h2 id="0x02-前言"><a class="v-toc-item" href="#0x02-前言">#</a> 0x02 前言</h2>
+<h2 id="0x03-前言"><a class="v-toc-item" href="#0x03-前言">#</a> 0x03 前言</h2>
+<h2 id="0xee-参考链接"><a class="v-toc-item" href="#0xee-参考链接">#</a> 0xEE 参考链接</h2>
+<ul>
+<li>macOS 软件安全和逆向分析</li>
+</ul>
+<hr>
+<p>ChangeLog:</p>
+<ul>
+<li><strong>2017-12-20</strong> 初始化本文</li>
+<li><strong>2018-02-10</strong> 添加笔记</li>
+</ul>
+</div></div><div><ul class="v-article-toc">
+<li>
+<ul>
+<li><a href="#0x00-%E5%89%8D%E8%A8%80">0x00 前言</a></li>
+<li><a href="#0x01-%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%9E%B6%E6%9E%84">0x01 系统安全架构</a>
+<ul>
+<li><a href="#11-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0">1.1 系统架构概述</a></li>
+<li><a href="#11-%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6">1.1 一些常用软件</a></li>
+</ul>
+</li>
+<li><a href="#0x02-%E5%89%8D%E8%A8%80">0x02 前言</a></li>
+<li><a href="#0x03-%E5%89%8D%E8%A8%80">0x03 前言</a></li>
+<li><a href="#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5">0xEE 参考链接</a></li>
+</ul>
+</li>
+</ul>
+</div></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"post":{"tags":["macOS"],"path":"20171223_macOSInDepth.md","title":"macOS 的系统与软件","slug":"macOS 的系统与软件","date":"2017-12-23","category":"善用佳软","lastMod":"2020-01-01","description":"这篇文章展示了基本的 Markdown 语法和格式.","thumbnail":"","content":"\u003ch2 id=\"0x00-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x00-前言\"\u003e#\u003c/a\u003e 0x00 前言\u003c/h2\u003e\n\u003cp\u003e折腾了 Windows 很多年，后来出于个人开发需求转投 Mac，使用起来一直很顺手。现在也开始从顺手开始到了解更深一点的东西。\u003c/p\u003e\n\u003ch2 id=\"0x01-系统安全架构\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x01-系统安全架构\"\u003e#\u003c/a\u003e 0x01 系统安全架构\u003c/h2\u003e\n\u003ch3 id=\"11-系统架构概述\"\u003e\u003ca class=\"v-toc-item\" href=\"#11-系统架构概述\"\u003e#\u003c/a\u003e 1.1 系统架构概述\u003c/h3\u003e\n\u003cp\u003e非开发人员分层：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eUser Experience\n\u003cul\u003e\n\u003cli\u003eAqua\u003c/li\u003e\n\u003cli\u003eDashboard\u003c/li\u003e\n\u003cli\u003eSpotlight\u003c/li\u003e\n\u003cli\u003eDock\u003c/li\u003e\n\u003cli\u003e输入法\u003c/li\u003e\n\u003cli\u003e屏保\u003c/li\u003e\n\u003cli\u003e辅助功能\u003c/li\u003e\n\u003cli\u003e语音\u003c/li\u003e\n\u003cli\u003e位置与地图\u003c/li\u003e\n\u003cli\u003e搜索\u003c/li\u003e\n\u003cli\u003eetc\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eApplication Framework\n\u003cul\u003e\n\u003cli\u003eCocoa\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eGraphics and Media\n\u003cul\u003e\n\u003cli\u003e核心框架，OpenAL,Quartz,SceneKit,SpriteKit\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003eDarwin\n\u003cul\u003e\n\u003cli\u003e系统内核与 Shell 环境\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e开发人员分层：\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003eCocoa Layer: Cocoa 框架层 包括了用于开发界面程序的框架集合。\u003c/li\u003e\n\u003cli\u003eFoundation Layer: 提供了程序开发室使用到的基础数据类型、数值处理、网络、IO 和 日期等\u003c/li\u003e\n\u003cli\u003eMedia Layer: 提供了图像、声音、视频、动画及游戏开发需要的接口\u003c/li\u003e\n\u003cli\u003eCore Service Layer: 系统安全、底层内部数据访问以及存储接口。比如 AddressBook,CoreData,QuickLook 用于快速浏览插件开发。CoreFoundation 框架也属于这一层。\u003c/li\u003e\n\u003cli\u003eCore OS Layer: 加速器，蓝牙，异常处理，网络扩展，系统配置\u003c/li\u003e\n\u003cli\u003eKernel \u0026amp; Driver Layer: 内核与驱动层。包括开发设备驱动程序与内核扩展所需的一些框架。\u003c/li\u003e\n\u003c/ul\u003e\n\u003cp\u003e应用程序是一个 bundle 文件，一般为 xxx.app 文件夹，\u003c/p\u003e\n\u003ch3 id=\"11-一些常用软件\"\u003e\u003ca class=\"v-toc-item\" href=\"#11-一些常用软件\"\u003e#\u003c/a\u003e 1.1 一些常用软件\u003c/h3\u003e\n\u003cp\u003eClang\u003cbr\u003e\nLLVM\u003c/p\u003e\n\u003cp\u003eHT Editor\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003ebrew install ht\n\u003c/code\u003e\u003c/pre\u003e\n\u003ch2 id=\"0x02-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x02-前言\"\u003e#\u003c/a\u003e 0x02 前言\u003c/h2\u003e\n\u003ch2 id=\"0x03-前言\"\u003e\u003ca class=\"v-toc-item\" href=\"#0x03-前言\"\u003e#\u003c/a\u003e 0x03 前言\u003c/h2\u003e\n\u003ch2 id=\"0xee-参考链接\"\u003e\u003ca class=\"v-toc-item\" href=\"#0xee-参考链接\"\u003e#\u003c/a\u003e 0xEE 参考链接\u003c/h2\u003e\n\u003cul\u003e\n\u003cli\u003emacOS 软件安全和逆向分析\u003c/li\u003e\n\u003c/ul\u003e\n\u003chr\u003e\n\u003cp\u003eChangeLog:\u003c/p\u003e\n\u003cul\u003e\n\u003cli\u003e\u003cstrong\u003e2017-12-20\u003c/strong\u003e 初始化本文\u003c/li\u003e\n\u003cli\u003e\u003cstrong\u003e2018-02-10\u003c/strong\u003e 添加笔记\u003c/li\u003e\n\u003c/ul\u003e\n","toc":"\u003cul class=\"v-article-toc\"\u003e\n\u003cli\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#0x00-%E5%89%8D%E8%A8%80\"\u003e0x00 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x01-%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E6%9E%B6%E6%9E%84\"\u003e0x01 系统安全架构\u003c/a\u003e\n\u003cul\u003e\n\u003cli\u003e\u003ca href=\"#11-%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84%E6%A6%82%E8%BF%B0\"\u003e1.1 系统架构概述\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#11-%E4%B8%80%E4%BA%9B%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6\"\u003e1.1 一些常用软件\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x02-%E5%89%8D%E8%A8%80\"\u003e0x02 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0x03-%E5%89%8D%E8%A8%80\"\u003e0x03 前言\u003c/a\u003e\u003c/li\u003e\n\u003cli\u003e\u003ca href=\"#0xee-%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5\"\u003e0xEE 参考链接\u003c/a\u003e\u003c/li\u003e\n\u003c/ul\u003e\n\u003c/li\u003e\n\u003c/ul\u003e\n"}},"__N_SSG":true},"page":"/post/[slug]","query":{"slug":"macOS 的系统与软件"},"buildId":"oDi_oBCBuu3qj6v7hDnrL","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>
